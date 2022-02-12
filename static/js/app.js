@@ -113,3 +113,18 @@ function closeAllModals() {
     closeModal($modal);
   });
 }
+
+(
+  document.querySelectorAll(
+    ".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button"
+  ) || []
+).forEach(($close) => {
+  const $target = $close.closest(".modal");
+  if ($target.id !== "modal-search-results") {
+    return;
+  }
+
+  $close.addEventListener("click", () => {
+    closeModal($target);
+  });
+});
