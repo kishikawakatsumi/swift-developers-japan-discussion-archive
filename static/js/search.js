@@ -66,23 +66,6 @@ search.addWidgets([
 ]);
 search.start();
 
-function setInstantSearchUiState(indexUiState) {
-  search.setUiState((uiState) => ({
-    ...uiState,
-    [INSTANT_SEARCH_INDEX_NAME]: {
-      ...uiState[INSTANT_SEARCH_INDEX_NAME],
-      page: 1,
-      ...indexUiState,
-    },
-  }));
-}
-
-function getInstantSearchUiState() {
-  const uiState = instantSearchRouter.read();
-
-  return (uiState && uiState[INSTANT_SEARCH_INDEX_NAME]) || {};
-}
-
 const searchPageState = getInstantSearchUiState();
 
 const querySuggestionsPlugin = createQuerySuggestionsPlugin({
@@ -174,3 +157,20 @@ autocomplete({
     ];
   },
 });
+
+function setInstantSearchUiState(indexUiState) {
+  search.setUiState((uiState) => ({
+    ...uiState,
+    [INSTANT_SEARCH_INDEX_NAME]: {
+      ...uiState[INSTANT_SEARCH_INDEX_NAME],
+      page: 1,
+      ...indexUiState,
+    },
+  }));
+}
+
+function getInstantSearchUiState() {
+  const uiState = instantSearchRouter.read();
+
+  return (uiState && uiState[INSTANT_SEARCH_INDEX_NAME]) || {};
+}
