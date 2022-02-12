@@ -1,0 +1,76 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">30-Aug-21 08:18 PM</span>
+    <div class="chatlog__message " data-message-id="881996297849143297" id="message-881996297849143297" title="Message sent: 30-Aug-21 08:18 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">UIViewController</span> に付いてのか。 <div class="pre pre--multiline language-swift">@MainActor class UIViewController : UIResponder</div>
+            <a href="https://developer.apple.com/documentation/uikit/uiviewcontroller">https://developer.apple.com/documentation/uikit/uiviewcontroller</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881996470121791508" id="message-881996470121791508" title="Message sent: 30-Aug-21 08:19 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Task.init</span> だと <span class="pre pre--inline">MainActor</span> 上で実行されるけど、 <span class="pre pre--inline">detached</span> だとそうじゃないからエラーになってしまったと。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881997544027201636" id="message-881997544027201636" title="Message sent: 30-Aug-21 08:23 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { [self] in do { let user = try await fetchUser(for: userID) DispatchQueue.main.async { [self] in self.user = user } } catch { // エラーハンドリング } } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881997704752955463" id="message-881997704752955463" title="Message sent: 30-Aug-21 08:23 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑で <span class="pre pre--inline">MainActor</span> に戻したらいけたけど、 <span class="pre pre--inline">DispatchQueue.main</span> よりもいい方法ないんだっけ？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881998107787816990" id="message-881998107787816990" title="Message sent: 30-Aug-21 08:25 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">DispatchQueue.main</span> って型じゃないけど、どうやって <span class="pre pre--inline">MainActor</span> と紐付いてるの？（ <span class="pre pre--inline">DispatchQueue.global()</span> だとコンパイルエラー）</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881998403557556264" id="message-881998403557556264" title="Message sent: 30-Aug-21 08:26 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">よく考えたら Global Actor の Proposal ちゃんと読んでなかった。ここに答えがあるのかな・・・。 <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0316-global-actors.md">https://github.com/apple/swift-evolution/blob/main/proposals/0316-global-actors.md</a></span>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/apple/swift-evolution/blob/main/proposals/0316-global-actors.md">
+                  <div class="markdown preserve-whitespace">swift-evolution/0316-global-actors.md at main · apple/swift-evolution</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">This maintains proposals for changes and user-visible enhancements to the Swift Programming Language. - swift-evolution/0316-global-actors.md at main · apple/swift-evolution</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/GWRhmrO9uIRJ5wabmNsxB1I9bVVHl1JPLz1CqgAIUHY/https/opengraph.githubassets.com/ea8210ae45934de5ab1c9f47d8a827d9f86424b8d0a41765f15dd7c0d28c35ff/apple/swift-evolution">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/GWRhmrO9uIRJ5wabmNsxB1I9bVVHl1JPLz1CqgAIUHY/https/opengraph.githubassets.com/ea8210ae45934de5ab1c9f47d8a827d9f86424b8d0a41765f15dd7c0d28c35ff/apple/swift-evolution" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

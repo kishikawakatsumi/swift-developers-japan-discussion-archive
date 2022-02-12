@@ -1,0 +1,49 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="hironytic#5238" data-user-id="338302215078936576" style="color: rgb(241,196,15)">hironytic</span>
+    <span class="chatlog__timestamp">26-Jun-20 12:15 PM</span>
+    <div class="chatlog__message " data-message-id="726048045023625306" id="message-726048045023625306" title="Message sent: 26-Jun-20 12:15 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">struct ContentView: View { var body: some View { NavigationView { FirstView() } .environmentObject(Env(items: [ Item(id: "C"), Item(id: "B"), Item(id: "A"), ])) } } struct FirstView: View { @EnvironmentObject var env: Env var body: some View { VStack { Button("move") { self.env.items = [ Item(id: "A"), Item(id: "C"), Item(id: "B"), ] } List(env.items) { item in ItemView(id: item.id) } } } } struct ItemView: View { let id: String @State var flag: Bool = false var body: some View { HStack { Text("\(id)") Button(flag ? "true" : "false") { self.flag.toggle() } } } } struct Item: Identifiable { let id: String } final class Env: ObservableObject { @Published var items: [Item] init(items: [Item]) { self.items = items } }</div> ↑ぼくの疑問だった <span class="pre pre--inline">@State</span> は並び替えてもちゃんと保たれている様子。（falseの部分をタップするとtrueとfalseがトグルするので適当に変更してからmoveを押して並び替えてもtrue, falseは保たれて並び変わる）
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726049178718830622" id="message-726049178718830622" title="Message sent: 26-Jun-20 12:20 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">import SwiftUI struct ContentView: View { var body: some View { NavigationView { FirstView() } .environmentObject(Env(items: [ Item(id: "C"), Item(id: "B"), Item(id: "A"), ])) } } struct FirstView: View { @EnvironmentObject var env: Env var body: some View { VStack { Button("move") { self.env.items = [ Item(id: "A"), Item(id: "C"), Item(id: "B"), ] } List(env.items) { item in ItemView(id: item.id) } } } } struct ItemView: View { let id: String @State var flag: Bool = false var body: some View { NavigationLink(destination: SecondView(id: id)) { HStack { Text("\(id)") Text(flag ? "true" : "false") .onTapGesture { self.flag.toggle() } } } } } struct SecondView: View { @EnvironmentObject var env: Env let id: String init(id: String) { self.id = id } var body: some View { Button("\(id)") { self.env.items = [ Item(id: "A"), Item(id: "C"), Item(id: "B"), ] } } } struct Item: Identifiable { let id: String }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726049345664712736" id="message-726049345664712736" title="Message sent: 26-Jun-20 12:20 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑うん？ <span class="pre pre--inline">NavigationLink</span> で遷移して強制的にpopされるパターンだと <span class="pre pre--inline">@State</span> で覚えてるやつもクリアされる。どうも完全にリセットされてるっぽいですね。</span>
+          <span class="chatlog__edited-timestamp" title="26-Jun-20 12:27 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726049618248597554" id="message-726049618248597554" title="Message sent: 26-Jun-20 12:21 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">（falseの部分をタップするとtrueとfalseがトグルするので適当に変更してから、Aの行をタップして次画面へ遷移したのち、Aをタップしてpopで戻されると、全部falseになってる）</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726050287886008372" id="message-726050287886008372" title="Message sent: 26-Jun-20 12:24 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この例、一度再現したあとに再度同じ操作を続けて行っても、最後に並び替わらないのでpopされないんだけど、そのときBackで戻ってもちゃんと true, false は残ってる。たぶん実際は因果関係が逆で <span class="pre pre--inline">@State</span> で覚えてるようなものがリセットされるからpopされるんだとは思いますが。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

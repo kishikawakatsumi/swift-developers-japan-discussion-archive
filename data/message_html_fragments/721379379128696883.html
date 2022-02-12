@@ -1,0 +1,37 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">13-Jun-20 03:04 PM</span>
+    <div class="chatlog__message " data-message-id="721379379128696883" id="message-721379379128696883" title="Message sent: 13-Jun-20 03:04 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">$foo.readOnly.a</span> できた。この方法絶対ダメだけどｗ <div class="pre pre--multiline language-swift">import SwiftUI extension ObservedObject.Wrapper { var readOnly: ReadOnly { let object: ObjectType = unsafeBitCast(self, to: ObjectType.self) return ReadOnly(object) } @dynamicMemberLookup struct ReadOnly { private let object: ObjectType init(_ object: ObjectType) { self.object = object } subscript&lt;Subject&gt;(dynamicMember keyPath: KeyPath&lt;ObjectType, Subject&gt;) -&gt; Binding&lt;Subject&gt; { Binding&lt;Subject&gt;( get: { self.object[keyPath: keyPath] }, set: { _ in assertionFailure("Read-only") } ) } } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721379498221764648" id="message-721379498221764648" title="Message sent: 13-Jun-20 03:04 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Wrapper</span> はどう考えても元のオブジェクトをラップしてるだけだろうと考えて <span class="pre pre--inline">unsafeBitCast</span> したら動いたｗ</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721380908707348500" id="message-721380908707348500" title="Message sent: 13-Jun-20 03:10 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">今やりたいのは、↓の <span class="pre pre--inline">Foo</span> のような型に対して <span class="pre pre--inline">@ObservedObject var foo: Foo</span> を作って、 <span class="pre pre--inline">$foo.readOnly.a</span> のようにして read-only な片方向のバインディングを作りたいということです。 <div class="pre pre--multiline language-swift">import Combine class Foo: ObservableObject { @Published private(set) var a: Int = 0 func incrementA() { a += 1 } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721381525379219546" id="message-721381525379219546" title="Message sent: 13-Jun-20 03:12 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">今は <span class="pre pre--inline">incrementA</span> が露出してるけど、アップデートのための関数は生成者や <span class="pre pre--inline">internal</span> にしか暴露されないとかもあり得る。そうでなくても、↑の <span class="pre pre--inline">incrementA</span> のようにアップデートの方法を限定したいからプロパティが <span class="pre pre--inline">private(set)</span> になるケースもあって、そのようなケースでもバインディングしたいというニーズも考えられる。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

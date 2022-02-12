@@ -1,0 +1,20 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">26-Apr-18 08:28 AM</span>
+    <div class="chatlog__message " data-message-id="438979563574394883" id="message-438979563574394883" title="Message sent: 26-Apr-18 08:28 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">でも A(2) も解放されないといけない気が。 </div>これってCoW時点では<span class="pre pre--inline">A(2)</span>もコピーされてるから、解放されなくて正解な気が。 <span class="mention" title="swift41#2144">@swift-4.1.3</span>
+            <div class="pre pre--multiline language-swift">class A : CustomStringConvertible{ let val: Int init(_ val: Int) { self.val = val } deinit { print("deinit: \(self)") } var description: String { return "A(\(val))" } } var x: ArraySlice&lt;A&gt; = [A(1), A(2), A(3)] do { let y = x // yは[A(1), A(2), A(3)]を保持 print("A") x.removeFirst() // xは[A(1), A(2), A(3)]を保持して[A(2), A(3)]を露出 x[2] = A(4) // CoW発生、xは[A(2), A(4)]を保持 print("B") x.removeFirst() // xは[A(2), A(4)]を保持して[A(4)]を露出 x[2] = A(5) // xは[A(2), A(5)]を保持して[A(5)]を露出、A(4)解放 print("C") x.removeFirst() // xは[A(2), A(5)]を保持して[]を露出 print("D") } // y解放、xに保持されていないA(1),A(3)解放 print("E")</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="26-Apr-18 08:48 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

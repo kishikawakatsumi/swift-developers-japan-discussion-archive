@@ -1,0 +1,24 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">14-Jun-21 11:31 AM</span>
+    <div class="chatlog__message " data-message-id="853959791230320640" id="message-853959791230320640" title="Message sent: 14-Jun-21 11:31 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">swift-5.2.5-RELEASE for ubuntu 16.04で再現しますね。<span class="pre pre--inline">-Ounchecked</span>を外すと起きない。 <div class="pre pre--multiline language-sh">$ pbpaste func main() { let K = Int(readLine()!)! if !K.isMultiple(of: 9) { print(0) return } var dp: [Int] = Array(repeating: 0, count: K+1) dp[0] = 1 for i in 1...K { for j in max(0, i-9)..&lt;i { dp[i] = (dp[i] + dp[j]) % (Int(1e9) + 7) //print(terminator: "") } } print(dp[K]) } main() $ pbpaste|docker run -i norionomura/swift:5.2 sh -c 'swiftc -Ounchecked -; echo 9|./main' 1 $ pbpaste|docker run -i norionomura/swift:5.2 sh -c 'swiftc -; echo 9|./main' 256 $ pbpaste|docker run -i norionomura/swift:5.3 sh -c 'swiftc -Ounchecked -; echo 9|./main' 256 $ pbpaste|docker run -i norionomura/swift:5.3 sh -c 'swiftc -; echo 9|./main' 256</div></span>
+          <span class="chatlog__edited-timestamp" title="14-Jun-21 11:34 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853960689747361802" id="message-853960689747361802" title="Message sent: 14-Jun-21 11:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">swift-5.3.3-RELEASEでは起きない。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

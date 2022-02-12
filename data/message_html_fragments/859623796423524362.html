@@ -1,0 +1,25 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">30-Jun-21 02:38 AM</span>
+    <div class="chatlog__message " data-message-id="859623796423524362" id="message-859623796423524362" title="Message sent: 30-Jun-21 02:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この <span class="pre pre--inline">RangeStorage(0...14)</span> の実行が、最初の Hud.init のときにしかされず、2回目以降はキャッシュされたオブジェクトが渡される。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="859624012098699274" id="message-859624012098699274" title="Message sent: 30-Jun-21 02:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">struct Hud { @Clamped(RangeStorage(0...14)) var bar = 5 @Clamped(RangeStorage(1...9)) var foo = 1 } var hud1 = Hud() var hud2 = Hud() // desugars to struct Hud { static let bar$shared = RangeStorage(0...14) static let foo$shared = RangeStorage(1...9) var bar = Clamped(wrappedValue: 5, @shared: bar$shared) var foo = Clamped(wrappedValue: 1, @shared: foo$shared) } // both Hud's get access to the same $shared properties. var hud1 = Hud() var hud2 = Hud() </div> ↑のdesugars toと見比べるのが挙動は一番わかりやすいな
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

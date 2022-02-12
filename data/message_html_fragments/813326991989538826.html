@@ -1,0 +1,18 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/269801719796334592/c7ac354c0870623258accfe97d7b8ffa.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="t.ae#5802" data-user-id="269801719796334592" style="color: rgb(241,196,15)">t.ae</span>
+    <span class="chatlog__timestamp">22-Feb-21 08:31 AM</span>
+    <div class="chatlog__message " data-message-id="813326991989538826" id="message-813326991989538826" title="Message sent: 22-Feb-21 08:31 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swift53#5213">@swift-5.3.3</span>
+            <div class="pre pre--multiline language-swift">import Foundation extension Process { struct RunResult { var output: Data var error: Data var status: Int32 } static func which(_ i: Int) throws -&gt; RunResult { let p = Process() p.executableURL = URL(fileURLWithPath: "/usr/bin/which") p.arguments = ["which"] let g = DispatchGroup() var outData = Data() let outPipe = Pipe() p.standardOutput = outPipe g.enter() outPipe.fileHandleForReading.readabilityHandler = { (handle) in let availableData = handle.availableData outData.append(availableData) print("[\(i)] stdout \(availableData)") if availableData.isEmpty { outPipe.fileHandleForReading.readabilityHandler = nil g.leave() } } var errData = Data() let errPipe = Pipe() p.standardError = errPipe g.enter() errPipe.fileHandleForReading.readabilityHandler = { (handle) in let availableData = handle.availableData errData.append(availableData) print("[\(i)] stderr \(availableData)") if availableData.isEmpty { errPipe.fileHandleForReading.readabilityHandler = nil g.leave() } } try p.run() p.waitUntilExit() print("[\(i)] process end") guard case .success = g.wait(timeout: .now()+3) else { fatalError("[\(i)] timeout") } print("[\(i)] wait end") let status = p.terminationStatus let result = RunResult(output: outData, error: errData, status: status) print("[\(i)] end output=\(result.output) error=\(result.error)") return result } } DispatchQueue.concurrentPerform(iterations: 3) { i in _ = try! Process.which(i) } print("end")</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

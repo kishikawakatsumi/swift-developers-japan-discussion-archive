@@ -1,0 +1,105 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">14-Jun-21 08:19 AM</span>
+    <div class="chatlog__message " data-message-id="853911567808200704" id="message-853911567808200704" title="Message sent: 14-Jun-21 08:19 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">インライン化するかどうかの判断に影響を与えるのは <span class="pre pre--inline">@_inline(always), @_inline(never)</span> などがありますね。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853911751988740138" id="message-853911751988740138" title="Message sent: 14-Jun-21 08:20 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そのメソッドがインライン化されるかどうかとは別の話として、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853911806069047309" id="message-853911806069047309" title="Message sent: 14-Jun-21 08:20 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そのメソッドを呼び出している別のメソッドとまとめてインライン化できるかどうか、というのが変わってきますね</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853912143006007357" id="message-853912143006007357" title="Message sent: 14-Jun-21 08:21 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">public struct S1 { @inlineable public func f2() { f3() } private func f3() { compute() } }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="14-Jun-21 08:25 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853912734362107915" id="message-853912734362107915" title="Message sent: 14-Jun-21 08:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">例えばこうなってたとき、 f2を呼び出す外部モジュールにおいては、f2の中のf3はインライン展開されなかった気がします。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853912808995684352" id="message-853912808995684352" title="Message sent: 14-Jun-21 08:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、f2の中のf3のインライン展開も怪しい気がします。↑の話があるので。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853912934568296508" id="message-853912934568296508" title="Message sent: 14-Jun-21 08:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><a href="https://docs.swift.org/swift-book/ReferenceManual/Attributes.html">https://docs.swift.org/swift-book/ReferenceManual/Attributes.html</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853912957719937065" id="message-853912957719937065" title="Message sent: 14-Jun-21 08:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">@usableFromInline</span> というのがあって</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853913087530237952" id="message-853913087530237952" title="Message sent: 14-Jun-21 08:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">public struct S2 { @inlineable public func f2() { f3() } @usableFromInline private func f3() { compute() } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853913182257807370" id="message-853913182257807370" title="Message sent: 14-Jun-21 08:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">こうすると、 f2の中にf3はインライン展開されるし、 f2をインライン展開する外部のモジュールにおいて、f3もインライン展開される、って事だったと思います。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853913240065409035" id="message-853913240065409035" title="Message sent: 14-Jun-21 08:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">このへんかなりややこしくてちょっと自信ないですけど。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853913353700507708" id="message-853913353700507708" title="Message sent: 14-Jun-21 08:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">public + inlineable</span> は、 ↑の <span class="pre pre--inline">@usableFromInline</span> と同じ状態になるので</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853913390966898688" id="message-853913390966898688" title="Message sent: 14-Jun-21 08:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">差が出ているならそういうことかもしれません。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">16-Oct-17 09:03 AM</span>
+    <div class="chatlog__message " data-message-id="369409895834976256" id="message-369409895834976256" title="Message sent: 16-Oct-17 09:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift"> internal init(encodedOffset o: Int, transcodedOffset: Int = 0, _ c: _Cache) { _compoundOffset = UInt64(o &lt;&lt; _Self._strideBits | transcodedOffset) _cache = c }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="369410118007259136" id="message-369410118007259136" title="Message sent: 16-Oct-17 09:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">2bitシフトして、 (UTF16でのインデックス, 0...3) のタプルになっている</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="369410387847675905" id="message-369410387847675905" title="Message sent: 16-Oct-17 09:04 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">現在のUnicodeが21bitでUTF8で4バイト文字までしか存在しないから</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="369410439815233547" id="message-369410439815233547" title="Message sent: 16-Oct-17 09:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">UTF8での位置は、 UTF16でvalidな位置 + 0〜3のオフセット</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="369410460107145217" id="message-369410460107145217" title="Message sent: 16-Oct-17 09:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、常に表現できるってことか？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="369410643721453578" id="message-369410643721453578" title="Message sent: 16-Oct-17 09:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">（ユニコードでの位置+UTF8ずらし分)的なデータ構造じゃないと辻褄が合わないと思ってて、こんなの出てきたからそうっぽいけど・・・</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="369410842015301633" id="message-369410842015301633" title="Message sent: 16-Oct-17 09:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-Swift">extension String { /// A position of a character or code unit in a string. @_fixed_layout // FIXME(sil-serialize-all) public struct Index { @_versioned // FIXME(sil-serialize-all) internal var _compoundOffset : UInt64 @_versioned internal var _cache: _Cache internal typealias _UTF8Buffer = _ValidUTF8Buffer&lt;UInt64&gt; @_versioned internal enum _Cache { case utf16 case utf8(buffer: _UTF8Buffer) case character(stride: UInt16) case unicodeScalar(value: Unicode.Scalar) } } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="369411029941354509" id="message-369411029941354509" title="Message sent: 16-Oct-17 09:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">String.Index型自体は内部に enum _Cache で、どの種類のビューのIndexなのかを保持しているから、適宜変換も可能と</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

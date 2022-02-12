@@ -1,0 +1,50 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="taketo1024#1158" data-user-id="370406638915420161" style="">taketo1024</span>
+    <span class="chatlog__timestamp">04-Sep-19 01:51 PM</span>
+    <div class="chatlog__message " data-message-id="618805400375918636" id="message-618805400375918636" title="Message sent: 04-Sep-19 01:51 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">C と Swift の連携で、Ubuntu でのみ再現するかなり嫌な感じのバグに苦しんでいます…<img loading="lazy" class="emoji " alt="😖" title="confounded" src="https://twemoji.maxcdn.com/2/svg/1f616.svg">
+            <div class="pre pre--multiline language-swift">func rank() -&gt; Int { let cA: UnsafeMutablePointer&lt;spasm&gt; = spasm_init(A) defer { spasm_csr_free(cA) } let rank = spasm_rank_hybrid(cA) return Int(rank) }</div>
+            <span class="pre pre--inline">spasm_</span> とついてるのが C のライブラリです。これを Ubuntu で実行すると <span class="pre pre--inline">spasm_csr_free(cA)</span> の中で Segmentation Fault が発生します。 <span class="pre pre--inline">spasm_csr_free</span> の中でポインタのアドレスを出力してみると、<span class="pre pre--inline">spasm_init</span> で返されるポインタのアドレスから微妙に変わっています。であれば <span class="pre pre--inline">spasm_rank_hybrid</span> の中で何者かがアドレスを書き換えてるのだろうと思いきや、この関数の return の直前でアドレスを出力してみても <span class="pre pre--inline">init</span> で返されるものと同じになっているのです… C と Swift の連携によってアドレスが書き換わってるとしか思えない感じです…<img loading="lazy" class="emoji " alt="😖" title="confounded" src="https://twemoji.maxcdn.com/2/svg/1f616.svg"> しかも不気味なことに <div class="pre pre--multiline language-swift">func rank() -&gt; Int { let cA: UnsafeMutablePointer&lt;spasm&gt; = spasm_init(A) print(cA) // ← これを入れるだけ defer { spasm_csr_free(cA) } let rank = spasm_rank_hybrid(cA) return Int(rank) }</div> こうすると Seg-Fault が発生しなくなります…<img loading="lazy" class="emoji " alt="😖" title="confounded" src="https://twemoji.maxcdn.com/2/svg/1f616.svg">
+          </span>
+          <span class="chatlog__edited-timestamp" title="04-Sep-19 02:24 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="618806262846586890" id="message-618806262846586890" title="Message sent: 04-Sep-19 01:55 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">defer</span> が悪さをしてるのかと思って <div class="pre pre--multiline language-swift">func rank() -&gt; Int { let cA: UnsafeMutablePointer&lt;spasm&gt; = spasm_init(A) let rank = spasm_rank_hybrid(cA) spasm_csr_free(cA) return Int(rank) }</div> としてみましたが同じでした<img loading="lazy" class="emoji " alt="😣" title="persevere" src="https://twemoji.maxcdn.com/2/svg/1f623.svg"></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="618807260252209184" id="message-618807260252209184" title="Message sent: 04-Sep-19 01:59 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">spasm_init: 0x7f3051b1c8f0 start of spasm_rank_hybrid: 0x7f3051b1c8f0 end of spasm_rank_hybrid: 0x7f3051b1c8f0 spasm_csr_free: 0x7f3051b1c800</div> こういう感じで、アドレスが <span class="pre pre--inline">f0</span> 分ズレるという…
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="618807780530454549" id="message-618807780530454549" title="Message sent: 04-Sep-19 02:01 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Optional の分ズレてるとかかなぁ<img loading="lazy" class="emoji " alt="🙄" title="rolling_eyes" src="https://twemoji.maxcdn.com/2/svg/1f644.svg"></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="618808487270416413" id="message-618808487270416413" title="Message sent: 04-Sep-19 02:04 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">f0</span> ズレるんじゃなくて <span class="pre pre--inline">&amp; 00</span> されるようです<img loading="lazy" class="emoji " alt="😣" title="persevere" src="https://twemoji.maxcdn.com/2/svg/1f623.svg"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

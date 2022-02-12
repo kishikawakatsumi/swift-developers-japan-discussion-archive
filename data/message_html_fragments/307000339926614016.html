@@ -1,0 +1,68 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">27-Apr-17 03:47 AM</span>
+    <div class="chatlog__message " data-message-id="306999859947372544" id="message-306999859947372544" title="Message sent: 27-Apr-17 03:47 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">protocol Fugable { typealias Element func fug() -&gt; Element } func callIntFugableFuga&lt;F: Fugable where F.Element == Int&gt;(fugable: F) -&gt; Int { return fugable.fuga() }</div> ↑一方こういうのがあるとき、LLVM IR だと↓こうなる <div class="pre pre--multiline nohighlight">define hidden i64 @_TF4main18callIntFugableFugauRq_S_7Fugablezqq_S0_7ElementSi_Fq_Si(%swift.opaque* noalias nocapture, %swift.type* %F, i8** %F.Fugable) #1 {</div> Existentialがないけど、結局、引数として x, wt, xt が並んでる。
+          </span>
+          <span class="chatlog__edited-timestamp" title="27-Apr-17 03:47 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="307000176420192257" id="message-307000176420192257" title="Message sent: 27-Apr-17 03:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ〜たしかに</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="307000205172277249" id="message-307000205172277249" title="Message sent: 27-Apr-17 03:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">xのサイズが24バイトを超えるかどうかとかで</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="307000273908269056" id="message-307000273908269056" title="Message sent: 27-Apr-17 03:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">直接ペイロードがコピーされてるか 、ポインタ渡しになっているかとかが変わるので</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="307000339926614016" id="message-307000339926614016" title="Message sent: 27-Apr-17 03:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そこらへんの分岐が、SILのopen_existential_addrがLLVMになる時に</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="307000388563894273" id="message-307000388563894273" title="Message sent: 27-Apr-17 03:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">直接のアドレス操作バイナリにコンパイルされる感じだけど</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="307000436282621952" id="message-307000436282621952" title="Message sent: 27-Apr-17 03:50 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">間接の場合は引数渡しより遅くなりうるかも？？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="307000784493740035" id="message-307000784493740035" title="Message sent: 27-Apr-17 03:51 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ、でも引数にバラける場合は常にopaqueポインタ渡しになるから、それと同じなのかな、うーん、わからない。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

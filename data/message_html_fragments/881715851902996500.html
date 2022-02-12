@@ -1,0 +1,28 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">30-Aug-21 01:44 AM</span>
+    <div class="chatlog__message " data-message-id="881715851902996500" id="message-881715851902996500" title="Message sent: 30-Aug-21 01:44 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">一体どうすれば？（そして Proposal のコードに <span class="pre pre--inline">await</span> が抜けてることに気付いた）</span>
+        </div>
+      </div>
+      <div class="chatlog__attachment " onclick="">
+        <a href="https://cdn.discordapp.com/attachments/306995750418513920/881715851663904858/Screen_Shot_2021-08-30_at_10.42.44.png">
+          <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/306995750418513920/881715851663904858/Screen_Shot_2021-08-30_at_10.42.44.png" alt="Image attachment" title="Image: Screen_Shot_2021-08-30_at_10.42.44.png (277.99 KB)" loading="lazy">
+        </a>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881716532349128754" id="message-881716532349128754" title="Message sent: 30-Aug-21 01:46 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓なら通ったけど、ちょっと・・・。そして <span class="pre pre--inline">onCancel</span> に <span class="pre pre--inline">Sendable</span> でない <span class="pre pre--inline">Box</span> を渡せてしまってるのはなぜ？？？ <div class="pre pre--multiline language-swift">func download(url: URL) async throws -&gt; Data? { let urlSessionTask: Box&lt;URLSessionTask&gt; = .init() return try await withTaskCancellationHandler { return try await withUnsafeThrowingContinuation { continuation in let task = URLSession.shared.dataTask(with: url) { data, _, error in if let error = error { // Ideally translate NSURLErrorCancelled to CancellationError here continuation.resume(throwing: error) } else { continuation.resume(returning: data) } } task.resume() urlSessionTask.value = task } } onCancel: { urlSessionTask.value?.cancel() // runs immediately when cancelled } } final class Box&lt;Value&gt; { var value: Value? }</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

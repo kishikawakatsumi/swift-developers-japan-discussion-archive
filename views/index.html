@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024, viewport-fit=cover">
+  <title>Swift Developers Japan Discussion Archive</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic" />
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css">
+
+  <link rel="stylesheet" href="/css/discord.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div>
+      <div class="columns">
+        <div class="column is-2 pl-6 py-5 has-background-light">
+          <div style="position: sticky; top: 1.5rem;">
+            <div style="height: 100vh; overflow: scroll;">
+              <aside class="menu">
+                <% Object.keys(it.categories).forEach(function(categoryName) { %>
+                <p class="menu-label">
+                  <%= categoryName %>
+                </p>
+                <% it.categories[categoryName].forEach(function(channel) { %>
+                <ul class="menu-list">
+                  <li>
+                    <a id="sidebar-<%= channel.channelName %>" href="/channels/<%= channel.channelName %>"
+                      style="text-decoration: none;">
+                      <span class="fa-light fa-hashtag"></span>
+                      <span class="px-1"><%= channel.channelName %></span>
+                    </a>
+                  </li>
+                </ul>
+                <% }) %>
+                <% }) %>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div style="position: sticky; top: 0; background-color: white; z-index: 2;">
+            <div class="p-2">
+              <span class="fa-light fa-hashtag has-text-grey is-size-5"></span>
+              <span id="header-channel-name" class="is-size-4 px-1"></span>
+              <div id="autocomplete" class="is-inline-block is-pulled-right" style="min-width: 60vw;"></div>
+            </div>
+          </div>
+          <div id="content-messages">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-loading" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box has-text-centered is-size-5">
+        <span class="fa-regular fa-circle-notch fa-fw fa-spin"></span>
+        <span class="has-text-dark pl-2">Jumping to message...</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://kit.fontawesome.com/6e15d9b0fb.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-plugin-query-suggestions"></script>
+
+  <script src="https://unpkg.com/virtual-scroller@1.x/bundle/virtual-scroller-dom.js"></script>
+  <script src="https://unpkg.com/page/page.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/router.js"></script>
+  <script src="/js/discord.js"></script>
+  <script src="/js/search.js"></script>
+</body>
+
+</html>

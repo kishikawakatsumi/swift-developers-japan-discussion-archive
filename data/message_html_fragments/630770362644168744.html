@@ -1,0 +1,39 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="taketo1024#1158" data-user-id="370406638915420161" style="">taketo1024</span>
+    <span class="chatlog__timestamp">07-Oct-19 02:13 PM</span>
+    <div class="chatlog__message " data-message-id="630769715266060298" id="message-630769715266060298" title="Message sent: 07-Oct-19 02:13 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">write 処理は同期されるけど，write 呼び出しはすぐ抜けられる，という感じなのかと理解してます．</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="630769789887053835" id="message-630769789887053835" title="Message sent: 07-Oct-19 02:13 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">deadlock なんじゃなくて単純に処理にめっちゃ時間かかってるのかも…<img loading="lazy" class="emoji " alt="🙄" title="rolling_eyes" src="https://twemoji.maxcdn.com/2/svg/1f644.svg"></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="630770123392679936" id="message-630770123392679936" title="Message sent: 07-Oct-19 02:15 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">しばらく待ったら出力されました．そして両方 <span class="pre pre--inline">sync</span> するように書き直したら一瞬で終わりましたw <div class="pre pre--multiline language-swift">public class SynchronizedDictionary&lt;Key: Hashable, Value&gt; { private var dictionary: [Key: Value] = [:] private let queue = DispatchQueue(label: "shit", qos: .default) public subscript(_ key: Key) -&gt; Value? { get { queue.sync { dictionary[key] } } set { queue.sync { self.dictionary[key] = newValue } } } } var a = SynchronizedDictionary&lt;Int, Int&gt;() let n = 100000 DispatchQueue.concurrentPerform(iterations: n) { i in a[i] = i }</div></span>
+          <span class="chatlog__edited-timestamp" title="07-Oct-19 02:15 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="630770362644168744" id="message-630770362644168744" title="Message sent: 07-Oct-19 02:16 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">書き込みにそれなりに時間かかるようなケースじゃないとむしろオーバーヘッドになるってことなのかな…<img loading="lazy" class="emoji " alt="🙄" title="rolling_eyes" src="https://twemoji.maxcdn.com/2/svg/1f644.svg"></span>
+          <span class="chatlog__edited-timestamp" title="07-Oct-19 02:16 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">27-Jan-20 09:51 AM</span>
+    <div class="chatlog__message " data-message-id="671291189932195841" id="message-671291189932195841" title="Message sent: 27-Jan-20 09:51 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">// これは展開できるから良いとして func f1(_ tpl: ([Int], [String])) { let fst: (Int?, String?) = tpl.map { $0.first } } // これもジェネリック型のまま展開できる func f2&lt;T, U&gt;(_ tpl: ([T], [U])) { let fst: (T?, U?) = tpl.map { $0.first } } // でもその変換が外部から来たら展開できない、こうか？ func f3(_ tpl: ([Int], [String]), _ g: &lt;A&gt;(A) -&gt; &lt;B&gt; B) { // #decltypeはC++からアイデアを借用 let fst: (#decltype(g(tpl.0)), #decltype(g(tpl.1)) = tpl.map(g) } // これもこう？ func f4&lt;T, U&gt;(_ tpl: ([T], [U]), _ g: &lt;A&gt;(A) -&gt; &lt;B&gt; B) { let fst: (#decltype(g(tpl.0), #decltype(g(tpl.1)) = tpl.map(g) }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="27-Jan-20 09:59 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="671291658519707683" id="message-671291658519707683" title="Message sent: 27-Jan-20 09:53 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑やっぱりmapに渡すクロージャの型は、リバースジェネリクスが含まれませんかね？ <span class="pre pre--inline">&lt;B&gt;</span> が前にあるとしたら、呼び出し側が決定するわけだけど、 実際<span class="pre pre--inline">g</span>　の実装が <span class="pre pre--inline">$0.first</span> なのか <span class="pre pre--inline">description($0)</span>　なのかわからないという立場だから、 <span class="pre pre--inline">f3</span> や <span class="pre pre--inline">f4</span> からすると、 <span class="pre pre--inline">&lt;B&gt;</span> のパラメータは指定できない。</span>
+          <span class="chatlog__edited-timestamp" title="27-Jan-20 09:54 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

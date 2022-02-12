@@ -1,0 +1,47 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+    <span class="chatlog__timestamp">31-Oct-17 08:46 AM</span>
+    <div class="chatlog__message " data-message-id="374841660099526658" id="message-374841660099526658" title="Message sent: 31-Oct-17 08:46 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Any型の値があるときに、それがclass型なのか値型なのか判別する方法</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="374841720929779721" id="message-374841720929779721" title="Message sent: 31-Oct-17 08:47 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class Cat {} struct Dog {} let cat = Cat() let dog = Dog() func checkIsClassValue(_ arg: Any) -&gt; Bool { return (arg as AnyObject) === (arg as AnyObject) } checkIsClassValue(cat) // true checkIsClassValue(dog) // false</div> こういうの考えてるんですが、もうちょっと効率いい方法無いですかね
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="374841765502517248" id="message-374841765502517248" title="Message sent: 31-Oct-17 08:47 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Mirror使えばいけるかな。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="374842688190808065" id="message-374842688190808065" title="Message sent: 31-Oct-17 08:51 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func checkIsClassValue(_ arg: Any) -&gt; Bool { return Mirror(reflecting: arg).displayStyle == .some(.class) }</div> こっちのほうが上品っぽい
+          </span>
+        </div>
+      </div>
+      <div class="chatlog__reactions">
+        <div class="chatlog__reaction" title="round_pushpin">
+          <img class="emoji emoji--small" alt="📍" src="https://twemoji.maxcdn.com/2/svg/1f4cd.svg" loading="lazy">
+          <span class="chatlog__reaction-count">1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

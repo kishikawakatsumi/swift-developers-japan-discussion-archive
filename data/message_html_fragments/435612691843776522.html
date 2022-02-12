@@ -1,0 +1,16 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">17-Apr-18 01:29 AM</span>
+    <div class="chatlog__message " data-message-id="435612691843776522" id="message-435612691843776522" title="Message sent: 17-Apr-18 01:29 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swiftbot#4647">@swiftbot</span> --version=latest <div class="pre pre--multiline nohighlight">import Foundation public protocol MapType { associatedtype Domain associatedtype Codomain init(_ fnc: @escaping (Domain) -&gt; Codomain) func applied(to x: Domain) -&gt; Codomain } public struct Map&lt;Domain, Codomain&gt;: MapType { internal let fnc: (Domain) -&gt; Codomain public init(_ fnc: @escaping (Domain) -&gt; Codomain) { self.fnc = fnc } public func applied(to x: Domain) -&gt; Codomain { return fnc(x) } } public protocol EndType: MapType where Domain == Codomain { static var identity: Self { get } func composed(with f: Self) -&gt; Self } public extension EndType { public static var identity: Self { return Self{ x in x } } public func composed(with g: Self) -&gt; Self { return Self { x in // ココで EXC_BAD_ACCESS self.applied(to: g.applied(to: x)) } } } extension Map: EndType where Domain == Codomain { } public extension Array where Element: EndType { func composed() -&gt; Element { return self.reduce(Element.identity) { (res, f) in res.composed(with: f) } } } let f = Map { x in 2 * x } let g = [f, f].composed() print(g.applied(to: 0))</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">26-Apr-18 06:24 AM</span>
+    <div class="chatlog__message " data-message-id="438948468833386507" id="message-438948468833386507" title="Message sent: 26-Apr-18 06:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">昨日やってたのは動画のフレームをコマ送りにするときに</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="438948546914287629" id="message-438948546914287629" title="Message sent: 26-Apr-18 06:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">N フレーム分戻れるように画像をキャッシュしてたんだけど</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="438948635430879232" id="message-438948635430879232" title="Message sent: 26-Apr-18 06:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">var cachedFrames = ArraySlice&lt;Image&lt;RGBA&lt;UInt8&gt;&gt;&gt;</span> としてキャッシュしておけば、</span>
+          <span class="chatlog__edited-timestamp" title="26-Apr-18 06:25 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="438948784098246666" id="message-438948784098246666" title="Message sent: 26-Apr-18 06:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">cachedFrames[frameIndex]</span> で簡単にアクセスできる。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="438948969125511169" id="message-438948969125511169" title="Message sent: 26-Apr-18 06:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">if cachedFrames.count &gt; maxNumberOfCachedFrames { cachedFrames.removeFirst() }</span> みたいにして簡単に古いキャッシュを消せるし</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="438949531070234624" id="message-438949531070234624" title="Message sent: 26-Apr-18 06:28 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">if cachedFrames.indices.contains(frameIndex) { ... }</span> みたいにキャッシュが存在するときの処理も簡単に書ける。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="438949717494202378" id="message-438949717494202378" title="Message sent: 26-Apr-18 06:29 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">（↑が O(1) になってるか自信ないけど、 <span class="pre pre--inline">(cachedFrames.startIndex ..&lt; cachedFrames.endIndex).contains(frameIndex)</span> にすれば O(1) ）</span>
+          <span class="chatlog__edited-timestamp" title="26-Apr-18 06:30 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

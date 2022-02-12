@@ -1,0 +1,2218 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>swift-developers-japan - recruitment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #23262a;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        a {
+            color: #0068e0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #b9bbbe;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(185, 187, 190, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #c7ccd1;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #f9f9f9;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #f3f3f3;
+            border-radius: 5px;
+            color: #657b83;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #f9f9f9;
+            color: #657b83;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #505cdc;
+            background-color: rgba(88, 101, 242, .15);
+            font-weight: 500;
+        }
+
+        .mention:hover {
+            background-color: #5865f2;
+            color: #ffffff
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(6, 6, 7, 0.08);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #2f3136;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid #eceeef;
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #c7ccd1;
+            border-top: 2px solid #c7ccd1;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #5f5f60;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #5f5f60;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #2f3136;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #2f3136;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            unicode-bidi: bidi-override;
+            color: #747f8d;
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+            direction: ltr;
+        }
+
+        .chatlog__author-name {
+            font-weight: 600;
+            color: #2f3136;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            color: #747f8d;
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #f2f3f5;
+            border: 1px solid #ebedef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: #747f8d;
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: rgba(227, 229, 232, 1);
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(249, 249, 249, 0.3);
+            border: 1px solid rgba(204, 204, 204, 0.3);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            color: #4f545c
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #4f545c;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #4f545c;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #36393e;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #2e3338;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0;
+            padding: .125rem .375rem;
+            background-color: #f2f3f5;
+            border-radius: 8px;
+            border-color: transparent;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        .chatlog__reaction:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+            border-width: 1px;
+            border-style: solid;
+            background-color: white;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: #4f5660;
+        }
+
+        .chatlog__reaction:hover .chatlog__reaction-count {
+            color: #2e3338;
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid #eceeef;
+        }
+
+        .postamble__entry {
+            color: #2f3136;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">swift-developers-japan</div>
+        <div class="preamble__entry">開発以外 / recruitment</div>
+
+            <div class="preamble__entry preamble__entry--small">iOS・Swift・その他Apple系のお仕事の募集・依頼などをするトピック。
+(ノイズに感じる方はミュート設定してください。)</div>
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 03:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="337070122168483841" id="message-337070122168483841" title="Message sent: 19-Jul-17 03:16 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://twitter.com/neuecc">https://twitter.com/neuecc</a> さんが短期の業務委託のSwiftエンジニア探していたので誘導してみたのですが、いないですね <img loading="lazy" class="emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg"></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://twitter.com/neuecc">
+                                                        <div class="markdown preserve-whitespace">neuecc (@neuecc)</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Microsoft MVP for Visual C#. CTO at Grani, Inc.Unityで使えるReactive Extensions(UniRx)を作ってます <a href="https://github.com/neuecc/UniRx">https://github.com/neuecc/UniRx</a></div>
+                                            </div>
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Tweets</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">33027</div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Followers</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">3524</div>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/1VNuEqMM46WASyoxzbFDUjzhPKuvtg63LZxCKduqXwc/https/pbs.twimg.com/profile_images/64820538/MyTwitterIcon_normal.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/1VNuEqMM46WASyoxzbFDUjzhPKuvtg63LZxCKduqXwc/https/pbs.twimg.com/profile_images/64820538/MyTwitterIcon_normal.jpg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                                    <div class="chatlog__embed-footer">
+                                            <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="337070315819630592" id="message-337070315819630592" title="Message sent: 19-Jul-17 03:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">黒いサイトの方です(　&#180;･‿･｀)
+<a href="http://neue.cc">http://neue.cc</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 03:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="337070320412393474" id="message-337070320412393474" title="Message sent: 19-Jul-17 03:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote">Unityで使えるReactive Extensions(UniRx)を作ってます
+</div>UniRxって日本人が作ってたんですね</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 03:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="337070345204793354" id="message-337070345204793354" title="Message sent: 19-Jul-17 03:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="http://qiita.com/mono0926/items/cf73fed1958f7db10642">http://qiita.com/mono0926/items/cf73fed1958f7db10642</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://qiita.com/mono0926/items/cf73fed1958f7db10642">
+                                                        <div class="markdown preserve-whitespace"><a href="http://neue.cc/">http://neue.cc/</a> を白くして見やすくするブックマークレット - Qiita</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace"><a href="http://neue.cc/">http://neue.cc/</a> を白くして見やすくするブックマークレット。
+
+```js
+javascript:$(&#39;body&#39;).css(&#39;background&#39;, &#39;white&#39;);$(&#39;*&#39;).not(&#39;.csharp &gt;spa...</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/IiVRJ2fhnvvWwZ7MUnaxQQYSzzGrisZJBUfRDqYc1qw/http/cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/IiVRJ2fhnvvWwZ7MUnaxQQYSzzGrisZJBUfRDqYc1qw/http/cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 03:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="337070521747243020" id="message-337070521747243020" title="Message sent: 19-Jul-17 03:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote">Unite 2017 Tokyo講演「「黒騎士と白の魔王」にみるC#で統一したサーバー/クライアント開発と現実的なUniRx使いこなし術」 - Grani Engineering Blog</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="337070549597683712" id="message-337070549597683712" title="Message sent: 19-Jul-17 03:18 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="http://engineering.grani.jp/entry/2017/05/10/223049">http://engineering.grani.jp/entry/2017/05/10/223049</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="http://blog.hatena.ne.jp/neuecc/">neuecc</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://engineering.grani.jp/entry/2017/05/10/223049">
+                                                        <div class="markdown preserve-whitespace">Unite 2017 Tokyo講演「「黒騎士と白の魔王」にみるC#で統一したサーバー/クライアント開発と現実的なUniRx使いこなし術」 - Grani Engineering Blog</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">CTOの河合です。Unite 2017 Tokyoにて、 「黒騎士と白の魔王」にみるC#で統一したサーバー/クライアント開発と現実的なUniRx使いこなし術 という講演を行いました。 【Unite 2017 Tokyo】「黒騎士と白の魔王」にみるC#で統一したサーバー/クライアント開発と現実的なUniRx使いこなし術 from UnityTechnologiesJapan 講演に参加いただいたみなさま、ありがとうございます。資料のほか、講演の動画は、また後日配信されるようなので、そちらもご覧いただけたらと思います。 C#大統一理論 「黒騎士と白の魔王」は、世にも珍しくクライアントとサーバーが共…</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="337070595743285253" id="message-337070595743285253" title="Message sent: 19-Jul-17 03:18 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">この人か！！</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 03:18 AM</span>
+
+            <div class="chatlog__message " data-message-id="337070683089666050" id="message-337070683089666050" title="Message sent: 19-Jul-17 03:18 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">最近、これでもiOS界隈の方目にしたかもです:
+<a href="https://github.com/neuecc/ZeroFormatter">https://github.com/neuecc/ZeroFormatter</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/neuecc/ZeroFormatter">
+                                                        <div class="markdown preserve-whitespace">neuecc/ZeroFormatter</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">ZeroFormatter - Fastest C# Serializer and Infinitely Fast Deserializer for .NET, .NET Core and Unity.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/FtOWfoQXSgyCO8z18OpTlbyK0XB2JFneh3aeg-9VIzI/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/46207">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/FtOWfoQXSgyCO8z18OpTlbyK0XB2JFneh3aeg-9VIzI/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/46207" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="337070763091689493" id="message-337070763091689493" title="Message sent: 19-Jul-17 03:18 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">違う人が作ったSwift版: <a href="https://github.com/yaslab/ZeroFormatter.swift">https://github.com/yaslab/ZeroFormatter.swift</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://github.com/yaslab/ZeroFormatter.swift">
+                                                        <div class="markdown preserve-whitespace">yaslab/ZeroFormatter.swift</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">ZeroFormatter.swift - [WIP] Implementation of ZeroFormatter in Swift.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/_Lii19OCgbaWGwcTqyor2tIqG2bp8HpTKLnJPdirkFU/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/2077275">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/_Lii19OCgbaWGwcTqyor2tIqG2bp8HpTKLnJPdirkFU/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/2077275" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="337070846118199296" id="message-337070846118199296" title="Message sent: 19-Jul-17 03:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.slideshare.net/neuecc/zeroformattermagiconion-fastest-c-serializergrpc-based-c-rpc?ref=http://neue.cc/2016/11/28_544.html">https://www.slideshare.net/neuecc/zeroformattermagiconion-fastest-c-serializergrpc-based-c-rpc?ref=http://neue.cc/2016/11/28_544.html</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.slideshare.net/neuecc">Yoshifumi Kawai</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.slideshare.net/neuecc/zeroformattermagiconion-fastest-c-serializergrpc-based-c-rpc?ref=http://neue.cc/2016/11/28_544.html">
+                                                        <div class="markdown preserve-whitespace">ZeroFormatter/MagicOnion - Fastest C# Serializer/gRPC based C# RPC</div>
+                                                    </a>
+                                            </div>
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/sHeRry7Je00ov-M2_QC_b6UfPk44b4HwTlrpKHLhnkA/%3Fcb%3D1480229554/https/cdn.slidesharecdn.com/ss_thumbnails/zeroformatterandmagiconion-161127065151-thumbnail-4.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/sHeRry7Je00ov-M2_QC_b6UfPk44b4HwTlrpKHLhnkA/%3Fcb%3D1480229554/https/cdn.slidesharecdn.com/ss_thumbnails/zeroformatterandmagiconion-161127065151-thumbnail-4.jpg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="337071576581406720" id="message-337071576581406720" title="Message sent: 19-Jul-17 03:22 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">2009年からRx触って来たベテランの方です(　&#180;･‿･｀) (この記事は2011年のですが)
+<a href="http://www.atmarkit.co.jp/fdotnet/introrx/introrx_01/introrx_01_01.html">http://www.atmarkit.co.jp/fdotnet/introrx/introrx_01/introrx_01_01.html</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 03:22 AM</span>
+
+            <div class="chatlog__message " data-message-id="337071686967099392" id="message-337071686967099392" title="Message sent: 19-Jul-17 03:22 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">MS MVPだしC#源流のRXからの本物の人だ・・・</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="sunglasses">
+                                <img class="emoji emoji--small" alt="&#128526;" src="https://twemoji.maxcdn.com/2/svg/1f60e.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 03:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="337073268693663756" id="message-337073268693663756" title="Message sent: 19-Jul-17 03:28 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote">最近、これでもiOS界隈の方目にしたかもです
+</div>
+あ、でも <span class="mention" title="takasek#2409">@takasek</span> さんが呟いていたくらいでiOS界隈としてはあまり話題になってなかったかもです。
+<a href="https://twitter.com/takasek/status/802758572891250688">https://twitter.com/takasek/status/802758572891250688</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+                                                    <img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/WTYWLwWLAk6_uDFqXwnTRCYAmXJXkw2N71_rqjGnWBA/https/pbs.twimg.com/profile_images/708591418655125505/toP3_XwC_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://twitter.com/takasek">takasek (@takasek)</a>
+                                                    </span>
+                                            </div>
+
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">デシリアライズしないからデシリアライズが無限大速いZeroFormatter、Swift実装も作ったんです！？ <a href="https://t.co/9SnCPh3G4L">https://t.co/9SnCPh3G4L</a> #kbkz_tech</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                    <div class="chatlog__embed-footer">
+                                            <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="337074021931941889" id="message-337074021931941889" title="Message sent: 19-Jul-17 03:31 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">果たしてご本人は降臨するのでしょうか<img loading="lazy" class="emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg"></span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Jul-17 04:37 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/337089905798807552/dc72e78a4b14089d6fdc707284ef4d1b.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="neuecc#9228" data-user-id="337089905798807552" style="">neuecc</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 04:36 AM</span>
+
+            <div class="chatlog__message " data-message-id="337090224091955201" id="message-337090224091955201" title="Message sent: 19-Jul-17 04:36 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">すみません、昨日はMVPの集まりがあってPC起動できなかったので、今Joinしました、遅れて失礼しました！</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="confetti_ball">
+                                <img class="emoji emoji--small" alt="&#127882;" src="https://twemoji.maxcdn.com/2/svg/1f38a.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 04:36 AM</span>
+
+            <div class="chatlog__message " data-message-id="337090294380101634" id="message-337090294380101634" title="Message sent: 19-Jul-17 04:36 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img loading="lazy" class="emoji emoji--large" alt="🎉" title="tada" src="https://twemoji.maxcdn.com/2/svg/1f389.svg"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/337089905798807552/dc72e78a4b14089d6fdc707284ef4d1b.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="neuecc#9228" data-user-id="337089905798807552" style="">neuecc</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 04:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="337092512319537174" id="message-337092512319537174" title="Message sent: 19-Jul-17 04:45 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">うちの会社（株式会社グラニ <a href="http://grani.jp/">http://grani.jp/</a> ）はスマフォ向けのソーシャルゲーム開発がメインで、↑で紹介頂いた通り、私はC#が得意でして、サーバーサイド・クライアントサイド(Unity)をC#でやってる希少な（？）会社です。今回はゲームの話ではなく、我々はVR事業も手がけていまして、iOS向けにARKitを利用してアプリケーションを作りたい、という企画があり、ならばSwiftによるネイティブiOS開発で行こうという方針になりました(Xamarinじゃないんですね！はい！）
+我々自身がナレッジに乏しいところもあり、まず短期で、一緒に業務委託の形で開発を進めていただけるエンジニアを探しています。もしご興味ある方がいれば、私向けにDM頂ければと思います。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 04:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="337092636127264779" id="message-337092636127264779" title="Message sent: 19-Jul-17 04:45 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">お、ARKit <img loading="lazy" class="emoji " alt="👀" title="eyes" src="https://twemoji.maxcdn.com/2/svg/1f440.svg"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/287391948828966912/dfc107ba768d35a8618af245ad1f70d6.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="miso_soup3#1292" data-user-id="287391948828966912" style="">miso_soup3</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 04:46 AM</span>
+
+            <div class="chatlog__message " data-message-id="337092814716272641" id="message-337092814716272641" title="Message sent: 19-Jul-17 04:46 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img loading="lazy" class="emoji emoji--large" alt="👀" title="eyes" src="https://twemoji.maxcdn.com/2/svg/1f440.svg"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 04:50 AM</span>
+
+            <div class="chatlog__message " data-message-id="337093817964429312" id="message-337093817964429312" title="Message sent: 19-Jul-17 04:50 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">多分Discordにいらっしゃらない <a href="https://twitter.com/shu223">https://twitter.com/shu223</a> さんと合いそうな案件ですが、今はフルタイムのようですね <img loading="lazy" class="emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg"> 
+
+<a href="http://d.hatena.ne.jp/shu223/20170607/1496918711">http://d.hatena.ne.jp/shu223/20170607/1496918711</a>
+<a href="http://d.hatena.ne.jp/shu223/20160929/1475109445">http://d.hatena.ne.jp/shu223/20160929/1475109445</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Jul-17 04:50 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://twitter.com/shu223">
+                                                        <div class="markdown preserve-whitespace">Shuichi Tsutsumi (@shu223)</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">iOS Freelancer [BOOKS] iOSxBLE Core Bluetooth Programming, iOS Advanced 100 Recipes [WORKS] BONX, WHILL, Moff, etc. [OSS] iOS Sampler <a href="http://github.com/shu223">http://github.com/shu223</a></div>
+                                            </div>
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Tweets</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">10844</div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Followers</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">5220</div>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/rR5avgp0cXz9lqh9Wrp1WlisTEhQ8cLZ0J9nOB43KcY/https/pbs.twimg.com/profile_images/772613345853661184/fcg8-joM_normal.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/rR5avgp0cXz9lqh9Wrp1WlisTEhQ8cLZ0J9nOB43KcY/https/pbs.twimg.com/profile_images/772613345853661184/fcg8-joM_normal.jpg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                                    <div class="chatlog__embed-footer">
+                                            <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://d.hatena.ne.jp/shu223/20170607/1496918711">
+                                                        <div class="markdown preserve-whitespace">【iOS 11】ARKitについてWWDCのラボで聞いてきたことのメモ - Over&amp;Out その後</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace"> iOS 11から追加された、AR機能を実装するためのフレームワーク「ARKit」についてWWDCのラボ（Appleのデベ..</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/9FaKUwfQeYflNlPDL9gaQUsf2k8OmrYuiPKs_VKvv60/http/cdn-ak.f.st-hatena.com/images/fotolife/s/shu223/20170608/20170608032933.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/9FaKUwfQeYflNlPDL9gaQUsf2k8OmrYuiPKs_VKvv60/http/cdn-ak.f.st-hatena.com/images/fotolife/s/shu223/20170608/20170608032933.jpg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="http://d.hatena.ne.jp/shu223/20160929/1475109445">
+                                                        <div class="markdown preserve-whitespace">フリーランスを休業して就職します - Over&amp;Out その後</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">2014年からフリーランスiOSプログラマとして活動を始めて2年と8ヶ月。フリーランスという働き方は自分には..</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/dd4LuDFOdTMHQubeBFpcRanr0tSTrN-1bPlTTU8G-YI/http/cdn-ak.f.st-hatena.com/images/fotolife/s/shu223/20160929/20160929075342.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/dd4LuDFOdTMHQubeBFpcRanr0tSTrN-1bPlTTU8G-YI/http/cdn-ak.f.st-hatena.com/images/fotolife/s/shu223/20160929/20160929075342.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/337089905798807552/dc72e78a4b14089d6fdc707284ef4d1b.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="neuecc#9228" data-user-id="337089905798807552" style="">neuecc</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 04:57 AM</span>
+
+            <div class="chatlog__message " data-message-id="337095684228513794" id="message-337095684228513794" title="Message sent: 19-Jul-17 04:57 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ARKit、さすがにバリバリ触ってるぜ！という人は少ないと思いますので、興味あるので仕事でやってみたい、ぐらいの温度感でOKです……！</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="thinking">
+                                <img class="emoji emoji--small" alt="&#129300;" src="https://twemoji.maxcdn.com/2/svg/1f914.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 05:36 AM</span>
+
+            <div class="chatlog__message " data-message-id="337105380155064333" id="message-337105380155064333" title="Message sent: 19-Jul-17 05:36 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291046514573312001/dccac6354e411d31bc9a8fd7e5a725fd.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mono#5154" data-user-id="291046514573312001" style="color: rgb(237,171,161)">mono</span>
+
+
+        <span class="chatlog__timestamp">19-Jul-17 09:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="337169188936351754" id="message-337169188936351754" title="Message sent: 19-Jul-17 09:49 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/265628591956557824/bc33e6a36f4a81e06de9e72f04352a4e.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="しゅん#6725" data-user-id="265628591956557824" style="">しゅん</span>
+
+
+        <span class="chatlog__timestamp">10-Feb-18 01:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="411696175624749066" id="message-411696175624749066" title="Message sent: 10-Feb-18 01:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">こんにちは、初めて投稿させていただきます。
+この度、お仕事を貰う可能性がありまして、iOSアプリを作れる人を探しています。
+(仕事上でiOSアプリを作成したことがなく、とんちんかんな事を言ってしまっていたらすみません)
+
+1, 個人で0からアプリを作り、現在もapp storeに載っているアプリがある方
+2, 複数人でやるiOSプロジェクトをやったことある方(プロジェクトマネージャーも出来るとなお良い)
+3, フリーランスで作成したことがある方
+4, (可能なら)秋葉原で一緒にコーディングが出来る方
+5, ニュースアプリのような、サーバーに保管されたデータを表示するアプリ作成経験者の方
+
+ざっくりですが、
+複数店舗と連動したポータルサービスの為のアプリとなります。
+複数店舗がイベントを入力して、ユーザーはログインして、イベント一覧を見たり、参加の意思表示が出来たり、お店のポイントを確認したり出来るものになります。
+参考になる既存アプリがありまして、機能、構造は殆ど同じものを作るので、先に先に進めれるものとなります。
+web版も作りまして、そちらでは店舗がイベントを入力できたり、イベントに来たユーザーをチェックインさせれたりします。そちらは私が作れます。
+
+私が出来ること
+・作業場所の提供
+・アプリの仕様の決定
+・iOS素人レベルのコーディング
+・webの方のサーバーの作成
+・店舗側への導入の説明等
+
+先方と私の関係
+秋葉原に場所を構える株式会社で、秋葉原で5店舗ほど構えて営業している会社。今まで私は、そのイベントの学生団体のリーダーとして活動していまして、イベントページの作成やイベントの運営をしばしばお手伝いしております。
+最近までwebエンジニアとしてベンチャーで働いておりました。
+
+見込み期間は、1~2ヶ月(iOSアプリ作成の規模感がわからず、どれくらいかかるのか余り分かっていないが、私がweb製作していた感覚でいくと、フルタイムなら1~2ヶ月で終わるのではないかと)
+フルタイムじゃないなら3~4ヶ月。
+デッドラインは半年です。
+
+金額は150~250万です。ただし、早く終わっても同じ金額をお渡し出来ます。
+
+はっきりと決まっておらず、ふわっとしていて申し訳ないですが、興味ある方、経歴と一緒にDMいただければと思います。
+どうぞよろしくお願い致します。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="411696211624591360" id="message-411696211624591360" title="Message sent: 10-Feb-18 01:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://gist.github.com/1ulce/77663b99e7dacbac8a503d4583000eb2">https://gist.github.com/1ulce/77663b99e7dacbac8a503d4583000eb2</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://gist.github.com/1ulce/77663b99e7dacbac8a503d4583000eb2">
+                                                        <div class="markdown preserve-whitespace">recruitment.txt</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">recruitment.txt</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/Y4zpyJhHM9iLdj2Yt9PW0a06foIOAh7ElP9jZNUP910/%3Fs%3D400%26v%3D4/https/avatars0.githubusercontent.com/u/4685046">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/Y4zpyJhHM9iLdj2Yt9PW0a06foIOAh7ElP9jZNUP910/%3Fs%3D400%26v%3D4/https/avatars0.githubusercontent.com/u/4685046" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/c7c329d5c48dc5ef2a80bdf8480b438a.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lovee#6218" data-user-id="332734073565085699" style="color: rgb(241,196,15)">lovee</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-18 12:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="430890338568241153" id="message-430890338568241153" title="Message sent: 04-Apr-18 12:44 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">知り合いが勤めてる会社がiOSエンジニア募集してます、年収は600万〜（応相談）で、勤務地は渋谷円山町です
+<a href="https://www.fullspeed.co.jp">https://www.fullspeed.co.jp</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293573633035730946/08ab0592c6064f92c3674e09cc81b5da.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="hiragram#3838" data-user-id="293573633035730946" style="">hiragram</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-18 12:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="430890678634151937" id="message-430890678634151937" title="Message sent: 04-Apr-18 12:45 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">へーフルスピードiOSアプリの事業あるんだ</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/c7c329d5c48dc5ef2a80bdf8480b438a.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lovee#6218" data-user-id="332734073565085699" style="color: rgb(241,196,15)">lovee</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-18 12:50 AM</span>
+
+            <div class="chatlog__message " data-message-id="430891907292594189" id="message-430891907292594189" title="Message sent: 04-Apr-18 12:50 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">多分これから作る感じですかね？まだ詳しく聞いてませんが</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/265628591956557824/bc33e6a36f4a81e06de9e72f04352a4e.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="しゅん#6725" data-user-id="265628591956557824" style="">しゅん</span>
+
+
+        <span class="chatlog__timestamp">18-Apr-18 02:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="436178612203421706" id="message-436178612203421706" title="Message sent: 18-Apr-18 02:58 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">遅くなりましたが、2018/02/10の募集案件は終了致しました。お問い合わせをしてくださった方々、ありがとうございました。</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="tada">
+                                <img class="emoji emoji--small" alt="&#127881;" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="taketo1024#1158" data-user-id="370406638915420161" style="">taketo1024</span>
+
+
+        <span class="chatlog__timestamp">11-May-18 01:21 AM</span>
+
+            <div class="chatlog__message " data-message-id="444307925217837076" id="message-444307925217837076" title="Message sent: 11-May-18 01:21 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://twitter.com/Aya_Furusawa/status/994740349909151744">https://twitter.com/Aya_Furusawa/status/994740349909151744</a>
+うちの奥さん（UI/UXデザイナ）転職活動中です✌️ティンと来たら是非 DM 送ってあげてください<img loading="lazy" class="emoji " alt="💌" title="love_letter" src="https://twemoji.maxcdn.com/2/svg/1f48c.svg"></span>
+
+                                <span class="chatlog__edited-timestamp" title="11-May-18 01:25 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+                                                    <img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/d51brxiUnES-9-JiOxoNId0IvQgGs10UQJZqbqCkA2Y/https/pbs.twimg.com/profile_images/973485351699324928/H7F19bQJ_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://twitter.com/Aya_Furusawa">Aya_Sano(佐野 彩) (@Aya_Furusawa)</a>
+                                                    </span>
+                                            </div>
+
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">[Twitter転職]年収600〜フレックス希望、UX/UIデザイナーで特にリサーチに強みがありサービスデザイン経験が長め、要件定義から入れます。若手の教育も出来ます。
+興味もたれたらDM...</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                    <div class="chatlog__embed-footer">
+                                            <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="thumbsup">
+                                <img class="emoji emoji--small" alt="&#128077;" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/c7c329d5c48dc5ef2a80bdf8480b438a.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lovee#6218" data-user-id="332734073565085699" style="color: rgb(241,196,15)">lovee</span>
+
+
+        <span class="chatlog__timestamp">17-May-19 07:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="578849091740499968" id="message-578849091740499968" title="Message sent: 17-May-19 07:39 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">かなり難しいと思いながら、知り合いの知り合いから某ベンチャーのiOSエンジニアの正社員募集を貼ります；かなり大至急らしいので自分の知り合いとかにも転職活動中の人がいれば声かけていただけたら嬉しいです；
+
+<div class="pre pre--multiline nohighlight">業務内容：新規の某分野の予約アプリ（超ミニマムスタート；どっちかというといろんなサービスを早く立ち上げて反応見るのが目的なので、とにかく早く構築してリリースしてダメそうなら早くやめて次に行くスタイルらしい）
+勤務地：東京
+勤務体系：フレックス（12〜16のコアタイムらしい）
+リモートワーク：基本不可
+私服出勤：可
+月収：50万（額面）
+ストックオプション：応相談</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/388353917953638404/925d4488b867503e85511c03185c1d37.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="maccostar#4947" data-user-id="388353917953638404" style="">maccostar</span>
+
+
+        <span class="chatlog__timestamp">12-Nov-19 10:47 AM</span>
+
+            <div class="chatlog__message " data-message-id="643763869151658022" id="message-643763869151658022" title="Message sent: 12-Nov-19 10:47 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">非IT系事業会社の開発組織を強化するにあたって、『エンジニア職の働きやすい/転職しやすい環境』を調査しています。
+
+お手数ですが、10問程度のアンケートにご協力ください<img loading="lazy" class="emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/2/svg/1f647.svg"> <img loading="lazy" class="emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/2/svg/1f647.svg"> 
+<a href="https://questant.jp/q/CBMSXB4Q">https://questant.jp/q/CBMSXB4Q</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://questant.jp/q/CBMSXB4Q">
+                                                        <div class="markdown preserve-whitespace">エンジニア転職に関する調査│Questant（クエスタ...</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">エンジニア転職に関する調査にご回答お願いいたします。</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/7sBFPDbo9Q_wSmzOyBgtGfQJTs_GjXMtHvBF_N7XyZQ/https/d1o79rcslrm1j.cloudfront.net/10046/site/img/common/fb_image.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/7sBFPDbo9Q_wSmzOyBgtGfQJTs_GjXMtHvBF_N7XyZQ/https/d1o79rcslrm1j.cloudfront.net/10046/site/img/common/fb_image.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="neo#5017" data-user-id="651334746990837760" style="">neo</span>
+
+
+        <span class="chatlog__timestamp">03-Dec-19 08:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="651340224370180098" id="message-651340224370180098" title="Message sent: 03-Dec-19 08:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">初めまして。 
+私共はWebの受託開発を行っている会社です。
+
+単発のコンサルティングしていただける方を募集しています。
+
+現在クライアント様よりマッチングサービスの開発、運用のお仕事をさせていただいております。
+今回、SwiftにてWebViewを用いていわゆるガワアプリを作成いたしました。
+しかし、Appleの度重なるリジェクトにより困っています。
+そのため、以下をご相談させていただける方がいらっしゃいましたら、お力を貸していただきたく思います。
+
+<div class="pre pre--multiline nohighlight">業務内容: iOSアプリリリースまでの助言と指導(開発は弊社にて行いますので必要はございません。)
+応募資格: マッチングサービスのアプリをリリースしたことのある方
+報酬: 5万円〜</div></span>
+
+                                <span class="chatlog__edited-timestamp" title="03-Dec-19 08:49 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/756800086473703454/767c874679078244ff8f5734671adcec.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="masatojames#4933" data-user-id="756800086473703454" style="">masatojames</span>
+
+
+        <span class="chatlog__timestamp">02-Feb-21 06:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="806045498908868628" id="message-806045498908868628" title="Message sent: 02-Feb-21 06:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">こんにちは〜！
+株式会社ウォールオブデス代表の堤と申します。
+
+弊社にてSwiftエンジニアを募集しています。興味ある方はTwitterよりご連絡ください！(質問も大歓迎です)
+
+↓↓↓
+<a href="https://twitter.com/masatojames">https://twitter.com/masatojames</a></span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://cdn.discordapp.com/attachments/336827994528022528/806045498691289128/iPhone_6.5_inch_4.png">
+                                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/336827994528022528/806045498691289128/iPhone_6.5_inch_4.png" alt="Image attachment" title="Image: iPhone_6.5_inch_4.png (415.46 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://twitter.com/masatojames">
+                                                        <div class="markdown preserve-whitespace">真聖 (@masatojames)</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">株式会社ウォールオブデスという会社の代表をやっています。ロックバンドの活動を支援するiOSアプリを開発しています(興味があればご連絡ください)。普段は早稲田大学に通ったりSwiftやAWSと遊んだり任意の猫に思いを馳せたりしています。</div>
+                                            </div>
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Tweets</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">3827</div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Followers</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">1060</div>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/bBXTmBg63nDlLZqPntRMQ8Yi_VQfdaGrSvq2pEiDLS0/https/pbs.twimg.com/profile_images/1319198325048946689/23DbjBGU_normal.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/bBXTmBg63nDlLZqPntRMQ8Yi_VQfdaGrSvq2pEiDLS0/https/pbs.twimg.com/profile_images/1319198325048946689/23DbjBGU_normal.jpg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                                    <div class="chatlog__embed-footer">
+                                            <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+
+                                        <span class="chatlog__embed-footer-text">
+Twitter
+
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/941311521332531220/27c046bf2ba0f59a7da665eadcbc7df4.png?size=128" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ryo Nakamura#1060" data-user-id="941311521332531220" style="">Ryo Nakamura</span>
+
+
+        <span class="chatlog__timestamp">11-Feb-22 09:46 AM</span>
+
+            <div class="chatlog__message " data-message-id="941631366867615744" id="message-941631366867615744" title="Message sent: 11-Feb-22 09:46 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【エンジニアの募集】
+初めまして。エアフレンド株式会社 代表取締役社長の中村良と申します。弊社はiOS/Androidエンジニアをフルタイムで募集しています。
+
+【待遇】
+1000万円/年 + ストックオプション
+
+【必要な条件】
+SwiftまたはKotlinを用いた3年以上の実務経験
+
+【望ましいスキル】
+ネイティブ独特の設定等の知識
+APIサーバー、プッシュ通知、UI等の知識
+アプリの申請関連の知識
+
+<a href="https://twitter.com/_Ryobot/status/1491688134945423360">https://twitter.com/_Ryobot/status/1491688134945423360</a>
+
+【詳細】
+私はNAIST中村研出身で会話AIを研究し、現在AI育成アプリ「エアフレンド」を開発・運営しています。
+
+エアフレンドはAIで架空の友だちを育てたり共有したり、みんなが育てたAIと話せる無料アプリ（LINE公式アカウント）です。
+昨年9月に個人開発で公開して以来、口コミのみで65万人以上のユーザーにご利用いただいております。
+TOKYO MX「バラいろダンディ」、TBS「王様のブランチ」、YouTube「ヒカキンTV」等で紹介されました。
+
+ホームページ:&#160;<a href="https://airfriend.ai/ja/">https://airfriend.ai/ja/</a>
+Twitter: <a href="https://twitter.com/airfriendai">https://twitter.com/airfriendai</a>
+
+昨年11月にエアフレンド株式会社を登記しました。「推しと話せる、新しい生活」というミッションを掲げ、ユーザーがときめく時間を過ごせるAIを提供します。
+今年2月初めにはトップクラスのAI系研究者を3名雇用しました。少数精鋭チームとともに、革新的な会話AIモバイルアプリを開発します。
+
+今回の募集では、優秀なiOS/Androidエンジニアを2名採用したいと考えています。4月1日または5月1日に入社していただく予定です。高待遇のオファーと、優秀なメンバーとともにエンジニアリングに集中できる環境をご用意します。
+
+お話だけでも結構ですので、ご興味がございましたら、下記のいずれかまでご連絡をお待ちしております。また、転職活動中のご友人がいらっしゃいましたら、ぜひご紹介をお願いします。
+
+・Discordの私のDM
+・Twitterの私のDM: <a href="https://twitter.com/_Ryobot">https://twitter.com/_Ryobot</a>
+・弊社のメールアドレス: airfriendai@gmail.com</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 35 message(s)</div>
+</div>
+
+</body>
+
+</html>

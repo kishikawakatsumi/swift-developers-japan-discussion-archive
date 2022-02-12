@@ -1,0 +1,39 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">27-Jun-20 09:07 AM</span>
+    <div class="chatlog__message " data-message-id="726363023656091648" id="message-726363023656091648" title="Message sent: 27-Jun-20 09:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">そして、たぶんレイアウト結果の見えてるセルだけが仮想Viewに作られるところが、見えてないので何も作られなくなって、その結果、 NavigationLink も存在しなくなって戻るのではないかと思いました。 </div>履歴リストの例で、最新の項目を play した場合（つまり、セルの順番は変わらないけど body は走った場合）は pop されないんですよね。これは、仮想ビューツリーの diff を取った結果、変化がないから生き続けてるってことですかね？で、変化があるとレンダリングも必要だから一度破棄されて、表示されてないからレンダリングが行われないから消えてしまう？
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726363510032039966" id="message-726363510032039966" title="Message sent: 27-Jun-20 09:09 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">とりあえず <span class="pre pre--inline">NavigationLink</span> 使わずに <span class="pre pre--inline">navigationController</span> を取り出して <span class="pre pre--inline">push</span> したら回避はできるんですが、今度は <span class="pre pre--inline">List</span> のセルに disclosure indicator を出すのが <span class="pre pre--inline">NavigationLink</span> の有無と連動してたり、セル選択のときの UI の挙動（セルの背景がグレーになるとか）が異なってたりでちょっと微妙です・・・。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726363981987708968" id="message-726363981987708968" title="Message sent: 27-Jun-20 09:11 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">今のところ↑に書いた通知を一時的にせき止める <span class="pre pre--inline">ObservableObject</span> をかまそうかと思ってますが、 iOS 14 だと N 階層でも伝わるので、事故を回避するためには <span class="pre pre--inline">List</span> 以下で変更される可能性のあるもの全部に付けないといけなくてかなり面倒です・・・。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726364508951412737" id="message-726364508951412737" title="Message sent: 27-Jun-20 09:13 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これ、今 <span class="pre pre--inline">static var shared: History</span> だからトリッキーなことに見えますけど、普通に Core Data で <span class="pre pre--inline">@FetchRequest</span> 使ってる場合とか同じじゃないかと思うんですよねぇ・・・。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

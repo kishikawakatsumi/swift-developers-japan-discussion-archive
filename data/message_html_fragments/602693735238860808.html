@@ -1,0 +1,39 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="hironytic#5238" data-user-id="338302215078936576" style="color: rgb(241,196,15)">hironytic</span>
+    <span class="chatlog__timestamp">22-Jul-19 02:48 AM</span>
+    <div class="chatlog__message " data-message-id="602693317142249482" id="message-602693317142249482" title="Message sent: 22-Jul-19 02:48 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">unsafeFlagsを使ったやつ、unsafeFlagsを使ってるFooそのものじゃなくて、Fooに依存してるCFooの方を利用しようとしたら、MergeSwiftModuleのフェーズでエラーになりました（なお、"App"はiOSアプリで、Xcode 11 beta 4で試しています）</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602693417381920768" id="message-602693417381920768" title="Message sent: 22-Jul-19 02:48 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">&lt;unknown&gt;:0: error: error opening '(...ProjectのDerivedDataのパス...)/SourcePackages/checkouts/Foo/Sources/CFoo/include/Foo-Swift.h' for output: Operation not permitted</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602693735238860808" id="message-602693735238860808" title="Message sent: 22-Jul-19 02:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">なお、Fooそのものの方を利用しようとしたら（ObjCからは呼び出せないことは覚悟の上で試しにやってみたら）、サクッと次のような感じのエラーになりました。 <div class="pre pre--multiline nohighlight">error: The package product 'Foo' cannot be used as a dependency of this target because it uses unsafe build flags. (in target 'App' from project 'App')</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602694292179517462" id="message-602694292179517462" title="Message sent: 22-Jul-19 02:51 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">でもまあFoo-Swift.hを更新するためだけの、パッケージ外に公開しないターゲットを作っておけば、Fooの開発中にそちらのターゲットをビルドすることで自動的にFoo-Swift.hを作れそうなので、運用面はだいぶ改善される気がします。まだそちらは試してませんけど。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

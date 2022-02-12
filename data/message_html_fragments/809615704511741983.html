@@ -1,0 +1,72 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">12-Feb-21 02:35 AM</span>
+    <div class="chatlog__message " data-message-id="809613668031397909" id="message-809613668031397909" title="Message sent: 12-Feb-21 02:35 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Custom Executor Pitch と Structured Concurrency Pitch を読み直してるけど、だんだんわかってきた</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809614447873884180" id="message-809614447873884180" title="Message sent: 12-Feb-21 02:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">async関数がsuspension pointによって区切られた個別の同期処理にPartial Taskとして分解されていて</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809614517034024970" id="message-809614517034024970" title="Message sent: 12-Feb-21 02:39 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これはUnownedJobRefとしてopaqueに表現されて</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809614754766782484" id="message-809614754766782484" title="Message sent: 12-Feb-21 02:39 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Executorはenqueueメソッドでそれを受け取る。 Executorが実行するときにはjob.executeを呼ぶ。 ここがダブルディスパッチなのは、Executorがスケジューリングやスレッドホッピングなどをするため。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809615121042898954" id="message-809615121042898954" title="Message sent: 12-Feb-21 02:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">という理解であってるんかな。 SerialExecutorのgiveUpThreadとかはまだよくわかっていないけど</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809615428950425611" id="message-809615428950425611" title="Message sent: 12-Feb-21 02:42 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ActorがExecutorにタスクを投入する前に</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809615515039301632" id="message-809615515039301632" title="Message sent: 12-Feb-21 02:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">tryClaimThreadして成功したら直接実行してgiveUpThreadで戻す　てことなんかなあ。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809615704511741983" id="message-809615704511741983" title="Message sent: 12-Feb-21 02:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">スレの会話によるとDispatchQueueがasyncメソッドでもスレッドスイッチしないでmutexですませるキューカウント0のときの話と似た話をしていた</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="809616447567298582" id="message-809616447567298582" title="Message sent: 12-Feb-21 02:46 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">なんでTaskGroup.add自体がasyncなんだ。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

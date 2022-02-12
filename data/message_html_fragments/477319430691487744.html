@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">10-Aug-18 03:36 AM</span>
+    <div class="chatlog__message " data-message-id="477319274843602954" id="message-477319274843602954" title="Message sent: 10-Aug-18 03:36 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">昨日の話の続きで思ったんですが、 <span class="pre pre--inline">self</span> に限らず <span class="pre pre--inline">weak</span> キャプチャしたオブジェクトが異なるスレッドで解放される可能性がある場合、リファレンスカウントの減少から <span class="pre pre--inline">deinit</span> の実行までは排他的でもアトミックでもないと思うんですが、そうすると <span class="pre pre--inline">weak</span> キャプチャしてる側で常にぶっ壊れる可能性がないですか？異なるスレッドからの解放はそもそもやっちゃいけない？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="477319430691487744" id="message-477319430691487744" title="Message sent: 10-Aug-18 03:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">たとえば、 <span class="pre pre--inline">self?.foo()</span> を呼び出したときに、 <span class="pre pre--inline">self</span> のリファレンスカウントをチェックしたときは 1 だったけど、 <span class="pre pre--inline">foo</span> が呼ばれる前に別スレッドから <span class="pre pre--inline">self</span> が解放されてしまったとか。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="477319736061984769" id="message-477319736061984769" title="Message sent: 10-Aug-18 03:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">冒頭で <span class="pre pre--inline">guard let </span>self<span class="pre pre--inline"> = self else { return }</span> してると一見安全そうだけど、この場合でもリファレンスカウントのチェックから代入してリファレンスカウント増やすまでの間に別スレッドから解放されてしまうおそれがありそう。</span>
+          <span class="chatlog__edited-timestamp" title="10-Aug-18 03:38 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

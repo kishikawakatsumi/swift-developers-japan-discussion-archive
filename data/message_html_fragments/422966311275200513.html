@@ -1,0 +1,37 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <span class="chatlog__timestamp">13-Mar-18 03:56 AM</span>
+    <div class="chatlog__message " data-message-id="422966073768411138" id="message-422966073768411138" title="Message sent: 13-Mar-18 03:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">最近関わりを持ったプロジェクトで、Model、ViewModel、ViewControllerがあり、それぞれModelの変更をViewModelが、ViewModelの変更をViewControllerが監視していて、ReactiveCocoaによってバインディングされています。 ViewModelの変更によって呼ばれるメソッドがちょっと長くて、 <div class="pre pre--multiline nohighlight">func updateTableView() { ... tableView.reloadData() // 1 ... tableView.scrollTo(latestIndexPath) // 2 ... }</div> のようになっています。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="422966112280379393" id="message-422966112280379393" title="Message sent: 13-Mar-18 03:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">このとき、（おそらく）1と2の間にModelが更新されて、2のメソッド呼び出しでIndexPathが合わなくてクラッシュするということが起こっています。 （おそらく、と書いたのは再現できたわけじゃないけど、コードを見る限りそうとしか思えない。）</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="422966257717870604" id="message-422966257717870604" title="Message sent: 13-Mar-18 03:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">updateTableView()はメインスレッドで呼ばれるけど、Modelの変更はバックグラウンドスレッドで頻繁に変更される。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="422966311275200513" id="message-422966311275200513" title="Message sent: 13-Mar-18 03:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">私はViewModelをイミュータブルにして、変更通知と変更通知の間で変わらないようにすべし（変更通知のたびにイミュータブルなViewModelを生成して渡す）、とアドバイスしたのですが、他に良い方法ありますか？</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

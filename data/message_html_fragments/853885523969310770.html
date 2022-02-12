@@ -1,0 +1,30 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="taketo1024#1158" data-user-id="370406638915420161" style="">taketo1024</span>
+    <span class="chatlog__timestamp">14-Jun-21 06:36 AM</span>
+    <div class="chatlog__message " data-message-id="853885523969310770" id="message-853885523969310770" title="Message sent: 14-Jun-21 06:36 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">results</span> のコピーを無くした上で，並列処理ごとにできるだけちょうど 1個結果が返ってくるように，並列処理の本数を動的に変える実装にしてみました．（話が盛り上がってるところすみません） <div class="pre pre--multiline language-swift">var targets = Array(0 ..&lt; 1000000) var results: [Int: Int] = [:] var batch = 1 var itr = 1 while !targets.isEmpty { let next = (0 ..&lt; batch).compactMap { _ in targets.isEmpty ? nil : targets.removeLast() } let candidates = targets.parallelCompactMap { i in find(i, results) // runs in parallel } if let (i, j) = candidates.min(by: { (i, j) in weight(i, j) }) { results[i] = j for (i1, _) in candidates where i1 != i { targets.append(i1) // redo unselected candidates. } } if candidates.count == 0 { batch *= 2 } else if candidates.count &gt;= 2 &amp;&amp; batch &gt; 1 { batch /= 2 } itr += 1 } // parallelized function func find(_ i: Int, _ currentResult: [Int: Int]) -&gt; (Int, Int)? { i % 10 == 0 ? (i, i) : nil } print(results.count)</div></span>
+          <span class="chatlog__edited-timestamp" title="14-Jun-21 06:40 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="853886696675344405" id="message-853886696675344405" title="Message sent: 14-Jun-21 06:40 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">結果 1:40 かかってた処理が 1:07 ぐらいになりました<img loading="lazy" class="emoji " alt="🙌" title="raised_hands" src="https://twemoji.maxcdn.com/2/svg/1f64c.svg"></span>
+        </div>
+      </div>
+      <div class="chatlog__reactions">
+        <div class="chatlog__reaction" title="tada">
+          <img class="emoji emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy">
+          <span class="chatlog__reaction-count">3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

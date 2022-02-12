@@ -1,0 +1,24 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">18-Apr-19 12:00 AM</span>
+    <div class="chatlog__message " data-message-id="568224423585382446" id="message-568224423585382446" title="Message sent: 18-Apr-19 12:00 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">install_name_tool</span>で<span class="pre pre--inline">UIKit</span>のパスを変えたら、<span class="pre pre--inline">@rpath/libswiftCore.dylib</span>をロードできないと言われた。 <div class="pre pre--multiline nohighlight">$ install_name_tool -change /System/Library/Frameworks/UIKit.framework/UIKit $(xcrun --show-sdk-platform-path --sdk iphoneos)/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot//System/Library/Frameworks/UIKit.framework/UIKit main $ ./main dyld: Library not loaded: @rpath/libswiftCore.dylib Referenced from: /Users/norio/github/docker-swift/./main Reason: image not found [1] 95202 abort ./main</div></span>
+          <span class="chatlog__edited-timestamp" title="18-Apr-19 12:03 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="568225091943530497" id="message-568225091943530497" title="Message sent: 18-Apr-19 12:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、<span class="pre pre--inline">rpath</span>を設定したら<span class="pre pre--inline">UIKit</span>にリンクされてる<span class="pre pre--inline">DocumentManager</span>をロードできないと言われ、ここで「実行時の環境を変えないとダメだ。」となり<span class="pre pre--inline">install_name_tool</span>を使う方法は終了。 <div class="pre pre--multiline nohighlight">$ pbpaste|swiftc -sdk $(xcrun --show-sdk-path --sdk iphonesimulator) -target x86_64-apple-ios12.2-simulator - -Xlinker -rpath -Xlinker $(xcrun --show-sdk-platform-path --sdk iphoneos)/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/swift $ install_name_tool -change /System/Library/Frameworks/UIKit.framework/UIKit $(xcrun --show-sdk-platform-path --sdk iphoneos)/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot//System/Library/Frameworks/UIKit.framework/UIKit main $ ./main dyld: Library not loaded: /System/Library/PrivateFrameworks/DocumentManager.framework/DocumentManager Referenced from: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot//System/Library/Frameworks/UIKit.framework/UIKit Reason: image not found [1] 95440 abort ./main</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

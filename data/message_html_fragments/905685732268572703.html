@@ -1,0 +1,27 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <span class="chatlog__timestamp">04-Nov-21 05:09 AM</span>
+    <div class="chatlog__message " data-message-id="905685213756153886" id="message-905685213756153886" title="Message sent: 04-Nov-21 05:09 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">app.get("runner", ":version", "health") { (req) -&gt; EventLoopFuture&lt;Response&gt; in let promise = req.eventLoop.makePromise(of: Response.self) let process = Process() process.executableURL = URL(fileURLWithPath: "/usr/bin/env") process.terminationHandler = { (process) in let status: HTTPResponseStatus = process.terminationStatus == 0 ? .ok : .internalServerError HealthCheckResponse(status: status) .encodeResponse( status: status, headers: HTTPHeaders([("Cache-Control", "no-store")]), for: req ) .cascade(to: promise) } process.launch() return promise.futureResult }</div> 非同期に呼ばれるCallbackクロージャが普通のクロージャで、その中でさらに非同期処理を呼んでいるというコードがあって、コールバックの中でawaitできない、と思ったけど非同期処理の前でいったん値を返して再度awaitする、っていうのでいけた。 合ってるかな？
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="905685732268572703" id="message-905685732268572703" title="Message sent: 04-Nov-21 05:11 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">app.get("runner", ":version", "health") { (req) -&gt; Response in guard let version = req.parameters.get("version") else { throw Abort(.badRequest) } let process = Process() process.executableURL = URL(fileURLWithPath: "/usr/bin/env") let status: HTTPResponseStatus = await withCheckedContinuation { (continuation) in process.terminationHandler = { (process) in let status: HTTPResponseStatus = process.terminationStatus == 0 ? .ok : .internalServerError continuation.resume(returning: status) } process.launch() } return try await HealthCheckResponse(status: status) .encodeResponse( status: status, headers: HTTPHeaders([("Cache-Control", "no-store")]), for: req ) }</div> こうなった。 <span class="pre pre--inline">encodeResponse</span> がさらに呼んでいる非同期関数で、それは最初のawaitを抜けた後に呼ぶ、というふうに分解してうまくいった、ということ。
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

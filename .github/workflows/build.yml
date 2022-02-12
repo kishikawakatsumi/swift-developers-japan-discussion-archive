@@ -1,0 +1,46 @@
+name: Build
+on:
+  workflow_dispatch:
+
+env:
+  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+  DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+  ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+  ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          set -ex
+
+          docker run --rm -v $PWD/data/json:/output tyrrrz/discordchatexporter:stable exportguild \
+            -t ${{ env.DISCORD_TOKEN }} \
+            -g ${{ env.DISCORD_SERVER_ID }} \
+            -o "/output/%P_%p_%T_%C.json" \
+            -f Json \
+            --parallel 2
+
+          docker run --rm -v $PWD/data/html:/output tyrrrz/discordchatexporter:stable exportguild \
+            -t ${{ env.DISCORD_TOKEN }} \
+            -g ${{ env.DISCORD_SERVER_ID }} \
+            -o "/output/%C.html" \
+            -f HtmlLight \
+            --parallel 2
+
+          npm ci
+
+          node --max-old-space-size=8192 dev/extract_each_message_html.js
+          node dev/generate_channel_structure.js 
+          node dev/update_search_index.js
+
+          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+          git add -A
+          git commit -m "Update data"
+          git push origin HEAD:${GITHUB_REF}

@@ -1,0 +1,39 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">12-Jun-20 10:48 PM</span>
+    <div class="chatlog__message " data-message-id="721133782123675798" id="message-721133782123675798" title="Message sent: 12-Jun-20 10:48 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">だめだ。 <span class="pre pre--inline">KeyPath</span> を <span class="pre pre--inline">Wrapper</span> のための <span class="pre pre--inline">ReferenceWritableKeyPath</span> に変換できない。 <div class="pre pre--multiline language-swift">import SwiftUI extension ObservedObject.Wrapper { var readOnly: ReadOnly { .init(self) } @dynamicMemberLookup struct ReadOnly { private let wrapper: ObservedObject&lt;ObjectType&gt;.Wrapper init(_ wrapper: ObservedObject&lt;ObjectType&gt;.Wrapper) { self.wrapper = wrapper } subscript&lt;Subject&gt;(dynamicMember keyPath: KeyPath&lt;ObjectType, Subject&gt;) -&gt; Binding&lt;Subject&gt; { get { wrapper[keyPath: keyPath] } // ⛔ set { assertionFailure("Read-only") } } } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721134029797326909" id="message-721134029797326909" title="Message sent: 12-Jun-20 10:49 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Wrapper</span> がラップしてる元のオブジェクトを参照できればいいんだけど・・・。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721134250585227317" id="message-721134250585227317" title="Message sent: 12-Jun-20 10:50 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ、 <span class="pre pre--inline">subscript</span> の <span class="pre pre--inline">get</span>, <span class="pre pre--inline">set</span> じゃなくて <span class="pre pre--inline">get</span> で <span class="pre pre--inline">Binding</span> の <span class="pre pre--inline">set</span> をつぶさなきゃいけないか。どっちにしろダメだけど。</span>
+          <span class="chatlog__edited-timestamp" title="12-Jun-20 10:50 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721135044453990423" id="message-721135044453990423" title="Message sent: 12-Jun-20 10:53 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Wrapper</span> に <span class="pre pre--inline">readOnly</span> 生やして <span class="pre pre--inline">$foo.readOnly.a</span> は諦めて、少々ブサイク（？）だけど <span class="pre pre--inline">ReadOnlyWrapper</span> 方式で <span class="pre pre--inline">_foo.readOnly.a</span> にするか。</span>
+          <span class="chatlog__edited-timestamp" title="12-Jun-20 10:53 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">16-Apr-18 09:56 AM</span>
+    <div class="chatlog__message " data-message-id="435377948351266818" id="message-435377948351266818" title="Message sent: 16-Apr-18 09:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swiftbot#4647">@swiftbot</span>
+            <div class="pre pre--multiline language-swift">import Foundation public protocol MapType { associatedtype DomainType associatedtype CodomainType init(_ fnc: @escaping (DomainType) -&gt; CodomainType) func applied(to x: DomainType) -&gt; CodomainType } public struct Map&lt;Domain, Codomain&gt;: MapType { internal let fnc: (Domain) -&gt; Codomain public init(_ fnc: @escaping (Domain) -&gt; Codomain) { self.fnc = fnc } public func applied(to x: Domain) -&gt; Codomain { return fnc(x) } } public protocol EndType: MapType where DomainType == CodomainType { static var identity: Self { get } func composed(with f: Self) -&gt; Self } public extension EndType { public static var identity: Self { return Self { x in x } } public func composed(with g: Self) -&gt; Self { return Self { x in // ココで EXC_BAD_ACCESS self.applied(to: g.applied(to: x)) } } } extension Map: EndType where Domain == Codomain { } public extension Array where Element == Map&lt;Int, Int&gt; { func composed() -&gt; Element { return self.reduce(Element.identity) { (res, f) in res.composed(with: f) } } } let f: Map&lt;Int, Int&gt; = Map { x in 2 * x } let fs: Array&lt;Map&lt;Int, Int&gt;&gt; = [f, f, f] let g: Map&lt;Int, Int&gt; = fs.composed() let t: Int = g.applied(to: 1) print(t)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

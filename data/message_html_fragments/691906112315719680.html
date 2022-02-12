@@ -1,0 +1,32 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <span class="chatlog__timestamp">24-Mar-20 07:06 AM</span>
+    <div class="chatlog__message " data-message-id="691905792034471976" id="message-691905792034471976" title="Message sent: 24-Mar-20 07:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">^ これは当然Bが呼ばれるのだけど、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="691906018527019008" id="message-691906018527019008" title="Message sent: 24-Mar-20 07:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">AとBのメソッドにデフォルト引数を足すと（デフォルト引数なのでCall siteの変更はナシ）</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="691906112315719680" id="message-691906112315719680" title="Message sent: 24-Mar-20 07:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swiftbot#4647">@swiftbot</span>
+            <div class="pre pre--multiline language-swift">import Foundation struct DocumentSymbol: Encodable {} class Service { func perform() { sendDocumentSymbolRequest(context: [:], resource: "", slug: "", path: "") { (_, _) in } } private func sendDocumentSymbolRequest(context: [String : String], resource: String, slug: String, path: String, reply: @escaping (Bool, [String : Any]) -&gt; Void) { let documentSymbols = [DocumentSymbol()] reply(true, ["result": "success", "value": encodeResponse(documentSymbols)]) } private func encodeResponse(_ documentSymbol: DocumentSymbol, _ indent: Int = 0) -&gt; [String: Any] { print("A") return [:] } private func encodeResponse(_ documentSymbols: [DocumentSymbol], _ indent: Int = 0) -&gt; [String: Any] { print("B") return [:] } private func encodeResponse&lt;T: Encodable&gt;(_ response: T) -&gt; Any { print("C") let data = try! JSONEncoder().encode(response) return try! JSONSerialization.jsonObject(with: data, options: []) } } let service = Service() service.perform()</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

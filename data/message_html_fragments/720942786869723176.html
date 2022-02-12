@@ -1,0 +1,19 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">12-Jun-20 10:09 AM</span>
+    <div class="chatlog__message " data-message-id="720942786869723176" id="message-720942786869723176" title="Message sent: 12-Jun-20 10:09 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">import Combine class Foo: ObservableObject { @Published var a: Int = 0 @Published var b: String = "" static let shared: Foo = .init() }</div>
+            <div class="pre pre--multiline language-swift">import SwiftUI struct ContentView: View { @ObservedObject var foo: Foo = .shared let cancellable = Foo.shared.objectWillChange.sink { _ in print("change") } var body: some View { print("body") return VStack { Text("a: \(foo.a)") Button("+") { Foo.shared.a += 1 } Text("b: \(foo.b)") Button("+") { Foo.shared.b += "+" } Button("++") { Foo.shared.a += 1 Foo.shared.b += "-" } } } }</div> ↑のようにして、 <span class="pre pre--inline">++</span> ボタンを押したときに <span class="pre pre--inline">Foo</span> の <span class="pre pre--inline">objectWillChange</span> には 2 回値が流れる（ <span class="pre pre--inline">"change"</span> は 2 回表示される）けど、 <span class="pre pre--inline">"body"</span> は 1 回しか表示されない。なんとなく、 <span class="pre pre--inline">@State</span> とか <span class="pre pre--inline">@ObservedObject</span> とかは変更が生じる度に <span class="pre pre--inline">body</span> が実行されるのだと思ってました。当たり前かもしれないけど、ちゃんと <span class="pre pre--inline">setNeedDisplay</span> みたいな仕組みが備わってるんですね。
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">26-Aug-17 12:06 PM</span>
+    <div class="chatlog__message " data-message-id="350974312372633601" id="message-350974312372633601" title="Message sent: 26-Aug-17 12:06 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">しばらく潜って考えて整理してみた。 slavaが指摘しているバグ この gist と合わせて解説 <a href="https://gist.github.com/omochi/ac7bfec6f0b3f92b74502bbfaf0563a7">https://gist.github.com/omochi/ac7bfec6f0b3f92b74502bbfaf0563a7</a> あるクラスがが convenience init から、別の init メソッド を呼んでいるときは、 静的な Selfではなく、 convenience init 実行中の動的な Self とともに呼ばねばならない。 例えば、Animal.init(init0:)はそのようなパターンで、Cat.init(init0:)を呼び出すと、 Animalのconvenience initから、オーバライドされたCat.init()が呼び出されることがわかる。</span>
+          <span class="chatlog__edited-timestamp" title="26-Aug-17 12:06 PM">(edited)</span>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://gist.github.com/omochi/ac7bfec6f0b3f92b74502bbfaf0563a7">
+                  <div class="markdown preserve-whitespace">swift-pr11635-bug.swift</div>
+                </a>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/jjxtFejIMImmtOYTU9-3zABOkxvqEJVGLPZJTmy1fH8/%3Fv%3D4%26s%3D400/https/avatars3.githubusercontent.com/u/312792">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/jjxtFejIMImmtOYTU9-3zABOkxvqEJVGLPZJTmy1fH8/%3Fv%3D4%26s%3D400/https/avatars3.githubusercontent.com/u/312792" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="350974396149661699" id="message-350974396149661699" title="Message sent: 26-Aug-17 12:06 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">しかし、 protocol の extension メソッドで定義された init を呼び出している場合には、 動的な Self ではなく、静的な Self に対して呼び出してしまうバグがあった。 これを検証しているのが Animal.init(init1:) である。 この中から呼ばれる self.init(facotry:) は、 Self が Animal に固定されて型検査されているし、 コンパイル後もそのように動作する。 その結果として、 Cat.init(init1:) の呼び出しは、 Cat の初期化をなんら呼び出していない。 実際に cat1.b を表示してみると、謎の値65が表示された。 (at IBM Swift sandbox) 本来は、 protocol から来ていたとしても、 convenience init から init を呼び出すところは、 動的な Self として扱わねばならない。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="350974473022865409" id="message-350974473022865409" title="Message sent: 26-Aug-17 12:07 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">このような「バグでコンパイルできてしまう」パターンは、 既存の NSNumber 実装が踏み抜いている。 <a href="https://github.com/apple/swift-corelibs-foundation/blob/87466c45462cba5a085d5cd41d785d681016542d/Foundation/NSNumber.swift#L266">https://github.com/apple/swift-corelibs-foundation/blob/87466c45462cba5a085d5cd41d785d681016542d/Foundation/NSNumber.swift#L266</a> この行は、 NSNumber の親、 NSValue が conformance する protocol _Factory によって定義された init(factory:) を呼び出している。 ここでは unsafeBitCast で NSNumber にキャストしているので、 init(factory:) に対しては、 <span class="pre pre--inline">() -&gt; NSNumber</span> なクロージャを渡している。</span>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/apple/swift-corelibs-foundation/blob/87466c45462cba5a085d5cd41d785d681016542d/Foundation/NSNumber.swift">
+                  <div class="markdown preserve-whitespace">apple/swift-corelibs-foundation</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">swift-corelibs-foundation - The Foundation Project, providing core utilities, internationalization, and OS independence</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/VzNx6xvMLRaO_R4AWubaDUuAkRCdKRQHx7PEDv8dwuU/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/10639145">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/VzNx6xvMLRaO_R4AWubaDUuAkRCdKRQHx7PEDv8dwuU/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="350974537527197697" id="message-350974537527197697" title="Message sent: 26-Aug-17 12:07 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">slava の修正によって、 このような場合でも動的な Self として型検査されるようになった。 そうすると、 gist の例の場合では、 <span class="pre pre--inline">init(factory:)</span> に渡しているクロージャの式が、 <span class="pre pre--inline">() -&gt; Animal</span> であるゆえに、 コンパイルエラーとなる。 ここは、 self　の式の型は Animal ではなく Self なので、 <span class="pre pre--inline">() -&gt; Self</span> 型のクロージャを渡さねばならないからだ。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="350974629663342592" id="message-350974629663342592" title="Message sent: 26-Aug-17 12:07 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">同様のコンパイルエラーを、 NSNumber が実際に踏み抜いた。 これを回避するために、 slava は3つの選択肢をだしている。 1. swift5までとりあえず放置する 2. NSNumberをfinalにする 3. ジェネリクスを使う 1は無いとして、2については、 もしこの問題になっているクラス (AnimalやNSNumber) が final class であれば、 convenience init をサブクラスから呼ぶ事自体が無いので、 解決するというもの。(修正した型チェッカはそれも考慮している)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="350974693307580416" id="message-350974693307580416" title="Message sent: 26-Aug-17 12:08 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">実際には、この選択肢は取れない。 NSDecimalNumber のような、 NSNumber のサブクラスがすでに存在しているから。 <a href="https://github.com/apple/swift-corelibs-foundation/blob/856b8bcd9cae659f1ca48545b2ddb7f63da77171/Foundation/NSDecimalNumber.swift">https://github.com/apple/swift-corelibs-foundation/blob/856b8bcd9cae659f1ca48545b2ddb7f63da77171/Foundation/NSDecimalNumber.swift</a> しかもこいつは下記フィールドを保持している。 <span class="pre pre--inline">fileprivate let decimal: Decimal</span> ということは、現状でも convenience init 経由の NSDecimalNumber のコンストラクトで、 メモリがぶっ壊れる可能性がある・・・？</span>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/apple/swift-corelibs-foundation/blob/856b8bcd9cae659f1ca48545b2ddb7f63da77171/Foundation/NSDecimalNumber.swift">
+                  <div class="markdown preserve-whitespace">apple/swift-corelibs-foundation</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">swift-corelibs-foundation - The Foundation Project, providing core utilities, internationalization, and OS independence</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/VzNx6xvMLRaO_R4AWubaDUuAkRCdKRQHx7PEDv8dwuU/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/10639145">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/VzNx6xvMLRaO_R4AWubaDUuAkRCdKRQHx7PEDv8dwuU/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="350974745631653889" id="message-350974745631653889" title="Message sent: 26-Aug-17 12:08 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">3の選択肢は、 現状の unsafeBitCast にジェネリクスを組み合わせて、 NSNumber固定ではなく、 Self へのキャストにすることで動かす、というもの。 slavaの実装例は下記で、返り値型推論を活用している。 <div class="pre pre--multiline language-swift">func castCFNumber&lt;T&gt;() -&gt; T { return unsafeBitCast(cfnumber, to: T.self) }</div> slavaはこれを試してみるとこのこと。 <div class="quote">I'll try the generics hack.</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="350974806096740354" id="message-350974806096740354" title="Message sent: 26-Aug-17 12:08 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これでとりあえず動くようになるけど、 NSDecimalNumber の decimal プロパティが初期化されない可能性は解決しないのでは・・・？？？</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

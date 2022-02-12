@@ -1,0 +1,25 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="hironytic#5238" data-user-id="338302215078936576" style="color: rgb(241,196,15)">hironytic</span>
+    <span class="chatlog__timestamp">23-Sep-21 02:52 AM</span>
+    <div class="chatlog__message " data-message-id="890430365330714644" id="message-890430365330714644" title="Message sent: 23-Sep-21 02:52 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func outerFunc(state: UserViewState) { printIsMainThread("outerFunc 1") Task { printIsMainThread("outerFunc 2") _ = await state.user printIsMainThread("outerFunc 3") } } class ViewController: UIViewController { ... state .objectWillChange .receive(on: DispatchQueue.global()) .sink { [weak self] _ in guard let self = self else { return } outerFunc(state: self.state) printIsMainThread("ViewController 1") Task { printIsMainThread("ViewController 2") _ = await self.state.user printIsMainThread("ViewController 3") } } .store(in: &amp;cancellables) ... }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="890430455705382982" id="message-890430455705382982" title="Message sent: 23-Sep-21 02:52 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これだと、outerFunc 1〜3は全部別スレッドから</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

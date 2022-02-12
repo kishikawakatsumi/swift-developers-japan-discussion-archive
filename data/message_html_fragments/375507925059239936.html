@@ -1,0 +1,42 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">02-Nov-17 04:53 AM</span>
+    <div class="chatlog__message " data-message-id="375507714945581057" id="message-375507714945581057" title="Message sent: 02-Nov-17 04:53 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Collectionに対するshared iterationはデフォルト挙動になって、普通の for in がそうなる</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="375507791751806978" id="message-375507791751806978" title="Message sent: 02-Nov-17 04:53 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">Programs can explicitly request an iteration over a copy of the value in that storage by using the copy intrinsic function on the operand. </div>従来挙動は明示的に <div class="pre pre--multiline language-swift">for x in copy(array) { ... } </div> コピーしましょうねとか書いてある
+          </span>
+          <span class="chatlog__edited-timestamp" title="02-Nov-17 04:54 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="375507925059239936" id="message-375507925059239936" title="Message sent: 02-Nov-17 04:54 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、もしそれが実装された場合</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="375508032152535041" id="message-375508032152535041" title="Message sent: 02-Nov-17 04:54 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">mutating generator iterateMutable() -&gt; inout Element { var i = startIndex, e = endIndex while i != e { yield &amp;self[i] self.formIndex(after: &amp;i) } }</div> イテレーションされている間の処理を記述するメソッドが　コルーチンになって yield が必要だよね という話が出てくる
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

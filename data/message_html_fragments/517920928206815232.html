@@ -1,0 +1,77 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">30-Nov-18 04:32 AM</span>
+    <div class="chatlog__message " data-message-id="517920928206815232" id="message-517920928206815232" title="Message sent: 30-Nov-18 04:32 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-py"># This library is only hypothetical, sorry from cancel_tokens import cancel_after, cancel_on_callback # Returns an opaque CancelToken object that enters the "cancelled" # state after 10 seconds. cancel_token = cancel_after(10) # So this request gives up after 10 seconds requests.get("https://...", cancel_token=cancel_token) # Returns an opaque CancelToken object that enters the "cancelled" # state when the given callback is called. cancel_callback, cancel_token = cancel_on_callback() # Arrange for the callback to be called if someone clicks "stop" stop_button.on_press = cancel_callback # So this request gives up if someone clicks 'stop' requests.get("https://...", cancel_token=cancel_token)</div>
+            <a href="https://vorpus.org/blog/timeouts-and-cancellation-for-humans/">https://vorpus.org/blog/timeouts-and-cancellation-for-humans/</a>
+          </span>
+          <span class="chatlog__edited-timestamp" title="30-Nov-18 04:32 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517921008192323585" id="message-517921008192323585" title="Message sent: 30-Nov-18 04:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Joe Groff が挙げてる方式。（斜め読みでコード抜き出しただけなので本当にこれが言いたいのかわからないけど。）</span>
+          <span class="chatlog__edited-timestamp" title="30-Nov-18 04:51 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517921449957261314" id="message-517921449957261314" title="Message sent: 30-Nov-18 04:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">トークンとコールバックが別で扱われてるのがちょっと気持ち悪い気がする。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517922833695768586" id="message-517922833695768586" title="Message sent: 30-Nov-18 04:40 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓みたいな方がいい気がする。 <div class="pre pre--multiline language-swift">struct Canceller { func cancel() func onCancel(_ body: () -&gt; Void) } func download(from url: URL, canceller: Canceller? = nil) async throws -&gt; Data let canceller = Canceller() let data = try await download(from: url, canceller: canceller) DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { canceller.cancel() } stopButton.onTap { canceller.cancel() }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517923154698436628" id="message-517923154698436628" title="Message sent: 30-Nov-18 04:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">よくみたら <span class="mention" title="omochimetaru#1122">@omochimetaru</span> 案とほぼ同じ気がする・・・。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517923213800374275" id="message-517923213800374275" title="Message sent: 30-Nov-18 04:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ちがうか。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517923869261299724" id="message-517923869261299724" title="Message sent: 30-Nov-18 04:44 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑の <span class="pre pre--inline">Canceller</span> だと context と token の役割が一体化していて、 canceller に <span class="pre pre--inline">onCancel</span> ができるのがまずいのか。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517925134204665869" id="message-517925134204665869" title="Message sent: 30-Nov-18 04:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">外部に公開するときに純粋に <span class="pre pre--inline">cancel</span> の機能だけを公開したい。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="517925249547763712" id="message-517925249547763712" title="Message sent: 30-Nov-18 04:50 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">でも外部から <span class="pre pre--inline">Canceller</span> を注入するなら、一体化しててまずいことってあるかな？</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">25-Jun-20 07:02 AM</span>
+    <div class="chatlog__message " data-message-id="725606952817786951" id="message-725606952817786951" title="Message sent: 25-Jun-20 07:02 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Equatable</span> の <span class="pre pre--inline">==</span> は関係なさそう。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="725606968429117486" id="message-725606968429117486" title="Message sent: 25-Jun-20 07:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">import SwiftUI struct ContentView2: View { @ObservedObject private var counter: Counter = .shared var body: some View { print("ContentView2.body") return VStack { HStack { Text("\(counter.count)") Button("+") { self.counter.increment() } } AView(value: .nan) .padding() .border(Color.gray, width: 1) .padding() } } } private struct AView: View { let value: Double var body: some View { print("AView.body") return VStack { HStack { Text("\(Counter.shared.count), \(value)") Button("+") { Counter.shared.increment() } } BView(value: value) .padding() .border(Color.gray, width: 1) .padding() } } } private struct BView: View { let value: Double var body: some View { print("BView.body") return HStack { Text("\(Counter.shared.count), \(value)") Button("+") { Counter.shared.increment() } } } } private final class Counter: ObservableObject { @Published private(set) var count: Int = 0 func increment() { count += 1 } static let shared: Counter = .init() }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="725607117037502484" id="message-725607117037502484" title="Message sent: 25-Jun-20 07:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑では <span class="pre pre--inline">AView</span> と <span class="pre pre--inline">BView</span> は <span class="pre pre--inline">value</span> を持っていて、そこに <span class="pre pre--inline">.nan</span> を渡してるから</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="725607167662751754" id="message-725607167662751754" title="Message sent: 25-Jun-20 07:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">==</span> で比較すると常に <span class="pre pre--inline">false</span> になるんだけど再描画されない。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">06-Oct-20 07:41 AM</span>
+    <div class="chatlog__message " data-message-id="762942532153114624" id="message-762942532153114624" title="Message sent: 06-Oct-20 07:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift"> return Response( status: .ok, headers: ["Content-Type": "text/html; charset=UTF-8"], body: Response.Body(string: html) )</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="762942592576520213" id="message-762942592576520213" title="Message sent: 06-Oct-20 07:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">View</span> 型だとどうなってるんだろうな。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="762942928024371210" id="message-762942928024371210" title="Message sent: 06-Oct-20 07:42 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">public struct View: ResponseEncodable { public var data: ByteBuffer public init(data: ByteBuffer) { self.data = data } public func encodeResponse(for request: Request) -&gt; EventLoopFuture&lt;Response&gt; { let response = Response() response.headers.contentType = .html response.body = .init(buffer: self.data) return request.eventLoop.makeSucceededFuture(response) } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="762943014821429248" id="message-762943014821429248" title="Message sent: 06-Oct-20 07:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">うーむ。できなさそう。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="762943120299261953" id="message-762943120299261953" title="Message sent: 06-Oct-20 07:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">一度 view.encodeResponseしてから、 Response型の statusプロパティだけ書き換えるとかになりますね。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="762943303066058752" id="message-762943303066058752" title="Message sent: 06-Oct-20 07:44 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">return view.encodeResponse(for: request).map { (response) in var response = response response.status = .notFound return response }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">30-Sep-21 04:11 AM</span>
+    <div class="chatlog__message " data-message-id="892986930667614249" id="message-892986930667614249" title="Message sent: 30-Sep-21 04:11 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func graphemeBreakPropertyData( forLine line: String ) -&gt; (scalars: ClosedRange&lt;Unicode.Scalar&gt;, property: Unicode.GraphemeBreakProperty)? { line .match(/([0-9A-F]+)(?:\.\.([0-9A-F]+))?\s*;\s(\w+).*/)? .captures.flatMap { (l, u, p) in guard let property = Unicode.GraphemeBreakProperty(p) else { return nil } let scalars = Unicode.Scalar(hex: l)! ... Unicode.Scalar(hex: u ?? l)! return (scalars, property) } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="892987191867899945" id="message-892987191867899945" title="Message sent: 30-Sep-21 04:12 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">l, u, p</span> の３要素タプルなのは正規表現パターンと対応しているのか。これはいいなあ。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="892987501877288990" id="message-892987501877288990" title="Message sent: 30-Sep-21 04:13 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func graphemeBreakPropertyData( forLine line: String ) -&gt; (scalars: ClosedRange&lt;Unicode.Scalar&gt;, property: Unicode.GraphemeBreakProperty)? { line.match { OneOrMore(.hexDigit).capture { Unicode.Scalar(hex: $0) } Optionally { ".." OneOrMore(.hexDigit).capture { Unicode.Scalar(hex: $0) } } OneOrMore(.whitespace) ";" OneOrMore(.whitespace) OneOrMore(.word).capture(GraphemeBreakProperty.init) Repeat(.anyCharacter) }?.captures.map { (lower, upper, property) in let scalars = lower ... (upper ?? lower) return (scalars, property) } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="892987529547087932" id="message-892987529547087932" title="Message sent: 30-Sep-21 04:13 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ResultBuilder記法もあるのね</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">30-Aug-21 01:15 AM</span>
+    <div class="chatlog__message " data-message-id="881708709967974430" id="message-881708709967974430" title="Message sent: 30-Aug-21 01:15 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">おおお、ここ完全に見逃してました。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881709336970272828" id="message-881709336970272828" title="Message sent: 30-Aug-21 01:18 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あー、これは非同期 API 利用側がキャンセルをハンドリングするためのものではなくて、実装側がキャンセルをハンドリングするためのものか。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881709747710087228" id="message-881709747710087228" title="Message sent: 30-Aug-21 01:19 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">task.cancel</span> が呼び出されたときに、 <span class="pre pre--inline">download</span> 関数の実装者は <span class="pre pre--inline">URLSessionTask</span> を即時 <span class="pre pre--inline">cancel</span> したいけど、それを実現するために使えるという。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="881710266193158174" id="message-881710266193158174" title="Message sent: 30-Aug-21 01:21 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">Ideally translate NSURLErrorCancelled to CancellationError here </div>については、やっぱり Convention 上はキャンセル時は <span class="pre pre--inline">CancellationError</span> が <span class="pre pre--inline">throw</span> されるようにしたいという意識なのかな。ただ、 100% 保証は無理だから、やっぱり呼び出し側では <span class="pre pre--inline">as CancellationError</span> で判別するのではなく <span class="pre pre--inline">Task.isCancelled</span> が良さそう。
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

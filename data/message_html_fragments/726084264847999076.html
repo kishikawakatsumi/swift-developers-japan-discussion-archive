@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">26-Jun-20 02:38 PM</span>
+    <div class="chatlog__message " data-message-id="726084020235927583" id="message-726084020235927583" title="Message sent: 26-Jun-20 02:38 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">List</span> が表示されていない間は流れをせき止める <span class="pre pre--inline">ObservableObject</span> でラップすることで、遷移先からの更新の反映を遅らせることができました。 <div class="pre pre--multiline language-swift">final class ObservableDam&lt;WrappedValue: ObservableObject&gt;: ObservableObject { typealias ObjectWillChangePublisher = AnyPublisher&lt;WrappedValue.ObjectWillChangePublisher.Output, Never&gt; let wrappedValue: WrappedValue private var cancellable: AnyCancellable? = nil var isActive: Bool = true { didSet { if isActive { let outputs = self.outputs self.outputs = [] for output in outputs { subject.send(output) } } } } private var outputs: [ObjectWillChangePublisher.Output] = [] private let subject: PassthroughSubject&lt;ObjectWillChangePublisher.Output, Never&gt; = .init() var objectWillChange: ObjectWillChangePublisher { subject.eraseToAnyPublisher() } init(_ wrappedValue: WrappedValue) { self.wrappedValue = wrappedValue cancellable = wrappedValue.objectWillChange.sink { [weak self] output in guard let self = self else { return } if self.isActive { self.subject.send(output) } else { self.outputs.append(output) } } } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726084264847999076" id="message-726084264847999076" title="Message sent: 26-Jun-20 02:39 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑こういうのを作って、 <div class="pre pre--multiline language-swift">struct ContentView: View { @ObservedObject var history: ObservableDam&lt;History&gt; = .init(.shared)</div> ↑こうして <div class="pre pre--multiline language-swift"> } .onAppear { self.history.isActive = true } .onDisappear { self.history.isActive = false }</div> ↑こうする。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726084434507595817" id="message-726084434507595817" title="Message sent: 26-Jun-20 02:40 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">戻ってきた瞬間に更新が発火して、アニメーションして最新状態が表示される。</span>
+          <span class="chatlog__edited-timestamp" title="26-Jun-20 02:40 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

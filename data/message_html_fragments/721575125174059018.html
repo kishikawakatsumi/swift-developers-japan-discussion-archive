@@ -1,0 +1,56 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">14-Jun-20 03:57 AM</span>
+    <div class="chatlog__message " data-message-id="721574125834993707" id="message-721574125834993707" title="Message sent: 14-Jun-20 03:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">もしCounterが <div class="pre pre--multiline language-swift">class Counter: ObservedObject { @Published var count: Int @Published var foo: Foo }</div> のようにfooも持っていてもこれはclassだから分離されているから良いけど・・・</span>
+          <span class="chatlog__edited-timestamp" title="14-Jun-20 03:59 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721574625548435477" id="message-721574625548435477" title="Message sent: 14-Jun-20 03:59 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class Counter: ObservedObject { @Published var count: Count } struct Count { var value: Int var foo: Foo }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="14-Jun-20 04:00 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721574780352069712" id="message-721574780352069712" title="Message sent: 14-Jun-20 04:00 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">のような場合にcount.valueが変わると、これはcount自体の変更になって、 count.fooの更新通知も発生してしまうのが嫌だよねという話かと思ってたけど</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721574923746672641" id="message-721574923746672641" title="Message sent: 14-Jun-20 04:01 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これはもうstructの部分更新が全体更新と同一視されるのは基本的な事だからそれでいいのかな。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721575125174059018" id="message-721575125174059018" title="Message sent: 14-Jun-20 04:01 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この状況において <span class="pre pre--inline">$counter.count.value</span> でバインディングしたときに、<span class="pre pre--inline">$counter.count.foo</span> でバインディングしている側には影響が無いようなシステムを期待しているイメージだった。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="721575329512292435" id="message-721575329512292435" title="Message sent: 14-Jun-20 04:02 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">SwiftUIの場合は実装的には、<span class="pre pre--inline">$counter.count.foo</span> をバインドしてるView Tree側で、勝手に変更チェックをしてfooが変化していなければ実View(FooView)の更新はしないという事をやるのだと思うけど。</span>
+          <span class="chatlog__edited-timestamp" title="14-Jun-20 04:02 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

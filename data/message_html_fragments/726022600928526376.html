@@ -1,0 +1,50 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">26-Jun-20 10:33 AM</span>
+    <div class="chatlog__message " data-message-id="726022238440259584" id="message-726022238440259584" title="Message sent: 26-Jun-20 10:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">import SwiftUI import Foundation import Combine struct ContentView: View { @ObservedObject var history: History = .shared let dateFormatter: DateFormatter = { let value = DateFormatter() value.dateFormat = "yyyy-MM-dd HH:mm:ss" return value }() let items: [Item] = [ Item(id: "A"), Item(id: "B"), Item(id: "C"), ] var body: some View { NavigationView { VStack { VStack { ForEach(items) { item in NavigationLink(destination: ItemView(item: item)) { Text("Open \(item.id)") .padding(4) } } } .padding() Text("履歴") .font(.headline) .padding() Divider() List(history.records.reversed()) { record in NavigationLink(destination: ItemView( item: self.items.first(where: { $0.id == record.id })! )) { VStack(alignment: .leading) { Text("\(record.id)") .font(.headline) Text("\(self.dateFormatter.string(from: record.lastPlayed))") .font(.subheadline) .foregroundColor(.secondary) } } } } } } } struct ItemView: View { let item: Item var body: some View { VStack { Text("\(item.id)") Button("Play") { History.shared.record(for: self.item.id) } } } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726022420166606848" id="message-726022420166606848" title="Message sent: 26-Jun-20 10:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">struct Item: Identifiable { let id: String } final class History: ObservableObject { private(set) var records: [Record] = [] private let subject: PassthroughSubject&lt;Void, Never&gt; = .init() var objectWillChange: AnyPublisher&lt;Void, Never&gt; { subject.eraseToAnyPublisher() } func record(for id: Item.ID) { records.removeAll(where: { $0.id == id }) records.append(Record(id: id, lastPlayed: Date())) subject.send(()) } static let shared: History = .init() struct Record: Identifiable { let id: Item.ID let lastPlayed: Date } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726022469785485333" id="message-726022469785485333" title="Message sent: 26-Jun-20 10:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑これで再現しました。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726022600928526376" id="message-726022600928526376" title="Message sent: 26-Jun-20 10:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">A, B, C の順に "Open" して "Play" してから履歴から A を選んで "Play" すると pop される。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="726023330129379389" id="message-726023330129379389" title="Message sent: 26-Jun-20 10:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">[TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy (the table view or one of its superviews has not been added to a window). This may cause bugs by forcing views inside the table view to load and perform layout without accurate information (e.g. table view bounds, trait collection, layout margins, safe area insets, etc), and will also cause unnecessary performance overhead due to extra layout passes. </div>こんな実行時警告出てるけど、そもそも子のアクションで親を再レンダリングしてほしくないなぁ・・・。親に戻ったときに走るならいいけど。
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

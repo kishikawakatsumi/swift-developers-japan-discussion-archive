@@ -1,0 +1,59 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">19-Jun-20 09:01 AM</span>
+    <div class="chatlog__message " data-message-id="723462536221163530" id="message-723462536221163530" title="Message sent: 19-Jun-20 09:01 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">サブクラスにinitが1つも無いとき、自動でやる。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="723462859903729705" id="message-723462859903729705" title="Message sent: 19-Jun-20 09:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class C1 { init() {} } class C2 { private init(_ a: Int) {} } C2() // error</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="723463036387721296" id="message-723463036387721296" title="Message sent: 19-Jun-20 09:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class C1 { init() {} } class C2 { } C2() // ok</div> これはC1.initが見えてるんじゃなくて、C2.initが自動定義されてるんじゃないだろうか。 C++の自動コンストラクタ定義みたいなノリで。
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="723463320408948806" id="message-723463320408948806" title="Message sent: 19-Jun-20 09:04 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class C1 { required init(a: Int) {} init(b: Int) {} } class C2 { } C2()</div> ↑よくViewController書いてるとなるやつ
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="723463603457359892" id="message-723463603457359892" title="Message sent: 19-Jun-20 09:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class C1 { required init(a: Int) {} init(b: Int) {} } class C2: C1 { override init(b: Int) { super.init(b: b) } // 'required' initializer 'init(a:)' must be provided by subclass of 'C1' }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="723463704548737025" id="message-723463704548737025" title="Message sent: 19-Jun-20 09:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">サブクラス側にひとつでも何かしらのinitがあると、自動実装がなくなるから、required initのoverrideしてないよって言われる。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

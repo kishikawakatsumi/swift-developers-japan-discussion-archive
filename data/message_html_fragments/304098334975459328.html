@@ -1,0 +1,18 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">19-Apr-17 03:38 AM</span>
+    <div class="chatlog__message " data-message-id="304098334975459328" id="message-304098334975459328" title="Message sent: 19-Apr-17 03:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">Farm が Generic なクラスを持ってたらだめってことでした。 </div> なるほどー。↓値型のままだとわかりづらいので <span class="pre pre--inline">struct</span> とイミュータブルクラスは等価だから書き変えて、 variance annotation ( <span class="pre pre--inline">out</span> ) を付けて考えると <span class="pre pre--inline">Fence</span> の <span class="pre pre--inline">animal</span> がコンパイルエラーですね。 <span class="pre pre--inline">setter</span> が許容できない。 <div class="pre pre--multiline language-swift">class Animal {} class Cow : Animal {} class Sheep : Animal {} class Fence&lt;out T&gt; { var animal: T? = nil // コンパイルエラー } class Farm&lt;out T&gt; { let fence: Fence&lt;T&gt; = Fence&lt;T&gt;() } func buySheep(farm: Farm&lt;Animal&gt;) { farm.fence.animal = Sheep() } let farm = Farm&lt;Cow&gt;() buySheep(farm: farm as Farm&lt;Animal&gt;)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

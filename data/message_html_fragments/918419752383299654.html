@@ -1,0 +1,40 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">09-Dec-21 08:28 AM</span>
+    <div class="chatlog__message " data-message-id="918418835646869514" id="message-918418835646869514" title="Message sent: 09-Dec-21 08:28 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">import SwiftUI @MainActor struct ContentView: View { let bar = Bar() var body: some View { Text("Hello, world!") .onAppear { Foo().start(bar: bar) } } } @MainActor final class Bar { func bar() -&gt; Int { print("bar", Thread.isMainThread) return 42 } } final class Foo { func start(bar: Bar) { Task { print("1", Thread.isMainThread, ObjectIdentifier(Thread.current)) let x = await bar.bar() print("2", Thread.isMainThread, ObjectIdentifier(Thread.current), x) Task { print("3", Thread.isMainThread, ObjectIdentifier(Thread.current)) let x = await bar.bar() print("4", Thread.isMainThread, ObjectIdentifier(Thread.current), x) Task.detached { print("5", Thread.isMainThread, ObjectIdentifier(Thread.current)) let x = await bar.bar() print("6", Thread.isMainThread, ObjectIdentifier(Thread.current), x) } } } } }</div>
+            <div class="pre pre--multiline nohighlight">1 false ObjectIdentifier(0x0000600001348780) bar true 2 false ObjectIdentifier(0x0000600001319580) 42 3 false ObjectIdentifier(0x0000600001319580) bar true 4 false ObjectIdentifier(0x0000600001348780) 42 5 false ObjectIdentifier(0x0000600001319580) bar true 6 false ObjectIdentifier(0x0000600001348780) 42</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="918418966408495105" id="message-918418966408495105" title="Message sent: 09-Dec-21 08:29 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">bar</span> はたしかにメインスレッドで実行されているのと</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="918419399503921214" id="message-918419399503921214" title="Message sent: 09-Dec-21 08:30 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">1 と 2 が異なるスレッドで実行されていることから、 <span class="pre pre--inline">Task</span> は Actor Context を持つわけではなさそう。 Actor Context がない場合も <span class="pre pre--inline">await</span> 先が結果を返したスレッドでそのまま実行されるわけではなく、また別のスレッドに投入される？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="918419752383299654" id="message-918419752383299654" title="Message sent: 09-Dec-21 08:32 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑も、 1 と 2 が同じスレッドで実行されることもあるけど（その方が多い）、それは節約されてるだけで、 1 と 2 が同じである保証はないと。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

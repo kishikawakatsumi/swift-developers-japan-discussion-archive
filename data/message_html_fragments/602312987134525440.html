@@ -1,0 +1,60 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="hironytic#5238" data-user-id="338302215078936576" style="color: rgb(241,196,15)">hironytic</span>
+    <span class="chatlog__timestamp">21-Jul-19 01:20 AM</span>
+    <div class="chatlog__message " data-message-id="602308987412807711" id="message-602308987412807711" title="Message sent: 21-Jul-19 01:20 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ちょうどぼくも先週、同じようなことを模索してました。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602309667091120128" id="message-602309667091120128" title="Message sent: 21-Jul-19 01:23 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ObjCとSwift混在のアプリ（App）のうち、一部のSwiftをSwiftPMのパッケージ（Foo）に切り出そうとしてたんですが、切り出すとAppのObjCからFooを呼び出せなくなって。呼び出せないというか、Fooに切り出した分がApp-Swift.hに出てこなくなるからヘッダがなくなってしまって。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602310869845671937" id="message-602310869845671937" title="Message sent: 21-Jul-19 01:28 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">今のところ、Foo側で、手動で swiftc を <span class="pre pre--inline">-emit-objc-header</span> 付きで呼び出してFooの分のヘッダを作成して、そのヘッダを参照できるだけのCモジュールもFoo側に作って、AppではそのCモジュールを参照するようにしたんですが。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602312098571091968" id="message-602312098571091968" title="Message sent: 21-Jul-19 01:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">パッケージの構成はこんな感じで <div class="pre pre--multiline nohighlight">├── Package.swift └── Sources ├── Foo │ ├── Foo1.swift │ ├── Foo2.swift │ └── FooN.swift └── CFoo ├── Foo.m └── include └── Foo-swift.h</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602312517028413440" id="message-602312517028413440" title="Message sent: 21-Jul-19 01:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Package.swiftがこんな感じです。 <div class="pre pre--multiline language-swift">// swift-tools-version:5.0 import PackageDescription let package = Package( name: "Foo", products: [ .library(name: "Foo", targets: ["Foo"]), .library(name: "CFoo", targets: ["CFoo"]) ], targets: [ .target(name: "Foo"), .target(name: "CFoo", dependencies: ["Foo"]) ] )</div></span>
+          <span class="chatlog__edited-timestamp" title="21-Jul-19 01:37 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602312987134525440" id="message-602312987134525440" title="Message sent: 21-Jul-19 01:36 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Foo.mの中身は空っぽで、Foo-Swift.hが <span class="pre pre--inline">-emit-objc-header</span> で作ったヘッダファイル。 App側でCFooを参照すれば、ObjCでも、 <span class="pre pre--inline">@import CFoo;</span> だけでヘッダの参照ができるようになりました。</span>
+          <span class="chatlog__edited-timestamp" title="21-Jul-19 01:44 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="602313993767616513" id="message-602313993767616513" title="Message sent: 21-Jul-19 01:40 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ただ、Foo側のコードを変更した時に Foo-Swift.h を更新するのがすごく面倒で… <img loading="lazy" class="emoji " alt="😟" title="worried" src="https://twemoji.maxcdn.com/2/svg/1f61f.svg"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

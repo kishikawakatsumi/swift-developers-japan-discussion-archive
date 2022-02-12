@@ -1,0 +1,26 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="taketo1024#1158" style="">taketo1024</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '853833466001096734')"> 並列処理の実装に関してアドバイスを頂きたいので質問させて下さい <img loading="lazy" class="emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/2/svg/1f647.svg"> 以下のコードは実際に使っているコードを簡略化したものです。 <span class="pre pre--inline">find</span> の処理を並列化するために <span class="pre pre--inline">DispatchQueue.concurrentPerform</span> を使っています．<span class="pre pre--inline">find</span> は現在の <span class="pre pre--inline">results</span> も使うため、各スレッドで <span class="pre pre--inline">results</span> のコピー <span class="pre pre--inline">localResults</span> を作り、<span class="pre pre--inline">find</span> の結果、他のスレッドによって変更されていなければ <span class="pre pre--inline">results</span> に追加、変更されていれば <span class="pre pre--inline">localResults</span> を更新してやり直し、という感じの処理になっています。 実際のケースでは <span class="pre pre--inline">targets</span> は膨大な量があり、<span class="pre pre--inline">find</span> もそこそこ見つかるので、 <span class="pre pre--inline">localResults</span> のコピーを更新があるごとに作っているのがパフォーマンスに影響しています。理想的には <span class="pre pre--inline">localResults</span> を作らず、どれかのスレッドが <span class="pre pre--inline">result</span> を見つけたら、他のスレッドが <span class="pre pre--inline">find</span> を終わらすのを待った上で、同期的に（複数ありうる） <span class="pre pre--inline">result</span> の中かから一番いいものを選んで <span class="pre pre--inline">results</span> に追加し、それが終わったらまたみんなで <span class="pre pre--inline">find</span> を続ける、という感じにしたいのですが、どう実装したらいいものか迷っています。 最近よく聞く <span class="pre pre--inline">async/await</span> を使うとキレイにできたりするのかなーとか思ってまして、もし良い方法があれば教えて下さい <img loading="lazy" class="emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/2/svg/1f647.svg">
+        <div class="pre pre--multiline language-swift">import Dispatch var targets = Set(0 ..&lt; 10000) var results: [Int: Int] = [:] let atomic = DispatchQueue(label: "atomic", qos: .userInteractive) DispatchQueue.concurrentPerform(iterations: 4) { _ in // create local copy var localResults = atomic.sync { results } while true { let next = atomic.sync { targets.popFirst() } guard let i = next else { break // all targets popped, exit loop. } if let result = find(in: i, currentResults: localResults) { atomic.sync { // update results if not updated by other threads. if localResults.count == results.count { results[i] = result } else { // otherwise retry i. targets.insert(i) } } } atomic.sync { // update local copy if necessary if localResults.count != results.count { localResults = results } } } } // parallelized function func find(in i: Int, currentResults: [Int: Int]) -&gt; Int? { i % 100 == 0 ? i : nil } print(results.count)</div>
+      </span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">14-Jun-21 03:37 AM</span>
+    <div class="chatlog__message " data-message-id="853840595776438282" id="message-853840595776438282" title="Message sent: 14-Jun-21 03:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Swift 5.5 を前提にするのであれば、 <span class="pre pre--inline">results</span> や <span class="pre pre--inline">targets</span> を Actor で守りながら、 <span class="pre pre--inline">find</span> を <span class="pre pre--inline">TaskGroup</span> で並行に走らせるのが良いように思います。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

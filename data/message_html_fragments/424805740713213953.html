@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">18-Mar-18 05:42 AM</span>
+    <div class="chatlog__message " data-message-id="424804885846949890" id="message-424804885846949890" title="Message sent: 18-Mar-18 05:42 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">累乗関数が欲しくて、パフォーマンスをチェックしてた。 <div class="pre pre--multiline language-swift">import XCTest @testable import pow let lhs = 10 let rhs = 10 let count = 1000000 let expect = Int(pow(Double(lhs), Double(rhs))) final class powTests: XCTestCase { func test0() { var x: Int = 0 measure { for _ in 0..&lt;count { x = power0(lhs, rhs) } } XCTAssertEqual(x, expect) } …</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="424805483120033792" id="message-424805483120033792" title="Message sent: 18-Mar-18 05:45 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ここで<span class="pre pre--inline">expect</span>の算出に使ってる<span class="pre pre--inline">Int(pow(Double(lhs), Double(rhs)))</span>の速度も測ろうと考え <div class="pre pre--multiline language-swift"> func test_() { var x: Int = 0 measure { for _ in 0..&lt;count { x = Int(pow(Double(lhs), Double(rhs))) } } XCTAssertEqual(x, expect) }</div> を追加したら、10000倍くらい速かった。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="424805740713213953" id="message-424805740713213953" title="Message sent: 18-Mar-18 05:46 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">しかしこれはコンパイラが賢くて、<s><span class="pre pre--inline">x = expect</span>に書き換えてただけだった…</s>コンパイル時に定数になってた。</span>
+          <span class="chatlog__edited-timestamp" title="18-Mar-18 10:37 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

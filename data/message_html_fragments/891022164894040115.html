@@ -1,0 +1,76 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">24-Sep-21 06:03 PM</span>
+    <div class="chatlog__message " data-message-id="891022005376286760" id="message-891022005376286760" title="Message sent: 24-Sep-21 06:03 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ふむふむ。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891022164894040115" id="message-891022164894040115" title="Message sent: 24-Sep-21 06:03 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そもそも <span class="pre pre--inline">override</span> も <span class="pre pre--inline">nonoverride</span> も付けない場合で、サブプロトコルで同じ名前をrequirementsに書くことができて、その場合テーブルエントリが別にできるわけですね。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891022331198197840" id="message-891022331198197840" title="Message sent: 24-Sep-21 06:04 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、このPRでは、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891022435833495613" id="message-891022435833495613" title="Message sent: 24-Sep-21 06:05 PM">
+      <div class="chatlog__attachment " onclick="">
+        <a href="https://cdn.discordapp.com/attachments/306995750418513920/891022432012480533/2021-09-25_3.04.57.png">
+          <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/306995750418513920/891022432012480533/2021-09-25_3.04.57.png" alt="Image attachment" title="Image: 2021-09-25_3.04.57.png (435.58 KB)" loading="lazy">
+        </a>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891022482922938438" id="message-891022482922938438" title="Message sent: 24-Sep-21 06:05 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">overrideを付けてるところと、nonoverrideを付けてるところがあるから、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891022708144484353" id="message-891022708144484353" title="Message sent: 24-Sep-21 06:06 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そのままこれまでどおり別エントリであることを明示的にしたnonoverrideの方は別に何もかわってなくって、 このパッチではoverrideをつけたところに関して、テーブルエントリがなくなるからバイナリサイズが減ったよということか</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891022802084307036" id="message-891022802084307036" title="Message sent: 24-Sep-21 06:06 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そうすると、なんでそもそも、同じ名前のテーブルエントリを作ってたんだ？？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891023390079582240" id="message-891023390079582240" title="Message sent: 24-Sep-21 06:08 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">This makes restating protocol requirements in inheriting protocols ABI-neutral, so we can restate protocol requirements to influence associated type inference without baking those decisions into the ABI.</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891024781145690203" id="message-891024781145690203" title="Message sent: 24-Sep-21 06:14 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swift55#0244">@swift-5.5.2-dev</span>
+            <div class="pre pre--multiline language-swift">protocol Base { func foo() } protocol Derived: Base { func foo() } struct Impl: Derived { @_implements(Base, foo()) func foo1() { print("foo1") } @_implements(Derived, foo()) func foo2() { print("foo2") } } func callBase&lt;T: Base&gt;(_ x: T) { x.foo() } func callDerived&lt;T: Derived&gt;(_ x: T) { x.foo() } callBase(Impl()) callDerived(Impl())</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

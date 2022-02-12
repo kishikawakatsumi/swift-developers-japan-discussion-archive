@@ -1,0 +1,33 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="uhooi#8263" style="">uhooi</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '920599979456876544')"> Presenter の処理が気になる Before <div class="pre pre--multiline language-swift"> func didSelectMonster(monster: MonsterEntity) { interactor.saveForSpotlight(monster) router.showMonsterDetail(monster: monster)</div> After <div class="pre pre--multiline language-swift"> func didSelectMonster(monster: MonsterEntity) async { router.showMonsterDetail(monster: monster) await interactor.saveForSpotlight(monster) }</div> ↓だと Ineractor の処理を待つ気がするから、Router による画面遷移の処理と順番を入れ替えた その考えで合っているかはわからない、、 <div class="pre pre--multiline language-swift"> func didSelectMonster(monster: MonsterEntity) async { await interactor.saveForSpotlight(monster) router.showMonsterDetail(monster: monster) }</div> </span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">15-Dec-21 01:34 PM</span>
+    <div class="chatlog__message " data-message-id="920670111768129556" id="message-920670111768129556" title="Message sent: 15-Dec-21 01:34 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">Ineractor の処理を待つ気がする </div>正しいです。 <div class="quote">Router による画面遷移の処理と順番を入れ替えた </div>この場合は問題ないのかもしれませんが、いつでも入れ替えられるとは限らないように思います。 処理が終わるのを待たずに後続処理を始めるためには、↓のように書くことができます（ <span class="pre pre--inline">: Void</span> がないと警告が出ます）。 <div class="pre pre--multiline language-swift">func didSelectMonster(monster: MonsterEntity) async { async let x: Void = interactor.saveForSpotlight(monster) router.showMonsterDetail(monster: monster) await x }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="15-Dec-21 01:34 PM">(edited)</span>
+        </div>
+      </div>
+      <div class="chatlog__reactions">
+        <div class="chatlog__reaction" title="eyes">
+          <img class="emoji emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy">
+          <span class="chatlog__reaction-count">1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

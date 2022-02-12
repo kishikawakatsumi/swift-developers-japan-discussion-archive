@@ -1,0 +1,39 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <span class="chatlog__timestamp">15-May-20 11:54 AM</span>
+    <div class="chatlog__message " data-message-id="710822449620451400" id="message-710822449620451400" title="Message sent: 15-May-20 11:54 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">extension Client { public func perform&lt;Response&gt;(request: Request&lt;Response&gt;) -&gt; Future&lt;Response, Error&gt; where Response: Decodable { return Future&lt;Response, Error&gt; { [weak self] promise in self?.perform(request: request) { switch $0 { case .success(let response): promise(.success(response.body)) case .failure(let error): promise(.failure(error)) } } } } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="710822811710652436" id="message-710822811710652436" title="Message sent: 15-May-20 11:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">^ こういうURLSessionのCompletionHandlerをFuture（Promise）にしてる実装があって、これはSinkする方で[weak self]しないとダメなんですけど呼び出される側の実装で回避できるかな？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="710823240653864990" id="message-710823240653864990" title="Message sent: 15-May-20 11:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ、これはそのさきのperformのCompletionHandlerをリトライのためにある程度保持するからかな？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="710823304918990908" id="message-710823304918990908" title="Message sent: 15-May-20 11:58 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ちょっとまず自分でいろいろ確認してみます。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

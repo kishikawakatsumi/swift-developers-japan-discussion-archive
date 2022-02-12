@@ -1,0 +1,16 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">19-Apr-17 04:31 AM</span>
+    <div class="chatlog__message " data-message-id="304111696182640652" id="message-304111696182640652" title="Message sent: 19-Apr-17 04:31 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">値型の variance 、どう考えたらいいのか難しいと思ってたけど、イミュータブルクラスに変換して、 <span class="pre pre--inline">mutating func</span> は <span class="pre pre--inline">static</span> メソッドに読み替えれば解釈できそう。 ↓ <span class="pre pre--inline">Array</span> は covariant にできる <div class="pre pre--multiline language-swift">class Array&lt;out E&gt; { func get(_ index: Int) -&gt; E { ... } static func set&lt;E&gt;(_ this: Array&lt;E&gt;, _ index: Int, newValue: E) -&gt; Array&lt;E&gt; { ... } }</div> けど、 <span class="pre pre--inline">Fence</span> は covariant にできない。 <div class="pre pre--multiline language-swift">class Fence&lt;T&gt; { var animal: T? = nil } class Farm&lt;out T&gt; { let fence: Fence&lt;T&gt; = Fence&lt;T&gt;() // Fence が T について invariant なのでエラー }</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

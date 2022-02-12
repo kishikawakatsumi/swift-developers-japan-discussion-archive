@@ -1,0 +1,40 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="hironytic#5238" style="color: rgb(241,196,15)">hironytic</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '890753596877049947')"> (B) が MainActor ではないところが微妙 </span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">24-Sep-21 12:52 AM</span>
+    <div class="chatlog__message " data-message-id="890762682423185471" id="message-890762682423185471" title="Message sent: 24-Sep-21 12:52 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑の話で考えると、 (B) は最終的な仕様上 MainActor にならないし、現状でも MainActor に守られているわけではないけど、 <span class="pre pre--inline">self.nameLabel.text = ...</span> みたいなのが書けないと既存コードが破壊されまくるので、現状ではコンパイラが MainActor 扱いにしてコードの互換性を保っている（ただし守られてはいない）、 Swift 6 では MainActor でなくなるし <span class="pre pre--inline">await</span> 必須になる、ということになる？ そして、それと <span class="pre pre--inline">bar</span> をすっ飛ばして <span class="pre pre--inline">Task.init</span> が <span class="pre pre--inline">foo</span> の context を引き継ぐ話はまた別で、 <span class="pre pre--inline">@Sendable</span> は actor の context をぶった切る、 <span class="pre pre--inline">@Sendable</span> でない <span class="pre pre--inline">@escaping</span> なクロージャが何かの actor の context を持つことはないと考えると、 <span class="pre pre--inline">Task.init</span> に渡されるクロージャは、それが宣言された場所で最も近い（内側のスコープの） actor を引き継ぐと考えれば一般化できる？ という感じでしょうか。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="890764433532522536" id="message-890764433532522536" title="Message sent: 24-Sep-21 12:59 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">// Actor 1 a { // @escaping // どの Actor でもない Task.init { // Actor 1 await MainActor.run { // MainActor b { // @escaping // どの Actor でもない Task.init { // MainActor c { // @Sendable @escaping // どの Actor でもない Task.init { // どの Actor でもない actor2 { // Actor 2 @Sendable @escaping // Actor 2 d { // @escaping // どの Actor でもない Task.init { // Actor 2 } } } } } } } } } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="890764474905145426" id="message-890764474905145426" title="Message sent: 24-Sep-21 01:00 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑のような感じ？</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

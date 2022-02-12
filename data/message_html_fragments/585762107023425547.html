@@ -1,0 +1,46 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">05-Jun-19 09:29 AM</span>
+    <div class="chatlog__message " data-message-id="585762061431209984" id="message-585762061431209984" title="Message sent: 05-Jun-19 09:29 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">StaticMember.red</span> はおかしくない？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="585762107023425547" id="message-585762107023425547" title="Message sent: 05-Jun-19 09:29 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">StaticMember&lt;Base&gt;.red</span> の <span class="pre pre--inline">Base</span> を何かで埋めないと。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="585762409600253962" id="message-585762409600253962" title="Message sent: 05-Jun-19 09:30 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ、見てる場所が違うのか。 俺が気にしてるのは <span class="pre pre--inline">.colorStyle(.red)</span> の推論ね。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="585762450218156032" id="message-585762450218156032" title="Message sent: 05-Jun-19 09:30 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">{ return .init(.init()) }</span> の方じゃない。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="585762615641505802" id="message-585762615641505802" title="Message sent: 05-Jun-19 09:31 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swift51#2395">@swift-5.1.5</span>
+            <div class="pre pre--multiline language-swift">struct StaticMember&lt;Base&gt; { init(_ base: Base) {} } protocol ColorStyle { typealias Member = StaticMember&lt;Self&gt; } struct RedStyle : ColorStyle {} struct BlueStyle : ColorStyle {} extension StaticMember where Base : ColorStyle { static var red: RedStyle.Member { return .init(.init()) } static var blue: BlueStyle.Member { return .init(.init()) } } protocol View {} extension View { func colorStyle&lt;S : ColorStyle&gt;(_ style: S.Member) { } } struct MyView : View {} MyView().colorStyle(.red) MyView().colorStyle(.blue)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

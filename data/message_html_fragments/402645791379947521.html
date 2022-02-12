@@ -1,0 +1,88 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">16-Jan-18 02:10 AM</span>
+    <div class="chatlog__message " data-message-id="402645741794754561" id="message-402645741794754561" title="Message sent: 16-Jan-18 02:10 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">シグナルハンドラって関数として登録するんですけど、CPU命令のタイミングでフックされて呼び出されるわけで</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402645762330066945" id="message-402645762330066945" title="Message sent: 16-Jan-18 02:10 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そこで死なずに戻ってきたとして</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402645791379947521" id="message-402645791379947521" title="Message sent: 16-Jan-18 02:10 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">例えばそのシグナルが発生してる例としては</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402645860535500812" id="message-402645860535500812" title="Message sent: 16-Jan-18 02:10 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">var x: String? = nil var y: String = x!</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402645938910265354" id="message-402645938910265354" title="Message sent: 16-Jan-18 02:11 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑こういうコードがあったとして、2行目の右辺値の評価中に ! のところで x がnilだからシグナルで死ぬわけです</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402645983265161246" id="message-402645983265161246" title="Message sent: 16-Jan-18 02:11 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">てことは、ハンドラで蘇生して戻ってきたとしても</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402646478574714903" id="message-402646478574714903" title="Message sent: 16-Jan-18 02:13 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">nilのメモリ(おそらくここでは0で埋まった24バイトの連続メモリ)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402646519528030209" id="message-402646519528030209" title="Message sent: 16-Jan-18 02:13 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">を、Stringとみなして無理やり読み取って続きの処理が走ろうとするんで</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402646660439736331" id="message-402646660439736331" title="Message sent: 16-Jan-18 02:14 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">内部バッファを指すポインタも0になってるから、 文字を読み取ろうとした時点で今度はnullポインタによるメモリアクセス違反のシグナルが飛んでくるとか</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402646674717147146" id="message-402646674717147146" title="Message sent: 16-Jan-18 02:14 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そういう感じになると思います</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="402646738877284352" id="message-402646738877284352" title="Message sent: 16-Jan-18 02:14 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ〜、シグナルハンドラの時点でスレッドを殺しちゃえば</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

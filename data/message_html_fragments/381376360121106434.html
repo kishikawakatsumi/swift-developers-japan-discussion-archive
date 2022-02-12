@@ -1,0 +1,46 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <span class="chatlog__timestamp">18-Nov-17 09:25 AM</span>
+    <div class="chatlog__message " data-message-id="381374277422809089" id="message-381374277422809089" title="Message sent: 18-Nov-17 09:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="TetsuFe#1787">@TetsuFe</span> 期待した通りに動かない理由はお書きになった通りです。UIが更新されるためにはイベントループに処理を戻す必要があるので、一連のメソッドの間で<span class="pre pre--inline">addSubview(_:)</span>と<span class="pre pre--inline">removeFromSuperView()</span>をしてしまうと、結果としてビューが外された最後の状態でUIが更新されます。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="381374876683862018" id="message-381374876683862018" title="Message sent: 18-Nov-17 09:27 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">download()</span>は同期的な処理ですか？最も望ましいと思われる解決は<span class="pre pre--inline">download()</span>メソッドを非同期処理にして完了時点でコールバックを受け取れるようにして、<span class="pre pre--inline">addSubview(_:) </span>を呼んでから<span class="pre pre--inline">download()</span>、ここまでは同じで、<span class="pre pre--inline">removeFromSuperView()</span>をダウンロード完了のコールバック内で呼ぶことです。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="381375109786501132" id="message-381375109786501132" title="Message sent: 18-Nov-17 09:28 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">それが難しければ、<span class="pre pre--inline">addSubview(_:)</span>の直後に一度イベントループに処理を戻してUIを更新して、<span class="pre pre--inline">download()</span>、<span class="pre pre--inline">removeFromSuperView()</span>を呼びます。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="381376130105475085" id="message-381376130105475085" title="Message sent: 18-Nov-17 09:32 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">view.addSubview(uiView) DispatchQueue.main.async { self.download() uiView.removeFromSuperView() }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="381376360121106434" id="message-381376360121106434" title="Message sent: 18-Nov-17 09:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">後者の方法はこんな感じですね。簡単ですけど良いコードではないのでオススメしませんが、元のコードがなぜ期待した通りに動かなかったのかはよくわかると思います。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

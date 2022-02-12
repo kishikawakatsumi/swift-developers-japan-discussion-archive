@@ -1,0 +1,48 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">18-Mar-18 10:31 AM</span>
+    <div class="chatlog__message " data-message-id="424877480256471040" id="message-424877480256471040" title="Message sent: 18-Mar-18 10:31 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">echo 'import Foundation; let lhs = 10, rhs = 9, count = 10000000, expect = Int(pow(Double(lhs), Double(rhs))); func test() { var x: Int = 0; for _ in 0..&lt;count { x = Int(pow(Double(lhs), Double(rhs))) }; print(x == expect) }; test()'|swiftc -emit-assembly - -O|xcrun swift-demangle</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="18-Mar-18 10:53 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="424877784096309258" id="message-424877784096309258" title="Message sent: 18-Mar-18 10:32 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">どうやら<span class="pre pre--inline">pow</span>の呼び出し自体がなくなってるぽい。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="424877891197861899" id="message-424877891197861899" title="Message sent: 18-Mar-18 10:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">-Onone</span>にすると<span class="pre pre--inline">callq _pow</span>が2箇所現れる。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="424878372728995841" id="message-424878372728995841" title="Message sent: 18-Mar-18 10:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">x = expect</span>にしてるわけでは無く、コンパイル時に定数になってるぽい。 <div class="pre pre--multiline language-asm"> movq $10, _main.lhs : Swift.Int(%rip) movq $9, _main.rhs : Swift.Int(%rip) movq $10000000, _main.count : Swift.Int(%rip) movq $1000000000, _main.expect : Swift.Int(%rip) callq _main.test() -&gt; ()</div></span>
+          <span class="chatlog__edited-timestamp" title="18-Mar-18 10:53 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="424878459119075328" id="message-424878459119075328" title="Message sent: 18-Mar-18 10:35 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そりゃ速いわ。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">09-May-18 05:32 AM</span>
+    <div class="chatlog__message " data-message-id="443646502217449473" id="message-443646502217449473" title="Message sent: 09-May-18 05:32 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">_variantBuffer </span> の <span class="pre pre--inline">index(for:)</span> を呼ぶ代わりに↓を呼ぶようになっています。 <div class="pre pre--multiline language-swift"> internal func containsKey(_ key: Key) -&gt; Bool { if _fastPath(guaranteedNative) { return asNative.index(forKey: key) != nil } switch self { case .native: return asNative.index(forKey: key) != nil #if _runtime(_ObjC) case .cocoa(let cocoaBuffer): return SelfType.maybeGetFromCocoaBuffer(cocoaBuffer, forKey: key) != nil #endif } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="443646760045379595" id="message-443646760045379595" title="Message sent: 09-May-18 05:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Native のときは <span class="pre pre--inline">index(for:)</span> が呼ばれますが、 <span class="pre pre--inline">NSDictionary</span> をラップしているときは <span class="pre pre--inline">maybeGetFromCocoaBuffer</span> になります。</span>
+          <span class="chatlog__edited-timestamp" title="09-May-18 05:34 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="443647287638491156" id="message-443647287638491156" title="Message sent: 09-May-18 05:35 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">index もいらないんで、その生成をショートカットできるならわずかにオーバーヘッドを減らせるかもしれないです。が、 O(1) が保証されることが一番大事だと思うので。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

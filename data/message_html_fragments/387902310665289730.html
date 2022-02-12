@@ -1,0 +1,37 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">06-Dec-17 09:45 AM</span>
+    <div class="chatlog__message " data-message-id="387902310665289730" id="message-387902310665289730" title="Message sent: 06-Dec-17 09:45 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これはコンパイルできる <div class="pre pre--multiline language-swift">protocol EventSinkProtocol { associatedtype Event func send(event: Event) } extension EventSinkProtocol { func asEventSink() -&gt; EventSink&lt;Event&gt; { return EventSink.init() } } class EventSink&lt;Event&gt; : EventSinkProtocol { func send(event: Event) {} }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="387902431780143104" id="message-387902431780143104" title="Message sent: 06-Dec-17 09:45 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これがコンパイルできない <div class="pre pre--multiline language-swift">protocol EventSinkConvertible { associatedtype Event func asEventSink() -&gt; EventSink&lt;Event&gt; } protocol EventSinkProtocol : EventSinkConvertible { func send(event: Event) } extension EventSinkProtocol { func asEventSink() -&gt; EventSink&lt;Event&gt; { return EventSink.init() } } class EventSink&lt;Event&gt; : EventSinkProtocol { func send(event: Event) {} }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="387902572175949828" id="message-387902572175949828" title="Message sent: 06-Dec-17 09:46 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これはコンパイルできる <div class="pre pre--multiline language-swift">protocol EventSinkConvertible { associatedtype _Event func asEventSink() -&gt; EventSink&lt;_Event&gt; } protocol EventSinkProtocol : EventSinkConvertible { associatedtype Event = _Event func send(event: Event) } extension EventSinkProtocol { func asEventSink() -&gt; EventSink&lt;Event&gt; { return EventSink.init() } } class EventSink&lt;Event&gt; : EventSinkProtocol { func send(event: Event) {} }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="387902818402435074" id="message-387902818402435074" title="Message sent: 06-Dec-17 09:47 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これもコンパイルできる <div class="pre pre--multiline language-swift">protocol EventSinkConvertible { associatedtype Event func asEventSink() -&gt; EventSink&lt;Event&gt; } protocol EventSinkProtocol : EventSinkConvertible { func send(event: Event) } extension EventSinkProtocol { func asEventSink() -&gt; EventSink&lt;Event&gt; { return EventSink.init() } } class EventSink&lt;E&gt; : EventSinkProtocol { typealias Event = E func send(event: E) {} }</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

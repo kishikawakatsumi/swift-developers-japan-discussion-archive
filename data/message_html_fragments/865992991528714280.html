@@ -1,0 +1,56 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">17-Jul-21 04:20 PM</span>
+    <div class="chatlog__message " data-message-id="865991382426714122" id="message-865991382426714122" title="Message sent: 17-Jul-21 04:20 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">import Foundation let line = (1 ... 1_000_000).map { $0.description }.joined(separator: " ") func measure(_ body: @escaping () -&gt; Void) -&gt; TimeInterval { let start = Date.timeIntervalSinceReferenceDate for _ in 0 ..&lt; 10 { body() } let end = Date.timeIntervalSinceReferenceDate return (end - start) / 10 } print(measure { let numbers = line.split(separator: " ").map { Int($0)! } print(numbers.count) }, "[s]") print(measure { let numbers = line.split(separator: " ").map { Int(String($0))! } print(numbers.count) }, "[s]")</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="17-Jul-21 04:21 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="865991793836818472" id="message-865991793836818472" title="Message sent: 17-Jul-21 04:22 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">$ swift -O convert-time.swift 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1.265830397605896 [s] 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 1000000 0.3805763006210327 [s]</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="865991973596692500" id="message-865991973596692500" title="Message sent: 17-Jul-21 04:22 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Substring</span> を直接 <span class="pre pre--inline">Int</span> に変換するよりも <span class="pre pre--inline">String</span> に変換してから <span class="pre pre--inline">Int</span> に変換した方が速い。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="865992391516225536" id="message-865992391516225536" title="Message sent: 17-Jul-21 04:24 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">String</span> を <span class="pre pre--inline">Int</span> のイニシャライザに渡すと <span class="pre pre--inline">Int.init(_: String)</span> が呼ばれ、 <span class="pre pre--inline">Substring</span> を <span class="pre pre--inline">Int</span> のイニシャライザに渡すと <span class="pre pre--inline">Int.init&lt;S: StringProtocol&gt;(_: S, radix: Int = 10)</span> が呼ばれる。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="865992925203529748" id="message-865992925203529748" title="Message sent: 17-Jul-21 04:26 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">後者は N 進数版だから遅いのかと思ったら↓なのでそれは関係なし。 <div class="pre pre--multiline language-swift">extension FixedWidthInteger { ... @inlinable @inline(__always) public init?(_ description: String) { self.init(description, radix: 10) } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="865992991528714280" id="message-865992991528714280" title="Message sent: 17-Jul-21 04:26 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Substring</span> の場合は specialize されないから遅い？</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

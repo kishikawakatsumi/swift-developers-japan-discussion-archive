@@ -1,0 +1,56 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/295071934889197578/e5f514e062778796ac06288270411f75.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="yyu#6765" data-user-id="295071934889197578" style="">yyu</span>
+    <span class="chatlog__timestamp">22-Jun-18 04:09 PM</span>
+    <div class="chatlog__message " data-message-id="459751835067088896" id="message-459751835067088896" title="Message sent: 22-Jun-18 04:09 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">別のことをしていてすっかり遅刻してしまいましたが、いちおうScalaを業務で書いているマンとしてちょっと<span class="pre pre--inline">enum</span> vs <span class="pre pre--inline">protocol</span> をやっていきたいと思います。 <div class="pre pre--multiline language-swift">protocol A {} class B: A{} class C: A{}</div> vs <div class="pre pre--multiline language-swift">enum A { case b(B) case c(C) }</div></span>
+        </div>
+      </div>
+      <div class="chatlog__reactions">
+        <div class="chatlog__reaction" title="eyes">
+          <img class="emoji emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy">
+          <span class="chatlog__reaction-count">1</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="459752175728459796" id="message-459752175728459796" title="Message sent: 22-Jun-18 04:11 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この2つですが、もしかして会場では答えでている可能性あって、そうしたら申し訳ないんですが、まさに上の方で議論されているようにSwiftには<span class="pre pre--inline">seald</span>がないので、<span class="pre pre--inline">protocol</span>を利用した上の例では、予想しないような実装（クラス・構造体）が作られる恐れがあり、またパターンマッチで網羅性を検査することができません。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="459752429882310686" id="message-459752429882310686" title="Message sent: 22-Jun-18 04:12 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">じゃあ、下の<span class="pre pre--inline">enum</span>がいいのか、という議論になるかというとそうではなくて、（勘違いだったら申し訳ないんですが）Swiftの<span class="pre pre--inline">enum</span>の各タグ（？、たとえば上記の例でいう<span class="pre pre--inline">a</span>とか<span class="pre pre--inline">b</span>）はたしか型パラメーターが取れないです。</span>
+        </div>
+      </div>
+      <div class="chatlog__reactions">
+        <div class="chatlog__reaction" title="point_right">
+          <img class="emoji emoji--small" alt="👉" src="https://twemoji.maxcdn.com/2/svg/1f449.svg" loading="lazy">
+          <span class="chatlog__reaction-count">1</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="459752769839169536" id="message-459752769839169536" title="Message sent: 22-Jun-18 04:13 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">だから、たとえば型レベルリスト（HList）のようなデータ構造を作りたいときは、パターンマッチの網羅性を犠牲にしてでも前者の<span class="pre pre--inline">protocol</span>をつかって次のようにやるしかない、といった感じになるんじゃないでしょうか。 <div class="pre pre--multiline language-swift">public protocol HList { } public struct HNil: HList { init() { } } public struct HCons&lt;H, T: HList&gt;: HList { public let head: H public let tail: T public init(_ h: H, _ t: T) { self.head = h self.tail = t } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="459752890064699412" id="message-459752890064699412" title="Message sent: 22-Jun-18 04:13 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この例ではタグ（？）として<span class="pre pre--inline">HNil</span>と<span class="pre pre--inline">HCons</span>がありますが、<span class="pre pre--inline">HCons</span>が型パラを取るので、こうしています。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

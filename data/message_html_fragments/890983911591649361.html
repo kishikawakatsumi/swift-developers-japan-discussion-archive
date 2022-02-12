@@ -1,0 +1,26 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+    <span class="chatlog__timestamp">24-Sep-21 03:31 PM</span>
+    <div class="chatlog__message " data-message-id="890983890641100820" id="message-890983890641100820" title="Message sent: 24-Sep-21 03:31 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class TaskContext&lt;T: AnyObject&gt; { private weak var weakValue: T? var value: T { get throws { guard let value = weakValue else { throw CancellationError() } return value } } init(weakValue: T?) { self.weakValue = weakValue } } extension Task where Failure == Error { @discardableResult init&lt;T&gt;(priority: TaskPriority? = nil, context: T, operation: @Sendable @escaping (TaskContext&lt;T&gt;) async throws -&gt; Success) { let taskContext = TaskContext(weakValue: context) self.init(priority: priority, operation: { try await operation(taskContext) }) } }</div> こういうのを作っておく するとこうなる <div class="pre pre--multiline language-swift"> Task(context: self) { context in for await foo in try context.value.observe(keyPath: \.foo) { try context.value.printFoo(foo) } }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="24-Sep-21 03:32 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="890983911591649361" id="message-890983911591649361" title="Message sent: 24-Sep-21 03:31 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">書き味はめちゃくちゃいいね</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

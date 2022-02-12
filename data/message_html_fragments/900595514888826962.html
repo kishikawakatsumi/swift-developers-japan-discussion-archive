@@ -1,0 +1,33 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">21-Oct-21 04:05 AM</span>
+    <div class="chatlog__message " data-message-id="900595514888826962" id="message-900595514888826962" title="Message sent: 21-Oct-21 04:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">もしかして、↓の <span class="pre pre--inline">self?.state</span> も本来ダメなんでしょうか・・・。 <div class="pre pre--multiline language-swift">final class UserViewController: UIViewController { private let state: UserViewState ... override func viewDidLoad() { super.viewDidLoad() ... let task = Task { [weak self] in guard let state = self?.state else { return } // この self もダメ？🤔 for await _ in state.objectWillChange.values { guard let self = self else { return } // state を View に反映する処理 self.nameLabel.text = state.user?.name } } cancellables.insert(.init { task.cancel() }) } ... }</div>
+            <span class="pre pre--inline">Task { }</span> の外側で <span class="pre pre--inline">let state = self.state</span> しておくのがいいのかな。 <span class="pre pre--inline">state</span> （ <span class="pre pre--inline">UserViewState</span> ）は <span class="pre pre--inline">@MainActor</span> が付与されてるから <span class="pre pre--inline">Sendable</span> になるはず。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="900596527972618280" id="message-900596527972618280" title="Message sent: 21-Oct-21 04:09 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あれ？違うか。 VC は <span class="pre pre--inline">@MainActor</span> だからいいのか。</span>
+          <span class="chatlog__edited-timestamp" title="21-Oct-21 04:09 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="900597270129549353" id="message-900597270129549353" title="Message sent: 21-Oct-21 04:12 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これ↓も本来 <span class="pre pre--inline">MyViewClass</span> が <span class="pre pre--inline">MainActor</span> だから警告出ないのが正しい？ <div class="pre pre--multiline language-swift">print(value) // Cannot use parameter 'self' with a non-sendable type 'MyViewClass' from concurrently-executed code</div></span>
+          <span class="chatlog__edited-timestamp" title="21-Oct-21 04:12 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

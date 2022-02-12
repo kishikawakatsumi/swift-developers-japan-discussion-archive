@@ -1,0 +1,33 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <span class="chatlog__timestamp">06-Oct-20 07:31 PM</span>
+    <div class="chatlog__message " data-message-id="763121251173793812" id="message-763121251173793812" title="Message sent: 06-Oct-20 07:31 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">final class ErrorMiddleware: Middleware { func respond(to request: Request, chainingTo next: Responder) -&gt; EventLoopFuture&lt;Response&gt; { return next.respond(to: request).flatMapError { (error) in let headers: HTTPHeaders let status: HTTPResponseStatus let reason: String let title: String switch error { case let abort as AbortError: headers = abort.headers status = abort.status title = "Not Found" reason = status == .notFound ? "Sorry, an error has occured, Requested page not found!" : abort.reason default: headers = [:] status = .internalServerError title = "Internal Server Error" reason = "Something went wrong." } return request.view.render("error", [ "title": title, "status": "\(status.code)", "reason": reason, ]) .encodeResponse(status: status, headers: headers, for: request) } } }</div> ミドルウェアはとりあえずこんな感じにしました。
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="763121427498401802" id="message-763121427498401802" title="Message sent: 06-Oct-20 07:32 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">error.leaf</span> っていうテンプレートがあって、タイトルとかが変わります。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="763121791262261300" id="message-763121791262261300" title="Message sent: 06-Oct-20 07:33 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">だんだんわかってきた。Vaporと結構格闘したからある程度スイスイかけるようになった、、、かもしれない。</span>
+          <span class="chatlog__edited-timestamp" title="06-Oct-20 07:33 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

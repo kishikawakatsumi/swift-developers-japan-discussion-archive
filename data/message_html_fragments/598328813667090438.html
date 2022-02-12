@@ -1,0 +1,43 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/269801719796334592/c7ac354c0870623258accfe97d7b8ffa.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="t.ae#5802" data-user-id="269801719796334592" style="color: rgb(241,196,15)">t.ae</span>
+    <span class="chatlog__timestamp">10-Jul-19 01:45 AM</span>
+    <div class="chatlog__message " data-message-id="598328813667090438" id="message-598328813667090438" title="Message sent: 10-Jul-19 01:45 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">sigmoidとその微分の実装がここ <a href="https://github.com/tensorflow/swift-apis/blob/323b5640c48822340f2f5410d6bff51972fc9f45/Sources/TensorFlow/Operators/Math.swift#L970-L975">https://github.com/tensorflow/swift-apis/blob/323b5640c48822340f2f5410d6bff51972fc9f45/Sources/TensorFlow/Operators/Math.swift#L970-L975</a>
+            <div class="pre pre--multiline language-swift">/// Returns the sigmoid of the specified tensor element-wise. /// Specifically, computes `1 / (1 + exp(-x))`. @inlinable @differentiable(vjp: _vjpSigmoid) public func sigmoid&lt;T: TensorFlowFloatingPoint&gt;(_ x: Tensor&lt;T&gt;) -&gt; Tensor&lt;T&gt; { Raw.sigmoid(x) } @inlinable internal func _vjpSigmoid&lt;T: TensorFlowFloatingPoint&gt;( _ x: Tensor&lt;T&gt; ) -&gt; (Tensor&lt;T&gt;, (Tensor&lt;T&gt;) -&gt; Tensor&lt;T&gt;) { (sigmoid(x), { v in Raw.sigmoidGrad(x, dy: v) }) }</div>
+            <span class="pre pre--inline">Raw.sigmoidGrad</span>がこれなのでyを渡すべきところでxを渡してる？ <a href="https://raw.githubusercontent.com/tensorflow/swift-apis/master/Sources/TensorFlow/Bindings/RawOpsGenerated.swift">https://raw.githubusercontent.com/tensorflow/swift-apis/master/Sources/TensorFlow/Bindings/RawOpsGenerated.swift</a>
+            <div class="pre pre--multiline language-swift">/// Computes the gradient of the sigmoid of `x` wrt its input. /// /// Specifically, `grad = dy * y * (1 - y)`, where `y = sigmoid(x)`, and /// `dy` is the corresponding input gradient. @inlinable @inline(__always) public static func sigmoidGrad&lt;T: FloatingPoint &amp; TensorFlowScalar&gt;( _ y: Tensor&lt;T&gt;, dy: Tensor&lt;T&gt; ) -&gt; Tensor&lt;T&gt; </div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="10-Jul-19 01:56 AM">(edited)</span>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/tensorflow/swift-apis/blob/323b5640c48822340f2f5410d6bff51972fc9f45/Sources/TensorFlow/Operators/Math.swift">
+                  <div class="markdown preserve-whitespace">tensorflow/swift-apis</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">Swift for TensorFlow Deep Learning Library. Contribute to tensorflow/swift-apis development by creating an account on GitHub.</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/3peH4P-58MnfNbQEZ1tMY0oKn_AeZaWIFPlgkAQnJI0/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/15658638">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/3peH4P-58MnfNbQEZ1tMY0oKn_AeZaWIFPlgkAQnJI0/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/15658638" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

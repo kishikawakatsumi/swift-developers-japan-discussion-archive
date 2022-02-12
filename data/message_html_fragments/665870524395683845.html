@@ -1,0 +1,94 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">12-Jan-20 10:51 AM</span>
+    <div class="chatlog__message " data-message-id="665870524395683845" id="message-665870524395683845" title="Message sent: 12-Jan-20 10:51 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そういう場合は Model層のDomainObjectとしてのCatと、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665870572231589898" id="message-665870572231589898" title="Message sent: 12-Jan-20 10:51 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">V1APIのCatと、V2APIのCatは別の型にしている。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665870641496457226" id="message-665870641496457226" title="Message sent: 12-Jan-20 10:52 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">V1APIのCatの中で、Codable実装のためだけに、CodableProxyを使う。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665870700384616448" id="message-665870700384616448" title="Message sent: 12-Jan-20 10:52 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">CodableProxyはInfra層のDTO HasDecodableProxyはModel層のDomainObject </div>両方ともDTOということ。
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665871209602482176" id="message-665871209602482176" title="Message sent: 12-Jan-20 10:54 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift"> public struct PlayerM: HasCodableProxy { public var trackingID: String public var id: Player.ID public var x: Float public var y: Float public var distance: Float public var speed: Float public var position: GLKVector2 { GLKVector2(x, y) } public struct CodableProxy: Codable { public var id: String public var no: Player.ID @FormatCoding&lt;FloatStaticFormatter&gt; public var x: Float @FormatCoding&lt;FloatStaticFormatter&gt; public var y: Float @FormatCoding&lt;FloatStaticFormatter&gt; public var distance: Float @FormatCoding&lt;FloatStaticFormatter&gt; public var speed: Float } public init(trackingID: String, id: Player.ID, x: Float, y: Float, distance: Float, speed: Float) { self.trackingID = trackingID self.id = id self.x = x self.y = y self.distance = distance self.speed = speed } public init(fromCodableProxy p: CodableProxy) { self.init(trackingID: p.id, id: p.no, x: p.x, y: p.y, distance: p.distance, speed: p.speed) } public func encodeToCodableProxy() -&gt; CodableProxy { CodableProxy(id: trackingID, no: id, x: x, y: y, distance: distance, speed: speed) } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665871600956080129" id="message-665871600956080129" title="Message sent: 12-Jan-20 10:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑最近のだとこんなの <span class="pre pre--inline">@FormatCoding&lt;FormatStaticFormatter&gt;</span>　は Floatを <span class="pre pre--inline">%.2f</span> 書式の 文字列としてエンコードする型</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665871787640356864" id="message-665871787640356864" title="Message sent: 12-Jan-20 10:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">public struct CameraCalibration: Codable { public typealias JSON = [CameraCalibration] public var fov: Float @ColumnMajorFloatArray9Coding public var rotation: GLKMatrix3 @FloatArray3Coding public var translation: GLKVector3 public init(fov: Float, rotation: GLKMatrix3, translation: GLKVector3) { self.fov = fov self.rotation = rotation self.translation = translation } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665871927738630156" id="message-665871927738630156" title="Message sent: 12-Jan-20 10:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑こっちはCodableProxyは使ってないけど、 <span class="pre pre--inline">@FloatArray3Coding</span> などが、3次元ベクトルを 3要素Float Array にエンコードする型</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665872075805687832" id="message-665872075805687832" title="Message sent: 12-Jan-20 10:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ちょっと手元のテクニックが移行期で、PropertyWrapperを使うことによってCodingProxyが不要になりつつある・・・</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665872246321053696" id="message-665872246321053696" title="Message sent: 12-Jan-20 10:58 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">public struct PlayerSpecifier : HasCodableProxy, Hashable { public struct CodableProxy : Codable { public var teamID: Team.ID public var teamColor: ColorProxyRGB public var playerID: Player.ID public var name: String } public var teamID: Team.ID public var teamColor: Color public var playerID: Player.ID public var name: String public init(teamID: Team.ID, teamColor: Color, playerID: Player.ID, name: String) { self.teamID = teamID self.teamColor = teamColor self.playerID = playerID self.name = name } public init(fromCodableProxy p: CodableProxy) { self.init(teamID: p.teamID, teamColor: p.teamColor.value, playerID: p.playerID, name: p.name) } public func encodeToCodableProxy() -&gt; PlayerSpecifier.CodableProxy { return CodableProxy(teamID: teamID, teamColor: ColorProxyRGB(teamColor), playerID: playerID, name: name) } }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="665872453381259274" id="message-665872453381259274" title="Message sent: 12-Jan-20 10:59 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑こっちは1世代前のコードでわかりやすいと思う <span class="pre pre--inline">ColorProxyRGB</span>　が Color型を Float3要素Array にコーディングするための型</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

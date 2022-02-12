@@ -1,0 +1,34 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/435205434236993537/3863f32c69bf0e1c2c27bd5022f305e0.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="freddi#3919" style="color: rgb(17,128,106)">freddi</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '806055223684497448')"> うーん <div class="pre pre--multiline language-swift">return Observable&lt;[Elements]&gt;.create { observer in let realmElements = realm.objects(Elements.self) observer.onNext(Array(realmElements)) let token = realmElements .observe { result in switch result { case .update(let data, _, _, _): observer.onNext(Array(data)) case .error(let error): observer.onError(error) default: break } } return Disposables.create { token.invalidate() } }</div>
+        <div class="pre pre--multiline language-swift">return Observable&lt;[Elements]&gt;.create { observer in observer.onNext(Array(realm.objects(Elements.self))) let token = realm.objects(Elements.self) .observe { result in switch result { case .update(let data, _, _, _): observer.onNext(Array(data)) case .error(let error): observer.onError(error) default: break } } return Disposables.create { token.invalidate() } }</div> どちらも onNext はちゃんと流れるけど、上だとnextで流れる内容がバグっていることがある、なんでだ (Rx + Realm のはなし
+      </span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/435205434236993537/3863f32c69bf0e1c2c27bd5022f305e0.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="freddi#3919" data-user-id="435205434236993537" style="color: rgb(17,128,106)">freddi</span>
+    <span class="chatlog__timestamp">02-Feb-21 10:57 AM</span>
+    <div class="chatlog__message " data-message-id="806115988818100235" id="message-806115988818100235" title="Message sent: 02-Feb-21 10:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これ、比較的でかいデータを送る &amp;&amp; 少々配列が大きくなる とどちらのコードもうまく動かなくなる事がわかりました</span>
+          <span class="chatlog__edited-timestamp" title="02-Feb-21 10:57 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="806116033664516116" id="message-806116033664516116" title="Message sent: 02-Feb-21 10:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そしてThreadSafeReference だとなおった・・・</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

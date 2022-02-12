@@ -1,0 +1,107 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">31-May-18 02:38 PM</span>
+    <div class="chatlog__message " data-message-id="451756329577742338" id="message-451756329577742338" title="Message sent: 31-May-18 02:38 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">xcodeのschemeで、Run &gt; Info のところで、Launch を Wait for executable to be launched にすることで、 swiftコマンドが起動する瞬間にデバッガをアタッチできるんですが</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451756434267570176" id="message-451756434267570176" title="Message sent: 31-May-18 02:38 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">swiftcコマンドに対して同じことをやろうとしても、Executableを指定するところで、 swiftcは実際にはシンボリックリンクなので、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451756535631052810" id="message-451756535631052810" title="Message sent: 31-May-18 02:39 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">XcodeのExecutableを選択するダイアログが勝手に、リンク先のswiftの指定として解釈するっぽくて</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451756572578676737" id="message-451756572578676737" title="Message sent: 31-May-18 02:39 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">選択後にExecutableがswiftになってしまう。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451756637125083147" id="message-451756637125083147" title="Message sent: 31-May-18 02:39 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、その状態だと、swiftcコマンドが叩かれてもデバッガアタッチされない</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451757195889999883" id="message-451757195889999883" title="Message sent: 31-May-18 02:41 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ、ちがう、かんちがいだ</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451757436404105237" id="message-451757436404105237" title="Message sent: 31-May-18 02:42 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">swiftcからの起動であってもswiftでwaitしておけばアタッチできた。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451757498664484864" id="message-451757498664484864" title="Message sent: 31-May-18 02:43 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">自己解決しました・・</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451757639194509312" id="message-451757639194509312" title="Message sent: 31-May-18 02:43 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">いつのまにか <span class="pre pre--inline">/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc</span> が混ざってて、自前版とごちゃごちゃになってた。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451759254919970827" id="message-451759254919970827" title="Message sent: 31-May-18 02:49 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">swift-buildがswiftcを呼び出すところはSwiftのFoundationのProcess.popenで、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451759282531205121" id="message-451759282531205121" title="Message sent: 31-May-18 02:50 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この呼出にはデバッガがアタッチしないっぽい</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451759332774903808" id="message-451759332774903808" title="Message sent: 31-May-18 02:50 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">けどなんか起動したこと？は</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451759390232674336" id="message-451759390232674336" title="Message sent: 31-May-18 02:50 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">検出するみたいで、Xcodeはwaitからfinishに変わる。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="451759782563414018" id="message-451759782563414018" title="Message sent: 31-May-18 02:52 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">swift build</span> からの一連の動作をデバッグしようとしてるんだけど難しいですね 今の所swiftのmain冒頭にargvのダンプを仕込んで、swiftpm経由で発火するときにstdoutに出させて、 呼び出しを洗い出したあと、手動で実行し直したりしています・・</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">14-May-19 01:13 PM</span>
+    <div class="chatlog__message " data-message-id="577846066297307146" id="message-577846066297307146" title="Message sent: 14-May-19 01:13 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">import Foundation struct HB : Decodable { var heartbeatInterval: Int enum CodingKeys : String, CodingKey { case heartbeatInterval = "heartbeat_interval" } } let json = #"{ "heartbeat_interval": 30 }"# let d = JSONDecoder() d.keyDecodingStrategy = .convertFromSnakeCase let data = json.data(using: .utf8)! let x = try d.decode(HB.self, from: data) dump(x)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="577846206009704459" id="message-577846206009704459" title="Message sent: 14-May-19 01:14 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑CodingKeysでスネークケースにするのと、keyDecodingStrategyでスネークケースにするのを同時に使うと、デコードに失敗するんだけど、どういう考え方なんだ・・・？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="577846522885046282" id="message-577846522885046282" title="Message sent: 14-May-19 01:15 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">両方考慮される結果、CodingKeysはスネークケースを期待してて、Decoder側はJSONのスネークケースから変換されたキャメルケースを投げてて、ミスマッチする？</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

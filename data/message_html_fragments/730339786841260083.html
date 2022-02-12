@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">08-Jul-20 08:26 AM</span>
+    <div class="chatlog__message " data-message-id="730338950824067113" id="message-730338950824067113" title="Message sent: 08-Jul-20 08:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Xcode 11.5とXcode 12のdiffを眺めてたら、<span class="pre pre--inline">mach-o/loader.h</span>に<span class="pre pre--inline">MH_FILESET</span>, <span class="pre pre--inline">LC_FILESET_ENTRY</span>, <span class="pre pre--inline">fileset_entry_command</span>ってのが追加されている事に気付いた。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="730339010056028162" id="message-730339010056028162" title="Message sent: 08-Jul-20 08:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">以下、<span class="pre pre--inline">/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/mach-o/loader.h</span>から引用 <div class="pre pre--multiline language-c">#define MH_FILESET 0xc /* a file composed of other Mach-Os to be run in the same userspace sharing a single linkedit. */ … #define LC_FILESET_ENTRY (0x35 | LC_REQ_DYLD) /* used with fileset_entry_command */ … /* * LC_FILESET_ENTRY commands describe constituent Mach-O files that are part * of a fileset. In one implementation, entries are dylibs with individual * mach headers and repositionable text and data segments. Each entry is * further described by its own mach header. */ struct fileset_entry_command { uint32_t cmd; /* LC_FILESET_ENTRY */ uint32_t cmdsize; /* includes entry_id string */ uint64_t vmaddr; /* memory address of the entry */ uint64_t fileoff; /* file offset of the entry */ union lc_str entry_id; /* contained entry id */ uint32_t reserved; /* reserved */ };</div></span>
+          <span class="chatlog__edited-timestamp" title="08-Jul-20 08:28 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="730339786841260083" id="message-730339786841260083" title="Message sent: 08-Jul-20 08:29 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">コメントを読むと、Rosetta 2でarmへ変換されたファイルを実行時に追加で読み込む仕組みの基礎に見える。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

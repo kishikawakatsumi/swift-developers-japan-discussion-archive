@@ -1,0 +1,59 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">27-Sep-21 08:33 AM</span>
+    <div class="chatlog__message " data-message-id="891965648199122954" id="message-891965648199122954" title="Message sent: 27-Sep-21 08:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">基本的に、そもそも従来の形の非同期APIが提供される場合、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891965738808651796" id="message-891965738808651796" title="Message sent: 27-Sep-21 08:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">なんらかの購読かタスク抽象オブジェクトに対する <span class="pre pre--inline">cancel</span> メソッドが呼び出せるように設計されている事が多くて</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891965774833549312" id="message-891965774833549312" title="Message sent: 27-Sep-21 08:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">かつ、そのcancelメソッドはスレッドセーフになってる事が多いので、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891965873676509194" id="message-891965873676509194" title="Message sent: 27-Sep-21 08:33 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そのオブジェクトが Sendable準拠してくれていて、普通に <span class="pre pre--inline">{ task.cancel() }</span> がconccurency safeと判定される</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891965892907384842" id="message-891965892907384842" title="Message sent: 27-Sep-21 08:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">というのが自然な展開じゃないですかね？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891966041389957130" id="message-891966041389957130" title="Message sent: 27-Sep-21 08:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">元記事でいうと、 <div class="pre pre--multiline nohighlight">勢いよくURLSessionTaskもSendableにしてしまっているが、スレッドセーフなはずなので大丈夫だと思う。</div> ↑これと同じ発想です。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="891966149074493480" id="message-891966149074493480" title="Message sent: 27-Sep-21 08:35 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">もしそうじゃなかったら、そもそもそのローレベルの(Swift concurrencyにラップする対象の)cancelメソッドを呼び出すことの安全性が保証できなそう。</span>
+          <span class="chatlog__edited-timestamp" title="27-Sep-21 08:35 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

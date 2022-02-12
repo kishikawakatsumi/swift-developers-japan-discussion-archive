@@ -1,0 +1,18 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391777793861615647/e387ca51039675f6b2f6a8d17ddb9ef8.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="takka#0001" data-user-id="391777793861615647" style="">takka</span>
+    <span class="chatlog__timestamp">14-Sep-20 04:39 AM</span>
+    <div class="chatlog__message " data-message-id="754924344177590404" id="message-754924344177590404" title="Message sent: 14-Sep-20 04:39 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swift52#7242">@swift-5.2.5</span>
+            <div class="pre pre--multiline language-swift">import Foundation @propertyWrapper struct DefaultValue&lt;Storage: DefaultValueStorage&gt;: Decodable { var wrappedValue: Storage.Value = Storage.value } extension DefaultValue { init(from decoder: Decoder) throws { let container = try decoder.singleValueContainer() self.wrappedValue = try container.decode(Storage.Value.self) } } protocol DefaultValueStorage { associatedtype Value: Decodable static var value: Value { get } } enum DefaultValueStorages { enum Nil&lt;T: Decodable&gt;: DefaultValueStorage { static var value: T? { nil } } } // MARK: - 1. 直接書く struct S1 { @DefaultValue&lt;DefaultValueStorages.Nil&lt;String&gt;&gt; var string } // MARK: - 2. 別enumでtypealiasする enum Default { typealias Nil&lt;T: Decodable&gt; = DefaultValue&lt;DefaultValueStorages.Nil&lt;T&gt;&gt; } struct S2 { @Default.Nil&lt;String&gt; var string } // MARK: - 3. extension DefaultValueでtypealiasする extension DefaultValue { typealias Nil&lt;T: Decodable&gt; = DefaultValue&lt;DefaultValueStorages.Nil&lt;T&gt;&gt; } struct S3 { @DefaultValue.Nil&lt;String&gt; var string }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

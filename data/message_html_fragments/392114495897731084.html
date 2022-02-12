@@ -1,0 +1,55 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">18-Dec-17 12:37 AM</span>
+    <div class="chatlog__message " data-message-id="392113036522946561" id="message-392113036522946561" title="Message sent: 18-Dec-17 12:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この前質問したネーミングの件ですが、 <span class="pre pre--inline">Data</span> の <span class="pre pre--inline">write(to:options:)</span> に倣って名詞を後ろにおいてもいいだろうということで <span class="pre pre--inline">write(to:formatting:)</span> → <span class="pre pre--inline">write(to:format:)</span> としました。ありがとうございました。</span>
+          <span class="chatlog__edited-timestamp" title="18-Dec-17 12:37 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="392114231190749184" id="message-392114231190749184" title="Message sent: 18-Dec-17 12:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">--- それとは別に↓を悩んでます。 次のように、<span class="pre pre--inline">extrapolatedBy:</span> を付与することで、 <span class="pre pre--inline">x</span>, <span class="pre pre--inline">y</span> が画像の範囲外にはみ出てしまった場合でも外挿してくれる API を提供しています。 <div class="pre pre--multiline language-swift">let red = RGBA&lt;UInt8&gt;(red: 255, green: 0, blue: 0, alpha: 255) let pixel = image[x, y, extrapolatedBy: .filling(red)] // 例えば x = -1, y = -1 なら red が返される</div></span>
+          <span class="chatlog__edited-timestamp" title="18-Dec-17 12:43 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="392114495897731084" id="message-392114495897731084" title="Message sent: 18-Dec-17 12:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この <span class="pre pre--inline">extrapolatedBy</span> に与えているのは <span class="pre pre--inline">ExtrapolationMethod</span> 型の値なのですが、次のように宣言されています。 <div class="pre pre--multiline language-swift">enum ExtrapolationMethod&lt;Pixel&gt; { case filling(Pixel) // 画像の外側を与えられた値で埋める case edging // 画像の外側を最も近いエッジのピクセルで埋める case repeating // 画像の外側を画像の繰り返しで埋める case reflecting // 画像の外側を画像を鏡写しに折り返して埋める }</div></span>
+          <span class="chatlog__edited-timestamp" title="18-Dec-17 12:46 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="392114734301708289" id="message-392114734301708289" title="Message sent: 18-Dec-17 12:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これを、 <span class="pre pre--inline">edge</span>, <span class="pre pre--inline">repeat</span>, <span class="pre pre--inline">reflection</span> に変えた方がいい気がしてるんですがいかがでしょうか。</span>
+          <span class="chatlog__edited-timestamp" title="18-Dec-17 12:49 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="392115762451578882" id="message-392115762451578882" title="Message sent: 18-Dec-17 12:48 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">特に <span class="pre pre--inline">edging</span> を縁取り的な意図で使ってるんですが、無限の大きさを持った縁なので 縁取りのイメージと合わない気が。一方で、今のままだと <span class="pre pre--inline">-ing</span> の統一感はあります。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="392116037488869376" id="message-392116037488869376" title="Message sent: 18-Dec-17 12:49 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">OpenGL に倣うと <span class="pre pre--inline">clampingToEdge</span> とかになると思うんですがちょっと長すぎかなと。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

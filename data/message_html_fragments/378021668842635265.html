@@ -1,0 +1,106 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">09-Nov-17 03:23 AM</span>
+    <div class="chatlog__message " data-message-id="378021668842635265" id="message-378021668842635265" title="Message sent: 09-Nov-17 03:23 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">protocol ASTNode : CustomStringConvertible { func accept&lt;V: ASTVisitor&gt;(visitor: V) -&gt; V.VisitResult } protocol ASTVisitor { associatedtype VisitResult func visit(nop: NopNode) -&gt; VisitResult func visit(text: TextNode) -&gt; VisitResult func visit(code: CodeNode) -&gt; VisitResult func visit(subst: SubstNode) -&gt; VisitResult func visit(macroCall: MacroCallNode) -&gt; VisitResult func visit(macroStringLiteral: MacroStringLiteralNode) -&gt; VisitResult func visit(template: Template) -&gt; VisitResult }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="09-Nov-17 03:23 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="378021810697928706" id="message-378021810697928706" title="Message sent: 09-Nov-17 03:23 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Visitorパターンの素体を protocol で組めて、 associatedtype で返り値の型もジェネリックにできて、ここまでは良かったんだけど</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="378021876951285760" id="message-378021876951285760" title="Message sent: 09-Nov-17 03:23 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">throws / rethrows が適用できない事に気がついた・・・</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="378022101443018753" id="message-378022101443018753" title="Message sent: 09-Nov-17 03:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">もし Node に渡す Visitor が 例外を投げうるVisitor であれば、 Node.acceptは throws になってほしい。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="378022283832328193" id="message-378022283832328193" title="Message sent: 09-Nov-17 03:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ASTThrowableVisitor protocol を定義して accept をオーバーロードすればいけるか・・・？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="378022375750500373" id="message-378022375750500373" title="Message sent: 09-Nov-17 03:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">全部のノードに accept の実体を２倍かかないといけないけど。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="378022437734055956" id="message-378022437734055956" title="Message sent: 09-Nov-17 03:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><a href="https://github.com/omochi/gysb/blob/master/Sources/gysb/AST.swift">https://github.com/omochi/gysb/blob/master/Sources/gysb/AST.swift</a>
+            <a href="https://github.com/omochi/gysb/blob/master/Sources/gysb/ASTVisitor.swift">https://github.com/omochi/gysb/blob/master/Sources/gysb/ASTVisitor.swift</a></span>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/omochi/gysb/blob/master/Sources/gysb/AST.swift">
+                  <div class="markdown preserve-whitespace">omochi/gysb</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">gysb - Generate your swifty boilerplate</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/5aA1m7onXwpaafKn9A9Ecq-ZYBotGXYKRzJS6Ie9IQw/%3Fs%3D400%26v%3D4/https/avatars3.githubusercontent.com/u/312792">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/5aA1m7onXwpaafKn9A9Ecq-ZYBotGXYKRzJS6Ie9IQw/%3Fs%3D400%26v%3D4/https/avatars3.githubusercontent.com/u/312792" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/omochi/gysb/blob/master/Sources/gysb/ASTVisitor.swift">
+                  <div class="markdown preserve-whitespace">omochi/gysb</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">gysb - Generate your swifty boilerplate</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/5aA1m7onXwpaafKn9A9Ecq-ZYBotGXYKRzJS6Ie9IQw/%3Fs%3D400%26v%3D4/https/avatars3.githubusercontent.com/u/312792">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/5aA1m7onXwpaafKn9A9Ecq-ZYBotGXYKRzJS6Ie9IQw/%3Fs%3D400%26v%3D4/https/avatars3.githubusercontent.com/u/312792" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">23-Apr-17 02:32 PM</span>
+    <div class="chatlog__message " data-message-id="305712545392492545" id="message-305712545392492545" title="Message sent: 23-Apr-17 02:32 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">extension Swift.Error { func `throw`&lt;T&gt;() throws -&gt; T { throw self } } extension Optional { func `else`&lt;T: Swift.Error&gt;(_ error: @autoclosure () -&gt; T) throws -&gt; Optional { guard case .some = self else { throw error() } return self } func unwrap&lt;T: Swift.Error&gt;(or error: @autoclosure () -&gt; T) throws -&gt; Wrapped { guard case let .some(wrapped) = self else { throw error() } return wrapped } enum Error: Swift.Error { case isNone(String) } func `else`(_ message: @autoclosure () -&gt; String) throws -&gt; Optional { guard case .some = self else { throw Error.isNone(message()) } return self } func unwrap(or message: @autoclosure () -&gt; String) throws -&gt; Wrapped { guard case let .some(wrapped) = self else { throw Error.isNone(message()) } return wrapped } } enum Error: Swift.Error { case unavailable, notInt } let dictionary: [AnyHashable: Any] = ["available": 1] do { let a = try (dictionary["available"] ?? Error.unavailable.throw()) as? Int ?? Error.notInt.throw() let b = try dictionary["available"].unwrap(or: Error.unavailable) as? Int ?? Error.notInt.throw() let c = try dictionary["available"].map({ try ($0 as? Int).unwrap(or: Error.notInt) }).unwrap(or: Error.unavailable) let d = try dictionary["available"].map({ try $0 as? Int ?? Error.notInt.throw() }) ?? Error.unavailable.throw() let e = try dictionary["available"].else(Error.unavailable).map({ $0 as? Int }).unwrap(or: Error.notInt) let f = try dictionary["available"].else("\"available\" does not exists").map({ $0 as? Int}).unwrap(or: "Fail converting to Int") } catch { print(error) }</div>
+            <img loading="lazy" class="emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg">
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

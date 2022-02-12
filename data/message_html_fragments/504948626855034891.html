@@ -1,0 +1,18 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">25-Oct-18 09:25 AM</span>
+    <div class="chatlog__message " data-message-id="504948626855034891" id="message-504948626855034891" title="Message sent: 25-Oct-18 09:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swift42#0507">@swift-4.2.4</span>
+            <div class="pre pre--multiline language-swift">// @escaping だけど同期的にクロージャが実行されるだけの関数 func run(_ body: @escaping () -&gt; Void) { body() } // 値型を非同期的に更新するための機能を提供 struct Updater&lt;Object: AnyObject, Target&gt; { let object: Object let keyPath: ReferenceWritableKeyPath&lt;Object, Target&gt; func update(_ body: (inout Target) throws -&gt; Void) rethrows { try body(&amp;object[keyPath: keyPath]) } } // 値型、これの状態を @escaping をまたいで更新したい struct FooState { var a: Int = 0 mutating func incrementA&lt;Object: AnyObject&gt;(with updater: Updater&lt;Object, FooState&gt;) { run { // @escaping なのでこの中では `self` を更新できない updater.update { state in // Updater を使って更新 state.a += 1 } } } } // FooState を保持する参照型 class Foo { var state: FooState = FooState() func bar() { state.incrementA(with: Updater&lt;Foo, FooState&gt;(object: self, keyPath: \Foo.state)) } } let foo = Foo() foo.bar() print(foo.state.a)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

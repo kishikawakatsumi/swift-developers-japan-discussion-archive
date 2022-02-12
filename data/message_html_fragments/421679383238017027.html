@@ -1,0 +1,19 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">09-Mar-18 02:43 PM</span>
+    <div class="chatlog__message " data-message-id="421679383238017027" id="message-421679383238017027" title="Message sent: 09-Mar-18 02:43 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この結果を見ると、<span class="pre pre--inline">isKnownUniquelyReferenced()</span>って排他制御が無いとあてにならない？ <div class="pre pre--multiline language-swift">import Foundation struct S { class C { var name: String init(name: String) { self.name = name print("init: \(name)") } deinit { print("deinit: \(name)") } } var c: C init(name: String) { c = C(name: name) } var name: String { get { return c.name } set { if isKnownUniquelyReferenced(&amp;c) { print("unique: \(c.name) -&gt; \(newValue)") c.name = newValue } else { print("not unique: \(c.name) -&gt; \(newValue)") c = C(name: newValue) } } } } var s = S(name: "初期値") let queue = DispatchQueue(label: "keep unique") DispatchQueue.concurrentPerform(iterations: 10) { idx in // queue.sync { s.name = "\(idx)" // } } print(s.name)</div>
+            <div class="pre pre--multiline nohighlight">init: 初期値 unique: 初期値 -&gt; 0 unique: 初期値 -&gt; 1 unique: 初期値 -&gt; 2 unique: 初期値 -&gt; 3 unique: 1 -&gt; 4 unique: 1 -&gt; 5 not unique: 5 -&gt; 6 init: 6 deinit: 5 unique: 6 -&gt; 7 not unique: 6 -&gt; 8 init: 8 not unique: 7 -&gt; 9 init: 9 deinit: 7 deinit: 8 9</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="09-Mar-18 02:43 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

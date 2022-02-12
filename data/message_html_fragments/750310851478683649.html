@@ -1,0 +1,45 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">01-Sep-20 11:05 AM</span>
+    <div class="chatlog__message " data-message-id="750310406697779230" id="message-750310406697779230" title="Message sent: 01-Sep-20 11:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">もしこれがコマンドラインで実行して終了するプログラムなら、メインスレッドで実行されているので <span class="pre pre--inline">DispatchQueue.main</span> だとプログラム終了まで結果が返ってこないと思います。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="750310691977691227" id="message-750310691977691227" title="Message sent: 01-Sep-20 11:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">combineLatest</span> に関係なく↓だと返ってきません。 <div class="pre pre--multiline language-swift">import Combine import Dispatch Just(2) .subscribe(on: DispatchQueue.main) .sink( receiveCompletion: { print("completion:", $0) semaphore.signal() }, receiveValue: { print("value:", $0) }) .store(in: &amp;subscriptions) semaphore.wait()</div></span>
+          <span class="chatlog__edited-timestamp" title="01-Sep-20 11:07 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="750310851478683649" id="message-750310851478683649" title="Message sent: 01-Sep-20 11:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓だと返ってきます。 <div class="pre pre--multiline language-swift">import Combine import Dispatch Just(2) .subscribe(on: DispatchQueue.global()) .sink( receiveCompletion: { print("completion:", $0) semaphore.signal() }, receiveValue: { print("value:", $0) }) .store(in: &amp;subscriptions)</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="750310947440164954" id="message-750310947440164954" title="Message sent: 01-Sep-20 11:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">しかし、 <span class="pre pre--inline">combineLatest</span> を入れると <span class="pre pre--inline">DispatchQueue.global()</span> でも返ってきません。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="750311041899954207" id="message-750311041899954207" title="Message sent: 01-Sep-20 11:08 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">combineLatest</span> についてはまだ調べられてません。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

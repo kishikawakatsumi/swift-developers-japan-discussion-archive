@@ -1,0 +1,41 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="shiz#7087" style="">shiz</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '882049545687678996')"> MainActorの場合はMainActor.runが使えないですかね？(すいません何か勘違いしてるかもしれないです) <a href="https://github.com/apple/swift/blob/main/stdlib/public/Concurrency/MainActor.swift#L46">https://github.com/apple/swift/blob/main/stdlib/public/Concurrency/MainActor.swift#L46</a> </span>
+      <span class="chatlog__reference-edited-timestamp" title="30-Aug-21 11:55 PM">(edited)</span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">31-Aug-21 02:07 AM</span>
+    <div class="chatlog__message " data-message-id="882084118463148132" id="message-882084118463148132" title="Message sent: 31-Aug-21 02:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ありがとうございます！何か手段があった気がしてたんですが、これかもしれないです。 <span class="pre pre--inline">MainActor</span> に戻す手段をどこかで見たなぁと思って WWDC のセッションや Proposal 漁ってたんですが、 <span class="pre pre--inline">{ @MainActor in ... }</span> を見つけて、これだったかも？ってなってました。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="882084342665465876" id="message-882084342665465876" title="Message sent: 31-Aug-21 02:08 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓の <span class="pre pre--inline">T.self</span> をデフォルトにするのおもしろいですね。 <span class="pre pre--inline">JSONDecoder.decode</span> とかもこれやってほしいかも。 <div class="pre pre--multiline language-swift">static func run&lt;T&gt;(resultType: T.Type = T.self, body: @MainActor @Sendable () throws -&gt; T) async rethrows -&gt; T</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="882085432899301446" id="message-882085432899301446" title="Message sent: 31-Aug-21 02:12 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="mention" title="swift54#8732">@swift-5.4.3</span>
+            <div class="pre pre--multiline language-swift">import Foundation extension JSONDecoder { func myDecode&lt;T: Decodable&gt;(_ type: T.Type = T.self, from data: Data) throws -&gt; T { try decode(type, from: data) } } let decoded: [Int] = try! JSONDecoder().myDecode(from: "[2, 3, 5]".data(using: .utf8)!) print(decoded)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

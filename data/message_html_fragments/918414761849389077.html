@@ -1,0 +1,32 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="Iceman#5499" data-user-id="310258733890535426" style="">Iceman</span>
+    <span class="chatlog__timestamp">09-Dec-21 08:06 AM</span>
+    <div class="chatlog__message " data-message-id="918413286242938880" id="message-918413286242938880" title="Message sent: 09-Dec-21 08:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この場合はコンパイラがTaskのネストを探索してFooに到達できそうなのでコンテキストが引き継がれるかも？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="918414761849389077" id="message-918414761849389077" title="Message sent: 09-Dec-21 08:12 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func global() async -&gt; Int { return await withCheckedContinuation { c in DispatchQueue.global().async { c.resume(returning: 42) } } } @MainActor final class Foo { func start() { Task { let x = await global() print(x, Thread.isMainThread) // 42 true Task { let x = await global() print(x, Thread.isMainThread) // 42 true } } } }</div> これは引き継がれてそうです
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="918414942896525354" id="message-918414942896525354" title="Message sent: 09-Dec-21 08:13 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">（もちろんMainActorを外したらどちらもfalseになる）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

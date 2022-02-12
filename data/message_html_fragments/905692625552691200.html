@@ -1,0 +1,47 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="kishikawakatsumi#7600" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '905685732268572703')">
+        <div class="pre pre--multiline language-swift">app.get("runner", ":version", "health") { (req) -&gt; Response in guard let version = req.parameters.get("version") else { throw Abort(.badRequest) } let process = Process() process.executableURL = URL(fileURLWithPath: "/usr/bin/env") let status: HTTPResponseStatus = await withCheckedContinuation { (continuation) in process.terminationHandler = { (process) in let status: HTTPResponseStatus = process.terminationStatus == 0 ? .ok : .internalServerError continuation.resume(returning: status) } process.launch() } return try await HealthCheckResponse(status: status) .encodeResponse( status: status, headers: HTTPHeaders([("Cache-Control", "no-store")]), for: req ) }</div> こうなった。 <span class="pre pre--inline">encodeResponse</span> がさらに呼んでいる非同期関数で、それは最初のawaitを抜けた後に呼ぶ、というふうに分解してうまくいった、ということ。
+      </span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">04-Nov-21 05:37 AM</span>
+    <div class="chatlog__message " data-message-id="905692301978902588" id="message-905692301978902588" title="Message sent: 04-Nov-21 05:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あってると思いますよ。 <span class="pre pre--inline">launch()</span> の呼び出しと <span class="pre pre--inline">terminationHandler</span> からの処理の継続を、Continuation APIで async/await にしている。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="905692510305792061" id="message-905692510305792061" title="Message sent: 04-Nov-21 05:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">コールバックスタイルからawaitスタイルへの変換は、最小の根っこのところでやっておいて、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="905692625552691200" id="message-905692625552691200" title="Message sent: 04-Nov-21 05:39 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あとはawaitの世界で処理を組み合わせていくというのが良いと思います　２つのスタイルを混ぜて考える必要がなくなるので</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="905692673871085580" id="message-905692673871085580" title="Message sent: 04-Nov-21 05:39 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">ちょうどそうなっている。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

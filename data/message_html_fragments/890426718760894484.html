@@ -1,0 +1,24 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="hironytic#5238" style="color: rgb(241,196,15)">hironytic</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '890425320920973353')"> ちなみに <span class="pre pre--inline">sink</span> の中って <span class="pre pre--inline">MainActor</span> 上で実行されるんでしょうか？だとしたら、 <span class="pre pre--inline">reveive(on: DispatchQueue.main)</span> を消しても大丈夫？ </span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">23-Sep-21 02:37 AM</span>
+    <div class="chatlog__message " data-message-id="890426718760894484" id="message-890426718760894484" title="Message sent: 23-Sep-21 02:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">まず、 <span class="pre pre--inline">receive(on: DispatchQueue.main)</span> した上でだと <span class="pre pre--inline">sink</span> の中はメインスレッド上で実行されるので（そして <span class="pre pre--inline">MainActor</span> は <span class="pre pre--inline">DispatchQueue.main</span> を使うので、事実上 <span class="pre pre--inline">MainActor</span> に守られているのと同じだと思います。で、わかっていることは、その <span class="pre pre--inline">sink</span> の中に書いたコードは <span class="pre pre--inline">MainActor</span> 上と判定されるようです（ <span class="pre pre--inline">MainActor</span> に isolate された API を同期的に呼び出せるので）。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

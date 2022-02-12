@@ -1,0 +1,26 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">13-Apr-21 04:25 AM</span>
+    <div class="chatlog__message " data-message-id="831384682602954752" id="message-831384682602954752" title="Message sent: 13-Apr-21 04:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Darwinでの挙動を調べてみると、複数の<span class="pre pre--inline">Set-Cookie</span>は<span class="pre pre--inline">[String]</span>として<span class="pre pre--inline">allHeaderFields</span>に入るみたい。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="831384802648653825" id="message-831384802648653825" title="Message sent: 13-Apr-21 04:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">なので、ちゃんとやるとこんな感じになる。 <span class="mention" title="swift50#5440">@swift-5.0.3</span>
+            <div class="pre pre--multiline language-swift">import Foundation #if canImport(FoundationNetworking) import FoundationNetworking #endif guard let url = URL(string: "https://discordapp.com/api/v7/gateway/bot") else { exit(1) } let task = URLSession.shared.dataTask(with: url) { dataOrNil, responseOrNil, errorOrNil in guard let response = responseOrNil as? HTTPURLResponse else { exit(1) } let allHeaderFields = response.allHeaderFields.map { (key, value) in ((key as! String).lowercased(), value) } let headers = [String: Any](allHeaderFields, uniquingKeysWith: { (lhs, rhs) in switch (lhs, rhs) { case (let lhs as [String], let rhs as [String]): return lhs + rhs case (let lhs as [String], let rhs as String): return lhs + [rhs] case (let lhs as String, let rhs as [String]): return [lhs] + rhs case (let lhs as String, let rhs as String): return [lhs, rhs] default: return rhs } }) dump(headers) exit(0) } task.resume() dispatchMain()</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="13-Apr-21 04:27 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

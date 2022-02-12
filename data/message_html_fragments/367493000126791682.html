@@ -1,0 +1,57 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <span class="chatlog__timestamp">11-Oct-17 01:55 AM</span>
+    <div class="chatlog__message " data-message-id="367490346231398401" id="message-367490346231398401" title="Message sent: 11-Oct-17 01:55 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Swift 4.0の<span class="pre pre--inline">extension Optional : Decodable</span>
+            <div class="pre pre--multiline nohighlight">extension Optional : Decodable /* where Wrapped : Decodable */ { @_inlineable // FIXME(sil-serialize-all) public init(from decoder: Decoder) throws { // Initialize self here so we can get type(of: self). self = .none assertTypeIsDecodable(Wrapped.self, in: type(of: self)) let container = try decoder.singleValueContainer() if !container.decodeNil() { let metaType = (Wrapped.self as! Decodable.Type) let element = try metaType.init(from: container) self = .some(element as! Wrapped) } } }</div> (Swift 4.0のコードに変更)
+          </span>
+          <span class="chatlog__edited-timestamp" title="11-Oct-17 02:02 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="367491360204390400" id="message-367491360204390400" title="Message sent: 11-Oct-17 01:59 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">本当は<span class="pre pre--inline">Decoder</span>の処理を優先して、こう書きたい。 <div class="pre pre--multiline nohighlight"> let container = try decoder.singleValueContainer() if !container.decodeNil() { - let metaType = (Wrapped.self as! Decodable.Type) - let element = try metaType.init(__from: container) - self = .some(element as! Wrapped) + self = .some(try container.decode(Wrapped.self)) } } }</div></span>
+          <span class="chatlog__edited-timestamp" title="11-Oct-17 02:32 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="367493000126791682" id="message-367493000126791682" title="Message sent: 11-Oct-17 02:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Swift 4.0では、Standard Libraryで提供される<span class="pre pre--inline">JSONEncoder</span>とかの<span class="pre pre--inline">Coder</span>で特別扱いされる<span class="pre pre--inline">URL</span>の側で「<span class="pre pre--inline">JSONEncoder</span>だったら辞書表現をやめる」みたいな力技で対応されていました。 <a href="https://github.com/apple/swift/pull/10766">https://github.com/apple/swift/pull/10766</a></span>
+          <span class="chatlog__edited-timestamp" title="11-Oct-17 02:07 AM">(edited)</span>
+        </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/apple/swift/pull/10766">
+                  <div class="markdown preserve-whitespace">JSONEncoder conditional conformance workarounds by itaiferber · Pull Request #10766 · apple/swift</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">What's in this pull request? Addresses SR-5206 for JSONEncoder and JSONDecoder. One of the limitations of not having conditional conformance at the moment is that the implementation of init(from:) ...</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/LZdivl2sHm4IDzJZV84Hg75oMWXN0D902XH5KvRwVqg/%3Fv%3D4%26s%3D400/https/avatars1.githubusercontent.com/u/33716">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/LZdivl2sHm4IDzJZV84Hg75oMWXN0D902XH5KvRwVqg/%3Fv%3D4%26s%3D400/https/avatars1.githubusercontent.com/u/33716" alt="Thumbnail" loading="lazy">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

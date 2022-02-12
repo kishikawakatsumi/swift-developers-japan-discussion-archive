@@ -1,0 +1,37 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">27-Jun-18 04:25 AM</span>
+    <div class="chatlog__message " data-message-id="461386569295593503" id="message-461386569295593503" title="Message sent: 27-Jun-18 04:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">CVPixelBuffer</span> からは必ずコピーして使うので、どのみちどこかにコピーしないといけないんですが、そのコピー先を EasyImagy の <span class="pre pre--inline">Image</span> 型のバッファにしてるので</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="461386704406708224" id="message-461386704406708224" title="Message sent: 27-Jun-18 04:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">BGRA</span> 型を作って <span class="pre pre--inline">Image&lt;BGRA&lt;UInt8&gt;&gt;</span> でフレームを取得するのであれば、ちゃんとやれば余計なオーバーヘッドなしになりそうだと思ってます。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="461387095131553793" id="message-461387095131553793" title="Message sent: 27-Jun-18 04:27 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">CoW のコピーが余計に発生しないようにできるかが確信を持ててないですが、できそうな気がしてます。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="461388245918547978" id="message-461388245918547978" title="Message sent: 27-Jun-18 04:32 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ、 <span class="pre pre--inline">UIImage</span> に変換して <span class="pre pre--inline">UIImageView</span> で表示させてるとこはもちろん余計なオーバーヘッドがあります。本当はもっと効率的な方法でレンダリングすべきです。が、そこはライブラリの外の話なので。 EasyImagy に <span class="pre pre--inline">withUnsafePointer</span> とか実装してあるんで、それを使って <span class="pre pre--inline">image</span> から効率的にレンダリングは可能です。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

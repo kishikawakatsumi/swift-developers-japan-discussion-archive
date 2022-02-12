@@ -1,0 +1,26 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">02-Oct-17 03:05 AM</span>
+    <div class="chatlog__message " data-message-id="364246528904396800" id="message-364246528904396800" title="Message sent: 02-Oct-17 03:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func processImageData1a() async -&gt; Image { let dataResource = Future { await loadWebResource("dataprofile.txt") } let imageResource = Future { await loadWebResource("imagedata.dat") } // ... other stuff can go here to cover load latency... let imageTmp = await decodeImage(dataResource.get(), imageResource.get()) let imageResult = await dewarpAndCleanupImage(imageTmp) return imageResult }</div> ↑これの、dataREsourceとimageResourceは並列発火されて、 それぞれ .get() のところで(awaitで)待つ。
+          </span>
+          <span class="chatlog__edited-timestamp" title="02-Oct-17 03:05 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="364246666234036224" id="message-364246666234036224" title="Message sent: 02-Oct-17 03:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Futureのコンストラクタ呼び出しで見れば non-blocking化されてる。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

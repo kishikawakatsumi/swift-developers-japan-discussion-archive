@@ -1,0 +1,23 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">24-Sep-21 05:51 AM</span>
+    <div class="chatlog__message " data-message-id="890837920532013066" id="message-890837920532013066" title="Message sent: 24-Sep-21 05:51 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">もうちょっと単純化すると、 <span class="pre pre--inline">viewDidLoad</span> で <span class="pre pre--inline">Publisher</span> を購読して変更を View に反映する、 Swift Concurrency 時代の正しいやり方は何なのか、かな。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="890838360799739976" id="message-890838360799739976" title="Message sent: 24-Sep-21 05:53 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓だと <span class="pre pre--inline">publisher</span> に値が流れてくるまで <span class="pre pre--inline">return</span> しないので、もし VC 解放後に値が流れて来ないならリークする。 <div class="pre pre--multiline language-swift">override func viewDidLoad() { super.viewDidLoad() Task { [weak self] in guard let publisher = self?.publisher else { return } for await value in publisher.values { guard let self = self else { return } self.label.text = value } } }</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

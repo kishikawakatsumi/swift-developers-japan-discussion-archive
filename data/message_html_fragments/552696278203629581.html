@@ -1,0 +1,54 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">06-Mar-19 03:34 AM</span>
+    <div class="chatlog__message " data-message-id="552695413686272051" id="message-552695413686272051" title="Message sent: 06-Mar-19 03:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓なので、 <div class="pre pre--multiline language-swift">func makeOpaque&lt;T&gt;(_: T.Type) -&gt; some Any { /* ... */ } var x = makeOpaque(Int.self) x = makeOpaque(Double.self) // error: "opaque" type from makeOpaque&lt;Double&gt; is distinct from makeOpaque&lt;Int&gt;</div> やっぱり↓で正しそう。 <div class="pre pre--multiline language-swift">func foo1() -&gt; some Foo { return Foo1() } func foo2() -&gt; some Foo { return Foo2() } var foo = foo1() foo = foo2() // コンパイルエラー</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="552695754410426392" id="message-552695754410426392" title="Message sent: 06-Mar-19 03:35 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これってモジュール（というかビルド単位）をまたいだときにどうやって静的に判定するの？ ABI に影響なくできる？</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="552696266174234624" id="message-552696266174234624" title="Message sent: 06-Mar-19 03:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">Opaque result types are an ABI-additive feature</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="552696278203629581" id="message-552696278203629581" title="Message sent: 06-Mar-19 03:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">書いてあった。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="552696318150311957" id="message-552696318150311957" title="Message sent: 06-Mar-19 03:37 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">additive だからいいのか。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="552698021809487872" id="message-552698021809487872" title="Message sent: 06-Mar-19 03:44 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓は OK ？エラー？ <div class="pre pre--multiline language-swift">func p1() -&gt; some P { return S(1) } func p2() -&gt; some P { return S(2) } var s = p1() s = p2() // OK ？エラー？</div></span>
+          <span class="chatlog__edited-timestamp" title="06-Mar-19 03:44 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

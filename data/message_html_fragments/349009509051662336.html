@@ -1,0 +1,69 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">21-Aug-17 01:58 AM</span>
+    <div class="chatlog__message " data-message-id="349009461857353728" id="message-349009461857353728" title="Message sent: 21-Aug-17 01:58 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あ、いい指摘だね、それは</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="349009482048864256" id="message-349009482048864256" title="Message sent: 21-Aug-17 01:59 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">テンポラリ変数での呼び出しと</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="349009495441014786" id="message-349009495441014786" title="Message sent: 21-Aug-17 01:59 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">呼び出し後の再代入に</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="349009509051662336" id="message-349009509051662336" title="Message sent: 21-Aug-17 01:59 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">分解される。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="349009799058292746" id="message-349009799058292746" title="Message sent: 21-Aug-17 02:00 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">class Cat { init() { print("Cat init(\(ObjectIdentifier(self))") } deinit { print("Cat deinit(\(ObjectIdentifier(self))") } var catProp: Cat { get { return Cat() } set { print("catProp setter: \(ObjectIdentifier(self))") } } } func f1(_ x: inout Cat) { print("f1 begin") x = Cat() print("f1 end") } func main() { print("b") f1(&amp;Cat().catProp) print("c") } main()</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="349009832751136778" id="message-349009832751136778" title="Message sent: 21-Aug-17 02:00 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">b Cat init(ObjectIdentifier(0x00007fd899434f90) Cat init(ObjectIdentifier(0x00007fd899424d70) f1 begin Cat init(ObjectIdentifier(0x00007fd899434d50) Cat deinit(ObjectIdentifier(0x00007fd899424d70) f1 end catProp setter: ObjectIdentifier(0x00007fd899434f90) Cat deinit(ObjectIdentifier(0x00007fd899434d50) Cat deinit(ObjectIdentifier(0x00007fd899434f90) c</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="349009953778040843" id="message-349009953778040843" title="Message sent: 21-Aug-17 02:00 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↑の出力で、f1の呼び出し前に破棄されるCatがなくなっていることと</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="349009988326522884" id="message-349009988326522884" title="Message sent: 21-Aug-17 02:01 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">setterの呼び出しがf1 end の後になっていることがポイント</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

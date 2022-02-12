@@ -1,0 +1,40 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">08-Feb-18 11:05 AM</span>
+    <div class="chatlog__message " data-message-id="411115419391229952" id="message-411115419391229952" title="Message sent: 08-Feb-18 11:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">そうですね、通常の動作だと 1. ViewController.deinit (プログラマがコードを書く部分 2. ViewController.disposeBag.deinit 3. ViewController.scrollView.deinit 2と3の順番が不定だから</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="411115556016750593" id="message-411115556016750593" title="Message sent: 08-Feb-18 11:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">deinit { DispatchQueue.main.async { [scrollView] in let _ = scrollView } }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="08-Feb-18 11:06 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="411115714796191744" id="message-411115714796191744" title="Message sent: 08-Feb-18 11:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">こうしとけば、3でreleaseされてもdeinitまでいかなくなって、次のサイクルでの解放になるから 2が確実に3より先になる</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="411115815962935296" id="message-411115815962935296" title="Message sent: 08-Feb-18 11:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">まあunownedで作って問題が起きてから対処したらよいと思うけど・・・</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

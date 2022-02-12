@@ -1,0 +1,138 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">21-Jul-17 02:24 AM</span>
+    <div class="chatlog__message " data-message-id="337781770067902464" id="message-337781770067902464" title="Message sent: 21-Jul-17 02:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あー　違う意味で使ってた</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337781775688269825" id="message-337781775688269825" title="Message sent: 21-Jul-17 02:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">例えば</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337781833443835907" id="message-337781833443835907" title="Message sent: 21-Jul-17 02:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">var x = 3 x = 2</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337781857359757313" id="message-337781857359757313" title="Message sent: 21-Jul-17 02:24 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">こういうコードがあったとして</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337781997940506627" id="message-337781997940506627" title="Message sent: 21-Jul-17 02:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func a() -&gt; Int { var a = 3 a = 2 return a }</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782148637655040" id="message-337782148637655040" title="Message sent: 21-Jul-17 02:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">上で「Intの代入がatomic」って言ったのは、「 Int に代入するとき、その操作がCPUにおいて不可分」</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782162814402561" id="message-337782162814402561" title="Message sent: 21-Jul-17 02:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">って事ですけど</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782201221382153" id="message-337782201221382153" title="Message sent: 21-Jul-17 02:25 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">func a</span> の例で言うなら、これって</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782253214105600" id="message-337782253214105600" title="Message sent: 21-Jul-17 02:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func a() -&gt; Int { return 2 }</div> と最適化されるかもしれない
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782303293964288" id="message-337782303293964288" title="Message sent: 21-Jul-17 02:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あーこれだとスレッド間共有が不可能だから微妙だな</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782398005673997" id="message-337782398005673997" title="Message sent: 21-Jul-17 02:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">func a(x: inout Int) -&gt; Int { x = 3 x = 2 return x }</div>
+          </span>
+          <span class="chatlog__edited-timestamp" title="21-Jul-17 02:28 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782402816409614" id="message-337782402816409614" title="Message sent: 21-Jul-17 02:26 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">これで。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782530436628480" id="message-337782530436628480" title="Message sent: 21-Jul-17 02:27 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、これが、1スレッドだけ考えれば <div class="pre pre--multiline language-swift">func a(x: inout Int) -&gt; Int { return 2 }</div></span>
+          <span class="chatlog__edited-timestamp" title="21-Jul-17 02:27 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782570362208267" id="message-337782570362208267" title="Message sent: 21-Jul-17 02:27 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">に最適化される可能性があると思ってて</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782582701981699" id="message-337782582701981699" title="Message sent: 21-Jul-17 02:27 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">その場合</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782623969476610" id="message-337782623969476610" title="Message sent: 21-Jul-17 02:27 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">aが3になる時間や、2になる時間はなくなる。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="337782659667329024" id="message-337782659667329024" title="Message sent: 21-Jul-17 02:27 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">でも、 <span class="pre pre--inline">std::atomic&lt;int&gt;</span> に対しては</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

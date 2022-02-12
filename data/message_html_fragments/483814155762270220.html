@@ -1,0 +1,52 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">28-Aug-18 01:39 AM</span>
+    <div class="chatlog__message " data-message-id="483812886079209497" id="message-483812886079209497" title="Message sent: 28-Aug-18 01:39 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">@dynamicMemberLookup</span> と <span class="pre pre--inline">@dynamicCallable</span> に加えて、 <span class="pre pre--inline">@dynamicConvertible</span> ほしくないですか？今だと <span class="pre pre--inline">PythonObject</span> から Swift に戻すときに↓のようにしないといけなくて面倒。 <div class="pre pre--multiline language-swift">import Python let np = Python.import("numpy") let a = np.array([[1, 2], [3, 4]]) let b = np.array([[5], [6]]) let c = np.matmul(a, b) let d: Int = Int(c[0, 0])! // ここで明示的変換が必要 print(d)</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="483813220998709261" id="message-483813220998709261" title="Message sent: 28-Aug-18 01:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">前提として Swift では暗黙の型変換は許さないという上で、 <span class="pre pre--inline">@dynamic</span> 系は安全性を崩して書きやすさをとっているので、 dynamic に限って暗黙の型変換を許すのは良いバランスじゃないかということです。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="483813390033354762" id="message-483813390033354762" title="Message sent: 28-Aug-18 01:41 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓のように書きたい。 <div class="pre pre--multiline language-swift">import Python let np = Python.import("numpy") let a = np.array([[1, 2], [3, 4]]) let b = np.array([[5], [6]]) let c = np.matmul(a, b) let d: Int = c[0, 0] // 暗黙の型変換 print(d)</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="483813482018635786" id="message-483813482018635786" title="Message sent: 28-Aug-18 01:42 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Int</span> を右に書くか左に書くかの違いに見えますが、引数に渡すときに意味があります。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="483813915575451661" id="message-483813915575451661" title="Message sent: 28-Aug-18 01:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓みたいな感じ。 <div class="pre pre--multiline language-swift">@dynamicMemberLookup @dynamicCallable @dynamicConvertible struct PythonObject { ... func converted() -&gt; Int { ... } func converted() -&gt; Bool { ... } func converted() -&gt; String { ... } func converted() -&gt; (PythonObject, PythobObject) { ... } ... }</div></span>
+          <span class="chatlog__edited-timestamp" title="28-Aug-18 01:43 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="483814155762270220" id="message-483814155762270220" title="Message sent: 28-Aug-18 01:44 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">今は <span class="pre pre--inline">Int</span> や <span class="pre pre--inline">Bool</span> 等については <span class="pre pre--inline">extension</span> の <span class="pre pre--inline">init</span> になってるけど、タプルは <span class="pre pre--inline">extension</span> 作れないので <span class="pre pre--inline">PythonObject</span> に <span class="pre pre--inline">tuple2</span> とかのメソッドが生えてて統一感もない。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

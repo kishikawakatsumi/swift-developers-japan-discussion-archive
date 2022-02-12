@@ -1,0 +1,25 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <span class="chatlog__timestamp">23-Oct-21 12:38 AM</span>
+    <div class="chatlog__message " data-message-id="901268432065019975" id="message-901268432065019975" title="Message sent: 23-Oct-21 12:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓みたいな <span class="pre pre--inline">JSON</span> 型が標準で提供されると便利そう。自由なフォーマットの JSON をコード側で扱いたいとき。 <span class="pre pre--inline">JSONSerialization</span> と比べるとパフォーマンス悪いけど。 <div class="pre pre--multiline language-swift">enum JSON { case number(Double) case boolean(Bool) case string(String) case array([JSON]) case object([String: JSON]) case null } extension JSON: Codable { init(from decoder: Decoder) throws { let container = try decoder.singleValueContainer() if let value = try? container.decode(Double.self) { self = .number(value) } else if let value = try? container.decode(Bool.self) { self = .boolean(value) } else if let value = try? container.decode(String.self) { self = .string(value) } else if let value = try? container.decode([JSON].self) { self = .array(value) } else if let value = try? container.decode([String: JSON].self) { self = .object(value) } else if container.decodeNil() { self = .null } else { throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Failed to interpret as a JSON value.", underlyingError: nil)) } } func encode(to encoder: Encoder) throws { var container = encoder.singleValueContainer() switch self { case .number(let value): try container.encode(value) case .boolean(let value): try container.encode(value) case .string(let value): try container.encode(value) case .array(let value): try container.encode(value) case .object(let value): try container.encode(value) case .null: try container.encodeNil() } } }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="901268741780815902" id="message-901268741780815902" title="Message sent: 23-Oct-21 12:40 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">let json = "[true]".data(using: .utf8)! let decoded = try JSONDecoder().decode(JSON.self, from: json) // .array(.boolean(true))</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

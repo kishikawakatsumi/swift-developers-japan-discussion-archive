@@ -1,0 +1,32 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <span class="chatlog__timestamp">22-Oct-20 02:59 PM</span>
+    <div class="chatlog__message " data-message-id="768851116699680778" id="message-768851116699680778" title="Message sent: 22-Oct-20 02:59 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Docker in Docker (Docker out of Docker) &nbsp;でRootユーザじゃなくて実行するようにできた。 実行ユーザーをdockerグループに入れる、というのはそうなんだけどそれだけだとダメでホストと同じGIDを持つdockerグループ、に入れてやることでできた。 <div class="pre pre--multiline nohighlight">RUN groupadd docker -g ${HOST_DOCKER_GROUP_ID} &amp;&amp; \ usermod -a -G docker vapor</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="768851254075588619" id="message-768851254075588619" title="Message sent: 22-Oct-20 03:00 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">HOST_DOCKER_GROUP_ID</span> はビルドするマシンは別だから一回SSHにログインして取る。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="768851590907428945" id="message-768851590907428945" title="Message sent: 22-Oct-20 03:01 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">TERM=xterm ssh -t -t -o 'StrictHostKeyChecking no' "${{ secrets.SSH_LOGIN_USER }}@${{ secrets.SSH_HOST }}" "grep "^docker:" /etc/group | sed -e 's/^[^:]\+:[^:]\+:\([^:]\+\):[^:]\+$/\1/g'" &gt; gid REMOTE_DOCKER_GID=$(echo $(tail -n 1 gid) | sed -e 's/\r//g')</div> CIの最初の方でこんな感じでとってる。 デプロイ先は <span class="pre pre--inline">getent</span> も入ってないOSだからグループIDを取るだけなのに結構ややこしいことをしている。
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

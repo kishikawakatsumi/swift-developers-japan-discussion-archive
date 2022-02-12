@@ -1,0 +1,33 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="rintaro#0001" data-user-id="296587674737704960" style="">rintaro</span>
+    <span class="chatlog__timestamp">28-Sep-18 03:45 AM</span>
+    <div class="chatlog__message " data-message-id="495078671762194432" id="message-495078671762194432" title="Message sent: 28-Sep-18 03:45 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">$ cat A.swift @available(*, introduced: 1) public func funcA() { print("funcA") } $ cat B.swift public func funcB() { print("funcB") funcA() } $ cat C.swift public func funcC() { print("funcC") } $ cat output.json { "A.swift": { "object": "Derived/A.o", "swiftmodule": "Derived/A~partial.swiftmodule", "swift-dependencies": "Derived/A.swiftdeps", }, "B.swift": { "object": "Derived/B.o", "swiftmodule": "Derived/B~partial.swiftmodule", "swift-dependencies": "Derived/B.swiftdeps", }, "C.swift": { "object": "Derived/C.o", "swiftmodule": "Derived/C~partial.swiftmodule", "swift-dependencies": "Derived/C.swiftdeps", }, "": { "swift-dependencies": "Derived/buildrecord.swiftdeps" } } $ mkdir -p Derived</div> な状態から、 <div class="pre pre--multiline nohighlight">$ xcrun swiftc -v -incremental -output-file-map output.json A.swift B.swift C.swift -module-name MyModule -emit-library -emit-module -o Derived/MyModule.dylib </div> でとりあえずクリーンビルドして、<span class="pre pre--inline">Derived</span> ディレクトリの中身見たり、<span class="pre pre--inline">A.swift</span>の<span class="pre pre--inline">@available</span>消して同コマンド実行して何が起こってるか確認したりすると面白いです。
+          </span>
+          <span class="chatlog__edited-timestamp" title="28-Sep-18 03:46 AM">(edited)</span>
+        </div>
+      </div>
+      <div class="chatlog__reactions">
+        <div class="chatlog__reaction" title="eyes">
+          <img class="emoji emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy">
+          <span class="chatlog__reaction-count">1</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="495079405048037397" id="message-495079405048037397" title="Message sent: 28-Sep-18 03:48 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">で、 <span class="pre pre--inline">swiftc</span> コマンドに <span class="pre pre--inline">-enable-batch-mode</span> 追加してあげるとXcode10の挙動と同等に。</span>
+          <span class="chatlog__edited-timestamp" title="28-Sep-18 03:49 AM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

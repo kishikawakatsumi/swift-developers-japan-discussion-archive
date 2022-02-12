@@ -1,0 +1,17 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="shiz#7087" data-user-id="382314715495399425" style="">shiz</span>
+    <span class="chatlog__timestamp">29-Aug-21 09:41 PM</span>
+    <div class="chatlog__message " data-message-id="881654870808084480" id="message-881654870808084480" title="Message sent: 29-Aug-21 09:41 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">昨日、ちょうど同じようなところを見ていて、メソッド内でCancellationErrorをスローしたい場合は <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0304-structured-concurrency.md#cancellation-handlers">https://github.com/apple/swift-evolution/blob/main/proposals/0304-structured-concurrency.md#cancellation-handlers</a> のソースコード例に書いてあるように(urlSessionTask captureしないとコンパイルできない) <div class="pre pre--multiline nohighlight">func download(url: URL) async throws -&gt; Data? { var urlSessionTask: URLSessionTask? return try withTaskCancellationHandler { return try await withUnsafeThrowingContinuation { continuation in urlSessionTask = URLSession.shared.dataTask(with: url) { data, _, error in if let error = error { 　　　 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ // Ideally translate NSURLErrorCancelled to CancellationError here continuation.resume(throwing: error) } else { continuation.resume(returning: data) } } urlSessionTask?.resume() } } onCancel: { urlSessionTask?.cancel() // runs immediately when cancelled } }</div> withTaskCancellationHandler使って手動でチェックするのがいいんですかね？(結局呼び出し側でError Typeチェックしなければいけないので、あまり意味ない気もしますが...)<img loading="lazy" class="emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg"></span>
+          <span class="chatlog__edited-timestamp" title="29-Aug-21 09:50 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
