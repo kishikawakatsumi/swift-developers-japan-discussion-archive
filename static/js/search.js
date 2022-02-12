@@ -49,7 +49,7 @@ const infiniteHits = connectors.connectInfiniteHits(
     container.querySelector("ul").innerHTML = hits
       .map(
         (hit) =>
-          `<div onclick="location.href='/channels/${hit.channel.name}?message_id=${hit.id}';">${hit.html}</div>`
+          `<li class="search-results-item" onclick="location.href='/channels/${hit.channel.name}?message_id=${hit.id}';">${hit.html}</li>`
       )
       .join("");
   }
