@@ -149,7 +149,10 @@ autocomplete({
           item({ item, createElement }) {
             return createElement("div", {
               dangerouslySetInnerHTML: {
-                __html: `<div onclick="location.href='/channels/${item.channel.name}?message_id=${item.id}';">${item.html}</div>`,
+                __html: `<div onclick="location.href='/channels/${item.channel.name}?message_id=${item.id}';">
+  <div class="has-text-grey has-text-weight-medium is-size-6 p-1"><span class="fa-light fa-hashtag fa-sm is-size-7 pl-2 pr-1"></span>${item.channel.name}</div>
+  ${item.html}
+</div>`,
               },
             });
           },
