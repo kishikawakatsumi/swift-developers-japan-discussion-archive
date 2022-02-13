@@ -102,6 +102,7 @@ function makeVirtualScroller(items) {
       return message;
     },
     {
+      scrollableContainer: document.getElementById("message-container"),
       getItemId,
       onScrollPositionChange,
     }
