@@ -38,6 +38,19 @@ function loadChannel(channel) {
             virtualScroller = makeVirtualScroller(
               messages.slice(index, messages.length)
             );
+
+            const searchItems =
+              virtualScroller.virtualScroller.getState().items;
+            if (searchItems && searchItems.length) {
+              const elements =
+                searchItems[0].querySelectorAll(".chatlog__message");
+              for (const element of elements) {
+                element.classList.add("chatlog__message--highlighted");
+                setTimeout(function () {
+                  element.classList.remove("chatlog__message--highlighted");
+                }, 2000);
+              }
+            }
           });
       }
     });
