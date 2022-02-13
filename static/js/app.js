@@ -1,103 +1,136 @@
 "use strict";
 
+const messageManager = { messages: [] };
 let virtualScroller;
 
 function loadChannel(channel) {
   document.getElementById("header-channel-name").innerText = channel;
 
   if (virtualScroller) {
-    virtualScroller.virtualScroller.scrollableContainer.scrollToY(0);
     virtualScroller.stop();
+    virtualScroller.virtualScroller.scrollableContainer.scrollToY(0);
     virtualScroller = undefined;
   }
 
-  fetch(`/data/${channel}.html`)
+  fetch(`/data/channels/${channel}.html`)
     .then((res) => res.text())
     .then((text) => new DOMParser().parseFromString(text, "text/html"))
     .then((doc) => {
-      const messages = [];
-      for (const element of doc.body.children) {
-        if (!element.classList.contains("chatlog")) {
-          continue;
-        }
-        for (const message of element.children) {
-          messages.push(message);
-        }
-      }
-      virtualScroller = new VirtualScroller(
-        document.getElementById("content-messages"),
-        messages,
-        (message) => {
-          return message;
-        }
-      );
+      const messages = items(doc);
+      messageManager.messages = messages;
 
       const searchParams = new URL(document.location).searchParams;
       const messageId = searchParams.get("message_id");
-      if (messageId !== null) {
-        document
-          .getElementById("content-messages")
-          .classList.add("is-invisible");
-        openModal(document.getElementById("modal-loading"));
-        scrollToItem(messageId);
+
+      if (messageId === undefined || messageId === null) {
+        virtualScroller = makeVirtualScroller(messages);
+      } else {
+        fetch(`/data/messages/${messageId}.html`)
+          .then((res) => res.text())
+          .then((text) => new DOMParser().parseFromString(text, "text/html"))
+          .then((doc) => {
+            const index = binarySearch(
+              messages,
+              items(doc)[0],
+              (a, b) => getItemId(a) - getItemId(b)
+            );
+
+            virtualScroller = makeVirtualScroller(
+              messages.slice(index, messages.length)
+            );
+          });
       }
     });
 }
 
-function scrollToItem(id) {
-  const state = virtualScroller.virtualScroller.getState();
-  const lastItem = state.items[state.lastShownItemIndex];
-  if (findItem(id, lastItem)) {
-    closeAllModals();
+function items(doc) {
+  const messages = [];
+  for (const element of doc.body.children) {
+    if (element.classList.contains("chatlog__message-group")) {
+      messages.push(element);
+      continue;
+    }
+    if (!element.classList.contains("chatlog")) {
+      continue;
+    }
+    for (const message of element.children) {
+      messages.push(message);
+    }
+  }
+  return messages;
+}
 
-    const index = getItemIndex(id);
-    const position =
-      virtualScroller.virtualScroller.getItemScrollPosition(index);
-    virtualScroller.virtualScroller.scrollableContainer.scrollToY(position);
+function getItemId(item) {
+  for (const element of item.children) {
+    if (!element.classList.contains("chatlog__messages")) {
+      continue;
+    }
+    for (const message of element.children) {
+      if (!message.classList.contains("chatlog__message")) {
+        continue;
+      }
+      return message.dataset.messageId;
+    }
+  }
+  return undefined;
+}
 
-    document
-      .getElementById("content-messages")
-      .classList.remove("is-invisible");
-    scrollToMessage(null, id);
-  } else {
-    const itemHeights = state.itemHeights.reduce((a, b) => a + b, 0);
-    virtualScroller.virtualScroller.scrollableContainer.scrollToY(itemHeights);
+function onScrollPositionChange(scrollY) {
+  if (scrollY <= 200) {
     setTimeout(() => {
-      scrollToItem(id);
+      if (virtualScroller) {
+        const items = virtualScroller.virtualScroller.getState().items;
+        if (items.length === messageManager.messages.length) {
+          return;
+        }
+        loadPrevious(
+          virtualScroller.virtualScroller,
+          messageManager.messages,
+          messageManager.messages.length - items.length,
+          200
+        );
+      }
     }, 0);
   }
 }
 
-function findItem(id, lastItem) {
-  for (const element of lastItem.children) {
-    if (element.classList.contains("chatlog__messages")) {
-      for (const el of element.children) {
-        if (el.classList.contains("chatlog__message")) {
-          if (el.dataset.messageId >= id) {
-            return true;
-          }
-        }
-      }
+function makeVirtualScroller(items) {
+  return new VirtualScroller(
+    document.getElementById("content-messages"),
+    items,
+    (message) => {
+      return message;
+    },
+    {
+      getItemId,
+      onScrollPositionChange,
     }
-  }
+  );
 }
 
-function getItemIndex(id) {
-  const state = virtualScroller.virtualScroller.getState();
-  const items = state.items;
-  for (const [index, item] of items.entries()) {
-    for (const element of item.children) {
-      if (element.classList.contains("chatlog__messages")) {
-        for (const el of element.children) {
-          if (el.classList.contains("chatlog__message")) {
-            if (el.dataset.messageId == id) {
-              return index;
-            }
-          }
-        }
-      }
+function loadPrevious(virtualScroller, messages, index, count) {
+  const start = Math.max(0, index - count);
+  const end = messages.length;
+  virtualScroller.setItems(messages.slice(start, end), {
+    preserveScrollPositionOnPrependItems: true,
+  });
+}
+
+function binarySearch(ar, el, compare_fn) {
+  let m = 0;
+  let n = ar.length - 1;
+  while (m <= n) {
+    const k = (n + m) >> 1;
+    const cmp = compare_fn(el, ar[k]);
+    if (cmp > 0) {
+      m = k + 1;
+    } else if (cmp < 0) {
+      n = k - 1;
+    } else {
+      return k;
     }
   }
+  return -m - 1;
 }
 
 function openModal($el) {
@@ -120,10 +153,6 @@ function closeAllModals() {
   ) || []
 ).forEach(($close) => {
   const $target = $close.closest(".modal");
-  if ($target.id !== "modal-search-results") {
-    return;
-  }
-
   $close.addEventListener("click", () => {
     closeModal($target);
   });
