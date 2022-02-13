@@ -22,7 +22,7 @@ const response = await fetch(
   "https://raw.githubusercontent.com/monperrus/crawler-user-agents/master/crawler-user-agents.json",
 );
 const items = await response.json();
-const patterns = items.map((item: any) => item.pattern);
+const patterns = items.map((item: { pattern: string }) => item.pattern);
 const isBot = new RegExp(patterns.join("|"));
 
 const router = new Router();
