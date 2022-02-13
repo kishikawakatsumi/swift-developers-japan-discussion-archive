@@ -7,13 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function scrollToMessage(event, id) {
-  const element = document.getElementById(`message-${id}`);
-  console.log(element);
+  const element = document.getElementById("message-" + id);
 
   if (element) {
-    if (event) {
-      event.preventDefault();
-    }
+    event.preventDefault();
+
     element.classList.add("chatlog__message--highlighted");
 
     window.scrollTo({
@@ -24,7 +22,7 @@ function scrollToMessage(event, id) {
       behavior: "smooth",
     });
 
-    window.setTimeout(() => {
+    setTimeout(function () {
       element.classList.remove("chatlog__message--highlighted");
     }, 2000);
   }

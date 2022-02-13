@@ -88,6 +88,10 @@ autocomplete({
     query: searchPageState.query || "",
   },
   onSubmit({ state }) {
+    if (!state.query) {
+      return;
+    }
+
     document.getElementById("modal-search-results-title").textContent =
       state.query;
     openModal(document.getElementById("modal-search-results"));
