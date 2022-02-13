@@ -18,6 +18,13 @@ const categories = JSON.parse(
   await Deno.readTextFile(`${Deno.cwd()}/data/channel_structure.json`),
 );
 
+const response = await fetch(
+  "https://raw.githubusercontent.com/monperrus/crawler-user-agents/master/crawler-user-agents.json",
+);
+const items = await response.json();
+const patterns = items.map((item: any) => item.pattern);
+const isBot = new RegExp(patterns.join("|"));
+
 const router = new Router();
 router
   .get("/healthz", (context) => {
@@ -29,9 +36,16 @@ router
     })}`;
   })
   .get("/channels/:id", async (context) => {
-    context.response.body = `${await renderFile("index.html", {
-      categories: categories,
-    })}`;
+    const userAgent = context.request.headers.get("user-agent");
+    if (userAgent && isBot.test(userAgent)) {
+      context.response.body = await Deno.readTextFile(
+        `${Deno.cwd()}/data/html/${context.params.id}.html`,
+      );
+    } else {
+      context.response.body = `${await renderFile("index.html", {
+        categories: categories,
+      })}`;
+    }
   });
 
 const app = new Application();
