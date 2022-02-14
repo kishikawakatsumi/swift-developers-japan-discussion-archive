@@ -40,7 +40,7 @@ router
         `${Deno.cwd()}/data/html/${context.params.id}.html`,
       );
     } else {
-      context.response.body = renderBody();
+      context.response.body = await renderBody();
     }
   });
 
