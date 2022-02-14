@@ -31,9 +31,7 @@ router
     context.response.body = { status: "pass" };
   })
   .get("/", async (context) => {
-    context.response.body = `${await renderFile("index.html", {
-      categories: categories,
-    })}`;
+    context.response.body = await renderBody();
   })
   .get("/channels/:id", async (context) => {
     const userAgent = context.request.headers.get("user-agent");
@@ -42,9 +40,7 @@ router
         `${Deno.cwd()}/data/html/${context.params.id}.html`,
       );
     } else {
-      context.response.body = `${await renderFile("index.html", {
-        categories: categories,
-      })}`;
+      context.response.body = renderBody();
     }
   });
 
@@ -87,7 +83,16 @@ app.use(async (context) => {
 app.addEventListener("listen", ({ hostname, port, secure }) => {
   const scheme = secure ? "https" : "http";
   const host = hostname ?? "localhost";
-  console.log(`Listening on: ${scheme}://${host}:${port}`);
+  const version = Deno.env.get("RENDER_GIT_COMMIT");
+  console.log(`Listening on: ${scheme}://${host}:${port} (${version})`);
 });
 
 await app.listen({ port: 8080 });
+
+async function renderBody(): Promise<string> {
+  const cacheBuster = `?v=${Deno.env.get("RENDER_GIT_COMMIT")}`;
+  return `${await renderFile("index.html", {
+    categories: categories,
+    cb: cacheBuster,
+  })}`;
+}
