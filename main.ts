@@ -42,6 +42,16 @@ router
     } else {
       context.response.body = await renderBody();
     }
+  })
+  .get("/channels/:thread/:id", async (context) => {
+    const userAgent = context.request.headers.get("user-agent");
+    if (userAgent && isBot.test(userAgent)) {
+      context.response.body = await Deno.readTextFile(
+        `${Deno.cwd()}/data/html/${context.params.thread}/${context.params.id}.html`,
+      );
+    } else {
+      context.response.body = await renderBody();
+    }
   });
 
 const app = new Application();

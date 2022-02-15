@@ -63,6 +63,25 @@
                     <span class="fa-light fa-hashtag"></span>
                     <span class="px-1"><%= channel.channelName %></span>
                   </a>
+                  <% if (channel.threads) { %>
+                  <ul>
+                    <details>
+                      <summary>
+                        <span class="fa-regular fa-message fa-sm"></span>
+                        <span class="px-1">Thread</span>
+                      </summary>
+                      <% channel.threads.forEach(function(thread) { %>
+                      <li>
+                        <a id="sidebar-<%= thread.channelId %>/<%= thread.channelName %>"
+                          href="/channels/<%= thread.channelId %>/<%= thread.channelName %>">
+                          <span class="fa-light fa-hashtag"></span>
+                          <span class="px-1"><%= thread.channelName %></span>
+                        </a>
+                      </li>
+                      <% }) %>
+                    </details>
+                  </ul>
+                  <% } %>
                 </li>
               </ul>
               <% }) %>
@@ -82,20 +101,20 @@
                 <li>
                   <a href="https://github.com/kishikawakatsumi/swift-developers-japan-discussion-archive/issues/new"
                     target="_blank" rel="nofollow noopener noreferrer">
-                    <span class="far fa-comment-alt-smile"></span>
+                    <span class="fa-regular fa-comment-alt-smile"></span>
                     <span class="px-1">Feedback</span>
                   </a>
                 </li>
                 <li>
                   <a href="https://github.com/kishikawakatsumi/swift-developers-japan-discussion-archive"
                     target="_blank" rel="nofollow noopener noreferrer">
-                    <span class="fab fa-github"></span>
+                    <span class="fa-brands fa-github"></span>
                     <span class="px-1">Source Code</span>
                   </a>
                 </li>
                 <li>
                   <a href="https://twitter.com/k_katsumi" target="_blank" rel="nofollow noopener noreferrer">
-                    <span class="far fa-at"></span>
+                    <span class="fa-regular fa-at"></span>
                     <span class="px-1">Maintainer</span>
                   </a>
                 </li>
@@ -136,7 +155,7 @@
     </div>
   </div>
 
-  <script src="https://kit.fontawesome.com/6e15d9b0fb.js" crossorigin="anonymous"></script>
+  <script data-search-pseudo-elements src="https://kit.fontawesome.com/6e15d9b0fb.js" crossorigin="anonymous"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.12.1/dist/algoliasearch.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.38.1/dist/instantsearch.production.min.js"></script>

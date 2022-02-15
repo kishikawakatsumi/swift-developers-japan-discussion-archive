@@ -3,37 +3,79 @@
 const fs = require("fs");
 
 const channels = [];
+const threads = [];
 
-fs.readdirSync("data/json").forEach((file) => {
-  if (!file.endsWith(".json")) {
+const root = "data/json";
+fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
+  if (dirent.isDirectory()) {
+    const channelId = dirent.name;
+    fs.readdirSync(`${root}/${dirent.name}`, { withFileTypes: true }).forEach(
+      (dirent) => {
+        if (dirent.name === "metadata.json" || !dirent.name.endsWith(".json")) {
+          return;
+        }
+        const comps = dirent.name.split("_");
+        const data = JSON.parse(
+          fs.readFileSync(`${root}/${channelId}/${dirent.name}`, "utf-8")
+        );
+        threads.push({
+          categoryPosition: Number(comps[0]),
+          channelPosition: Number(comps[1]),
+          categoryName: data.channel.category,
+          channelName: data.channel.name,
+          id: data.channel.id,
+          channelId,
+        });
+      }
+    );
     return;
   }
-  const comps = file.split("_");
+  if (!dirent.name.endsWith(".json")) {
+    return;
+  }
+  const comps = dirent.name.split("_");
+  const data = JSON.parse(fs.readFileSync(`${root}/${dirent.name}`, "utf-8"));
   channels.push({
     categoryPosition: Number(comps[0]),
     channelPosition: Number(comps[1]),
-    categoryName: comps[2],
-    channelName: comps[3].replace(".json", ""),
+    categoryName: data.channel.category,
+    channelName: data.channel.name,
+    channelId: data.channel.id,
   });
 });
 
-channels
+channels.sort((a, b) => {
+  return (
+    a.categoryPosition - b.categoryPosition ||
+    a.channelPosition - b.channelPosition
+  );
+});
+
+threads
   .sort((a, b) => {
-    return (
-      a.categoryPosition - b.categoryPosition ||
-      a.channelPosition - b.channelPosition
-    );
+    return a.channelId - b.channelId || a.id - b.id;
   })
   .map((x) => {
-    return { categoryName: x.categoryName, channelName: x.channelName };
+    return {
+      categoryName: x.categoryName,
+      channelName: x.channelName,
+    };
   });
 
-const groupBy = function (xs, key) {
-  return xs.reduce(function (rv, x) {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
-};
+for (const [k, v] of Object.entries(groupBy(threads, "channelId"))) {
+  for (const channel of channels) {
+    if (channel.channelId === k) {
+      channel.threads = v.map((x) => {
+        return {
+          categoryName: x.categoryName,
+          channelName: x.channelName,
+          id: x.id,
+          channelId: x.channelId,
+        };
+      });
+    }
+  }
+}
 
 const categories = groupBy(
   channels
@@ -44,7 +86,11 @@ const categories = groupBy(
       );
     })
     .map((x) => {
-      return { categoryName: x.categoryName, channelName: x.channelName };
+      return {
+        categoryName: x.categoryName,
+        channelName: x.channelName,
+        threads: x.threads,
+      };
     }),
   "categoryName"
 );
@@ -54,3 +100,10 @@ fs.writeFileSync(
   JSON.stringify(categories, null, 2),
   "utf-8"
 );
+
+function groupBy(xs, key) {
+  return xs.reduce(function (rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+}
