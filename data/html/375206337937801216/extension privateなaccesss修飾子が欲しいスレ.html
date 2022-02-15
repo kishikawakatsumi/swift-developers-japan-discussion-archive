@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>swift-developers-japan - extension privateなaccesss修飾子が欲しいスレ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+      font-weight: 300;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+      font-weight: 600;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+      font-weight: 700;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #23262a;
+      font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    a {
+      color: #0068e0;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      object-fit: contain;
+    }
+
+    .markdown {
+      max-width: 100%;
+      line-height: 1.3;
+      overflow-wrap: break-word;
+    }
+
+    .preserve-whitespace {
+      white-space: pre-wrap;
+    }
+
+    .spoiler-text {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+
+    .spoiler-text--hidden {
+      cursor: pointer;
+      background-color: #b9bbbe;
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .spoiler-text--hidden:hover {
+      background-color: rgba(185, 187, 190, 0.8);
+    }
+
+    .spoiler-text--hidden::selection {
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .quote {
+      display: flex;
+      margin: 0.05em 0;
+    }
+
+    .quote::before {
+      content: "";
+      margin-right: 0.5em;
+      border: 2px solid #c7ccd1;
+      border-radius: 3px;
+    }
+
+    .pre {
+      background-color: #f9f9f9;
+      font-family: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    .pre--multiline {
+      margin-top: 0.25em;
+      padding: 0.5em;
+      border: 2px solid #f3f3f3;
+      border-radius: 5px;
+      color: #657b83;
+    }
+
+    .pre--multiline.hljs {
+      background-color: #f9f9f9;
+      color: #657b83;
+    }
+
+    .pre--inline {
+      padding: 2px;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .mention {
+      border-radius: 3px;
+      padding: 0 2px;
+      color: #505cdc;
+      background-color: rgba(88, 101, 242, .15);
+      font-weight: 500;
+    }
+
+    .mention:hover {
+      background-color: #5865f2;
+      color: #ffffff
+    }
+
+    .timestamp {
+      border-radius: 3px;
+      padding: 0 2px;
+      background-color: rgba(6, 6, 7, 0.08);
+    }
+
+    .emoji {
+      width: 1.325em;
+      height: 1.325em;
+      margin: 0 0.06em;
+      vertical-align: -0.4em;
+    }
+
+    .emoji--small {
+      width: 1em;
+      height: 1em;
+    }
+
+    .emoji--large {
+      width: 2.8em;
+      height: 2.8em;
+    }
+
+    .preamble {
+      display: grid;
+      margin: 0 0.3em 0.6em 0.3em;
+      max-width: 100%;
+      grid-template-columns: auto 1fr;
+    }
+
+    .preamble__guild-icon-container {
+      grid-column: 1;
+    }
+
+    .preamble__guild-icon {
+      max-width: 88px;
+      max-height: 88px;
+    }
+
+    .preamble__entries-container {
+      grid-column: 2;
+      margin-left: 0.6em;
+    }
+
+    .preamble__entry {
+      font-size: 1.4em;
+      color: #2f3136;
+    }
+
+    .preamble__entry--small {
+      font-size: 1em;
+    }
+
+    .chatlog {
+      max-width: 100%;
+    }
+
+    .chatlog__message-group {
+      display: grid;
+      margin: 0 0.6em;
+      padding: 0.9em 0;
+      border-top: 1px solid #eceeef;
+      grid-template-columns: auto 1fr;
+    }
+
+    .chatlog__reference-symbol {
+      grid-column: 1;
+      margin: 8px 4px 4px 18px;
+      border-left: 2px solid #c7ccd1;
+      border-top: 2px solid #c7ccd1;
+      border-radius: 8px 0 0 0;
+    }
+
+    .chatlog__reference {
+      display: flex;
+      grid-column: 2;
+      margin-bottom: 0.25em;
+      font-size: 0.875em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-items: center;
+      color: #5f5f60;
+    }
+
+    .chatlog__reference-avatar {
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      margin-right: 0.25em;
+    }
+
+    .chatlog__reference-name {
+      margin-right: 0.3em;
+      font-weight: 600;
+    }
+
+    .chatlog__reference-content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__reference-content a:hover {
+      text-decoration: none;
+    }
+
+    .chatlog__reference-link {
+      cursor: pointer;
+      color: #5f5f60;
+    }
+
+    .chatlog__reference-link * {
+      display: inline;
+      pointer-events: none;
+    }
+
+    .chatlog__reference-link:hover {
+      color: #2f3136;
+    }
+
+    .chatlog__reference-link:hover *:not(.spoiler-text) {
+      color: #2f3136;
+    }
+
+    .chatlog__reference-edited-timestamp {
+      margin-left: 0.25em;
+      font-size: 0.8em;
+      unicode-bidi: bidi-override;
+      color: #747f8d;
+    }
+
+    .chatlog__author-avatar-container {
+      grid-column: 1;
+      width: 40px;
+      height: 40px;
+      margin-right: 16px;
+    }
+
+    .chatlog__author-avatar {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .chatlog__messages {
+      grid-column: 2;
+      min-width: 50%;
+      direction: ltr;
+    }
+
+    .chatlog__author-name {
+      font-weight: 600;
+      color: #2f3136;
+    }
+
+    .chatlog__timestamp {
+      margin-left: 0.3em;
+      font-size: 0.75em;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+      color: #747f8d;
+    }
+
+    .chatlog__message {
+      padding: 0.1em 0.3em;
+      margin: 0 -0.3em;
+      background-color: transparent;
+      transition: background-color 1s ease;
+    }
+
+    .chatlog__message--highlighted {
+      background-color: rgba(114, 137, 218, 0.2);
+    }
+
+    .chatlog__message--pinned {
+      background-color: rgba(249, 168, 37, 0.05);
+    }
+
+    .chatlog__content {
+      font-size: 0.95em;
+      word-wrap: break-word;
+    }
+
+    .chatlog__edited-timestamp {
+      margin-left: 0.15em;
+      font-size: 0.8em;
+    }
+
+    .chatlog__attachment {
+      display: inline-block;
+      position: relative;
+      margin-top: 0.3em;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden {
+      cursor: pointer;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatlog__attachment--hidden * {
+      pointer-events: none;
+    }
+
+    .chatlog__attachment-spoiler-caption {
+      display: none;
+      z-index: 999;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0.4em 0.8em;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 20px;
+      color: #dcddde;
+      font-size: 0.9em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+      display: block;
+    }
+
+    .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+      color: #fff;
+    }
+
+    .chatlog__attachment-media {
+      vertical-align: top;
+      max-width: 45vw;
+      max-height: 500px;
+      border-radius: 3px;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-media {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic {
+      width: 100%;
+      max-width: 520px;
+      height: 40px;
+      padding: 10px;
+      background-color: #f2f3f5;
+      border: 1px solid #ebedef;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-generic {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic-icon {
+      float: left;
+      width: 30px;
+      height: 100%;
+      margin-right: 10px;
+    }
+
+    .chatlog__attachment-generic-size {
+      color: #72767d;
+      font-size: 12px;
+    }
+
+    .chatlog__attachment-generic-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__edited-timestamp {
+      color: #747f8d;
+    }
+
+    .chatlog__embed {
+      display: flex;
+      margin-top: 0.3em;
+      max-width: 520px;
+    }
+
+    .chatlog__embed-color-pill {
+      flex-shrink: 0;
+      width: 0.25em;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    .chatlog__embed-color-pill--default {
+      background-color: rgba(227, 229, 232, 1);
+    }
+
+    .chatlog__embed-content-container {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5em 0.6em;
+      background-color: rgba(249, 249, 249, 0.3);
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    .chatlog__embed-content {
+      display: flex;
+      width: 100%;
+    }
+
+    .chatlog__embed-text {
+      flex: 1;
+    }
+
+    .chatlog__embed-author {
+      display: flex;
+      margin-bottom: 0.3em;
+      align-items: center;
+    }
+
+    .chatlog__embed-author-icon {
+      margin-right: 0.5em;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    .chatlog__embed-author-name {
+      font-size: 0.875em;
+      font-weight: 600;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+      color: #4f545c
+    }
+
+    .chatlog__embed-author-name-link {
+      color: #4f545c;
+    }
+
+    .chatlog__embed-title {
+      margin-bottom: 0.2em;
+      font-size: 0.875em;
+      font-weight: 600;
+      color: #4f545c;
+    }
+
+    .chatlog__embed-description {
+      font-weight: 500;
+      font-size: 0.85em;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 0.5em;
+    }
+
+    .chatlog__embed-field {
+      flex: 0;
+      min-width: 100%;
+      max-width: 506px;
+      padding-top: 0.6em;
+      font-size: 0.875em;
+    }
+
+    .chatlog__embed-field--inline {
+      flex: 1;
+      flex-basis: auto;
+      min-width: 150px;
+    }
+
+    .chatlog__embed-field-name {
+      margin-bottom: 0.2em;
+      font-weight: 600;
+      color: #36393e;
+    }
+
+    .chatlog__embed-field-value {
+      font-weight: 500;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-thumbnail {
+      flex: 0;
+      margin-left: 1.2em;
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-image-container {
+      margin-top: 0.6em;
+    }
+
+    .chatlog__embed-image {
+      max-width: 500px;
+      max-height: 400px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-footer {
+      margin-top: 0.6em;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-footer-icon {
+      margin-right: 0.2em;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+
+    .chatlog__embed-footer-text {
+      vertical-align: middle;
+      font-size: 0.75em;
+      font-weight: 500;
+    }
+
+    .chatlog__embed-plainimage {
+      vertical-align: top;
+      max-width: 45vw;
+      max-height: 500px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-spotify {
+      border: 0;
+    }
+
+    .chatlog__embed-youtube-container {
+      margin-top: 0.6em;
+    }
+
+    .chatlog__embed-youtube {
+      border: 0;
+      border-radius: 3px;
+    }
+
+    .chatlog__reactions {
+      display: flex;
+    }
+
+    .chatlog__reaction {
+      display: flex;
+      align-items: center;
+      margin: 0.35em 0.1em 0.1em 0;
+      padding: .125rem .375rem;
+      background-color: #f2f3f5;
+      border-radius: 8px;
+      border-color: transparent;
+      border-width: 1px;
+      border-style: solid;
+    }
+
+    .chatlog__reaction:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+      border-width: 1px;
+      border-style: solid;
+      background-color: white;
+    }
+
+    .chatlog__reaction-count {
+      min-width: 9px;
+      margin-left: 0.35em;
+      font-size: 0.875em;
+      color: #4f5660;
+    }
+
+    .chatlog__reaction:hover .chatlog__reaction-count {
+      color: #2e3338;
+    }
+
+    .chatlog__bot-tag {
+      position: relative;
+      top: -.1em;
+      margin-left: 0.3em;
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+      line-height: 1.3;
+      background-color: #5865F2;
+      color: #ffffff;
+      font-size: 0.625em;
+      font-weight: 500;
+    }
+
+    .postamble {
+      margin: 1.4em 0.3em 0.6em 0.3em;
+      padding: 1em;
+      border-top: 1px solid #eceeef;
+    }
+
+    .postamble__entry {
+      color: #2f3136;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+    });
+  </script>
+  <script>
+    function scrollToMessage(event, id) {
+      var element = document.getElementById('message-' + id);
+      if (element) {
+        event.preventDefault();
+        element.classList.add('chatlog__message--highlighted');
+        window.scrollTo({
+          top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+          behavior: 'smooth'
+        });
+        window.setTimeout(function() {
+          element.classList.remove('chatlog__message--highlighted');
+        }, 2000);
+      }
+    }
+
+    function showSpoiler(event, element) {
+      if (element && element.classList.contains('spoiler-text--hidden')) {
+        event.preventDefault();
+        element.classList.remove('spoiler-text--hidden');
+      }
+      if (element && element.classList.contains('chatlog__attachment--hidden')) {
+        event.preventDefault();
+        element.classList.remove('chatlog__attachment--hidden');
+      }
+    }
+  </script>
+  <svg style="display: none">
+    <symbol id="icon-attachment" viewBox="0 0 720 960">
+      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+    </symbol>
+  </svg>
+</head>
+
+<body>
+  <div class="preamble">
+    <div class="preamble__guild-icon-container">
+      <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+      <div class="preamble__entry">swift-developers-japan</div>
+      <div class="preamble__entry">swift-zatsu / extension privateなaccesss修飾子が欲しいスレ</div>
+    </div>
+  </div>
+  <div class="chatlog">
+    <div class="chatlog__message-group">
+      <div class="chatlog__reference-symbol"></div>
+      <div class="chatlog__reference">
+        <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+        <span class="chatlog__reference-name" title="koher#9336" style="color: rgb(17,128,106)">koher</span>
+        <div class="chatlog__reference-content">
+          <span class="chatlog__reference-link" onclick="scrollToMessage(event, &#39;874257586323607633&#39;)"> 前も書いた気がするけど extension private なアクセスレベルがほしい。ある <span class="pre pre--inline">private</span> メソッドからだけ呼ばれるメソッド群（処理に名前を付けるだけ）が他のメソッドから可視なのが気持ち悪い。それらを <span class="pre pre--inline">extension</span> にまとめた上で extension private にして、そのメソッドからだけ可視にしたい。 </span>
+        </div>
+      </div>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <span class="chatlog__timestamp">09-Aug-21 11:57 AM</span>
+        <div class="chatlog__message " data-message-id="874260015937122374" id="message-874260015937122374" title="Message sent: 09-Aug-21 11:57 AM">
+        </div>
+        <div class="chatlog__message " data-message-id="874260017371566091" id="message-874260017371566091" title="Message sent: 09-Aug-21 11:57 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">直観ですが複数モジュールを跨いで壊れる予感があるんですよね。pivateなら複数ファイルでも壊れるかもしれない。 現状は、適当にprivateなwrapper型を作って、そのwrapper型が任意のprotocolにconformすると良いのだと思います。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874260403515977758" id="message-874260403515977758" title="Message sent: 09-Aug-21 11:58 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">スレッドにしたら自分の投稿だけ見えない不具合にあたったw</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">09-Aug-21 11:58 AM</span>
+        <div class="chatlog__message " data-message-id="874260431173206066" id="message-874260431173206066" title="Message sent: 09-Aug-21 11:58 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">extension private があったとして一つの extension はファイルをまたげないので現状の private と変わりなくないですか？</span>
+              <span class="chatlog__edited-timestamp" title="09-Aug-21 11:59 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <span class="chatlog__timestamp">09-Aug-21 11:59 AM</span>
+        <div class="chatlog__message " data-message-id="874260645120454688" id="message-874260645120454688" title="Message sent: 09-Aug-21 11:59 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あれ？protocol関係ないなら、それはできたような</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">09-Aug-21 11:59 AM</span>
+        <div class="chatlog__message " data-message-id="874260670399533116" id="message-874260670399533116" title="Message sent: 09-Aug-21 11:59 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あー、 extension private 同士で ABI 上の名前重複を避けないといけないとかはあるか。</span>
+              <span class="chatlog__edited-timestamp" title="09-Aug-21 12:01 PM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <span class="chatlog__timestamp">09-Aug-21 12:00 PM</span>
+        <div class="chatlog__message " data-message-id="874260749403439154" id="message-874260749403439154" title="Message sent: 09-Aug-21 12:00 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あ、理解しました</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874260821885198396" id="message-874260821885198396" title="Message sent: 09-Aug-21 12:00 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">extensionの中だけで使えるAccessコントロールってことですね</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">09-Aug-21 12:00 PM</span>
+        <div class="chatlog__message " data-message-id="874260895834980372" id="message-874260895834980372" title="Message sent: 09-Aug-21 12:00 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">はい、そうです。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <span class="chatlog__timestamp">09-Aug-21 12:00 PM</span>
+        <div class="chatlog__message " data-message-id="874260963874967572" id="message-874260963874967572" title="Message sent: 09-Aug-21 12:00 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">完全に、protocolへのconformをprivateにする話と勘違いしていたw</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874261078291415081" id="message-874261078291415081" title="Message sent: 09-Aug-21 12:01 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">Changed the channel name.</span>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="thumbsup">
+              <img class="emoji emoji--small" alt="&#128077;" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874261324899696650" id="message-874261324899696650" title="Message sent: 09-Aug-21 12:02 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">
+                <div class="pre pre--multiline language-swift">extension Hoge { private foo() { ... } }</div> この場合ってHoge.fooはextensionの外から見えるんでしたっけ
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">09-Aug-21 12:04 PM</span>
+        <div class="chatlog__message " data-message-id="874261888710619156" id="message-874261888710619156" title="Message sent: 09-Aug-21 12:04 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">はい、見えるんですよ<img loading="lazy" class="emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/2/svg/1f622.svg"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <span class="chatlog__timestamp">09-Aug-21 12:05 PM</span>
+        <div class="chatlog__message " data-message-id="874262119418302495" id="message-874262119418302495" title="Message sent: 09-Aug-21 12:05 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あれ、見えてないような…</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874262466631180308" id="message-874262466631180308" title="Message sent: 09-Aug-21 12:06 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">手元のXcode12.5.1だと見えなさそうな感じなんですが、通ってますね <a href="https://discord.com/channels/291054398077927425/430242233468452865/874262315896283197" onclick="scrollToMessage(event, '874262315896283197')">https://discord.com/channels/291054398077927425/430242233468452865/874262315896283197</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874263313775755264" id="message-874263313775755264" title="Message sent: 09-Aug-21 12:10 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">↑私のガバだったw <a href="https://discord.com/channels/291054398077927425/430242233468452865/874263057906425856" onclick="scrollToMessage(event, '874263057906425856')">https://discord.com/channels/291054398077927425/430242233468452865/874263057906425856</a> 通ってないですね</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">09-Aug-21 01:18 PM</span>
+        <div class="chatlog__message " data-message-id="874280392193101834" id="message-874280392193101834" title="Message sent: 09-Aug-21 01:18 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">↓こういうパターンですね。 <span class="mention" title="swift54#8732">@swift-5.4.3</span>
+                <div class="pre pre--multiline language-swift">final class ViewController { func viewDidLoad() { prepareViews() // ↓これはできてほしくない prepareAView() } } extension ViewController { private func prepareViews() { prepareAView() prepareBView() prepareCView() } /*extension*/private func prepareAView() {} /*extension*/private func prepareBView() {} /*extension*/private func prepareCView() {} }</div>
+              </span>
+              <span class="chatlog__edited-timestamp" title="09-Aug-21 01:21 PM">(edited)</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874280540033921044" id="message-874280540033921044" title="Message sent: 09-Aug-21 01:18 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あれ？スレッドでボット使えないのか。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874280918402093076" id="message-874280918402093076" title="Message sent: 09-Aug-21 01:20 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://discord.com/channels/291054398077927425/430242233468452865/874280820846776371" onclick="scrollToMessage(event, '874280820846776371')">https://discord.com/channels/291054398077927425/430242233468452865/874280820846776371</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/827894258966331402/be502717de29e4db1202de08822ad935.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ensan#6902" data-user-id="827894258966331402" style="">Ensan</span>
+        <span class="chatlog__timestamp">09-Aug-21 01:22 PM</span>
+        <div class="chatlog__message " data-message-id="874281415821369344" id="message-874281415821369344" title="Message sent: 09-Aug-21 01:22 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">無理矢理ですが入れ子関数だとダメなんでしょうか <div class="pre pre--multiline language-Swift">extension ViewController { private func prepareViews() { func prepareAView() {} func prepareBView() {} func prepareCView() {} prepareAView() prepareBView() prepareCView() } }</div></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <span class="chatlog__timestamp">09-Aug-21 01:22 PM</span>
+        <div class="chatlog__message " data-message-id="874281606066622504" id="message-874281606066622504" title="Message sent: 09-Aug-21 01:22 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">これはSelfの中からはextensionのprivateを見えてしまう、という話なので、classかprotocolを1層挟めば見えなくなりますね</span>
+              <span class="chatlog__edited-timestamp" title="09-Aug-21 01:24 PM">(edited)</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874281707891732550" id="message-874281707891732550" title="Message sent: 09-Aug-21 01:23 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">親の型にprivateを定義すると子の型からは見えなくなる</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__reference-symbol"></div>
+      <div class="chatlog__reference">
+        <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/827894258966331402/be502717de29e4db1202de08822ad935.png?size=128" alt="Avatar" loading="lazy">
+        <span class="chatlog__reference-name" title="Ensan#6902" style="">Ensan</span>
+        <div class="chatlog__reference-content">
+          <span class="chatlog__reference-link" onclick="scrollToMessage(event, &#39;874281415821369344&#39;)"> 無理矢理ですが入れ子関数だとダメなんでしょうか <div class="pre pre--multiline language-Swift">extension ViewController { private func prepareViews() { func prepareAView() {} func prepareBView() {} func prepareCView() {} prepareAView() prepareBView() prepareCView() } }</div> </span>
+        </div>
+      </div>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">09-Aug-21 01:23 PM</span>
+        <div class="chatlog__message " data-message-id="874281756273045584" id="message-874281756273045584" title="Message sent: 09-Aug-21 01:23 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">これも一つの手段だと思うんですが、 <span class="pre pre--inline">prepareViews</span> はすごく長くなっちゃうし、インデントが深くなるのが微妙なんですよね。ただ、構造上はこれが正しい気もしますね。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874281963685568513" id="message-874281963685568513" title="Message sent: 09-Aug-21 01:24 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">さっきまさに悩んでこれを書こうとして、メソッドが長くなるの嫌で可視性をあきらめてフラットに書いたんですが、構造は明確だしそっちの方がいいのかなぁ。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/827894258966331402/be502717de29e4db1202de08822ad935.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ensan#6902" data-user-id="827894258966331402" style="">Ensan</span>
+        <span class="chatlog__timestamp">09-Aug-21 01:24 PM</span>
+        <div class="chatlog__message " data-message-id="874282071701475408" id="message-874282071701475408" title="Message sent: 09-Aug-21 01:24 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">うーん、、迷いどころですね</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">09-Aug-21 01:27 PM</span>
+        <div class="chatlog__message " data-message-id="874282737152983090" id="message-874282737152983090" title="Message sent: 09-Aug-21 01:27 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ローカル関数、論理的には正しいと思うんですが、 <div class="pre pre--multiline language-swift">if isFoo { // すごく長いコード return bar } else { return baz }</div> とするよりも <div class="pre pre--multiline language-swift">guard isFoo else { return baz } // すごく長いコード return bar</div> が良いみたいな。 <span class="pre pre--inline">true</span>, <span class="pre pre--inline">false</span> のケースが対等な場合で。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874283636353036298" id="message-874283636353036298" title="Message sent: 09-Aug-21 01:31 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ローカル関数で嫌だったのは、 <span class="pre pre--inline">prepareViews</span> の先頭にローカル関数を書くと実際の処理までたくさんスクロールしなければならず、後ろに書いた場合、 <div class="pre pre--multiline language-swift">extension ViewController { private func prepareViews() { prepareAView() prepareBView() prepareCView() // ここから先がローカル関数の宣言だけな保証がない func prepareAView() { // 長いコード } func prepareBView() { // 長いコード } foo() // もしここに何か処理が書かれていたら？スクロールしないとわからない。 func prepareCView() {} } }</div> みたいな可能性があり、結局長いメソッドのコードをスクロールしないといけなくなるなぁと。</span>
+              <span class="chatlog__edited-timestamp" title="09-Aug-21 01:31 PM">(edited)</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874284037018103848" id="message-874284037018103848" title="Message sent: 09-Aug-21 01:32 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><span class="pre pre--inline">// 以下、ローカル関数の宣言のみ</span> みたいなコメントを入れたらいいのかな。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="rintaro#0001" data-user-id="296587674737704960" style="">rintaro</span>
+        <span class="chatlog__timestamp">10-Aug-21 07:20 PM</span>
+        <div class="chatlog__message " data-message-id="874733865074294846" id="message-874733865074294846" title="Message sent: 10-Aug-21 07:20 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">無理矢理だけど型にまとめれば。。。 <div class="pre pre--multiline language-swift">class ViewController { func viewDidLoad() { prepareViews(self) } } extension ViewController { private struct prepareViews { var _self: ViewController @discardableResult init(_ _self: ViewController) { self._self = _self prepareAView() prepareBView() prepareCView() } func prepareAView() {} func prepareBView() {} func prepareCView() {} } }</div></span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874734983753908286" id="message-874734983753908286" title="Message sent: 10-Aug-21 07:24 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">個人的にはスコープが分離できてればあまり関数が長くなること自体は気にならないので、callerが一箇所だけであればラベル付き <span class="pre pre--inline">do</span> でインラインにしちゃいます。 <div class="pre pre--multiline language-swift">func prepareViews() { A_VIEW: do { ... } B_VIEW: do { ... } C_VIEW: do { ... } }</div></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <span class="chatlog__timestamp">11-Aug-21 02:31 AM</span>
+        <div class="chatlog__message " data-message-id="874842404551790612" id="message-874842404551790612" title="Message sent: 11-Aug-21 02:31 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">上にも書いてますが、extensionじゃなくて型を分けて書いてあげれば大体解決しますね <div class="pre pre--multiline language-swift">private protocol MyViewControllerPrepareViews { var view: UIView! { get } func prepareViews() } extension MyViewControllerPrepareViews { private func prepareAView() { } private func prepareBView() { } private func prepareCView() { } func prepareViews() { prepareAView() prepareBView() prepareCView() } } class MyViewController: UIViewController, MyViewControllerPrepareViews { override func loadView() { prepareViews() // prepareAView() &lt;- 見えない } }</div></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">11-Aug-21 04:08 AM</span>
+        <div class="chatlog__message " data-message-id="874866840617230356" id="message-874866840617230356" title="Message sent: 11-Aug-21 04:08 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">うーん、型を分けるのはワークアラウンドだと思うし、現状でよく行われてる <span class="pre pre--inline">extension</span> でメソッドをグルーピングするのは読みやすさのためでしかないケースが多いと思うんですが <span class="pre pre--inline">extensionprivate</span> があれば <span class="pre pre--inline">extension</span> にするコード上の必要性が生じるという意味でも、現状行われていることに対して妥当な解決策なように思います。もし <span class="pre pre--inline">extensionprivate</span> があればわざわざ型で分けて書かないですよね？</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874866969046835281" id="message-874866969046835281" title="Message sent: 11-Aug-21 04:08 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">もしかして、ファイルを分けて <span class="pre pre--inline">fileprivate</span> にしたら同じ型からでも見えない？</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="rintaro#0001" data-user-id="296587674737704960" style="">rintaro</span>
+        <span class="chatlog__timestamp">11-Aug-21 04:09 AM</span>
+        <div class="chatlog__message " data-message-id="874867056888152114" id="message-874867056888152114" title="Message sent: 11-Aug-21 04:09 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ファイル分ければ private でも大丈夫ですよ。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="874867273851097139" id="message-874867273851097139" title="Message sent: 11-Aug-21 04:10 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ただ <span class="pre pre--inline">prepareViews()</span> を <span class="pre pre--inline">internal</span> にしなければならないのでそれが嫌なのかと思ってました。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">11-Aug-21 04:10 AM</span>
+        <div class="chatlog__message " data-message-id="874867398170271754" id="message-874867398170271754" title="Message sent: 11-Aug-21 04:10 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><span class="pre pre--inline">private</span> も見えないのか。それだと <span class="pre pre--inline">internal</span> になるからだめですね・・・。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="postamble">
+    <div class="postamble__entry">Exported 36 message(s)</div>
+  </div>
+</body>
+
+</html>
