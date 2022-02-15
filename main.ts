@@ -46,8 +46,20 @@ router
   .get("/channels/:thread/:id", async (context) => {
     const userAgent = context.request.headers.get("user-agent");
     if (userAgent && isBot.test(userAgent)) {
+      const channelId = context.params.thread;
+      const threadId = context.params.id;
+
+      const threads = Object.values(categories)
+        .flat()
+        .filter((x) => (x as { threads: unknown }).threads)
+        .map((x) => (x as { threads: unknown }).threads)
+        .flat();
+      const thread = threads.find((x) => (x as { id: string }).id === threadId);
+
       context.response.body = await Deno.readTextFile(
-        `${Deno.cwd()}/data/html/${context.params.thread}/${context.params.id}.html`,
+        `${Deno.cwd()}/data/html/${
+          (thread as { channelId: string }).channelId
+        }/${(thread as { channelName: string }).channelName}.html`,
       );
     } else {
       context.response.body = await renderBody();
