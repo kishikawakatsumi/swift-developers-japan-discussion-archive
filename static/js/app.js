@@ -4,8 +4,6 @@ const messageManager = { messages: [] };
 let virtualScroller;
 
 function loadChannel(channel) {
-  document.getElementById("header-channel-name").innerText = channel;
-
   if (virtualScroller) {
     virtualScroller.stop();
     virtualScroller.virtualScroller.scrollableContainer.scrollToY(0);
