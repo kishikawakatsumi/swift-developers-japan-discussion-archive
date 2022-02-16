@@ -59,7 +59,8 @@
               <% it.categories[categoryName].forEach(function(channel) { %>
               <ul class="menu-list">
                 <li>
-                  <a id="sidebar-<%= channel.channelName %>" href="/channels/<%= channel.channelName %>">
+                  <a id="sidebar-<%= channel.channelId %>"
+                    href="/channels/<%= channel.channelId %>?category=<%= channel.categoryName %>&channel=<%= channel.channelName %>">
                     <span class="fa-light fa-hashtag"></span>
                     <span class="px-1"><%= channel.channelName %></span>
                   </a>
@@ -73,7 +74,7 @@
                       <% channel.threads.forEach(function(thread) { %>
                       <li>
                         <a id="sidebar-<%= thread.channelId %>/<%= thread.id %>"
-                          href="/channels/<%= thread.channelId %>/<%= thread.id %>">
+                          href="/channels/<%= thread.channelId %>/<%= thread.id %>?category=<%= thread.categoryName %>&channel=<%= thread.channelName %>">
                           <span class="fa-light fa-hashtag"></span>
                           <span class="px-1"><%= thread.channelName %></span>
                         </a>
@@ -167,11 +168,6 @@
 
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 
-  <script>
-    /* beautify ignore:start */
-    window.categories = <%~ JSON.stringify(it.categories) %>;
-    /* beautify ignore:end */
-  </script>
   <script src="/js/app.js<%= it.cb %>"></script>
   <script src="/js/router.js<%= it.cb %>"></script>
   <script src="/js/discord.js<%= it.cb %>"></script>

@@ -1,31 +1,29 @@
 "use strict";
 
 page("/", () => {
-  page.redirect("/channels/swift");
+  page.redirect("/channels/291054454793306112");
 });
-page("/channels/:channelName", (ctx) => {
-  const channelName = ctx.params.channelName;
+page("/channels/:id(\\d+)", (ctx) => {
+  const channelId = ctx.params.id;
+  const searchParams = new URLSearchParams(ctx.querystring);
+  const channelName = searchParams.get("channel");
 
   for (const activeMenu of document.querySelectorAll(
     ".menu-list a.is-active"
   )) {
     activeMenu.classList.remove("is-active");
   }
-  document.getElementById(`sidebar-${channelName}`).classList.add("is-active");
+  document.getElementById(`sidebar-${channelId}`).classList.add("is-active");
 
   document.getElementById("header-channel-name").innerText = channelName;
-  loadChannel(channelName);
+  loadChannel(channelId);
 });
 page("/channels/:channelId/:threadId", (ctx) => {
   const channelId = ctx.params.channelId;
   const threadId = ctx.params.threadId;
-
-  const threads = Object.values(window.categories)
-    .flat()
-    .filter((x) => x.threads)
-    .map((x) => x.threads)
-    .flat();
-  const thread = threads.find((x) => x.id === threadId);
+  const searchParams = new URLSearchParams(ctx.querystring);
+  const categoryName = searchParams.get("category");
+  const channelName = searchParams.get("channel");
 
   for (const activeMenu of document.querySelectorAll(
     ".menu-list a.is-active"
@@ -36,11 +34,10 @@ page("/channels/:channelId/:threadId", (ctx) => {
     .getElementById(`sidebar-${channelId}/${threadId}`)
     .classList.add("is-active");
 
-  document.getElementById(
-    "header-channel-name"
-  ).innerText = `${thread.categoryName}/${thread.channelName}`;
+  const title = `${categoryName}/${channelName}`;
+  document.getElementById("header-channel-name").innerText = title;
 
-  loadChannel(`${thread.channelId}/${thread.channelName}`);
+  loadChannel(`${channelId}/${threadId}`);
 });
 
 page();
