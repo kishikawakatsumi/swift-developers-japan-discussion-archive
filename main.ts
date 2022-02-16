@@ -75,6 +75,12 @@ router
       `${Deno.cwd()}/data/html/${context.params.thread}/${context.params.id}.html`,
     );
   })
+  .get("/data/messages/:id(\\d+).html", async (context) => {
+    const channelId = context.params.id;
+    context.response.body = await Deno.readTextFile(
+      `${Deno.cwd()}/data/message_html_fragments/${channelId}.html`,
+    );
+  })
   // Legacy routes
   .get("/channels/:channelName", async (context) => {
     const channelName = context.params.channelName;
