@@ -92,11 +92,12 @@ const querySuggestionsPlugin = createQuerySuggestionsPlugin({
 const debounced = debouncePromise((items) => Promise.resolve(items), 400);
 
 autocomplete({
+  debug: true,
   container: "#autocomplete",
   placeholder: "Search",
   openOnFocus: false,
   plugins: [querySuggestionsPlugin],
-  detachedMediaQuery: "none",
+  detachedMediaQuery: "",
   initialState: {
     query: searchPageState.query || "",
   },
@@ -132,7 +133,7 @@ autocomplete({
                 query,
                 attributesToRetrieve: ["id", "channel", "html"],
                 params: {
-                  hitsPerPage: 20,
+                  hitsPerPage: 50,
                   snippetEllipsisText: "…",
                 },
               },
