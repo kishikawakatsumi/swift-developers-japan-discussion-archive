@@ -92,7 +92,6 @@ const querySuggestionsPlugin = createQuerySuggestionsPlugin({
 const debounced = debouncePromise((items) => Promise.resolve(items), 400);
 
 autocomplete({
-  debug: true,
   container: "#autocomplete",
   placeholder: "Search",
   openOnFocus: false,
