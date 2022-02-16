@@ -19,26 +19,30 @@ jobs:
         run: |
           set -ex
 
-          docker run --rm -v $PWD/data/json:/output tyrrrz/discordchatexporter:stable exportguild \
+          docker run --rm -v $PWD/data/json:/output tyrrrz/discordchatexporter:latest exportguild \
             -t ${{ env.DISCORD_TOKEN }} \
             -g ${{ env.DISCORD_SERVER_ID }} \
-            -o "/output/%P_%p_%T_%C.json" \
+            -o "/output/%P|%p|%T|%C|%t|%c.json" \
             -f Json \
             --parallel 2
 
-          docker run --rm -v $PWD/data/html:/output tyrrrz/discordchatexporter:stable exportguild \
+          docker run --rm -v $PWD/data/html:/output tyrrrz/discordchatexporter:latest exportguild \
             -t ${{ env.DISCORD_TOKEN }} \
             -g ${{ env.DISCORD_SERVER_ID }} \
-            -o "/output/%C.html" \
+            -o "/output/%c.html" \
             -f HtmlLight \
             --parallel 2
 
           npm ci
 
+          node dev/get_thread_metadata.mjs
+          node dev/get_thread_messages.js
+
           node --max-old-space-size=8192 dev/extract_each_message_html.js
-          node dev/generate_channel_structure.js 
+          npx js-beautify --file data/html/**/*.html --type html --replace --indent-size 2 --no-preserve-newlines
+
+          node dev/generate_channel_structure.js
           node dev/update_search_index.js
-          npx js-beautify --file data/html/* --type html --replace --indent-size 2 --no-preserve-newlines
 
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
           git config --global user.name "${GITHUB_ACTOR}"

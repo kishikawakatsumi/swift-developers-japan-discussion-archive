@@ -14,7 +14,7 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
         if (dirent.name === "metadata.json" || !dirent.name.endsWith(".json")) {
           return;
         }
-        const comps = dirent.name.split("_");
+        const comps = dirent.name.split("|");
         const data = JSON.parse(
           fs.readFileSync(`${root}/${channelId}/${dirent.name}`, "utf-8")
         );
@@ -22,6 +22,7 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
           categoryPosition: Number(comps[0]),
           channelPosition: Number(comps[1]),
           categoryName: data.channel.category,
+          categoryId: data.channel.categoryId,
           channelName: data.channel.name,
           id: data.channel.id,
           channelId,
@@ -33,12 +34,13 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
   if (!dirent.name.endsWith(".json")) {
     return;
   }
-  const comps = dirent.name.split("_");
+  const comps = dirent.name.split("|");
   const data = JSON.parse(fs.readFileSync(`${root}/${dirent.name}`, "utf-8"));
   channels.push({
     categoryPosition: Number(comps[0]),
     channelPosition: Number(comps[1]),
     categoryName: data.channel.category,
+    categoryId: data.channel.categoryId,
     channelName: data.channel.name,
     channelId: data.channel.id,
   });
@@ -51,16 +53,9 @@ channels.sort((a, b) => {
   );
 });
 
-threads
-  .sort((a, b) => {
-    return a.channelId - b.channelId || a.id - b.id;
-  })
-  .map((x) => {
-    return {
-      categoryName: x.categoryName,
-      channelName: x.channelName,
-    };
-  });
+threads.sort((a, b) => {
+  return a.channelId - b.channelId || a.id - b.id;
+});
 
 for (const [k, v] of Object.entries(groupBy(threads, "channelId"))) {
   for (const channel of channels) {
@@ -88,7 +83,9 @@ const categories = groupBy(
     .map((x) => {
       return {
         categoryName: x.categoryName,
+        categoryId: x.categoryId,
         channelName: x.channelName,
+        channelId: x.channelId,
         threads: x.threads,
       };
     }),

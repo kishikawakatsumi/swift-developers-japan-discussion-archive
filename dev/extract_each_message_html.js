@@ -4,6 +4,8 @@ const fs = require("fs");
 const { JSDOM } = require("jsdom");
 const beautify = require("js-beautify").html;
 
+fs.mkdirSync("data/message_html_fragments", { recursive: true });
+
 const root = "data/html";
 fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
   if (dirent.isDirectory()) {
