@@ -49,8 +49,14 @@ const infiniteHits = connectors.connectInfiniteHits(
     container.querySelector("ul").innerHTML = hits
       .map(
         (hit) =>
-          `<li class="search-results-item" onclick="location.href='/channels/${hit.channel.id}?message_id=${hit.id}';">
-  <div class="has-text-grey has-text-weight-medium is-size-6 px-1"><span class="fa-light fa-hashtag fa-sm is-size-7 pl-2 pr-1"></span>${hit.channel.name}</div>
+          `<li class="search-results-item" onclick="location.href='/channels/${
+            hit.channel.id
+          }?message_id=${hit.id}';">
+  <div class="has-text-grey has-text-weight-medium is-size-6 px-1"><span class="fa-light fa-hashtag fa-sm is-size-7 pl-2 pr-1"></span>${
+    hit.channel.type !== "11"
+      ? hit.channel.name
+      : `${hit.channel.category}/${hit.channel.name}`
+  }</div>
   ${hit.html}
 </li>`
       )
@@ -152,8 +158,14 @@ autocomplete({
           item({ item, createElement }) {
             return createElement("div", {
               dangerouslySetInnerHTML: {
-                __html: `<div onclick="location.href='/channels/${item.channel.id}?message_id=${item.id}';">
-  <div class="has-text-grey has-text-weight-medium is-size-6 p-1"><span class="fa-light fa-hashtag fa-sm is-size-7 pl-2 pr-1"></span>${item.channel.name}</div>
+                __html: `<div onclick="location.href='/channels/${
+                  item.channel.id
+                }?message_id=${item.id}';">
+  <div class="has-text-grey has-text-weight-medium is-size-6 p-1"><span class="fa-light fa-hashtag fa-sm is-size-7 pl-2 pr-1"></span>${
+    item.channel.type !== "11"
+      ? item.channel.name
+      : `${item.channel.category}/${item.channel.name}`
+  }</div>
   ${item.html}
 </div>`,
               },
