@@ -31,6 +31,7 @@ const infiniteHits = connectors.connectInfiniteHits(
 
     if (isFirstRender) {
       const sentinel = document.createElement("div");
+      sentinel.textContent = "\u00A0";
       container.appendChild(document.createElement("ul"));
       container.appendChild(sentinel);
 
@@ -67,7 +68,7 @@ const infiniteHits = connectors.connectInfiniteHits(
 
 search.addWidgets([
   widgets.configure({
-    hitsPerPage: 200,
+    hitsPerPage: 40,
   }),
   virtualSearchBox({}),
   infiniteHits({
@@ -87,6 +88,8 @@ const querySuggestionsPlugin = createQuerySuggestionsPlugin({
     };
   },
 });
+
+const debounced = debouncePromise((items) => Promise.resolve(items), 400);
 
 autocomplete({
   container: "#autocomplete",
@@ -117,11 +120,7 @@ autocomplete({
     }
   },
   getSources({ query }) {
-    if (!query) {
-      return [];
-    }
-
-    return [
+    return debounced([
       {
         sourceId: "messages",
         getItems() {
@@ -131,8 +130,9 @@ autocomplete({
               {
                 indexName: "messages",
                 query,
+                attributesToRetrieve: ["id", "channel", "html"],
                 params: {
-                  hitsPerPage: 200,
+                  hitsPerPage: 20,
                   snippetEllipsisText: "…",
                 },
               },
@@ -180,7 +180,7 @@ autocomplete({
           },
         },
       },
-    ];
+    ]);
   },
 });
 
@@ -199,4 +199,18 @@ function getInstantSearchUiState() {
   const uiState = instantSearchRouter.read();
 
   return (uiState && uiState[INSTANT_SEARCH_INDEX_NAME]) || {};
+}
+
+function debouncePromise(fn, time) {
+  let timerId = undefined;
+
+  return function debounced(...args) {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    return new Promise((resolve) => {
+      timerId = setTimeout(() => resolve(fn(...args)), time);
+    });
+  };
 }
