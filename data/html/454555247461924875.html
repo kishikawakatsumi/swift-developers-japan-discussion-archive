@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>swift-developers-japan - metal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+      font-weight: 300;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+      font-weight: 600;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+      font-weight: 700;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #23262a;
+      font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    a {
+      color: #0068e0;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      object-fit: contain;
+    }
+
+    .markdown {
+      max-width: 100%;
+      line-height: 1.3;
+      overflow-wrap: break-word;
+    }
+
+    .preserve-whitespace {
+      white-space: pre-wrap;
+    }
+
+    .spoiler-text {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+
+    .spoiler-text--hidden {
+      cursor: pointer;
+      background-color: #b9bbbe;
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .spoiler-text--hidden:hover {
+      background-color: rgba(185, 187, 190, 0.8);
+    }
+
+    .spoiler-text--hidden::selection {
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .quote {
+      display: flex;
+      margin: 0.05em 0;
+    }
+
+    .quote::before {
+      content: "";
+      margin-right: 0.5em;
+      border: 2px solid #c7ccd1;
+      border-radius: 3px;
+    }
+
+    .pre {
+      background-color: #f9f9f9;
+      font-family: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    .pre--multiline {
+      margin-top: 0.25em;
+      padding: 0.5em;
+      border: 2px solid #f3f3f3;
+      border-radius: 5px;
+      color: #657b83;
+    }
+
+    .pre--multiline.hljs {
+      background-color: #f9f9f9;
+      color: #657b83;
+    }
+
+    .pre--inline {
+      padding: 2px;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .mention {
+      border-radius: 3px;
+      padding: 0 2px;
+      color: #505cdc;
+      background-color: rgba(88, 101, 242, .15);
+      font-weight: 500;
+    }
+
+    .mention:hover {
+      background-color: #5865f2;
+      color: #ffffff
+    }
+
+    .timestamp {
+      border-radius: 3px;
+      padding: 0 2px;
+      background-color: rgba(6, 6, 7, 0.08);
+    }
+
+    .emoji {
+      width: 1.325em;
+      height: 1.325em;
+      margin: 0 0.06em;
+      vertical-align: -0.4em;
+    }
+
+    .emoji--small {
+      width: 1em;
+      height: 1em;
+    }
+
+    .emoji--large {
+      width: 2.8em;
+      height: 2.8em;
+    }
+
+    .preamble {
+      display: grid;
+      margin: 0 0.3em 0.6em 0.3em;
+      max-width: 100%;
+      grid-template-columns: auto 1fr;
+    }
+
+    .preamble__guild-icon-container {
+      grid-column: 1;
+    }
+
+    .preamble__guild-icon {
+      max-width: 88px;
+      max-height: 88px;
+    }
+
+    .preamble__entries-container {
+      grid-column: 2;
+      margin-left: 0.6em;
+    }
+
+    .preamble__entry {
+      font-size: 1.4em;
+      color: #2f3136;
+    }
+
+    .preamble__entry--small {
+      font-size: 1em;
+    }
+
+    .chatlog {
+      max-width: 100%;
+    }
+
+    .chatlog__message-group {
+      display: grid;
+      margin: 0 0.6em;
+      padding: 0.9em 0;
+      border-top: 1px solid #eceeef;
+      grid-template-columns: auto 1fr;
+    }
+
+    .chatlog__reference-symbol {
+      grid-column: 1;
+      margin: 8px 4px 4px 18px;
+      border-left: 2px solid #c7ccd1;
+      border-top: 2px solid #c7ccd1;
+      border-radius: 8px 0 0 0;
+    }
+
+    .chatlog__reference {
+      display: flex;
+      grid-column: 2;
+      margin-bottom: 0.25em;
+      font-size: 0.875em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-items: center;
+      color: #5f5f60;
+    }
+
+    .chatlog__reference-avatar {
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      margin-right: 0.25em;
+    }
+
+    .chatlog__reference-name {
+      margin-right: 0.3em;
+      font-weight: 600;
+    }
+
+    .chatlog__reference-content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__reference-content a:hover {
+      text-decoration: none;
+    }
+
+    .chatlog__reference-link {
+      cursor: pointer;
+      color: #5f5f60;
+    }
+
+    .chatlog__reference-link * {
+      display: inline;
+      pointer-events: none;
+    }
+
+    .chatlog__reference-link:hover {
+      color: #2f3136;
+    }
+
+    .chatlog__reference-link:hover *:not(.spoiler-text) {
+      color: #2f3136;
+    }
+
+    .chatlog__reference-edited-timestamp {
+      margin-left: 0.25em;
+      font-size: 0.8em;
+      unicode-bidi: bidi-override;
+      color: #747f8d;
+    }
+
+    .chatlog__author-avatar-container {
+      grid-column: 1;
+      width: 40px;
+      height: 40px;
+      margin-right: 16px;
+    }
+
+    .chatlog__author-avatar {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .chatlog__messages {
+      grid-column: 2;
+      min-width: 50%;
+      direction: ltr;
+    }
+
+    .chatlog__author-name {
+      font-weight: 600;
+      color: #2f3136;
+    }
+
+    .chatlog__timestamp {
+      margin-left: 0.3em;
+      font-size: 0.75em;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+      color: #747f8d;
+    }
+
+    .chatlog__message {
+      padding: 0.1em 0.3em;
+      margin: 0 -0.3em;
+      background-color: transparent;
+      transition: background-color 1s ease;
+    }
+
+    .chatlog__message--highlighted {
+      background-color: rgba(114, 137, 218, 0.2);
+    }
+
+    .chatlog__message--pinned {
+      background-color: rgba(249, 168, 37, 0.05);
+    }
+
+    .chatlog__content {
+      font-size: 0.95em;
+      word-wrap: break-word;
+    }
+
+    .chatlog__edited-timestamp {
+      margin-left: 0.15em;
+      font-size: 0.8em;
+    }
+
+    .chatlog__attachment {
+      display: inline-block;
+      position: relative;
+      margin-top: 0.3em;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden {
+      cursor: pointer;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatlog__attachment--hidden * {
+      pointer-events: none;
+    }
+
+    .chatlog__attachment-spoiler-caption {
+      display: none;
+      z-index: 999;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0.4em 0.8em;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 20px;
+      color: #dcddde;
+      font-size: 0.9em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+      display: block;
+    }
+
+    .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+      color: #fff;
+    }
+
+    .chatlog__attachment-media {
+      vertical-align: top;
+      max-width: 45vw;
+      max-height: 500px;
+      border-radius: 3px;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-media {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic {
+      width: 100%;
+      max-width: 520px;
+      height: 40px;
+      padding: 10px;
+      background-color: #f2f3f5;
+      border: 1px solid #ebedef;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-generic {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic-icon {
+      float: left;
+      width: 30px;
+      height: 100%;
+      margin-right: 10px;
+    }
+
+    .chatlog__attachment-generic-size {
+      color: #72767d;
+      font-size: 12px;
+    }
+
+    .chatlog__attachment-generic-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__edited-timestamp {
+      color: #747f8d;
+    }
+
+    .chatlog__embed {
+      display: flex;
+      margin-top: 0.3em;
+      max-width: 520px;
+    }
+
+    .chatlog__embed-color-pill {
+      flex-shrink: 0;
+      width: 0.25em;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    .chatlog__embed-color-pill--default {
+      background-color: rgba(227, 229, 232, 1);
+    }
+
+    .chatlog__embed-content-container {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5em 0.6em;
+      background-color: rgba(249, 249, 249, 0.3);
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    .chatlog__embed-content {
+      display: flex;
+      width: 100%;
+    }
+
+    .chatlog__embed-text {
+      flex: 1;
+    }
+
+    .chatlog__embed-author {
+      display: flex;
+      margin-bottom: 0.3em;
+      align-items: center;
+    }
+
+    .chatlog__embed-author-icon {
+      margin-right: 0.5em;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    .chatlog__embed-author-name {
+      font-size: 0.875em;
+      font-weight: 600;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+      color: #4f545c
+    }
+
+    .chatlog__embed-author-name-link {
+      color: #4f545c;
+    }
+
+    .chatlog__embed-title {
+      margin-bottom: 0.2em;
+      font-size: 0.875em;
+      font-weight: 600;
+      color: #4f545c;
+    }
+
+    .chatlog__embed-description {
+      font-weight: 500;
+      font-size: 0.85em;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 0.5em;
+    }
+
+    .chatlog__embed-field {
+      flex: 0;
+      min-width: 100%;
+      max-width: 506px;
+      padding-top: 0.6em;
+      font-size: 0.875em;
+    }
+
+    .chatlog__embed-field--inline {
+      flex: 1;
+      flex-basis: auto;
+      min-width: 150px;
+    }
+
+    .chatlog__embed-field-name {
+      margin-bottom: 0.2em;
+      font-weight: 600;
+      color: #36393e;
+    }
+
+    .chatlog__embed-field-value {
+      font-weight: 500;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-thumbnail {
+      flex: 0;
+      margin-left: 1.2em;
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-image-container {
+      margin-top: 0.6em;
+    }
+
+    .chatlog__embed-image {
+      max-width: 500px;
+      max-height: 400px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-footer {
+      margin-top: 0.6em;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-footer-icon {
+      margin-right: 0.2em;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+
+    .chatlog__embed-footer-text {
+      vertical-align: middle;
+      font-size: 0.75em;
+      font-weight: 500;
+    }
+
+    .chatlog__embed-plainimage {
+      vertical-align: top;
+      max-width: 45vw;
+      max-height: 500px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-spotify {
+      border: 0;
+    }
+
+    .chatlog__embed-youtube-container {
+      margin-top: 0.6em;
+    }
+
+    .chatlog__embed-youtube {
+      border: 0;
+      border-radius: 3px;
+    }
+
+    .chatlog__sticker {
+      width: 180px;
+      height: 180px;
+    }
+
+    .chatlog__sticker--media {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .chatlog__reactions {
+      display: flex;
+    }
+
+    .chatlog__reaction {
+      display: flex;
+      align-items: center;
+      margin: 0.35em 0.1em 0.1em 0;
+      padding: .125rem .375rem;
+      background-color: #f2f3f5;
+      border-radius: 8px;
+      border-color: transparent;
+      border-width: 1px;
+      border-style: solid;
+    }
+
+    .chatlog__reaction:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+      border-width: 1px;
+      border-style: solid;
+      background-color: white;
+    }
+
+    .chatlog__reaction-count {
+      min-width: 9px;
+      margin-left: 0.35em;
+      font-size: 0.875em;
+      color: #4f5660;
+    }
+
+    .chatlog__reaction:hover .chatlog__reaction-count {
+      color: #2e3338;
+    }
+
+    .chatlog__bot-tag {
+      position: relative;
+      top: -.1em;
+      margin-left: 0.3em;
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+      line-height: 1.3;
+      background-color: #5865F2;
+      color: #ffffff;
+      font-size: 0.625em;
+      font-weight: 500;
+    }
+
+    .postamble {
+      margin: 1.4em 0.3em 0.6em 0.3em;
+      padding: 1em;
+      border-top: 1px solid #eceeef;
+    }
+
+    .postamble__entry {
+      color: #2f3136;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.pre--multiline').forEach(e => hljs.highlightBlock(e));
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
+        const imageDataUrl = e.getAttribute('data-source');
+        const anim = lottie.loadAnimation({
+          container: e,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: imageDataUrl
+        });
+        anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
+      });
+    });
+  </script>
+  <script>
+    function scrollToMessage(event, id) {
+      var element = document.getElementById('message-' + id);
+      if (element) {
+        event.preventDefault();
+        element.classList.add('chatlog__message--highlighted');
+        window.scrollTo({
+          top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+          behavior: 'smooth'
+        });
+        window.setTimeout(function() {
+          element.classList.remove('chatlog__message--highlighted');
+        }, 2000);
+      }
+    }
+
+    function showSpoiler(event, element) {
+      if (element && element.classList.contains('spoiler-text--hidden')) {
+        event.preventDefault();
+        element.classList.remove('spoiler-text--hidden');
+      }
+      if (element && element.classList.contains('chatlog__attachment--hidden')) {
+        event.preventDefault();
+        element.classList.remove('chatlog__attachment--hidden');
+      }
+    }
+  </script>
+  <svg style="display: none">
+    <symbol id="icon-attachment" viewBox="0 0 720 960">
+      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+    </symbol>
+  </svg>
+</head>
+
+<body>
+  <div class="preamble">
+    <div class="preamble__guild-icon-container">
+      <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+      <div class="preamble__entry">swift-developers-japan</div>
+      <div class="preamble__entry">開発環境, ライブラリ / metal</div>
+    </div>
+  </div>
+  <div class="chatlog">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">06-Jul-18 09:13 AM</span>
+        <div class="chatlog__message " data-message-id="464720559566225429" id="message-464720559566225429" title="Message sent: 06-Jul-18 09:13 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">Metalのシェーダーファイルをpodに含めた場合にアプリのビルド時にMetalシェーダのビルドが走らない…</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="464720942573289473" id="message-464720942573289473" title="Message sent: 06-Jul-18 09:15 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">と思ったけど走っているっぽい bundleちゃんと指定すればmetallib取れそう</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="464721154830106635" id="message-464721154830106635" title="Message sent: 06-Jul-18 09:15 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><span class="pre pre--inline">let lib = try! device.makeDefaultLibrary(bundle: Bundle(for: type(of: self)))</span> で取れた</span>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="yum">
+              <img class="emoji emoji--small" alt="&#128523;" src="https://twemoji.maxcdn.com/2/svg/1f60b.svg" loading="lazy">
+              <span class="chatlog__reaction-count">3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">20-Jul-18 08:51 AM</span>
+        <div class="chatlog__message " data-message-id="469788347758542859" id="message-469788347758542859" title="Message sent: 20-Jul-18 08:51 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">レンダリング用のスレッドを作って描画するときにどうしても最後にdrawableを取得するためにMTLViewやCAMetalLayerを触ってしまってThread Sanitizerに怒られてしまう・・・。 こういうときってどうするのがいいんだろう。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">20-Jul-18 08:52 AM</span>
+        <div class="chatlog__message " data-message-id="469788771731111938" id="message-469788771731111938" title="Message sent: 20-Jul-18 08:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">設計を詳しく見ないとなんともいえないですけど、</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469788824235409409" id="message-469788824235409409" title="Message sent: 20-Jul-18 08:53 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">安直には、 MTLViewに触る必要のある最後の処理だけ</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469788892434792458" id="message-469788892434792458" title="Message sent: 20-Jul-18 08:53 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">DispatchQueue.main.asyncで実行する感じになりそうです</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469789120450002944" id="message-469789120450002944" title="Message sent: 20-Jul-18 08:54 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">描画スレッドはフレームバッファなりへの書き込みまでを行う。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">20-Jul-18 09:02 AM</span>
+        <div class="chatlog__message " data-message-id="469791214489698304" id="message-469791214489698304" title="Message sent: 20-Jul-18 09:02 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">MetalだとcommandBufferでdrawableやレンダリング先のtextureが必要で、それをUIが返してくれる（(CAMetalLayer.nextDrawable()）のでOpenGLESで言うフレームバッファの書き込みまでにUIを触っちゃうんですよね…。 そこだけメインスレッドでも良いんですけど、毎フレーム触っちゃうのは嫌だなぁと</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469792118043443201" id="message-469792118043443201" title="Message sent: 20-Jul-18 09:06 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://github.com/noppefoxwolf/Kitsunebi_Metal/blob/master/Kitsunebi_Metal/Classes/PlayerView.swift#L42">https://github.com/noppefoxwolf/Kitsunebi_Metal/blob/master/Kitsunebi_Metal/Classes/PlayerView.swift#L42</a></span>
+            </div>
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://github.com/noppefoxwolf/Kitsunebi_Metal/blob/master/Kitsunebi_Metal/Classes/PlayerView.swift">
+                      <div class="markdown preserve-whitespace">noppefoxwolf/Kitsunebi_Metal</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">Kitsunebi_Metal - [WIP] Kitsunebi using Metal.</div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ZsV4prx8Jb3UrFcGjYcMVvVLoVbiQHWubUqjrrsouK4/%3Fs%3D400%26v%3D4/https/avatars1.githubusercontent.com/u/2066707">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ZsV4prx8Jb3UrFcGjYcMVvVLoVbiQHWubUqjrrsouK4/%3Fs%3D400%26v%3D4/https/avatars1.githubusercontent.com/u/2066707" alt="Thumbnail" loading="lazy">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">20-Jul-18 09:11 AM</span>
+        <div class="chatlog__message " data-message-id="469793550700249098" id="message-469793550700249098" title="Message sent: 20-Jul-18 09:11 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">metalLayer.nextDrawable() をメインスレッドで呼んで、</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469793584774774784" id="message-469793584774774784" title="Message sent: 20-Jul-18 09:11 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">engine.render(to: drawable, src: src, mask: mask)を描画スレッドで実行する？</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469793622016131096" id="message-469793622016131096" title="Message sent: 20-Jul-18 09:12 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">もしくは</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469793648574464010" id="message-469793648574464010" title="Message sent: 20-Jul-18 09:12 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">描画用のバッファは別に用意しておいて</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469793724222668800" id="message-469793724222668800" title="Message sent: 20-Jul-18 09:12 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">その絵の転送だけをメインスレッドで回すとか。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">20-Jul-18 09:14 AM</span>
+        <div class="chatlog__message " data-message-id="469794260267433994" id="message-469794260267433994" title="Message sent: 20-Jul-18 09:14 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">なるほど！ 描画用のバッファ別で用意するのが良さそうですね、各フレームのpresentationTimeを現実の時間と同期する箇所が必要なのでそこでdrawableを取って来て描画バッファから転送という流れが綺麗そう やって見ます、ありがとうございますー！</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469795579409727498" id="message-469795579409727498" title="Message sent: 20-Jul-18 09:19 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あ、でも結局毎フレームUI触ってしまう事に変わらないか・・・ nextDrawableをスレッドセーフに取ってくる機構が必要だなぁ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">07-Aug-18 05:04 AM</span>
+        <div class="chatlog__message " data-message-id="476254297701744651" id="message-476254297701744651" title="Message sent: 07-Aug-18 05:04 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">チップセットによってGPU/CPUからも共有メモリ扱えるのかと思ったけど、OpenGLES使っているうちは転送必要なんですね <a href="https://developer.apple.com/jp/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/Performance/Performance.html">https://developer.apple.com/jp/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/Performance/Performance.html</a>
+                <div class="quote">GPUがタイルのレンダリングを終えると、そのピクセルデータを共有メモリに書き戻す必要があります。これを論理バッファの格納と言いますが、やはり負荷の高い処理です。描画するフレームごとに少なくとも1回はこの転送が必要です。</div>
+              </span>
+            </div>
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://developer.apple.com/jp/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/Performance/Performance.html">
+                      <div class="markdown preserve-whitespace">OpenGL&#160;ESアプリケーションのチューニング</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">iOSアプリケーションにOpenGL ESを採用して、高パフォーマンスのグラフィックを生成する手順を解説します。</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="476254417486610442" id="message-476254417486610442" title="Message sent: 07-Aug-18 05:05 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">この辺りのCPU &lt;-&gt; GPU間の転送処理ってInstrumentsから見れるのかな</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/363586212209885185/b1c8351cc21adc00e7c5cce2ec1c654f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cookiezby#5867" data-user-id="363586212209885185" style="">cookiezby</span>
+        <span class="chatlog__timestamp">07-Aug-18 05:54 AM</span>
+        <div class="chatlog__message " data-message-id="476266884980015105" id="message-476266884980015105" title="Message sent: 07-Aug-18 05:54 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">Metalをシミュレータで走らせるため、関連クラス使う前に全部#if arch(i386) || arch(x86_64)を付けないといけないかな</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="476267055402975233" id="message-476267055402975233" title="Message sent: 07-Aug-18 05:55 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">走らせるではなく、コンパイルを通る</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">07-Aug-18 06:24 AM</span>
+        <div class="chatlog__message " data-message-id="476274539664375808" id="message-476274539664375808" title="Message sent: 07-Aug-18 06:24 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">そうなります、Metalはi386/x86_64ではコンパイル出来ないので。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/363586212209885185/b1c8351cc21adc00e7c5cce2ec1c654f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cookiezby#5867" data-user-id="363586212209885185" style="">cookiezby</span>
+        <span class="chatlog__timestamp">07-Aug-18 06:26 AM</span>
+        <div class="chatlog__message " data-message-id="476274839498260480" id="message-476274839498260480" title="Message sent: 07-Aug-18 06:26 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><img loading="lazy" class="emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/2/svg/1f622.svg"> アプルさんせめてコンパルを通して欲しいな</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">07-Aug-18 06:28 AM</span>
+        <div class="chatlog__message " data-message-id="476275307137990659" id="message-476275307137990659" title="Message sent: 07-Aug-18 06:28 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">DIとかで依存部分を隠すのが良いと思います。シミュレータではOpenGLESか、何も実行しないStubで何とかするとか、、</span>
+              <span class="chatlog__edited-timestamp" title="07-Aug-18 06:32 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/363586212209885185/b1c8351cc21adc00e7c5cce2ec1c654f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cookiezby#5867" data-user-id="363586212209885185" style="">cookiezby</span>
+        <span class="chatlog__timestamp">07-Aug-18 06:30 AM</span>
+        <div class="chatlog__message " data-message-id="476275997600120842" id="message-476275997600120842" title="Message sent: 07-Aug-18 06:30 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">なるほど、試してみます、ありがとうございます</span>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="❤">
+              <img class="emoji emoji--small" alt="❤" src="https://twemoji.maxcdn.com/2/svg/2764.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">07-Aug-18 06:51 AM</span>
+        <div class="chatlog__message " data-message-id="476281097362079745" id="message-476281097362079745" title="Message sent: 07-Aug-18 06:51 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あ、すいません。Metal/MetalKit自体はコンパイル通ります。 CVMetalTextureCacheとかCAMetalDrawableとかこの辺の事ですよね &gt; 関連クラス</span>
+              <span class="chatlog__edited-timestamp" title="07-Aug-18 06:54 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/363586212209885185/b1c8351cc21adc00e7c5cce2ec1c654f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cookiezby#5867" data-user-id="363586212209885185" style="">cookiezby</span>
+        <span class="chatlog__timestamp">07-Aug-18 07:05 AM</span>
+        <div class="chatlog__message " data-message-id="476284719655288832" id="message-476284719655288832" title="Message sent: 07-Aug-18 07:05 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">シミュレータのSKDではMetalKit入ってないので、MTKViewも見つかりません。Metalに入ってるものが大丈夫らしいです。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="476285507379134484" id="message-476285507379134484" title="Message sent: 07-Aug-18 07:08 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://www.invasivecode.com/weblog/metal-image-processing?doing_wp_cron=1533026631.2689108848571777343750">https://www.invasivecode.com/weblog/metal-image-processing?doing_wp_cron=1533026631.2689108848571777343750</a></span>
+            </div>
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://www.invasivecode.com/weblog/metal-image-processing?doing_wp_cron=1533026631.2689108848571777343750">
+                      <div class="markdown preserve-whitespace">Metal: Blazing Fast Image Processing</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">Metal can process images in real-time applications. In this tutorial, you learn how to setup a Metal project and perform blazing fast image processing.</div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/absus0bC7w69U4xXm1BzbvEjRGYdWKXn3ojPd7R-3ho/https/www.invasivecode.com/weblog/wp-content/uploads/2016/04/metal.png">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/absus0bC7w69U4xXm1BzbvEjRGYdWKXn3ojPd7R-3ho/https/www.invasivecode.com/weblog/wp-content/uploads/2016/04/metal.png" alt="Thumbnail" loading="lazy">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="476285567265669121" id="message-476285567265669121" title="Message sent: 07-Aug-18 07:08 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">前発見したいい記事です。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">07-Aug-18 09:35 AM</span>
+        <div class="chatlog__message " data-message-id="476322535865319425" id="message-476322535865319425" title="Message sent: 07-Aug-18 09:35 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">MetalKitは多分あるはずです、deviceが取得できないので実行はできませんがコンパイルは通るはずです。（自分の環境では通りました） /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/MetalKit.framework CVMetalTextureが無いのは、CVMetalTexture.h自体は存在しているが、COREVIDEO_SUPPORTS_METALフラグでifdefされているからでした。どこかでフラグ書き換えてあげればとりあえずビルドは通るかもしれませんね… /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVMetalTexture.h</span>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="watermelon">
+              <img class="emoji emoji--small" alt="&#127817;" src="https://twemoji.maxcdn.com/2/svg/1f349.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">07-Aug-18 09:44 AM</span>
+        <div class="chatlog__message " data-message-id="476324832930299946" id="message-476324832930299946" title="Message sent: 07-Aug-18 09:44 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">とりあえずビルド通すなら#ifで自分で空のクラスとして定義するのもありかも。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">07-Aug-18 10:38 AM</span>
+        <div class="chatlog__message " data-message-id="476338402573287465" id="message-476338402573287465" title="Message sent: 07-Aug-18 10:38 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CAMetalLayerはそもそもシミュレータSDKには無いっぽい、CVMetalTextureと扱い違うのか</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">07-Aug-18 11:20 AM</span>
+        <div class="chatlog__message " data-message-id="476348973875986435" id="message-476348973875986435" title="Message sent: 07-Aug-18 11:20 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://gist.github.com/noppefoxwolf/8540f2a18a8a8268422947cbbddb1f93">https://gist.github.com/noppefoxwolf/8540f2a18a8a8268422947cbbddb1f93</a></span>
+            </div>
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://gist.github.com/noppefoxwolf/8540f2a18a8a8268422947cbbddb1f93">
+                      <div class="markdown preserve-whitespace">metal_excluded.h</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ZsV4prx8Jb3UrFcGjYcMVvVLoVbiQHWubUqjrrsouK4/%3Fs%3D400%26v%3D4/https/avatars1.githubusercontent.com/u/2066707">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ZsV4prx8Jb3UrFcGjYcMVvVLoVbiQHWubUqjrrsouK4/%3Fs%3D400%26v%3D4/https/avatars1.githubusercontent.com/u/2066707" alt="Thumbnail" loading="lazy">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="476349089664204825" id="message-476349089664204825" title="Message sent: 07-Aug-18 11:21 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">手元のMetalプロジェクトで使ってそうなところ探して出してみた。他にもあるかも</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">10-Aug-18 11:43 AM</span>
+        <div class="chatlog__message " data-message-id="477441836068110336" id="message-477441836068110336" title="Message sent: 10-Aug-18 11:43 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CIFilterの結果をUIImageViewに描画するのと、シェーダー使ってGLESView/MTKViewに表示するのはコスト変わらないのでしょうか…？ CIFilterのデメリットとしてCIFilterから作ったCIImageをUIImageに変換する過程でCGImageにするからコストが大きいみたいに <a href="https://www.objc.io/issues/21-camera-and-photos/core-image-intro/#improving-performance-with-opengl">https://www.objc.io/issues/21-camera-and-photos/core-image-intro/#improving-performance-with-opengl</a> には書いてあるけど、<span class="pre pre--inline">UIImage(ciimage:)</span>使ったらそのコスト（多分）無いし実は変わらない…？</span>
+              <span class="chatlog__edited-timestamp" title="10-Aug-18 11:46 AM">(edited)</span>
+            </div>
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://www.objc.io/issues/21-camera-and-photos/core-image-intro/">
+                      <div class="markdown preserve-whitespace">An Introduction to Core Image &#183; objc.io</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">objc.io publishes books on advanced techniques and practices for iOS and OS X development</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">10-Aug-18 11:52 AM</span>
+        <div class="chatlog__message " data-message-id="477444137982099456" id="message-477444137982099456" title="Message sent: 10-Aug-18 11:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">変わらない気がしている</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477444185478266891" id="message-477444185478266891" title="Message sent: 10-Aug-18 11:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">UIImageってそれ自体はイメージバッファの実体を持っていなくて</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477444220412624896" id="message-477444220412624896" title="Message sent: 10-Aug-18 11:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CGImageやCIImageが実体で</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477444270564048905" id="message-477444270564048905" title="Message sent: 10-Aug-18 11:53 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">描画のときに都合の良い方になっている気がする</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477445474601795598" id="message-477445474601795598" title="Message sent: 10-Aug-18 11:57 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あ、あと、CoreGraphicsにおいても、下請けのバッファはCPUモードとGPUモードがある気がする。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:01 PM</span>
+        <div class="chatlog__message " data-message-id="477446357540667399" id="message-477446357540667399" title="Message sent: 10-Aug-18 12:01 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CIImageはソースとフィルタ構造のレシピなので最終的にピクセル単位のデータ配列にはなると思うんだけど、多分UIImageViewはそれを直接GPUに展開して表示しますよね そうなるとOpenGLESのシェーダで実装するのと変わらないですね…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:02 PM</span>
+        <div class="chatlog__message " data-message-id="477446538612965406" id="message-477446538612965406" title="Message sent: 10-Aug-18 12:02 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">それ系でいうと</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477446562839134224" id="message-477446562839134224" title="Message sent: 10-Aug-18 12:02 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">リサイズされたときの挙動なんかが</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477446752321142811" id="message-477446752321142811" title="Message sent: 10-Aug-18 12:02 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">レシピで持ってるか、いちどピクセルバッファになるかで変わると思うんですけど</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477446799435759636" id="message-477446799435759636" title="Message sent: 10-Aug-18 12:03 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">UIImageってサイズ不定は表現できないのかな。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477446878389076008" id="message-477446878389076008" title="Message sent: 10-Aug-18 12:03 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CIImageが</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477446913831075840" id="message-477446913831075840" title="Message sent: 10-Aug-18 12:03 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">もしそのレシピをシェーダーコードに展開していたら</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477446954465361923" id="message-477446954465361923" title="Message sent: 10-Aug-18 12:03 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">自前でフィルタ処理を画像に複数回かけるよりも</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477446992814145556" id="message-477446992814145556" title="Message sent: 10-Aug-18 12:03 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">GPUでワンショットな処理になっていて、速いとかもあるのかも</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:06 PM</span>
+        <div class="chatlog__message " data-message-id="477447673985630210" id="message-477447673985630210" title="Message sent: 10-Aug-18 12:06 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あー、それはありそうです。仮に1フィルタ噛ませるにしても、最終的にリサイズが必要であれば2フィルタかかるって話ですよね。 CIFIlterは複数フィルタを寄せて一括で処理かけるみたいな話だった気がするので、書き方によっては自前より早そうです。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="rintaro#0001" data-user-id="296587674737704960" style="">rintaro</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:06 PM</span>
+        <div class="chatlog__message " data-message-id="477447676774973440" id="message-477447676774973440" title="Message sent: 10-Aug-18 12:06 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://www.objc.io/issues/21-camera-and-photos/core-image-intro/">https://www.objc.io/issues/21-camera-and-photos/core-image-intro/</a>
+                <div class="quote">It is possible to create a UIImage directly from a CIImage, but this approach is fraught: if you try to display such an image in a UIImageView, its contentMode property will be ignored.</div>
+              </span>
+            </div>
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://www.objc.io/issues/21-camera-and-photos/core-image-intro/">
+                      <div class="markdown preserve-whitespace">An Introduction to Core Image &#183; objc.io</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">objc.io publishes books on advanced techniques and practices for iOS and OS X development</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477447816088911872" id="message-477447816088911872" title="Message sent: 10-Aug-18 12:07 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">だいぶ前の記事だからもう変わっているかもしれないですが。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:08 PM</span>
+        <div class="chatlog__message " data-message-id="477448185107972103" id="message-477448185107972103" title="Message sent: 10-Aug-18 12:08 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">
+                <div class="quote">Using an intermediate CGImage takes an extra step, but obviates this annoyance.</div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477448218783907872" id="message-477448218783907872" title="Message sent: 10-Aug-18 12:08 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CGImageを経由するとContentModeが正しく働くってことは、</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477448256855474194" id="message-477448256855474194" title="Message sent: 10-Aug-18 12:08 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CGImageを経由しようとするとそこでピクセルバッファになってしまってる？</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="rintaro#0001" data-user-id="296587674737704960" style="">rintaro</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:09 PM</span>
+        <div class="chatlog__message " data-message-id="477448296047050753" id="message-477448296047050753" title="Message sent: 10-Aug-18 12:09 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">それはそうですね。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:09 PM</span>
+        <div class="chatlog__message " data-message-id="477448377605423121" id="message-477448377605423121" title="Message sent: 10-Aug-18 12:09 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">UIImageでContentModeが正しく動かないってことは、処理自体はなんか特別な速いやつになってそう</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="rintaro#0001" data-user-id="296587674737704960" style="">rintaro</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:10 PM</span>
+        <div class="chatlog__message " data-message-id="477448706451439619" id="message-477448706451439619" title="Message sent: 10-Aug-18 12:10 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><span class="pre pre--inline">CIContext</span> 次第だと思いますが、GPUのコンテキストで作ったものなら、そのままGPUで描画になりそうですね。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:10 PM</span>
+        <div class="chatlog__message " data-message-id="477448768854163456" id="message-477448768854163456" title="Message sent: 10-Aug-18 12:10 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あ、そうか、CIContextを作るときに指定したりできるんですっけ。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:13 PM</span>
+        <div class="chatlog__message " data-message-id="477449528543412235" id="message-477449528543412235" title="Message sent: 10-Aug-18 12:13 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">今試してみたらcontentMode効いてますね、iPhoneXだからかも、5cとかでやらないと分からないな…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:14 PM</span>
+        <div class="chatlog__message " data-message-id="477449593055871016" id="message-477449593055871016" title="Message sent: 10-Aug-18 12:14 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">昔のバグかも。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477449785968689153" id="message-477449785968689153" title="Message sent: 10-Aug-18 12:14 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ありえんでかい画像を作ったら</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477449826271756289" id="message-477449826271756289" title="Message sent: 10-Aug-18 12:15 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">メモリ消費とGPUメモリ消費を観察して</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477449848946294806" id="message-477449848946294806" title="Message sent: 10-Aug-18 12:15 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">なんとなくわかるかもしれないですね</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477449882697990164" id="message-477449882697990164" title="Message sent: 10-Aug-18 12:15 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">GPUメモリ消費がわかるinstrumentsあったっけ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">10-Aug-18 12:17 PM</span>
+        <div class="chatlog__message " data-message-id="477450519460315136" id="message-477450519460315136" title="Message sent: 10-Aug-18 12:17 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">バグだとしても少なくともおもちさんの言う通り特別速いルートか何らか違うパイプラインで処理されてそうですね CGImageになっている時にCPUメモリ側にあったらCIImage to UIImageはオーバーヘッドありそうですね…！</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477452056521605142" id="message-477452056521605142" title="Message sent: 10-Aug-18 12:24 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">CPU -&gt; GPU間のtransferが分かっても同義か 多分最近のはMetalになっちゃっているので旧デバイス必要ですね…</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="477452925275209740" id="message-477452925275209740" title="Message sent: 10-Aug-18 12:27 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">iPhone5cポチったので届いたら測ってみます</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">27-Aug-18 05:22 AM</span>
+        <div class="chatlog__message " data-message-id="483506495741362176" id="message-483506495741362176" title="Message sent: 27-Aug-18 05:22 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">↑OpenGLESのInstrumentsがもう動かないので検証出来なかった…。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/363586212209885185/b1c8351cc21adc00e7c5cce2ec1c654f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cookiezby#5867" data-user-id="363586212209885185" style="">cookiezby</span>
+        <span class="chatlog__timestamp">26-Sep-18 10:54 AM</span>
+        <div class="chatlog__message " data-message-id="494461723177254914" id="message-494461723177254914" title="Message sent: 26-Sep-18 10:54 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://github.com/BradLarson/GPUImage3">https://github.com/BradLarson/GPUImage3</a></span>
+            </div>
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://github.com/BradLarson/GPUImage3">
+                      <div class="markdown preserve-whitespace">BradLarson/GPUImage3</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">GPUImage 3 is a BSD-licensed Swift framework for GPU-accelerated video and image processing using Metal. - BradLarson/GPUImage3</div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/UNXo0N9RFr3I5pXiLD4auROR7i-7J1rrUPL43xaJuRg/%3Fs%3D400%26v%3D4/https/avatars3.githubusercontent.com/u/954279">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/UNXo0N9RFr3I5pXiLD4auROR7i-7J1rrUPL43xaJuRg/%3Fs%3D400%26v%3D4/https/avatars3.githubusercontent.com/u/954279" alt="Thumbnail" loading="lazy">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="eyes">
+              <img class="emoji emoji--small" alt="&#128064;" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy">
+              <span class="chatlog__reaction-count">3</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="494461805243138048" id="message-494461805243138048" title="Message sent: 26-Sep-18 10:54 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">Metal製GPUImageが来た</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">08-Oct-18 05:22 PM</span>
+        <div class="chatlog__message " data-message-id="498908121700499476" id="message-498908121700499476" title="Message sent: 08-Oct-18 05:22 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">こんばんは <img loading="lazy" class="emoji " alt="👩" title="woman" src="https://twemoji.maxcdn.com/2/svg/1f469.svg">‍<img loading="lazy" class="emoji " alt="👩" title="woman" src="https://twemoji.maxcdn.com/2/svg/1f469.svg">‍<img loading="lazy" class="emoji " alt="👦" title="boy" src="https://twemoji.maxcdn.com/2/svg/1f466.svg">‍<img loading="lazy" class="emoji " alt="👦" title="boy" src="https://twemoji.maxcdn.com/2/svg/1f466.svg"></span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="498908971336204319" id="message-498908971336204319" title="Message sent: 08-Oct-18 05:26 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">名前はmetalになっていますが、グラフィック全般ここでokなんですかね？</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+        <span class="chatlog__timestamp">08-Oct-18 05:35 PM</span>
+        <div class="chatlog__message " data-message-id="498911431266402314" id="message-498911431266402314" title="Message sent: 08-Oct-18 05:35 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あまり厳密じゃないんで、他に良さそうなチャネルがなければ書いてみて、他の方が良さそうなら誰かが案内してくれると思います<img loading="lazy" class="emoji " alt="🙂" title="slight_smile" src="https://twemoji.maxcdn.com/2/svg/1f642.svg"></span>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="ok_hand">
+              <img class="emoji emoji--small" alt="&#128076;" src="https://twemoji.maxcdn.com/2/svg/1f44c.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/360220968301363200/37e59c5ef330320c30575c25dd8d722b.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kwzr#8127" data-user-id="360220968301363200" style="">kwzr</span>
+        <span class="chatlog__timestamp">09-Oct-18 04:06 AM</span>
+        <div class="chatlog__message " data-message-id="499070211819831316" id="message-499070211819831316" title="Message sent: 09-Oct-18 04:06 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">こんにちは。Metalではないですが、Core Image Kernel Languageで以下のコードがiOS11では動いていたのですが、iOS12上で実行したらエラーも吐かずに動かなくなってしまいます。(カメラからcaptureOutputでフィルターを掛けてUIImageViewに突っ込んでいるが、それが止まってしまう。 arrayの書き方は特に間違ってないと思うのですが... <div class="pre pre--multiline language-glsl">vec2 blurCoordinates[9]; ... blurCoordinates[4] = destCoord(); ... // これは動かない(iOS11までは動いていた) vec4 centralColor = sample(inputImage, samplerTransform(inputImage, blurCoordinates[4])); // これは動く vec4 centralColor = sample(inputImage, samplerTransform(inputImage, destCoord()));</div></span>
+              <span class="chatlog__edited-timestamp" title="09-Oct-18 04:07 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/360220968301363200/37e59c5ef330320c30575c25dd8d722b.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kwzr#8127" data-user-id="360220968301363200" style="">kwzr</span>
+        <span class="chatlog__timestamp">09-Oct-18 10:32 AM</span>
+        <div class="chatlog__message " data-message-id="499167280001843211" id="message-499167280001843211" title="Message sent: 09-Oct-18 10:32 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">こちら、CIKernelのapplyのroiCallbackでinsetを設定していたんですが、それを消したらうまく動くようになりました(謎</span>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="open_mouth">
+              <img class="emoji emoji--small" alt="&#128558;" src="https://twemoji.maxcdn.com/2/svg/1f62e.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">11-Oct-18 02:34 AM</span>
+        <div class="chatlog__message " data-message-id="499771825144987698" id="message-499771825144987698" title="Message sent: 11-Oct-18 02:34 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">UIImageViewってCIImageの表示に最適化されてたんですね。 GLKViewとかMTKView使ったCIImageの表示は必要なかったのかな..</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">11-Oct-18 03:37 AM</span>
+        <div class="chatlog__message " data-message-id="499787574584410112" id="message-499787574584410112" title="Message sent: 11-Oct-18 03:37 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">個人的にはその手のMetalで画像表示ビューなどの自作は意味がないと思ってます。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="499787786849615872" id="message-499787786849615872" title="Message sent: 11-Oct-18 03:38 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">理由はUIImageViewが対応しているからです。</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="499787947185537025" id="message-499787947185537025" title="Message sent: 11-Oct-18 03:38 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">iOS自体がMacOSXをベースにしてるので、基本的な描画システム(CALayer)がCPUベースじゃなくGPUベースでできているはずで</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="499788221451075604" id="message-499788221451075604" title="Message sent: 11-Oct-18 03:39 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">UIKitが提供してる範囲で目的が果たせるなら、パフォーマンスに関してはAppleに任せたほうが、GPU連携の裏の挙動も最適化されると思います。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">11-Oct-18 03:52 AM</span>
+        <div class="chatlog__message " data-message-id="499791255274913793" id="message-499791255274913793" title="Message sent: 11-Oct-18 03:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">そうですよね、今まで少し勘違いしてました</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="499792079484878858" id="message-499792079484878858" title="Message sent: 11-Oct-18 03:55 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ただ、以前がんばってPhotosの編集画面を覗いていた時に、クロップ時と編集プレビュー時でUIImageViewとGLKViewを使い分けていたのを見つけたことがあったのが少し気がかりです。 これはiOS9だったかな..</span>
+            </div>
+          </div>
+          <div class="chatlog__attachment " onclick="">
+            <a href="https://cdn.discordapp.com/attachments/454555247461924875/499792078352547870/Screen_Shot_2018-10-11_at_12.54.01.png">
+              <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/454555247461924875/499792078352547870/Screen_Shot_2018-10-11_at_12.54.01.png" alt="Image attachment" title="Image: Screen_Shot_2018-10-11_at_12.54.01.png (1.42 MB)" loading="lazy">
+            </a>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="grinning">
+              <img class="emoji emoji--small" alt="&#128512;" src="https://twemoji.maxcdn.com/2/svg/1f600.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">11-Oct-18 03:57 AM</span>
+        <div class="chatlog__message " data-message-id="499792729702924308" id="message-499792729702924308" title="Message sent: 11-Oct-18 03:57 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">なにかエフェクトがかかったりする箇所であれば、OpenGLのコードを書きたいのでGLKViewを使う理由が出てくると思いますが、ただ表示してるだけの箇所なら謎ですね</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">11-Oct-18 04:00 AM</span>
+        <div class="chatlog__message " data-message-id="499793323129569290" id="message-499793323129569290" title="Message sent: 11-Oct-18 04:00 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ああ、明るさとかのフィルターは行うViewだとは思います!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">11-Oct-18 04:00 AM</span>
+        <div class="chatlog__message " data-message-id="499793428838612997" id="message-499793428838612997" title="Message sent: 11-Oct-18 04:00 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">お、じゃあその処理をGLで実装してるんじゃないですかね〜</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">11-Oct-18 04:01 AM</span>
+        <div class="chatlog__message " data-message-id="499793640777056256" id="message-499793640777056256" title="Message sent: 11-Oct-18 04:01 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">なるほど、</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <span class="chatlog__timestamp">11-Oct-18 04:02 AM</span>
+        <div class="chatlog__message " data-message-id="499793810499436552" id="message-499793810499436552" title="Message sent: 11-Oct-18 04:02 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">GL関係は全部deprecatedになってるからiOS12だとMetalに変わってるんですかねえ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">11-Oct-18 04:03 AM</span>
+        <div class="chatlog__message " data-message-id="499794154994401291" id="message-499794154994401291" title="Message sent: 11-Oct-18 04:03 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">また機会があれば頑張って覗いてみたいものです <img loading="lazy" class="emoji " alt="🤐" title="zipper_mouth" src="https://twemoji.maxcdn.com/2/svg/1f910.svg"></span>
+            </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="slight_smile">
+              <img class="emoji emoji--small" alt="&#128578;" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">11-Oct-18 08:39 AM</span>
+        <div class="chatlog__message " data-message-id="499863702061973506" id="message-499863702061973506" title="Message sent: 11-Oct-18 08:39 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ぬ、UIImageView &lt;- CIImage contentModeが効かない?</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="499863820076974080" id="message-499863820076974080" title="Message sent: 11-Oct-18 08:40 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">実機 iOS12は効いてる</span>
+              <span class="chatlog__edited-timestamp" title="11-Oct-18 08:40 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="499864207131541514" id="message-499864207131541514" title="Message sent: 11-Oct-18 08:41 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">実機iOS11も大丈夫か... シミュレータだけかしら</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <span class="chatlog__timestamp">12-Oct-18 09:11 AM</span>
+        <div class="chatlog__message " data-message-id="500233960224456715" id="message-500233960224456715" title="Message sent: 12-Oct-18 09:11 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">前にこのスレでrintaroさんが話してたやつですかね CGImage経由すると問題ないとか</span>
+              <span class="chatlog__edited-timestamp" title="12-Oct-18 09:11 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/495020788793999370/c14883a96f2c6807293d6eb41cad3eec.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="muukii#6724" data-user-id="495020788793999370" style="">muukii</span>
+        <span class="chatlog__timestamp">13-Oct-18 08:14 PM</span>
+        <div class="chatlog__message " data-message-id="500763310606516226" id="message-500763310606516226" title="Message sent: 13-Oct-18 08:14 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">お、そんな問題が</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/363586212209885185/b1c8351cc21adc00e7c5cce2ec1c654f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cookiezby#5867" data-user-id="363586212209885185" style="">cookiezby</span>
+        <span class="chatlog__timestamp">17-Oct-18 06:52 AM</span>
+        <div class="chatlog__message " data-message-id="502010946173009920" id="message-502010946173009920" title="Message sent: 17-Oct-18 06:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">MTLTextureのpixelFormatの変更をやったことがある人がいますか？</span>
+              <span class="chatlog__edited-timestamp" title="17-Oct-18 06:52 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/363586212209885185/b1c8351cc21adc00e7c5cce2ec1c654f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cookiezby#5867" data-user-id="363586212209885185" style="">cookiezby</span>
+        <span class="chatlog__timestamp">05-Nov-18 09:48 AM</span>
+        <div class="chatlog__message " data-message-id="508940554240000001" id="message-508940554240000001" title="Message sent: 05-Nov-18 09:48 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">metal関連したコードがiPhone8以後の機種がRender先のMLTextureのusageを.renderTargetに設定しないとXcode10.0がよくクラッシュになる。。。Xcode10.1にアップデットするとやっとこれが分かった。<img loading="lazy" class="emoji " alt="😇" title="innocent" src="https://twemoji.maxcdn.com/2/svg/1f607.svg"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/351622088974401546/1961899f96712d70a274e7d8782e8556.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="yoshiki#8651" data-user-id="351622088974401546" style="">yoshiki</span>
+        <span class="chatlog__timestamp">11-Apr-19 01:25 PM</span>
+        <div class="chatlog__message " data-message-id="565890103000563712" id="message-565890103000563712" title="Message sent: 11-Apr-19 01:25 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">MetalでMacOS上で動くshaderを弄ってみました。</span>
+            </div>
+          </div>
+          <div class="chatlog__attachment " onclick="">
+            <a href="https://cdn.discordapp.com/attachments/454555247461924875/565890102996369421/2019-04-11_22.24.39.png">
+              <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/454555247461924875/565890102996369421/2019-04-11_22.24.39.png" alt="Image attachment" title="Image: 2019-04-11_22.24.39.png (106.94 KB)" loading="lazy">
+            </a>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="thumbsup">
+              <img class="emoji emoji--small" alt="&#128077;" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+              <span class="chatlog__reaction-count">4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/351622088974401546/1961899f96712d70a274e7d8782e8556.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="yoshiki#8651" data-user-id="351622088974401546" style="">yoshiki</span>
+        <span class="chatlog__timestamp">26-May-19 09:07 AM</span>
+        <div class="chatlog__message " data-message-id="582132688987750400" id="message-582132688987750400" title="Message sent: 26-May-19 09:07 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">Metal使いはじめて気づいたこと。 自前のキューブなどのオブジェクトを複数描画したい場合は <div class="pre pre--multiline nohighlight">renderCommandEncoder?.setVertexBuffer() renderCommandEncoder?.drawPrimitives()</div> をオブジェクト数分書けばいい。 これが分からなくて半日ハマりました。</span>
+              <span class="chatlog__edited-timestamp" title="26-May-19 09:09 AM">(edited)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/351622088974401546/1961899f96712d70a274e7d8782e8556.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="yoshiki#8651" data-user-id="351622088974401546" style="">yoshiki</span>
+        <span class="chatlog__timestamp">04-Jun-19 01:49 PM</span>
+        <div class="chatlog__message " data-message-id="585465150358814721" id="message-585465150358814721" title="Message sent: 04-Jun-19 01:49 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">3Dゲーム制作を開始しました。</span>
+              <span class="chatlog__edited-timestamp" title="04-Jun-19 01:49 PM">(edited)</span>
+            </div>
+          </div>
+          <div class="chatlog__attachment " onclick="">
+            <a href="https://cdn.discordapp.com/attachments/454555247461924875/585465150358814720/IMG_0256_2.PNG">
+              <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/454555247461924875/585465150358814720/IMG_0256_2.PNG" alt="Image attachment" title="Image: IMG_0256_2.PNG (810.11 KB)" loading="lazy">
+            </a>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="100">
+              <img class="emoji emoji--small" alt="&#128175;" src="https://twemoji.maxcdn.com/2/svg/1f4af.svg" loading="lazy">
+              <span class="chatlog__reaction-count">3</span>
+            </div>
+            <div class="chatlog__reaction" title="robot">
+              <img class="emoji emoji--small" alt="&#129302;" src="https://twemoji.maxcdn.com/2/svg/1f916.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="postamble">
+    <div class="postamble__entry">Exported 99 message(s)</div>
+  </div>
+</body>
+
+</html>

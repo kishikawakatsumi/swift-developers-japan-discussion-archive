@@ -17,6 +17,12 @@ configure({
 const categories = JSON.parse(
   await Deno.readTextFile(`${Deno.cwd()}/data/channel_structure.json`),
 );
+const channels = Object.values(categories)
+  .flat();
+const threads = channels
+  .filter((x) => (x as { threads: unknown }).threads)
+  .map((x) => (x as { threads: unknown }).threads)
+  .flat();
 
 const response = await fetch(
   "https://raw.githubusercontent.com/monperrus/crawler-user-agents/master/crawler-user-agents.json",
@@ -33,7 +39,7 @@ router
   .get("/", async (context) => {
     context.response.body = await renderBody();
   })
-  .get("/channels/:id", async (context) => {
+  .get("/channels/:id(\\d+)", async (context) => {
     const userAgent = context.request.headers.get("user-agent");
     if (userAgent && isBot.test(userAgent)) {
       context.response.body = await Deno.readTextFile(
@@ -43,17 +49,10 @@ router
       context.response.body = await renderBody();
     }
   })
-  .get("/channels/:thread/:id", async (context) => {
+  .get("/channels/:thread/:id(\\d+)", async (context) => {
     const userAgent = context.request.headers.get("user-agent");
     if (userAgent && isBot.test(userAgent)) {
-      const channelId = context.params.thread;
       const threadId = context.params.id;
-
-      const threads = Object.values(categories)
-        .flat()
-        .filter((x) => (x as { threads: unknown }).threads)
-        .map((x) => (x as { threads: unknown }).threads)
-        .flat();
       const thread = threads.find((x) => (x as { id: string }).id === threadId);
 
       context.response.body = await Deno.readTextFile(
@@ -64,6 +63,47 @@ router
     } else {
       context.response.body = await renderBody();
     }
+  })
+  .get("/data/channels/:id(\\d+).html", async (context) => {
+    const channelId = context.params.id;
+    context.response.body = await Deno.readTextFile(
+      `${Deno.cwd()}/data/html/${channelId}.html`,
+    );
+  })
+  .get("/data/channels/:thread/:id(\\d+).html", async (context) => {
+    context.response.body = await Deno.readTextFile(
+      `${Deno.cwd()}/data/html/${context.params.thread}/${context.params.id}.html`,
+    );
+  })
+  // Legacy routes
+  .get("/channels/:channelName", async (context) => {
+    const channelName = context.params.channelName;
+
+    const channel = channels.find((channel) =>
+      (channel as { channelName: string }).channelName === channelName
+    );
+    const channelId = (channel as { channelId: string }).channelId;
+
+    const userAgent = context.request.headers.get("user-agent");
+    if (userAgent && isBot.test(userAgent)) {
+      context.response.body = await Deno.readTextFile(
+        `${Deno.cwd()}/data/html/${channelId}.html`,
+      );
+    } else {
+      context.response.body = await renderBody();
+    }
+  })
+  .get("/data/channels/:channelName.html", async (context) => {
+    const channelName = context.params.channelName;
+
+    const channel = channels.find((channel) =>
+      (channel as { channelName: string }).channelName === channelName
+    );
+    const channelId = (channel as { channelId: string }).channelId;
+
+    context.response.body = await Deno.readTextFile(
+      `${Deno.cwd()}/data/html/${channelId}.html`,
+    );
   });
 
 const app = new Application();

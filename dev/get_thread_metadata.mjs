@@ -1,5 +1,7 @@
 "use strict";
 
+import "dotenv/config";
+
 import fetch from "node-fetch";
 import * as fs from "fs";
 

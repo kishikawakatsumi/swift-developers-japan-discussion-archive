@@ -12,11 +12,37 @@ const client = algoliasearch(
 const index = client.initIndex("messages");
 
 const root = "data/json";
-fs.readdirSync(root).forEach(async (file) => {
-  if (!file.endsWith(".json")) {
+fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
+  if (dirent.isDirectory()) {
+    const channelId = dirent.name;
+    fs.readdirSync(`${root}/${dirent.name}`, { withFileTypes: true }).forEach(
+      async (dirent) => {
+        if (dirent.name === "metadata.json" || !dirent.name.endsWith(".json")) {
+          return;
+        }
+        const data = JSON.parse(
+          fs.readFileSync(`${root}/${channelId}/${dirent.name}`, "utf-8")
+        );
+        const messages = data.messages.map((message) => ({
+          objectID: message.id,
+          channel: data.channel,
+          ...message,
+          html: fs.readFileSync(
+            `data/message_html_fragments/${message.id}.html`,
+            "utf-8"
+          ),
+        }));
+        await index.saveObjects(messages, {
+          autoGenerateObjectIDIfNotExist: false,
+        });
+      }
+    );
     return;
   }
-  const data = JSON.parse(fs.readFileSync(`${root}/${file}`, "utf-8"));
+  if (!dirent.name.endsWith(".json")) {
+    return;
+  }
+  const data = JSON.parse(fs.readFileSync(`${root}/${dirent.name}`, "utf-8"));
   const messages = data.messages.map((message) => ({
     objectID: message.id,
     channel: data.channel,
