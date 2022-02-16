@@ -1,7 +1,7 @@
 "use strict";
 
 page("/", () => {
-  page.redirect("/channels/291054454793306112");
+  page.redirect("/channels/291054454793306112?category=main&channel=swift");
 });
 page("/channels/:id(\\d+)", (ctx) => {
   const channelId = ctx.params.id;
