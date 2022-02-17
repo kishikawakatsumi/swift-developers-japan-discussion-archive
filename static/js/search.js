@@ -121,11 +121,10 @@ autocomplete({
         "button",
         "is-small",
         "is-info",
-        "px-5",
+        "px-4",
         "ml-2",
         "my-1"
       );
-      submitButton.style.marginTop = "2px";
       submitButton.innerHTML = `<span class="fa-solid fa-magnifying-glass"></span>`;
       submitButton.onclick = () => {
         document
@@ -192,6 +191,20 @@ autocomplete({
                 __html: `<div onclick="location.href='/channels/${link}?category=${channel.category}&channel=${channel.name}&message_id=${item.id}';">
   <div class="has-text-grey has-text-weight-medium is-size-6 p-1"><span class="fa-light fa-hashtag fa-sm is-size-7 pl-2 pr-1"></span>${headerText}</div>
   ${item.html}
+</div>`,
+              },
+            });
+          },
+          footer({ createElement, Fragment }) {
+            return createElement("div", {
+              dangerouslySetInnerHTML: {
+                __html: `<hr class="my-3">
+<div class="columns is-centered">
+  <div class="column is-4">
+    <button class="button is-small is-info is-fullwidth" onclick='document.querySelector(".aa-Form").requestSubmit(document.querySelector(".aa-SubmitButton"));'>
+      <span class="fa-solid fa-magnifying-glass"></span>
+    </button>
+  </div>
 </div>`,
               },
             });
