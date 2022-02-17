@@ -97,6 +97,7 @@ autocomplete({
   openOnFocus: false,
   plugins: [querySuggestionsPlugin],
   detachedMediaQuery: "",
+  debug: true,
   initialState: {
     query: searchPageState.query || "",
   },
@@ -108,15 +109,36 @@ autocomplete({
     document.getElementById("modal-search-results-title").textContent =
       state.query;
     openModal(document.getElementById("modal-search-results"));
-
-    setInstantSearchUiState({ query: state.query });
   },
   onReset() {
     setInstantSearchUiState({ query: "" });
   },
-  onStateChange({ prevState, state }) {
-    if (prevState.query !== state.query) {
-      setInstantSearchUiState({ query: state.query });
+  onStateChange({ _prevState, _state }) {
+    if (!document.getElementById("submit-button")) {
+      const submitButton = document.createElement("button");
+      submitButton.id = "submit-button";
+      submitButton.classList.add(
+        "button",
+        "is-small",
+        "is-info",
+        "px-5",
+        "ml-2",
+        "my-1"
+      );
+      submitButton.style.marginTop = "2px";
+      submitButton.innerHTML = `<span class="fa-solid fa-magnifying-glass"></span>`;
+      submitButton.onclick = () => {
+        document
+          .querySelector(".aa-Form")
+          .requestSubmit(document.querySelector(".aa-SubmitButton"));
+      };
+      const formContainer = document.querySelector(".aa-DetachedFormContainer");
+      if (formContainer) {
+        formContainer.insertBefore(
+          submitButton,
+          document.querySelector(".aa-DetachedCancelButton")
+        );
+      }
     }
   },
   getSources({ query }) {
@@ -132,8 +154,7 @@ autocomplete({
                 query,
                 attributesToRetrieve: ["id", "channel", "html"],
                 params: {
-                  hitsPerPage: 50,
-                  snippetEllipsisText: "…",
+                  hitsPerPage: 20,
                 },
               },
             ],
