@@ -39,5 +39,18 @@ page("/channels/:channelId/:threadId", (ctx) => {
 
   loadChannel(`${channelId}/${threadId}`);
 });
+// Legacy routes
+page("/channels/:channelName", (ctx) => {
+  const channelName = ctx.params.channelName;
+
+  for (const activeMenu of document.querySelectorAll(
+    ".menu-list a.is-active"
+  )) {
+    activeMenu.classList.remove("is-active");
+  }
+
+  document.getElementById("header-channel-name").innerText = channelName;
+  loadChannel(channelName);
+});
 
 page();
