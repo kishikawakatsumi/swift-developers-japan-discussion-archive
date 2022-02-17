@@ -106,8 +106,9 @@ autocomplete({
       return;
     }
 
-    document.getElementById("modal-search-results-title").textContent =
-      state.query;
+    document.getElementById(
+      "modal-search-results-title"
+    ).innerHTML = `<span class="fa-solid fa-magnifying-glass is-size-5 pr-2"></span>${state.query}`;
     openModal(document.getElementById("modal-search-results"));
   },
   onReset() {
