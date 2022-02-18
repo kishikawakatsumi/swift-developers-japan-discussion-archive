@@ -53,11 +53,11 @@
           </div>
           <div class="pl-4 pb-4" style="height: 100vh; overflow: scroll;">
             <aside class="menu">
-              <% Object.keys(it.categories).forEach(function(categoryName) { %>
+              <% Object.keys(it.categories).forEach((categoryName) => { %>
               <p class="menu-label">
                 <%= categoryName %>
               </p>
-              <% it.categories[categoryName].forEach(function(channel) { %>
+              <% it.categories[categoryName].forEach((channel) => { %>
               <ul class="menu-list">
                 <li>
                   <a id="sidebar-<%= channel.channelId %>"
@@ -72,7 +72,7 @@
                         <span class="fa-regular fa-message fa-sm"></span>
                         <span class="px-1">Thread</span>
                       </summary>
-                      <% channel.threads.forEach(function(thread) { %>
+                      <% channel.threads.forEach((thread) => { %>
                       <li>
                         <a id="sidebar-<%= thread.channelId %>/<%= thread.id %>"
                           href="/channels/<%= thread.channelId %>/<%= thread.id %>?category=<%= thread.categoryName %>&channel=<%= thread.channelName %>">
@@ -132,7 +132,23 @@
               <span id="header-channel-name" class="is-size-4 px-1"></span>
             </div>
             <div class="column pr-5 pb-0">
-              <div id="autocomplete" class="is-inline-block is-pulled-right" style="min-width: 20vw;"></div>
+              <div id="autocomplete" class="is-pulled-right" style="min-width: 20vw;"></div>
+
+              <div class="dropdown is-hoverable is-pulled-right px-2">
+                <div class="dropdown-trigger">
+                  <button class="button is-small px-4" aria-haspopup="true" aria-controls="dropdown-menu"
+                    style="padding-top: 15px; padding-bottom: 16px;">
+                    <span class="fa-regular fa-calendar-arrow-down is-size-6 px-1"></span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div id="date-index-menu" class="dropdown-content" style="max-height: 80vh; overflow: scroll;">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div id="message-container" class="column" style="max-height: 100vh; overflow: auto;">
@@ -170,6 +186,12 @@
   <script src="https://unpkg.com/page/page.js"></script>
 
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
+
+  <script>
+    /* beautify ignore:start */
+    window.channelDateIndex = <%~ it.dateIndex %>;
+    /* beautify ignore:end */
+  </script>
 
   <script src="/js/app.js<%= it.cb %>"></script>
   <script src="/js/router.js<%= it.cb %>"></script>

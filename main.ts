@@ -24,12 +24,38 @@ const threads = channels
   .map((x) => (x as { threads: unknown }).threads)
   .flat();
 
-const response = await fetch(
-  "https://raw.githubusercontent.com/monperrus/crawler-user-agents/master/crawler-user-agents.json",
-);
-const items = await response.json();
-const patterns = items.map((item: { pattern: string }) => item.pattern);
-const isBot = new RegExp(patterns.join("|"));
+const channelDateIndex = await (async () => {
+  const index: any = {};
+
+  const root = `${Deno.cwd()}/data/json`;
+  for await (const file of await Deno.readDir(root)) {
+    if (file.isFile && file.name.endsWith(".json")) {
+      const channel = JSON.parse(
+        await Deno.readTextFile(`${root}/${file.name}`),
+      );
+
+      const dateIndex: any = {};
+      index[channel.channel.id] = dateIndex;
+
+      for (const message of channel.messages) {
+        const date = message.timestamp.substring(0, 7);
+        if (!dateIndex[date]) {
+          dateIndex[date] = message.id;
+        }
+      }
+    }
+  }
+  return index;
+})();
+
+const isBot = await (async (): Promise<RegExp> => {
+  const response = await fetch(
+    "https://raw.githubusercontent.com/monperrus/crawler-user-agents/master/crawler-user-agents.json",
+  );
+  const items = await response.json();
+  const patterns = items.map((item: { pattern: string }) => item.pattern);
+  return new RegExp(patterns.join("|"));
+})();
 
 const router = new Router();
 router
@@ -55,19 +81,18 @@ router
       const threadId = context.params.id;
       const thread = threads.find((x) => (x as { id: string }).id === threadId);
 
+      const channelId = (thread as { channelId: string }).channelId;
+      const channelName = (thread as { channelName: string }).channelName;
       context.response.body = await Deno.readTextFile(
-        `${Deno.cwd()}/data/html/${
-          (thread as { channelId: string }).channelId
-        }/${(thread as { channelName: string }).channelName}.html`,
+        `${Deno.cwd()}/data/html/${channelId}/${channelName}.html`,
       );
     } else {
       context.response.body = await renderBody();
     }
   })
   .get("/data/channels/:id(\\d+).html", async (context) => {
-    const channelId = context.params.id;
     context.response.body = await Deno.readTextFile(
-      `${Deno.cwd()}/data/html/${channelId}.html`,
+      `${Deno.cwd()}/data/html/${context.params.id}.html`,
     );
   })
   .get("/data/channels/:thread/:id(\\d+).html", async (context) => {
@@ -76,9 +101,8 @@ router
     );
   })
   .get("/data/messages/:id(\\d+).html", async (context) => {
-    const channelId = context.params.id;
     context.response.body = await Deno.readTextFile(
-      `${Deno.cwd()}/data/message_html_fragments/${channelId}.html`,
+      `${Deno.cwd()}/data/message_html_fragments/${context.params.id}.html`,
     );
   })
   // Legacy routes
@@ -161,6 +185,7 @@ async function renderBody(): Promise<string> {
   const cacheBuster = `?v=${Deno.env.get("RENDER_GIT_COMMIT")}`;
   return `${await renderFile("index.html", {
     categories: categories,
+    dateIndex: JSON.stringify(channelDateIndex),
     cb: cacheBuster,
   })}`;
 }
