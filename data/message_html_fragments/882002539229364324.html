@@ -17,7 +17,10 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">Task.init は現在の Actor コンテキストを引き継ぐと思うので 今回の場合は <span class="pre pre--inline">@MainActor in</span> はいらない </div>↓みたいに <span class="pre pre--inline">Task.init</span> ではなく <span class="pre pre--inline">Task.detached</span> を挟んで context を引き継がないときなので <span class="pre pre--inline">MainActor</span> に戻す必要があるかと。 <div class="pre pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { [self] in do { let user = try await fetchUser(for: userID); Task { @MainActor in self.user = user } } catch { // エラーハンドリング } } }</div>
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">Task.init は現在の Actor コンテキストを引き継ぐと思うので 今回の場合は <span class="pre pre--inline">@MainActor in</span> はいらない </div>
+            </div>↓みたいに <span class="pre pre--inline">Task.init</span> ではなく <span class="pre pre--inline">Task.detached</span> を挟んで context を引き継がないときなので <span class="pre pre--inline">MainActor</span> に戻す必要があるかと。 <div class="pre pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { [self] in do { let user = try await fetchUser(for: userID); Task { @MainActor in self.user = user } } catch { // エラーハンドリング } } }</div>
           </span>
         </div>
       </div>

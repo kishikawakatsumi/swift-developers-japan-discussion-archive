@@ -23,7 +23,19 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">When a protocol restates a requirement from its inherited protocol, track that as an override the same way we do with overrides in classes. </div>プロトコル要求を再定義したとき、クラスのオーバライドと同じ仕組みで紐付けられる。 <div class="quote">Such overrides are recorded in the AST but are omitted from the witness table itself. </div>このオーバライドはASTとして記録されているがwitness talbeでは消える。 <div class="quote">This makes restating protocol requirements in inheriting protocols ABI-neutral, </div>継承先プロトコルでの再定義がABIに影響を与えない(netutral)ので <div class="quote">so we can restate protocol requirements to influence associated type inference without baking those decisions into the ABI. </div>これらの決定をABIに焼き込むことなしに、associated type推論を促すために、プロトコル要求の再定義をすることができる。
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">When a protocol restates a requirement from its inherited protocol, track that as an override the same way we do with overrides in classes. </div>
+            </div>プロトコル要求を再定義したとき、クラスのオーバライドと同じ仕組みで紐付けられる。 <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">Such overrides are recorded in the AST but are omitted from the witness table itself. </div>
+            </div>このオーバライドはASTとして記録されているがwitness talbeでは消える。 <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">This makes restating protocol requirements in inheriting protocols ABI-neutral, </div>
+            </div>継承先プロトコルでの再定義がABIに影響を与えない(netutral)ので <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">so we can restate protocol requirements to influence associated type inference without baking those decisions into the ABI. </div>
+            </div>これらの決定をABIに焼き込むことなしに、associated type推論を促すために、プロトコル要求の再定義をすることができる。
           </span>
         </div>
       </div>
@@ -39,7 +51,10 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">As part of this, introduce tools that allow us to audit all of the restated protocol requirements within the standard library, via a warning new warning flag (-warn-implicit-overrides) to warn about such requirements, as well as an appropriate suppression mechanism (override to treat it as an override, @_nonoverride to give it a new witness table entry). </div>で、このオーバーライドがちゃんと効いてることをチェックできるように、ちゃんとマーキングした上で、マーキングなしでオーバライドしてたら通知する警告を作ったよと・・・そこもわかる。
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">As part of this, introduce tools that allow us to audit all of the restated protocol requirements within the standard library, via a warning new warning flag (-warn-implicit-overrides) to warn about such requirements, as well as an appropriate suppression mechanism (override to treat it as an override, @_nonoverride to give it a new witness table entry). </div>
+            </div>で、このオーバーライドがちゃんと効いてることをチェックできるように、ちゃんとマーキングした上で、マーキングなしでオーバライドしてたら通知する警告を作ったよと・・・そこもわかる。
           </span>
           <span class="chatlog__edited-timestamp" title="24-Sep-21 06:24 PM">(edited)</span>
         </div>
@@ -49,7 +64,19 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">Only those restated requirements that are meant to have a semantic effect, </div>再定義した要求において意味上の影響を意図しているものだけは <div class="quote">like BidirectionalCollection.index(_:offsetBy:), </div>たとえば BidirectionalCollection.indexなど <div class="quote">should use @_nonoverride, </div>は、nonoverrideを付けたほうが良い <div class="quote">because it commits us to having that entry in the witness table forever. </div>なぜならテーブルエントリを永遠に保持することを約束してくれるから。
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">Only those restated requirements that are meant to have a semantic effect, </div>
+            </div>再定義した要求において意味上の影響を意図しているものだけは <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">like BidirectionalCollection.index(_:offsetBy:), </div>
+            </div>たとえば BidirectionalCollection.indexなど <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">should use @_nonoverride, </div>
+            </div>は、nonoverrideを付けたほうが良い <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">because it commits us to having that entry in the witness table forever. </div>
+            </div>なぜならテーブルエントリを永遠に保持することを約束してくれるから。
           </span>
           <span class="chatlog__edited-timestamp" title="24-Sep-21 06:27 PM">(edited)</span>
         </div>

@@ -9,7 +9,10 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">handle とスコープについては、 Go の defer はスコープ関係なく関数単位だったはずだから、 handle はどうなんだろう？とさっきから思ってる。 </div><a href="https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling.md">https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling.md</a> の <span class="pre pre--inline">Each check may have a different handler chain function depending on the scope in which it is defined. For example, consider this function:</span> がまさにそこに言及していそう <div class="pre pre--multiline nohighlight">func process(user string, files chan string) (n int, err error) { handle err { return 0, fmt.Errorf("process: %v", err) } // handler A for i := 0; i &lt; 3; i++ { handle err { err = fmt.Errorf("attempt %d: %v", i, err) } // handler B handle err { err = moreWrapping(err) } // handler C check do(something()) // check 1: handler chain C, B, A } check do(somethingElse()) // check 2: handler chain A }</div>
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">handle とスコープについては、 Go の defer はスコープ関係なく関数単位だったはずだから、 handle はどうなんだろう？とさっきから思ってる。 </div>
+            </div><a href="https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling.md">https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling.md</a> の <span class="pre pre--inline">Each check may have a different handler chain function depending on the scope in which it is defined. For example, consider this function:</span> がまさにそこに言及していそう <div class="pre pre--multiline nohighlight">func process(user string, files chan string) (n int, err error) { handle err { return 0, fmt.Errorf("process: %v", err) } // handler A for i := 0; i &lt; 3; i++ { handle err { err = fmt.Errorf("attempt %d: %v", i, err) } // handler B handle err { err = moreWrapping(err) } // handler C check do(something()) // check 1: handler chain C, B, A } check do(somethingElse()) // check 2: handler chain A }</div>
           </span>
           <span class="chatlog__edited-timestamp" title="29-Aug-18 05:41 AM">(edited)</span>
         </div>

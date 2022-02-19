@@ -1,0 +1,30 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/941518510000046101/e31a3624dfece97bec2310df0b9049fa.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="quesera2#1882" data-user-id="941518510000046101" style="">quesera2</span>
+    <span class="chatlog__timestamp">19-Feb-22 04:46 AM</span>
+    <div class="chatlog__message " data-message-id="944454793424945192" id="message-944454793424945192" title="Message sent: 19-Feb-22 04:46 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">StubのAPIリポジトリでその場で結果を返してしまうと、await中の状態に対するassertionが書けないと考えていて、疑似コードですけれどこういう感じで値を返すのを遅延させている感じです <div class="pre pre--multiline language-swift">func fetchRepositories(userName: String) async throws -&gt; [FooItem] { 　　　　　　　　// ここで値を返すとawait中の検証ができない return try await withCheckedThrowingContinuation { continuation in self.continuation = continuation } } func `continue`() { self.continuation.resume(returning: expectResult) }</div></span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="944455012971577415" id="message-944455012971577415" title="Message sent: 19-Feb-22 04:47 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">Task.yield()</span> がない場合、await内の処理がまったく進まないので、上のコードだと支障ないんですけれど、内部で値を変えているものが未反映になる感じですね</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="944455332174909450" id="message-944455332174909450" title="Message sent: 19-Feb-22 04:48 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">やりたいこととしてはこういう感じになります（こっちのほうがわかりやすかった） <div class="pre pre--multiline language-swift">XCTAssertFalse(viewModel.showProgress) async let result: () = viewModel.fetchRepository() await Task.yield() XCTAssertTrue(viewModel.showProgress) // ここを検証したい stubApiClient.continue() // resumeで値を返却させる await result XCTAssertFalse(viewModel.showProgress)</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

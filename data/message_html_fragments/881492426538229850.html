@@ -24,8 +24,14 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">Conventionally, most functions that check for cancellation report it by throwing <span class="pre pre--inline">CancellationError()</span>
-            </div>だから必ずしも <span class="pre pre--inline">CancellationError</span> を <span class="pre pre--inline">throw</span> しなくても良い？でも <div class="quote">Operations running synchronously as part of the task can check this flag and are conventionally expected to throw a <span class="pre pre--inline">CancellationError</span>
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">Conventionally, most functions that check for cancellation report it by throwing <span class="pre pre--inline">CancellationError()</span>
+              </div>
+            </div>だから必ずしも <span class="pre pre--inline">CancellationError</span> を <span class="pre pre--inline">throw</span> しなくても良い？でも <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">Operations running synchronously as part of the task can check this flag and are conventionally expected to throw a <span class="pre pre--inline">CancellationError</span>
+              </div>
             </div>とあるので、 <span class="pre pre--inline">CancellationError</span> を <span class="pre pre--inline">throw</span> することが期待されている？ <span class="pre pre--inline">URLSession.data(from:)</span> が <span class="pre pre--inline">cancel</span> 時に <span class="pre pre--inline">CancellationError</span> を <span class="pre pre--inline">throw</span> しないのはお行儀が悪い？ <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0304-structured-concurrency.md#cancellation">https://github.com/apple/swift-evolution/blob/main/proposals/0304-structured-concurrency.md#cancellation</a>
           </span>
           <span class="chatlog__edited-timestamp" title="29-Aug-21 10:56 AM">(edited)</span>
@@ -36,7 +42,10 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">For tasks that would prefer to immediately exit with a thrown error on cancellation, the task API provides a common error type, <span class="pre pre--inline">CancellationError</span>, to communicate that the task was cancelled. </div>この communicate の温度感もわからないな。キャンセルされたことを <span class="pre pre--inline">CancellationError</span> として検出できるように、くらいの意味まで持つならキャンセル時に独自のエラーを <span class="pre pre--inline">throw</span> するのではなく <span class="pre pre--inline">CancellationError</span> を <span class="pre pre--inline">throw</span> すべきとなりそうだけど。
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">For tasks that would prefer to immediately exit with a thrown error on cancellation, the task API provides a common error type, <span class="pre pre--inline">CancellationError</span>, to communicate that the task was cancelled. </div>
+            </div>この communicate の温度感もわからないな。キャンセルされたことを <span class="pre pre--inline">CancellationError</span> として検出できるように、くらいの意味まで持つならキャンセル時に独自のエラーを <span class="pre pre--inline">throw</span> するのではなく <span class="pre pre--inline">CancellationError</span> を <span class="pre pre--inline">throw</span> すべきとなりそうだけど。
           </span>
         </div>
       </div>

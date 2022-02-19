@@ -9,7 +9,10 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace">
-            <div class="quote">画面遷移する前にXXしてないとチラつく </div>という観点では、順番入れ替えも <span class="pre pre--inline">async let</span> もせずに <span class="pre pre--inline">await</span> した方が良いことになりませんか？それが必要なケースもあると思いますが、その場合、インタラクションから遷移まで delay が発生するので、 UX を損ねる可能性が気になります。 <span class="pre pre--inline">saveForSpotlight</span> が体感できないくらい一瞬ならいいですが。あと、 suspend 中は UI スレッドがブロックされてないので（それ自体は悪くないですが）、ボタン連打された場合のケアとかが気になります。 並行で走らせるなら「画面遷移する前にXX」することを保証できないから入れ替えでも問題なさそうに思いますが、元々問題が起こってなくて（かつ、元の <span class="pre pre--inline">saveForSpotlight</span> のコードは並行に走ってて投げっぱなしで結果を待たない実装になってて）、忠実にその挙動を再現するなら、やっぱり <span class="pre pre--inline">async let</span> が良さそうですね。 &gt; Cc: <span class="mention" title="uhooi#8263">@uhooi</span>
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">画面遷移する前にXXしてないとチラつく </div>
+            </div>という観点では、順番入れ替えも <span class="pre pre--inline">async let</span> もせずに <span class="pre pre--inline">await</span> した方が良いことになりませんか？それが必要なケースもあると思いますが、その場合、インタラクションから遷移まで delay が発生するので、 UX を損ねる可能性が気になります。 <span class="pre pre--inline">saveForSpotlight</span> が体感できないくらい一瞬ならいいですが。あと、 suspend 中は UI スレッドがブロックされてないので（それ自体は悪くないですが）、ボタン連打された場合のケアとかが気になります。 並行で走らせるなら「画面遷移する前にXX」することを保証できないから入れ替えでも問題なさそうに思いますが、元々問題が起こってなくて（かつ、元の <span class="pre pre--inline">saveForSpotlight</span> のコードは並行に走ってて投げっぱなしで結果を待たない実装になってて）、忠実にその挙動を再現するなら、やっぱり <span class="pre pre--inline">async let</span> が良さそうですね。 &gt; Cc: <span class="mention" title="uhooi#8263">@uhooi</span>
           </span>
         </div>
       </div>

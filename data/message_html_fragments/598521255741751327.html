@@ -9,7 +9,13 @@
       <div class="chatlog__content">
         <div class="markdown">
           <span class="preserve-whitespace"><span class="mention" title="すえたく#8763">@すえたく</span>
-            <div class="quote">そうなると、herokuで何かを設定するというよりは、アプリケーション側の設定（callback用のURL等）を適切に設定すればOK。。。？ </div> あーすみません、heroku側で一部だけ設定してやる必要ありました。なので手順は、下記でした。 1. <span class="pre pre--inline">Deploy to Heroku</span>をクリック 2. <span class="pre pre--inline">https://github.com/bih/spotify-token-swap-service#configuration</span> の環境変数項目のRequiredを最低限設定する --- <div class="quote">クイックスタートには/api/tokenや/api/refresh_tokenを入れることになってますが、それもheroku側が自動的に設定していることになるんでしょうか？ </div>
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">そうなると、herokuで何かを設定するというよりは、アプリケーション側の設定（callback用のURL等）を適切に設定すればOK。。。？ </div>
+            </div> あーすみません、heroku側で一部だけ設定してやる必要ありました。なので手順は、下記でした。 1. <span class="pre pre--inline">Deploy to Heroku</span>をクリック 2. <span class="pre pre--inline">https://github.com/bih/spotify-token-swap-service#configuration</span> の環境変数項目のRequiredを最低限設定する --- <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">クイックスタートには/api/tokenや/api/refresh_tokenを入れることになってますが、それもheroku側が自動的に設定していることになるんでしょうか？ </div>
+            </div>
             <span class="pre pre--inline">/api/token</span> や <span class="pre pre--inline">/api/refresh_token</span> はHerokuサーバに対して行います。 つまり、Heroku設定後、quick-startの続きにあるコードの <span class="pre pre--inline">[my token swap app domain]</span> をherokuのアドレスに置き換えてiOSアプリを実装したらOKです。 仮にHerokuサーバのアドレスが <span class="pre pre--inline">https://swap.heroku.com/</span> であれば… <div class="pre pre--multiline language-swift">// Swiftコード lazy var sessionManager: SPTSessionManager = { if let tokenSwapURL = URL(string: "https://swap.heroku.com/api/token"), let tokenRefreshURL = URL(string: "https://swap.heroku.com/api/refresh_token") { self.configuration.tokenSwapURL = tokenSwapURL self.configuration.tokenRefreshURL = tokenRefreshURL self.configuration.playURI = "" } let manager = SPTSessionManager(configuration: self.configuration, delegate: self) return manager }()</div> のように書いて、quick-startを進めていけば大丈夫かと思います
           </span>
           <span class="chatlog__edited-timestamp" title="10-Jul-19 02:38 PM">(edited)</span>

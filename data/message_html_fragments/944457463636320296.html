@@ -1,0 +1,53 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+    <span class="chatlog__timestamp">19-Feb-22 04:54 AM</span>
+    <div class="chatlog__message " data-message-id="944456940476563467" id="message-944456940476563467" title="Message sent: 19-Feb-22 04:54 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">その場合は、「<span class="pre pre--inline">viewModel.fetchRepository</span> の処理が動き始めるのを待機する」ロジックを明確に書くのが良いと思います。</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="944457054637133894" id="message-944457054637133894" title="Message sent: 19-Feb-22 04:55 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">おそらく、 <span class="pre pre--inline">viewModel.fetchRepository</span> の中で、 <span class="pre pre--inline">StubAPIClient.fetchRepository</span> を呼ぶようになってますよね、なので、</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="944457260921393173" id="message-944457260921393173" title="Message sent: 19-Feb-22 04:55 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">StubAPIClient</span> に、　<span class="pre pre--inline">fetchRepository</span> が呼ばれたら返ってくる await property を生やすのが良いんじゃないでしょうか</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="944457316131037257" id="message-944457316131037257" title="Message sent: 19-Feb-22 04:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">つまりテストコードとしては</span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="944457463636320296" id="message-944457463636320296" title="Message sent: 19-Feb-22 04:56 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">XCTAssertFalse(viewModel.showProgress) async let result: () = viewModel.fetchRepository() await stubAPIClient.willFetchRepository XCTAssertTrue(viewModel.showProgress) stubApiClient.continue() await result XCTAssertFalse(viewModel.showProgress)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message " data-message-id="944457748295323738" id="message-944457748295323738" title="Message sent: 19-Feb-22 04:57 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">こう書けるようにする。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
