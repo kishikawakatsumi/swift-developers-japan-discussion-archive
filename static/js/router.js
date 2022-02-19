@@ -33,8 +33,7 @@ page("/channels/:id(\\d+)", (ctx) => {
     const a = document.createElement("a");
     a.href = `/channels/${channelId}?channel=${channelName}&message_id=${messageId}`;
     a.classList.add("dropdown-item");
-    a.textContent = date;
-    a.style = "font-family: monospace;";
+    a.innerHTML = `${date}`;
     fragment.appendChild(a);
   }
   document.getElementById("date-index-menu").innerHTML = "";

@@ -14,6 +14,10 @@ function loadChannel(channel) {
     .then((res) => res.text())
     .then((text) => new DOMParser().parseFromString(text, "text/html"))
     .then((doc) => {
+      document
+        .getElementById("content-messages-loader")
+        .classList.add("is-hidden");
+
       const messages = items(doc);
       messageManager.messages = messages;
 
