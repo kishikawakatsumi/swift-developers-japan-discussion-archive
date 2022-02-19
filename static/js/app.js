@@ -102,7 +102,7 @@ function onScrollPositionChange(scrollY) {
           virtualScroller.virtualScroller,
           messageManager.messages,
           messageManager.messages.length - items.length,
-          200
+          40
         );
       }
     }, 0);
