@@ -82,9 +82,8 @@ router
       const thread = threads.find((x) => (x as { id: string }).id === threadId);
 
       const channelId = (thread as { channelId: string }).channelId;
-      const channelName = (thread as { channelName: string }).channelName;
       context.response.body = await Deno.readTextFile(
-        `${Deno.cwd()}/data/html/${channelId}/${channelName}.html`,
+        `${Deno.cwd()}/data/html/${channelId}/${threadId}.html`,
       );
     } else {
       context.response.body = await renderBody();
