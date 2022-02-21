@@ -91,7 +91,7 @@ const querySuggestionsPlugin = createQuerySuggestionsPlugin({
 
 const debounced = debouncePromise((items) => Promise.resolve(items), 400);
 
-autocomplete({
+const ac = autocomplete({
   container: "#autocomplete",
   placeholder: "Search",
   openOnFocus: false,
@@ -196,7 +196,7 @@ autocomplete({
               },
             });
           },
-          footer({ createElement, Fragment }) {
+          footer({ createElement }) {
             return createElement("div", {
               dangerouslySetInnerHTML: {
                 __html: `<hr class="my-3">
@@ -219,6 +219,17 @@ autocomplete({
   },
 });
 
+window.addEventListener(
+  "click",
+  (event) => {
+    if (event.target.classList.contains("aa-ItemWrapper")) {
+      document.querySelector(".aa-ItemActionButton").click();
+      event.stopImmediatePropagation();
+    }
+  },
+  true
+);
+
 function setInstantSearchUiState(indexUiState) {
   search.setUiState((uiState) => ({
     ...uiState,
@@ -232,7 +243,6 @@ function setInstantSearchUiState(indexUiState) {
 
 function getInstantSearchUiState() {
   const uiState = instantSearchRouter.read();
-
   return (uiState && uiState[INSTANT_SEARCH_INDEX_NAME]) || {};
 }
 
