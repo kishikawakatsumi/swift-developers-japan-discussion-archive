@@ -5,14 +5,11 @@ const { JSDOM } = require("jsdom");
 const beautify = require("js-beautify").html;
 
 const categories = JSON.parse(fs.readFileSync(`data/channel_structure.json`));
-console.log(categories);
 const channels = Object.values(categories).flat();
-console.log(channels);
 const threads = channels
   .filter((x) => x.threads)
   .map((x) => x.threads)
   .flat();
-console.log(threads);
 
 const root = "data/html";
 fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
@@ -52,13 +49,9 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
                 const a = dom.window.document.createElement("a");
                 const threadId = dirent.name.replaceAll(".html", "");
                 const thread = threads.find((x) => x.id === threadId);
-                if (thread) {
-                  a.href = `/channels/${thread.channelId}/${threadId}?category=${thread.categoryName}&channel=${thread.channelName}&message_id=${messageId}`;
-                  timestamp.parentNode.insertBefore(a, timestamp);
-                  a.appendChild(timestamp);
-                } else {
-                  console.log(`Thread not found: ${threadId}`);
-                }
+                a.href = `/channels/${thread.channelId}/${threadId}?category=${thread.categoryName}&channel=${thread.channelName}&message_id=${messageId}`;
+                timestamp.parentNode.insertBefore(a, timestamp);
+                a.appendChild(timestamp);
               });
           }
         }
