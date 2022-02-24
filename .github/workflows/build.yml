@@ -47,6 +47,8 @@ jobs:
 
           npm ci
 
+          node dev/generate_channel_structure.js
+
           node dev/get_thread_metadata.mjs
           node dev/get_thread_messages.js
 
@@ -55,7 +57,6 @@ jobs:
           sudo node --max-old-space-size=8192 dev/extract_each_message_html.js
           sudo npx js-beautify --file data/html/**/*.html --type html --replace --indent-size 2 --no-preserve-newlines
 
-          node dev/generate_channel_structure.js
           node dev/update_search_index.js
 
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
