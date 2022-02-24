@@ -1,1502 +1,1162 @@
-
-
-
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>swift-developers-japan - arkit</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-
-    <style>
-        @font-face {
-            font-family: Whitney;
-            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
-            font-weight: 300;
-        }
-
-        @font-face {
-            font-family: Whitney;
-            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
-            font-weight: 400;
-        }
-
-        @font-face {
-            font-family: Whitney;
-            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
-            font-weight: 500;
-        }
-
-        @font-face {
-            font-family: Whitney;
-            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
-            font-weight: 600;
-        }
-
-        @font-face {
-            font-family: Whitney;
-            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
-            font-weight: 700;
-        }
-
-        body {
-            background-color: #ffffff;
-            color: #23262a;
-            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 17px;
-            font-weight: 500;
-        }
-
-        a {
-            color: #0068e0;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        img {
-            object-fit: contain;
-        }
-
-        .markdown {
-            max-width: 100%;
-            line-height: 1.3;
-            overflow-wrap: break-word;
-        }
-
-        .preserve-whitespace {
-            white-space: pre-wrap;
-        }
-
-        .spoiler-text {
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 3px;
-        }
-
-        .spoiler-text--hidden {
-            cursor: pointer;
-            background-color: #b9bbbe;
-            color: rgba(0, 0, 0, 0);
-        }
-
-        .spoiler-text--hidden:hover {
-            background-color: rgba(185, 187, 190, 0.8);
-        }
-
-        .spoiler-text--hidden::selection {
-            color: rgba(0, 0, 0, 0);
-        }
-
-        .quote {
-            display: flex;
-            margin: 0.05em 0;
-        }
-
-        .quote-border {
-            margin-right: 0.5em;
-            border: 2px solid #c7ccd1;
-            border-radius: 3px;
-        }
-
-        .pre {
-            background-color: #f9f9f9;
-            font-family: "Consolas", "Courier New", Courier, monospace;
-        }
-
-        .pre--multiline {
-            margin-top: 0.25em;
-            padding: 0.5em;
-            border: 2px solid #f3f3f3;
-            border-radius: 5px;
-            color: #657b83;
-        }
-
-        .pre--multiline.hljs {
-            background-color: #f9f9f9;
-            color: #657b83;
-        }
-
-        .pre--inline {
-            padding: 2px;
-            border-radius: 3px;
-            font-size: 0.85em;
-        }
-
-        .mention {
-            border-radius: 3px;
-            padding: 0 2px;
-            color: #505cdc;
-            background-color: rgba(88, 101, 242, .15);
-            font-weight: 500;
-        }
-
-        .mention:hover {
-            background-color: #5865f2;
-            color: #ffffff
-        }
-
-        .timestamp {
-            border-radius: 3px;
-            padding: 0 2px;
-            background-color: rgba(6, 6, 7, 0.08);
-        }
-
-        .emoji {
-            width: 1.325em;
-            height: 1.325em;
-            margin: 0 0.06em;
-            vertical-align: -0.4em;
-        }
-
-        .emoji--small {
-            width: 1em;
-            height: 1em;
-        }
-
-        .emoji--large {
-            width: 2.8em;
-            height: 2.8em;
-        }
-
-        .preamble {
-            display: grid;
-            margin: 0 0.3em 0.6em 0.3em;
-            max-width: 100%;
-            grid-template-columns: auto 1fr;
-        }
-
-        .preamble__guild-icon-container {
-            grid-column: 1;
-        }
-
-        .preamble__guild-icon {
-            max-width: 88px;
-            max-height: 88px;
-        }
-
-        .preamble__entries-container {
-            grid-column: 2;
-            margin-left: 0.6em;
-        }
-
-        .preamble__entry {
-            font-size: 1.4em;
-            color: #2f3136;
-        }
-
-        .preamble__entry--small {
-            font-size: 1em;
-        }
-
-        .chatlog {
-            max-width: 100%;
-        }
-
-        .chatlog__message-group {
-            display: grid;
-            margin: 0 0.6em;
-            padding: 0.9em 0;
-            border-top: 1px solid #eceeef;
-            grid-template-columns: auto 1fr;
-        }
-
-        .chatlog__reference-symbol {
-            grid-column: 1;
-            margin: 8px 4px 4px 18px;
-            border-left: 2px solid #c7ccd1;
-            border-top: 2px solid #c7ccd1;
-            border-radius: 8px 0 0 0;
-        }
-
-        .chatlog__reference {
-            display: flex;
-            grid-column: 2;
-            margin-bottom: 0.25em;
-            font-size: 0.875em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            align-items: center;
-            color: #5f5f60;
-        }
-
-        .chatlog__reference-avatar {
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            margin-right: 0.25em;
-        }
-
-        .chatlog__reference-name {
-            margin-right: 0.3em;
-            font-weight: 600;
-        }
-
-        .chatlog__reference-content {
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .chatlog__reference-content a:hover {
-            text-decoration: none;
-        }
-
-        .chatlog__reference-link {
-            cursor: pointer;
-            color: #5f5f60;
-        }
-
-        .chatlog__reference-link * {
-            display: inline;
-            pointer-events: none;
-        }
-
-        .chatlog__reference-link:hover {
-            color: #2f3136;
-        }
-
-        .chatlog__reference-link:hover *:not(.spoiler-text) {
-            color: #2f3136;
-        }
-
-        .chatlog__reference-edited-timestamp {
-            margin-left: 0.25em;
-            font-size: 0.8em;
-            unicode-bidi: bidi-override;
-            color: #747f8d;
-        }
-
-        .chatlog__author-avatar-container {
-            grid-column: 1;
-            width: 40px;
-            height: 40px;
-            margin-right: 16px;
-        }
-
-        .chatlog__author-avatar {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-        }
-
-        .chatlog__messages {
-            grid-column: 2;
-            min-width: 50%;
-            direction: ltr;
-        }
-
-        .chatlog__author-name {
-            font-weight: 600;
-            color: #2f3136;
-        }
-
-        .chatlog__timestamp {
-            margin-left: 0.3em;
-            font-size: 0.75em;
-            direction: ltr;
-            unicode-bidi: bidi-override;
-            color: #747f8d;
-        }
-
-        .chatlog__message {
-            padding: 0.1em 0.3em;
-            margin: 0 -0.3em;
-            background-color: transparent;
-            transition: background-color 1s ease;
-        }
-
-        .chatlog__message--highlighted {
-            background-color: rgba(114, 137, 218, 0.2);
-        }
-
-        .chatlog__message--pinned {
-            background-color: rgba(249, 168, 37, 0.05);
-        }
-
-        .chatlog__content {
-            font-size: 0.95em;
-            word-wrap: break-word;
-        }
-
-        .chatlog__edited-timestamp {
-            margin-left: 0.15em;
-            font-size: 0.8em;
-        }
-
-        .chatlog__attachment {
-            display: inline-block;
-            position: relative;
-            margin-top: 0.3em;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .chatlog__attachment--hidden {
-            cursor: pointer;
-            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-        }
-
-        .chatlog__attachment--hidden * {
-            pointer-events: none;
-        }
-
-        .chatlog__attachment-spoiler-caption {
-            display: none;
-            z-index: 999;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            padding: 0.4em 0.8em;
-            background-color: rgba(0, 0, 0, 0.9);
-            border-radius: 20px;
-            color: #dcddde;
-            font-size: 0.9em;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
-            display: block;
-        }
-
-        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
-            color: #fff;
-        }
-
-        .chatlog__attachment-media {
-            vertical-align: top;
-            max-width: 45vw;
-            max-height: 500px;
-            border-radius: 3px;
-        }
-
-        .chatlog__attachment--hidden .chatlog__attachment-media {
-            filter: blur(44px);
-        }
-
-        .chatlog__attachment-generic {
-            width: 100%;
-            max-width: 520px;
-            height: 40px;
-            padding: 10px;
-            background-color: #f2f3f5;
-            border: 1px solid #ebedef;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .chatlog__attachment--hidden .chatlog__attachment-generic {
-            filter: blur(44px);
-        }
-
-        .chatlog__attachment-generic-icon {
-            float: left;
-            width: 30px;
-            height: 100%;
-            margin-right: 10px;
-        }
-
-        .chatlog__attachment-generic-size {
-            color: #72767d;
-            font-size: 12px;
-        }
-
-        .chatlog__attachment-generic-name {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
-        .chatlog__edited-timestamp {
-            color: #747f8d;
-        }
-
-        .chatlog__embed {
-            display: flex;
-            margin-top: 0.3em;
-            max-width: 520px;
-        }
-
-        .chatlog__embed-color-pill {
-            flex-shrink: 0;
-            width: 0.25em;
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-        }
-
-        .chatlog__embed-color-pill--default {
-            background-color: rgba(227, 229, 232, 1);
-        }
-
-        .chatlog__embed-content-container {
-            display: flex;
-            flex-direction: column;
-            padding: 0.5em 0.6em;
-            background-color: rgba(249, 249, 249, 0.3);
-            border: 1px solid rgba(204, 204, 204, 0.3);
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-        }
-
-        .chatlog__embed-content {
-            display: flex;
-            width: 100%;
-        }
-
-        .chatlog__embed-text {
-            flex: 1;
-        }
-
-        .chatlog__embed-author {
-            display: flex;
-            margin-bottom: 0.3em;
-            align-items: center;
-        }
-
-        .chatlog__embed-author-icon {
-            margin-right: 0.5em;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-        }
-
-        .chatlog__embed-author-name {
-            font-size: 0.875em;
-            font-weight: 600;
-            direction: ltr;
-            unicode-bidi: bidi-override;
-            color: #4f545c
-        }
-
-        .chatlog__embed-author-name-link {
-            color: #4f545c;
-        }
-
-        .chatlog__embed-title {
-            margin-bottom: 0.2em;
-            font-size: 0.875em;
-            font-weight: 600;
-            color: #4f545c;
-        }
-
-        .chatlog__embed-description {
-            font-weight: 500;
-            font-size: 0.85em;
-            color: #2e3338;
-        }
-
-        .chatlog__embed-fields {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0 0.5em;
-        }
-
-        .chatlog__embed-field {
-            flex: 0;
-            min-width: 100%;
-            max-width: 506px;
-            padding-top: 0.6em;
-            font-size: 0.875em;
-        }
-
-        .chatlog__embed-field--inline {
-            flex: 1;
-            flex-basis: auto;
-            min-width: 150px;
-        }
-
-        .chatlog__embed-field-name {
-            margin-bottom: 0.2em;
-            font-weight: 600;
-            color: #36393e;
-        }
-
-        .chatlog__embed-field-value {
-            font-weight: 500;
-            color: #2e3338;
-        }
-
-        .chatlog__embed-thumbnail {
-            flex: 0;
-            margin-left: 1.2em;
-            max-width: 80px;
-            max-height: 80px;
-            border-radius: 3px;
-        }
-
-        .chatlog__embed-image-container {
-            margin-top: 0.6em;
-        }
-
-        .chatlog__embed-image {
-            max-width: 500px;
-            max-height: 400px;
-            border-radius: 3px;
-        }
-
-        .chatlog__embed-footer {
-            margin-top: 0.6em;
-            color: #2e3338;
-        }
-
-        .chatlog__embed-footer-icon {
-            margin-right: 0.2em;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            vertical-align: middle;
-        }
-
-        .chatlog__embed-footer-text {
-            vertical-align: middle;
-            font-size: 0.75em;
-            font-weight: 500;
-        }
-
-        .chatlog__embed-plainimage {
-            vertical-align: top;
-            max-width: 45vw;
-            max-height: 500px;
-            border-radius: 3px;
-        }
-
-        .chatlog__embed-spotify {
-            border: 0;
-        }
-
-        .chatlog__embed-youtube-container {
-            margin-top: 0.6em;
-        }
-
-        .chatlog__embed-youtube {
-            border: 0;
-            border-radius: 3px;
-        }
-
-        .chatlog__sticker {
-            width: 180px;
-            height: 180px;
-        }
-
-        .chatlog__sticker--media {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .chatlog__reactions {
-            display: flex;
-        }
-
-        .chatlog__reaction {
-            display: flex;
-            align-items: center;
-            margin: 0.35em 0.1em 0.1em 0;
-            padding: .125rem .375rem;
-            background-color: #f2f3f5;
-            border-radius: 8px;
-            border-color: transparent;
-            border-width: 1px;
-            border-style: solid;
-        }
-
-        .chatlog__reaction:hover {
-            border-color: rgba(0, 0, 0, 0.2);
-            border-width: 1px;
-            border-style: solid;
-            background-color: white;
-        }
-
-        .chatlog__reaction-count {
-            min-width: 9px;
-            margin-left: 0.35em;
-            font-size: 0.875em;
-            color: #4f5660;
-        }
-
-        .chatlog__reaction:hover .chatlog__reaction-count {
-            color: #2e3338;
-        }
-
-        .chatlog__bot-tag {
-            position: relative;
-            top: -.1em;
-            margin-left: 0.3em;
-            padding: 0.05em 0.3em;
-            border-radius: 3px;
-            line-height: 1.3;
-            background-color: #5865F2;
-            color: #ffffff;
-            font-size: 0.625em;
-            font-weight: 500;
-        }
-
-        .postamble {
-            margin: 1.4em 0.3em 0.6em 0.3em;
-            padding: 1em;
-            border-top: 1px solid #eceeef;
-        }
-
-        .postamble__entry {
-            color: #2f3136;
-        }
-    </style>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.pre--multiline').forEach(e => hljs.highlightBlock(e));
+  <title>swift-developers-japan - arkit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+      font-weight: 300;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+      font-weight: 600;
+    }
+
+    @font-face {
+      font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+      font-weight: 700;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #23262a;
+      font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    a {
+      color: #0068e0;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      object-fit: contain;
+    }
+
+    .markdown {
+      max-width: 100%;
+      line-height: 1.3;
+      overflow-wrap: break-word;
+    }
+
+    .preserve-whitespace {
+      white-space: pre-wrap;
+    }
+
+    .spoiler-text {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+
+    .spoiler-text--hidden {
+      cursor: pointer;
+      background-color: #b9bbbe;
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .spoiler-text--hidden:hover {
+      background-color: rgba(185, 187, 190, 0.8);
+    }
+
+    .spoiler-text--hidden::selection {
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .quote {
+      display: flex;
+      margin: 0.05em 0;
+    }
+
+    .quote-border {
+      margin-right: 0.5em;
+      border: 2px solid #c7ccd1;
+      border-radius: 3px;
+    }
+
+    .pre {
+      background-color: #f9f9f9;
+      font-family: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    .pre--multiline {
+      margin-top: 0.25em;
+      padding: 0.5em;
+      border: 2px solid #f3f3f3;
+      border-radius: 5px;
+      color: #657b83;
+    }
+
+    .pre--multiline.hljs {
+      background-color: #f9f9f9;
+      color: #657b83;
+    }
+
+    .pre--inline {
+      padding: 2px;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .mention {
+      border-radius: 3px;
+      padding: 0 2px;
+      color: #505cdc;
+      background-color: rgba(88, 101, 242, .15);
+      font-weight: 500;
+    }
+
+    .mention:hover {
+      background-color: #5865f2;
+      color: #ffffff
+    }
+
+    .timestamp {
+      border-radius: 3px;
+      padding: 0 2px;
+      background-color: rgba(6, 6, 7, 0.08);
+    }
+
+    .emoji {
+      width: 1.325em;
+      height: 1.325em;
+      margin: 0 0.06em;
+      vertical-align: -0.4em;
+    }
+
+    .emoji--small {
+      width: 1em;
+      height: 1em;
+    }
+
+    .emoji--large {
+      width: 2.8em;
+      height: 2.8em;
+    }
+
+    .preamble {
+      display: grid;
+      margin: 0 0.3em 0.6em 0.3em;
+      max-width: 100%;
+      grid-template-columns: auto 1fr;
+    }
+
+    .preamble__guild-icon-container {
+      grid-column: 1;
+    }
+
+    .preamble__guild-icon {
+      max-width: 88px;
+      max-height: 88px;
+    }
+
+    .preamble__entries-container {
+      grid-column: 2;
+      margin-left: 0.6em;
+    }
+
+    .preamble__entry {
+      font-size: 1.4em;
+      color: #2f3136;
+    }
+
+    .preamble__entry--small {
+      font-size: 1em;
+    }
+
+    .chatlog {
+      max-width: 100%;
+    }
+
+    .chatlog__message-group {
+      display: grid;
+      margin: 0 0.6em;
+      padding: 0.9em 0;
+      border-top: 1px solid #eceeef;
+      grid-template-columns: auto 1fr;
+    }
+
+    .chatlog__reference-symbol {
+      grid-column: 1;
+      margin: 8px 4px 4px 18px;
+      border-left: 2px solid #c7ccd1;
+      border-top: 2px solid #c7ccd1;
+      border-radius: 8px 0 0 0;
+    }
+
+    .chatlog__reference {
+      display: flex;
+      grid-column: 2;
+      margin-bottom: 0.25em;
+      font-size: 0.875em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-items: center;
+      color: #5f5f60;
+    }
+
+    .chatlog__reference-avatar {
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      margin-right: 0.25em;
+    }
+
+    .chatlog__reference-name {
+      margin-right: 0.3em;
+      font-weight: 600;
+    }
+
+    .chatlog__reference-content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__reference-content a:hover {
+      text-decoration: none;
+    }
+
+    .chatlog__reference-link {
+      cursor: pointer;
+      color: #5f5f60;
+    }
+
+    .chatlog__reference-link * {
+      display: inline;
+      pointer-events: none;
+    }
+
+    .chatlog__reference-link:hover {
+      color: #2f3136;
+    }
+
+    .chatlog__reference-link:hover *:not(.spoiler-text) {
+      color: #2f3136;
+    }
+
+    .chatlog__reference-edited-timestamp {
+      margin-left: 0.25em;
+      font-size: 0.8em;
+      unicode-bidi: bidi-override;
+      color: #747f8d;
+    }
+
+    .chatlog__author-avatar-container {
+      grid-column: 1;
+      width: 40px;
+      height: 40px;
+      margin-right: 16px;
+    }
+
+    .chatlog__author-avatar {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .chatlog__messages {
+      grid-column: 2;
+      min-width: 50%;
+      direction: ltr;
+    }
+
+    .chatlog__author-name {
+      font-weight: 600;
+      color: #2f3136;
+    }
+
+    .chatlog__timestamp {
+      margin-left: 0.3em;
+      font-size: 0.75em;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+      color: #747f8d;
+    }
+
+    .chatlog__message {
+      padding: 0.1em 0.3em;
+      margin: 0 -0.3em;
+      background-color: transparent;
+      transition: background-color 1s ease;
+    }
+
+    .chatlog__message--highlighted {
+      background-color: rgba(114, 137, 218, 0.2);
+    }
+
+    .chatlog__message--pinned {
+      background-color: rgba(249, 168, 37, 0.05);
+    }
+
+    .chatlog__content {
+      font-size: 0.95em;
+      word-wrap: break-word;
+    }
+
+    .chatlog__edited-timestamp {
+      margin-left: 0.15em;
+      font-size: 0.8em;
+    }
+
+    .chatlog__attachment {
+      display: inline-block;
+      position: relative;
+      margin-top: 0.3em;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden {
+      cursor: pointer;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatlog__attachment--hidden * {
+      pointer-events: none;
+    }
+
+    .chatlog__attachment-spoiler-caption {
+      display: none;
+      z-index: 999;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0.4em 0.8em;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 20px;
+      color: #dcddde;
+      font-size: 0.9em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+      display: block;
+    }
+
+    .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+      color: #fff;
+    }
+
+    .chatlog__attachment-media {
+      vertical-align: top;
+      max-width: 45vw;
+      max-height: 500px;
+      border-radius: 3px;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-media {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic {
+      width: 100%;
+      max-width: 520px;
+      height: 40px;
+      padding: 10px;
+      background-color: #f2f3f5;
+      border: 1px solid #ebedef;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-generic {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic-icon {
+      float: left;
+      width: 30px;
+      height: 100%;
+      margin-right: 10px;
+    }
+
+    .chatlog__attachment-generic-size {
+      color: #72767d;
+      font-size: 12px;
+    }
+
+    .chatlog__attachment-generic-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__edited-timestamp {
+      color: #747f8d;
+    }
+
+    .chatlog__embed {
+      display: flex;
+      margin-top: 0.3em;
+      max-width: 520px;
+    }
+
+    .chatlog__embed-color-pill {
+      flex-shrink: 0;
+      width: 0.25em;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    .chatlog__embed-color-pill--default {
+      background-color: rgba(227, 229, 232, 1);
+    }
+
+    .chatlog__embed-content-container {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5em 0.6em;
+      background-color: rgba(249, 249, 249, 0.3);
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    .chatlog__embed-content {
+      display: flex;
+      width: 100%;
+    }
+
+    .chatlog__embed-text {
+      flex: 1;
+    }
+
+    .chatlog__embed-author {
+      display: flex;
+      margin-bottom: 0.3em;
+      align-items: center;
+    }
+
+    .chatlog__embed-author-icon {
+      margin-right: 0.5em;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    .chatlog__embed-author-name {
+      font-size: 0.875em;
+      font-weight: 600;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+      color: #4f545c
+    }
+
+    .chatlog__embed-author-name-link {
+      color: #4f545c;
+    }
+
+    .chatlog__embed-title {
+      margin-bottom: 0.2em;
+      font-size: 0.875em;
+      font-weight: 600;
+      color: #4f545c;
+    }
+
+    .chatlog__embed-description {
+      font-weight: 500;
+      font-size: 0.85em;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 0.5em;
+    }
+
+    .chatlog__embed-field {
+      flex: 0;
+      min-width: 100%;
+      max-width: 506px;
+      padding-top: 0.6em;
+      font-size: 0.875em;
+    }
+
+    .chatlog__embed-field--inline {
+      flex: 1;
+      flex-basis: auto;
+      min-width: 150px;
+    }
+
+    .chatlog__embed-field-name {
+      margin-bottom: 0.2em;
+      font-weight: 600;
+      color: #36393e;
+    }
+
+    .chatlog__embed-field-value {
+      font-weight: 500;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-thumbnail {
+      flex: 0;
+      margin-left: 1.2em;
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-image-container {
+      margin-top: 0.6em;
+    }
+
+    .chatlog__embed-image {
+      max-width: 500px;
+      max-height: 400px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-footer {
+      margin-top: 0.6em;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-footer-icon {
+      margin-right: 0.2em;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+
+    .chatlog__embed-footer-text {
+      vertical-align: middle;
+      font-size: 0.75em;
+      font-weight: 500;
+    }
+
+    .chatlog__embed-plainimage {
+      vertical-align: top;
+      max-width: 45vw;
+      max-height: 500px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-spotify {
+      border: 0;
+    }
+
+    .chatlog__embed-youtube-container {
+      margin-top: 0.6em;
+    }
+
+    .chatlog__embed-youtube {
+      border: 0;
+      border-radius: 3px;
+    }
+
+    .chatlog__sticker {
+      width: 180px;
+      height: 180px;
+    }
+
+    .chatlog__sticker--media {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .chatlog__reactions {
+      display: flex;
+    }
+
+    .chatlog__reaction {
+      display: flex;
+      align-items: center;
+      margin: 0.35em 0.1em 0.1em 0;
+      padding: .125rem .375rem;
+      background-color: #f2f3f5;
+      border-radius: 8px;
+      border-color: transparent;
+      border-width: 1px;
+      border-style: solid;
+    }
+
+    .chatlog__reaction:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+      border-width: 1px;
+      border-style: solid;
+      background-color: white;
+    }
+
+    .chatlog__reaction-count {
+      min-width: 9px;
+      margin-left: 0.35em;
+      font-size: 0.875em;
+      color: #4f5660;
+    }
+
+    .chatlog__reaction:hover .chatlog__reaction-count {
+      color: #2e3338;
+    }
+
+    .chatlog__bot-tag {
+      position: relative;
+      top: -.1em;
+      margin-left: 0.3em;
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+      line-height: 1.3;
+      background-color: #5865F2;
+      color: #ffffff;
+      font-size: 0.625em;
+      font-weight: 500;
+    }
+
+    .postamble {
+      margin: 1.4em 0.3em 0.6em 0.3em;
+      padding: 1em;
+      border-top: 1px solid #eceeef;
+    }
+
+    .postamble__entry {
+      color: #2f3136;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.pre--multiline').forEach(e => hljs.highlightBlock(e));
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
+        const imageDataUrl = e.getAttribute('data-source');
+        const anim = lottie.loadAnimation({
+          container: e,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: imageDataUrl
         });
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-                const imageDataUrl = e.getAttribute('data-source');
-
-                const anim = lottie.loadAnimation({
-                  container: e,
-                  renderer: 'svg',
-                  loop: true,
-                  autoplay: true,
-                  path: imageDataUrl
-                });
-
-                anim.addEventListener('data_failed', () =>
-                    e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>'
-                );
-            });
+        anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
+      });
+    });
+  </script>
+  <script>
+    function scrollToMessage(event, id) {
+      var element = document.getElementById('message-' + id);
+      if (element) {
+        event.preventDefault();
+        element.classList.add('chatlog__message--highlighted');
+        window.scrollTo({
+          top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+          behavior: 'smooth'
         });
-    </script>
+        window.setTimeout(function() {
+          element.classList.remove('chatlog__message--highlighted');
+        }, 2000);
+      }
+    }
 
-    <script>
-        function scrollToMessage(event, id) {
-            var element = document.getElementById('message-' + id);
-
-            if (element) {
-                event.preventDefault();
-
-                element.classList.add('chatlog__message--highlighted');
-
-                window.scrollTo({
-                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
-                    behavior: 'smooth'
-                });
-
-                window.setTimeout(function() {
-                    element.classList.remove('chatlog__message--highlighted');
-                }, 2000);
-            }
-        }
-
-        function showSpoiler(event, element) {
-            if (element && element.classList.contains('spoiler-text--hidden')) {
-                event.preventDefault();
-                element.classList.remove('spoiler-text--hidden');
-            }
-            if (element && element.classList.contains('chatlog__attachment--hidden')) {
-                event.preventDefault();
-                element.classList.remove('chatlog__attachment--hidden');
-            }
-        }
-    </script>
-
-    <svg style="display: none">
-        <symbol id="icon-attachment" viewBox="0 0 720 960">
-            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
-            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
-            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
-            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
-        </symbol>
-    </svg>
+    function showSpoiler(event, element) {
+      if (element && element.classList.contains('spoiler-text--hidden')) {
+        event.preventDefault();
+        element.classList.remove('spoiler-text--hidden');
+      }
+      if (element && element.classList.contains('chatlog__attachment--hidden')) {
+        event.preventDefault();
+        element.classList.remove('chatlog__attachment--hidden');
+      }
+    }
+  </script>
 </head>
-<body>
 
-<div class="preamble">
+<body><svg style="display: none">
+    <symbol id="icon-attachment" viewBox="0 0 720 960">
+      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+    </symbol>
+  </svg>
+  <div class="preamble">
     <div class="preamble__guild-icon-container">
-        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
+      <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
     </div>
     <div class="preamble__entries-container">
-        <div class="preamble__entry">swift-developers-japan</div>
-        <div class="preamble__entry">開発環境, ライブラリ / arkit</div>
-
-
+      <div class="preamble__entry">swift-developers-japan</div>
+      <div class="preamble__entry">開発環境, ライブラリ / arkit</div>
     </div>
-</div>
-
-<div class="chatlog">
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+  </div>
+  <div class="chatlog">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
-
-
-        <span class="chatlog__timestamp">18-Jul-18 05:15 AM</span>
-
-            <div class="chatlog__message " data-message-id="469009351273742336" id="message-469009351273742336" title="Message sent: 18-Jul-18 05:15 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace"><a href="https://graphics.pixar.com/usd/docs/Usdz-File-Format-Specification.html">https://graphics.pixar.com/usd/docs/Usdz-File-Format-Specification.html</a>
-
-pixerと協力してusdzがポンと出てきたと思っていたけどUSDっていう前身があって、usdzが策定されたという話なのですね</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=469009351273742336"><span class="chatlog__timestamp">18-Jul-18 05:15 AM</span></a>
+        <div class="chatlog__message " data-message-id="469009351273742336" id="message-469009351273742336" title="Message sent: 18-Jul-18 05:15 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://graphics.pixar.com/usd/docs/Usdz-File-Format-Specification.html">https://graphics.pixar.com/usd/docs/Usdz-File-Format-Specification.html</a> pixerと協力してusdzがポンと出てきたと思っていたけどUSDっていう前身があって、usdzが策定されたという話なのですね</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-
-
-        <span class="chatlog__timestamp">18-Jul-18 05:20 AM</span>
-
-            <div class="chatlog__message " data-message-id="469010433634861056" id="message-469010433634861056" title="Message sent: 18-Jul-18 05:20 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace"><span class="mention" title="noppe#8476">@noppe</span> みたいですね。 USD は前から SceneKit で読み込めるようです。
-<a href="https://qiita.com/takahito-tejima/items/559391bb7126bbda830f">https://qiita.com/takahito-tejima/items/559391bb7126bbda830f</a></span>
-
-                        </div>
-                    </div>
-
-
-                        <div class="chatlog__embed">
-                                <div class="chatlog__embed-color-pill" style="background-color: rgba(85,197,0,255)"></div>
-
-                            <div class="chatlog__embed-content-container">
-                                <div class="chatlog__embed-content">
-                                    <div class="chatlog__embed-text">
-
-                                            <div class="chatlog__embed-title">
-                                                    <a class="chatlog__embed-title-link" href="https://qiita.com/takahito-tejima/items/559391bb7126bbda830f">
-                                                        <div class="markdown preserve-whitespace">USD 入門編３：macOS Sierra で USD を試してみる - Qiita</div>
-                                                    </a>
-                                            </div>
-
-                                            <div class="chatlog__embed-description">
-                                                <div class="markdown preserve-whitespace">これは Pixar USD <a href="http://openusd.org">http://openusd.org</a> に関する情報です。
-
-前回の記事: [USD (2016/8 版) をビルドしてみる] (<a href="http://qiita.com/takahito-tejima/items/">http://qiita.com/takahito-tejima/items/</a>...</div>
-                                            </div>
-
-                                    </div>
-
-                                        <div class="chatlog__embed-thumbnail-container">
-                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ps5YPQmRxQulaU8XG5YmfAfPZ-74j0sY8VdJrnF2FR8/https/cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png">
-                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ps5YPQmRxQulaU8XG5YmfAfPZ-74j0sY8VdJrnF2FR8/https/cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png" alt="Thumbnail" loading="lazy">
-                                            </a>
-                                        </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=469010672332701696"><span class="chatlog__timestamp">18-Jul-18 05:20 AM</span></a>
+        <div class="chatlog__message " data-message-id="469010433634861056" id="message-469010433634861056" title="Message sent: 18-Jul-18 05:20 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><span class="mention" title="noppe#8476">@noppe</span> みたいですね。 USD は前から SceneKit で読み込めるようです。 <a href="https://qiita.com/takahito-tejima/items/559391bb7126bbda830f">https://qiita.com/takahito-tejima/items/559391bb7126bbda830f</a></span>
             </div>
-            <div class="chatlog__message " data-message-id="469010672332701696" id="message-469010672332701696" title="Message sent: 18-Jul-18 05:20 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">あ、リンク先は SceneKit じゃなかった・・・</span>
-
-                        </div>
-                    </div>
-
-
-
-
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill" style="background-color: rgba(85,197,0,255)"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://qiita.com/takahito-tejima/items/559391bb7126bbda830f">
+                      <div class="markdown preserve-whitespace">USD 入門編３：macOS Sierra で USD を試してみる - Qiita</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">これは Pixar USD <a href="http://openusd.org">http://openusd.org</a> に関する情報です。 前回の記事: [USD (2016/8 版) をビルドしてみる] (<a href="http://qiita.com/takahito-tejima/items/">http://qiita.com/takahito-tejima/items/</a>...</div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ps5YPQmRxQulaU8XG5YmfAfPZ-74j0sY8VdJrnF2FR8/https/cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ps5YPQmRxQulaU8XG5YmfAfPZ-74j0sY8VdJrnF2FR8/https/cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png" alt="Thumbnail" loading="lazy">
+                  </a>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469010672332701696" id="message-469010672332701696" title="Message sent: 18-Jul-18 05:20 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あ、リンク先は SceneKit じゃなかった・・・</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
-
-
-        <span class="chatlog__timestamp">18-Jul-18 05:21 AM</span>
-
-            <div class="chatlog__message " data-message-id="469010696601075713" id="message-469010696601075713" title="Message sent: 18-Jul-18 05:21 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">USDにはテクスチャがないんですかね、多分
-usdzは実体がzipなのですが、これをunzipするとテクスチャとusdcが出てくる</span>
-
-                                <span class="chatlog__edited-timestamp" title="18-Jul-18 05:22 AM">(edited)</span>
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=469010696601075713"><span class="chatlog__timestamp">18-Jul-18 05:21 AM</span></a>
+        <div class="chatlog__message " data-message-id="469010696601075713" id="message-469010696601075713" title="Message sent: 18-Jul-18 05:21 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">USDにはテクスチャがないんですかね、多分 usdzは実体がzipなのですが、これをunzipするとテクスチャとusdcが出てくる</span>
+              <span class="chatlog__edited-timestamp" title="18-Jul-18 05:22 AM">(edited)</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-
-
-        <span class="chatlog__timestamp">18-Jul-18 05:21 AM</span>
-
-            <div class="chatlog__message " data-message-id="469010799537422348" id="message-469010799537422348" title="Message sent: 18-Jul-18 05:21 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">↓こっちとか
-<a href="http://appleengine.hatenablog.com/entry/2017/08/08/183538">http://appleengine.hatenablog.com/entry/2017/08/08/183538</a></span>
-
-                        </div>
-                    </div>
-
-
-                        <div class="chatlog__embed">
-                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-
-                            <div class="chatlog__embed-content-container">
-                                <div class="chatlog__embed-content">
-                                    <div class="chatlog__embed-text">
-                                            <div class="chatlog__embed-author">
-
-                                                    <span class="chatlog__embed-author-name">
-                                                            <a class="chatlog__embed-author-name-link" href="http://blog.hatena.ne.jp/x67x6fx74x6f/">x67x6fx74x6f</a>
-                                                    </span>
-                                            </div>
-
-                                            <div class="chatlog__embed-title">
-                                                    <a class="chatlog__embed-title-link" href="http://appleengine.hatenablog.com/entry/2017/08/08/183538">
-                                                        <div class="markdown preserve-whitespace">iOS で SceneKit を試す(Swift 3) その57 - SceneKit で使用...</div>
-                                                    </a>
-                                            </div>
-
-                                            <div class="chatlog__embed-description">
-                                                <div class="markdown preserve-whitespace">SceneKit でのリソースの操作やオブジェクトファイルの読み込みは Model I/O のフレームワークを使用しており、 ファイルの読み込みは Model I/O に依存している。 オブジェクトファイルをプロジェクトで使用す...</div>
-                                            </div>
-
-                                    </div>
-
-                                        <div class="chatlog__embed-thumbnail-container">
-                                            <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/kxv5LTy4W8Ju4WpwidsLqA22Lbz29blPKnJ-SFToUCE/https/cdn.blog.st-hatena.com/images/theme/og-image-1500.png">
-                                                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/kxv5LTy4W8Ju4WpwidsLqA22Lbz29blPKnJ-SFToUCE/https/cdn.blog.st-hatena.com/images/theme/og-image-1500.png" alt="Thumbnail" loading="lazy">
-                                            </a>
-                                        </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=469011005825875978"><span class="chatlog__timestamp">18-Jul-18 05:21 AM</span></a>
+        <div class="chatlog__message " data-message-id="469010799537422348" id="message-469010799537422348" title="Message sent: 18-Jul-18 05:21 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">↓こっちとか <a href="http://appleengine.hatenablog.com/entry/2017/08/08/183538">http://appleengine.hatenablog.com/entry/2017/08/08/183538</a></span>
             </div>
-            <div class="chatlog__message " data-message-id="469011005825875978" id="message-469011005825875978" title="Message sent: 18-Jul-18 05:22 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">COLLADA (.dae) とかもそうですが、テクスチャがモデル本体と分離されているので、 USDZ は ZIP 化してひとまとめにしたので、手軽に配信できるようになったというのが本質的な違いなんだと思います。</span>
-
-                        </div>
-                    </div>
-
-
-
-
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-author">
+                    <span class="chatlog__embed-author-name">
+                      <a class="chatlog__embed-author-name-link" href="http://blog.hatena.ne.jp/x67x6fx74x6f/">x67x6fx74x6f</a>
+                    </span>
+                  </div>
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="http://appleengine.hatenablog.com/entry/2017/08/08/183538">
+                      <div class="markdown preserve-whitespace">iOS で SceneKit を試す(Swift 3) その57 - SceneKit で使用...</div>
+                    </a>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">SceneKit でのリソースの操作やオブジェクトファイルの読み込みは Model I/O のフレームワークを使用しており、 ファイルの読み込みは Model I/O に依存している。 オブジェクトファイルをプロジェクトで使用す...</div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/kxv5LTy4W8Ju4WpwidsLqA22Lbz29blPKnJ-SFToUCE/https/cdn.blog.st-hatena.com/images/theme/og-image-1500.png">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/kxv5LTy4W8Ju4WpwidsLqA22Lbz29blPKnJ-SFToUCE/https/cdn.blog.st-hatena.com/images/theme/og-image-1500.png" alt="Thumbnail" loading="lazy">
+                  </a>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469011005825875978" id="message-469011005825875978" title="Message sent: 18-Jul-18 05:22 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">COLLADA (.dae) とかもそうですが、テクスチャがモデル本体と分離されているので、 USDZ は ZIP 化してひとまとめにしたので、手軽に配信できるようになったというのが本質的な違いなんだと思います。</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
-
-
-        <span class="chatlog__timestamp">18-Jul-18 05:26 AM</span>
-
-            <div class="chatlog__message " data-message-id="469012089894076437" id="message-469012089894076437" title="Message sent: 18-Jul-18 05:26 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace"><div class="quote"><div class="quote-border"></div><div class="quote-content">テクスチャがモデル本体と分離されている
-</div></div>自分はあまり3d触ってこなかったのですが、これが今までデファクトだったことが驚きです…w</span>
-
-                                <span class="chatlog__edited-timestamp" title="18-Jul-18 05:30 AM">(edited)</span>
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=469012089894076437"><span class="chatlog__timestamp">18-Jul-18 05:26 AM</span></a>
+        <div class="chatlog__message " data-message-id="469012089894076437" id="message-469012089894076437" title="Message sent: 18-Jul-18 05:26 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">
+                <div class="quote">
+                  <div class="quote-border"></div>
+                  <div class="quote-content">テクスチャがモデル本体と分離されている </div>
+                </div>自分はあまり3d触ってこなかったのですが、これが今までデファクトだったことが驚きです…w
+              </span>
+              <span class="chatlog__edited-timestamp" title="18-Jul-18 05:30 AM">(edited)</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-
-
-        <span class="chatlog__timestamp">18-Jul-18 05:31 AM</span>
-
-            <div class="chatlog__message " data-message-id="469013423779217438" id="message-469013423779217438" title="Message sent: 18-Jul-18 05:31 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">モデルファイルの中にテクスチャファイルのパスが絶対パスで焼き込まれていたり、でもロードするときにうまく解決されてたり、色々ヤバイです<img loading="lazy" class="emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg"></span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=469013423779217438"><span class="chatlog__timestamp">18-Jul-18 05:31 AM</span></a>
+        <div class="chatlog__message " data-message-id="469013423779217438" id="message-469013423779217438" title="Message sent: 18-Jul-18 05:31 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">モデルファイルの中にテクスチャファイルのパスが絶対パスで焼き込まれていたり、でもロードするときにうまく解決されてたり、色々ヤバイです<img loading="lazy" class="emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg"></span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
-
-
-        <span class="chatlog__timestamp">18-Jul-18 05:41 AM</span>
-
-            <div class="chatlog__message " data-message-id="469015809373634571" id="message-469015809373634571" title="Message sent: 18-Jul-18 05:41 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">USDをZIPにしたものがUSDZですね。</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=469016084075511808"><span class="chatlog__timestamp">18-Jul-18 05:41 AM</span></a>
+        <div class="chatlog__message " data-message-id="469015809373634571" id="message-469015809373634571" title="Message sent: 18-Jul-18 05:41 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">USDをZIPにしたものがUSDZですね。</span>
             </div>
-            <div class="chatlog__message " data-message-id="469016084075511808" id="message-469016084075511808" title="Message sent: 18-Jul-18 05:42 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">私もUSDZを調べて全然ファイルフォーマットの話が出てこなかったので、不思議に思ってたらそういうことだった。</span>
-
-                        </div>
-                    </div>
-
-
-
-
+          </div>
+        </div>
+        <div class="chatlog__message " data-message-id="469016084075511808" id="message-469016084075511808" title="Message sent: 18-Jul-18 05:42 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">私もUSDZを調べて全然ファイルフォーマットの話が出てこなかったので、不思議に思ってたらそういうことだった。</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/504938868165050369/1f90b027f05ea48216a09628475e5b5e.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="Jaguarmouse#8566" data-user-id="504938868165050369" style="">Jaguarmouse</span>
-
-
-        <span class="chatlog__timestamp">08-Nov-18 08:21 AM</span>
-
-            <div class="chatlog__message " data-message-id="510006058782031909" id="message-510006058782031909" title="Message sent: 08-Nov-18 08:21 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">不勉強で申し訳ないのですが、以下の状況を実現したいです。のでどなたかヘルプお願いします！ARConfigurationのWorldAlignmentをcameraにした時、
-<a href="https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera">https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera</a>
-にあるようにlandscapeRightにした時の右がx+、上がy+、手前がz+になるのですが、これをportraitの時の右がx+、上がy+、手前がz+になるようにしたいです。が、無理そうなので得られるanchorのtransformをどうにか変換したいです。
-そのtransformを使って表示するノードはARSCNViewではなく別のSCNView上のシーンにあります。ARFaceTrackingConfigurationを使っていて、フレームごとにARFaceAnchorのtransformをどうにか変換してノードのtransformに代入しようと思っています。ちなみにそのままノードのtransformに代入するとz軸を中心に反時計回りに90度回転した状態で表示されます。
-実現したい状況というのは要はアニ文字です。</span>
-
-                                <span class="chatlog__edited-timestamp" title="08-Nov-18 08:35 AM">(edited)</span>
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=510006058782031909"><span class="chatlog__timestamp">08-Nov-18 08:21 AM</span></a>
+        <div class="chatlog__message " data-message-id="510006058782031909" id="message-510006058782031909" title="Message sent: 08-Nov-18 08:21 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">不勉強で申し訳ないのですが、以下の状況を実現したいです。のでどなたかヘルプお願いします！ARConfigurationのWorldAlignmentをcameraにした時、 <a href="https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera">https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera</a> にあるようにlandscapeRightにした時の右がx+、上がy+、手前がz+になるのですが、これをportraitの時の右がx+、上がy+、手前がz+になるようにしたいです。が、無理そうなので得られるanchorのtransformをどうにか変換したいです。 そのtransformを使って表示するノードはARSCNViewではなく別のSCNView上のシーンにあります。ARFaceTrackingConfigurationを使っていて、フレームごとにARFaceAnchorのtransformをどうにか変換してノードのtransformに代入しようと思っています。ちなみにそのままノードのtransformに代入するとz軸を中心に反時計回りに90度回転した状態で表示されます。 実現したい状況というのは要はアニ文字です。</span>
+              <span class="chatlog__edited-timestamp" title="08-Nov-18 08:35 AM">(edited)</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
-
-
-        <span class="chatlog__timestamp">08-Nov-18 08:48 AM</span>
-
-            <div class="chatlog__message " data-message-id="510012691566428170" id="message-510012691566428170" title="Message sent: 08-Nov-18 08:48 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">シーンがカメラ座標系をベースに組んでいるという話なら、端末をどの向きで持とうが、常に90度回転しちゃってるってことですよね？
-transformを代入する前に90度回転するのはどうですか？</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=510012691566428170"><span class="chatlog__timestamp">08-Nov-18 08:48 AM</span></a>
+        <div class="chatlog__message " data-message-id="510012691566428170" id="message-510012691566428170" title="Message sent: 08-Nov-18 08:48 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">シーンがカメラ座標系をベースに組んでいるという話なら、端末をどの向きで持とうが、常に90度回転しちゃってるってことですよね？ transformを代入する前に90度回転するのはどうですか？</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/504938868165050369/1f90b027f05ea48216a09628475e5b5e.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="Jaguarmouse#8566" data-user-id="504938868165050369" style="">Jaguarmouse</span>
-
-
-        <span class="chatlog__timestamp">08-Nov-18 09:18 AM</span>
-
-            <div class="chatlog__message " data-message-id="510020185995083776" id="message-510020185995083776" title="Message sent: 08-Nov-18 09:18 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">90度回転させると一見いいんですが、顔の向きを変えた時、正しい向きがノードに反映されません。左右を向くとノードは上下を向いてしまいます</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=510020185995083776"><span class="chatlog__timestamp">08-Nov-18 09:18 AM</span></a>
+        <div class="chatlog__message " data-message-id="510020185995083776" id="message-510020185995083776" title="Message sent: 08-Nov-18 09:18 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">90度回転させると一見いいんですが、顔の向きを変えた時、正しい向きがノードに反映されません。左右を向くとノードは上下を向いてしまいます</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
-
-
-        <span class="chatlog__timestamp">08-Nov-18 09:47 AM</span>
-
-            <div class="chatlog__message " data-message-id="510027600710860822" id="message-510027600710860822" title="Message sent: 08-Nov-18 09:47 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">「別のSCNView」の方のシーンを撮影してるカメラ(顔を撮影している端末のカメラじゃなくて、3Dグラフィックスをレンダリングするカメラ) を、Z軸周りに回転してやるといけそうな気がします。</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=510027600710860822"><span class="chatlog__timestamp">08-Nov-18 09:47 AM</span></a>
+        <div class="chatlog__message " data-message-id="510027600710860822" id="message-510027600710860822" title="Message sent: 08-Nov-18 09:47 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">「別のSCNView」の方のシーンを撮影してるカメラ(顔を撮影している端末のカメラじゃなくて、3Dグラフィックスをレンダリングするカメラ) を、Z軸周りに回転してやるといけそうな気がします。</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/504938868165050369/1f90b027f05ea48216a09628475e5b5e.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="Jaguarmouse#8566" data-user-id="504938868165050369" style="">Jaguarmouse</span>
-
-
-        <span class="chatlog__timestamp">08-Nov-18 09:52 AM</span>
-
-            <div class="chatlog__message " data-message-id="510028763262746624" id="message-510028763262746624" title="Message sent: 08-Nov-18 09:52 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">確かに！</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=510028763262746624"><span class="chatlog__timestamp">08-Nov-18 09:52 AM</span></a>
+        <div class="chatlog__message " data-message-id="510028763262746624" id="message-510028763262746624" title="Message sent: 08-Nov-18 09:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">確かに！</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/504938868165050369/1f90b027f05ea48216a09628475e5b5e.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="Jaguarmouse#8566" data-user-id="504938868165050369" style="">Jaguarmouse</span>
-
-
-        <span class="chatlog__timestamp">08-Nov-18 10:01 AM</span>
-
-            <div class="chatlog__message " data-message-id="510031092238123028" id="message-510031092238123028" title="Message sent: 08-Nov-18 10:01 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">できました。ありがとうございます<img loading="lazy" class="emoji " alt="👍" title="thumbsup" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg"></span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=510031092238123028"><span class="chatlog__timestamp">08-Nov-18 10:01 AM</span></a>
+        <div class="chatlog__message " data-message-id="510031092238123028" id="message-510031092238123028" title="Message sent: 08-Nov-18 10:01 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">できました。ありがとうございます<img loading="lazy" class="emoji " alt="👍" title="thumbsup" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg"></span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
-
-
-        <span class="chatlog__timestamp">08-Nov-18 10:02 AM</span>
-
-            <div class="chatlog__message " data-message-id="510031372979666945" id="message-510031372979666945" title="Message sent: 08-Nov-18 10:02 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">おお、よかったです <img loading="lazy" class="emoji " alt="😁" title="grin" src="https://twemoji.maxcdn.com/2/svg/1f601.svg"></span>
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="chatlog__reactions">
-                            <div class="chatlog__reaction" title="pray">
-                                <img class="emoji emoji--small" alt="&#128591;" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy">
-                                <span class="chatlog__reaction-count">1</span>
-                            </div>
-                    </div>
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=510031372979666945"><span class="chatlog__timestamp">08-Nov-18 10:02 AM</span></a>
+        <div class="chatlog__message " data-message-id="510031372979666945" id="message-510031372979666945" title="Message sent: 08-Nov-18 10:02 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">おお、よかったです <img loading="lazy" class="emoji " alt="😁" title="grin" src="https://twemoji.maxcdn.com/2/svg/1f601.svg"></span>
             </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="pray">
+              <img class="emoji emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/351622088974401546/1961899f96712d70a274e7d8782e8556.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="yoshiki#8651" data-user-id="351622088974401546" style="">yoshiki</span>
-
-
-        <span class="chatlog__timestamp">29-Apr-19 02:58 PM</span>
-
-            <div class="chatlog__message " data-message-id="572436635992719360" id="message-572436635992719360" title="Message sent: 29-Apr-19 02:58 PM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">ARのMetalのHello Wordを動かしてみました。ソースはまだ理解してないので、どうにか理解しようと思います。</span>
-
-                        </div>
-                    </div>
-
-                    <div class="chatlog__attachment " onclick="">
-
-                            <video class="chatlog__attachment-media" controls>
-                                <source src="https://cdn.discordapp.com/attachments/454555217048895501/572436633559891968/video.mov" alt="Video attachment" title="Video: video.mov (27.54 MB)">
-                            </video>
-                    </div>
-
-
-
-                    <div class="chatlog__reactions">
-                            <div class="chatlog__reaction" title="yum">
-                                <img class="emoji emoji--small" alt="&#128523;" src="https://twemoji.maxcdn.com/2/svg/1f60b.svg" loading="lazy">
-                                <span class="chatlog__reaction-count">1</span>
-                            </div>
-                    </div>
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=572436635992719360"><span class="chatlog__timestamp">29-Apr-19 02:58 PM</span></a>
+        <div class="chatlog__message " data-message-id="572436635992719360" id="message-572436635992719360" title="Message sent: 29-Apr-19 02:58 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ARのMetalのHello Wordを動かしてみました。ソースはまだ理解してないので、どうにか理解しようと思います。</span>
             </div>
+          </div>
+          <div class="chatlog__attachment " onclick="">
+            <video class="chatlog__attachment-media" controls="">
+              <source src="https://cdn.discordapp.com/attachments/454555217048895501/572436633559891968/video.mov" alt="Video attachment" title="Video: video.mov (27.54 MB)">
+            </video>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="yum">
+              <img class="emoji emoji--small" alt="😋" src="https://twemoji.maxcdn.com/2/svg/1f60b.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
-
-
-        <span class="chatlog__timestamp">04-Jun-19 11:15 PM</span>
-
-            <div class="chatlog__message " data-message-id="585607644367159313" id="message-585607644367159313" title="Message sent: 04-Jun-19 11:15 PM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">RealityKit良すぎる、この間自分が言っていたContactShadowもやってくれそう</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=585607644367159313"><span class="chatlog__timestamp">04-Jun-19 11:15 PM</span></a>
+        <div class="chatlog__message " data-message-id="585607644367159313" id="message-585607644367159313" title="Message sent: 04-Jun-19 11:15 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">RealityKit良すぎる、この間自分が言っていたContactShadowもやってくれそう</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
-
-
-        <span class="chatlog__timestamp">05-Jun-19 12:47 AM</span>
-
-            <div class="chatlog__message " data-message-id="585630791040499712" id="message-585630791040499712" title="Message sent: 05-Jun-19 12:47 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">おお</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=585630791040499712"><span class="chatlog__timestamp">05-Jun-19 12:47 AM</span></a>
+        <div class="chatlog__message " data-message-id="585630791040499712" id="message-585630791040499712" title="Message sent: 05-Jun-19 12:47 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">おお</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
-
-
-        <span class="chatlog__timestamp">05-Jun-19 09:04 PM</span>
-
-            <div class="chatlog__message " data-message-id="585936995197648938" id="message-585936995197648938" title="Message sent: 05-Jun-19 09:04 PM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">実装してないけど今ラボで聞いたら出来るって言われた</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=585936995197648938"><span class="chatlog__timestamp">05-Jun-19 09:04 PM</span></a>
+        <div class="chatlog__message " data-message-id="585936995197648938" id="message-585936995197648938" title="Message sent: 05-Jun-19 09:04 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">実装してないけど今ラボで聞いたら出来るって言われた</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-
-
-        <span class="chatlog__timestamp">05-Oct-20 10:50 AM</span>
-
-            <div class="chatlog__message " data-message-id="762627669594341376" id="message-762627669594341376" title="Message sent: 05-Oct-20 10:50 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace"><span class="mention" title="Deleted User#0000">@Deleted User</span> チャンネル移動しました。
-
-画像をトラッキングするのであれば↓のようなサンプルが参考になると思います。
-<a href="https://developer.apple.com/documentation/arkit/tracking_and_altering_images">https://developer.apple.com/documentation/arkit/tracking_and_altering_images</a>
-<a href="https://developer.apple.com/documentation/arkit/detecting_images_in_an_ar_experience">https://developer.apple.com/documentation/arkit/detecting_images_in_an_ar_experience</a></span>
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="chatlog__reactions">
-                            <div class="chatlog__reaction" title="thumbsup">
-                                <img class="emoji emoji--small" alt="&#128077;" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
-                                <span class="chatlog__reaction-count">1</span>
-                            </div>
-                    </div>
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=762627669594341376"><span class="chatlog__timestamp">05-Oct-20 10:50 AM</span></a>
+        <div class="chatlog__message " data-message-id="762627669594341376" id="message-762627669594341376" title="Message sent: 05-Oct-20 10:50 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><span class="mention" title="Deleted User#0000">@Deleted User</span> チャンネル移動しました。 画像をトラッキングするのであれば↓のようなサンプルが参考になると思います。 <a href="https://developer.apple.com/documentation/arkit/tracking_and_altering_images">https://developer.apple.com/documentation/arkit/tracking_and_altering_images</a>
+                <a href="https://developer.apple.com/documentation/arkit/detecting_images_in_an_ar_experience">https://developer.apple.com/documentation/arkit/detecting_images_in_an_ar_experience</a></span>
             </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="thumbsup">
+              <img class="emoji emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
-
-
-        <span class="chatlog__timestamp">05-Oct-20 10:50 AM</span>
-
-            <div class="chatlog__message " data-message-id="762627880651194408" id="message-762627880651194408" title="Message sent: 05-Oct-20 10:50 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">koher さん　ありがとうございます！そちら参考に作成したいと思います。</span>
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="chatlog__reactions">
-                            <div class="chatlog__reaction" title="slight_smile">
-                                <img class="emoji emoji--small" alt="&#128578;" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy">
-                                <span class="chatlog__reaction-count">1</span>
-                            </div>
-                    </div>
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=762627880651194408"><span class="chatlog__timestamp">05-Oct-20 10:50 AM</span></a>
+        <div class="chatlog__message " data-message-id="762627880651194408" id="message-762627880651194408" title="Message sent: 05-Oct-20 10:50 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">koher さん　ありがとうございます！そちら参考に作成したいと思います。</span>
             </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="slight_smile">
+              <img class="emoji emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-
-<div class="chatlog__message-group">
-
-    <div class="chatlog__author-avatar-container">
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
         <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
-    </div>
-
-    <div class="chatlog__messages">
+      </div>
+      <div class="chatlog__messages">
         <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
-
-
-        <span class="chatlog__timestamp">15-Oct-20 05:16 AM</span>
-
-            <div class="chatlog__message " data-message-id="766167658026369034" id="message-766167658026369034" title="Message sent: 15-Oct-20 05:16 AM">
-                    <div class="chatlog__content">
-                        <div class="markdown">
-                            <span class="preserve-whitespace">↑RealityKitでやると楽そうだなぁって思いました</span>
-
-                        </div>
-                    </div>
-
-
-
-
+        <a href="/channels/454555217048895501?category=開発環境, ライブラリ&amp;channel=arkit&amp;message_id=766167658026369034"><span class="chatlog__timestamp">15-Oct-20 05:16 AM</span></a>
+        <div class="chatlog__message " data-message-id="766167658026369034" id="message-766167658026369034" title="Message sent: 15-Oct-20 05:16 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">↑RealityKitでやると楽そうだなぁって思いました</span>
             </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-</div>
-
-<div class="postamble">
+  </div>
+  <div class="postamble">
     <div class="postamble__entry">Exported 24 message(s)</div>
-</div>
-
+  </div>
 </body>
 
 </html>
