@@ -68,9 +68,16 @@ router
   .get("/channels/:id(\\d+)", async (context) => {
     const userAgent = context.request.headers.get("user-agent");
     if (userAgent && isBot.test(userAgent)) {
-      context.response.body = await Deno.readTextFile(
-        `${Deno.cwd()}/data/html/${context.params.id}.html`,
-      );
+      const messageId = context.request.url.searchParams.get("message_id");
+      if (messageId) {
+        context.response.body = await Deno.readTextFile(
+          `${Deno.cwd()}/data/message_html_fragments/${messageId}.html`,
+        );
+      } else {
+        context.response.body = await Deno.readTextFile(
+          `${Deno.cwd()}/data/html/${context.params.id}.html`,
+        );
+      }
     } else {
       context.response.body = await renderBody();
     }
@@ -78,13 +85,21 @@ router
   .get("/channels/:thread/:id(\\d+)", async (context) => {
     const userAgent = context.request.headers.get("user-agent");
     if (userAgent && isBot.test(userAgent)) {
-      const threadId = context.params.id;
-      const thread = threads.find((x) => (x as { id: string }).id === threadId);
-
-      const channelId = (thread as { channelId: string }).channelId;
-      context.response.body = await Deno.readTextFile(
-        `${Deno.cwd()}/data/html/${channelId}/${threadId}.html`,
-      );
+      const messageId = context.request.url.searchParams.get("message_id");
+      if (messageId) {
+        context.response.body = await Deno.readTextFile(
+          `${Deno.cwd()}/data/message_html_fragments/${messageId}.html`,
+        );
+      } else {
+        const threadId = context.params.id;
+        const thread = threads.find((x) =>
+          (x as { id: string }).id === threadId
+        );
+        const channelId = (thread as { channelId: string }).channelId;
+        context.response.body = await Deno.readTextFile(
+          `${Deno.cwd()}/data/html/${channelId}/${threadId}.html`,
+        );
+      }
     } else {
       context.response.body = await renderBody();
     }
