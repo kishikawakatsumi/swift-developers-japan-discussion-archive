@@ -1,0 +1,17 @@
+<div class="chatlog__message-group">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="rintaro#0001" data-user-id="296587674737704960" style="">rintaro</span>
+    <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=946891071806406667"><span class="chatlog__timestamp">25-Feb-22 10:07 PM</span></a>
+    <div class="chatlog__message " data-message-id="946891071806406667" id="message-946891071806406667" title="Message sent: 25-Feb-22 10:07 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">withCString(:_)</span> とか <span class="pre pre--inline">withUnsafeBytes(:_)</span> をリストで扱いたいと思って、つまり <div class="pre pre--multiline language-swift"> let array: [String] = [...] array.with(each: String.withCString) { cStrings/*: [UnsafePointer&lt;CChar&gt;] */ in cFunctionReceivingCStringArray(cStrings) }</div> こういうのがやりたくて、邪悪なものを生み出してしまった。 <div class="pre pre--multiline language-swift">extension BidirectionalCollection { func with&lt;U, R&gt;( each mapFn: (Element) -&gt; ((U) throws -&gt; R) throws -&gt; R, _ fn: ([U]) throws -&gt; R ) rethrows -&gt; R { try withoutActuallyEscaping(fn) { fn in try withoutActuallyEscaping(mapFn) { mapFn in var stash: [U] = [] stash.reserveCapacity(count) let closure = reversed().reduce({ try fn(stash) }) { closure, elem in { try mapFn(elem)() { val in stash.append(val) return try closure() } } } return try closure() } } } }</div></span>
+          <span class="chatlog__edited-timestamp" title="25-Feb-22 11:21 PM">(edited)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
