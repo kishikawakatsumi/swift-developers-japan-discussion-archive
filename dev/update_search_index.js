@@ -12,6 +12,7 @@ const client = algoliasearch(
 const index = client.initIndex("messages");
 
 const optoutUsers = new Set();
+const optoutChannels = new Set(["453733491067322378"]);
 
 fs.readdirSync("temp/dm", { withFileTypes: true }).forEach((dirent) => {
   if (!dirent.name.endsWith(".json")) {
@@ -53,7 +54,10 @@ fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
 
         const optOutMessageIds = messages
           .filter((message) => {
-            return optoutUsers.has(message.author.id);
+            return (
+              optoutUsers.has(message.author.id) ||
+              optoutChannels.has(message.channel.categoryId)
+            );
           })
           .map((message) => message.id);
         if (optOutMessageIds.length) {
@@ -80,7 +84,10 @@ fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
 
   const optOutMessageIds = messages
     .filter((message) => {
-      return optoutUsers.has(message.author.id);
+      return (
+        optoutUsers.has(message.author.id) ||
+        optoutChannels.has(message.channel.id)
+      );
     })
     .map((message) => message.id);
   if (optOutMessageIds.length) {
