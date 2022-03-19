@@ -22820,7 +22820,7 @@
         "nickname": "Sumidora",
         "color": null,
         "isBot": false,
-        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/e5d0d6edd0e34ccdfcf645137a280e11.png?size=128"
+        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/eaa743f4f678dc982c9c41f92ad656a6.png?size=128"
       },
       "attachments": [
         {
@@ -22873,7 +22873,7 @@
         "nickname": "Sumidora",
         "color": null,
         "isBot": false,
-        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/e5d0d6edd0e34ccdfcf645137a280e11.png?size=128"
+        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/eaa743f4f678dc982c9c41f92ad656a6.png?size=128"
       },
       "attachments": [],
       "embeds": [],
@@ -30481,7 +30481,214 @@
       "stickers": [],
       "reactions": [],
       "mentions": []
+    },
+    {
+      "id": "953306020657106994",
+      "type": "Default",
+      "timestamp": "2022-03-15T14:57:46.894+00:00",
+      "timestampEdited": "2022-03-15T15:02:24.924+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`URL` を返す async 関数を `Task` のクロージャで `await` するようなボタンを Xcode Previews 上でクリックしたら必ずプレビューのプロセスがクラッシュする (実機だと問題なし) という謎の問題を発見して，特に困っているわけではないのですが気になるので情報をお持ちの方を探しています．\n\n以下ミニマル再現コードです．(macOS 12.3 & Xcode 13.3 や iPadOS 15.4 & Swift Playgrounds 4.0.2 で再現することを確認)\n```swift\nimport SwiftUI\n\nfunc foo() async -> URL {\n    URL(fileURLWithPath: \"/\")  // 戻り値が String 等では問題なし\n}\n\nstruct ContentView: View {\n    var body: some View {\n        Button(\"Press Me\") {\n            Task { _ = await foo() }\n        }\n    }\n}\n```\n\nスタックトレース:\n```\nThread 4 Crashed::  Dispatch queue: com.apple.root.user-initiated-qos.cooperative\n0   libsystem_kernel.dylib                   0x1cba39e60 __pthread_kill + 8\n1   libsystem_pthread.dylib                  0x1cba8d3c0 pthread_kill + 256\n2   libsystem_c.dylib                        0x1801023f4 abort + 124\n3   libswift_Concurrency.dylib               0x1cb9db604 swift::swift_Concurrency_fatalError(unsigned int, char const*, ...) + 12\n4   libswift_Concurrency.dylib               0x1cb9dd350 swift_task_dealloc + 124\n5   ContentView.1.preview-thunk.dylib           0x104a2b06c (1) await resume partial function for closure #1 in closure #1 in ContentView.__preview__body.getter + 80 (ContentView.swift:17)\n6   ContentView.1.preview-thunk.dylib           0x104a2b5d9 (1) await resume partial function for thunk for @escaping @callee_guaranteed @Sendable @async () -> (@out A) + 1\n7   ContentView.1.preview-thunk.dylib           0x104a2b73d (1) await resume partial function for partial apply for thunk for @escaping @callee_guaranteed @Sendable @async () -> (@out A) + 1\n8   libswift_Concurrency.dylib               0x1cb9dced1 completeTaskWithClosure(swift::AsyncContext*, swift::SwiftError*) + 1\n```",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953314116762730506",
+      "type": "Default",
+      "timestamp": "2022-03-15T15:29:57.156+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`@preconcurrency import Foundation` 書いたら変化しますか？",
+      "author": {
+        "id": "310258733890535426",
+        "name": "Iceman",
+        "discriminator": "5499",
+        "nickname": "Iceman",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953323226530975824",
+      "type": "Default",
+      "timestamp": "2022-03-15T16:06:09.094+00:00",
+      "timestampEdited": "2022-03-15T16:16:39.612+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "変化しないですね．`Foundation.URL` が使われているのか `SwiftUI.URL` が使われているのかわからないので念のために\n```swift\n@preconcurrency import struct Foundation.URL\nimport struct SwiftUI.Button\nimport protocol SwiftUI.PreviewProvider\nimport protocol SwiftUI.View\n```\nみたいなのも試してみましたが，こうするとファイルを開き直した時にプレビューが表示されなくなっちゃうのでプレビューが残っている間に試しました．\nただ，`-warn-concurrency` つけていても警告は出ていなかったのであんまり関係ないかなという気はしてます．\nちなみに `foo()` の定義だけ別のファイルに持っていくとクラッシュしなくなるんですよね．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953327884951511124",
+      "type": "Default",
+      "timestamp": "2022-03-15T16:24:39.748+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`Sendable` かどうかでなにか変わってるのかと思いましたが、関係ないようですね。不思議。",
+      "author": {
+        "id": "310258733890535426",
+        "name": "Iceman",
+        "discriminator": "5499",
+        "nickname": "Iceman",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953336140151263322",
+      "type": "Default",
+      "timestamp": "2022-03-15T16:57:27.941+00:00",
+      "timestampEdited": "2022-03-15T17:00:28.46+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "一応試した範囲で foo の戻り値の型で再現する/しない型を書きだすとこんな感じですね．Foundation の struct だと再現するのかと思いきや例外もあってそうとも限らなさそうでなんとも...\n再現する型: URL, URLError, UUID, Date, Measurement, Locale, some SwiftUI.View\n再現しない型: String, [Int], [String: Int], some StringProtocol, DispatchQueue, Bundle, Data, DateFormatter, URLSession, JSONEncoder, NSNumber, CGFloat, Decimal, SwiftUI.Text",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953597872195129354",
+      "type": "Default",
+      "timestamp": "2022-03-16T10:17:29.723+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "普通にシミュレータで実行した時再現しますか？",
+      "author": {
+        "id": "291062140079570944",
+        "name": "kateinoigakukun",
+        "discriminator": "2184",
+        "nickname": "kateinoigakukun",
+        "color": "#F1C40F",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953598337783853086",
+      "type": "Default",
+      "timestamp": "2022-03-16T10:19:20.728+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "あー、x64のコード生成がおかしいのかと思ったんですがiPadでも再現するなら違うか…",
+      "author": {
+        "id": "291062140079570944",
+        "name": "kateinoigakukun",
+        "discriminator": "2184",
+        "nickname": "kateinoigakukun",
+        "color": "#F1C40F",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953717347221401650",
+      "type": "Default",
+      "timestamp": "2022-03-16T18:12:14.789+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "シミュレータでは問題なかったと記憶してますが，コードが違ったかもしれないので明日もう一回確かめてみます．(ただおっしゃる通り x64 向けのコンパイルに限った問題ではないです)",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "953839970743906314",
+      "type": "Default",
+      "timestamp": "2022-03-17T02:19:30.515+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "やっぱりシミュレータではクラッシュしないですね．ちなみに私の環境だと M1 Mac mini なのでプレビューやシミュレータも arm64 でした．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=128"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
     }
   ],
-  "messageCount": 1228
+  "messageCount": 1237
 }
