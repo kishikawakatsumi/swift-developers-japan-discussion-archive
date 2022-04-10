@@ -1,15 +1,17 @@
 <div class="chatlog__message-group">
-  <div class="chatlog__author-avatar-container">
-    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=128" alt="Avatar" loading="lazy">
-  </div>
-  <div class="chatlog__messages">
-    <span class="chatlog__author-name" title="taketo1024#1158" data-user-id="370406638915420161" style="">taketo1024</span>
-    <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=435309715812122632"><span class="chatlog__timestamp">16-Apr-18 05:25 AM</span></a>
-    <div class="chatlog__message " data-message-id="435309715812122632" id="message-435309715812122632" title="Message sent: 16-Apr-18 05:25 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">お助け願います <img loading="lazy" class="emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/2/svg/1f647.svg">
-            <div class="pre pre--multiline language-swift">import Foundation public protocol MapType { associatedtype Domain associatedtype Codomain init(_ fnc: @escaping (Domain) -&gt; Codomain) func applied(to x: Domain) -&gt; Codomain } public struct Map&lt;Domain, Codomain&gt;: MapType { internal let fnc: (Domain) -&gt; Codomain public init(_ fnc: @escaping (Domain) -&gt; Codomain) { self.fnc = fnc } public func applied(to x: Domain) -&gt; Codomain { return fnc(x) } } public protocol EndType: MapType where Domain == Codomain { static var identity: Self { get } func composed(with f: Self) -&gt; Self } public extension EndType { public static var identity: Self { return Self{ x in x } } public func composed(with g: Self) -&gt; Self { return Self { x in // ココで EXC_BAD_ACCESS self.applied(to: g.applied(to: x)) } } } extension Map: EndType where Domain == Codomain { } public extension Array where Element: EndType { func composed() -&gt; Element { return self.reduce(Element.identity) { (res, f) in res.composed(with: f) } } } let f = Map { x in 2 * x } let g = [f, f].composed() print(g.applied(to: 0))</div> 関数（写像）を抽象化した MapType と、具体型の Map: MapType を作り、特に Domain(定義域) と Codomain(値域) が一致している場合に EndType: MapType という subprotocol を用意して、配列に入った関数をまとめて合成できるようにしたいと思って上のようなコードを書いたのですが、実行時に EXC_BAD_ACCESS が出てしまいます <img loading="lazy" class="emoji " alt="👼" title="angel" src="https://twemoji.maxcdn.com/2/svg/1f47c.svg"> protocol で関数値を取る init を置いてるのがまずいんでしょうか…？わかる方いたら教えてください <img loading="lazy" class="emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg">
+  <div id="chatlog__message-container-435309715812122632" class="chatlog__message-container " data-message-id="435309715812122632">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header">
+          <span class="chatlog__author" style="" title="taketo1024#1158" data-user-id="370406638915420161">taketo1024</span>
+          <span class="chatlog__timestamp">16-Apr-18 05:25 AM</span>
+        </div>
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">お助け願います <img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/2/svg/1f647.svg">
+            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Foundation public protocol MapType { associatedtype Domain associatedtype Codomain init(_ fnc: @escaping (Domain) -&gt; Codomain) func applied(to x: Domain) -&gt; Codomain } public struct Map&lt;Domain, Codomain&gt;: MapType { internal let fnc: (Domain) -&gt; Codomain public init(_ fnc: @escaping (Domain) -&gt; Codomain) { self.fnc = fnc } public func applied(to x: Domain) -&gt; Codomain { return fnc(x) } } public protocol EndType: MapType where Domain == Codomain { static var identity: Self { get } func composed(with f: Self) -&gt; Self } public extension EndType { public static var identity: Self { return Self{ x in x } } public func composed(with g: Self) -&gt; Self { return Self { x in // ココで EXC_BAD_ACCESS self.applied(to: g.applied(to: x)) } } } extension Map: EndType where Domain == Codomain { } public extension Array where Element: EndType { func composed() -&gt; Element { return self.reduce(Element.identity) { (res, f) in res.composed(with: f) } } } let f = Map { x in 2 * x } let g = [f, f].composed() print(g.applied(to: 0))</div> 関数（写像）を抽象化した MapType と、具体型の Map: MapType を作り、特に Domain(定義域) と Codomain(値域) が一致している場合に EndType: MapType という subprotocol を用意して、配列に入った関数をまとめて合成できるようにしたいと思って上のようなコードを書いたのですが、実行時に EXC_BAD_ACCESS が出てしまいます <img loading="lazy" class="chatlog__emoji " alt="👼" title="angel" src="https://twemoji.maxcdn.com/2/svg/1f47c.svg"> protocol で関数値を取る init を置いてるのがまずいんでしょうか…？わかる方いたら教えてください <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg">
           </span>
           <span class="chatlog__edited-timestamp" title="16-Apr-18 05:31 AM">(edited)</span>
         </div>

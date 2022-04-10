@@ -6,39 +6,42 @@
   <meta name="viewport" content="width=device-width">
   <style>
     @font-face {
-      font-family: Whitney;
       src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+      font-family: Whitney;
       font-weight: 300;
     }
 
     @font-face {
-      font-family: Whitney;
       src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+      font-family: Whitney;
       font-weight: 400;
     }
 
     @font-face {
-      font-family: Whitney;
       src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+      font-family: Whitney;
       font-weight: 500;
     }
 
     @font-face {
-      font-family: Whitney;
       src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+      font-family: Whitney;
       font-weight: 600;
     }
 
     @font-face {
-      font-family: Whitney;
       src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+      font-family: Whitney;
       font-weight: 700;
     }
 
+    html,
     body {
+      margin: 0;
+      padding: 0;
       background-color: #ffffff;
       color: #23262a;
-      font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
       font-weight: 500;
     }
@@ -54,113 +57,15 @@
 
     img {
       object-fit: contain;
-    }
-
-    .markdown {
-      max-width: 100%;
-      line-height: 1.3;
-      overflow-wrap: break-word;
-    }
-
-    .preserve-whitespace {
-      white-space: pre-wrap;
-    }
-
-    .spoiler-text {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 3px;
-    }
-
-    .spoiler-text--hidden {
-      cursor: pointer;
-      background-color: #b9bbbe;
-      color: rgba(0, 0, 0, 0);
-    }
-
-    .spoiler-text--hidden:hover {
-      background-color: rgba(185, 187, 190, 0.8);
-    }
-
-    .spoiler-text--hidden::selection {
-      color: rgba(0, 0, 0, 0);
-    }
-
-    .quote {
-      display: flex;
-      margin: 0.05em 0;
-    }
-
-    .quote-border {
-      margin-right: 0.5em;
-      border: 2px solid #c7ccd1;
-      border-radius: 3px;
-    }
-
-    .pre {
-      background-color: #f9f9f9;
-      font-family: "Consolas", "Courier New", Courier, monospace;
-    }
-
-    .pre--multiline {
-      margin-top: 0.25em;
-      padding: 0.5em;
-      border: 2px solid #f3f3f3;
-      border-radius: 5px;
-      color: #657b83;
-    }
-
-    .pre--multiline.hljs {
-      background-color: #f9f9f9;
-      color: #657b83;
-    }
-
-    .pre--inline {
-      padding: 2px;
-      border-radius: 3px;
-      font-size: 0.85em;
-    }
-
-    .mention {
-      border-radius: 3px;
-      padding: 0 2px;
-      color: #505cdc;
-      background-color: rgba(88, 101, 242, .15);
-      font-weight: 500;
-    }
-
-    .mention:hover {
-      background-color: #5865f2;
-      color: #ffffff
-    }
-
-    .timestamp {
-      border-radius: 3px;
-      padding: 0 2px;
-      background-color: rgba(6, 6, 7, 0.08);
-    }
-
-    .emoji {
-      width: 1.325em;
-      height: 1.325em;
-      margin: 0 0.06em;
-      vertical-align: -0.4em;
-    }
-
-    .emoji--small {
-      width: 1em;
-      height: 1em;
-    }
-
-    .emoji--large {
-      width: 2.8em;
-      height: 2.8em;
+      image-rendering: high-quality;
+      image-rendering: -webkit-optimize-contrast;
     }
 
     .preamble {
       display: grid;
-      margin: 0 0.3em 0.6em 0.3em;
-      max-width: 100%;
       grid-template-columns: auto 1fr;
+      max-width: 100%;
+      padding: 1rem;
     }
 
     .preamble__guild-icon-container {
@@ -174,59 +79,114 @@
 
     .preamble__entries-container {
       grid-column: 2;
-      margin-left: 0.6em;
+      margin-left: 1rem;
     }
 
     .preamble__entry {
-      font-size: 1.4em;
+      margin-bottom: 0.15rem;
       color: #2f3136;
+      font-size: 1.4rem;
     }
 
     .preamble__entry--small {
-      font-size: 1em;
+      font-size: 1rem;
     }
 
     .chatlog {
-      max-width: 100%;
+      padding: 1rem 0;
+      width: 100%;
+      border-top: 1px solid #eceeef;
+      border-bottom: 1px solid #eceeef;
     }
 
     .chatlog__message-group {
+      margin-bottom: 1rem;
+    }
+
+    .chatlog__message-container {
+      background-color: transparent;
+      transition: background-color 1s ease;
+    }
+
+    .chatlog__message-container--highlighted {
+      background-color: rgba(114, 137, 218, 0.2);
+    }
+
+    .chatlog__message-container--pinned {
+      background-color: rgba(249, 168, 37, 0.05);
+    }
+
+    .chatlog__message {
       display: grid;
-      margin: 0 0.6em;
-      padding: 0.9em 0;
-      border-top: 1px solid #eceeef;
       grid-template-columns: auto 1fr;
+      padding: 0.15rem 0;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+    }
+
+    .chatlog__message:hover {
+      background-color: #fafafa;
+    }
+
+    .chatlog__message:hover .chatlog__short-timestamp {
+      display: block;
+    }
+
+    .chatlog__message-aside {
+      grid-column: 1;
+      width: 72px;
+      padding: 0.15rem 0.15rem 0 0.15rem;
+      text-align: center;
     }
 
     .chatlog__reference-symbol {
-      grid-column: 1;
-      margin: 8px 4px 4px 18px;
+      height: 10px;
+      margin: 6px 4px 4px 36px;
       border-left: 2px solid #c7ccd1;
       border-top: 2px solid #c7ccd1;
       border-radius: 8px 0 0 0;
     }
 
+    .chatlog__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .chatlog__short-timestamp {
+      display: none;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+    }
+
+    .chatlog__message-primary {
+      grid-column: 2;
+      min-width: 0;
+    }
+
     .chatlog__reference {
       display: flex;
-      grid-column: 2;
-      margin-bottom: 0.25em;
-      font-size: 0.875em;
+      margin-bottom: 0.15rem;
+      align-items: center;
+      color: #5f5f60;
+      font-size: 0.875rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      align-items: center;
-      color: #5f5f60;
     }
 
     .chatlog__reference-avatar {
-      border-radius: 50%;
       width: 16px;
       height: 16px;
-      margin-right: 0.25em;
+      margin-right: 0.25rem;
+      border-radius: 50%;
     }
 
-    .chatlog__reference-name {
-      margin-right: 0.3em;
+    .chatlog__reference-author {
+      margin-right: 0.3rem;
       font-weight: 600;
     }
 
@@ -235,13 +195,8 @@
       text-overflow: ellipsis;
     }
 
-    .chatlog__reference-content a:hover {
-      text-decoration: none;
-    }
-
     .chatlog__reference-link {
       cursor: pointer;
-      color: #5f5f60;
     }
 
     .chatlog__reference-link * {
@@ -249,82 +204,75 @@
       pointer-events: none;
     }
 
+    .chatlog__reference-link .hljs {
+      display: inline;
+    }
+
     .chatlog__reference-link:hover {
       color: #2f3136;
     }
 
-    .chatlog__reference-link:hover *:not(.spoiler-text) {
-      color: #2f3136;
+    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+      color: inherit;
     }
 
     .chatlog__reference-edited-timestamp {
-      margin-left: 0.25em;
-      font-size: 0.8em;
-      unicode-bidi: bidi-override;
-      color: #747f8d;
-    }
-
-    .chatlog__author-avatar-container {
-      grid-column: 1;
-      width: 40px;
-      height: 40px;
-      margin-right: 16px;
-    }
-
-    .chatlog__author-avatar {
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-    }
-
-    .chatlog__messages {
-      grid-column: 2;
-      min-width: 50%;
+      margin-left: 0.25rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
       direction: ltr;
+      unicode-bidi: bidi-override;
     }
 
-    .chatlog__author-name {
+    .chatlog__header {
+      margin-bottom: 0.1rem;
+    }
+
+    .chatlog__author {
       font-weight: 600;
       color: #2f3136;
     }
 
+    .chatlog__bot-label {
+      position: relative;
+      top: -0.1rem;
+      margin-left: 0.3rem;
+      padding: 0.05rem 0.3rem;
+      border-radius: 3px;
+      background-color: #5865F2;
+      color: #ffffff;
+      font-size: 0.625rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
     .chatlog__timestamp {
-      margin-left: 0.3em;
-      font-size: 0.75em;
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
       direction: ltr;
       unicode-bidi: bidi-override;
-      color: #747f8d;
-    }
-
-    .chatlog__message {
-      padding: 0.1em 0.3em;
-      margin: 0 -0.3em;
-      background-color: transparent;
-      transition: background-color 1s ease;
-    }
-
-    .chatlog__message--highlighted {
-      background-color: rgba(114, 137, 218, 0.2);
-    }
-
-    .chatlog__message--pinned {
-      background-color: rgba(249, 168, 37, 0.05);
     }
 
     .chatlog__content {
-      font-size: 0.95em;
+      padding-right: 1rem;
+      font-size: 0.95rem;
       word-wrap: break-word;
     }
 
     .chatlog__edited-timestamp {
-      margin-left: 0.15em;
-      font-size: 0.8em;
+      margin-left: 0.15rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
     }
 
     .chatlog__attachment {
-      display: inline-block;
       position: relative;
-      margin-top: 0.3em;
+      width: fit-content;
+      margin-top: 0.3rem;
       border-radius: 3px;
       overflow: hidden;
     }
@@ -340,18 +288,18 @@
 
     .chatlog__attachment-spoiler-caption {
       display: none;
-      z-index: 999;
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
-      padding: 0.4em 0.8em;
-      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      padding: 0.4rem 0.8rem;
       border-radius: 20px;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.9);
       color: #dcddde;
-      font-size: 0.9em;
+      font-size: 0.9rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.05rem;
     }
 
     .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
@@ -363,9 +311,9 @@
     }
 
     .chatlog__attachment-media {
-      vertical-align: top;
       max-width: 45vw;
       max-height: 500px;
+      vertical-align: top;
       border-radius: 3px;
     }
 
@@ -374,13 +322,13 @@
     }
 
     .chatlog__attachment-generic {
-      width: 100%;
       max-width: 520px;
+      width: 100%;
       height: 40px;
       padding: 10px;
-      background-color: #f2f3f5;
       border: 1px solid #ebedef;
       border-radius: 3px;
+      background-color: #f2f3f5;
       overflow: hidden;
     }
 
@@ -406,19 +354,15 @@
       text-overflow: ellipsis;
     }
 
-    .chatlog__edited-timestamp {
-      color: #747f8d;
-    }
-
     .chatlog__embed {
       display: flex;
-      margin-top: 0.3em;
+      margin-top: 0.3rem;
       max-width: 520px;
     }
 
     .chatlog__embed-color-pill {
       flex-shrink: 0;
-      width: 0.25em;
+      width: 0.25rem;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
     }
@@ -430,11 +374,11 @@
     .chatlog__embed-content-container {
       display: flex;
       flex-direction: column;
-      padding: 0.5em 0.6em;
-      background-color: rgba(249, 249, 249, 0.3);
+      padding: 0.5rem 0.6rem;
       border: 1px solid rgba(204, 204, 204, 0.3);
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
+      background-color: rgba(249, 249, 249, 0.3);
     }
 
     .chatlog__embed-content {
@@ -446,85 +390,85 @@
       flex: 1;
     }
 
-    .chatlog__embed-author {
+    .chatlog__embed-author-container {
       display: flex;
-      margin-bottom: 0.3em;
+      margin-bottom: 0.5rem;
       align-items: center;
     }
 
     .chatlog__embed-author-icon {
-      margin-right: 0.5em;
       width: 20px;
       height: 20px;
+      margin-right: 0.5rem;
       border-radius: 50%;
     }
 
-    .chatlog__embed-author-name {
-      font-size: 0.875em;
+    .chatlog__embed-author {
+      color: #4f545c;
+      font-size: 0.875rem;
       font-weight: 600;
       direction: ltr;
       unicode-bidi: bidi-override;
-      color: #4f545c
     }
 
-    .chatlog__embed-author-name-link {
+    .chatlog__embed-author-link {
       color: #4f545c;
     }
 
     .chatlog__embed-title {
-      margin-bottom: 0.2em;
-      font-size: 0.875em;
-      font-weight: 600;
+      margin-bottom: 0.5rem;
       color: #4f545c;
+      font-size: 0.875rem;
+      font-weight: 600;
     }
 
     .chatlog__embed-description {
-      font-weight: 500;
-      font-size: 0.85em;
       color: #2e3338;
+      font-weight: 500;
+      font-size: 0.85rem;
     }
 
     .chatlog__embed-fields {
       display: flex;
       flex-wrap: wrap;
-      gap: 0 0.5em;
+      gap: 0 0.5rem;
     }
 
     .chatlog__embed-field {
       flex: 0;
       min-width: 100%;
       max-width: 506px;
-      padding-top: 0.6em;
-      font-size: 0.875em;
+      padding-top: 0.6rem;
+      font-size: 0.875rem;
     }
 
     .chatlog__embed-field--inline {
       flex: 1;
       flex-basis: auto;
-      min-width: 150px;
+      min-width: 50px;
     }
 
     .chatlog__embed-field-name {
-      margin-bottom: 0.2em;
-      font-weight: 600;
+      margin-bottom: 0.2rem;
       color: #36393e;
+      font-weight: 600;
     }
 
     .chatlog__embed-field-value {
-      font-weight: 500;
       color: #2e3338;
+      font-weight: 500;
     }
 
     .chatlog__embed-thumbnail {
       flex: 0;
-      margin-left: 1.2em;
       max-width: 80px;
       max-height: 80px;
+      margin-left: 1.2rem;
       border-radius: 3px;
     }
 
     .chatlog__embed-image-container {
-      margin-top: 0.6em;
+      margin-top: 0.6rem;
     }
 
     .chatlog__embed-image {
@@ -534,28 +478,28 @@
     }
 
     .chatlog__embed-footer {
-      margin-top: 0.6em;
+      margin-top: 0.6rem;
       color: #2e3338;
     }
 
     .chatlog__embed-footer-icon {
-      margin-right: 0.2em;
       width: 20px;
       height: 20px;
+      margin-right: 0.2rem;
       border-radius: 50%;
       vertical-align: middle;
     }
 
     .chatlog__embed-footer-text {
       vertical-align: middle;
-      font-size: 0.75em;
+      font-size: 0.75rem;
       font-weight: 500;
     }
 
     .chatlog__embed-plainimage {
-      vertical-align: top;
       max-width: 45vw;
       max-height: 500px;
+      vertical-align: top;
       border-radius: 3px;
     }
 
@@ -564,7 +508,7 @@
     }
 
     .chatlog__embed-youtube-container {
-      margin-top: 0.6em;
+      margin-top: 0.6rem;
     }
 
     .chatlog__embed-youtube {
@@ -588,51 +532,132 @@
 
     .chatlog__reaction {
       display: flex;
-      align-items: center;
-      margin: 0.35em 0.1em 0.1em 0;
-      padding: .125rem .375rem;
-      background-color: #f2f3f5;
+      margin: 0.35rem 0.1rem 0.1rem 0;
+      padding: 0.125rem 0.375rem;
+      border: 1px solid transparent;
       border-radius: 8px;
-      border-color: transparent;
-      border-width: 1px;
-      border-style: solid;
+      background-color: #f2f3f5;
+      align-items: center;
     }
 
     .chatlog__reaction:hover {
-      border-color: rgba(0, 0, 0, 0.2);
-      border-width: 1px;
-      border-style: solid;
+      border: 1px solid rgba(0, 0, 0, 0.2);
       background-color: white;
     }
 
     .chatlog__reaction-count {
       min-width: 9px;
-      margin-left: 0.35em;
-      font-size: 0.875em;
+      margin-left: 0.35rem;
       color: #4f5660;
+      font-size: 0.875rem;
     }
 
     .chatlog__reaction:hover .chatlog__reaction-count {
       color: #2e3338;
     }
 
-    .chatlog__bot-tag {
-      position: relative;
-      top: -.1em;
-      margin-left: 0.3em;
-      padding: 0.05em 0.3em;
-      border-radius: 3px;
+    .chatlog__markdown {
+      max-width: 100%;
       line-height: 1.3;
-      background-color: #5865F2;
-      color: #ffffff;
-      font-size: 0.625em;
+      overflow-wrap: break-word;
+    }
+
+    .chatlog__markdown-preserve {
+      white-space: pre-wrap;
+    }
+
+    .chatlog__markdown-spoiler {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+
+    .chatlog__markdown-spoiler--hidden {
+      cursor: pointer;
+      background-color: #b9bbbe;
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .chatlog__markdown-spoiler--hidden:hover {
+      background-color: rgba(185, 187, 190, 0.8);
+    }
+
+    .chatlog__markdown-spoiler--hidden::selection {
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .chatlog__markdown-quote {
+      display: flex;
+      margin: 0.05rem 0;
+    }
+
+    .chatlog__markdown-quote-border {
+      margin-right: 0.5rem;
+      border: 2px solid #c7ccd1;
+      border-radius: 3px;
+    }
+
+    .chatlog__markdown-pre {
+      background-color: #f9f9f9;
+      font-family: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    .chatlog__markdown-pre--multiline {
+      margin-top: 0.25rem;
+      padding: 0.5rem;
+      border: 2px solid #f3f3f3;
+      border-radius: 5px;
+      color: #657b83;
+    }
+
+    .chatlog__markdown-pre--multiline.hljs {
+      background-color: inherit;
+      color: inherit;
+    }
+
+    .chatlog__markdown-pre--inline {
+      padding: 2px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+
+    .chatlog__markdown-mention {
+      border-radius: 3px;
+      padding: 0 2px;
+      background-color: rgba(88, 101, 242, .15);
+      color: #505cdc;
       font-weight: 500;
     }
 
+    .chatlog__markdown-mention:hover {
+      background-color: #5865f2;
+      color: #ffffff
+    }
+
+    .chatlog__markdown-timestamp {
+      border-radius: 3px;
+      padding: 0 2px;
+      color: #5e6772;
+    }
+
+    .chatlog__emoji {
+      width: 1.325rem;
+      height: 1.325rem;
+      margin: 0 0.06rem;
+      vertical-align: -0.4rem;
+    }
+
+    .chatlog__emoji--small {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .chatlog__emoji--large {
+      width: 2.8rem;
+      height: 2.8rem;
+    }
+
     .postamble {
-      margin: 1.4em 0.3em 0.6em 0.3em;
-      padding: 1em;
-      border-top: 1px solid #eceeef;
+      padding: 1.25rem;
     }
 
     .postamble__entry {
@@ -643,10 +668,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.pre--multiline').forEach(e => hljs.highlightBlock(e));
+      document.querySelectorAll('.chatlog__markdown-pre--multiline').forEach(e => hljs.highlightBlock(e));
     });
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.2/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
@@ -664,35 +689,35 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('message-' + id);
-      if (element) {
-        event.preventDefault();
-        element.classList.add('chatlog__message--highlighted');
-        window.scrollTo({
-          top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
-          behavior: 'smooth'
-        });
-        window.setTimeout(function() {
-          element.classList.remove('chatlog__message--highlighted');
-        }, 2000);
-      }
+      var element = document.getElementById('chatlog__message-container-' + id);
+      if (!element) return;
+      event.preventDefault();
+      element.classList.add('chatlog__message-container--highlighted');
+      window.scrollTo({
+        top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+        behavior: 'smooth'
+      });
+      window.setTimeout(function() {
+        element.classList.remove('chatlog__message-container--highlighted');
+      }, 2000);
     }
 
     function showSpoiler(event, element) {
-      if (element && element.classList.contains('spoiler-text--hidden')) {
-        event.preventDefault();
-        element.classList.remove('spoiler-text--hidden');
-      }
-      if (element && element.classList.contains('chatlog__attachment--hidden')) {
+      if (!element) return;
+      if (element.classList.contains('chatlog__attachment--hidden')) {
         event.preventDefault();
         element.classList.remove('chatlog__attachment--hidden');
+      }
+      if (element.classList.contains('chatlog__markdown-spoiler--hidden')) {
+        event.preventDefault();
+        element.classList.remove('chatlog__markdown-spoiler--hidden');
       }
     }
   </script>
 </head>
 
 <body><svg style="display: none">
-    <symbol id="icon-attachment" viewBox="0 0 720 960">
+    <symbol id="attachment-icon" viewBox="0 0 720 960">
       <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
       <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
       <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
@@ -710,281 +735,73 @@
   </div>
   <div class="chatlog">
     <div class="chatlog__message-group">
-      <div class="chatlog__reference-symbol"></div>
-      <div class="chatlog__reference">
-        <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
-        <span class="chatlog__reference-name" title="uhooi#8263" style="">uhooi</span>
-        <div class="chatlog__reference-content">
-          <span class="chatlog__reference-link" onclick="scrollToMessage(event, '888039546212741130')"> 今日の問題 <a href="https://algo-method.com/tasks/382">https://algo-method.com/tasks/382</a> </span>
-        </div>
-      </div>
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="uhooi#8263" data-user-id="578033825121304576" style="">uhooi</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888039638571307070"><span class="chatlog__timestamp">16-Sep-21 12:32 PM</span></a>
-        <div class="chatlog__message " data-message-id="888039602173116416" id="message-888039602173116416" title="Message sent: 16-Sep-21 12:32 PM">
-        </div>
-        <div class="chatlog__message " data-message-id="888039638571307070" id="message-888039638571307070" title="Message sent: 16-Sep-21 12:32 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace"><a href="https://twitter.com/algo_method/status/1438472743650054146?s=20">https://twitter.com/algo_method/status/1438472743650054146?s=20</a></span>
-            </div>
+      <div id="chatlog__message-container-888039602173116416" class="chatlog__message-container " data-message-id="888039602173116416">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div>
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
           </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-author">
-                    <img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/4OSOv_4V2uU7X-70EK2FyAA3dz2PneUjEIiezwp9Cqc/https/pbs.twimg.com/profile_images/1421416811287904258/SBZNIjyF_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
-                    <span class="chatlog__embed-author-name">
-                      <a class="chatlog__embed-author-name-link" href="https://twitter.com/algo_method">アルゴ式 (@algo_method)</a>
-                    </span>
-                  </div>
-                  <div class="chatlog__embed-description">
-                    <div class="markdown preserve-whitespace">【 #毎日アルゴ式 】 本日 (9/16) の練習問題はこちらです！ 見た目も解き方もとてもシンプルな問題です。昨日に引き続き二分探索の基本的な問題となっていますので是非挑戦してみてください！ <a href="https://t.co/OIJp97Z8gd">https://t.co/OIJp97Z8gd</a> ※ 問題への言及は自由に行っていただいてかまいません<img loading="lazy" class="emoji " alt="🐢" title="turtle" src="https://twemoji.maxcdn.com/2/svg/1f422.svg"> #アルゴ式</div>
-                  </div>
-                </div>
-              </div>
-              <div class="chatlog__embed-image-container">
-                <a class="chatlog__embed-image-link" href="https://images-ext-2.discordapp.net/external/Aj-gLB4yQ4T9IaS47z1He_7GhQenqxTdm0BnuF9RrJM/https/pbs.twimg.com/media/E_Z6cLbVcAIjeal.jpg%3Alarge">
-                  <img class="chatlog__embed-image" src="https://images-ext-2.discordapp.net/external/Aj-gLB4yQ4T9IaS47z1He_7GhQenqxTdm0BnuF9RrJM/https/pbs.twimg.com/media/E_Z6cLbVcAIjeal.jpg%3Alarge" alt="Image" loading="lazy">
-                </a>
-              </div>
-              <div class="chatlog__embed-footer">
-                <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
-                <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 12:00 PM </span>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference">
+              <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" style="" title="uhooi#8263">uhooi</div>
+              <div class="chatlog__reference-content">
+                <span class="chatlog__reference-link" onclick="scrollToMessage(event, '888039546212741130')"> 今日の問題 <a href="https://algo-method.com/tasks/382">https://algo-method.com/tasks/382</a> </span>
               </div>
             </div>
-          </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                </div>
-              </div>
-              <div class="chatlog__embed-image-container">
-                <a class="chatlog__embed-image-link" href="https://images-ext-1.discordapp.net/external/6nXnMwo1r2QLzemXt6oGWYJWXO8xExfT2jlpT5xTkAs/https/pbs.twimg.com/media/E_Z6dREVkAAj2Cp.jpg%3Alarge">
-                  <img class="chatlog__embed-image" src="https://images-ext-1.discordapp.net/external/6nXnMwo1r2QLzemXt6oGWYJWXO8xExfT2jlpT5xTkAs/https/pbs.twimg.com/media/E_Z6dREVkAAj2Cp.jpg%3Alarge" alt="Image" loading="lazy">
-                </a>
-              </div>
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span>
+              <span class="chatlog__timestamp">16-Sep-21 12:32 PM</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/679492030556143654/72cc2a66c6b054156a6ef90df41705b8.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="log5#5350" data-user-id="679492030556143654" style="">log5</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888040816193437717"><span class="chatlog__timestamp">16-Sep-21 12:37 PM</span></a>
-        <div class="chatlog__message " data-message-id="888040816193437717" id="message-888040816193437717" title="Message sent: 16-Sep-21 12:37 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">昨日のコードを少し直して突破できました <a href="https://algo-method.com/submissions/72000">https://algo-method.com/submissions/72000</a></span>
-            </div>
+      <div id="chatlog__message-container-888039638571307070" class="chatlog__message-container " data-message-id="888039638571307070">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 12:32 PM">12:32</div>
           </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-title">
-                    <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72000">
-                      <div class="markdown preserve-whitespace">提出 #72000 | アルゴ式(beta)</div>
-                    </a>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><a href="https://twitter.com/algo_method/status/1438472743650054146?s=20">https://twitter.com/algo_method/status/1438472743650054146?s=20</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color: rgba(29, 161, 242, 255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container">
+                      <img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/4OSOv_4V2uU7X-70EK2FyAA3dz2PneUjEIiezwp9Cqc/https/pbs.twimg.com/profile_images/1421416811287904258/SBZNIjyF_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+                      <a class="chatlog__embed-author-link" href="https://twitter.com/algo_method">
+                        <div class="chatlog__embed-author">アルゴ式 (@algo_method)</div>
+                      </a>
+                    </div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">【 #毎日アルゴ式 】 本日 (9/16) の練習問題はこちらです！ 見た目も解き方もとてもシンプルな問題です。昨日に引き続き二分探索の基本的な問題となっていますので是非挑戦してみてください！ <a href="https://t.co/OIJp97Z8gd">https://t.co/OIJp97Z8gd</a> ※ 問題への言及は自由に行っていただいてかまいません<img loading="lazy" class="chatlog__emoji " alt="🐢" title="turtle" src="https://twemoji.maxcdn.com/2/svg/1f422.svg"> #アルゴ式</div>
+                    </div>
                   </div>
                 </div>
-                <div class="chatlog__embed-thumbnail-container">
-                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
-                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                <div class="chatlog__embed-image-container">
+                  <a class="chatlog__embed-image-link" href="https://images-ext-2.discordapp.net/external/Aj-gLB4yQ4T9IaS47z1He_7GhQenqxTdm0BnuF9RrJM/https/pbs.twimg.com/media/E_Z6cLbVcAIjeal.jpg%3Alarge">
+                    <img class="chatlog__embed-image" src="https://images-ext-2.discordapp.net/external/Aj-gLB4yQ4T9IaS47z1He_7GhQenqxTdm0BnuF9RrJM/https/pbs.twimg.com/media/E_Z6cLbVcAIjeal.jpg%3Alarge" alt="Image" loading="lazy">
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="thumbsup">
-              <img class="emoji emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
-              <span class="chatlog__reaction-count">2</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/372296616826109952/58e65e1ecc45dfb509f938e9a4a36993.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="koogawa#4610" data-user-id="372296616826109952" style="color: rgb(17,128,106)">koogawa</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888056188707688500"><span class="chatlog__timestamp">16-Sep-21 01:37 PM</span></a>
-        <div class="chatlog__message " data-message-id="888056093383745546" id="message-888056093383745546" title="Message sent: 16-Sep-21 01:37 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">同じく昨日のコードをいじってAC <a href="https://algo-method.com/submissions/72049">https://algo-method.com/submissions/72049</a></span>
-            </div>
-          </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-title">
-                    <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72049">
-                      <div class="markdown preserve-whitespace">提出 #72049 | アルゴ式(beta)</div>
-                    </a>
-                  </div>
-                </div>
-                <div class="chatlog__embed-thumbnail-container">
-                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
-                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
-                  </a>
+                <div class="chatlog__embed-footer">
+                  <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+                  <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 12:00 PM </span>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="thumbsup">
-              <img class="emoji emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
-              <span class="chatlog__reaction-count">2</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888056188707688500" id="message-888056188707688500" title="Message sent: 16-Sep-21 01:38 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">境界の設定がわからんくなってくる・・！<img loading="lazy" class="emoji " alt="😫" title="tired_face" src="https://twemoji.maxcdn.com/2/svg/1f62b.svg"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="uhooi#8263" data-user-id="578033825121304576" style="">uhooi</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888063447810592858"><span class="chatlog__timestamp">16-Sep-21 01:51 PM</span></a>
-        <div class="chatlog__message " data-message-id="888059479264985088" id="message-888059479264985088" title="Message sent: 16-Sep-21 01:51 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">酒飲んでるからか頭が回らないｗ</span>
-            </div>
-          </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="joy">
-              <img class="emoji emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
-              <span class="chatlog__reaction-count">2</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888060947879579689" id="message-888060947879579689" title="Message sent: 16-Sep-21 01:57 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace"><span class="pre pre--inline">print("left: \(left), right: \(right)")</span></span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888061771775090699" id="message-888061771775090699" title="Message sent: 16-Sep-21 02:00 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">koogawa さんが貼ってるの、semisagi さんの回答ですねｗ</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888063402876997633" id="message-888063402876997633" title="Message sent: 16-Sep-21 02:06 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace"><a href="https://twitter.com/the_uhooi/status/1438504600139489289?s=20">https://twitter.com/the_uhooi/status/1438504600139489289?s=20</a></span>
-            </div>
-          </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-author">
-                    <img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/basUObZN3VdHbin2zPaPwxbu-u0cEbs9q4QxHQLm_rw/https/pbs.twimg.com/profile_images/1434845284178141187/eVmiWO5x_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
-                    <span class="chatlog__embed-author-name">
-                      <a class="chatlog__embed-author-name-link" href="https://twitter.com/the_uhooi">ウホーイ🟡 (@the_uhooi)</a>
-                    </span>
-                  </div>
-                  <div class="chatlog__embed-description">
-                    <div class="markdown preserve-whitespace">よく見たら入力例 1 円周率やんｗ #毎日アルゴ式</div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
                   </div>
                 </div>
-              </div>
-              <div class="chatlog__embed-footer">
-                <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
-                <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 02:06 PM </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888063447810592858" id="message-888063447810592858" title="Message sent: 16-Sep-21 02:07 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace"><span class="pre pre--inline">3 1 4 1 5 9 2 6</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__reference-symbol"></div>
-      <div class="chatlog__reference">
-        <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
-        <span class="chatlog__reference-name" title="uhooi#8263" style="">uhooi</span>
-        <div class="chatlog__reference-content">
-          <span class="chatlog__reference-link" onclick="scrollToMessage(event, '888061771775090699')"> koogawa さんが貼ってるの、semisagi さんの回答ですねｗ </span>
-        </div>
-      </div>
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/372296616826109952/58e65e1ecc45dfb509f938e9a4a36993.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="koogawa#4610" data-user-id="372296616826109952" style="color: rgb(17,128,106)">koogawa</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888064724649017434"><span class="chatlog__timestamp">16-Sep-21 02:11 PM</span></a>
-        <div class="chatlog__message " data-message-id="888064640674852874" id="message-888064640674852874" title="Message sent: 16-Sep-21 02:11 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">アカン<img loading="lazy" class="emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg">やってもうた</span>
-            </div>
-          </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="joy">
-              <img class="emoji emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
-              <span class="chatlog__reaction-count">2</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888064724649017434" id="message-888064724649017434" title="Message sent: 16-Sep-21 02:12 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">正しくはこちら <a href="https://algo-method.com/submissions/72120">https://algo-method.com/submissions/72120</a></span>
-            </div>
-          </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-title">
-                    <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72120">
-                      <div class="markdown preserve-whitespace">提出 #72120 | アルゴ式(beta)</div>
-                    </a>
-                  </div>
-                </div>
-                <div class="chatlog__embed-thumbnail-container">
-                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
-                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                <div class="chatlog__embed-image-container">
+                  <a class="chatlog__embed-image-link" href="https://images-ext-1.discordapp.net/external/6nXnMwo1r2QLzemXt6oGWYJWXO8xExfT2jlpT5xTkAs/https/pbs.twimg.com/media/E_Z6dREVkAAj2Cp.jpg%3Alarge">
+                    <img class="chatlog__embed-image" src="https://images-ext-1.discordapp.net/external/6nXnMwo1r2QLzemXt6oGWYJWXO8xExfT2jlpT5xTkAs/https/pbs.twimg.com/media/E_Z6dREVkAAj2Cp.jpg%3Alarge" alt="Image" loading="lazy">
                   </a>
                 </div>
               </div>
@@ -994,272 +811,563 @@
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="uhooi#8263" data-user-id="578033825121304576" style="">uhooi</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888068085662253096"><span class="chatlog__timestamp">16-Sep-21 02:23 PM</span></a>
-        <div class="chatlog__message " data-message-id="888067679607468032" id="message-888067679607468032" title="Message sent: 16-Sep-21 02:23 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">これ koogawa さんの回答と何が違うんだろう…？ <a href="https://twitter.com/the_uhooi/status/1438508818296492061?s=20">https://twitter.com/the_uhooi/status/1438508818296492061?s=20</a></span>
-            </div>
+      <div id="chatlog__message-container-888040816193437717" class="chatlog__message-container " data-message-id="888040816193437717">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/679492030556143654/72cc2a66c6b054156a6ef90df41705b8.png?size=512" alt="Avatar" loading="lazy">
           </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-author">
-                    <img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/basUObZN3VdHbin2zPaPwxbu-u0cEbs9q4QxHQLm_rw/https/pbs.twimg.com/profile_images/1434845284178141187/eVmiWO5x_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
-                    <span class="chatlog__embed-author-name">
-                      <a class="chatlog__embed-author-name-link" href="https://twitter.com/the_uhooi">ウホーイ🟡 (@the_uhooi)</a>
-                    </span>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="log5#5350" data-user-id="679492030556143654">log5</span>
+              <span class="chatlog__timestamp">16-Sep-21 12:37 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">昨日のコードを少し直して突破できました <a href="https://algo-method.com/submissions/72000">https://algo-method.com/submissions/72000</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72000">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #72000 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
                   </div>
-                  <div class="chatlog__embed-description">
-                    <div class="markdown preserve-whitespace">ですよね、サンプルすら通ってないんだもん --- 「Q2-4. 小さい数の個数」の提出結果は WA(不正解) でした！ 詳細はこちら↓ <a href="https://t.co/7OvQqxBmL5">https://t.co/7OvQqxBmL5</a> #アルゴ式 #毎日アルゴ式</div>
-                  </div>
-                </div>
-              </div>
-              <div class="chatlog__embed-image-container">
-                <a class="chatlog__embed-image-link" href="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-">
-                  <img class="chatlog__embed-image" src="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-" alt="Image" loading="lazy">
-                </a>
-              </div>
-              <div class="chatlog__embed-footer">
-                <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
-                <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 02:23 PM </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888068085662253096" id="message-888068085662253096" title="Message sent: 16-Sep-21 02:25 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">はい、ソートした a を使っていませんでしたあああああ</span>
-            </div>
-          </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="joy">
-              <img class="emoji emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
-              <span class="chatlog__reaction-count">1</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/679492030556143654/72cc2a66c6b054156a6ef90df41705b8.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="log5#5350" data-user-id="679492030556143654" style="">log5</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888068458363912262"><span class="chatlog__timestamp">16-Sep-21 02:26 PM</span></a>
-        <div class="chatlog__message " data-message-id="888068458363912262" id="message-888068458363912262" title="Message sent: 16-Sep-21 02:26 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">自分もたまにやらかすやつですね...</span>
-            </div>
-          </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="tired_face">
-              <img class="emoji emoji--small" alt="😫" src="https://twemoji.maxcdn.com/2/svg/1f62b.svg" loading="lazy">
-              <span class="chatlog__reaction-count">1</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="uhooi#8263" data-user-id="578033825121304576" style="">uhooi</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888068766477475851"><span class="chatlog__timestamp">16-Sep-21 02:28 PM</span></a>
-        <div class="chatlog__message " data-message-id="888068766477475851" id="message-888068766477475851" title="Message sent: 16-Sep-21 02:28 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">直してもダメでした <a href="https://twitter.com/the_uhooi/status/1438509799222566923?s=20">https://twitter.com/the_uhooi/status/1438509799222566923?s=20</a></span>
-            </div>
-          </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-author">
-                    <img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/basUObZN3VdHbin2zPaPwxbu-u0cEbs9q4QxHQLm_rw/https/pbs.twimg.com/profile_images/1434845284178141187/eVmiWO5x_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
-                    <span class="chatlog__embed-author-name">
-                      <a class="chatlog__embed-author-name-link" href="https://twitter.com/the_uhooi">ウホーイ🟡 (@the_uhooi)</a>
-                    </span>
-                  </div>
-                  <div class="chatlog__embed-description">
-                    <div class="markdown preserve-whitespace">むっ、でも 1 つだけ WA になる --- 「Q2-4. 小さい数の個数」の提出結果は WA(不正解) でした！ 詳細はこちら↓ <a href="https://t.co/Dx2XBoY27Y">https://t.co/Dx2XBoY27Y</a> #アルゴ式 #毎日アルゴ式</div>
-                  </div>
-                </div>
-              </div>
-              <div class="chatlog__embed-image-container">
-                <a class="chatlog__embed-image-link" href="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-">
-                  <img class="chatlog__embed-image" src="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-" alt="Image" loading="lazy">
-                </a>
-              </div>
-              <div class="chatlog__embed-footer">
-                <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
-                <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 02:27 PM </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/679492030556143654/72cc2a66c6b054156a6ef90df41705b8.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="log5#5350" data-user-id="679492030556143654" style="">log5</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888069047789453362"><span class="chatlog__timestamp">16-Sep-21 02:29 PM</span></a>
-        <div class="chatlog__message " data-message-id="888069047789453362" id="message-888069047789453362" title="Message sent: 16-Sep-21 02:29 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">right は N - 1で足ります？</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="uhooi#8263" data-user-id="578033825121304576" style="">uhooi</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888069759315357767"><span class="chatlog__timestamp">16-Sep-21 02:30 PM</span></a>
-        <div class="chatlog__message " data-message-id="888069220112404510" id="message-888069220112404510" title="Message sent: 16-Sep-21 02:30 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">あーーー</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888069713882677360" id="message-888069713882677360" title="Message sent: 16-Sep-21 02:31 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace"><a href="https://github.com/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f">https://github.com/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f</a></span>
-            </div>
-          </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-title">
-                    <a class="chatlog__embed-title-link" href="https://github.com/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f">
-                      <div class="markdown preserve-whitespace">Fix algo-method 382 · uhooi/Programming-Swift-Solving@44622da</div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
                     </a>
                   </div>
                 </div>
-                <div class="chatlog__embed-thumbnail-container">
-                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/xDR3nD_th7WjbY7xjgTSJgoDKId1ZFmnu0P2ck_v8co/https/opengraph.githubassets.com/bf9993d5dcb65f0832b1f1a606db5c475c0041c1f9a7a28a2b85236e18ae581a/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f">
-                    <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/xDR3nD_th7WjbY7xjgTSJgoDKId1ZFmnu0P2ck_v8co/https/opengraph.githubassets.com/bf9993d5dcb65f0832b1f1a606db5c475c0041c1f9a7a28a2b85236e18ae581a/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f" alt="Thumbnail" loading="lazy">
-                  </a>
-                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="chatlog__message " data-message-id="888069759315357767" id="message-888069759315357767" title="Message sent: 16-Sep-21 02:32 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">ありがとうございます、AC ですm(<em> </em>)m</span>
-            </div>
-          </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="tada">
-              <img class="emoji emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy">
-              <span class="chatlog__reaction-count">2</span>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="thumbsup">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+                <span class="chatlog__reaction-count">2</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888074348324343848"><span class="chatlog__timestamp">16-Sep-21 02:48 PM</span></a>
-        <div class="chatlog__message " data-message-id="888073821381357618" id="message-888073821381357618" title="Message sent: 16-Sep-21 02:48 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">昨日と同じく自作ライブラリ使いました。昨日は <span class="pre pre--inline">indices.first</span> だったけど、今日は <span class="pre pre--inline">count</span> でした。 <a href="https://algo-method.com/submissions/72292">https://algo-method.com/submissions/72292</a></span>
-            </div>
+      <div id="chatlog__message-container-888056093383745546" class="chatlog__message-container " data-message-id="888056093383745546">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/372296616826109952/58e65e1ecc45dfb509f938e9a4a36993.png?size=512" alt="Avatar" loading="lazy">
           </div>
-          <div class="chatlog__embed">
-            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-            <div class="chatlog__embed-content-container">
-              <div class="chatlog__embed-content">
-                <div class="chatlog__embed-text">
-                  <div class="chatlog__embed-title">
-                    <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72292">
-                      <div class="markdown preserve-whitespace">提出 #72292 | アルゴ式(beta)</div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koogawa#4610" data-user-id="372296616826109952">koogawa</span>
+              <span class="chatlog__timestamp">16-Sep-21 01:37 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">同じく昨日のコードをいじってAC <a href="https://algo-method.com/submissions/72049">https://algo-method.com/submissions/72049</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72049">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #72049 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
                     </a>
                   </div>
                 </div>
-                <div class="chatlog__embed-thumbnail-container">
-                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
-                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
-                  </a>
+              </div>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="thumbsup">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+                <span class="chatlog__reaction-count">2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888056188707688500" class="chatlog__message-container " data-message-id="888056188707688500">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 01:38 PM">13:38</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">境界の設定がわからんくなってくる・・！<img loading="lazy" class="chatlog__emoji " alt="😫" title="tired_face" src="https://twemoji.maxcdn.com/2/svg/1f62b.svg"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888059479264985088" class="chatlog__message-container " data-message-id="888059479264985088">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span>
+              <span class="chatlog__timestamp">16-Sep-21 01:51 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">酒飲んでるからか頭が回らないｗ</span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="joy">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
+                <span class="chatlog__reaction-count">2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888060947879579689" class="chatlog__message-container " data-message-id="888060947879579689">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 01:57 PM">13:57</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">print("left: \(left), right: \(right)")</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888061771775090699" class="chatlog__message-container " data-message-id="888061771775090699">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:00 PM">14:00</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">koogawa さんが貼ってるの、semisagi さんの回答ですねｗ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888063402876997633" class="chatlog__message-container " data-message-id="888063402876997633">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:06 PM">14:06</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><a href="https://twitter.com/the_uhooi/status/1438504600139489289?s=20">https://twitter.com/the_uhooi/status/1438504600139489289?s=20</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color: rgba(29, 161, 242, 255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container">
+                      <img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/basUObZN3VdHbin2zPaPwxbu-u0cEbs9q4QxHQLm_rw/https/pbs.twimg.com/profile_images/1434845284178141187/eVmiWO5x_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+                      <a class="chatlog__embed-author-link" href="https://twitter.com/the_uhooi">
+                        <div class="chatlog__embed-author">ウホーイ🟡 (@the_uhooi)</div>
+                      </a>
+                    </div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">よく見たら入力例 1 円周率やんｗ #毎日アルゴ式</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-footer">
+                  <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+                  <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 02:06 PM </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="chatlog__message " data-message-id="888074348324343848" id="message-888074348324343848" title="Message sent: 16-Sep-21 02:50 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">実質↓ <div class="pre pre--multiline language-swift">let (n, m) = readInt2() let aa = readIntN().sorted() let bb = readIntN() for b in bb { print(aa.values(&lt;=, b).count) }</div></span>
+      </div>
+      <div id="chatlog__message-container-888063447810592858" class="chatlog__message-container " data-message-id="888063447810592858">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:07 PM">14:07</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">3 1 4 1 5 9 2 6</span></span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=128" alt="Avatar" loading="lazy">
+      <div id="chatlog__message-container-888064640674852874" class="chatlog__message-container " data-message-id="888064640674852874">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div>
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/372296616826109952/58e65e1ecc45dfb509f938e9a4a36993.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference">
+              <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" style="" title="uhooi#8263">uhooi</div>
+              <div class="chatlog__reference-content">
+                <span class="chatlog__reference-link" onclick="scrollToMessage(event, '888061771775090699')"> koogawa さんが貼ってるの、semisagi さんの回答ですねｗ </span>
+              </div>
+            </div>
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koogawa#4610" data-user-id="372296616826109952">koogawa</span>
+              <span class="chatlog__timestamp">16-Sep-21 02:11 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">アカン<img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg">やってもうた</span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="joy">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
+                <span class="chatlog__reaction-count">2</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="uhooi#8263" data-user-id="578033825121304576" style="">uhooi</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888077507587362866"><span class="chatlog__timestamp">16-Sep-21 03:02 PM</span></a>
-        <div class="chatlog__message " data-message-id="888077507587362866" id="message-888077507587362866" title="Message sent: 16-Sep-21 03:02 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">つよすぎるw</span>
+      <div id="chatlog__message-container-888064724649017434" class="chatlog__message-container " data-message-id="888064724649017434">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:12 PM">14:12</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">正しくはこちら <a href="https://algo-method.com/submissions/72120">https://algo-method.com/submissions/72120</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72120">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #72120 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div class="chatlog__author-avatar-container">
-        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__messages">
-        <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-        <a href="/channels/763427634179735592/888039546212741130?category=atcoder&amp;channel=algo-382&amp;message_id=888085568829935637"><span class="chatlog__timestamp">16-Sep-21 03:34 PM</span></a>
-        <div class="chatlog__message " data-message-id="888085568829935637" id="message-888085568829935637" title="Message sent: 16-Sep-21 03:34 PM">
-          <div class="chatlog__content">
-            <div class="markdown">
-              <span class="preserve-whitespace">このライブラリ、マジ便利です。ただ、練習にはなってないかもしれません<img loading="lazy" class="emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"></span>
+      <div id="chatlog__message-container-888067679607468032" class="chatlog__message-container " data-message-id="888067679607468032">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span>
+              <span class="chatlog__timestamp">16-Sep-21 02:23 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">これ koogawa さんの回答と何が違うんだろう…？ <a href="https://twitter.com/the_uhooi/status/1438508818296492061?s=20">https://twitter.com/the_uhooi/status/1438508818296492061?s=20</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color: rgba(29, 161, 242, 255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container">
+                      <img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/basUObZN3VdHbin2zPaPwxbu-u0cEbs9q4QxHQLm_rw/https/pbs.twimg.com/profile_images/1434845284178141187/eVmiWO5x_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+                      <a class="chatlog__embed-author-link" href="https://twitter.com/the_uhooi">
+                        <div class="chatlog__embed-author">ウホーイ🟡 (@the_uhooi)</div>
+                      </a>
+                    </div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">ですよね、サンプルすら通ってないんだもん --- 「Q2-4. 小さい数の個数」の提出結果は WA(不正解) でした！ 詳細はこちら↓ <a href="https://t.co/7OvQqxBmL5">https://t.co/7OvQqxBmL5</a> #アルゴ式 #毎日アルゴ式</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-image-container">
+                  <a class="chatlog__embed-image-link" href="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-">
+                    <img class="chatlog__embed-image" src="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-" alt="Image" loading="lazy">
+                  </a>
+                </div>
+                <div class="chatlog__embed-footer">
+                  <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+                  <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 02:23 PM </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="chatlog__reactions">
-            <div class="chatlog__reaction" title="joy">
-              <img class="emoji emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
-              <span class="chatlog__reaction-count">1</span>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888068085662253096" class="chatlog__message-container " data-message-id="888068085662253096">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:25 PM">14:25</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">はい、ソートした a を使っていませんでしたあああああ</span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="joy">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
+                <span class="chatlog__reaction-count">1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888068458363912262" class="chatlog__message-container " data-message-id="888068458363912262">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/679492030556143654/72cc2a66c6b054156a6ef90df41705b8.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="log5#5350" data-user-id="679492030556143654">log5</span>
+              <span class="chatlog__timestamp">16-Sep-21 02:26 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">自分もたまにやらかすやつですね...</span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="tired_face">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="😫" src="https://twemoji.maxcdn.com/2/svg/1f62b.svg" loading="lazy">
+                <span class="chatlog__reaction-count">1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888068766477475851" class="chatlog__message-container " data-message-id="888068766477475851">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span>
+              <span class="chatlog__timestamp">16-Sep-21 02:28 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">直してもダメでした <a href="https://twitter.com/the_uhooi/status/1438509799222566923?s=20">https://twitter.com/the_uhooi/status/1438509799222566923?s=20</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color: rgba(29, 161, 242, 255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container">
+                      <img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/basUObZN3VdHbin2zPaPwxbu-u0cEbs9q4QxHQLm_rw/https/pbs.twimg.com/profile_images/1434845284178141187/eVmiWO5x_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+                      <a class="chatlog__embed-author-link" href="https://twitter.com/the_uhooi">
+                        <div class="chatlog__embed-author">ウホーイ🟡 (@the_uhooi)</div>
+                      </a>
+                    </div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">むっ、でも 1 つだけ WA になる --- 「Q2-4. 小さい数の個数」の提出結果は WA(不正解) でした！ 詳細はこちら↓ <a href="https://t.co/Dx2XBoY27Y">https://t.co/Dx2XBoY27Y</a> #アルゴ式 #毎日アルゴ式</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-image-container">
+                  <a class="chatlog__embed-image-link" href="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-">
+                    <img class="chatlog__embed-image" src="https://images-ext-2.discordapp.net/external/R6ZXsJyR_VE2icX9-zTPUS1V3p_gW65hUAVPlw1kz64/%3Fformat%3Djpg%26name%3D144x144_2/https/pbs.twimg.com/card_img/1437752613240336391/9sp7Tlw-" alt="Image" loading="lazy">
+                  </a>
+                </div>
+                <div class="chatlog__embed-footer">
+                  <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+                  <span class="chatlog__embed-footer-text"> Twitter • 16-Sep-21 02:27 PM </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888069047789453362" class="chatlog__message-container " data-message-id="888069047789453362">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/679492030556143654/72cc2a66c6b054156a6ef90df41705b8.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="log5#5350" data-user-id="679492030556143654">log5</span>
+              <span class="chatlog__timestamp">16-Sep-21 02:29 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">right は N - 1で足ります？</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888069220112404510" class="chatlog__message-container " data-message-id="888069220112404510">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span>
+              <span class="chatlog__timestamp">16-Sep-21 02:30 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">あーーー</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888069713882677360" class="chatlog__message-container " data-message-id="888069713882677360">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:31 PM">14:31</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><a href="https://github.com/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f">https://github.com/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color: rgba(30, 35, 39, 255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://github.com/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">Fix algo-method 382 · uhooi/Programming-Swift-Solving@44622da</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/xDR3nD_th7WjbY7xjgTSJgoDKId1ZFmnu0P2ck_v8co/https/opengraph.githubassets.com/bf9993d5dcb65f0832b1f1a606db5c475c0041c1f9a7a28a2b85236e18ae581a/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/xDR3nD_th7WjbY7xjgTSJgoDKId1ZFmnu0P2ck_v8co/https/opengraph.githubassets.com/bf9993d5dcb65f0832b1f1a606db5c475c0041c1f9a7a28a2b85236e18ae581a/uhooi/Programming-Swift-Solving/commit/44622da1d65debe40f8352bf40b66c4e45c0d40f" alt="Thumbnail" loading="lazy">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888069759315357767" class="chatlog__message-container " data-message-id="888069759315357767">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:32 PM">14:32</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">ありがとうございます、AC ですm(<em> </em>)m</span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="tada">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy">
+                <span class="chatlog__reaction-count">2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888073821381357618" class="chatlog__message-container " data-message-id="888073821381357618">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
+              <span class="chatlog__timestamp">16-Sep-21 02:48 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">昨日と同じく自作ライブラリ使いました。昨日は <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">indices.first</span> だったけど、今日は <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">count</span> でした。 <a href="https://algo-method.com/submissions/72292">https://algo-method.com/submissions/72292</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/72292">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #72292 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-888074348324343848" class="chatlog__message-container " data-message-id="888074348324343848">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-21 02:50 PM">14:50</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">実質↓ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let (n, m) = readInt2() let aa = readIntN().sorted() let bb = readIntN() for b in bb { print(aa.values(&lt;=, b).count) }</div></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888077507587362866" class="chatlog__message-container " data-message-id="888077507587362866">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/578033825121304576/129561f19e64026c8f156a2725a87c48.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span>
+              <span class="chatlog__timestamp">16-Sep-21 03:02 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">つよすぎるw</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-888085568829935637" class="chatlog__message-container " data-message-id="888085568829935637">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
+              <span class="chatlog__timestamp">16-Sep-21 03:34 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">このライブラリ、マジ便利です。ただ、練習にはなってないかもしれません<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"></span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="joy">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="😂" src="https://twemoji.maxcdn.com/2/svg/1f602.svg" loading="lazy">
+                <span class="chatlog__reaction-count">1</span>
+              </div>
             </div>
           </div>
         </div>

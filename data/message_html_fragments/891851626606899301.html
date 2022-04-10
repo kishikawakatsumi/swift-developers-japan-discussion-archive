@@ -1,34 +1,36 @@
 <div class="chatlog__message-group">
-  <div class="chatlog__reference-symbol"></div>
-  <div class="chatlog__reference">
-    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=128" alt="Avatar" loading="lazy">
-    <span class="chatlog__reference-name" title="shiz#7087" style="">shiz</span>
-    <div class="chatlog__reference-content">
-      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '891801466283622421')">
-        <s><span class="pre pre--inline">AsyncSequence</span>でOptionalを扱いたい場合、nextの戻り値の型をOptionalのOptionalにしなければいけないのは、ループの終わり記号としてのnilと、要素としてのnilを区別するために仕方がないんですかね？(<span class="pre pre--inline">AsyncStream</span> との比較のためにあえて<span class="pre pre--inline">AsyncSequence</span> 使ってます)</s>
-        <s>ちょっと不思議な気もしたのですが、nextの定義にOptionalが付いているのでそういうものなんですね...</s> 　改めて考えたら<span class="pre pre--inline">IteratorProtocol</span> と同じですね(失礼しましたmm)。 <div class="pre pre--multiline nohighlight">mutating func next() async throws -&gt; Self.Element?</div>
-        <div class="pre pre--multiline nohighlight">struct IntGenerator: AsyncSequence { typealias Element = Int? var strings: [String] struct AsyncIterator: AsyncIteratorProtocol { var current = 1 var strings: [String] fileprivate var index = 0 mutating func next() async -&gt; Int?? {　// &lt;- ここ guard index &lt; strings.count else { return nil } let string = strings[index] index += 1 return Int(string) } } func makeAsyncIterator() -&gt; AsyncIterator { AsyncIterator(strings: strings) } } Task { let strings: [String] = ["1", "a", "2"] for await i in IntGenerator(strings: strings) { print(i) } }</div>
-        <div class="pre pre--multiline nohighlight">Optional(1) nil Optional(2)</div>
-      </span>
-      <span class="chatlog__reference-edited-timestamp" title="26-Sep-21 11:32 PM">(edited)</span>
-    </div>
-  </div>
-  <div class="chatlog__author-avatar-container">
-    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-  </div>
-  <div class="chatlog__messages">
-    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-    <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=891851626606899301"><span class="chatlog__timestamp">27-Sep-21 12:59 AM</span></a>
-    <div class="chatlog__message " data-message-id="891851626606899301" id="message-891851626606899301" title="Message sent: 27-Sep-21 12:59 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">Java 等の言語だと nullable の入れ子ができないので、 <span class="pre pre--inline">Iterator</span> の API が <span class="pre pre--inline">hasNext</span> と <span class="pre pre--inline">next</span> に分かれていて、まず <span class="pre pre--inline">hasNext</span> で存在を確認してから <span class="pre pre--inline">next</span> を呼ぶという手順になっていますね。その点、 <span class="pre pre--inline">next</span> だけで済ませられる Swift の設計はシンプルだと思います。</span>
-        </div>
+  <div id="chatlog__message-container-891851626606899301" class="chatlog__message-container " data-message-id="891851626606899301">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reference-symbol"></div>
+        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
       </div>
-      <div class="chatlog__reactions">
-        <div class="chatlog__reaction" title="thumbsup_tone1">
-          <img class="emoji emoji--small" alt="👍🏻" src="https://twemoji.maxcdn.com/2/svg/1f44d-1f3fb.svg" loading="lazy">
-          <span class="chatlog__reaction-count">1</span>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reference">
+          <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reference-author" style="" title="shiz#7087">shiz</div>
+          <div class="chatlog__reference-content">
+            <span class="chatlog__reference-link" onclick="scrollToMessage(event, '891801466283622421')">
+              <s><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">AsyncSequence</span>でOptionalを扱いたい場合、nextの戻り値の型をOptionalのOptionalにしなければいけないのは、ループの終わり記号としてのnilと、要素としてのnilを区別するために仕方がないんですかね？(<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">AsyncStream</span> との比較のためにあえて<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">AsyncSequence</span> 使ってます)</s>
+              <s>ちょっと不思議な気もしたのですが、nextの定義にOptionalが付いているのでそういうものなんですね...</s> 　改めて考えたら<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">IteratorProtocol</span> と同じですね(失礼しましたmm)。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">mutating func next() async throws -&gt; Self.Element?</div>
+              <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">struct IntGenerator: AsyncSequence { typealias Element = Int? var strings: [String] struct AsyncIterator: AsyncIteratorProtocol { var current = 1 var strings: [String] fileprivate var index = 0 mutating func next() async -&gt; Int?? {　// &lt;- ここ guard index &lt; strings.count else { return nil } let string = strings[index] index += 1 return Int(string) } } func makeAsyncIterator() -&gt; AsyncIterator { AsyncIterator(strings: strings) } } Task { let strings: [String] = ["1", "a", "2"] for await i in IntGenerator(strings: strings) { print(i) } }</div>
+              <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">Optional(1) nil Optional(2)</div>
+            </span>
+            <span class="chatlog__reference-edited-timestamp" title="26-Sep-21 11:32 PM">(edited)</span>
+          </div>
+        </div>
+        <div class="chatlog__header">
+          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
+          <span class="chatlog__timestamp">27-Sep-21 12:59 AM</span>
+        </div>
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">Java 等の言語だと nullable の入れ子ができないので、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Iterator</span> の API が <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">hasNext</span> と <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">next</span> に分かれていて、まず <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">hasNext</span> で存在を確認してから <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">next</span> を呼ぶという手順になっていますね。その点、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">next</span> だけで済ませられる Swift の設計はシンプルだと思います。</span>
+        </div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="thumbsup_tone1">
+            <img class="chatlog__emoji chatlog__emoji--small" alt="👍🏻" src="https://twemoji.maxcdn.com/2/svg/1f44d-1f3fb.svg" loading="lazy">
+            <span class="chatlog__reaction-count">1</span>
+          </div>
         </div>
       </div>
     </div>
