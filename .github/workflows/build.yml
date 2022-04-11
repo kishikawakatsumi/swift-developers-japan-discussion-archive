@@ -22,21 +22,21 @@ jobs:
 
           rm -rf data/
 
-          docker run --rm -v $PWD/data/json:/output tyrrrz/discordchatexporter:latest exportguild \
+          docker run --rm -v $PWD/data/json:/output tyrrrz/discordchatexporter:stable exportguild \
             -t ${{ env.DISCORD_TOKEN }} \
             -g ${{ env.DISCORD_SERVER_ID }} \
             -o "/output/%P|%p|%T|%C|%t|%c.json" \
             -f Json \
             --parallel 2
 
-          docker run --rm -v $PWD/data/html:/output tyrrrz/discordchatexporter:latest exportguild \
+          docker run --rm -v $PWD/data/html:/output tyrrrz/discordchatexporter:stable exportguild \
             -t ${{ env.DISCORD_TOKEN }} \
             -g ${{ env.DISCORD_SERVER_ID }} \
             -o "/output/%c.html" \
             -f HtmlLight \
             --parallel 2
 
-          docker run --rm -v $PWD/temp/dm:/output tyrrrz/discordchatexporter:latest exportdm \
+          docker run --rm -v $PWD/temp/dm:/output tyrrrz/discordchatexporter:stable exportdm \
             -t ${{ env.DISCORD_OPTOUTBOT_TOKEN }} \
             -o /output \
             -f Json \
