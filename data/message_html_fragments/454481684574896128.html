@@ -1,34 +1,27 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-454481353778397184" class="chatlog__message-container " data-message-id="454481353778397184">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span>
-          <span class="chatlog__timestamp">08-Jun-18 03:06 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-quote">
-              <div class="chatlog__markdown-quote-border"></div>
-              <div class="chatlog__markdown-quote-content">Staticなパラメータ参照出来るので </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+    <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=454481684574896128"><span class="chatlog__timestamp">08-Jun-18 03:06 AM</span></a>
+    <div class="chatlog__message " data-message-id="454481353778397184" id="message-454481353778397184" title="Message sent: 08-Jun-18 03:06 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">Staticなパラメータ参照出来るので </div>
             </div> とても役に立ちました。ありがとうございます。
           </span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-454481684574896128" class="chatlog__message-container " data-message-id="454481684574896128">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08-Jun-18 03:07 AM">03:07</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">この<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">default2</span>で<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Generic parameter 'T' could not be inferred</span>となる理由が分からない。 <span class="chatlog__markdown-mention" title="swift42#0507">@swift-4.2.4</span>
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Foundation infix operator ∘ : CompositionPrecedence precedencegroup CompositionPrecedence { associativity: left higherThan: TernaryPrecedence } public struct Converter&lt;T, U&gt; { public typealias Handler = (T) -&gt; U let handler: Handler public init(_ handler: @escaping Handler) { self.handler = handler } public func compose&lt;A&gt;(_ other: Converter&lt;A, T&gt;) -&gt; Converter&lt;A, U&gt; { return .init { self.handler(other.handler($0)) } } public static func ∘ &lt;A, B, C&gt;(_ lhs: Converter&lt;B, C&gt;, _ rhs: Converter&lt;A, B&gt;) -&gt; Converter&lt;A, C&gt; { return .init { lhs.handler(rhs.handler($0)) } } } public typealias Symbol = (String, String) public typealias Demangler = Converter&lt;Symbol, Symbol&gt; public typealias SymbolFormatter = Converter&lt;Symbol, String&gt; // Demangler extension Converter where T == Symbol, U == Symbol { #if os(macOS) public static let `default` = Converter { ($0.0.uppercased(), $0.1) } #elseif os(Linux) public static let `default` = Converter { ($0.0.lowercased(), $0.1) } #endif } // SymbolFormatter extension Converter where T == Symbol, U == String { #if os(macOS) public static let defaultStyle = Converter { "macOS: \($0)" } #elseif os(Linux) public static let defaultStyle = Converter { "linux: \($0)" } #endif public static let default1 = SymbolFormatter.defaultStyle.compose(Demangler.default) public static let default2 = SymbolFormatter.defaultStyle ∘ Demangler.default }</div>
+    <div class="chatlog__message " data-message-id="454481684574896128" id="message-454481684574896128" title="Message sent: 08-Jun-18 03:07 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">この<span class="pre pre--inline">default2</span>で<span class="pre pre--inline">Generic parameter 'T' could not be inferred</span>となる理由が分からない。 <span class="mention" title="swift42#0507">@swift-4.2.4</span>
+            <div class="pre pre--multiline language-swift">import Foundation infix operator ∘ : CompositionPrecedence precedencegroup CompositionPrecedence { associativity: left higherThan: TernaryPrecedence } public struct Converter&lt;T, U&gt; { public typealias Handler = (T) -&gt; U let handler: Handler public init(_ handler: @escaping Handler) { self.handler = handler } public func compose&lt;A&gt;(_ other: Converter&lt;A, T&gt;) -&gt; Converter&lt;A, U&gt; { return .init { self.handler(other.handler($0)) } } public static func ∘ &lt;A, B, C&gt;(_ lhs: Converter&lt;B, C&gt;, _ rhs: Converter&lt;A, B&gt;) -&gt; Converter&lt;A, C&gt; { return .init { lhs.handler(rhs.handler($0)) } } } public typealias Symbol = (String, String) public typealias Demangler = Converter&lt;Symbol, Symbol&gt; public typealias SymbolFormatter = Converter&lt;Symbol, String&gt; // Demangler extension Converter where T == Symbol, U == Symbol { #if os(macOS) public static let `default` = Converter { ($0.0.uppercased(), $0.1) } #elseif os(Linux) public static let `default` = Converter { ($0.0.lowercased(), $0.1) } #endif } // SymbolFormatter extension Converter where T == Symbol, U == String { #if os(macOS) public static let defaultStyle = Converter { "macOS: \($0)" } #elseif os(Linux) public static let defaultStyle = Converter { "linux: \($0)" } #endif public static let default1 = SymbolFormatter.defaultStyle.compose(Demangler.default) public static let default2 = SymbolFormatter.defaultStyle ∘ Demangler.default }</div>
           </span>
           <span class="chatlog__edited-timestamp" title="08-Jun-18 03:10 AM">(edited)</span>
         </div>

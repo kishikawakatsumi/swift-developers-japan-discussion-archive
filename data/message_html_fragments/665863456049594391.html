@@ -1,17 +1,15 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-665863456049594391" class="chatlog__message-container " data-message-id="665863456049594391">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="takasek#2409" data-user-id="295054334234722305">takasek</span>
-          <span class="chatlog__timestamp">12-Jan-20 10:23 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">あとおもちさんのHasDecodableProxyは他にも（あるいは他じゃないのかもしれないけど）引っかかるところがあって、 3層レイヤードアーキテクチャ View - Model - Infra 層があったとして、 CodableProxyはInfra層のDTO HasDecodableProxyはModel層のDomainObject になると思っていいかな そうすると、 1. 依存の方向を Model &lt;- Infra にしたいけど、HasDecodableProxyの構造だとそれができない 2. CodableProxyがひとつに固定されてしまう という問題がある ## 依存の方向を Model &lt;- Infra にしたいけど、HasDecodableProxyの構造だとそれができない 雑に言えばmemberwise initializerがinternalになるのと同種の問題だと思ってよくて、 DTOをInfra層に閉じ込めようとするとHasDecodableProxyをInfra側にextensionで書くことになる そうするとDomainObjectのpublic memberwise initializerを手で書かにゃならん DomainObjectにプロパティがたくさんあった場合、 - public memberwise initializer - init(fromCodableProxy proxy: CodableProxy) を手作業で書きまくって、それぞれをメンテしなきゃいけないの気が遠くなりそう ## CodableProxyがひとつに固定されてしまう 明確な問題はたとえばCatを取得したくて、 V1 APIとV2 APIでレスポンス構造が変わるけどどちらもクライアントでは同じCatとして扱いたい そうすると以下のようになると思うんだけど <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">CatDTOV1: { id: Int, name: String, ownerID: Int, ownerName: String, ... } CatDTOV2: { id: Int, name: String, owner: Owner, ... }</div>
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">struct Cat: HasDecodableProxy { typealias CodableProxy = CatDTOV1??CatDTOV2?? }</div> このときassoctypeとしてProxyはV1かV2かどっちかひとつに固定されるのはきつくない？
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="takasek#2409" data-user-id="295054334234722305" style="color: rgb(241,196,15)">takasek</span>
+    <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=665863456049594391"><span class="chatlog__timestamp">12-Jan-20 10:23 AM</span></a>
+    <div class="chatlog__message " data-message-id="665863456049594391" id="message-665863456049594391" title="Message sent: 12-Jan-20 10:23 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あとおもちさんのHasDecodableProxyは他にも（あるいは他じゃないのかもしれないけど）引っかかるところがあって、 3層レイヤードアーキテクチャ View - Model - Infra 層があったとして、 CodableProxyはInfra層のDTO HasDecodableProxyはModel層のDomainObject になると思っていいかな そうすると、 1. 依存の方向を Model &lt;- Infra にしたいけど、HasDecodableProxyの構造だとそれができない 2. CodableProxyがひとつに固定されてしまう という問題がある ## 依存の方向を Model &lt;- Infra にしたいけど、HasDecodableProxyの構造だとそれができない 雑に言えばmemberwise initializerがinternalになるのと同種の問題だと思ってよくて、 DTOをInfra層に閉じ込めようとするとHasDecodableProxyをInfra側にextensionで書くことになる そうするとDomainObjectのpublic memberwise initializerを手で書かにゃならん DomainObjectにプロパティがたくさんあった場合、 - public memberwise initializer - init(fromCodableProxy proxy: CodableProxy) を手作業で書きまくって、それぞれをメンテしなきゃいけないの気が遠くなりそう ## CodableProxyがひとつに固定されてしまう 明確な問題はたとえばCatを取得したくて、 V1 APIとV2 APIでレスポンス構造が変わるけどどちらもクライアントでは同じCatとして扱いたい そうすると以下のようになると思うんだけど <div class="pre pre--multiline nohighlight">CatDTOV1: { id: Int, name: String, ownerID: Int, ownerName: String, ... } CatDTOV2: { id: Int, name: String, owner: Owner, ... }</div>
+            <div class="pre pre--multiline nohighlight">struct Cat: HasDecodableProxy { typealias CodableProxy = CatDTOV1??CatDTOV2?? }</div> このときassoctypeとしてProxyはV1かV2かどっちかひとつに固定されるのはきつくない？
           </span>
           <span class="chatlog__edited-timestamp" title="12-Jan-20 10:29 AM">(edited)</span>
         </div>

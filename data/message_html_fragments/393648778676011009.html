@@ -1,16 +1,14 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-393648778676011009" class="chatlog__message-container " data-message-id="393648778676011009">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/322428188871622666/5eb6265a7a3bba1bdc11fc606dfa1117.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="" title="Yoshikuni Kato#6611" data-user-id="322428188871622666">Yoshikuni Kato</span>
-          <span class="chatlog__timestamp">22-Dec-17 06:19 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">UINavigationController</span>の<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">viewControllers</span>（もしくは<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">topViewController</span> or <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">visibleViewController</span>）の変化をKVO（<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">UINavigationControllerDelegate</span>以外）で検出したいと思っているのですが、可能かどうかご存じの方いらっしゃいますでしょうか？ 以下のコードで試したのですが、push / popしても何も反応ありませんでした。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class CustomNavigationController: UINavigationController { var token: NSKeyValueObservation? override func viewDidLoad() { super.viewDidLoad() token = self.observe(\.viewControllers) { observed, change in print(observed) print(change) } } }</div> 根源的にやりたいことは次のようなものです： status barのappearanceの変化のために、<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">childViewControllerForStatusBarHidden</span>をoverrideし、topViewControllerを返すようにしています。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class CustomNavigationController: UINavigationController { override var childViewControllerForStatusBarHidden: UIViewController? { return self.topViewController } }</div> このメソッドのドキュメントを見ると、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">If you change the return value from this method, call the setNeedsStatusBarAppearanceUpdate() method.</span> とあり、topViewControllerが変わった段階で <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">setNeedsStatusBarAppearanceUpdate</span>をcallする必要があるので、変化を検出したいです。</span>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/322428188871622666/5eb6265a7a3bba1bdc11fc606dfa1117.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="Yoshikuni Kato#6611" data-user-id="322428188871622666" style="">Yoshikuni Kato</span>
+    <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=393648778676011009"><span class="chatlog__timestamp">22-Dec-17 06:19 AM</span></a>
+    <div class="chatlog__message " data-message-id="393648778676011009" id="message-393648778676011009" title="Message sent: 22-Dec-17 06:19 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">UINavigationController</span>の<span class="pre pre--inline">viewControllers</span>（もしくは<span class="pre pre--inline">topViewController</span> or <span class="pre pre--inline">visibleViewController</span>）の変化をKVO（<span class="pre pre--inline">UINavigationControllerDelegate</span>以外）で検出したいと思っているのですが、可能かどうかご存じの方いらっしゃいますでしょうか？ 以下のコードで試したのですが、push / popしても何も反応ありませんでした。 <div class="pre pre--multiline language-swift">class CustomNavigationController: UINavigationController { var token: NSKeyValueObservation? override func viewDidLoad() { super.viewDidLoad() token = self.observe(\.viewControllers) { observed, change in print(observed) print(change) } } }</div> 根源的にやりたいことは次のようなものです： status barのappearanceの変化のために、<span class="pre pre--inline">childViewControllerForStatusBarHidden</span>をoverrideし、topViewControllerを返すようにしています。 <div class="pre pre--multiline language-swift">class CustomNavigationController: UINavigationController { override var childViewControllerForStatusBarHidden: UIViewController? { return self.topViewController } }</div> このメソッドのドキュメントを見ると、 <span class="pre pre--inline">If you change the return value from this method, call the setNeedsStatusBarAppearanceUpdate() method.</span> とあり、topViewControllerが変わった段階で <span class="pre pre--inline">setNeedsStatusBarAppearanceUpdate</span>をcallする必要があるので、変化を検出したいです。</span>
           <span class="chatlog__edited-timestamp" title="22-Dec-17 06:21 AM">(edited)</span>
         </div>
       </div>

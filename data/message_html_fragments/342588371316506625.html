@@ -1,72 +1,65 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-342588371316506625" class="chatlog__message-container " data-message-id="342588371316506625">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=342588472088985610"><span class="chatlog__timestamp">03-Aug-17 08:43 AM</span></a>
+    <div class="chatlog__message " data-message-id="342588371316506625" id="message-342588371316506625" title="Message sent: 03-Aug-17 08:43 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">RGBA のピクセル列から <span class="pre pre--inline">NSImage</span> を生成して <span class="pre pre--inline">tiffRepresentation</span> を呼ぶと <span class="pre pre--inline">nil</span> が返ってきてしまうんですが、解決策をご存知の方はいませんか？ 今やっているのは↓で、 <div class="pre pre--multiline language-swift">let image = NSImage(cgImage: cgImage, size: NSSize.zero) image.tiffRepresentation // nil</div> この <span class="pre pre--inline">cgImage</span> は↓のように生成されています。 <div class="pre pre--multiline language-swift">extension Image where Pixel == RGBA { public var cgImage: CGImage { let length = count * 4 // count == width * height var data = Data(capacity: length) data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer&lt;UInt8&gt;) -&gt; Void in // 略 } let provider: CGDataProvider = CGDataProvider(data: data as CFData)! return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width * 4, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: CGColorRenderingIntent.defaultIntent)! } fileprivate static var colorSpace: CGColorSpace { return CGColorSpaceCreateDeviceRGB() } fileprivate static var bitmapInfo: CGBitmapInfo { return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue) } }</div>
+            <span class="pre pre--inline">tiffRepresentation</span> のドキュメントには↓のようにありますが、特に PDF や EPS のようなベクター形式の representation にはなっていないと思います。 "if the TIFF data cannot be created" の原因がわからず・・・。 <div class="pre pre--multiline nohighlight">If one of the receiver's image representations does not support the creation of TIFF data natively (PDF and EPS images, for example), this property creates the TIFF data from that representation's cached content. This property contains nil if the TIFF data cannot be created.</div>
+            <a href="https://developer.apple.com/documentation/appkit/nsimage/1519841-tiffrepresentation">https://developer.apple.com/documentation/appkit/nsimage/1519841-tiffrepresentation</a> なお、同様の手法↓で生成されたグレースケールの <span class="pre pre--inline">CGImage</span> から作られた <span class="pre pre--inline">NSImage</span> や、 PNG ファイルを読み込んで生成された <span class="pre pre--inline">NSImage</span> の <span class="pre pre--inline">tiffRepresentation</span> は正しく動作します。 <a href="https://github.com/koher/EasyImagy/blob/05db8c28d034a36cef3a8271d2daa214c8ad5ee4/EasyImagy/ImageCoreGraphics.swift#L133-L147">https://github.com/koher/EasyImagy/blob/05db8c28d034a36cef3a8271d2daa214c8ad5ee4/EasyImagy/ImageCoreGraphics.swift#L133-L147</a></span>
+        </div>
       </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
-          <span class="chatlog__timestamp">03-Aug-17 08:43 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">RGBA のピクセル列から <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">NSImage</span> を生成して <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">tiffRepresentation</span> を呼ぶと <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">nil</span> が返ってきてしまうんですが、解決策をご存知の方はいませんか？ 今やっているのは↓で、 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let image = NSImage(cgImage: cgImage, size: NSSize.zero) image.tiffRepresentation // nil</div> この <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">cgImage</span> は↓のように生成されています。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension Image where Pixel == RGBA { public var cgImage: CGImage { let length = count * 4 // count == width * height var data = Data(capacity: length) data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer&lt;UInt8&gt;) -&gt; Void in // 略 } let provider: CGDataProvider = CGDataProvider(data: data as CFData)! return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width * 4, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: CGColorRenderingIntent.defaultIntent)! } fileprivate static var colorSpace: CGColorSpace { return CGColorSpaceCreateDeviceRGB() } fileprivate static var bitmapInfo: CGBitmapInfo { return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue) } }</div>
-            <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">tiffRepresentation</span> のドキュメントには↓のようにありますが、特に PDF や EPS のようなベクター形式の representation にはなっていないと思います。 "if the TIFF data cannot be created" の原因がわからず・・・。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">If one of the receiver's image representations does not support the creation of TIFF data natively (PDF and EPS images, for example), this property creates the TIFF data from that representation's cached content. This property contains nil if the TIFF data cannot be created.</div>
-            <a href="https://developer.apple.com/documentation/appkit/nsimage/1519841-tiffrepresentation">https://developer.apple.com/documentation/appkit/nsimage/1519841-tiffrepresentation</a> なお、同様の手法↓で生成されたグレースケールの <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">CGImage</span> から作られた <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">NSImage</span> や、 PNG ファイルを読み込んで生成された <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">NSImage</span> の <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">tiffRepresentation</span> は正しく動作します。 <a href="https://github.com/koher/EasyImagy/blob/05db8c28d034a36cef3a8271d2daa214c8ad5ee4/EasyImagy/ImageCoreGraphics.swift#L133-L147">https://github.com/koher/EasyImagy/blob/05db8c28d034a36cef3a8271d2daa214c8ad5ee4/EasyImagy/ImageCoreGraphics.swift#L133-L147</a></span>
-        </div>
-        <div class="chatlog__embed">
-          <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-          <div class="chatlog__embed-content-container">
-            <div class="chatlog__embed-content">
-              <div class="chatlog__embed-text">
-                <div class="chatlog__embed-title">
-                  <a class="chatlog__embed-title-link" href="https://github.com/koher/EasyImagy/blob/05db8c28d034a36cef3a8271d2daa214c8ad5ee4/EasyImagy/ImageCoreGraphics.swift">
-                    <div class="chatlog__markdown chatlog__markdown-preserve">koher/EasyImagy</div>
-                  </a>
-                </div>
-                <div class="chatlog__embed-description">
-                  <div class="chatlog__markdown chatlog__markdown-preserve">EasyImagy - Makes it easy to deal with images in Swift</div>
-                </div>
-              </div>
-              <div class="chatlog__embed-thumbnail-container">
-                <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/W8tq6mPoLAM11PEMSvufIwyf0U-NjFaaGUHUaoieSIY/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/217100">
-                  <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/W8tq6mPoLAM11PEMSvufIwyf0U-NjFaaGUHUaoieSIY/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/217100" alt="Thumbnail" loading="lazy">
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/koher/EasyImagy/blob/05db8c28d034a36cef3a8271d2daa214c8ad5ee4/EasyImagy/ImageCoreGraphics.swift">
+                  <div class="markdown preserve-whitespace">koher/EasyImagy</div>
                 </a>
               </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">EasyImagy - Makes it easy to deal with images in Swift</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/W8tq6mPoLAM11PEMSvufIwyf0U-NjFaaGUHUaoieSIY/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/217100">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/W8tq6mPoLAM11PEMSvufIwyf0U-NjFaaGUHUaoieSIY/%3Fv%3D4%26s%3D400/https/avatars2.githubusercontent.com/u/217100" alt="Thumbnail" loading="lazy">
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-342588472088985610" class="chatlog__message-container " data-message-id="342588472088985610">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="03-Aug-17 08:44 AM">08:44</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">発端となったのは <span class="chatlog__markdown-mention" title="t.ae#5802">@t.ae</span> が報告してくれた↓の issue です。 <a href="https://github.com/koher/EasyImagy/issues/15">https://github.com/koher/EasyImagy/issues/15</a></span>
+    <div class="chatlog__message " data-message-id="342588472088985610" id="message-342588472088985610" title="Message sent: 03-Aug-17 08:44 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">発端となったのは <span class="mention" title="t.ae#5802">@t.ae</span> が報告してくれた↓の issue です。 <a href="https://github.com/koher/EasyImagy/issues/15">https://github.com/koher/EasyImagy/issues/15</a></span>
         </div>
-        <div class="chatlog__embed">
-          <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-          <div class="chatlog__embed-content-container">
-            <div class="chatlog__embed-content">
-              <div class="chatlog__embed-text">
-                <div class="chatlog__embed-title">
-                  <a class="chatlog__embed-title-link" href="https://github.com/koher/EasyImagy/issues/15">
-                    <div class="chatlog__markdown chatlog__markdown-preserve">Can't save images · Issue #15 · koher/EasyImagy</div>
-                  </a>
-                </div>
-                <div class="chatlog__embed-description">
-                  <div class="chatlog__markdown chatlog__markdown-preserve">Sample project: <a href="https://github.com/t-ae/EasyImagySaveExperiment">https://github.com/t-ae/EasyImagySaveExperiment</a> I'm trying to save Image via NSImage/CGImage. <a href="https://github.com/t-ae/EasyImagySaveExperiment/blob/master/EasyImagySaveExperiment/Vie">https://github.com/t-ae/EasyImagySaveExperiment/blob/master/EasyImagySaveExperiment/Vie</a>...</div>
-                </div>
-              </div>
-              <div class="chatlog__embed-thumbnail-container">
-                <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/j8HFRtVcsJoP747e7H4xxdQfqjbG7Gg7TBHmu5m6HAs/%3Fv%3D4%26s%3D400/https/avatars3.githubusercontent.com/u/12446914">
-                  <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/j8HFRtVcsJoP747e7H4xxdQfqjbG7Gg7TBHmu5m6HAs/%3Fv%3D4%26s%3D400/https/avatars3.githubusercontent.com/u/12446914" alt="Thumbnail" loading="lazy">
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/koher/EasyImagy/issues/15">
+                  <div class="markdown preserve-whitespace">Can't save images · Issue #15 · koher/EasyImagy</div>
                 </a>
               </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">Sample project: <a href="https://github.com/t-ae/EasyImagySaveExperiment">https://github.com/t-ae/EasyImagySaveExperiment</a> I'm trying to save Image via NSImage/CGImage. <a href="https://github.com/t-ae/EasyImagySaveExperiment/blob/master/EasyImagySaveExperiment/Vie">https://github.com/t-ae/EasyImagySaveExperiment/blob/master/EasyImagySaveExperiment/Vie</a>...</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/j8HFRtVcsJoP747e7H4xxdQfqjbG7Gg7TBHmu5m6HAs/%3Fv%3D4%26s%3D400/https/avatars3.githubusercontent.com/u/12446914">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/j8HFRtVcsJoP747e7H4xxdQfqjbG7Gg7TBHmu5m6HAs/%3Fv%3D4%26s%3D400/https/avatars3.githubusercontent.com/u/12446914" alt="Thumbnail" loading="lazy">
+              </a>
             </div>
           </div>
         </div>

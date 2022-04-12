@@ -6,42 +6,39 @@
   <meta name="viewport" content="width=device-width">
   <style>
     @font-face {
-      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
       font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
       font-weight: 300;
     }
 
     @font-face {
-      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
       font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
       font-weight: 400;
     }
 
     @font-face {
-      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
       font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
       font-weight: 500;
     }
 
     @font-face {
-      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
       font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
       font-weight: 600;
     }
 
     @font-face {
-      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
       font-family: Whitney;
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
       font-weight: 700;
     }
 
-    html,
     body {
-      margin: 0;
-      padding: 0;
       background-color: #ffffff;
       color: #23262a;
-      font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
       font-weight: 500;
     }
@@ -57,15 +54,113 @@
 
     img {
       object-fit: contain;
-      image-rendering: high-quality;
-      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .markdown {
+      max-width: 100%;
+      line-height: 1.3;
+      overflow-wrap: break-word;
+    }
+
+    .preserve-whitespace {
+      white-space: pre-wrap;
+    }
+
+    .spoiler-text {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+
+    .spoiler-text--hidden {
+      cursor: pointer;
+      background-color: #b9bbbe;
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .spoiler-text--hidden:hover {
+      background-color: rgba(185, 187, 190, 0.8);
+    }
+
+    .spoiler-text--hidden::selection {
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .quote {
+      display: flex;
+      margin: 0.05em 0;
+    }
+
+    .quote-border {
+      margin-right: 0.5em;
+      border: 2px solid #c7ccd1;
+      border-radius: 3px;
+    }
+
+    .pre {
+      background-color: #f9f9f9;
+      font-family: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    .pre--multiline {
+      margin-top: 0.25em;
+      padding: 0.5em;
+      border: 2px solid #f3f3f3;
+      border-radius: 5px;
+      color: #657b83;
+    }
+
+    .pre--multiline.hljs {
+      background-color: #f9f9f9;
+      color: #657b83;
+    }
+
+    .pre--inline {
+      padding: 2px;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .mention {
+      border-radius: 3px;
+      padding: 0 2px;
+      color: #505cdc;
+      background-color: rgba(88, 101, 242, .15);
+      font-weight: 500;
+    }
+
+    .mention:hover {
+      background-color: #5865f2;
+      color: #ffffff
+    }
+
+    .timestamp {
+      border-radius: 3px;
+      padding: 0 2px;
+      background-color: rgba(6, 6, 7, 0.08);
+    }
+
+    .emoji {
+      width: 1.325em;
+      height: 1.325em;
+      margin: 0 0.06em;
+      vertical-align: -0.4em;
+    }
+
+    .emoji--small {
+      width: 1em;
+      height: 1em;
+    }
+
+    .emoji--large {
+      width: 2.8em;
+      height: 2.8em;
     }
 
     .preamble {
       display: grid;
-      grid-template-columns: auto 1fr;
+      margin: 0 0.3em 0.6em 0.3em;
       max-width: 100%;
-      padding: 1rem;
+      grid-template-columns: auto 1fr;
     }
 
     .preamble__guild-icon-container {
@@ -79,114 +174,59 @@
 
     .preamble__entries-container {
       grid-column: 2;
-      margin-left: 1rem;
+      margin-left: 0.6em;
     }
 
     .preamble__entry {
-      margin-bottom: 0.15rem;
+      font-size: 1.4em;
       color: #2f3136;
-      font-size: 1.4rem;
     }
 
     .preamble__entry--small {
-      font-size: 1rem;
+      font-size: 1em;
     }
 
     .chatlog {
-      padding: 1rem 0;
-      width: 100%;
-      border-top: 1px solid #eceeef;
-      border-bottom: 1px solid #eceeef;
+      max-width: 100%;
     }
 
     .chatlog__message-group {
-      margin-bottom: 1rem;
-    }
-
-    .chatlog__message-container {
-      background-color: transparent;
-      transition: background-color 1s ease;
-    }
-
-    .chatlog__message-container--highlighted {
-      background-color: rgba(114, 137, 218, 0.2);
-    }
-
-    .chatlog__message-container--pinned {
-      background-color: rgba(249, 168, 37, 0.05);
-    }
-
-    .chatlog__message {
       display: grid;
+      margin: 0 0.6em;
+      padding: 0.9em 0;
+      border-top: 1px solid #eceeef;
       grid-template-columns: auto 1fr;
-      padding: 0.15rem 0;
-      direction: ltr;
-      unicode-bidi: bidi-override;
-    }
-
-    .chatlog__message:hover {
-      background-color: #fafafa;
-    }
-
-    .chatlog__message:hover .chatlog__short-timestamp {
-      display: block;
-    }
-
-    .chatlog__message-aside {
-      grid-column: 1;
-      width: 72px;
-      padding: 0.15rem 0.15rem 0 0.15rem;
-      text-align: center;
     }
 
     .chatlog__reference-symbol {
-      height: 10px;
-      margin: 6px 4px 4px 36px;
+      grid-column: 1;
+      margin: 8px 4px 4px 18px;
       border-left: 2px solid #c7ccd1;
       border-top: 2px solid #c7ccd1;
       border-radius: 8px 0 0 0;
     }
 
-    .chatlog__avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    .chatlog__short-timestamp {
-      display: none;
-      color: #5e6772;
-      font-size: 0.75rem;
-      font-weight: 500;
-      direction: ltr;
-      unicode-bidi: bidi-override;
-    }
-
-    .chatlog__message-primary {
-      grid-column: 2;
-      min-width: 0;
-    }
-
     .chatlog__reference {
       display: flex;
-      margin-bottom: 0.15rem;
-      align-items: center;
-      color: #5f5f60;
-      font-size: 0.875rem;
+      grid-column: 2;
+      margin-bottom: 0.25em;
+      font-size: 0.875em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      align-items: center;
+      color: #5f5f60;
     }
 
     .chatlog__reference-avatar {
+      border-radius: 50%;
       width: 16px;
       height: 16px;
-      margin-right: 0.25rem;
-      border-radius: 50%;
+      margin-right: 0.25em;
     }
 
-    .chatlog__reference-author {
-      margin-right: 0.3rem;
+    .chatlog__reference-name {
+      margin-right: 0.3em;
       font-weight: 600;
     }
 
@@ -195,8 +235,13 @@
       text-overflow: ellipsis;
     }
 
+    .chatlog__reference-content a:hover {
+      text-decoration: none;
+    }
+
     .chatlog__reference-link {
       cursor: pointer;
+      color: #5f5f60;
     }
 
     .chatlog__reference-link * {
@@ -204,75 +249,82 @@
       pointer-events: none;
     }
 
-    .chatlog__reference-link .hljs {
-      display: inline;
-    }
-
     .chatlog__reference-link:hover {
       color: #2f3136;
     }
 
-    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
-      color: inherit;
+    .chatlog__reference-link:hover *:not(.spoiler-text) {
+      color: #2f3136;
     }
 
     .chatlog__reference-edited-timestamp {
-      margin-left: 0.25rem;
-      color: #5e6772;
-      font-size: 0.75rem;
-      font-weight: 500;
-      direction: ltr;
+      margin-left: 0.25em;
+      font-size: 0.8em;
       unicode-bidi: bidi-override;
+      color: #747f8d;
     }
 
-    .chatlog__header {
-      margin-bottom: 0.1rem;
+    .chatlog__author-avatar-container {
+      grid-column: 1;
+      width: 40px;
+      height: 40px;
+      margin-right: 16px;
     }
 
-    .chatlog__author {
+    .chatlog__author-avatar {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .chatlog__messages {
+      grid-column: 2;
+      min-width: 50%;
+      direction: ltr;
+    }
+
+    .chatlog__author-name {
       font-weight: 600;
       color: #2f3136;
     }
 
-    .chatlog__bot-label {
-      position: relative;
-      top: -0.1rem;
-      margin-left: 0.3rem;
-      padding: 0.05rem 0.3rem;
-      border-radius: 3px;
-      background-color: #5865F2;
-      color: #ffffff;
-      font-size: 0.625rem;
-      font-weight: 500;
-      line-height: 1.3;
-    }
-
     .chatlog__timestamp {
-      margin-left: 0.3rem;
-      color: #5e6772;
-      font-size: 0.75rem;
-      font-weight: 500;
+      margin-left: 0.3em;
+      font-size: 0.75em;
       direction: ltr;
       unicode-bidi: bidi-override;
+      color: #747f8d;
+    }
+
+    .chatlog__message {
+      padding: 0.1em 0.3em;
+      margin: 0 -0.3em;
+      background-color: transparent;
+      transition: background-color 1s ease;
+    }
+
+    .chatlog__message--highlighted {
+      background-color: rgba(114, 137, 218, 0.2);
+    }
+
+    .chatlog__message--pinned {
+      background-color: rgba(249, 168, 37, 0.05);
     }
 
     .chatlog__content {
-      padding-right: 1rem;
-      font-size: 0.95rem;
+      font-size: 0.95em;
       word-wrap: break-word;
     }
 
     .chatlog__edited-timestamp {
-      margin-left: 0.15rem;
-      color: #5e6772;
-      font-size: 0.75rem;
-      font-weight: 500;
+      margin-left: 0.15em;
+      font-size: 0.8em;
     }
 
     .chatlog__attachment {
+      display: inline-block;
       position: relative;
-      width: fit-content;
-      margin-top: 0.3rem;
+      margin-top: 0.3em;
       border-radius: 3px;
       overflow: hidden;
     }
@@ -288,18 +340,18 @@
 
     .chatlog__attachment-spoiler-caption {
       display: none;
+      z-index: 999;
       position: absolute;
       left: 50%;
       top: 50%;
-      z-index: 999;
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
       transform: translate(-50%, -50%);
+      padding: 0.4em 0.8em;
       background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 20px;
       color: #dcddde;
-      font-size: 0.9rem;
+      font-size: 0.9em;
       font-weight: 600;
-      letter-spacing: 0.05rem;
+      letter-spacing: 0.05em;
     }
 
     .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
@@ -311,9 +363,9 @@
     }
 
     .chatlog__attachment-media {
+      vertical-align: top;
       max-width: 45vw;
       max-height: 500px;
-      vertical-align: top;
       border-radius: 3px;
     }
 
@@ -322,13 +374,13 @@
     }
 
     .chatlog__attachment-generic {
-      max-width: 520px;
       width: 100%;
+      max-width: 520px;
       height: 40px;
       padding: 10px;
+      background-color: #f2f3f5;
       border: 1px solid #ebedef;
       border-radius: 3px;
-      background-color: #f2f3f5;
       overflow: hidden;
     }
 
@@ -354,15 +406,19 @@
       text-overflow: ellipsis;
     }
 
+    .chatlog__edited-timestamp {
+      color: #747f8d;
+    }
+
     .chatlog__embed {
       display: flex;
-      margin-top: 0.3rem;
+      margin-top: 0.3em;
       max-width: 520px;
     }
 
     .chatlog__embed-color-pill {
       flex-shrink: 0;
-      width: 0.25rem;
+      width: 0.25em;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
     }
@@ -374,11 +430,11 @@
     .chatlog__embed-content-container {
       display: flex;
       flex-direction: column;
-      padding: 0.5rem 0.6rem;
+      padding: 0.5em 0.6em;
+      background-color: rgba(249, 249, 249, 0.3);
       border: 1px solid rgba(204, 204, 204, 0.3);
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
-      background-color: rgba(249, 249, 249, 0.3);
     }
 
     .chatlog__embed-content {
@@ -390,85 +446,85 @@
       flex: 1;
     }
 
-    .chatlog__embed-author-container {
+    .chatlog__embed-author {
       display: flex;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3em;
       align-items: center;
     }
 
     .chatlog__embed-author-icon {
+      margin-right: 0.5em;
       width: 20px;
       height: 20px;
-      margin-right: 0.5rem;
       border-radius: 50%;
     }
 
-    .chatlog__embed-author {
-      color: #4f545c;
-      font-size: 0.875rem;
+    .chatlog__embed-author-name {
+      font-size: 0.875em;
       font-weight: 600;
       direction: ltr;
       unicode-bidi: bidi-override;
+      color: #4f545c
     }
 
-    .chatlog__embed-author-link {
+    .chatlog__embed-author-name-link {
       color: #4f545c;
     }
 
     .chatlog__embed-title {
-      margin-bottom: 0.5rem;
-      color: #4f545c;
-      font-size: 0.875rem;
+      margin-bottom: 0.2em;
+      font-size: 0.875em;
       font-weight: 600;
+      color: #4f545c;
     }
 
     .chatlog__embed-description {
-      color: #2e3338;
       font-weight: 500;
-      font-size: 0.85rem;
+      font-size: 0.85em;
+      color: #2e3338;
     }
 
     .chatlog__embed-fields {
       display: flex;
       flex-wrap: wrap;
-      gap: 0 0.5rem;
+      gap: 0 0.5em;
     }
 
     .chatlog__embed-field {
       flex: 0;
       min-width: 100%;
       max-width: 506px;
-      padding-top: 0.6rem;
-      font-size: 0.875rem;
+      padding-top: 0.6em;
+      font-size: 0.875em;
     }
 
     .chatlog__embed-field--inline {
       flex: 1;
       flex-basis: auto;
-      min-width: 50px;
+      min-width: 150px;
     }
 
     .chatlog__embed-field-name {
-      margin-bottom: 0.2rem;
-      color: #36393e;
+      margin-bottom: 0.2em;
       font-weight: 600;
+      color: #36393e;
     }
 
     .chatlog__embed-field-value {
-      color: #2e3338;
       font-weight: 500;
+      color: #2e3338;
     }
 
     .chatlog__embed-thumbnail {
       flex: 0;
+      margin-left: 1.2em;
       max-width: 80px;
       max-height: 80px;
-      margin-left: 1.2rem;
       border-radius: 3px;
     }
 
     .chatlog__embed-image-container {
-      margin-top: 0.6rem;
+      margin-top: 0.6em;
     }
 
     .chatlog__embed-image {
@@ -478,28 +534,28 @@
     }
 
     .chatlog__embed-footer {
-      margin-top: 0.6rem;
+      margin-top: 0.6em;
       color: #2e3338;
     }
 
     .chatlog__embed-footer-icon {
+      margin-right: 0.2em;
       width: 20px;
       height: 20px;
-      margin-right: 0.2rem;
       border-radius: 50%;
       vertical-align: middle;
     }
 
     .chatlog__embed-footer-text {
       vertical-align: middle;
-      font-size: 0.75rem;
+      font-size: 0.75em;
       font-weight: 500;
     }
 
     .chatlog__embed-plainimage {
+      vertical-align: top;
       max-width: 45vw;
       max-height: 500px;
-      vertical-align: top;
       border-radius: 3px;
     }
 
@@ -508,7 +564,7 @@
     }
 
     .chatlog__embed-youtube-container {
-      margin-top: 0.6rem;
+      margin-top: 0.6em;
     }
 
     .chatlog__embed-youtube {
@@ -532,132 +588,51 @@
 
     .chatlog__reaction {
       display: flex;
-      margin: 0.35rem 0.1rem 0.1rem 0;
-      padding: 0.125rem 0.375rem;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      background-color: #f2f3f5;
       align-items: center;
+      margin: 0.35em 0.1em 0.1em 0;
+      padding: .125rem .375rem;
+      background-color: #f2f3f5;
+      border-radius: 8px;
+      border-color: transparent;
+      border-width: 1px;
+      border-style: solid;
     }
 
     .chatlog__reaction:hover {
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-color: rgba(0, 0, 0, 0.2);
+      border-width: 1px;
+      border-style: solid;
       background-color: white;
     }
 
     .chatlog__reaction-count {
       min-width: 9px;
-      margin-left: 0.35rem;
+      margin-left: 0.35em;
+      font-size: 0.875em;
       color: #4f5660;
-      font-size: 0.875rem;
     }
 
     .chatlog__reaction:hover .chatlog__reaction-count {
       color: #2e3338;
     }
 
-    .chatlog__markdown {
-      max-width: 100%;
+    .chatlog__bot-tag {
+      position: relative;
+      top: -.1em;
+      margin-left: 0.3em;
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
       line-height: 1.3;
-      overflow-wrap: break-word;
-    }
-
-    .chatlog__markdown-preserve {
-      white-space: pre-wrap;
-    }
-
-    .chatlog__markdown-spoiler {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 3px;
-    }
-
-    .chatlog__markdown-spoiler--hidden {
-      cursor: pointer;
-      background-color: #b9bbbe;
-      color: rgba(0, 0, 0, 0);
-    }
-
-    .chatlog__markdown-spoiler--hidden:hover {
-      background-color: rgba(185, 187, 190, 0.8);
-    }
-
-    .chatlog__markdown-spoiler--hidden::selection {
-      color: rgba(0, 0, 0, 0);
-    }
-
-    .chatlog__markdown-quote {
-      display: flex;
-      margin: 0.05rem 0;
-    }
-
-    .chatlog__markdown-quote-border {
-      margin-right: 0.5rem;
-      border: 2px solid #c7ccd1;
-      border-radius: 3px;
-    }
-
-    .chatlog__markdown-pre {
-      background-color: #f9f9f9;
-      font-family: "Consolas", "Courier New", Courier, monospace;
-    }
-
-    .chatlog__markdown-pre--multiline {
-      margin-top: 0.25rem;
-      padding: 0.5rem;
-      border: 2px solid #f3f3f3;
-      border-radius: 5px;
-      color: #657b83;
-    }
-
-    .chatlog__markdown-pre--multiline.hljs {
-      background-color: inherit;
-      color: inherit;
-    }
-
-    .chatlog__markdown-pre--inline {
-      padding: 2px;
-      border-radius: 3px;
-      font-size: 0.85rem;
-    }
-
-    .chatlog__markdown-mention {
-      border-radius: 3px;
-      padding: 0 2px;
-      background-color: rgba(88, 101, 242, .15);
-      color: #505cdc;
+      background-color: #5865F2;
+      color: #ffffff;
+      font-size: 0.625em;
       font-weight: 500;
     }
 
-    .chatlog__markdown-mention:hover {
-      background-color: #5865f2;
-      color: #ffffff
-    }
-
-    .chatlog__markdown-timestamp {
-      border-radius: 3px;
-      padding: 0 2px;
-      color: #5e6772;
-    }
-
-    .chatlog__emoji {
-      width: 1.325rem;
-      height: 1.325rem;
-      margin: 0 0.06rem;
-      vertical-align: -0.4rem;
-    }
-
-    .chatlog__emoji--small {
-      width: 1rem;
-      height: 1rem;
-    }
-
-    .chatlog__emoji--large {
-      width: 2.8rem;
-      height: 2.8rem;
-    }
-
     .postamble {
-      padding: 1.25rem;
+      margin: 1.4em 0.3em 0.6em 0.3em;
+      padding: 1em;
+      border-top: 1px solid #eceeef;
     }
 
     .postamble__entry {
@@ -668,7 +643,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.chatlog__markdown-pre--multiline').forEach(e => hljs.highlightBlock(e));
+      document.querySelectorAll('.pre--multiline').forEach(e => hljs.highlightBlock(e));
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
@@ -689,35 +664,35 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
-      if (!element) return;
-      event.preventDefault();
-      element.classList.add('chatlog__message-container--highlighted');
-      window.scrollTo({
-        top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
-        behavior: 'smooth'
-      });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      var element = document.getElementById('message-' + id);
+      if (element) {
+        event.preventDefault();
+        element.classList.add('chatlog__message--highlighted');
+        window.scrollTo({
+          top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+          behavior: 'smooth'
+        });
+        window.setTimeout(function() {
+          element.classList.remove('chatlog__message--highlighted');
+        }, 2000);
+      }
     }
 
     function showSpoiler(event, element) {
-      if (!element) return;
-      if (element.classList.contains('chatlog__attachment--hidden')) {
+      if (element && element.classList.contains('spoiler-text--hidden')) {
+        event.preventDefault();
+        element.classList.remove('spoiler-text--hidden');
+      }
+      if (element && element.classList.contains('chatlog__attachment--hidden')) {
         event.preventDefault();
         element.classList.remove('chatlog__attachment--hidden');
-      }
-      if (element.classList.contains('chatlog__markdown-spoiler--hidden')) {
-        event.preventDefault();
-        element.classList.remove('chatlog__markdown-spoiler--hidden');
       }
     }
   </script>
 </head>
 
 <body><svg style="display: none">
-    <symbol id="attachment-icon" viewBox="0 0 720 960">
+    <symbol id="icon-attachment" viewBox="0 0 720 960">
       <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
       <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
       <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
@@ -735,309 +710,277 @@
   </div>
   <div class="chatlog">
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-728935722932895794" class="chatlog__message-container " data-message-id="728935722932895794">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span>
-              <span class="chatlog__timestamp">04-Jul-20 11:30 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">SwiftコンパイラのApple Silicon対応パッチ来ましたね <a href="https://github.com/apple/swift/pull/32705">https://github.com/apple/swift/pull/32705</a></span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kateinoigakukun#2184" data-user-id="291062140079570944" style="color: rgb(241,196,15)">kateinoigakukun</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=728935722932895794"><span class="chatlog__timestamp">04-Jul-20 11:30 AM</span></a>
+        <div class="chatlog__message " data-message-id="728935722932895794" id="message-728935722932895794" title="Message sent: 04-Jul-20 11:30 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">SwiftコンパイラのApple Silicon対応パッチ来ましたね <a href="https://github.com/apple/swift/pull/32705">https://github.com/apple/swift/pull/32705</a></span>
               <span class="chatlog__edited-timestamp" title="04-Jul-20 11:30 AM">(edited)</span>
             </div>
-            <div class="chatlog__embed">
-              <div class="chatlog__embed-color-pill" style="background-color: rgba(30, 35, 39, 255)"></div>
-              <div class="chatlog__embed-content-container">
-                <div class="chatlog__embed-content">
-                  <div class="chatlog__embed-text">
-                    <div class="chatlog__embed-title">
-                      <a class="chatlog__embed-title-link" href="https://github.com/apple/swift/pull/32705">
-                        <div class="chatlog__markdown chatlog__markdown-preserve">[master] Apple Silicon support by shahmishal · Pull Request #32705 ...</div>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="chatlog__embed-thumbnail-container">
-                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145">
-                      <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+          </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://github.com/apple/swift/pull/32705">
+                      <div class="markdown preserve-whitespace">[master] Apple Silicon support by shahmishal · Pull Request #32705 ...</div>
                     </a>
                   </div>
                 </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+                  </a>
+                </div>
               </div>
             </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="sunglasses">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="😎" src="https://twemoji.maxcdn.com/2/svg/1f60e.svg" loading="lazy">
-                <span class="chatlog__reaction-count">1</span>
-              </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="sunglasses">
+              <img class="emoji emoji--small" alt="😎" src="https://twemoji.maxcdn.com/2/svg/1f60e.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-729348545672511549" class="chatlog__message-container " data-message-id="729348545672511549">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/380698943153242124/f1a74258ccad3a3294ceb976e58137b3.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="kenmaz#0310" data-user-id="380698943153242124">kenmaz</span>
-              <span class="chatlog__timestamp">05-Jul-20 02:50 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">おmasterにmergeされたみたいですね。July 5, 2020のsnapshotに含まれるのかな</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/380698943153242124/f1a74258ccad3a3294ceb976e58137b3.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kenmaz#0310" data-user-id="380698943153242124" style="color: rgb(241,196,15)">kenmaz</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=729348545672511549"><span class="chatlog__timestamp">05-Jul-20 02:50 PM</span></a>
+        <div class="chatlog__message " data-message-id="729348545672511549" id="message-729348545672511549" title="Message sent: 05-Jul-20 02:50 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">おmasterにmergeされたみたいですね。July 5, 2020のsnapshotに含まれるのかな</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-785036022890758156" class="chatlog__message-container " data-message-id="785036022890758156">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=785036078515879936"><span class="chatlog__timestamp">06-Dec-20 06:52 AM</span></a>
+        <div class="chatlog__message " data-message-id="785036022890758156" id="message-785036022890758156" title="Message sent: 06-Dec-20 06:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://okuranagaimo.blogspot.com/2020/12/applem1.html?m=1">https://okuranagaimo.blogspot.com/2020/12/applem1.html?m=1</a></span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(237, 171, 161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span>
-              <span class="chatlog__timestamp">06-Dec-20 06:52 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve"><a href="https://okuranagaimo.blogspot.com/2020/12/applem1.html?m=1">https://okuranagaimo.blogspot.com/2020/12/applem1.html?m=1</a></span>
-            </div>
-            <div class="chatlog__embed">
-              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-              <div class="chatlog__embed-content-container">
-                <div class="chatlog__embed-content">
-                  <div class="chatlog__embed-text">
-                    <div class="chatlog__embed-title">
-                      <a class="chatlog__embed-title-link" href="https://okuranagaimo.blogspot.com/2020/12/applem1.html?m=1">
-                        <div class="chatlog__markdown chatlog__markdown-preserve">なぜ、AppleのM1チップはそんなに速いのか?</div>
-                      </a>
-                    </div>
-                    <div class="chatlog__embed-description">
-                      <div class="chatlog__markdown chatlog__markdown-preserve">Medium(Debugger)より 。 新しいM1 Macの実際の体験が動き始めました。速いです。本当に速い。しかし、なぜ? 魔法は何ですか? エリック・エンハイム Youtubeで、昨年iMacを購入したMacユーザーを見ました。それは40GBのRAMを搭載、約4...</div>
-                    </div>
-                  </div>
-                  <div class="chatlog__embed-thumbnail-container">
-                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/glK0htWY8vIq5jLhBxHD9RDRBm9EI5x8Qg0Bk67ZtnU/https/1.bp.blogspot.com/-9GT_WqWaRIY/X8lU5ydUEmI/AAAAAAAAJr8/cqt2_zu_DksFp_KGyIbIHfVLKUvD-25EACLcBGAsYHQ/w1200-h630-p-k-no-nu/why-is-apple-m1-1.png">
-                      <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/glK0htWY8vIq5jLhBxHD9RDRBm9EI5x8Qg0Bk67ZtnU/https/1.bp.blogspot.com/-9GT_WqWaRIY/X8lU5ydUEmI/AAAAAAAAJr8/cqt2_zu_DksFp_KGyIbIHfVLKUvD-25EACLcBGAsYHQ/w1200-h630-p-k-no-nu/why-is-apple-m1-1.png" alt="Thumbnail" loading="lazy">
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://okuranagaimo.blogspot.com/2020/12/applem1.html?m=1">
+                      <div class="markdown preserve-whitespace">なぜ、AppleのM1チップはそんなに速いのか?</div>
                     </a>
                   </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">Medium(Debugger)より 。 新しいM1 Macの実際の体験が動き始めました。速いです。本当に速い。しかし、なぜ? 魔法は何ですか? エリック・エンハイム Youtubeで、昨年iMacを購入したMacユーザーを見ました。それは40GBのRAMを搭載、約4...</div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/glK0htWY8vIq5jLhBxHD9RDRBm9EI5x8Qg0Bk67ZtnU/https/1.bp.blogspot.com/-9GT_WqWaRIY/X8lU5ydUEmI/AAAAAAAAJr8/cqt2_zu_DksFp_KGyIbIHfVLKUvD-25EACLcBGAsYHQ/w1200-h630-p-k-no-nu/why-is-apple-m1-1.png">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/glK0htWY8vIq5jLhBxHD9RDRBm9EI5x8Qg0Bk67ZtnU/https/1.bp.blogspot.com/-9GT_WqWaRIY/X8lU5ydUEmI/AAAAAAAAJr8/cqt2_zu_DksFp_KGyIbIHfVLKUvD-25EACLcBGAsYHQ/w1200-h630-p-k-no-nu/why-is-apple-m1-1.png" alt="Thumbnail" loading="lazy">
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-785036078515879936" class="chatlog__message-container " data-message-id="785036078515879936">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="06-Dec-20 06:53 AM">06:53</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">M1がなぜ速いかという話 わかりやすかった</span>
+        <div class="chatlog__message " data-message-id="785036078515879936" id="message-785036078515879936" title="Message sent: 06-Dec-20 06:53 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">M1がなぜ速いかという話 わかりやすかった</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806684379082391592" class="chatlog__message-container " data-message-id="806684379082391592">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806684379082391592"><span class="chatlog__timestamp">04-Feb-21 12:35 AM</span></a>
+        <div class="chatlog__message " data-message-id="806684379082391592" id="message-806684379082391592" title="Message sent: 04-Feb-21 12:35 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ついにDTK返してってメールきた</span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">04-Feb-21 12:35 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">ついにDTK返してってメールきた</span>
-            </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy">
-                <span class="chatlog__reaction-count">1</span>
-              </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="eyes">
+              <img class="emoji emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806684425302573087" class="chatlog__message-container " data-message-id="806684425302573087">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">04-Feb-21 12:35 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">w</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806684425302573087"><span class="chatlog__timestamp">04-Feb-21 12:35 AM</span></a>
+        <div class="chatlog__message " data-message-id="806684425302573087" id="message-806684425302573087" title="Message sent: 04-Feb-21 12:35 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">w</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806694576777461760" class="chatlog__message-container " data-message-id="806694576777461760">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">04-Feb-21 01:16 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">全然何も連絡がなかったからしっかり使うつもりで設置してしまってたり。。。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806694576777461760"><span class="chatlog__timestamp">04-Feb-21 01:16 AM</span></a>
+        <div class="chatlog__message " data-message-id="806694576777461760" id="message-806694576777461760" title="Message sent: 04-Feb-21 01:16 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">全然何も連絡がなかったからしっかり使うつもりで設置してしまってたり。。。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806706019618914366" class="chatlog__message-container " data-message-id="806706019618914366">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806706019618914366"><span class="chatlog__timestamp">04-Feb-21 02:01 AM</span></a>
+        <div class="chatlog__message " data-message-id="806706019618914366" id="message-806706019618914366" title="Message sent: 04-Feb-21 02:01 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://9to5mac.com/2021/02/03/apple-asking-developers-to-return-dtk-mac-mini-offers-200-credit-for-buying-m1-macs/">https://9to5mac.com/2021/02/03/apple-asking-developers-to-return-dtk-mac-mini-offers-200-credit-for-buying-m1-macs/</a> ウッ、交換じゃないのか…</span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span>
-              <span class="chatlog__timestamp">04-Feb-21 02:01 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve"><a href="https://9to5mac.com/2021/02/03/apple-asking-developers-to-return-dtk-mac-mini-offers-200-credit-for-buying-m1-macs/">https://9to5mac.com/2021/02/03/apple-asking-developers-to-return-dtk-mac-mini-offers-200-credit-for-buying-m1-macs/</a> ウッ、交換じゃないのか…</span>
-            </div>
-            <div class="chatlog__embed">
-              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-              <div class="chatlog__embed-content-container">
-                <div class="chatlog__embed-content">
-                  <div class="chatlog__embed-text">
-                    <div class="chatlog__embed-author-container">
-                      <a class="chatlog__embed-author-link" href="https://9to5mac.com/author/filipeesposito/">
-                        <div class="chatlog__embed-author">Filipe Espósito</div>
-                      </a>
-                    </div>
-                    <div class="chatlog__embed-title">
-                      <a class="chatlog__embed-title-link" href="https://9to5mac.com/2021/02/03/apple-asking-developers-to-return-dtk-mac-mini-offers-200-credit-for-buying-m1-macs/">
-                        <div class="chatlog__markdown chatlog__markdown-preserve">Apple asking developers to return DTK Mac mini, offers $200 credit ...</div>
-                      </a>
-                    </div>
-                    <div class="chatlog__embed-description">
-                      <div class="chatlog__markdown chatlog__markdown-preserve">When Apple announced the transition from Intel processors to Apple Silicon chips, the company offered a custom Mac mini with the A12Z Bionic chip so that developers could update their macOS apps to support the new ARM platform. The company is now asking developers to return these DTK Mac minis as the M1 Macs were […]</div>
-                    </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-author">
+                    <span class="chatlog__embed-author-name">
+                      <a class="chatlog__embed-author-name-link" href="https://9to5mac.com/author/filipeesposito/">Filipe Espósito</a>
+                    </span>
                   </div>
-                  <div class="chatlog__embed-thumbnail-container">
-                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/Nq2af3jt07mmSDy5PpdspnbNIquExvnK3Uw9V7TauEY/%3Fresize%3D1200%252C628%26quality%3D82%26strip%3Dall%26ssl%3D1/https/i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2020/04/The-Rewind-Mac-mini-2018-Standing.jpg">
-                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/Nq2af3jt07mmSDy5PpdspnbNIquExvnK3Uw9V7TauEY/%3Fresize%3D1200%252C628%26quality%3D82%26strip%3Dall%26ssl%3D1/https/i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2020/04/The-Rewind-Mac-mini-2018-Standing.jpg" alt="Thumbnail" loading="lazy">
+                  <div class="chatlog__embed-title">
+                    <a class="chatlog__embed-title-link" href="https://9to5mac.com/2021/02/03/apple-asking-developers-to-return-dtk-mac-mini-offers-200-credit-for-buying-m1-macs/">
+                      <div class="markdown preserve-whitespace">Apple asking developers to return DTK Mac mini, offers $200 credit ...</div>
                     </a>
                   </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">When Apple announced the transition from Intel processors to Apple Silicon chips, the company offered a custom Mac mini with the A12Z Bionic chip so that developers could update their macOS apps to support the new ARM platform. The company is now asking developers to return these DTK Mac minis as the M1 Macs were […]</div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-thumbnail-container">
+                  <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/Nq2af3jt07mmSDy5PpdspnbNIquExvnK3Uw9V7TauEY/%3Fresize%3D1200%252C628%26quality%3D82%26strip%3Dall%26ssl%3D1/https/i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2020/04/The-Rewind-Mac-mini-2018-Standing.jpg">
+                    <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/Nq2af3jt07mmSDy5PpdspnbNIquExvnK3Uw9V7TauEY/%3Fresize%3D1200%252C628%26quality%3D82%26strip%3Dall%26ssl%3D1/https/i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2020/04/The-Rewind-Mac-mini-2018-Standing.jpg" alt="Thumbnail" loading="lazy">
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="cry">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="😢" src="https://twemoji.maxcdn.com/2/svg/1f622.svg" loading="lazy">
-                <span class="chatlog__reaction-count">1</span>
-              </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="cry">
+              <img class="emoji emoji--small" alt="😢" src="https://twemoji.maxcdn.com/2/svg/1f622.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806732029953441823" class="chatlog__message-container " data-message-id="806732029953441823">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">04-Feb-21 03:45 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">普通にMacBook Pro買っちゃったから200ドルの割引は誰かに譲りたいけどそういうのは無理かな。代わりに買えばいいのか。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806732029953441823"><span class="chatlog__timestamp">04-Feb-21 03:45 AM</span></a>
+        <div class="chatlog__message " data-message-id="806732029953441823" id="message-806732029953441823" title="Message sent: 04-Feb-21 03:45 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">普通にMacBook Pro買っちゃったから200ドルの割引は誰かに譲りたいけどそういうのは無理かな。代わりに買えばいいのか。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806732299252531210" class="chatlog__message-container " data-message-id="806732299252531210">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">04-Feb-21 03:46 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">記念にとっておく</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806732335752019999"><span class="chatlog__timestamp">04-Feb-21 03:46 AM</span></a>
+        <div class="chatlog__message " data-message-id="806732299252531210" id="message-806732299252531210" title="Message sent: 04-Feb-21 03:46 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">記念にとっておく</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-806732335752019999" class="chatlog__message-container " data-message-id="806732335752019999">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-Feb-21 03:46 AM">03:46</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">将来価値がでるかも</span>
+        <div class="chatlog__message " data-message-id="806732335752019999" id="message-806732335752019999" title="Message sent: 04-Feb-21 03:46 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">将来価値がでるかも</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806733986830352454" class="chatlog__message-container " data-message-id="806733986830352454">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">04-Feb-21 03:52 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">返さないってことですか？</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806733986830352454"><span class="chatlog__timestamp">04-Feb-21 03:52 AM</span></a>
+        <div class="chatlog__message " data-message-id="806733986830352454" id="message-806733986830352454" title="Message sent: 04-Feb-21 03:52 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">返さないってことですか？</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806734155370201119" class="chatlog__message-container " data-message-id="806734155370201119">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(231, 76, 60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span>
-              <span class="chatlog__timestamp">04-Feb-21 03:53 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">買い取って神棚に飾っておくとある日骨董品になってるかも</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tarunon#9603" data-user-id="293572563010060288" style="color: rgb(231,76,60)">tarunon</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806734155370201119"><span class="chatlog__timestamp">04-Feb-21 03:53 AM</span></a>
+        <div class="chatlog__message " data-message-id="806734155370201119" id="message-806734155370201119" title="Message sent: 04-Feb-21 03:53 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">買い取って神棚に飾っておくとある日骨董品になってるかも</span>
               <span class="chatlog__edited-timestamp" title="04-Feb-21 03:53 AM">(edited)</span>
             </div>
           </div>
@@ -1045,578 +988,495 @@
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806742053101895740" class="chatlog__message-container " data-message-id="806742053101895740">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">04-Feb-21 04:24 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">返さずにしまっておく</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806742431814254633"><span class="chatlog__timestamp">04-Feb-21 04:24 AM</span></a>
+        <div class="chatlog__message " data-message-id="806742053101895740" id="message-806742053101895740" title="Message sent: 04-Feb-21 04:24 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">返さずにしまっておく</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-806742431814254633" class="chatlog__message-container " data-message-id="806742431814254633">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-Feb-21 04:26 AM">04:26</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">【激レア】M1 mac miniより前にリリースされた貴重な Apple Silicon の mac mini! 【ノークレームノーリターン】</span>
+        <div class="chatlog__message " data-message-id="806742431814254633" id="message-806742431814254633" title="Message sent: 04-Feb-21 04:26 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">【激レア】M1 mac miniより前にリリースされた貴重な Apple Silicon の mac mini! 【ノークレームノーリターン】</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806742622638047292" class="chatlog__message-container " data-message-id="806742622638047292">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806742948565221396"><span class="chatlog__timestamp">04-Feb-21 04:27 AM</span></a>
+        <div class="chatlog__message " data-message-id="806742622638047292" id="message-806742622638047292" title="Message sent: 04-Feb-21 04:27 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://twitter.com/stroughtonsmith/status/1357115014486904838?s=20">https://twitter.com/stroughtonsmith/status/1357115014486904838?s=20</a></span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span>
-              <span class="chatlog__timestamp">04-Feb-21 04:27 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve"><a href="https://twitter.com/stroughtonsmith/status/1357115014486904838?s=20">https://twitter.com/stroughtonsmith/status/1357115014486904838?s=20</a></span>
-            </div>
-            <div class="chatlog__embed">
-              <div class="chatlog__embed-color-pill" style="background-color: rgba(29, 161, 242, 255)"></div>
-              <div class="chatlog__embed-content-container">
-                <div class="chatlog__embed-content">
-                  <div class="chatlog__embed-text">
-                    <div class="chatlog__embed-author-container">
-                      <img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/5O4DdwcxVWdAEhrhGS_iaO8kdKNJj-DBG7prJsPnFX0/https/pbs.twimg.com/profile_images/923969343087669248/diAzr2_2_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
-                      <a class="chatlog__embed-author-link" href="https://twitter.com/stroughtonsmith">
-                        <div class="chatlog__embed-author">Steve Troughton-Smith (@stroughtonsmith)</div>
-                      </a>
-                    </div>
-                    <div class="chatlog__embed-description">
-                      <div class="chatlog__markdown chatlog__markdown-preserve">TWO HUNDRED DOLLARS? That doesn’t even go a third of the way towards the cheapest M1 Mac. It just about covers the 4 months the DTK was usable out of the 12 month lease you paid for</div>
-                    </div>
-                    <div class="chatlog__embed-fields">
-                      <div class="chatlog__embed-field chatlog__embed-field--inline">
-                        <div class="chatlog__embed-field-name">
-                          <div class="chatlog__markdown chatlog__markdown-preserve">Likes</div>
-                        </div>
-                        <div class="chatlog__embed-field-value">
-                          <div class="chatlog__markdown chatlog__markdown-preserve">202</div>
-                        </div>
+          <div class="chatlog__embed">
+            <div class="chatlog__embed-color-pill" style="background-color: rgba(29,161,242,255)"></div>
+            <div class="chatlog__embed-content-container">
+              <div class="chatlog__embed-content">
+                <div class="chatlog__embed-text">
+                  <div class="chatlog__embed-author">
+                    <img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/5O4DdwcxVWdAEhrhGS_iaO8kdKNJj-DBG7prJsPnFX0/https/pbs.twimg.com/profile_images/923969343087669248/diAzr2_2_bigger.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+                    <span class="chatlog__embed-author-name">
+                      <a class="chatlog__embed-author-name-link" href="https://twitter.com/stroughtonsmith">Steve Troughton-Smith (@stroughtonsmith)</a>
+                    </span>
+                  </div>
+                  <div class="chatlog__embed-description">
+                    <div class="markdown preserve-whitespace">TWO HUNDRED DOLLARS? That doesn’t even go a third of the way towards the cheapest M1 Mac. It just about covers the 4 months the DTK was usable out of the 12 month lease you paid for</div>
+                  </div>
+                  <div class="chatlog__embed-fields">
+                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                      <div class="chatlog__embed-field-name">
+                        <div class="markdown preserve-whitespace">Likes</div>
+                      </div>
+                      <div class="chatlog__embed-field-value">
+                        <div class="markdown preserve-whitespace">202</div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="chatlog__embed-footer">
-                  <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
-                  <span class="chatlog__embed-footer-text"> Twitter • 03-Feb-21 11:53 PM </span>
-                </div>
+              </div>
+              <div class="chatlog__embed-footer">
+                <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+                <span class="chatlog__embed-footer-text"> Twitter • 03-Feb-21 11:53 PM </span>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-806742653684940870" class="chatlog__message-container " data-message-id="806742653684940870">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-Feb-21 04:27 AM">04:27</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">キレてますやん…</span>
+        <div class="chatlog__message " data-message-id="806742653684940870" id="message-806742653684940870" title="Message sent: 04-Feb-21 04:27 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">キレてますやん…</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-806742948565221396" class="chatlog__message-container " data-message-id="806742948565221396">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-Feb-21 04:28 AM">04:28</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">niwさん言う通り200apple$貰うくらいなら返却しないほうがプラスになりそう。 返却どれくらい強制力を持つのか…</span>
+        <div class="chatlog__message " data-message-id="806742948565221396" id="message-806742948565221396" title="Message sent: 04-Feb-21 04:28 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">niwさん言う通り200apple$貰うくらいなら返却しないほうがプラスになりそう。 返却どれくらい強制力を持つのか…</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806744405771157555" class="chatlog__message-container " data-message-id="806744405771157555">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">04-Feb-21 04:34 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">本当にビンテージ価値が出たらおもしろい。ケースにサインとかあったらよかったのに。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806744405771157555"><span class="chatlog__timestamp">04-Feb-21 04:34 AM</span></a>
+        <div class="chatlog__message " data-message-id="806744405771157555" id="message-806744405771157555" title="Message sent: 04-Feb-21 04:34 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">本当にビンテージ価値が出たらおもしろい。ケースにサインとかあったらよかったのに。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-806772854116319233" class="chatlog__message-container " data-message-id="806772854116319233">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/485766664445624323/535256438a745b56a4afe22dcff71218.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/485766664445624323/535256438a745b56a4afe22dcff71218.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="treastrain_spla#3013" data-user-id="485766664445624323" style="">treastrain / Tanaka.R</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806772854116319233"><span class="chatlog__timestamp">04-Feb-21 06:27 AM</span></a>
+        <div class="chatlog__message " data-message-id="806772854116319233" id="message-806772854116319233" title="Message sent: 04-Feb-21 06:27 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">返さなかった場合に Developer アカウントが BAN されるとかないでしょうか…？</span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="treastrain_spla#3013" data-user-id="485766664445624323">treastrain / Tanaka.R</span>
-              <span class="chatlog__timestamp">04-Feb-21 06:27 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">返さなかった場合に Developer アカウントが BAN されるとかないでしょうか…？</span>
-            </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="fearful">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="😨" src="https://twemoji.maxcdn.com/2/svg/1f628.svg" loading="lazy">
-                <span class="chatlog__reaction-count">2</span>
-              </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="fearful">
+              <img class="emoji emoji--small" alt="😨" src="https://twemoji.maxcdn.com/2/svg/1f628.svg" loading="lazy">
+              <span class="chatlog__reaction-count">2</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-807471083707564033" class="chatlog__message-container " data-message-id="807471083707564033">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/485766664445624323/535256438a745b56a4afe22dcff71218.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="treastrain_spla#3013" data-user-id="485766664445624323">treastrain / Tanaka.R</span>
-              <span class="chatlog__timestamp">06-Feb-21 04:41 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">追加のメールが Apple から来ましたね</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/485766664445624323/535256438a745b56a4afe22dcff71218.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="treastrain_spla#3013" data-user-id="485766664445624323" style="">treastrain / Tanaka.R</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=807471083707564033"><span class="chatlog__timestamp">06-Feb-21 04:41 AM</span></a>
+        <div class="chatlog__message " data-message-id="807471083707564033" id="message-807471083707564033" title="Message sent: 06-Feb-21 04:41 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">追加のメールが Apple から来ましたね</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-807472584332804096" class="chatlog__message-container " data-message-id="807472584332804096">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=807472584332804096"><span class="chatlog__timestamp">06-Feb-21 04:47 AM</span></a>
+        <div class="chatlog__message " data-message-id="807472584332804096" id="message-807472584332804096" title="Message sent: 06-Feb-21 04:47 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">クレジットの増加と返却期限の延長<img loading="lazy" class="emoji " alt="😄" title="smile" src="https://twemoji.maxcdn.com/2/svg/1f604.svg"></span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">06-Feb-21 04:47 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">クレジットの増加と返却期限の延長<img loading="lazy" class="chatlog__emoji " alt="😄" title="smile" src="https://twemoji.maxcdn.com/2/svg/1f604.svg"></span>
-            </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="laughing">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/2/svg/1f606.svg" loading="lazy">
-                <span class="chatlog__reaction-count">2</span>
-              </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="laughing">
+              <img class="emoji emoji--small" alt="😆" src="https://twemoji.maxcdn.com/2/svg/1f606.svg" loading="lazy">
+              <span class="chatlog__reaction-count">2</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-807495235298394112" class="chatlog__message-container " data-message-id="807495235298394112">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span>
-              <span class="chatlog__timestamp">06-Feb-21 06:17 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">ありがたい<img loading="lazy" class="chatlog__emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/2/svg/263a.svg">️</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=807495347739557898"><span class="chatlog__timestamp">06-Feb-21 06:17 AM</span></a>
+        <div class="chatlog__message " data-message-id="807495235298394112" id="message-807495235298394112" title="Message sent: 06-Feb-21 06:17 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ありがたい<img loading="lazy" class="emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/2/svg/263a.svg">️</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-807495347739557898" class="chatlog__message-container " data-message-id="807495347739557898">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="06-Feb-21 06:18 AM">06:18</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">あとクレジットの利用対象も変更になってますね</span>
+        <div class="chatlog__message " data-message-id="807495347739557898" id="message-807495347739557898" title="Message sent: 06-Feb-21 06:18 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あとクレジットの利用対象も変更になってますね</span>
             </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="laughing">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/2/svg/1f606.svg" loading="lazy">
-                <span class="chatlog__reaction-count">2</span>
-              </div>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="laughing">
+              <img class="emoji emoji--small" alt="😆" src="https://twemoji.maxcdn.com/2/svg/1f606.svg" loading="lazy">
+              <span class="chatlog__reaction-count">2</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-807604521315336213" class="chatlog__message-container " data-message-id="807604521315336213">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span>
-              <span class="chatlog__timestamp">06-Feb-21 01:32 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">DTK返却期限って、元々はもっと先だったの？</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=807604521315336213"><span class="chatlog__timestamp">06-Feb-21 01:32 PM</span></a>
+        <div class="chatlog__message " data-message-id="807604521315336213" id="message-807604521315336213" title="Message sent: 06-Feb-21 01:32 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">DTK返却期限って、元々はもっと先だったの？</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-807608556663603200" class="chatlog__message-container " data-message-id="807608556663603200">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span>
-              <span class="chatlog__timestamp">06-Feb-21 01:48 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">契約日から最長1年+30日か、Appleから求められた時か。 <a href="https://developer.apple.com/terms/universal-app-quick-start-program/Developer-Universal-App-Quick-Start-Program.pdf">https://developer.apple.com/terms/universal-app-quick-start-program/Developer-Universal-App-Quick-Start-Program.pdf</a></span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="norio_nomura#8334" data-user-id="127674083331538944" style="color: rgb(155,89,182)">norio_nomura</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=807608556663603200"><span class="chatlog__timestamp">06-Feb-21 01:48 PM</span></a>
+        <div class="chatlog__message " data-message-id="807608556663603200" id="message-807608556663603200" title="Message sent: 06-Feb-21 01:48 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">契約日から最長1年+30日か、Appleから求められた時か。 <a href="https://developer.apple.com/terms/universal-app-quick-start-program/Developer-Universal-App-Quick-Start-Program.pdf">https://developer.apple.com/terms/universal-app-quick-start-program/Developer-Universal-App-Quick-Start-Program.pdf</a></span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815149097421504582" class="chatlog__message-container " data-message-id="815149097421504582">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815149487156625428"><span class="chatlog__timestamp">27-Feb-21 09:11 AM</span></a>
+        <div class="chatlog__message " data-message-id="815149097421504582" id="message-815149097421504582" title="Message sent: 27-Feb-21 09:11 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">DTKの返却、詳細のメールが来てすでにヤマトの集荷が一方的に決まってて3/8に取りに来るらしい<img loading="lazy" class="emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg">めんどうがなくて私はめっちゃいいと思うけど。</span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">27-Feb-21 09:11 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">DTKの返却、詳細のメールが来てすでにヤマトの集荷が一方的に決まってて3/8に取りに来るらしい<img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg">めんどうがなくて私はめっちゃいいと思うけど。</span>
-            </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="exclamation">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="❗" src="https://twemoji.maxcdn.com/2/svg/2757.svg" loading="lazy">
-                <span class="chatlog__reaction-count">1</span>
-              </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="exclamation">
+              <img class="emoji emoji--small" alt="❗" src="https://twemoji.maxcdn.com/2/svg/2757.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-815149487156625428" class="chatlog__message-container " data-message-id="815149487156625428">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="27-Feb-21 09:13 AM">09:13</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">まあ渡せなかった場合は再スケジュール用の電話番号を置いていってくれるとのこと。合理的？である。</span>
+        <div class="chatlog__message " data-message-id="815149487156625428" id="message-815149487156625428" title="Message sent: 27-Feb-21 09:13 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">まあ渡せなかった場合は再スケジュール用の電話番号を置いていってくれるとのこと。合理的？である。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815149570870738944" class="chatlog__message-container " data-message-id="815149570870738944">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291057993686974466/459a7a7d92d588e0a6d0e6b28373eb7c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="yutailang0119#3673" data-user-id="291057993686974466">yutailang0119</span>
-              <span class="chatlog__timestamp">27-Feb-21 09:13 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">アグレッシブですごい</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291057993686974466/459a7a7d92d588e0a6d0e6b28373eb7c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="yutailang0119#3673" data-user-id="291057993686974466" style="color: rgb(241,196,15)">yutailang0119</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815149570870738944"><span class="chatlog__timestamp">27-Feb-21 09:13 AM</span></a>
+        <div class="chatlog__message " data-message-id="815149570870738944" id="message-815149570870738944" title="Message sent: 27-Feb-21 09:13 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">アグレッシブですごい</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815150295474634752" class="chatlog__message-container " data-message-id="815150295474634752">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">27-Feb-21 09:16 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">手配はある程度自分でやると思ったからよかったけどまさか勝手にこの日ね、って決まってるとは。しかも9:00-12:00やで。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815150295474634752"><span class="chatlog__timestamp">27-Feb-21 09:16 AM</span></a>
+        <div class="chatlog__message " data-message-id="815150295474634752" id="message-815150295474634752" title="Message sent: 27-Feb-21 09:16 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">手配はある程度自分でやると思ったからよかったけどまさか勝手にこの日ね、って決まってるとは。しかも9:00-12:00やで。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815839803484405821" class="chatlog__message-container " data-message-id="815839803484405821">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span>
-              <span class="chatlog__timestamp">01-Mar-21 06:56 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">梱包done - コンセント箱に戻すのめっちゃ難しい - 側面のラベル全然剥がれない</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815839803484405821"><span class="chatlog__timestamp">01-Mar-21 06:56 AM</span></a>
+        <div class="chatlog__message " data-message-id="815839803484405821" id="message-815839803484405821" title="Message sent: 01-Mar-21 06:56 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">梱包done - コンセント箱に戻すのめっちゃ難しい - 側面のラベル全然剥がれない</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815866059760467988" class="chatlog__message-container " data-message-id="815866059760467988">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">01-Mar-21 08:40 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">そうなのか。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815866158938456075"><span class="chatlog__timestamp">01-Mar-21 08:40 AM</span></a>
+        <div class="chatlog__message " data-message-id="815866059760467988" id="message-815866059760467988" title="Message sent: 01-Mar-21 08:40 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">そうなのか。</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-815866158938456075" class="chatlog__message-container " data-message-id="815866158938456075">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="01-Mar-21 08:40 AM">08:40</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">集荷に来たときに入れたらいいかと思ってたけど前日くらいにはやっといた方がいいな。</span>
+        <div class="chatlog__message " data-message-id="815866158938456075" id="message-815866158938456075" title="Message sent: 01-Mar-21 08:40 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">集荷に来たときに入れたらいいかと思ってたけど前日くらいにはやっといた方がいいな。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815866851795664906" class="chatlog__message-container " data-message-id="815866851795664906">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/269801719796334592/c7ac354c0870623258accfe97d7b8ffa.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="t.ae#5802" data-user-id="269801719796334592">t.ae</span>
-              <span class="chatlog__timestamp">01-Mar-21 08:43 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">ふつうのmac miniのと同じ箱ですかね。 仕事でmac miniを詰める機会が年一くらいであるんですが未だに箱が膨らまないようにコンセントを片付けられない。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/269801719796334592/c7ac354c0870623258accfe97d7b8ffa.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="t.ae#5802" data-user-id="269801719796334592" style="color: rgb(241,196,15)">t.ae</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815866851795664906"><span class="chatlog__timestamp">01-Mar-21 08:43 AM</span></a>
+        <div class="chatlog__message " data-message-id="815866851795664906" id="message-815866851795664906" title="Message sent: 01-Mar-21 08:43 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ふつうのmac miniのと同じ箱ですかね。 仕事でmac miniを詰める機会が年一くらいであるんですが未だに箱が膨らまないようにコンセントを片付けられない。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815867534217314354" class="chatlog__message-container " data-message-id="815867534217314354">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">01-Mar-21 08:46 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">いや、段ボールむき出しじゃなかったかな。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815867534217314354"><span class="chatlog__timestamp">01-Mar-21 08:46 AM</span></a>
+        <div class="chatlog__message " data-message-id="815867534217314354" id="message-815867534217314354" title="Message sent: 01-Mar-21 08:46 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">いや、段ボールむき出しじゃなかったかな。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815932769363951677" class="chatlog__message-container " data-message-id="815932769363951677">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">01-Mar-21 01:05 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">むきだしじゃなかった。二重構造でちゃんとMac miniみたいな箱が入ってた。全然覚えてなかった。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815932769363951677"><span class="chatlog__timestamp">01-Mar-21 01:05 PM</span></a>
+        <div class="chatlog__message " data-message-id="815932769363951677" id="message-815932769363951677" title="Message sent: 01-Mar-21 01:05 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">むきだしじゃなかった。二重構造でちゃんとMac miniみたいな箱が入ってた。全然覚えてなかった。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-815944722954321930" class="chatlog__message-container " data-message-id="815944722954321930">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">01-Mar-21 01:53 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">梱包した。電源ケーブル箱に戻すのは難しかった。無理やり詰めた。 ラベル剥がれない（脆くて全部剥がすのはめっちゃ時間かかる）から、ガムテープを上から貼ってベリッと剥がすと印刷がバッチリ取れた。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815944722954321930"><span class="chatlog__timestamp">01-Mar-21 01:53 PM</span></a>
+        <div class="chatlog__message " data-message-id="815944722954321930" id="message-815944722954321930" title="Message sent: 01-Mar-21 01:53 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">梱包した。電源ケーブル箱に戻すのは難しかった。無理やり詰めた。 ラベル剥がれない（脆くて全部剥がすのはめっちゃ時間かかる）から、ガムテープを上から貼ってベリッと剥がすと印刷がバッチリ取れた。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-817260872094711839" class="chatlog__message-container " data-message-id="817260872094711839">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/306592600419205121/5cd1898939cac8712e4dea38249fc80f.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="dictav#2639" data-user-id="306592600419205121">dictav</span>
-              <span class="chatlog__timestamp">05-Mar-21 05:02 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">外箱捨ててたから準備しないと。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/306592600419205121/5cd1898939cac8712e4dea38249fc80f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="dictav#2639" data-user-id="306592600419205121" style="color: rgb(241,196,15)">dictav</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=817260872094711839"><span class="chatlog__timestamp">05-Mar-21 05:02 AM</span></a>
+        <div class="chatlog__message " data-message-id="817260872094711839" id="message-817260872094711839" title="Message sent: 05-Mar-21 05:02 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">外箱捨ててたから準備しないと。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-818399100516433930" class="chatlog__message-container " data-message-id="818399100516433930">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span>
-              <span class="chatlog__timestamp">08-Mar-21 08:25 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">返却done</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="noppe#8476" data-user-id="391942268954738688" style="color: rgb(241,196,15)">noppe</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=818399100516433930"><span class="chatlog__timestamp">08-Mar-21 08:25 AM</span></a>
+        <div class="chatlog__message " data-message-id="818399100516433930" id="message-818399100516433930" title="Message sent: 08-Mar-21 08:25 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">返却done</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-821317267144179713" class="chatlog__message-container " data-message-id="821317267144179713">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/306592600419205121/5cd1898939cac8712e4dea38249fc80f.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="dictav#2639" data-user-id="306592600419205121">dictav</span>
-              <span class="chatlog__timestamp">16-Mar-21 09:41 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">返却完了のメールが来なくて不安だったんですが、プロモーションコードもらったし届いたらしい <a href="https://developer.apple.com/programs/universal/return/">https://developer.apple.com/programs/universal/return/</a></span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/306592600419205121/5cd1898939cac8712e4dea38249fc80f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="dictav#2639" data-user-id="306592600419205121" style="color: rgb(241,196,15)">dictav</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=821317267144179713"><span class="chatlog__timestamp">16-Mar-21 09:41 AM</span></a>
+        <div class="chatlog__message " data-message-id="821317267144179713" id="message-821317267144179713" title="Message sent: 16-Mar-21 09:41 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">返却完了のメールが来なくて不安だったんですが、プロモーションコードもらったし届いたらしい <a href="https://developer.apple.com/programs/universal/return/">https://developer.apple.com/programs/universal/return/</a></span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-821323256429936650" class="chatlog__message-container " data-message-id="821323256429936650">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">16-Mar-21 10:05 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">む、ウチはまだだなあ<img loading="lazy" class="chatlog__emoji " alt="😌" title="relieved" src="https://twemoji.maxcdn.com/2/svg/1f60c.svg"></span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=821323256429936650"><span class="chatlog__timestamp">16-Mar-21 10:05 AM</span></a>
+        <div class="chatlog__message " data-message-id="821323256429936650" id="message-821323256429936650" title="Message sent: 16-Mar-21 10:05 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">む、ウチはまだだなあ<img loading="lazy" class="emoji " alt="😌" title="relieved" src="https://twemoji.maxcdn.com/2/svg/1f60c.svg"></span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-823440998230261770" class="chatlog__message-container " data-message-id="823440998230261770">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=823441079189110784"><span class="chatlog__timestamp">22-Mar-21 06:20 AM</span></a>
+        <div class="chatlog__message " data-message-id="823440998230261770" id="message-823440998230261770" title="Message sent: 22-Mar-21 06:20 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">プロモーションコードってメールで送られてくるのと思ってましたが、DTK Portalにアクセスしたらコードが表示されるってことなんですね。</span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">22-Mar-21 06:20 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">プロモーションコードってメールで送られてくるのと思ってましたが、DTK Portalにアクセスしたらコードが表示されるってことなんですね。</span>
-            </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
-                <span class="chatlog__reaction-count">1</span>
-              </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="thumbsup">
+              <img class="emoji emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-823441079189110784" class="chatlog__message-container " data-message-id="823441079189110784">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Mar-21 06:20 AM">06:20</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">私も５万円ちょっとのクーポンが使えるみたい。</span>
+        <div class="chatlog__message " data-message-id="823441079189110784" id="message-823441079189110784" title="Message sent: 22-Mar-21 06:20 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">私も５万円ちょっとのクーポンが使えるみたい。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-823701935596634112" class="chatlog__message-container " data-message-id="823701935596634112">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">22-Mar-21 11:37 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">ヘッドフォン買いましょう〜</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=823701935596634112"><span class="chatlog__timestamp">22-Mar-21 11:37 PM</span></a>
+        <div class="chatlog__message " data-message-id="823701935596634112" id="message-823701935596634112" title="Message sent: 22-Mar-21 11:37 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">ヘッドフォン買いましょう〜</span>
               <span class="chatlog__edited-timestamp" title="22-Mar-21 11:37 PM">(edited)</span>
             </div>
           </div>
@@ -1624,54 +1484,45 @@
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-823737927749992528" class="chatlog__message-container " data-message-id="823737927749992528">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">23-Mar-21 02:00 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">確かにそれと金額がだいたい一緒なんですよね。意外とすぐにDiscontinuedになりそうな気もするから手に入れておいたらいいのかも。。。？</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=823737927749992528"><span class="chatlog__timestamp">23-Mar-21 02:00 AM</span></a>
+        <div class="chatlog__message " data-message-id="823737927749992528" id="message-823737927749992528" title="Message sent: 23-Mar-21 02:00 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">確かにそれと金額がだいたい一緒なんですよね。意外とすぐにDiscontinuedになりそうな気もするから手に入れておいたらいいのかも。。。？</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-847677062344605726" class="chatlog__message-container " data-message-id="847677062344605726">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/306592600419205121/5cd1898939cac8712e4dea38249fc80f.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="dictav#2639" data-user-id="306592600419205121">dictav</span>
-              <span class="chatlog__timestamp">28-May-21 03:26 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve"><a href="https://discord.com/channels/291054398077927425/291397535145132033/847673632116310077" onclick="scrollToMessage(event, '847673632116310077')">https://discord.com/channels/291054398077927425/291397535145132033/847673632116310077</a>
-                <div class="chatlog__markdown-quote">
-                  <div class="chatlog__markdown-quote-border"></div>
-                  <div class="chatlog__markdown-quote-content">ここで良いかな？ M1RACLES は悪用難しそうだし、うまく使ったら面白いことできそう、という印象です。 <a href="https://www.phoronix.com/scan.php?page=news_item&amp;px=Apple-M1-M1RACLES">https://www.phoronix.com/scan.php?page=news_item&amp;px=Apple-M1-M1RACLES</a></div>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/306592600419205121/5cd1898939cac8712e4dea38249fc80f.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="dictav#2639" data-user-id="306592600419205121" style="color: rgb(241,196,15)">dictav</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=847677100634406922"><span class="chatlog__timestamp">28-May-21 03:26 AM</span></a>
+        <div class="chatlog__message " data-message-id="847677062344605726" id="message-847677062344605726" title="Message sent: 28-May-21 03:26 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace"><a href="https://discord.com/channels/291054398077927425/291397535145132033/847673632116310077" onclick="scrollToMessage(event, '847673632116310077')">https://discord.com/channels/291054398077927425/291397535145132033/847673632116310077</a>
+                <div class="quote">
+                  <div class="quote-border"></div>
+                  <div class="quote-content">ここで良いかな？ M1RACLES は悪用難しそうだし、うまく使ったら面白いことできそう、という印象です。 <a href="https://www.phoronix.com/scan.php?page=news_item&amp;px=Apple-M1-M1RACLES">https://www.phoronix.com/scan.php?page=news_item&amp;px=Apple-M1-M1RACLES</a></div>
                 </div>
               </span>
               <span class="chatlog__edited-timestamp" title="28-May-21 03:26 AM">(edited)</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-847677100634406922" class="chatlog__message-container " data-message-id="847677100634406922">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="28-May-21 03:26 AM">03:26</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">あー、discord は展開されないのですね</span>
+        <div class="chatlog__message " data-message-id="847677100634406922" id="message-847677100634406922" title="Message sent: 28-May-21 03:26 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あー、discord は展開されないのですね</span>
               <span class="chatlog__edited-timestamp" title="28-May-21 03:26 AM">(edited)</span>
             </div>
           </div>
@@ -1679,21 +1530,19 @@
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-847751554873294868" class="chatlog__message-container " data-message-id="847751554873294868">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/ae31fdcc85cca42e2c192111d7936e22.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="lovee#6218" data-user-id="332734073565085699">lovee</span>
-              <span class="chatlog__timestamp">28-May-21 08:22 AM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">
-                <div class="chatlog__markdown-quote">
-                  <div class="chatlog__markdown-quote-border"></div>
-                  <div class="chatlog__markdown-quote-content"><strong>If this bug doesn't matter, why did you go through all the trouble of putting this site and the demo together?</strong> Honestly, I just wanted to play Bad Apple!! over an M1 vulnerability. You have to admit that's kind of cool. </div>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/ae31fdcc85cca42e2c192111d7936e22.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lovee#6218" data-user-id="332734073565085699" style="color: rgb(241,196,15)">lovee</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=847751554873294868"><span class="chatlog__timestamp">28-May-21 08:22 AM</span></a>
+        <div class="chatlog__message " data-message-id="847751554873294868" id="message-847751554873294868" title="Message sent: 28-May-21 08:22 AM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">
+                <div class="quote">
+                  <div class="quote-border"></div>
+                  <div class="quote-content"><strong>If this bug doesn't matter, why did you go through all the trouble of putting this site and the demo together?</strong> Honestly, I just wanted to play Bad Apple!! over an M1 vulnerability. You have to admit that's kind of cool. </div>
                 </div>結構ワロタw
               </span>
             </div>
@@ -1702,191 +1551,168 @@
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855791510243377182" class="chatlog__message-container " data-message-id="855791510243377182">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">19-Jun-21 12:49 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">M1 MacでDockerのイメージのビルドの過程にあるswift buildがうまく動かない。Core Dumpを出力して止まってしまう。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight"> &gt; [3/3] RUN cd ./swiftfiddle.com/_Packages/ &amp;&amp; swift build -c release: #7 1.099 qemu: uncaught target signal 4 (Illegal instruction) - core dumped #7 1.103 Illegal instruction</div></span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855791510243377182"><span class="chatlog__timestamp">19-Jun-21 12:49 PM</span></a>
+        <div class="chatlog__message " data-message-id="855791510243377182" id="message-855791510243377182" title="Message sent: 19-Jun-21 12:49 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">M1 MacでDockerのイメージのビルドの過程にあるswift buildがうまく動かない。Core Dumpを出力して止まってしまう。 <div class="pre pre--multiline nohighlight"> &gt; [3/3] RUN cd ./swiftfiddle.com/_Packages/ &amp;&amp; swift build -c release: #7 1.099 qemu: uncaught target signal 4 (Illegal instruction) - core dumped #7 1.103 Illegal instruction</div></span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855832253040689163" class="chatlog__message-container " data-message-id="855832253040689163">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:31 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">qemu…?</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855832331692015657"><span class="chatlog__timestamp">19-Jun-21 03:31 PM</span></a>
+        <div class="chatlog__message " data-message-id="855832253040689163" id="message-855832253040689163" title="Message sent: 19-Jun-21 03:31 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">qemu…?</span>
             </div>
           </div>
         </div>
-      </div>
-      <div id="chatlog__message-container-855832331692015657" class="chatlog__message-container " data-message-id="855832331692015657">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Jun-21 03:32 PM">15:32</div>
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">hypervisor.framework にしてみたらどうでしょう</span>
+        <div class="chatlog__message " data-message-id="855832331692015657" id="message-855832331692015657" title="Message sent: 19-Jun-21 03:32 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">hypervisor.framework にしてみたらどうでしょう</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855833799887159296" class="chatlog__message-container " data-message-id="855833799887159296">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:37 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">あ、なんか２種類あるんでしたっけ。やってみます。</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855833799887159296"><span class="chatlog__timestamp">19-Jun-21 03:37 PM</span></a>
+        <div class="chatlog__message " data-message-id="855833799887159296" id="message-855833799887159296" title="Message sent: 19-Jun-21 03:37 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">あ、なんか２種類あるんでしたっけ。やってみます。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855836088941936640" class="chatlog__message-container " data-message-id="855836088941936640">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855836088941936640"><span class="chatlog__timestamp">19-Jun-21 03:47 PM</span></a>
+        <div class="chatlog__message " data-message-id="855836088941936640" id="message-855836088941936640" title="Message sent: 19-Jun-21 03:47 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">これかな。再挑戦。。。</span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:47 PM</span>
+          <div class="chatlog__attachment " onclick="">
+            <a href="https://cdn.discordapp.com/attachments/728903379732004915/855836088437964830/Screen_Shot_2021-06-20_at_0.46.25.png">
+              <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/728903379732004915/855836088437964830/Screen_Shot_2021-06-20_at_0.46.25.png" alt="Image attachment" title="Image: Screen_Shot_2021-06-20_at_0.46.25.png (488.37 KB)" loading="lazy">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855836153104957480"><span class="chatlog__timestamp">19-Jun-21 03:47 PM</span></a>
+        <div class="chatlog__message " data-message-id="855836153104957480" id="message-855836153104957480" title="Message sent: 19-Jun-21 03:47 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">それですね。</span>
             </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">これかな。再挑戦。。。</span>
-            </div>
-            <div class="chatlog__attachment " onclick="">
-              <a href="https://cdn.discordapp.com/attachments/728903379732004915/855836088437964830/Screen_Shot_2021-06-20_at_0.46.25.png">
-                <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/728903379732004915/855836088437964830/Screen_Shot_2021-06-20_at_0.46.25.png" alt="Image attachment" title="Image: Screen_Shot_2021-06-20_at_0.46.25.png (488.37 KB)" loading="lazy">
-              </a>
+          </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="pray_tone1">
+              <img class="emoji emoji--small" alt="🙏🏻" src="https://twemoji.maxcdn.com/2/svg/1f64f-1f3fb.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855836153104957480" class="chatlog__message-container " data-message-id="855836153104957480">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:47 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">それですね。</span>
-            </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray_tone1">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="🙏🏻" src="https://twemoji.maxcdn.com/2/svg/1f64f-1f3fb.svg" loading="lazy">
-                <span class="chatlog__reaction-count">1</span>
-              </div>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855837162716135435"><span class="chatlog__timestamp">19-Jun-21 03:51 PM</span></a>
+        <div class="chatlog__message " data-message-id="855837162716135435" id="message-855837162716135435" title="Message sent: 19-Jun-21 03:51 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">さっきよりずいぶん進んだのでうまくいきそうです（ビルドは結構時間かかる）。どうもありがとうございます <img loading="lazy" class="emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/2/svg/263a.svg">️</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855837162716135435" class="chatlog__message-container " data-message-id="855837162716135435">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:51 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">さっきよりずいぶん進んだのでうまくいきそうです（ビルドは結構時間かかる）。どうもありがとうございます <img loading="lazy" class="chatlog__emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/2/svg/263a.svg">️</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855837626670383104"><span class="chatlog__timestamp">19-Jun-21 03:53 PM</span></a>
+        <div class="chatlog__message " data-message-id="855837626670383104" id="message-855837626670383104" title="Message sent: 19-Jun-21 03:53 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">うまくいったら qemu のバグか、docker があててるパッチのバグかなあ</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855837626670383104" class="chatlog__message-container " data-message-id="855837626670383104">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:53 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">うまくいったら qemu のバグか、docker があててるパッチのバグかなあ</span>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855839016807825408"><span class="chatlog__timestamp">19-Jun-21 03:58 PM</span></a>
+        <div class="chatlog__message " data-message-id="855839016807825408" id="message-855839016807825408" title="Message sent: 19-Jun-21 03:58 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">成功しました。</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855839016807825408" class="chatlog__message-container " data-message-id="855839016807825408">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:58 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">成功しました。</span>
-            </div>
-          </div>
-        </div>
+      <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=128" alt="Avatar" loading="lazy">
       </div>
-    </div>
-    <div class="chatlog__message-group">
-      <div id="chatlog__message-container-855839059826311198" class="chatlog__message-container " data-message-id="855839059826311198">
-        <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy">
+      <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="niw#3551" data-user-id="375129448900591616" style="">niw</span>
+        <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855839059826311198"><span class="chatlog__timestamp">19-Jun-21 03:58 PM</span></a>
+        <div class="chatlog__message " data-message-id="855839059826311198" id="message-855839059826311198" title="Message sent: 19-Jun-21 03:58 PM">
+          <div class="chatlog__content">
+            <div class="markdown">
+              <span class="preserve-whitespace">やったあ。</span>
+            </div>
           </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__header">
-              <span class="chatlog__author" style="" title="niw#3551" data-user-id="375129448900591616">niw</span>
-              <span class="chatlog__timestamp">19-Jun-21 03:58 PM</span>
-            </div>
-            <div class="chatlog__content chatlog__markdown">
-              <span class="chatlog__markdown-preserve">やったあ。</span>
-            </div>
-            <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="smiling_face_with_3_hearts">
-                <img class="chatlog__emoji chatlog__emoji--small" alt="🥰" src="https://twemoji.maxcdn.com/2/svg/1f970.svg" loading="lazy">
-                <span class="chatlog__reaction-count">1</span>
-              </div>
+          <div class="chatlog__reactions">
+            <div class="chatlog__reaction" title="smiling_face_with_3_hearts">
+              <img class="emoji emoji--small" alt="🥰" src="https://twemoji.maxcdn.com/2/svg/1f970.svg" loading="lazy">
+              <span class="chatlog__reaction-count">1</span>
             </div>
           </div>
         </div>

@@ -1,98 +1,81 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-475990145938620416" class="chatlog__message-container " data-message-id="475990145938620416">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/387843027072188417/47c96b35135f39a117c2d3e88950c7ab.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="Kuniwak#7542" data-user-id="387843027072188417">Kuniwak</span>
-          <span class="chatlog__timestamp">06-Aug-18 11:34 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol P { associatedtype T func f(_ g: @escaping (T) -&gt; Void) } class C&lt;S&gt;: P { typealias T = S private let _f: ((S) -&gt; Void) -&gt; Void init&lt;Q: P&gt;(q: Q) where Q.T == T { // Error: cannot assign value of type '((S) -&gt; Void) -&gt; Void' to type '((S) -&gt; Void) -&gt; Void' self._f = { g -&gt; Void in q.f(g) } } func f(_ g: @escaping (S) -&gt; Void) { self._f(g) } }</div> でエラーメッセージが不親切な件の原因を探している過程で、意図のわからないコードがあったので質問させてください <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-cpp"> // Try to simplify irrelevant details of function types. For example, if // someone passes a "() -&gt; Float" function to a "() throws -&gt; Int" // parameter, then uttering the "throws" may confuse them into thinking that // that is the problem, even though there is a clear subtype relation. if (auto srcFT = exprType-&gt;getAs&lt;FunctionType&gt;()) if (auto destFT = contextualType-&gt;getAs&lt;FunctionType&gt;()) { auto destExtInfo = destFT-&gt;getExtInfo(); if (!srcFT-&gt;isNoEscape()) destExtInfo = destExtInfo.withNoEscape(false); // 👈</div> ですが、これコメントの通り関数の型の不一致に escaping とか throws とか混ぜるとややこしいので出さない的な意図であってそうでしょうか？ <a href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3250">https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3250</a>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/387843027072188417/47c96b35135f39a117c2d3e88950c7ab.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="Kuniwak#7542" data-user-id="387843027072188417" style="color: rgb(241,196,15)">Kuniwak</span>
+    <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=475992712630370315"><span class="chatlog__timestamp">06-Aug-18 11:34 AM</span></a>
+    <div class="chatlog__message " data-message-id="475990145938620416" id="message-475990145938620416" title="Message sent: 06-Aug-18 11:34 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">protocol P { associatedtype T func f(_ g: @escaping (T) -&gt; Void) } class C&lt;S&gt;: P { typealias T = S private let _f: ((S) -&gt; Void) -&gt; Void init&lt;Q: P&gt;(q: Q) where Q.T == T { // Error: cannot assign value of type '((S) -&gt; Void) -&gt; Void' to type '((S) -&gt; Void) -&gt; Void' self._f = { g -&gt; Void in q.f(g) } } func f(_ g: @escaping (S) -&gt; Void) { self._f(g) } }</div> でエラーメッセージが不親切な件の原因を探している過程で、意図のわからないコードがあったので質問させてください <div class="pre pre--multiline language-cpp"> // Try to simplify irrelevant details of function types. For example, if // someone passes a "() -&gt; Float" function to a "() throws -&gt; Int" // parameter, then uttering the "throws" may confuse them into thinking that // that is the problem, even though there is a clear subtype relation. if (auto srcFT = exprType-&gt;getAs&lt;FunctionType&gt;()) if (auto destFT = contextualType-&gt;getAs&lt;FunctionType&gt;()) { auto destExtInfo = destFT-&gt;getExtInfo(); if (!srcFT-&gt;isNoEscape()) destExtInfo = destExtInfo.withNoEscape(false); // 👈</div> ですが、これコメントの通り関数の型の不一致に escaping とか throws とか混ぜるとややこしいので出さない的な意図であってそうでしょうか？ <a href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3250">https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3250</a>
           </span>
         </div>
-        <div class="chatlog__embed">
-          <div class="chatlog__embed-color-pill" style="background-color: rgba(30, 35, 39, 255)"></div>
-          <div class="chatlog__embed-content-container">
-            <div class="chatlog__embed-content">
-              <div class="chatlog__embed-text">
-                <div class="chatlog__embed-title">
-                  <a class="chatlog__embed-title-link" href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp">
-                    <div class="chatlog__markdown chatlog__markdown-preserve">apple/swift</div>
-                  </a>
-                </div>
-                <div class="chatlog__embed-description">
-                  <div class="chatlog__markdown chatlog__markdown-preserve">swift - The Swift Programming Language</div>
-                </div>
-              </div>
-              <div class="chatlog__embed-thumbnail-container">
-                <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145">
-                  <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp">
+                  <div class="markdown preserve-whitespace">apple/swift</div>
                 </a>
               </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">swift - The Swift Programming Language</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-475990995348226058" class="chatlog__message-container " data-message-id="475990995348226058">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06-Aug-18 11:38 AM">11:38</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3261">https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3261</a></span>
+    <div class="chatlog__message " data-message-id="475990995348226058" id="message-475990995348226058" title="Message sent: 06-Aug-18 11:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><a href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3261">https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp#L3261</a></span>
         </div>
-        <div class="chatlog__embed">
-          <div class="chatlog__embed-color-pill" style="background-color: rgba(30, 35, 39, 255)"></div>
-          <div class="chatlog__embed-content-container">
-            <div class="chatlog__embed-content">
-              <div class="chatlog__embed-text">
-                <div class="chatlog__embed-title">
-                  <a class="chatlog__embed-title-link" href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp">
-                    <div class="chatlog__markdown chatlog__markdown-preserve">apple/swift</div>
-                  </a>
-                </div>
-                <div class="chatlog__embed-description">
-                  <div class="chatlog__markdown chatlog__markdown-preserve">swift - The Swift Programming Language</div>
-                </div>
-              </div>
-              <div class="chatlog__embed-thumbnail-container">
-                <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145">
-                  <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://github.com/apple/swift/blob/5e7da0e3dcf13c603233c1f2aad1f1aded8821df/lib/Sema/CSDiag.cpp">
+                  <div class="markdown preserve-whitespace">apple/swift</div>
                 </a>
               </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">swift - The Swift Programming Language</div>
+              </div>
+            </div>
+            <div class="chatlog__embed-thumbnail-container">
+              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145">
+                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/fj7m7VLuaV_seT8bPYkMDFODFrNdHunv8fIJancJpw4/%3Fs%3D400%26v%3D4/https/avatars2.githubusercontent.com/u/10639145" alt="Thumbnail" loading="lazy">
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-475991061181759498" class="chatlog__message-container " data-message-id="475991061181759498">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06-Aug-18 11:38 AM">11:38</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">あれ、ちょっと思ってたのと違うな… この分岐で拾われているように見える</span>
+    <div class="chatlog__message " data-message-id="475991061181759498" id="message-475991061181759498" title="Message sent: 06-Aug-18 11:38 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">あれ、ちょっと思ってたのと違うな… この分岐で拾われているように見える</span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-475992712630370315" class="chatlog__message-container " data-message-id="475992712630370315">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06-Aug-18 11:45 AM">11:45</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">コードリーディングだけだとちょっとつらいですね…これ実際に swiftc を debug build して見ないとすぐにはわからなさそう…</span>
+    <div class="chatlog__message " data-message-id="475992712630370315" id="message-475992712630370315" title="Message sent: 06-Aug-18 11:45 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">コードリーディングだけだとちょっとつらいですね…これ実際に swiftc を debug build して見ないとすぐにはわからなさそう…</span>
         </div>
       </div>
     </div>

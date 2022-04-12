@@ -1,40 +1,28 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-729899400570208286" class="chatlog__message-container " data-message-id="729899400570208286">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
-          <span class="chatlog__timestamp">07-Jul-20 03:19 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">Combine の <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Future</span> って、非同期処理のコールバック代わりに使おうとすると、いちいち <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">cancellable</span> をどこかに保持しておかないといけなくて面倒じゃないですか？キャンセルしないとき。</span>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <a href="/channels/700259791217491999?category=開発環境, ライブラリ&amp;channel=combine&amp;message_id=729900261744836608"><span class="chatlog__timestamp">07-Jul-20 03:19 AM</span></a>
+    <div class="chatlog__message " data-message-id="729899400570208286" id="message-729899400570208286" title="Message sent: 07-Jul-20 03:19 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Combine の <span class="pre pre--inline">Future</span> って、非同期処理のコールバック代わりに使おうとすると、いちいち <span class="pre pre--inline">cancellable</span> をどこかに保持しておかないといけなくて面倒じゃないですか？キャンセルしないとき。</span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-729899523828088833" class="chatlog__message-container " data-message-id="729899523828088833">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07-Jul-20 03:20 AM">03:20</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">↓こういうのがあれば便利じゃないかと思ったんですが、どうでしょうか？ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension Future { public func get(_ body: @escaping (Result&lt;Output, Failure&gt;) -&gt; Void) { let keep: Keep&lt;AnyCancellable&gt; = .init() keep.value = sink(receiveCompletion: { completion in switch completion { case .finished: break case .failure(let error): body(.failure(error)) } keep.value = nil }, receiveValue: { output in body(.success(output)) }) } } private class Keep&lt;Value&gt; { var value: Value? }</div></span>
+    <div class="chatlog__message " data-message-id="729899523828088833" id="message-729899523828088833" title="Message sent: 07-Jul-20 03:20 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓こういうのがあれば便利じゃないかと思ったんですが、どうでしょうか？ <div class="pre pre--multiline language-swift">extension Future { public func get(_ body: @escaping (Result&lt;Output, Failure&gt;) -&gt; Void) { let keep: Keep&lt;AnyCancellable&gt; = .init() keep.value = sink(receiveCompletion: { completion in switch completion { case .finished: break case .failure(let error): body(.failure(error)) } keep.value = nil }, receiveValue: { output in body(.success(output)) }) } } private class Keep&lt;Value&gt; { var value: Value? }</div></span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-729900261744836608" class="chatlog__message-container " data-message-id="729900261744836608">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07-Jul-20 03:23 AM">03:23</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">↓使うとき。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let future = asyncFoo() future.get { foo in // cancellable は内部的に保持される // ... }</div></span>
+    <div class="chatlog__message " data-message-id="729900261744836608" id="message-729900261744836608" title="Message sent: 07-Jul-20 03:23 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">↓使うとき。 <div class="pre pre--multiline language-swift">let future = asyncFoo() future.get { foo in // cancellable は内部的に保持される // ... }</div></span>
         </div>
       </div>
     </div>

@@ -1,30 +1,23 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-918412481695715409" class="chatlog__message-container " data-message-id="918412481695715409">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
-          <span class="chatlog__timestamp">09-Dec-21 08:03 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">async</span> 側のコンテクストも存在しないのかな。結果的に <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">async</span> API の呼び出し先依存のスレッドで実行されるにしても、そこでさらにクロージャを書いたからといってそのコンテクストが引き継がれるとかはないと。</span>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=918412910286479401"><span class="chatlog__timestamp">09-Dec-21 08:03 AM</span></a>
+    <div class="chatlog__message " data-message-id="918412481695715409" id="message-918412481695715409" title="Message sent: 09-Dec-21 08:03 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><span class="pre pre--inline">async</span> 側のコンテクストも存在しないのかな。結果的に <span class="pre pre--inline">async</span> API の呼び出し先依存のスレッドで実行されるにしても、そこでさらにクロージャを書いたからといってそのコンテクストが引き継がれるとかはないと。</span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-918412910286479401" class="chatlog__message-container " data-message-id="918412910286479401">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09-Dec-21 08:05 AM">08:05</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">actor Foo { func bar() -&gt; Int { // Thread 2 &amp; Foo の Actor Context 42 } }</div>
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let foo = Foo() Task { // Thread 1 let x = await foo.bar() // Thread 2 （ただし Foo の Actor Context ではない） print(x) Task { // Thread 3 （ Foo の Actor Context は引き継がない） print(x) } }</div>
+    <div class="chatlog__message " data-message-id="918412910286479401" id="message-918412910286479401" title="Message sent: 09-Dec-21 08:05 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">actor Foo { func bar() -&gt; Int { // Thread 2 &amp; Foo の Actor Context 42 } }</div>
+            <div class="pre pre--multiline language-swift">let foo = Foo() Task { // Thread 1 let x = await foo.bar() // Thread 2 （ただし Foo の Actor Context ではない） print(x) Task { // Thread 3 （ Foo の Actor Context は引き継がない） print(x) } }</div>
           </span>
           <span class="chatlog__edited-timestamp" title="09-Dec-21 08:14 AM">(edited)</span>
         </div>

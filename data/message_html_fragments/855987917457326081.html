@@ -1,30 +1,23 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-855987917457326081" class="chatlog__message-container " data-message-id="855987917457326081">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span>
-          <span class="chatlog__timestamp">20-Jun-21 01:50 AM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">#20 1.569 [2215/2636] Compiling _NumericsShims _NumericsShims.c #20 1.623 [2216/2637] Compiling _AtomicsShims.c #20 1.623 [2217/2637] Compiling CSystem shims.c #20 3.014 [2218/2637] Compiling RealModule AlgebraicField.swift #20 4.016 [2219/2640] Compiling DequeModule Compatibility.swift #20 6.883 SIL memory lifetime failure in @$s13ComplexModule0A0V3logyACyxGAEFZ: memory is not initialized, but should #20 6.883 memory location: %98 = alloc_stack $RealType, let, name "θ" // users: %392, %390, %234, %235, %406, %247, %100 #20 6.883 at instruction: copy_addr %98 to [initialization] %391 : $*RealType // id: %392 #20 6.883 #20 6.883 in function: #20 6.883 // static Complex.log(_:) #20 6.883 sil [serialized] [ossa] @$s13ComplexModule0A0V3logyACyxGAEFZ : $@convention(method) &lt;RealType where RealType : Real&gt; (@in_guaranteed Complex&lt;RealType&gt;, @thin Complex&lt;RealType&gt;.Type) -&gt; @out Complex&lt;RealType&gt; {</div> swift-numericsがこんな感じのエラーでDocker上でだけビルドできないっていうのにずっと悩んでたけど、Dockerに割り当てるリソースを増やしたら解決した。 CIでもちょっと内容は違うけど似たようなところで失敗していてそれは <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">-j 1</span> を指定したらビルドできるようになった。 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">SIL memory lifetime failure</span> ってなんだろうってずっと悩んでいた。
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="kishikawakatsumi#7600" data-user-id="291075091025100810" style="color: rgb(155,89,182)">Kishikawa Katsumi</span>
+    <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=855988478969118721"><span class="chatlog__timestamp">20-Jun-21 01:50 AM</span></a>
+    <div class="chatlog__message " data-message-id="855987917457326081" id="message-855987917457326081" title="Message sent: 20-Jun-21 01:50 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline nohighlight">#20 1.569 [2215/2636] Compiling _NumericsShims _NumericsShims.c #20 1.623 [2216/2637] Compiling _AtomicsShims.c #20 1.623 [2217/2637] Compiling CSystem shims.c #20 3.014 [2218/2637] Compiling RealModule AlgebraicField.swift #20 4.016 [2219/2640] Compiling DequeModule Compatibility.swift #20 6.883 SIL memory lifetime failure in @$s13ComplexModule0A0V3logyACyxGAEFZ: memory is not initialized, but should #20 6.883 memory location: %98 = alloc_stack $RealType, let, name "θ" // users: %392, %390, %234, %235, %406, %247, %100 #20 6.883 at instruction: copy_addr %98 to [initialization] %391 : $*RealType // id: %392 #20 6.883 #20 6.883 in function: #20 6.883 // static Complex.log(_:) #20 6.883 sil [serialized] [ossa] @$s13ComplexModule0A0V3logyACyxGAEFZ : $@convention(method) &lt;RealType where RealType : Real&gt; (@in_guaranteed Complex&lt;RealType&gt;, @thin Complex&lt;RealType&gt;.Type) -&gt; @out Complex&lt;RealType&gt; {</div> swift-numericsがこんな感じのエラーでDocker上でだけビルドできないっていうのにずっと悩んでたけど、Dockerに割り当てるリソースを増やしたら解決した。 CIでもちょっと内容は違うけど似たようなところで失敗していてそれは <span class="pre pre--inline">-j 1</span> を指定したらビルドできるようになった。 <span class="pre pre--inline">SIL memory lifetime failure</span> ってなんだろうってずっと悩んでいた。
           </span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-855988478969118721" class="chatlog__message-container " data-message-id="855988478969118721">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="20-Jun-21 01:52 AM">01:52</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">Swift 5.3の場合は問題なくて5.4以上のときだけこの問題が起こって、Ubuntuのバージョンを16に下げた場合も微妙に直るみたいな挙動をしていたので原因を見落とした。</span>
+    <div class="chatlog__message " data-message-id="855988478969118721" id="message-855988478969118721" title="Message sent: 20-Jun-21 01:52 AM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">Swift 5.3の場合は問題なくて5.4以上のときだけこの問題が起こって、Ubuntuのバージョンを16に下げた場合も微妙に直るみたいな挙動をしていたので原因を見落とした。</span>
         </div>
       </div>
     </div>

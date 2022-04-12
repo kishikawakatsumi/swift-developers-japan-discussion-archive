@@ -1,45 +1,38 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-701889164257394788" class="chatlog__message-container " data-message-id="701889164257394788">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/295071934889197578/e5f514e062778796ac06288270411f75.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="" title="yyu#6765" data-user-id="295071934889197578">yyu</span>
-          <span class="chatlog__timestamp">20-Apr-20 08:16 PM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol HTraverse { associatedtype Source: HList func traverse(_ f: () -&gt; Void) -&gt; HNil } extension HCons: HTraverse where T: HTraverse { typealias Source = HCons&lt;H, T&gt; // おい！ここを@inlinableにさせてくれ！！ func traverse(_ f: () -&gt; Void) -&gt; HNil { f() return self.tail.traverse(f) } } extension HNil: HTraverse { typealias Source = HNil public func traverse(_ f: () -&gt; Void) -&gt; HNil { f() return HNil() } }</div>
-            <img loading="lazy" class="chatlog__emoji " alt="👆" title="point_up_2" src="https://twemoji.maxcdn.com/2/svg/1f446.svg"> こういう感じで<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">HList</span>を<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">HNil</span> まで型レベルで再帰していくことによって、たとえば <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">HCons&lt;String, HCons&lt;Bool, HCons&lt;Bool, HCons&lt;Int, HCons&lt;Optional&lt;Int&gt;, HCons&lt;String, HCons&lt;Bool, HCons&lt;Bool, HCons&lt;Int, HCons&lt;Optional&lt;Int&gt;, HNil&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div> このように10回<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">HCons</span> がネストした型だと10回の違った（1つずつ展開された）呼び出され型がするため、その分の特殊化（？）でバイナリサイズが爆弾になることを期待してたんですが、コメントにあるとおり、狙った場所に <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@inlineable</span> を書くとコンパイルがとおらない…… <img loading="lazy" class="chatlog__emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/2/svg/1f622.svg">
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/295071934889197578/e5f514e062778796ac06288270411f75.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="yyu#6765" data-user-id="295071934889197578" style="">yyu</span>
+    <a href="/channels/380329942505750529?category=イベント&amp;channel=waiwai-swiftc&amp;message_id=701889282373189682"><span class="chatlog__timestamp">20-Apr-20 08:16 PM</span></a>
+    <div class="chatlog__message " data-message-id="701889164257394788" id="message-701889164257394788" title="Message sent: 20-Apr-20 08:16 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">protocol HTraverse { associatedtype Source: HList func traverse(_ f: () -&gt; Void) -&gt; HNil } extension HCons: HTraverse where T: HTraverse { typealias Source = HCons&lt;H, T&gt; // おい！ここを@inlinableにさせてくれ！！ func traverse(_ f: () -&gt; Void) -&gt; HNil { f() return self.tail.traverse(f) } } extension HNil: HTraverse { typealias Source = HNil public func traverse(_ f: () -&gt; Void) -&gt; HNil { f() return HNil() } }</div>
+            <img loading="lazy" class="emoji " alt="👆" title="point_up_2" src="https://twemoji.maxcdn.com/2/svg/1f446.svg"> こういう感じで<span class="pre pre--inline">HList</span>を<span class="pre pre--inline">HNil</span> まで型レベルで再帰していくことによって、たとえば <div class="pre pre--multiline language-swift">HCons&lt;String, HCons&lt;Bool, HCons&lt;Bool, HCons&lt;Int, HCons&lt;Optional&lt;Int&gt;, HCons&lt;String, HCons&lt;Bool, HCons&lt;Bool, HCons&lt;Int, HCons&lt;Optional&lt;Int&gt;, HNil&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div> このように10回<span class="pre pre--inline">HCons</span> がネストした型だと10回の違った（1つずつ展開された）呼び出され型がするため、その分の特殊化（？）でバイナリサイズが爆弾になることを期待してたんですが、コメントにあるとおり、狙った場所に <span class="pre pre--inline">@inlineable</span> を書くとコンパイルがとおらない…… <img loading="lazy" class="emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/2/svg/1f622.svg">
           </span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-701889282373189682" class="chatlog__message-container " data-message-id="701889282373189682">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="20-Apr-20 08:17 PM">20:17</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve"><a href="https://ideone.com/IHgKWp">https://ideone.com/IHgKWp</a></span>
+    <div class="chatlog__message " data-message-id="701889282373189682" id="message-701889282373189682" title="Message sent: 20-Apr-20 08:17 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><a href="https://ideone.com/IHgKWp">https://ideone.com/IHgKWp</a></span>
         </div>
-        <div class="chatlog__embed">
-          <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-          <div class="chatlog__embed-content-container">
-            <div class="chatlog__embed-content">
-              <div class="chatlog__embed-text">
-                <div class="chatlog__embed-title">
-                  <a class="chatlog__embed-title-link" href="https://ideone.com/IHgKWp">
-                    <div class="chatlog__markdown chatlog__markdown-preserve">Ideone.com</div>
-                  </a>
-                </div>
-                <div class="chatlog__embed-description">
-                  <div class="chatlog__markdown chatlog__markdown-preserve">Ideone is something more than a pastebin; it's an online compiler and debugging tool which allows to compile and run code online in more than 40 programming languages.</div>
-                </div>
+      </div>
+      <div class="chatlog__embed">
+        <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+        <div class="chatlog__embed-content-container">
+          <div class="chatlog__embed-content">
+            <div class="chatlog__embed-text">
+              <div class="chatlog__embed-title">
+                <a class="chatlog__embed-title-link" href="https://ideone.com/IHgKWp">
+                  <div class="markdown preserve-whitespace">Ideone.com</div>
+                </a>
+              </div>
+              <div class="chatlog__embed-description">
+                <div class="markdown preserve-whitespace">Ideone is something more than a pastebin; it's an online compiler and debugging tool which allows to compile and run code online in more than 40 programming languages.</div>
               </div>
             </div>
           </div>

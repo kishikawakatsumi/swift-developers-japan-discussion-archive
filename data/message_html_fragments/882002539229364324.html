@@ -1,28 +1,26 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-882002539229364324" class="chatlog__message-container " data-message-id="882002539229364324">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__reference-symbol"></div>
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__reference">
-          <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy">
-          <div class="chatlog__reference-author" style="" title="rintaro#0001">rintaro</div>
-          <div class="chatlog__reference-content">
-            <span class="chatlog__reference-link" onclick="scrollToMessage(event, '882001676591050812')"> とりあえず Task.init は現在の Actor コンテキストを引き継ぐと思うので 今回の場合は <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor in</span> はいらないと思います。 </span>
-          </div>
-        </div>
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
-          <span class="chatlog__timestamp">30-Aug-21 08:43 PM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-quote">
-              <div class="chatlog__markdown-quote-border"></div>
-              <div class="chatlog__markdown-quote-content">Task.init は現在の Actor コンテキストを引き継ぐと思うので 今回の場合は <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor in</span> はいらない </div>
-            </div>↓みたいに <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</span> ではなく <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.detached</span> を挟んで context を引き継がないときなので <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</span> に戻す必要があるかと。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { [self] in do { let user = try await fetchUser(for: userID); Task { @MainActor in self.user = user } } catch { // エラーハンドリング } } }</div>
+  <div class="chatlog__reference-symbol"></div>
+  <div class="chatlog__reference">
+    <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=128" alt="Avatar" loading="lazy">
+    <span class="chatlog__reference-name" title="rintaro#0001" style="">rintaro</span>
+    <div class="chatlog__reference-content">
+      <span class="chatlog__reference-link" onclick="scrollToMessage(event, '882001676591050812')"> とりあえず Task.init は現在の Actor コンテキストを引き継ぐと思うので 今回の場合は <span class="pre pre--inline">@MainActor in</span> はいらないと思います。 </span>
+    </div>
+  </div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=882002539229364324"><span class="chatlog__timestamp">30-Aug-21 08:43 PM</span></a>
+    <div class="chatlog__message " data-message-id="882002539229364324" id="message-882002539229364324" title="Message sent: 30-Aug-21 08:43 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="quote">
+              <div class="quote-border"></div>
+              <div class="quote-content">Task.init は現在の Actor コンテキストを引き継ぐと思うので 今回の場合は <span class="pre pre--inline">@MainActor in</span> はいらない </div>
+            </div>↓みたいに <span class="pre pre--inline">Task.init</span> ではなく <span class="pre pre--inline">Task.detached</span> を挟んで context を引き継がないときなので <span class="pre pre--inline">MainActor</span> に戻す必要があるかと。 <div class="pre pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { [self] in do { let user = try await fetchUser(for: userID); Task { @MainActor in self.user = user } } catch { // エラーハンドリング } } }</div>
           </span>
         </div>
       </div>

@@ -1,53 +1,39 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-909079899883573279" class="chatlog__message-container " data-message-id="909079899883573279">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
-          <span class="chatlog__timestamp">13-Nov-21 01:58 PM</span>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve"><strong>Q8</strong>
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import UIKit import Combine final class UserViewController: UIViewController { private let state: UserViewState private let iconImageView: UIImageView = .init() private let nameLabel: UILabel = .init() private var cancellables: Set&lt;AnyCancellable&gt; = [] init(id: User.ID) { self.state = UserViewState(id: id) super.init(nibName: nil, bundle: nil) } required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") } override func viewDidLoad() { super.viewDidLoad() // レイアウト iconImageView.translatesAutoresizingMaskIntoConstraints = false iconImageView.layer.cornerRadius = 40 iconImageView.layer.borderWidth = 4 iconImageView.layer.borderColor = UIColor.systemGray3.cgColor iconImageView.clipsToBounds = true view.addSubview(iconImageView) nameLabel.translatesAutoresizingMaskIntoConstraints = false view.addSubview(nameLabel) NSLayoutConstraint.activate([ iconImageView.widthAnchor.constraint(equalToConstant: 80), iconImageView.heightAnchor.constraint(equalToConstant: 80), iconImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor), iconImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16), nameLabel.centerXAnchor.constraint(equalTo: iconImageView.centerXAnchor), nameLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 16), ]) // View への反映 do { let task = Task { [weak self] in guard let state = self?.state else { return } for await user in await state.$user.values { guard let self = self else { return } self.nameLabel.text = user?.name } } cancellables.insert(.init { task.cancel() }) } do { let task = Task { [weak self] in guard let state = self?.state else { return } for await iconImage in await state.$iconImage.values { guard let self = self else { return } self.iconImageView.image = iconImage } } cancellables.insert(.init { task.cancel() }) } } override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task { await state.loadUser() } } } extension Published.Publisher: @unchecked Sendable where Output: Sendable {} extension UIImage: @unchecked Sendable {}</div>
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Combine import Foundation import class UIKit.UIImage actor UserViewState { let id: User.ID @Published private(set) var user: User? @Published private(set) var iconImage: UIImage? init(id: User.ID) { self.id = id } func loadUser() async { do { // User の JSON の取得 let url: URL = .init(string: "https://koherent.org/fake-service/api/user?id=\(id)")! let data = try await downloadData(from: url) // JSON のデコード let user: User = try JSONDecoder().decode(User.self, from: data) // state への反映 self.user = user // アイコン画像の取得 let iconData = try await downloadData(from: user.iconURL) // Data を UIImage に変換 guard let iconImage: UIImage = .init(data: iconData) else { // エラーハンドリング print("The icon image at \(user.iconURL) has an illegal format.") return } // state への反映 self.iconImage = iconImage } catch { // エラーハンドリング print(error) } } }</div>
+  <div class="chatlog__author-avatar-container">
+    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  </div>
+  <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
+    <a href="/channels/499393715140558881?category=イベント&amp;channel=swift-zoomin&amp;message_id=909080329887830078"><span class="chatlog__timestamp">13-Nov-21 01:58 PM</span></a>
+    <div class="chatlog__message " data-message-id="909079899883573279" id="message-909079899883573279" title="Message sent: 13-Nov-21 01:58 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace"><strong>Q8</strong>
+            <div class="pre pre--multiline language-swift">import UIKit import Combine final class UserViewController: UIViewController { private let state: UserViewState private let iconImageView: UIImageView = .init() private let nameLabel: UILabel = .init() private var cancellables: Set&lt;AnyCancellable&gt; = [] init(id: User.ID) { self.state = UserViewState(id: id) super.init(nibName: nil, bundle: nil) } required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") } override func viewDidLoad() { super.viewDidLoad() // レイアウト iconImageView.translatesAutoresizingMaskIntoConstraints = false iconImageView.layer.cornerRadius = 40 iconImageView.layer.borderWidth = 4 iconImageView.layer.borderColor = UIColor.systemGray3.cgColor iconImageView.clipsToBounds = true view.addSubview(iconImageView) nameLabel.translatesAutoresizingMaskIntoConstraints = false view.addSubview(nameLabel) NSLayoutConstraint.activate([ iconImageView.widthAnchor.constraint(equalToConstant: 80), iconImageView.heightAnchor.constraint(equalToConstant: 80), iconImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor), iconImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16), nameLabel.centerXAnchor.constraint(equalTo: iconImageView.centerXAnchor), nameLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 16), ]) // View への反映 do { let task = Task { [weak self] in guard let state = self?.state else { return } for await user in await state.$user.values { guard let self = self else { return } self.nameLabel.text = user?.name } } cancellables.insert(.init { task.cancel() }) } do { let task = Task { [weak self] in guard let state = self?.state else { return } for await iconImage in await state.$iconImage.values { guard let self = self else { return } self.iconImageView.image = iconImage } } cancellables.insert(.init { task.cancel() }) } } override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task { await state.loadUser() } } } extension Published.Publisher: @unchecked Sendable where Output: Sendable {} extension UIImage: @unchecked Sendable {}</div>
+            <div class="pre pre--multiline language-swift">import Combine import Foundation import class UIKit.UIImage actor UserViewState { let id: User.ID @Published private(set) var user: User? @Published private(set) var iconImage: UIImage? init(id: User.ID) { self.id = id } func loadUser() async { do { // User の JSON の取得 let url: URL = .init(string: "https://koherent.org/fake-service/api/user?id=\(id)")! let data = try await downloadData(from: url) // JSON のデコード let user: User = try JSONDecoder().decode(User.self, from: data) // state への反映 self.user = user // アイコン画像の取得 let iconData = try await downloadData(from: user.iconURL) // Data を UIImage に変換 guard let iconImage: UIImage = .init(data: iconData) else { // エラーハンドリング print("The icon image at \(user.iconURL) has an illegal format.") return } // state への反映 self.iconImage = iconImage } catch { // エラーハンドリング print(error) } } }</div>
           </span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-909080055379030036" class="chatlog__message-container " data-message-id="909080055379030036">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="13-Nov-21 01:59 PM">13:59</div>
-      </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension URL: @unchecked Sendable {}</div>
+    <div class="chatlog__message " data-message-id="909080055379030036" id="message-909080055379030036" title="Message sent: 13-Nov-21 01:59 PM">
+      <div class="chatlog__content">
+        <div class="markdown">
+          <span class="preserve-whitespace">
+            <div class="pre pre--multiline language-swift">extension URL: @unchecked Sendable {}</div>
           </span>
         </div>
       </div>
     </div>
-  </div>
-  <div id="chatlog__message-container-909080329887830078" class="chatlog__message-container " data-message-id="909080329887830078">
-    <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="13-Nov-21 02:00 PM">14:00</div>
+    <div class="chatlog__message " data-message-id="909080329887830078" id="message-909080329887830078" title="Message sent: 13-Nov-21 02:00 PM">
+      <div class="chatlog__attachment " onclick="">
+        <a href="https://cdn.discordapp.com/attachments/499393715140558881/909080329057341490/Screen_Shot_2021-11-13_at_23.00.21.png">
+          <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/499393715140558881/909080329057341490/Screen_Shot_2021-11-13_at_23.00.21.png" alt="Image attachment" title="Image: Screen_Shot_2021-11-13_at_23.00.21.png (166.9 KB)" loading="lazy">
+        </a>
       </div>
-      <div class="chatlog__message-primary">
-        <div class="chatlog__attachment " onclick="">
-          <a href="https://cdn.discordapp.com/attachments/499393715140558881/909080329057341490/Screen_Shot_2021-11-13_at_23.00.21.png">
-            <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/499393715140558881/909080329057341490/Screen_Shot_2021-11-13_at_23.00.21.png" alt="Image attachment" title="Image: Screen_Shot_2021-11-13_at_23.00.21.png (166.9 KB)" loading="lazy">
-          </a>
-        </div>
-        <div class="chatlog__reactions">
-          <div class="chatlog__reaction" title="thumbsup">
-            <img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
-            <span class="chatlog__reaction-count">17</span>
-          </div>
+      <div class="chatlog__reactions">
+        <div class="chatlog__reaction" title="thumbsup">
+          <img class="emoji emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy">
+          <span class="chatlog__reaction-count">17</span>
         </div>
       </div>
     </div>
