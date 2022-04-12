@@ -25,7 +25,7 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
         );
         for (const messageGroup of messageGroups) {
           messageGroup
-            .querySelectorAll(".chatlog__message-container")
+            .querySelectorAll(".chatlog__message")
             .forEach((message) => {
               const html = beautify(messageGroup.outerHTML, {
                 indent_size: 2,
@@ -51,18 +51,16 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
     ".chatlog__message-group"
   );
   for (const messageGroup of messageGroups) {
-    messageGroup
-      .querySelectorAll(".chatlog__message-container")
-      .forEach((message) => {
-        const html = beautify(messageGroup.outerHTML, {
-          indent_size: 2,
-          preserve_newlines: false,
-        });
-        fs.writeFileSync(
-          `data/message_html_fragments/${message.dataset.messageId}.html`,
-          html,
-          "utf-8"
-        );
+    messageGroup.querySelectorAll(".chatlog__message").forEach((message) => {
+      const html = beautify(messageGroup.outerHTML, {
+        indent_size: 2,
+        preserve_newlines: false,
       });
+      fs.writeFileSync(
+        `data/message_html_fragments/${message.dataset.messageId}.html`,
+        html,
+        "utf-8"
+      );
+    });
   }
 });
