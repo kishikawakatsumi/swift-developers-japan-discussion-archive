@@ -1,14 +1,16 @@
 <div class="chatlog__message-group">
-  <div class="chatlog__author-avatar-container">
-    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/474410035854835723/26ada50472c408449db73ec2258a6ecd.png?size=128" alt="Avatar" loading="lazy">
-  </div>
-  <div class="chatlog__messages">
-    <span class="chatlog__author-name" title="usatie#2723" data-user-id="474410035854835723" style="">usatie</span>
-    <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=570436135742996490"><span class="chatlog__timestamp">24-Apr-19 02:29 AM</span></a>
-    <div class="chatlog__message " data-message-id="570436135742996490" id="message-570436135742996490" title="Message sent: 24-Apr-19 02:29 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">NSObjectにしてObserveするとstructを使えず、AppConfigのpropertyを変更しただけだとObservableに流れてこないので、変更を通知するためにはインスタンスごと変更するなど、ちょっとコツが必要でした。そのため、名前をわかりやすいように分けるだけなら下記のような実装でもいいかなと思って、今はこんな感じで実装しています。 <div class="pre pre--multiline nohighlight">protocol AppConfigProvider { var rx: RxEnvironmentProvider { get } var config: AppConfig { get set } } protocol RxAppConfigProvider { var config: Observable&lt;AppConfig&gt; { get } } final class AppEnvironment: AppConfigProvider { private var rx: RxAppEnvironment var config: AppConfig { get { return try! configSubject.value() } set { rx.configSubject.onNext(newValue) } } } struct RxAppEnvironment: RxAppConfigProvider { let configSubject: BehaviorSubject&lt;Entity.AppConfig&gt; var config: Observable&lt;AppConfig&gt; { return configSubject } }</div></span>
+  <div id="chatlog__message-container-570436135742996490" class="chatlog__message-container " data-message-id="570436135742996490">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/474410035854835723/26ada50472c408449db73ec2258a6ecd.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header">
+          <span class="chatlog__author" style="" title="usatie#2723" data-user-id="474410035854835723">usatie</span>
+          <span class="chatlog__timestamp">24-Apr-19 02:29 AM</span>
+        </div>
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">NSObjectにしてObserveするとstructを使えず、AppConfigのpropertyを変更しただけだとObservableに流れてこないので、変更を通知するためにはインスタンスごと変更するなど、ちょっとコツが必要でした。そのため、名前をわかりやすいように分けるだけなら下記のような実装でもいいかなと思って、今はこんな感じで実装しています。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">protocol AppConfigProvider { var rx: RxEnvironmentProvider { get } var config: AppConfig { get set } } protocol RxAppConfigProvider { var config: Observable&lt;AppConfig&gt; { get } } final class AppEnvironment: AppConfigProvider { private var rx: RxAppEnvironment var config: AppConfig { get { return try! configSubject.value() } set { rx.configSubject.onNext(newValue) } } } struct RxAppEnvironment: RxAppConfigProvider { let configSubject: BehaviorSubject&lt;Entity.AppConfig&gt; var config: Observable&lt;AppConfig&gt; { return configSubject } }</div></span>
         </div>
       </div>
     </div>

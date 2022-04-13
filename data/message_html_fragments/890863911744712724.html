@@ -1,68 +1,105 @@
 <div class="chatlog__message-group">
-  <div class="chatlog__author-avatar-container">
-    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=128" alt="Avatar" loading="lazy">
-  </div>
-  <div class="chatlog__messages">
-    <span class="chatlog__author-name" title="omochimetaru#1122" data-user-id="189711109966659584" style="color: rgb(237,171,161)">omochimetaru</span>
-    <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890864501702922300"><span class="chatlog__timestamp">24-Sep-21 07:32 AM</span></a>
-    <div class="chatlog__message " data-message-id="890863286243958805" id="message-890863286243958805" title="Message sent: 24-Sep-21 07:32 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">
-            <div class="pre pre--multiline nohighlight">&gt; **Rationale**: In theory, `@escaping` is completely orthogonal to `@Sendable`, and a Swift program built entirely with `@Sendable` from the ground up would not have the rule that `@escaping` closures be non-isolated. However, the existing Swift ecosystem is built without `@Sendable`, which leaves us with an unfortunate choice. We can assume that the lack of `@Sendable` on a function type means that the closure won't escape the concurrency domain, and where existing code (i.e., all Swift code that's been written so far) breaks this assumption, we'll have a data race. Or, we can conservatively assume that all existing function types are `@Sendable`, which will prevent all data races, but at the cost of being unable to use even the most basic facilities (such as `Sequence.map`, above). Therefore, we employ an heuristic: `@escaping` is a good (but imperfect) indicator in Swift today that the closure can be executed concurrently, so we don't permit escaping closures to be actor-isolated. This eliminates a significant proportion of the data races that would affect actor state, and the cost of (1) admitting some data races with existing code that manages to execute a closure concurrently without escaping it, and (2) prohibiting some safe patterns where a closure escapes but does not cross concurrency domains. This is a pragmatic, temporarily solution to the problem of rolling out data-race prevention throughout an existing ecosystem. Our approach will ratchet up the safety as code opts in to more concurrency safety in future language versions.</div>
+  <div id="chatlog__message-container-890863286243958805" class="chatlog__message-container " data-message-id="890863286243958805">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header">
+          <span class="chatlog__author" style="color: rgb(237, 171, 161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span>
+          <span class="chatlog__timestamp">24-Sep-21 07:32 AM</span>
+        </div>
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">&gt; **Rationale**: In theory, `@escaping` is completely orthogonal to `@Sendable`, and a Swift program built entirely with `@Sendable` from the ground up would not have the rule that `@escaping` closures be non-isolated. However, the existing Swift ecosystem is built without `@Sendable`, which leaves us with an unfortunate choice. We can assume that the lack of `@Sendable` on a function type means that the closure won't escape the concurrency domain, and where existing code (i.e., all Swift code that's been written so far) breaks this assumption, we'll have a data race. Or, we can conservatively assume that all existing function types are `@Sendable`, which will prevent all data races, but at the cost of being unable to use even the most basic facilities (such as `Sequence.map`, above). Therefore, we employ an heuristic: `@escaping` is a good (but imperfect) indicator in Swift today that the closure can be executed concurrently, so we don't permit escaping closures to be actor-isolated. This eliminates a significant proportion of the data races that would affect actor state, and the cost of (1) admitting some data races with existing code that manages to execute a closure concurrently without escaping it, and (2) prohibiting some safe patterns where a closure escapes but does not cross concurrency domains. This is a pragmatic, temporarily solution to the problem of rolling out data-race prevention throughout an existing ecosystem. Our approach will ratchet up the safety as code opts in to more concurrency safety in future language versions.</div>
           </span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="890863884406235186" id="message-890863884406235186" title="Message sent: 24-Sep-21 07:35 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">「理論上は、escapingとsendableは直行する概念だけど、まだsendableが普及してないから妥協をする必要があって、実際escapingはコールバックに使ってることが多いし、escapingならnon-isolated(=sendable)にするヒューリスティックにしようと思うよ」</span>
+  </div>
+  <div id="chatlog__message-container-890863884406235186" class="chatlog__message-container " data-message-id="890863884406235186">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="24-Sep-21 07:35 AM">07:35</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">「理論上は、escapingとsendableは直行する概念だけど、まだsendableが普及してないから妥協をする必要があって、実際escapingはコールバックに使ってることが多いし、escapingならnon-isolated(=sendable)にするヒューリスティックにしようと思うよ」</span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="890863911744712724" id="message-890863911744712724" title="Message sent: 24-Sep-21 07:35 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">みたいな事が書いてあって</span>
+  </div>
+  <div id="chatlog__message-container-890863911744712724" class="chatlog__message-container " data-message-id="890863911744712724">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="24-Sep-21 07:35 AM">07:35</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">みたいな事が書いてあって</span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="890863938944778260" id="message-890863938944778260" title="Message sent: 24-Sep-21 07:35 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">それに対してラトナーが↑で</span>
+  </div>
+  <div id="chatlog__message-container-890863938944778260" class="chatlog__message-container " data-message-id="890863938944778260">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="24-Sep-21 07:35 AM">07:35</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">それに対してラトナーが↑で</span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="890864055672258580" id="message-890864055672258580" title="Message sent: 24-Sep-21 07:35 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">「いやいやそれだとマズイでしょ理論上直行するわけで・・・(以下説明)」みたいなツッコミをした結果</span>
+  </div>
+  <div id="chatlog__message-container-890864055672258580" class="chatlog__message-container " data-message-id="890864055672258580">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="24-Sep-21 07:35 AM">07:35</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">「いやいやそれだとマズイでしょ理論上直行するわけで・・・(以下説明)」みたいなツッコミをした結果</span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="890864153336639538" id="message-890864153336639538" title="Message sent: 24-Sep-21 07:36 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">第二回レビューのタイミングでは、escapingに関するヒューリスティック(=sendable)が取り除かれた？</span>
+  </div>
+  <div id="chatlog__message-container-890864153336639538" class="chatlog__message-container " data-message-id="890864153336639538">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="24-Sep-21 07:36 AM">07:36</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">第二回レビューのタイミングでは、escapingに関するヒューリスティック(=sendable)が取り除かれた？</span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="890864403384270889" id="message-890864403384270889" title="Message sent: 24-Sep-21 07:37 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">ラトナー <div class="quote">
-              <div class="quote-border"></div>
-              <div class="quote-content">and it makes perfect sense for a closure to be @escaping without being @Sendable.</div>
+  </div>
+  <div id="chatlog__message-container-890864403384270889" class="chatlog__message-container " data-message-id="890864403384270889">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="24-Sep-21 07:37 AM">07:37</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">ラトナー <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">and it makes perfect sense for a closure to be @escaping without being @Sendable.</div>
             </div></span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="890864501702922300" id="message-890864501702922300" title="Message sent: 24-Sep-21 07:37 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">Sendableじゃないけどescapingなクロージャは完全に正しい（ありえる）</span>
+  </div>
+  <div id="chatlog__message-container-890864501702922300" class="chatlog__message-container " data-message-id="890864501702922300">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="24-Sep-21 07:37 AM">07:37</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">Sendableじゃないけどescapingなクロージャは完全に正しい（ありえる）</span>
         </div>
       </div>
     </div>

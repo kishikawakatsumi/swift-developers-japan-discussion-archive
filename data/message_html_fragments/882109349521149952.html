@@ -1,37 +1,49 @@
 <div class="chatlog__message-group">
-  <div class="chatlog__author-avatar-container">
-    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
-  </div>
-  <div class="chatlog__messages">
-    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-    <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=882110003304075304"><span class="chatlog__timestamp">31-Aug-21 03:47 AM</span></a>
-    <div class="chatlog__message " data-message-id="882109349521149952" id="message-882109349521149952" title="Message sent: 31-Aug-21 03:47 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">
-            <div class="quote">
-              <div class="quote-border"></div>
-              <div class="quote-content">WWDCのセッションでこのように言っていたので、優先順位に合わせて入れ替えるものだと思っていました </div>
-            </div>なるほど、それなら普通の <span class="pre pre--inline">actor</span> は入れ替えてくれそうな感じがしますね。 <div class="quote">
-              <div class="quote-border"></div>
-              <div class="quote-content">DispatchQueue経由なので厳格に順番通りなんですかね...？ </div>
-            </div><span class="pre pre--inline">DispatchQueue</span> も <span class="pre pre--inline">DispatchWorkItem</span> に <span class="pre pre--inline">qos</span> を指定できるみたいですね。使ったことなかった。 <a href="https://developer.apple.com/documentation/dispatch/dispatchworkitem">https://developer.apple.com/documentation/dispatch/dispatchworkitem</a>
+  <div id="chatlog__message-container-882109349521149952" class="chatlog__message-container " data-message-id="882109349521149952">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header">
+          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
+          <span class="chatlog__timestamp">31-Aug-21 03:47 AM</span>
+        </div>
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">WWDCのセッションでこのように言っていたので、優先順位に合わせて入れ替えるものだと思っていました </div>
+            </div>なるほど、それなら普通の <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">actor</span> は入れ替えてくれそうな感じがしますね。 <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">DispatchQueue経由なので厳格に順番通りなんですかね...？ </div>
+            </div><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">DispatchQueue</span> も <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">DispatchWorkItem</span> に <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">qos</span> を指定できるみたいですね。使ったことなかった。 <a href="https://developer.apple.com/documentation/dispatch/dispatchworkitem">https://developer.apple.com/documentation/dispatch/dispatchworkitem</a>
           </span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="882109449760813106" id="message-882109449760813106" title="Message sent: 31-Aug-21 03:48 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">そうすると <span class="pre pre--inline">MainActor</span> でも <span class="pre pre--inline">priority</span> を考慮してくれそう。</span>
+  </div>
+  <div id="chatlog__message-container-882109449760813106" class="chatlog__message-container " data-message-id="882109449760813106">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="31-Aug-21 03:48 AM">03:48</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">そうすると <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</span> でも <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">priority</span> を考慮してくれそう。</span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="882110003304075304" id="message-882110003304075304" title="Message sent: 31-Aug-21 03:50 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">なら↓もありな可能性があるのかな？ <div class="pre pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { @MainActor in do { let user = try await fetchUser(for: userID) self.user = user } catch { // エラーハンドリング } } }</div>
-            <span class="pre pre--inline">@MainActor</span> のクロージャ式が丸ごと↓の <span class="pre pre--inline">block</span> に突っ込まれるイメージ？ <div class="pre pre--multiline language-swift">DispatchQueue.main.async(DispatchWorkItem(qos: .background, block: /* ここ */))</div></span>
+  </div>
+  <div id="chatlog__message-container-882110003304075304" class="chatlog__message-container " data-message-id="882110003304075304">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="31-Aug-21 03:50 AM">03:50</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">なら↓もありな可能性があるのかな？ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { @MainActor in do { let user = try await fetchUser(for: userID) self.user = user } catch { // エラーハンドリング } } }</div>
+            <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</span> のクロージャ式が丸ごと↓の <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">block</span> に突っ込まれるイメージ？ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">DispatchQueue.main.async(DispatchWorkItem(qos: .background, block: /* ここ */))</div></span>
           <span class="chatlog__edited-timestamp" title="31-Aug-21 03:52 AM">(edited)</span>
         </div>
       </div>

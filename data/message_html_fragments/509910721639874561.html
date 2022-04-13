@@ -1,49 +1,61 @@
 <div class="chatlog__message-group">
-  <div class="chatlog__author-avatar-container">
-    <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=128" alt="Avatar" loading="lazy">
+  <div id="chatlog__message-container-509910721639874561" class="chatlog__message-container " data-message-id="509910721639874561">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header">
+          <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
+          <span class="chatlog__timestamp">08-Nov-18 02:03 AM</span>
+        </div>
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">dataTask</span> については、戻り値を <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">URLSessionDataTask</span> に使ってるのが微妙だけど、これは Foundation の API 設計の問題だと思うなぁ。</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="chatlog__messages">
-    <span class="chatlog__author-name" title="koher#9336" data-user-id="293624673265123328" style="color: rgb(17,128,106)">koher</span>
-    <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=509912188534652938"><span class="chatlog__timestamp">08-Nov-18 02:03 AM</span></a>
-    <div class="chatlog__message " data-message-id="509910721639874561" id="message-509910721639874561" title="Message sent: 08-Nov-18 02:03 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace"><span class="pre pre--inline">dataTask</span> については、戻り値を <span class="pre pre--inline">URLSessionDataTask</span> に使ってるのが微妙だけど、これは Foundation の API 設計の問題だと思うなぁ。</span>
+  <div id="chatlog__message-container-509911452635758602" class="chatlog__message-container " data-message-id="509911452635758602">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="08-Nov-18 02:06 AM">02:06</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">response</span> をエラーケースでも受け取りたいとしても、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">data</span> と <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">response</span> と <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">error</span> を受け取るだけなら↓ <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">async/await</span> と typed throws で↓にできる。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func dataTask(with url: URL) async throws URLSessionDataTaskError -&gt; (Data, URLResponse) { ... } struct URLSessionDataTaskError: Error { let response: URLResponse? }</div></span>
         </div>
       </div>
     </div>
-    <div class="chatlog__message " data-message-id="509911452635758602" id="message-509911452635758602" title="Message sent: 08-Nov-18 02:06 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace"><span class="pre pre--inline">response</span> をエラーケースでも受け取りたいとしても、 <span class="pre pre--inline">data</span> と <span class="pre pre--inline">response</span> と <span class="pre pre--inline">error</span> を受け取るだけなら↓ <span class="pre pre--inline">async/await</span> と typed throws で↓にできる。 <div class="pre pre--multiline language-swift">func dataTask(with url: URL) async throws URLSessionDataTaskError -&gt; (Data, URLResponse) { ... } struct URLSessionDataTaskError: Error { let response: URLResponse? }</div></span>
-        </div>
+  </div>
+  <div id="chatlog__message-container-509912188534652938" class="chatlog__message-container " data-message-id="509912188534652938">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="08-Nov-18 02:08 AM">02:08</div>
       </div>
-    </div>
-    <div class="chatlog__message " data-message-id="509912188534652938" id="message-509912188534652938" title="Message sent: 08-Nov-18 02:08 AM">
-      <div class="chatlog__content">
-        <div class="markdown">
-          <span class="preserve-whitespace">以前 Joe Groff が <span class="pre pre--inline">Result</span> 全否定してたときのコメント。 <div class="pre pre--multiline nohighlight">Yeah, we extensively discussed adding a Result type internally, but ultimately couldn't justify it. The only real use case we could see in the wild was for threading errors through CPS-inversion-style abstractions like async promises, something we hope to provide proper language support for. More generally, expressing effects as monadic values is a pretty awful abstraction; aside from polluting the Internet with an endless deluge of unhelpful tutorials, they also don't compose cleanly, they impose nesting where is desired—you have to pick between Result&lt;Async&lt;T&gt;&gt; and Async&lt;Result&lt;T&gt;&gt;, or build ResultT&lt;AsyncT&lt;Identity&gt;&gt;&lt;T&gt; out of monad transformers—and they don't do the natural thing when used with other higher-order abstractions—if you're mapping a `throws` function over a collection, you probably want to propagate that error like `rethrows` does, not end up with a collection of Result&lt;T&gt;. I'd rather see us adopt an extensible algebraic effects system, something like http://www.eff-lang.org , which provides a framework for `throws`, `async` and other control flow effects to be cleanly composed and abstracted over. I see `throws` as the first seed of that.</div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown">
+          <span class="chatlog__markdown-preserve">以前 Joe Groff が <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Result</span> 全否定してたときのコメント。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">Yeah, we extensively discussed adding a Result type internally, but ultimately couldn't justify it. The only real use case we could see in the wild was for threading errors through CPS-inversion-style abstractions like async promises, something we hope to provide proper language support for. More generally, expressing effects as monadic values is a pretty awful abstraction; aside from polluting the Internet with an endless deluge of unhelpful tutorials, they also don't compose cleanly, they impose nesting where is desired—you have to pick between Result&lt;Async&lt;T&gt;&gt; and Async&lt;Result&lt;T&gt;&gt;, or build ResultT&lt;AsyncT&lt;Identity&gt;&gt;&lt;T&gt; out of monad transformers—and they don't do the natural thing when used with other higher-order abstractions—if you're mapping a `throws` function over a collection, you probably want to propagate that error like `rethrows` does, not end up with a collection of Result&lt;T&gt;. I'd rather see us adopt an extensible algebraic effects system, something like http://www.eff-lang.org , which provides a framework for `throws`, `async` and other control flow effects to be cleanly composed and abstracted over. I see `throws` as the first seed of that.</div>
             <a href="https://forums.swift.org/t/throws-as-returning-a-result/1799/2">https://forums.swift.org/t/throws-as-returning-a-result/1799/2</a></span>
         </div>
-      </div>
-      <div class="chatlog__embed">
-        <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,255)"></div>
-        <div class="chatlog__embed-content-container">
-          <div class="chatlog__embed-content">
-            <div class="chatlog__embed-text">
-              <div class="chatlog__embed-title">
-                <a class="chatlog__embed-title-link" href="https://forums.swift.org/t/throws-as-returning-a-result/1799/2">
-                  <div class="markdown preserve-whitespace">throws as returning a Result</div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color: rgba(255, 255, 255, 255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title">
+                  <a class="chatlog__embed-title-link" href="https://forums.swift.org/t/throws-as-returning-a-result/1799/2">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">throws as returning a Result</div>
+                  </a>
+                </div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Yeah, we extensively discussed adding a Result type internally, but ultimately couldn't justify it. The only real use case we could see in the wild was for threading errors through CPS-inversion-style abstractions like async promises, something we hope to provide proper langu...</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container">
+                <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/NylZ1hSjLzzujgg3nlClfuuXk-3dVOHdM7IkZP09-yg/https/discourse-cdn-sjc1.com/swift/user_avatar/forums.swift.org/joe_groff/200/1929_1.png">
+                  <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/NylZ1hSjLzzujgg3nlClfuuXk-3dVOHdM7IkZP09-yg/https/discourse-cdn-sjc1.com/swift/user_avatar/forums.swift.org/joe_groff/200/1929_1.png" alt="Thumbnail" loading="lazy">
                 </a>
               </div>
-              <div class="chatlog__embed-description">
-                <div class="markdown preserve-whitespace">Yeah, we extensively discussed adding a Result type internally, but ultimately couldn't justify it. The only real use case we could see in the wild was for threading errors through CPS-inversion-style abstractions like async promises, something we hope to provide proper langu...</div>
-              </div>
-            </div>
-            <div class="chatlog__embed-thumbnail-container">
-              <a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/NylZ1hSjLzzujgg3nlClfuuXk-3dVOHdM7IkZP09-yg/https/discourse-cdn-sjc1.com/swift/user_avatar/forums.swift.org/joe_groff/200/1929_1.png">
-                <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/NylZ1hSjLzzujgg3nlClfuuXk-3dVOHdM7IkZP09-yg/https/discourse-cdn-sjc1.com/swift/user_avatar/forums.swift.org/joe_groff/200/1929_1.png" alt="Thumbnail" loading="lazy">
-              </a>
             </div>
           </div>
         </div>
