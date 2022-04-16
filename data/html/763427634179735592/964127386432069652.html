@@ -1,0 +1,1031 @@
+<html lang="en">
+
+<head>
+  <title>swift-developers-japan - algo-866</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    @font-face {
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+      font-family: Whitney;
+      font-weight: 300;
+    }
+
+    @font-face {
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+      font-family: Whitney;
+      font-weight: 400;
+    }
+
+    @font-face {
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+      font-family: Whitney;
+      font-weight: 500;
+    }
+
+    @font-face {
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+      font-family: Whitney;
+      font-weight: 600;
+    }
+
+    @font-face {
+      src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+      font-family: Whitney;
+      font-weight: 700;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #23262a;
+      font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    a {
+      color: #0068e0;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      object-fit: contain;
+      image-rendering: high-quality;
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .preamble {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      max-width: 100%;
+      padding: 1rem;
+    }
+
+    .preamble__guild-icon-container {
+      grid-column: 1;
+    }
+
+    .preamble__guild-icon {
+      max-width: 88px;
+      max-height: 88px;
+    }
+
+    .preamble__entries-container {
+      grid-column: 2;
+      margin-left: 1rem;
+    }
+
+    .preamble__entry {
+      margin-bottom: 0.15rem;
+      color: #2f3136;
+      font-size: 1.4rem;
+    }
+
+    .preamble__entry--small {
+      font-size: 1rem;
+    }
+
+    .chatlog {
+      padding: 1rem 0;
+      width: 100%;
+      border-top: 1px solid #eceeef;
+      border-bottom: 1px solid #eceeef;
+    }
+
+    .chatlog__message-group {
+      margin-bottom: 1rem;
+    }
+
+    .chatlog__message-container {
+      background-color: transparent;
+      transition: background-color 1s ease;
+    }
+
+    .chatlog__message-container--highlighted {
+      background-color: rgba(114, 137, 218, 0.2);
+    }
+
+    .chatlog__message-container--pinned {
+      background-color: rgba(249, 168, 37, 0.05);
+    }
+
+    .chatlog__message {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      padding: 0.15rem 0;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+    }
+
+    .chatlog__message:hover {
+      background-color: #fafafa;
+    }
+
+    .chatlog__message:hover .chatlog__short-timestamp {
+      display: block;
+    }
+
+    .chatlog__message-aside {
+      grid-column: 1;
+      width: 72px;
+      padding: 0.15rem 0.15rem 0 0.15rem;
+      text-align: center;
+    }
+
+    .chatlog__reference-symbol {
+      height: 10px;
+      margin: 6px 4px 4px 36px;
+      border-left: 2px solid #c7ccd1;
+      border-top: 2px solid #c7ccd1;
+      border-radius: 8px 0 0 0;
+    }
+
+    .chatlog__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .chatlog__short-timestamp {
+      display: none;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+    }
+
+    .chatlog__message-primary {
+      grid-column: 2;
+      min-width: 0;
+    }
+
+    .chatlog__reference {
+      display: flex;
+      margin-bottom: 0.15rem;
+      align-items: center;
+      color: #5f5f60;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__reference-avatar {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.25rem;
+      border-radius: 50%;
+    }
+
+    .chatlog__reference-author {
+      margin-right: 0.3rem;
+      font-weight: 600;
+    }
+
+    .chatlog__reference-content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__reference-link {
+      cursor: pointer;
+    }
+
+    .chatlog__reference-link * {
+      display: inline;
+      pointer-events: none;
+    }
+
+    .chatlog__reference-link .hljs {
+      display: inline;
+    }
+
+    .chatlog__reference-link:hover {
+      color: #2f3136;
+    }
+
+    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+      color: inherit;
+    }
+
+    .chatlog__reference-edited-timestamp {
+      margin-left: 0.25rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+    }
+
+    .chatlog__header {
+      margin-bottom: 0.1rem;
+    }
+
+    .chatlog__author {
+      font-weight: 600;
+      color: #2f3136;
+    }
+
+    .chatlog__bot-label {
+      position: relative;
+      top: -0.1rem;
+      margin-left: 0.3rem;
+      padding: 0.05rem 0.3rem;
+      border-radius: 3px;
+      background-color: #5865F2;
+      color: #ffffff;
+      font-size: 0.625rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .chatlog__timestamp {
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+    }
+
+    .chatlog__content {
+      padding-right: 1rem;
+      font-size: 0.95rem;
+      word-wrap: break-word;
+    }
+
+    .chatlog__edited-timestamp {
+      margin-left: 0.15rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .chatlog__attachment {
+      position: relative;
+      width: fit-content;
+      margin-top: 0.3rem;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden {
+      cursor: pointer;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatlog__attachment--hidden * {
+      pointer-events: none;
+    }
+
+    .chatlog__attachment-spoiler-caption {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 999;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #dcddde;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05rem;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+      display: block;
+    }
+
+    .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+      color: #fff;
+    }
+
+    .chatlog__attachment-media {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-media {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic {
+      max-width: 520px;
+      width: 100%;
+      height: 40px;
+      padding: 10px;
+      border: 1px solid #ebedef;
+      border-radius: 3px;
+      background-color: #f2f3f5;
+      overflow: hidden;
+    }
+
+    .chatlog__attachment--hidden .chatlog__attachment-generic {
+      filter: blur(44px);
+    }
+
+    .chatlog__attachment-generic-icon {
+      float: left;
+      width: 30px;
+      height: 100%;
+      margin-right: 10px;
+    }
+
+    .chatlog__attachment-generic-size {
+      color: #72767d;
+      font-size: 12px;
+    }
+
+    .chatlog__attachment-generic-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .chatlog__embed {
+      display: flex;
+      margin-top: 0.3rem;
+      max-width: 520px;
+    }
+
+    .chatlog__embed-color-pill {
+      flex-shrink: 0;
+      width: 0.25rem;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    .chatlog__embed-color-pill--default {
+      background-color: rgba(227, 229, 232, 1);
+    }
+
+    .chatlog__embed-content-container {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 0.6rem;
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      background-color: rgba(249, 249, 249, 0.3);
+    }
+
+    .chatlog__embed-content {
+      display: flex;
+      width: 100%;
+    }
+
+    .chatlog__embed-text {
+      flex: 1;
+    }
+
+    .chatlog__embed-author-container {
+      display: flex;
+      margin-bottom: 0.5rem;
+      align-items: center;
+    }
+
+    .chatlog__embed-author-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+      border-radius: 50%;
+    }
+
+    .chatlog__embed-author {
+      color: #4f545c;
+      font-size: 0.875rem;
+      font-weight: 600;
+      direction: ltr;
+      unicode-bidi: bidi-override;
+    }
+
+    .chatlog__embed-author-link {
+      color: #4f545c;
+    }
+
+    .chatlog__embed-title {
+      margin-bottom: 0.5rem;
+      color: #4f545c;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .chatlog__embed-description {
+      color: #2e3338;
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+
+    .chatlog__embed-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 0.5rem;
+    }
+
+    .chatlog__embed-field {
+      flex: 0;
+      min-width: 100%;
+      max-width: 506px;
+      padding-top: 0.6rem;
+      font-size: 0.875rem;
+    }
+
+    .chatlog__embed-field--inline {
+      flex: 1;
+      flex-basis: auto;
+      min-width: 50px;
+    }
+
+    .chatlog__embed-field-name {
+      margin-bottom: 0.2rem;
+      color: #36393e;
+      font-weight: 600;
+    }
+
+    .chatlog__embed-field-value {
+      color: #2e3338;
+      font-weight: 500;
+    }
+
+    .chatlog__embed-thumbnail {
+      flex: 0;
+      max-width: 80px;
+      max-height: 80px;
+      margin-left: 1.2rem;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-image-container {
+      margin-top: 0.6rem;
+    }
+
+    .chatlog__embed-image {
+      max-width: 500px;
+      max-height: 400px;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-footer {
+      margin-top: 0.6rem;
+      color: #2e3338;
+    }
+
+    .chatlog__embed-footer-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.2rem;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+
+    .chatlog__embed-footer-text {
+      vertical-align: middle;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .chatlog__embed-plainimage {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px;
+    }
+
+    .chatlog__embed-spotify {
+      border: 0;
+    }
+
+    .chatlog__embed-youtube-container {
+      margin-top: 0.6rem;
+    }
+
+    .chatlog__embed-youtube {
+      border: 0;
+      border-radius: 3px;
+    }
+
+    .chatlog__sticker {
+      width: 180px;
+      height: 180px;
+    }
+
+    .chatlog__sticker--media {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .chatlog__reactions {
+      display: flex;
+    }
+
+    .chatlog__reaction {
+      display: flex;
+      margin: 0.35rem 0.1rem 0.1rem 0;
+      padding: 0.125rem 0.375rem;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background-color: #f2f3f5;
+      align-items: center;
+    }
+
+    .chatlog__reaction:hover {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: white;
+    }
+
+    .chatlog__reaction-count {
+      min-width: 9px;
+      margin-left: 0.35rem;
+      color: #4f5660;
+      font-size: 0.875rem;
+    }
+
+    .chatlog__reaction:hover .chatlog__reaction-count {
+      color: #2e3338;
+    }
+
+    .chatlog__markdown {
+      max-width: 100%;
+      line-height: 1.3;
+      overflow-wrap: break-word;
+    }
+
+    .chatlog__markdown-preserve {
+      white-space: pre-wrap;
+    }
+
+    .chatlog__markdown-spoiler {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+
+    .chatlog__markdown-spoiler--hidden {
+      cursor: pointer;
+      background-color: #b9bbbe;
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .chatlog__markdown-spoiler--hidden:hover {
+      background-color: rgba(185, 187, 190, 0.8);
+    }
+
+    .chatlog__markdown-spoiler--hidden::selection {
+      color: rgba(0, 0, 0, 0);
+    }
+
+    .chatlog__markdown-quote {
+      display: flex;
+      margin: 0.05rem 0;
+    }
+
+    .chatlog__markdown-quote-border {
+      margin-right: 0.5rem;
+      border: 2px solid #c7ccd1;
+      border-radius: 3px;
+    }
+
+    .chatlog__markdown-pre {
+      background-color: #f9f9f9;
+      font-family: "Consolas", "Courier New", Courier, monospace;
+    }
+
+    .chatlog__markdown-pre--multiline {
+      margin-top: 0.25rem;
+      padding: 0.5rem;
+      border: 2px solid #f3f3f3;
+      border-radius: 5px;
+      color: #657b83;
+    }
+
+    .chatlog__markdown-pre--multiline.hljs {
+      background-color: inherit;
+      color: inherit;
+    }
+
+    .chatlog__markdown-pre--inline {
+      padding: 2px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+
+    .chatlog__markdown-mention {
+      border-radius: 3px;
+      padding: 0 2px;
+      background-color: rgba(88, 101, 242, .15);
+      color: #505cdc;
+      font-weight: 500;
+    }
+
+    .chatlog__markdown-mention:hover {
+      background-color: #5865f2;
+      color: #ffffff
+    }
+
+    .chatlog__markdown-timestamp {
+      border-radius: 3px;
+      padding: 0 2px;
+      color: #5e6772;
+    }
+
+    .chatlog__emoji {
+      width: 1.325rem;
+      height: 1.325rem;
+      margin: 0 0.06rem;
+      vertical-align: -0.4rem;
+    }
+
+    .chatlog__emoji--small {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .chatlog__emoji--large {
+      width: 2.8rem;
+      height: 2.8rem;
+    }
+
+    .postamble {
+      padding: 1.25rem;
+    }
+
+    .postamble__entry {
+      color: #2f3136;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.chatlog__markdown-pre--multiline').forEach(e => hljs.highlightBlock(e));
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
+        const imageDataUrl = e.getAttribute('data-source');
+        const anim = lottie.loadAnimation({
+          container: e,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: imageDataUrl
+        });
+        anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
+      });
+    });
+  </script>
+  <script>
+    function scrollToMessage(event, id) {
+      var element = document.getElementById('chatlog__message-container-' + id);
+      if (!element) return;
+      event.preventDefault();
+      element.classList.add('chatlog__message-container--highlighted');
+      window.scrollTo({
+        top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+        behavior: 'smooth'
+      });
+      window.setTimeout(function() {
+        element.classList.remove('chatlog__message-container--highlighted');
+      }, 2000);
+    }
+
+    function showSpoiler(event, element) {
+      if (!element) return;
+      if (element.classList.contains('chatlog__attachment--hidden')) {
+        event.preventDefault();
+        element.classList.remove('chatlog__attachment--hidden');
+      }
+      if (element.classList.contains('chatlog__markdown-spoiler--hidden')) {
+        event.preventDefault();
+        element.classList.remove('chatlog__markdown-spoiler--hidden');
+      }
+    }
+  </script>
+</head>
+
+<body><svg style="display: none">
+    <symbol id="attachment-icon" viewBox="0 0 720 960">
+      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+    </symbol>
+  </svg>
+  <div class="preamble">
+    <div class="preamble__guild-icon-container">
+      <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+      <div class="preamble__entry">swift-developers-japan</div>
+      <div class="preamble__entry">atcoder / algo-866</div>
+    </div>
+  </div>
+  <div class="chatlog">
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-964127574026510406" class="chatlog__message-container " data-message-id="964127574026510406">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div>
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference">
+              <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" style="" title="strmikan#9165">strmikan</div>
+              <div class="chatlog__reference-content">
+                <span class="chatlog__reference-link" onclick="scrollToMessage(event, '964127386432069652')"> 今日のアルゴ式です。新シリーズ！ <a href="https://algo-method.com/tasks/866">https://algo-method.com/tasks/866</a> </span>
+              </div>
+            </div>
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span>
+              <span class="chatlog__timestamp">14-Apr-22 11:38 AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-964127576064942121" class="chatlog__message-container " data-message-id="964127576064942121">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="14-Apr-22 11:38 AM">11:38</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><a href="https://twitter.com/algo_method/status/1514559094572601348?s=20&amp;t=PO-jfhyH-WCEWJ7kAsejJw">https://twitter.com/algo_method/status/1514559094572601348?s=20&amp;t=PO-jfhyH-WCEWJ7kAsejJw</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color: rgba(29, 161, 242, 255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container">
+                      <img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/1pGkSjxKfAUlMIbIx8oroi27h7Rki_e6ql-0Q90A7tQ/https/pbs.twimg.com/profile_images/1421416811287904258/SBZNIjyF_400x400.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+                      <a class="chatlog__embed-author-link" href="https://twitter.com/algo_method">
+                        <div class="chatlog__embed-author">アルゴ式 (@algo_method)</div>
+                      </a>
+                    </div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">【 #毎日アルゴ式 】 今日 (4/14) の練習問題です！ バケットを終えて、いよいよハッシュテーブルと連想配列を学んでいきます。バケットは魅力的なアイデアです。ハッシュを使うと、バケットの適用範囲を広げることができます。 ぜひ挑戦してみてください！ <a href="https://t.co/oBcMN5XFVk">https://t.co/oBcMN5XFVk</a> #アルゴ式</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-image-container">
+                  <a class="chatlog__embed-image-link" href="https://images-ext-2.discordapp.net/external/7SDZEmUI6Cfzk1TqQ0OHjeqU_e4AHHuov6szyghcXTM/https/pbs.twimg.com/media/FQS5FNCVEAU-c_F.jpg">
+                    <img class="chatlog__embed-image" src="https://images-ext-2.discordapp.net/external/7SDZEmUI6Cfzk1TqQ0OHjeqU_e4AHHuov6szyghcXTM/https/pbs.twimg.com/media/FQS5FNCVEAU-c_F.jpg" alt="Image" loading="lazy">
+                  </a>
+                </div>
+                <div class="chatlog__embed-footer">
+                  <img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy">
+                  <span class="chatlog__embed-footer-text"> Twitter • 14-Apr-22 11:00 AM </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-964134006373367818" class="chatlog__message-container " data-message-id="964134006373367818">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span>
+              <span class="chatlog__timestamp">14-Apr-22 12:04 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">ACしました！</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-964134009061933146" class="chatlog__message-container " data-message-id="964134009061933146">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="14-Apr-22 12:04 PM">12:04</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><a href="https://algo-method.com/submissions/390024">https://algo-method.com/submissions/390024</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/390024">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #390024 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="clap">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy">
+                <span class="chatlog__reaction-count">4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-964139390995664987" class="chatlog__message-container " data-message-id="964139390995664987">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/372296616826109952/58e65e1ecc45dfb509f938e9a4a36993.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koogawa#4610" data-user-id="372296616826109952">koogawa</span>
+              <span class="chatlog__timestamp">14-Apr-22 12:25 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">おなじくAC! <a href="https://algo-method.com/submissions/390063">https://algo-method.com/submissions/390063</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/390063">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #390063 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="clap">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy">
+                <span class="chatlog__reaction-count">4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-964145697882513438" class="chatlog__message-container " data-message-id="964145697882513438">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/679492030556143654/72cc2a66c6b054156a6ef90df41705b8.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="log5#5350" data-user-id="679492030556143654">log5</span>
+              <span class="chatlog__timestamp">14-Apr-22 12:50 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">ACできました〜 <a href="https://algo-method.com/submissions/390099">https://algo-method.com/submissions/390099</a> 制約よく読まずにTLE3回くらいしました <img loading="lazy" class="chatlog__emoji " alt="😇" title="innocent" src="https://twemoji.maxcdn.com/2/svg/1f607.svg"></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/390099">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #390099 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="clap">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy">
+                <span class="chatlog__reaction-count">4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-964148357490671686" class="chatlog__message-container " data-message-id="964148357490671686">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/941518510000046101/e31a3624dfece97bec2310df0b9049fa.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="quesera2#1882" data-user-id="941518510000046101">quesera2</span>
+              <span class="chatlog__timestamp">14-Apr-22 01:01 PM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">ACしました～ <a href="https://algo-method.com/submissions/390117">https://algo-method.com/submissions/390117</a></span>
+            </div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title">
+                      <a class="chatlog__embed-title-link" href="https://algo-method.com/submissions/390117">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">提出 #390117 | アルゴ式(beta)</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container">
+                    <a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg">
+                      <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/ypWYSPdZK54OaDYIj5Id6FtmJQKjS6XVWCGEeAcLsXc/https/algo-method.com/icons/default_user_icon.jpg" alt="Thumbnail" loading="lazy">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="clap">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy">
+                <span class="chatlog__reaction-count">4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-964148786597330976" class="chatlog__message-container " data-message-id="964148786597330976">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="14-Apr-22 01:03 PM">13:03</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-spoiler chatlog__markdown-spoiler--hidden" onclick="showSpoiler(event, this)">ハッシュ関数作ったけど、辞書使って台無しにした感じ</span>があります</span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="t_me_too">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="t_me_too" src="https://cdn.discordapp.com/emojis/956110647295373322.png" loading="lazy">
+                <span class="chatlog__reaction-count">1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-964341786304716860" class="chatlog__message-container " data-message-id="964341786304716860">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/131342384406462464/cf965ca79d511a1b6806c08ea5bccc1c.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header">
+              <span class="chatlog__author" style="" title="たけし#4224" data-user-id="131342384406462464">たけし</span>
+              <span class="chatlog__timestamp">15-Apr-22 01:49 AM</span>
+            </div>
+            <div class="chatlog__content chatlog__markdown">
+              <span class="chatlog__markdown-preserve">ACしました！ <a href="https://algo-method.com/submissions/390543">https://algo-method.com/submissions/390543</a></span>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="clap_tone1">
+                <img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/2/svg/1f44f-1f3fb.svg" loading="lazy">
+                <span class="chatlog__reaction-count">4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="postamble">
+    <div class="postamble__entry">Exported 9 message(s)</div>
+  </div>
+</body>
+
+</html>
