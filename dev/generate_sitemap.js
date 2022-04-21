@@ -44,7 +44,7 @@ const sitemap = new SitemapStream({
   hostname: "https://archive.swiftdevelopers.jp",
 });
 
-const writeStream = createWriteStream("views/sitemap.xml");
+const writeStream = createWriteStream("static/sitemap.xml");
 sitemap.pipe(writeStream);
 links.forEach((link) => {
   sitemap.write(link);
