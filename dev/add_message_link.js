@@ -32,7 +32,7 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
           const messageId = (() => {
             let id = "";
             messageGroup
-              .querySelectorAll(".chatlog__message")
+              .querySelectorAll(".chatlog__message-container")
               .forEach((message) => {
                 if (message.dataset.messageId) {
                   id = message.dataset.messageId;
@@ -76,12 +76,14 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
   for (const messageGroup of messageGroups) {
     const messageId = (() => {
       let id = "";
-      messageGroup.querySelectorAll(".chatlog__message").forEach((message) => {
-        if (message.dataset.messageId) {
-          id = message.dataset.messageId;
-          return;
-        }
-      });
+      messageGroup
+        .querySelectorAll(".chatlog__message-container")
+        .forEach((message) => {
+          if (message.dataset.messageId) {
+            id = message.dataset.messageId;
+            return;
+          }
+        });
       return id;
     })();
 

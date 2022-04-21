@@ -44,12 +44,17 @@ function loadChannel(channel) {
             const searchItems =
               virtualScroller.virtualScroller.getState().items;
             if (searchItems && searchItems.length) {
-              const elements =
-                searchItems[0].querySelectorAll(".chatlog__message");
+              const elements = searchItems[0].querySelectorAll(
+                ".chatlog__message-container"
+              );
               for (const element of elements) {
-                element.classList.add("chatlog__message--highlighted");
+                element.classList.add(
+                  "chatlog__message-container--highlighted"
+                );
                 setTimeout(function () {
-                  element.classList.remove("chatlog__message--highlighted");
+                  element.classList.remove(
+                    "chatlog__message-container--highlighted"
+                  );
                 }, 2000);
               }
             }
@@ -77,15 +82,10 @@ function items(doc) {
 
 function getItemId(item) {
   for (const element of item.children) {
-    if (!element.classList.contains("chatlog__messages")) {
+    if (!element.classList.contains("chatlog__message-container")) {
       continue;
     }
-    for (const message of element.children) {
-      if (!message.classList.contains("chatlog__message")) {
-        continue;
-      }
-      return message.dataset.messageId;
-    }
+    return element.dataset.messageId;
   }
   return undefined;
 }
