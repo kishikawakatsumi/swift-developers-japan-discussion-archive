@@ -46,9 +46,9 @@ const sms = new SitemapAndIndexStream({
     const sitemapStream = new SitemapStream({
       hostname: "https://archive.swiftdevelopers.jp",
     });
-    const path = `static/sitemap-${i}.xml`;
+    const path = `sitemap-${i}.xml`;
 
-    const ws = createWriteStream(resolve(path));
+    const ws = createWriteStream(resolve(`static/${path}`));
     sitemapStream.pipe(ws);
 
     return [
