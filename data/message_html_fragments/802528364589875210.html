@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="color: rgb(237, 171, 161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span>
-          <span class="chatlog__timestamp">23-Jan-21 01:21 PM</span>
+          <a href="/channels/499393715140558881?category=イベント&amp;channel=swift-zoomin&amp;message_id=802528364589875210"><span class="chatlog__timestamp">23-Jan-21 01:21 PM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="swiftNightly#5501">@swift-nightly</span> -Xfrontend -enable-experimental-concurrency <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">import Foundation import FoundationNetworking struct User: Identifiable, Codable { typealias ID = Int let id: ID var name: String var thumbnailURL: URL } func download(from url: URL) async throws -&gt; Data { let data: Data = try Data(contentsOf: url) return data } func fetchUserWithThumbnail(for id: User.ID) async throws -&gt; (user: User, thumbnail: Data) { let url: URL = URL(string: "https://koherent.org/async-await-challenge/api/user?id=\(id.description)")! let data = try await download(from: url) let decoder = JSONDecoder() let user = try decoder.decode(User.self, from: data) let thData = try await download(from: user.thumbnailURL) return (user: user, thumbnail: thData) } runAsyncAndBlock { do { let (user, thumbnail) = try await fetchUserWithThumbnail(for: 123) print(user.name, thumbnail.count) } catch { print(error) } }</div></span>

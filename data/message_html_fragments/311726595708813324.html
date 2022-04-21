@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="color: rgb(231, 76, 60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span>
-          <span class="chatlog__timestamp">10-May-17 04:50 AM</span>
+          <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=311726595708813324"><span class="chatlog__timestamp">10-May-17 04:50 AM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve">結局、ここらへんが落とし所っぽい。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">enum Either2&lt;A, B&gt; { case a(A), b(B) } class MyReciever: Reciever { typealias Arguments = Either2&lt;String, Int&gt; } // このままだとStringを吐き出すSenderは使えない class MySender: Sender { typealias Returns = String } // Either変換を含めた魔改造type-erasureを作る class Sender2A&lt;R1, R2&gt; { typealias Returns = Either&lt;R1, R2&gt; init&lt;S: Sender&gt;(_ sender: S) where S.Returns == R1 } class Sender2B&lt;R1, R2&gt; { typealias Returns = Either&lt;R1, R2&gt; init&lt;S: Sender&gt;(_ sender: S) where S.Returns == R2 } // 変換オペレーターを差し込む prefix operator ~ prefix func ~&lt;S: Sender, R&gt;(_ sender: S) -&gt; Sender2A&lt;S.Returns, R&gt; { return .init(sender) } prefix func ~&lt;S: Sender, R&gt;(_ sender: S) -&gt; Sender2B&lt;R, S.Returns&gt; { return .init(sender) } combine(MyReciever(), ~MySender()) // OK!</div></span>

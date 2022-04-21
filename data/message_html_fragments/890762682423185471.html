@@ -15,7 +15,7 @@
         </div>
         <div class="chatlog__header">
           <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
-          <span class="chatlog__timestamp">24-Sep-21 12:52 AM</span>
+          <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890764474905145426"><span class="chatlog__timestamp">24-Sep-21 12:52 AM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve">↑の話で考えると、 (B) は最終的な仕様上 MainActor にならないし、現状でも MainActor に守られているわけではないけど、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">self.nameLabel.text = ...</span> みたいなのが書けないと既存コードが破壊されまくるので、現状ではコンパイラが MainActor 扱いにしてコードの互換性を保っている（ただし守られてはいない）、 Swift 6 では MainActor でなくなるし <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">await</span> 必須になる、ということになる？ そして、それと <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar</span> をすっ飛ばして <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</span> が <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">foo</span> の context を引き継ぐ話はまた別で、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</span> は actor の context をぶった切る、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</span> でない <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@escaping</span> なクロージャが何かの actor の context を持つことはないと考えると、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</span> に渡されるクロージャは、それが宣言された場所で最も近い（内側のスコープの） actor を引き継ぐと考えれば一般化できる？ という感じでしょうか。</span>

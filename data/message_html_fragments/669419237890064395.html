@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span>
-          <span class="chatlog__timestamp">22-Jan-20 05:53 AM</span>
+          <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=669419237890064395"><span class="chatlog__timestamp">22-Jan-20 05:53 AM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve">Builder にしておいたほうが、使用側の利便性はよさそうと思いました <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">enum Valid {} enum Invalid {} struct Configurable { let configuration: Configuration } struct Configuration { fileprivate init(a: Int, b: String) { self.a = a self.b = b } let a: Int let b: String } struct ConfigurationBuilder&lt;FlagA, FlagB&gt; { private var a: Int = 0 func setFlagA(a: Int) -&gt; ConfigurationBuilder&lt;Valid, FlagB&gt; { return ConfigurationBuilder&lt;Valid, FlagB&gt;(a: a, b: b) } private var b: String = "" func setFlagB(b: String) -&gt; ConfigurationBuilder&lt;FlagA, Valid&gt; { return ConfigurationBuilder&lt;FlagA, Valid&gt;(a: a, b: b) } private init(a: Int, b: String) { self.a = a self.b = b } } extension ConfigurationBuilder where FlagA == Invalid, FlagB == Invalid { init() {} } extension ConfigurationBuilder where FlagA == Valid, FlagB == Valid { func build() -&gt; Configuration { return Configuration(a: a, b: b) } } let configuration = ConfigurationBuilder() .setFlagA(a: 1) .setFlagB(b: "b") .build() _ = Configurable(configuration: configuration)</div></span>

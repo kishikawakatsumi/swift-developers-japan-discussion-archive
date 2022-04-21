@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="" title="shiz#7087" data-user-id="382314715495399425">shiz</span>
-          <span class="chatlog__timestamp">28-Oct-18 03:43 AM</span>
+          <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=505949626826752000"><span class="chatlog__timestamp">28-Oct-18 03:43 AM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve">ひとまず上記の現象を解消することができました。 (根本的な原因が何かが特定はできていませんが。。。) <span class="chatlog__markdown-mention" title="noppe#8476">@noppe</span>さんのご推察の通りAutoLayoutに関係するものでした。 今回設定していたのはUITableViewCellの中に垂直のStackViewを入れ、 その中に水平のStackViewを入れ、その中のUILabelに値を設定するというものでした。 こんな設定です↓ UITableViewCell -&gt; 垂直のStackView -&gt; 水平のStackView -&gt; UILabel(numberOfLines = 0) &lt;- ここに値を設定 解決方法としては、UILabelをUIStackViewの外に出してあげたら動くようになりました。 どこのレンダリングが原因かというのはわかっていませんが、 おそらくiOS12でAutoLayoutのレンダリングの性能が上がったことで iOS12では動いたのかなと思っています。 (そもそもの設定方法が怪しいのかと疑ったのですが、 Dispatch.main.asyncAfterで10秒くらい待った後に設定しても落ちていたので違うのかなと考えています。) 何はともあれ、始めにUILabelが原因ではないのでは、とアドバイスをくださった <span class="chatlog__markdown-mention" title="kishikawakatsumi#7600">@Kishikawa Katsumi</span> さん、 AutoLayoutが怪しいと教えてくださった<span class="chatlog__markdown-mention" title="noppe#8476">@noppe</span>さん、ありがとうございました！</span>

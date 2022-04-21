@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="color: rgb(17, 128, 106)" title="koher#9336" data-user-id="293624673265123328">koher</span>
-          <span class="chatlog__timestamp">17-Dec-21 04:05 AM</span>
+          <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=921251998786015252"><span class="chatlog__timestamp">17-Dec-21 04:05 AM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve">一昨日の話だと、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</span> が付与されたクラスのサブクラスは、オーバーライドしたメソッドは <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</span> に保護されるけど、それ以外のメソッドは保護されないって話じゃなかったですっけ？僕の勘違い？ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import UIKit class ViewController: UIViewController, Sendable { override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) print("viewDidAppear 1", Thread.isMainThread) Task { print("viewDidAppear 2", Thread.isMainThread) await Actor().callFoo(of: self) } } func foo() { print("foo 1", Thread.isMainThread) Task { print("foo 2", Thread.isMainThread) } } } actor Actor { func callFoo(of viewController: ViewController) async { print("callFoo", Thread.isMainThread) await viewController.foo() } }</div>

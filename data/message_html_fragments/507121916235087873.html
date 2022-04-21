@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="acevif#0050" data-user-id="431048656884334606">acevif</span>
-          <span class="chatlog__timestamp">31-Oct-18 09:21 AM</span>
+          <a href="/channels/387857770038427648?category=main&amp;channel=testing&amp;message_id=507121916235087873"><span class="chatlog__timestamp">31-Oct-18 09:21 AM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve">わかりづらくてすみません 既存のclassやstructのスタブ版を作りたい場合もありますし、 そもそも実装がまだなくてインターフェースだけprotocolで決めてあるときとかもです。 たとえば class Dog : Animal がまだなくて、 protocol Animal はすでに↓みたいなのがあって <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-Swift">protocol Animal { func group(id: Int) -&gt; Observable&lt;Group&gt; func bark() -&gt; String }</div> まずはAnimalを使ったモジュールのテストを書いていこうというとき、現状では↓のような汎用のスタブを作り <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-Swift">struct StubAnimal { func group(id: Int) -&gt; Observable&lt;Group&gt; { return _group(id) } private var group: ( id: Int) -&gt; Observable&lt;Group&gt; func bark() -&gt; String { return _bark() } private var _bark: () -&gt; String init( group: @escaping ((_ id: Int) -&gt; Observable&lt;Group&gt;) = { _ in Observable.never() } , bark: @escaping (() -&gt; String) = { _ in "meow" } ) { _group = group _bark = bark } }</div> SUTに関係ない関数はデフォルト引数で済ませられるよう、また、何に関心を持っているか、何がSUTへの間接入力になりうるかが明確になるようにしています。</span>

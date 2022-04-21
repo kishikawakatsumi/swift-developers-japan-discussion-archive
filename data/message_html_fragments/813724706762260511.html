@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span>
-          <span class="chatlog__timestamp">23-Feb-21 10:51 AM</span>
+          <a href="/channels/430242233468452865?category=main&amp;channel=swiftbot-sandbox&amp;message_id=813724706762260511"><span class="chatlog__timestamp">23-Feb-21 10:51 AM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="swiftNightly#5501">@swift-nightly</span> -Xfrontend -enable-experimental-concurrency -Xfrontend -parse-as-library <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// // main.swift // ConcurrencyPlayground // // Created by Max Desiatov on 07/01/2021. // import Foundation import FoundationNetworking struct UnknownError: Error {} func download(url: URL) async throws -&gt; Data { try await withUnsafeThrowingContinuation { c in let task = URLSession.shared.dataTask(with: url) { data, _, error in switch (data, error) { case let (_, error?): return c.resume(throwing: error) case let (data?, _): return c.resume(returning: data) case (nil, nil): c.resume(throwing: UnknownError()) } } task.resume() } } @main struct Main { static func main() async { print("task started") let data = try! await download(url: URL(string: "https://httpbin.org/uuid")!) print(String(data: data, encoding: .utf8)!) } }</div></span>

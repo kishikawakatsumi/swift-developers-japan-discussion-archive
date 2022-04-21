@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="color: rgb(155, 89, 182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span>
-          <span class="chatlog__timestamp">09-Mar-18 02:43 PM</span>
+          <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=421679383238017027"><span class="chatlog__timestamp">09-Mar-18 02:43 PM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve">この結果を見ると、<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">isKnownUniquelyReferenced()</span>って排他制御が無いとあてにならない？ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Foundation struct S { class C { var name: String init(name: String) { self.name = name print("init: \(name)") } deinit { print("deinit: \(name)") } } var c: C init(name: String) { c = C(name: name) } var name: String { get { return c.name } set { if isKnownUniquelyReferenced(&amp;c) { print("unique: \(c.name) -&gt; \(newValue)") c.name = newValue } else { print("not unique: \(c.name) -&gt; \(newValue)") c = C(name: newValue) } } } } var s = S(name: "初期値") let queue = DispatchQueue(label: "keep unique") DispatchQueue.concurrentPerform(iterations: 10) { idx in // queue.sync { s.name = "\(idx)" // } } print(s.name)</div>

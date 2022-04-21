@@ -7,7 +7,7 @@
       <div class="chatlog__message-primary">
         <div class="chatlog__header">
           <span class="chatlog__author" style="" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span>
-          <span class="chatlog__timestamp">25-Feb-22 10:07 PM</span>
+          <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=946891071806406667"><span class="chatlog__timestamp">25-Feb-22 10:07 PM</span></a>
         </div>
         <div class="chatlog__content chatlog__markdown">
           <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">withCString(:_)</span> とか <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">withUnsafeBytes(:_)</span> をリストで扱いたいと思って、つまり <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> let array: [String] = [...] array.with(each: String.withCString) { cStrings/*: [UnsafePointer&lt;CChar&gt;] */ in cFunctionReceivingCStringArray(cStrings) }</div> こういうのがやりたくて、邪悪なものを生み出してしまった。 <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension BidirectionalCollection { func with&lt;U, R&gt;( each mapFn: (Element) -&gt; ((U) throws -&gt; R) throws -&gt; R, _ fn: ([U]) throws -&gt; R ) rethrows -&gt; R { try withoutActuallyEscaping(fn) { fn in try withoutActuallyEscaping(mapFn) { mapFn in var stash: [U] = [] stash.reserveCapacity(count) let closure = reversed().reduce({ try fn(stash) }) { closure, elem in { try mapFn(elem)() { val in stash.append(val) return try closure() } } } return try closure() } } } }</div></span>
