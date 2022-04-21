@@ -11,6 +11,8 @@ const threads = channels
   .map((x) => x.threads)
   .flat();
 
+const links = [];
+
 const root = "data/html";
 fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
   if (dirent.isDirectory()) {
@@ -49,7 +51,9 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
                 const a = dom.window.document.createElement("a");
                 const threadId = dirent.name.replaceAll(".html", "");
                 const thread = threads.find((x) => x.id === threadId);
-                a.href = `/channels/${thread.channelId}/${threadId}?category=${thread.categoryName}&channel=${thread.channelName}&message_id=${messageId}`;
+                const link = `/channels/${thread.channelId}/${threadId}?category=${thread.categoryName}&channel=${thread.channelName}&message_id=${messageId}`;
+                a.href = link;
+                links.push(link);
                 timestamp.parentNode.insertBefore(a, timestamp);
                 a.appendChild(timestamp);
               });
@@ -96,7 +100,9 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
           const channel = channels.find(
             (channel) => channel.channelId === channelId
           );
-          a.href = `/channels/${channelId}?category=${channel.categoryName}&channel=${channel.channelName}&message_id=${messageId}`;
+          const link = `/channels/${channelId}?category=${channel.categoryName}&channel=${channel.channelName}&message_id=${messageId}`;
+          a.href = link;
+          links.push(link);
           timestamp.parentNode.insertBefore(a, timestamp);
           a.appendChild(timestamp);
         });
@@ -108,4 +114,6 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
     preserve_newlines: false,
   });
   fs.writeFileSync(`${root}/${dirent.name}`, html, "utf-8");
+
+  fs.writeFileSync(`data/links.txt`, links.join("\n"), "utf-8");
 });
