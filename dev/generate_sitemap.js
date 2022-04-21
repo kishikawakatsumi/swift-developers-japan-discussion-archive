@@ -1,7 +1,8 @@
 "use strict";
 
 const { createWriteStream, readFileSync } = require("fs");
-const { SitemapStream } = require("sitemap");
+const { resolve } = require("path");
+const { SitemapAndIndexStream, SitemapStream } = require("sitemap");
 
 const categories = JSON.parse(
   readFileSync("data/channel_structure.json", "utf-8")
@@ -40,14 +41,26 @@ readFileSync("data/links.txt", "utf-8")
     }
   });
 
-const sitemap = new SitemapStream({
-  hostname: "https://archive.swiftdevelopers.jp",
+const sms = new SitemapAndIndexStream({
+  getSitemapStream: (i) => {
+    const sitemapStream = new SitemapStream({
+      hostname: "https://archive.swiftdevelopers.jp",
+    });
+    const path = `static/sitemap-${i}.xml`;
+
+    const ws = createWriteStream(resolve(path));
+    sitemapStream.pipe(ws);
+
+    return [
+      new URL(path, "https://archive.swiftdevelopers.jp").toString(),
+      sitemapStream,
+      ws,
+    ];
+  },
 });
 
-const writeStream = createWriteStream("static/sitemap.xml");
-sitemap.pipe(writeStream);
+sms.pipe(createWriteStream(resolve("static/sitemap-index.xml")));
 links.forEach((link) => {
-  sitemap.write(link);
+  sms.write(link);
 });
-
-sitemap.end();
+sms.end();
