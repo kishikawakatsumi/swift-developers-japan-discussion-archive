@@ -1,0 +1,14 @@
+name: Ping
+on:
+  schedule:
+    - cron: "0 16 * * 6"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Sitemap
+        run: |
+          set -ex
+          curl -X GET "http://www.google.com/ping?sitemap=https://archive.swiftdevelopers.jp/sitemap-index.xml"
