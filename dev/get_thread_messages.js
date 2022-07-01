@@ -19,13 +19,13 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
   -t ${process.env.DISCORD_TOKEN} \
   -c ${threadId} \
   -o "/output/%P|${index}|%T|%C|%t|%c.json" \
-  -f Json && true`);
+  -f Json`);
 
       execSync(`docker run --rm -v $PWD/data/html/${parentId}:/output tyrrrz/discordchatexporter:stable export \
   -t ${process.env.DISCORD_TOKEN} \
   -c ${threadId} \
   -o "/output/%c.html" \
-  -f HtmlLight && true`);
+  -f HtmlLight`);
     }
   }
 });
