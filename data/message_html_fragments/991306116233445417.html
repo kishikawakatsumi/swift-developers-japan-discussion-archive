@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-991306116233445417" class="chatlog__message-container" data-message-id="991306116233445417">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz#7087" data-user-id="382314715495399425">shiz</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=991306116233445417"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-991306116233445417">28-Jun-22 11:36 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">(すいませんどうしても気になってしまいw) <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">func runEscaping(_ operation: @escaping () -&gt; Void) { Task.detached { print("3", Thread.isMainThread) // false operation() } } @MainActor final class Bar { func countUp() { print("1", Thread.isMainThread) // true runEscaping { print("2", Thread.isMainThread) // false Task { // ここはmain actor contextが引き継がれる print("4", Thread.isMainThread) // true👀 } } } }</code> asyncを足すとtrueになる(MainActorにhopできる) <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">func runEscaping(operation: @escaping () async -&gt; Void) { Task.detached { print("3", Thread.isMainThread) // false await operation() } } @MainActor final class Bar { func countUp() { runEscaping { print("2", Thread.isMainThread) // trueになる👀 } } }</code></span> <span class="chatlog__edited-timestamp" title="28-Jun-22 10:30 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

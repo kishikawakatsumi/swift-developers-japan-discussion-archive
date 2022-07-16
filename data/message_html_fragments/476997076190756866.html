@@ -1,49 +1,33 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-476997076190756866" class="chatlog__message-container " data-message-id="476997076190756866">
+  <div id="chatlog__message-container-476997076190756866" class="chatlog__message-container" data-message-id="476997076190756866">
     <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/387843027072188417/47c96b35135f39a117c2d3e88950c7ab.png?size=512" alt="Avatar" loading="lazy">
-      </div>
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/387843027072188417/47c96b35135f39a117c2d3e88950c7ab.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="Kuniwak#7542" data-user-id="387843027072188417">Kuniwak</span>
-          <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=476997464730370050"><span class="chatlog__timestamp">09-Aug-18 06:16 AM</span></a>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">最近気付いたんですが、<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">self</span> の再宣言で LLDB 壊れますね <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class Example { func ok() { let f = { [weak self] in guard let strongSelf = self else { return } // Set a breakpoint at here print(strongSelf) } f() } func error() { let f = { [weak self] in guard let `self` = self else { return } // Set a breakpoint at here print(self) } f() } } Example().ok() Example().error()</div></span>
-        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="Kuniwak#7542" data-user-id="387843027072188417">Kuniwak</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=476997464730370050"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-476997076190756866">09-Aug-18 06:16 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">最近気付いたんですが、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self</code> の再宣言で LLDB 壊れますね <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class Example { func ok() { let f = { [weak self] in guard let strongSelf = self else { return } // Set a breakpoint at here print(strongSelf) } f() } func error() { let f = { [weak self] in guard let `self` = self else { return } // Set a breakpoint at here print(self) } f() } } Example().ok() Example().error()</code></span></div>
         <div class="chatlog__reactions">
-          <div class="chatlog__reaction" title="astonished">
-            <img class="chatlog__emoji chatlog__emoji--small" alt="😲" src="https://twemoji.maxcdn.com/2/svg/1f632.svg" loading="lazy">
-            <span class="chatlog__reaction-count">1</span>
-          </div>
+          <div class="chatlog__reaction" title="astonished"><img class="chatlog__emoji chatlog__emoji--small" alt="😲" src="https://twemoji.maxcdn.com/2/svg/1f632.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
         </div>
       </div>
     </div>
   </div>
-  <div id="chatlog__message-container-476997227819302912" class="chatlog__message-container " data-message-id="476997227819302912">
+  <div id="chatlog__message-container-476997227819302912" class="chatlog__message-container" data-message-id="476997227819302912">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
         <div class="chatlog__short-timestamp" title="09-Aug-18 06:16 AM">06:16</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">(lldb) br set --file example.swift --line 7 Breakpoint 1: where = example`closure #1 () -&gt; () in example.Example.ok() -&gt; () + 111 at example.swift:7, address = 0x00000001000017df (lldb) br set --file example.swift --line 18 Breakpoint 2: where = example`closure #1 () -&gt; () in example.Example.error() -&gt; () + 111 at example.swift:18, address = 0x00000001000019cf (lldb) r Process 6298 launched: '/Users/yuki.kokubun/Development/self-self-lldb/example' (x86_64) Process 6298 stopped * thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1 frame #0: 0x00000001000017df example`closure #1 in Example.ok(self=0x0000000100802b30) at example.swift:7 4 guard let strongSelf = self else { return } 5 6 // Set a breakpoint at here -&gt; 7 print(strongSelf) 8 } 9 10 f() Target 0: (example) stopped. (lldb) po self ▿ Optional&lt;Example&gt; - some : &lt;Example: 0x100802b30&gt; (lldb) c Process 6298 resuming example.Example Process 6298 stopped * thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1 frame #0: 0x00000001000019cf example`closure #1 in Example.error(self=0x0000000100a01030) at example.swift:18 15 guard let `self` = self else { return } 16 17 // Set a breakpoint at here -&gt; 18 print(self) 19 } 20 21 f() Target 0: (example) stopped. (lldb) po self error: warning: &lt;EXPR&gt;:12:9: warning: initialization of variable '$__lldb_error_result' was never used; consider replacing with assignment to '_' or removing it var $__lldb_error_result = __lldb_tmp_error ~~~~^~~~~~~~~~~~~~~~~~~~ _ error: &lt;EXPR&gt;:18:5: error: value of type 'Example' has no member '$__lldb_wrapped_expr_2' $__lldb_injected_self.$__lldb_wrapped_expr_2( ^~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~</div>
-          </span>
-        </div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">(lldb) br set --file example.swift --line 7 Breakpoint 1: where = example`closure #1 () -&gt; () in example.Example.ok() -&gt; () + 111 at example.swift:7, address = 0x00000001000017df (lldb) br set --file example.swift --line 18 Breakpoint 2: where = example`closure #1 () -&gt; () in example.Example.error() -&gt; () + 111 at example.swift:18, address = 0x00000001000019cf (lldb) r Process 6298 launched: '/Users/yuki.kokubun/Development/self-self-lldb/example' (x86_64) Process 6298 stopped * thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1 frame #0: 0x00000001000017df example`closure #1 in Example.ok(self=0x0000000100802b30) at example.swift:7 4 guard let strongSelf = self else { return } 5 6 // Set a breakpoint at here -&gt; 7 print(strongSelf) 8 } 9 10 f() Target 0: (example) stopped. (lldb) po self ▿ Optional&lt;Example&gt; - some : &lt;Example: 0x100802b30&gt; (lldb) c Process 6298 resuming example.Example Process 6298 stopped * thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 2.1 frame #0: 0x00000001000019cf example`closure #1 in Example.error(self=0x0000000100a01030) at example.swift:18 15 guard let `self` = self else { return } 16 17 // Set a breakpoint at here -&gt; 18 print(self) 19 } 20 21 f() Target 0: (example) stopped. (lldb) po self error: warning: &lt;EXPR&gt;:12:9: warning: initialization of variable '$__lldb_error_result' was never used; consider replacing with assignment to '_' or removing it var $__lldb_error_result = __lldb_tmp_error ~~~~^~~~~~~~~~~~~~~~~~~~ _ error: &lt;EXPR&gt;:18:5: error: value of type 'Example' has no member '$__lldb_wrapped_expr_2' $__lldb_injected_self.$__lldb_wrapped_expr_2( ^~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~</code></span></div>
       </div>
     </div>
   </div>
-  <div id="chatlog__message-container-476997464730370050" class="chatlog__message-container " data-message-id="476997464730370050">
+  <div id="chatlog__message-container-476997464730370050" class="chatlog__message-container" data-message-id="476997464730370050">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
         <div class="chatlog__short-timestamp" title="09-Aug-18 06:17 AM">06:17</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">この場合、<span class="chatlog__markdown-pre chatlog__markdown-pre--inline">fr var</span> は下のようになるので単純な名前ベースでの解決をしようとすると死ぬのが原因…？ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">(lldb) fr var (@lvalue example.Example?) self = 0x0000000100a01030 (example.Example) self = 0x0000000100a01030 {}</div></span>
-        </div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この場合、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">fr var</code> は下のようになるので単純な名前ベースでの解決をしようとすると死ぬのが原因…？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">(lldb) fr var (@lvalue example.Example?) self = 0x0000000100a01030 (example.Example) self = 0x0000000100a01030 {}</code></span></div>
       </div>
     </div>
   </div>

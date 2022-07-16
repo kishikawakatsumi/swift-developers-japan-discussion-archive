@@ -1,0 +1,46 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-990492215509942272" class="chatlog__message-container" data-message-id="990492215509942272">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=990492763852271677"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-990492215509942272">26-Jun-22 05:42 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">mainactorが保証されてるのはクロージャを作るところまで </div>
+            </div>
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">Task.detachedのクロージャ内はcontextを引き継がないので、途切れて引き継がれないのではない </div>
+            </div> そうすると、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@escaping</code> クロージャの actor context 引き継ぎとは、何（誰）の context を引き継ぐのでしょうか？
+          </span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-990492396565438464" class="chatlog__message-container" data-message-id="990492396565438464">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="26-Jun-22 05:43 AM">05:43</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">A closure that is not <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</code> cannot escape the concurrency domain in which it was formed. </div>
+            </div><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0306-actors.md">https://github.com/apple/swift-evolution/blob/main/proposals/0306-actors.md</a> そもそも escape できない？
+          </span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-990492763852271677" class="chatlog__message-container" data-message-id="990492763852271677">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="26-Jun-22 05:44 AM">05:44</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうすると、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</code> で escape できるのがおかしい？ <span class="chatlog__markdown-mention" title="swift56#4510">@swift-5.6.2</span>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func run(_ operation: () -&gt; Void) { operation() } func runEscaping(_ operation: @escaping () -&gt; Void) { operation() } actor Foo { var count: Int = 0 func countUp() { run { count += 1 } runEscaping { [weak self] in guard let self = self else { return } print(self.count) } } }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

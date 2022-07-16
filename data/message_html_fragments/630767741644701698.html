@@ -1,17 +1,10 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-630767741644701698" class="chatlog__message-container " data-message-id="630767741644701698">
+  <div id="chatlog__message-container-630767741644701698" class="chatlog__message-container" data-message-id="630767741644701698">
     <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=512" alt="Avatar" loading="lazy">
-      </div>
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/5b5a5525762c5433e5d13a8353f83202.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="" title="taketo1024#1158" data-user-id="370406638915420161">taketo1024</span>
-          <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=630767741644701698"><span class="chatlog__timestamp">07-Oct-19 02:05 PM</span></a>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve">Thread safe な dictionary を作ろうとしているのですが，dead lock になってしまうようです．何がまずいかわかりますか？ <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public class SynchronizedDictionary&lt;Key: Hashable, Value&gt; { private var dictionary: [Key: Value] = [:] private let queue = DispatchQueue(label: "hoge", qos: .default, attributes: .concurrent) public subscript(_ key: Key) -&gt; Value? { get { queue.sync { dictionary[key] } } set { queue.async(flags: .barrier) { self.dictionary[key] = newValue } } } } var a = SynchronizedDictionary&lt;Int, Int&gt;() let n = 100000 DispatchQueue.concurrentPerform(iterations: n) { i in a[i] = i } print(a[n-1])</div> write のところは <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">sync</span> ではなく <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">async(flags: .barrier)</span> とした方が良いという記事をいくつか見てそうしてます．</span>
-        </div>
+        <div class="chatlog__header"><span class="chatlog__author" title="taketo1024#1158" data-user-id="370406638915420161">taketo1024</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=630767741644701698"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-630767741644701698">07-Oct-19 02:05 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Thread safe な dictionary を作ろうとしているのですが，dead lock になってしまうようです．何がまずいかわかりますか？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public class SynchronizedDictionary&lt;Key: Hashable, Value&gt; { private var dictionary: [Key: Value] = [:] private let queue = DispatchQueue(label: "hoge", qos: .default, attributes: .concurrent) public subscript(_ key: Key) -&gt; Value? { get { queue.sync { dictionary[key] } } set { queue.async(flags: .barrier) { self.dictionary[key] = newValue } } } } var a = SynchronizedDictionary&lt;Int, Int&gt;() let n = 100000 DispatchQueue.concurrentPerform(iterations: n) { i in a[i] = i } print(a[n-1])</code> write のところは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">sync</code> ではなく <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">async(flags: .barrier)</code> とした方が良いという記事をいくつか見てそうしてます．</span></div>
       </div>
     </div>
   </div>

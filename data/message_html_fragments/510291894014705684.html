@@ -1,31 +1,21 @@
 <div class="chatlog__message-group">
-  <div id="chatlog__message-container-510291810707439647" class="chatlog__message-container " data-message-id="510291810707439647">
+  <div id="chatlog__message-container-510291810707439647" class="chatlog__message-container" data-message-id="510291810707439647">
     <div class="chatlog__message">
-      <div class="chatlog__message-aside">
-        <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy">
-      </div>
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header">
-          <span class="chatlog__author" style="" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span>
-          <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=510291894014705684"><span class="chatlog__timestamp">09-Nov-18 03:17 AM</span></a>
-        </div>
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-pre chatlog__markdown-pre--inline">AnyHashable</span> の実装みてたんですが、 <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">associatedtype</span>無しの <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">Self</span> 制約だけであれば <span class="chatlog__markdown-pre chatlog__markdown-pre--inline">protocol</span> で type erasure 書けるんですねー。</span>
-        </div>
+        <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=510291894014705684"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-510291810707439647">09-Nov-18 03:17 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">AnyHashable</code> の実装みてたんですが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">associatedtype</code>無しの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Self</code> 制約だけであれば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">protocol</code> で type erasure 書けるんですねー。</span></div>
       </div>
     </div>
   </div>
-  <div id="chatlog__message-container-510291894014705684" class="chatlog__message-container " data-message-id="510291894014705684">
+  <div id="chatlog__message-container-510291894014705684" class="chatlog__message-container" data-message-id="510291894014705684">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
         <div class="chatlog__short-timestamp" title="09-Nov-18 03:17 AM">03:17</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown">
-          <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="swift42#0507">@swift-4.2.4</span>
-            <div class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol Equattable { func equaals(to other: Self) -&gt; Bool } extension Int: Equattable { func equaals(to other: Int) -&gt; Bool { return self == other } } extension String: Equattable { func equaals(to other: String) -&gt; Bool { return self == other } } protocol _AnyEquattableBox { func _unbox&lt;T: Equattable&gt;() -&gt; T? func _equaals(to box: _AnyEquattableBox) -&gt; Bool? } struct _ConcreteEquattableBox&lt;Base: Equattable&gt; : _AnyEquattableBox { var _baseEquattable: Base init(_ base: Base) { self._baseEquattable = base } func _unbox&lt;T: Equattable&gt;() -&gt; T? { return (self as _AnyEquattableBox as? _ConcreteEquattableBox&lt;T&gt;)?._baseEquattable } func _equaals(to box: _AnyEquattableBox) -&gt; Bool? { guard let rhs: Base = box._unbox() else { return nil } return _baseEquattable.equaals(to: rhs) } } struct AnyEquattable: Equattable { var _box: _AnyEquattableBox init&lt;E: Equattable&gt;(_ base: E) { _box = _ConcreteEquattableBox(base) } func equaals(to rhs: AnyEquattable) -&gt; Bool { return _box._equaals(to: rhs._box) ?? false } } let intVal1 = AnyEquattable(1) let intVal2 = AnyEquattable(1) let intVal3 = AnyEquattable(2) let strVal = AnyEquattable("test") assert(intVal1.equaals(to: intVal2)) assert(!intVal1.equaals(to: intVal3)) assert(!intVal1.equaals(to: strVal))</div>
-          </span>
-        </div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="swift42#0507">@swift-4.2.4</span>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol Equattable { func equaals(to other: Self) -&gt; Bool } extension Int: Equattable { func equaals(to other: Int) -&gt; Bool { return self == other } } extension String: Equattable { func equaals(to other: String) -&gt; Bool { return self == other } } protocol _AnyEquattableBox { func _unbox&lt;T: Equattable&gt;() -&gt; T? func _equaals(to box: _AnyEquattableBox) -&gt; Bool? } struct _ConcreteEquattableBox&lt;Base: Equattable&gt; : _AnyEquattableBox { var _baseEquattable: Base init(_ base: Base) { self._baseEquattable = base } func _unbox&lt;T: Equattable&gt;() -&gt; T? { return (self as _AnyEquattableBox as? _ConcreteEquattableBox&lt;T&gt;)?._baseEquattable } func _equaals(to box: _AnyEquattableBox) -&gt; Bool? { guard let rhs: Base = box._unbox() else { return nil } return _baseEquattable.equaals(to: rhs) } } struct AnyEquattable: Equattable { var _box: _AnyEquattableBox init&lt;E: Equattable&gt;(_ base: E) { _box = _ConcreteEquattableBox(base) } func equaals(to rhs: AnyEquattable) -&gt; Bool { return _box._equaals(to: rhs._box) ?? false } } let intVal1 = AnyEquattable(1) let intVal2 = AnyEquattable(1) let intVal3 = AnyEquattable(2) let strVal = AnyEquattable("test") assert(intVal1.equaals(to: intVal2)) assert(!intVal1.equaals(to: intVal3)) assert(!intVal1.equaals(to: strVal))</code></span></div>
       </div>
     </div>
   </div>
