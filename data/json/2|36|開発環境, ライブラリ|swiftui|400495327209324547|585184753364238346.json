@@ -22890,7 +22890,7 @@
         "nickname": "Sumidora",
         "color": null,
         "isBot": false,
-        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/f834d796a8fea4feec29e74aa1c36f9e.png?size=512"
+        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/8936dcb051dcdda1d686e75adc9e04ba.png?size=512"
       },
       "attachments": [
         {
@@ -22943,7 +22943,7 @@
         "nickname": "Sumidora",
         "color": null,
         "isBot": false,
-        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/f834d796a8fea4feec29e74aa1c36f9e.png?size=512"
+        "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/8936dcb051dcdda1d686e75adc9e04ba.png?size=512"
       },
       "attachments": [],
       "embeds": [],
@@ -30792,7 +30792,67 @@
       "stickers": [],
       "reactions": [],
       "mentions": []
+    },
+    {
+      "id": "1005020299428900884",
+      "type": "Default",
+      "timestamp": "2022-08-05T07:51:51.758+00:00",
+      "timestampEdited": "2022-08-05T08:07:47.731+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "質問失礼します。\n以下を参考にSwiftUIのNavigationLinkで複数回画面遷移をした後に一気に最初の画面に戻る実装をしています。記事ではNavigationLinkに`.isDetailLink(false)`をつけなければ最初のView戻ることはできないと言及されています。\n\nしかし、`.isDetailLink(false)`をつけない場合や、`.isDetailLink(true)`にした場合でも同様に最初のViewに戻ることができました。これは、SwiftUIの仕様変更等が原因なのでしょうか？？何かご存知の方がいられましたらご教授いただければ幸いです。\n\nhttps://www.yururiwork.net/archives/148\n\nhttps://stackoverflow.com/questions/57334455/how-can-i-pop-to-the-root-view-using-swiftui/59662275#59662275\n\n以下ソースコードです。\n```swift\nstruct FirstView: View {\n\n    @State private var isActive = false\n\n    var body: some View {\n        NavigationView {\n            NavigationLink(destination: SecondView(isFirstViewActive: $isActive), isActive: $isActive) {\n                Button(action: {\n                    self.isActive = true\n                }, label: {\n                    Text(\"Forward to Second View.\")\n                })\n            }\n            .navigationBarTitle(\"First View\")\n        }\n    }\n}\n\nstruct SecondView: View {\n\n    @State private var isActive = false\n    @Binding var isFirstViewActive: Bool\n\n    var body: some View {\n        NavigationLink(destination: ThirdView(isFirstViewActive: $isFirstViewActive), isActive: $isActive) {\n            Button(action: {\n                self.isActive = true\n            }, label: {\n                Text(\"Forward to Third View.\")\n            })\n        }\n        .isDetailLink(false) //ここをコメントアウトしてもFirstViewに戻れる。\n        .navigationBarTitle(\"Second View\")\n    }\n}\n\nstruct ThirdView: View {\n\n    @Binding var isFirstViewActive: Bool\n\n    var body: some View {\n        Button(action: {\n            self.isFirstViewActive = false\n        }, label: {\n            Text(\"Back to First View.\")\n        })\n        .navigationBarTitle(\"Third View\")\n    }\n}\n\n```",
+      "author": {
+        "id": "849121205792538624",
+        "name": "れい 中岡黎 rei_nakaoka",
+        "discriminator": "5514",
+        "nickname": "れい 中岡黎 rei_nakaoka",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/849121205792538624/e14e0baaed36f611a2cc51548e74160d.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "How can I pop to the Root view using SwiftUI?",
+          "url": "https://stackoverflow.com/questions/57334455/how-can-i-pop-to-the-root-view-using-swiftui/59662275",
+          "timestamp": null,
+          "description": "Finally now with Beta 5 we can programmatically pop to a parent View. However, there are several places in my app where a view has a \"Save\" button that concludes a several step process and",
+          "thumbnail": {
+            "url": "https://images-ext-1.discordapp.net/external/VbfwnzN2MM794XNccNxDzrB1YeuPrxR53y11bwRfflY/%3Fv%3D73d79a89bded/https/cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon%402.png",
+            "width": 316,
+            "height": 316
+          },
+          "images": [],
+          "fields": []
+        }
+      ],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1005107453907705917",
+      "type": "Default",
+      "timestamp": "2022-08-05T13:38:11.005+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "動作のキモの部分はNavigationLinkのisActiveをBindingとして受け渡していって奥のビューで全部一気にfalseに書き換えるということのようなので、isDetailLink(false)でないと動かなかったのはSwiftUIのバグか内部でなんらかの変更があったのだと思います。\n\n初期のSwiftUIの環境（iOS 13）では確かにisDetailLink(false)になってなければRootには戻らないようですね。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "7600",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
     }
   ],
-  "messageCount": 1237
+  "messageCount": 1239
 }
