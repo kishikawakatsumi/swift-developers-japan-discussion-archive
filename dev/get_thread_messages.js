@@ -15,19 +15,25 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
       const parentId = thread.parentId;
       const threadId = thread.threadId;
 
-      const cmd = `docker run --rm -v $PWD/data/json/${parentId}:/output tyrrrz/discordchatexporter:stable export \
+      try {
+        execSync(`docker run --rm -v $PWD/data/json/${parentId}:/output tyrrrz/discordchatexporter:stable export \
   -t ${process.env.DISCORD_TOKEN} \
   -c ${threadId} \
   -o "/output/%P|${index}|%T|%C|%t|%c.json" \
-  -f Json || true`;
-      console.log(cmd);
-      execSync(cmd);
+  -f Json`);
+      } catch (error) {
+        console.error(error);
+      }
 
-      execSync(`docker run --rm -v $PWD/data/html/${parentId}:/output tyrrrz/discordchatexporter:stable export \
+      try {
+        execSync(`docker run --rm -v $PWD/data/html/${parentId}:/output tyrrrz/discordchatexporter:stable export \
   -t ${process.env.DISCORD_TOKEN} \
   -c ${threadId} \
   -o "/output/%c.html" \
-  -f HtmlLight || true`);
+  -f HtmlLight`);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 });
