@@ -1,4 +1,4 @@
-FROM denoland/deno:1.24.2
+FROM denoland/deno:1.24.3
 
 WORKDIR /app
 
