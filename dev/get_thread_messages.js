@@ -22,7 +22,12 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
   -o "/output/%P|${index}|%T|%C|%t|%c.json" \
   -f Json`);
       } catch (error) {
-        console.error(error);
+        if (error.stdout) {
+          console.error(error.stdout.toString());
+        }
+        if (error.stderr) {
+          console.error(error.stderr.toString());
+        }
       }
 
       try {
@@ -32,7 +37,12 @@ fs.readdirSync(root, { withFileTypes: true }).forEach((dirent) => {
   -o "/output/%c.html" \
   -f HtmlLight`);
       } catch (error) {
-        console.error(error);
+        if (error.stdout) {
+          console.error(error.stdout.toString());
+        }
+        if (error.stderr) {
+          console.error(error.stderr.toString());
+        }
       }
     }
   }
