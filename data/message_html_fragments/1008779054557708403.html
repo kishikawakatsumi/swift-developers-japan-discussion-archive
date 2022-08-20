@@ -1,0 +1,84 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1008779054557708403" class="chatlog__message-container" data-message-id="1008779054557708403">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1008781062949830797"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1008779054557708403">15-Aug-22 04:47 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、上記に書いたようにConsoleを開いて、インストールしようとしているデバイスのログの受信を開始して、再度インストールしようとすると、こういうエラーが出ているのがわかる。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">0x16d5ab000 -[MIBundle _validateWithError:]: 47: Failed to load Info.plist from bundle at path /var/installd/Library/Caches/com.apple.mobile.installd.staging/temp.WVoNf1/extracted/Example.app/Frameworks/MLKitBarcodeScanning.framework; Extra info about "/var/installd/Library/Caches/com.apple.mobile.installd.staging/temp.WVoNf1/extracted/Example.app/Frameworks/MLKitBarcodeScanning.framework/Info.plist": Couldn't stat /var/installd/Library/Caches/com.apple.mobile.installd.staging/temp.WVoNf1/extracted/Example.app/Frameworks/MLKitBarcodeScanning.framework/Info.plist: No such file or directory</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1008779194735538246" class="chatlog__message-container" data-message-id="1008779194735538246">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="15-Aug-22 04:48 PM">16:48</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">（ログは膨大なので <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Example.app</code> などのキーワードでログをフィルタすると良い。その上で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">installd</code> プロセスが出力しているログを探すと見つかる。）</span> <span class="chatlog__edited-timestamp" title="15-Aug-22 04:58 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1008779483391733800" class="chatlog__message-container" data-message-id="1008779483391733800">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="15-Aug-22 04:49 PM">16:49</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これはアプリに含まれるFrameworkはInfo.plistがないとダメなのだけど、それが無いというエラー（だと思う）。つまりこのFrameworkはStatic FrameworkなのでアプリケーションパッケージにEmbedされることを想定してない（のでInfo.plistもない）。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1008780012603850892" class="chatlog__message-container" data-message-id="1008780012603850892">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="15-Aug-22 04:51 PM">16:51</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、ひとまずそれが原因であることを確認するために、Xcodeから <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Products/Example.app</code> をShow Finderして、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Example.app</code> パッケージをShow Contentsして <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Frameworks</code> フォルダから<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MLKitFaceDetection.framework</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MLKitBarcodeScanning.framework</code> を削除します。 （他の人にもわかるように手順を書いています。）</span> <span class="chatlog__edited-timestamp" title="15-Aug-22 04:56 PM">(edited)</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="t_kansha"><img class="chatlog__emoji chatlog__emoji--small" alt="t_kansha" src="https://cdn.discordapp.com/emojis/982131947683856444.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1008780455866277988" class="chatlog__message-container" data-message-id="1008780455866277988">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="15-Aug-22 04:53 PM">16:53</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、２つのFrameworkを取り除いた <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Example.app</code> を直接XcodeのDevice and SimulatorsのインストールしたいデバイスのところにDrag &amp; Dropします。 これはインストールに成功するはずです。 ２つのFrameworkを取り除かずに同様の操作をすると、同じエラーで失敗します（メッセージも同じ。XcodeがやってることをGUIでやっているだけ）。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1008780663933112361" class="chatlog__message-container" data-message-id="1008780663933112361">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="15-Aug-22 04:54 PM">16:54</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なので直接の原因はStatic Framework（正確にいうとInfo.plistが含まれていないFramework）をアプリケーションパッケージに含めてしまっていること、だと思います。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1008780907588636712" class="chatlog__message-container" data-message-id="1008780907588636712">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="15-Aug-22 04:55 PM">16:55</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">直し方はちょっとよくわからない。SwiftPMになんかEmbedさせない設定があるならそれが良さそう。もしくはStatic Linkを指定したりできないだろうか。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1008781062949830797" class="chatlog__message-container" data-message-id="1008781062949830797">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="15-Aug-22 04:55 PM">16:55</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">最悪、XcodeのScript PhaseあたりでFrameworkを取り除く、という操作をすると成功すると思う。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
