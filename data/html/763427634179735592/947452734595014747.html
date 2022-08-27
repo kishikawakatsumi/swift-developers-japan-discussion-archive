@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -774,10 +771,10 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/947452734595014747?category=atcoder&amp;channel=algo-809&amp;message_id=947460846160850985"><span class="chatlog__timestamp"><a href="#chatlog__message-container-947460842989965344">27-Feb-22 11:51 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/947452734595014747?category=atcoder&amp;channel=algo-809&amp;message_id=947460846160850985"><span class="chatlog__timestamp"><a href="#chatlog__message-container-947460842989965344">27-Feb-22 11:51 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ACしました！</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/2/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -827,7 +824,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -854,7 +851,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -865,7 +862,7 @@
             <div class="chatlog__short-timestamp" title="27-Feb-22 01:13 PM">13:13</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">解説にある(3)の式変形は教科書に定番で出てくるものですね 初見だとうっ<img loading="lazy" class="chatlog__emoji " alt="😨" title="fearful" src="https://twemoji.maxcdn.com/2/svg/1f628.svg"> ってなるやつですが</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">解説にある(3)の式変形は教科書に定番で出てくるものですね 初見だとうっ<img loading="lazy" class="chatlog__emoji " alt="😨" title="fearful" src="https://twemoji.maxcdn.com/v/latest/svg/1f628.svg"> ってなるやつですが</span></div>
           </div>
         </div>
       </div>
@@ -876,9 +873,9 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/941518510000046101/e31a3624dfece97bec2310df0b9049fa.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="quesera2#1882" data-user-id="941518510000046101">quesera2</span> <a href="/channels/763427634179735592/947452734595014747?category=atcoder&amp;channel=algo-809&amp;message_id=947525064352497674"><span class="chatlog__timestamp"><a href="#chatlog__message-container-947525064352497674">27-Feb-22 04:06 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">解説見て(1)は分かったんですけれど、(3)は怪しかったので、「問題解決のためのアルゴリズムx数学が基礎からしっかり身につく本」とかいうのを買ってみました、勉強しなおします…<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://twemoji.maxcdn.com/2/svg/1f616.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">解説見て(1)は分かったんですけれど、(3)は怪しかったので、「問題解決のためのアルゴリズムx数学が基礎からしっかり身につく本」とかいうのを買ってみました、勉強しなおします…<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://twemoji.maxcdn.com/v/latest/svg/1f616.svg"></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>

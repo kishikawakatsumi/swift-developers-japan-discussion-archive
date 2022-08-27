@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -888,7 +885,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=699877492189823016"><span class="chatlog__timestamp"><a href="#chatlog__message-container-699877492189823016">15-Apr-20 07:03 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="rizumita#3212">@rizumita</span> コメントありがとうございます。Discordすごく久しぶりに開いてメンションされてるのに気が付きました。そういえば最近だと私もVIPERだと一つのViewにつきPresenter 1つでやってました。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1001,7 +998,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745482986866212955"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745482986866212955">19-Aug-20 03:23 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それで十分そうです。 ありがとうございます。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1064,7 +1061,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">5</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">5</span></div>
             </div>
           </div>
         </div>

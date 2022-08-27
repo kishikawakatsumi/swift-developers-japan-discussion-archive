@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -786,7 +783,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DはUnionFindを利用してどうにか倒しました...(E,Fはノーアイデア...</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -810,7 +807,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">A: 考えすぎて2分使ってしまった B: Dictionary C: 二分探索 D: WA から抜け出せず というわけで、3完でした</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -821,7 +818,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919224578750947408"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919224426036346902">11-Dec-21 01:49 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919224578750947408"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919224426036346902">11-Dec-21 01:49 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お疲れ様でした！</span></div>
           </div>
         </div>
@@ -832,7 +829,7 @@
             <div class="chatlog__short-timestamp" title="11-Dec-21 01:50 PM">13:50</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">A問題の難易度が急に下がって、逆に怖くなりました<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">A問題の難易度が急に下がって、逆に怖くなりました<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg"></span></div>
           </div>
         </div>
       </div>
@@ -865,7 +862,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/372296616826109952/58e65e1ecc45dfb509f938e9a4a36993.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koogawa#4610" data-user-id="372296616826109952">koogawa</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919224792635277362"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919224792635277362">11-Dec-21 01:51 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">「こんなわけない」と無駄に考え込んでしまった <img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">「こんなわけない」と無駄に考え込んでしまった <img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/v/latest/svg/1f602.svg"></span></div>
           </div>
         </div>
       </div>
@@ -911,7 +908,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919225785452228739"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919225785452228739">11-Dec-21 01:55 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919225785452228739"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919225785452228739">11-Dec-21 01:55 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">前ですが<s>priority_queue</s>setを使いたくて1問だけC++で解きました</span> <span class="chatlog__edited-timestamp" title="11-Dec-21 01:55 PM">(edited)</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="t_naruhodo"><img class="chatlog__emoji chatlog__emoji--small" alt="t_naruhodo" src="https://cdn.discordapp.com/emojis/892393551856533584.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1023,10 +1020,10 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919226983026655303"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919226983026655303">11-Dec-21 01:59 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">連結成分を考えてなくて2回WA出してしまいました<img loading="lazy" class="chatlog__emoji " alt="😇" title="innocent" src="https://twemoji.maxcdn.com/2/svg/1f607.svg"></span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919226983026655303"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919226983026655303">11-Dec-21 01:59 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">連結成分を考えてなくて2回WA出してしまいました<img loading="lazy" class="chatlog__emoji " alt="😇" title="innocent" src="https://twemoji.maxcdn.com/v/latest/svg/1f607.svg"></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="sob"><img class="chatlog__emoji chatlog__emoji--small" alt="😭" src="https://twemoji.maxcdn.com/2/svg/1f62d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="sob"><img class="chatlog__emoji chatlog__emoji--small" alt="😭" src="https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1072,7 +1069,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919227358463017071"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919227358463017071">11-Dec-21 02:01 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919227358463017071"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919227358463017071">11-Dec-21 02:01 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">一列に並ぶ→ループしてると円になってしまうので✗ですね</span></div>
           </div>
         </div>
@@ -1097,10 +1094,10 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919227964384743534"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919227964384743534">11-Dec-21 02:03 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">たまに入力例が1つだけの時とかあります（結構苦手ですが<img loading="lazy" class="chatlog__emoji " alt="💦" title="sweat_drops" src="https://twemoji.maxcdn.com/2/svg/1f4a6.svg"></span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919227964384743534"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919227964384743534">11-Dec-21 02:03 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">たまに入力例が1つだけの時とかあります（結構苦手ですが<img loading="lazy" class="chatlog__emoji " alt="💦" title="sweat_drops" src="https://twemoji.maxcdn.com/v/latest/svg/1f4a6.svg"></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="innocent"><img class="chatlog__emoji chatlog__emoji--small" alt="😇" src="https://twemoji.maxcdn.com/2/svg/1f607.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="innocent"><img class="chatlog__emoji chatlog__emoji--small" alt="😇" src="https://twemoji.maxcdn.com/v/latest/svg/1f607.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1138,8 +1135,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919228947089203270"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919228947089203270">11-Dec-21 02:07 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">自分も時間内に解けなかった問題です<img loading="lazy" class="chatlog__emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/2/svg/1f622.svg"></span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919228947089203270"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919228947089203270">11-Dec-21 02:07 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">自分も時間内に解けなかった問題です<img loading="lazy" class="chatlog__emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/v/latest/svg/1f622.svg"></span></div>
           </div>
         </div>
       </div>
@@ -1152,7 +1149,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="log5#5350" data-user-id="679492030556143654">log5</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919229176693817344"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919229176693817344">11-Dec-21 02:08 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">... .#. ###</code> 自分は「これ三角形でしょ」と思い込んでしまったのが運の尽きでした...</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="innocent"><img class="chatlog__emoji chatlog__emoji--small" alt="😇" src="https://twemoji.maxcdn.com/2/svg/1f607.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="innocent"><img class="chatlog__emoji chatlog__emoji--small" alt="😇" src="https://twemoji.maxcdn.com/v/latest/svg/1f607.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1163,7 +1160,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919229350056951889"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919229345917177856">11-Dec-21 02:09 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919229350056951889"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919229345917177856">11-Dec-21 02:09 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">質問も出てましたし、わかりにくかったですよね…</span></div>
           </div>
         </div>
@@ -1204,7 +1201,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/372296616826109952/58e65e1ecc45dfb509f938e9a4a36993.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koogawa#4610" data-user-id="372296616826109952">koogawa</span> <a href="/channels/763427634179735592/919222286026940457?category=atcoder&amp;channel=abc231&amp;message_id=919233019204735036"><span class="chatlog__timestamp"><a href="#chatlog__message-container-919232915710312520">11-Dec-21 02:23 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">結果出ましたねー なかなか茶色になれない <img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">結果出ましたねー なかなか茶色になれない <img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/v/latest/svg/1f602.svg"></span></div>
             <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/919222286026940457/919232915047587960/unknown.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/919222286026940457/919232915047587960/unknown.png" alt="Image attachment" title="Image: unknown.png (11.63 KB)" loading="lazy"> </a></div>
           </div>
         </div>
@@ -1217,7 +1214,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">来週またがんばります</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="muscle"><img class="chatlog__emoji chatlog__emoji--small" alt="💪" src="https://twemoji.maxcdn.com/2/svg/1f4aa.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="muscle"><img class="chatlog__emoji chatlog__emoji--small" alt="💪" src="https://twemoji.maxcdn.com/v/latest/svg/1f4aa.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>

@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -798,7 +795,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span> <a href="/channels/763427634179735592/879348711476580362?category=atcoder&amp;channel=algo-324&amp;message_id=879366024716255242"><span class="chatlog__timestamp"><a href="#chatlog__message-container-879366024716255242">23-Aug-21 02:06 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今からやってみます 考え方はわかったけどプログラムに落とし込める自信がないｗ</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="muscle"><img class="chatlog__emoji chatlog__emoji--small" alt="💪" src="https://twemoji.maxcdn.com/2/svg/1f4aa.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="muscle"><img class="chatlog__emoji chatlog__emoji--small" alt="💪" src="https://twemoji.maxcdn.com/v/latest/svg/1f4aa.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -828,8 +825,8 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -914,7 +911,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span> <a href="/channels/763427634179735592/879348711476580362?category=atcoder&amp;channel=algo-324&amp;message_id=879371181143253033"><span class="chatlog__timestamp"><a href="#chatlog__message-container-879370090477420565">23-Aug-21 02:22 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ですよね、運営の方に伝えてみます</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -943,7 +940,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -956,7 +953,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">log5 さんのテストケースが上 3 つ通ったのでできたっぽい！ 一発でできて嬉しい〜</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1059,7 +1056,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">明日自分の解答も直そw</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1095,7 +1092,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/763427634179735592/879348711476580362?category=atcoder&amp;channel=algo-324&amp;message_id=879461873928519681"><span class="chatlog__timestamp"><a href="#chatlog__message-container-879461482067288104">23-Aug-21 08:25 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やってみました。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Array2D</code> は github.com/koher/swift-atcoder-support より。 <a href="https://gist.github.com/koher/00bd76c909ff149d31d631676f1bcc48#file-324-swift">https://gist.github.com/koher/00bd76c909ff149d31d631676f1bcc48#file-324-swift</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -1108,7 +1105,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">outside</code> を指定できるので、はみ出たときの分岐処理をループの中で書く必要がないです。</span> <span class="chatlog__edited-timestamp" title="23-Aug-21 08:27 PM">(edited)</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="cool"><img class="chatlog__emoji chatlog__emoji--small" alt="🆒" src="https://twemoji.maxcdn.com/2/svg/1f192.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="cool"><img class="chatlog__emoji chatlog__emoji--small" alt="🆒" src="https://twemoji.maxcdn.com/v/latest/svg/1f192.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1171,7 +1168,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1185,7 +1182,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span> <a href="/channels/763427634179735592/879348711476580362?category=atcoder&amp;channel=algo-324&amp;message_id=879524652404326460"><span class="chatlog__timestamp"><a href="#chatlog__message-container-879524652404326460">24-Aug-21 12:36 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そして log5 さんの where を使って左下を計算しないやつ、普通に range の下限を増やすだけで実現できるということに気づいてしまった…</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="exclamation"><img class="chatlog__emoji chatlog__emoji--small" alt="❗" src="https://twemoji.maxcdn.com/2/svg/2757.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="exclamation"><img class="chatlog__emoji chatlog__emoji--small" alt="❗" src="https://twemoji.maxcdn.com/v/latest/svg/2757.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1199,7 +1196,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="log5#5350" data-user-id="679492030556143654">log5</span> <a href="/channels/763427634179735592/879348711476580362?category=atcoder&amp;channel=algo-324&amp;message_id=879531416659066920"><span class="chatlog__timestamp"><a href="#chatlog__message-container-879531416659066920">24-Aug-21 01:03 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">修正された制約に合わせてテストケースをリニューアルしました〜（取り急ぎ</span> <span class="chatlog__edited-timestamp" title="24-Aug-21 01:03 AM">(edited)</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1219,8 +1216,8 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/763427634179735592/879348711476580362?category=atcoder&amp;channel=algo-324&amp;message_id=879547717557317692"><span class="chatlog__timestamp"><a href="#chatlog__message-container-879547717557317692">24-Aug-21 02:08 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Array2D</code> は他と比べて圧倒的に利用頻度が高いので、これか他のライブラリ使うか自作するかがおすすめです。あと、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">[[Int]]</code> などで扱おうとすると Copy-on-Write の問題でコピーが走って TLE してしまう問題が前にありました。そういうこともコンテスト中に考えたくないので <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Array2D</code> 使ってます。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="flushed"><img class="chatlog__emoji chatlog__emoji--small" alt="😳" src="https://twemoji.maxcdn.com/2/svg/1f633.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
-              <div class="chatlog__reaction" title="scream"><img class="chatlog__emoji chatlog__emoji--small" alt="😱" src="https://twemoji.maxcdn.com/2/svg/1f631.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="flushed"><img class="chatlog__emoji chatlog__emoji--small" alt="😳" src="https://twemoji.maxcdn.com/v/latest/svg/1f633.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="scream"><img class="chatlog__emoji chatlog__emoji--small" alt="😱" src="https://twemoji.maxcdn.com/v/latest/svg/1f631.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1260,7 +1257,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>

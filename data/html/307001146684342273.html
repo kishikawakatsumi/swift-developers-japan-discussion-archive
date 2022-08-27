@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -1428,7 +1425,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/307001146684342273?category=開発環境, ライブラリ&amp;channel=cocoa&amp;message_id=382368618970742794"><span class="chatlog__timestamp"><a href="#chatlog__message-container-382368069063802880">21-Nov-17 03:14 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> override func copy(with zone: NSZone? = nil) -&gt; Any { return MyHeaderCell.init(textCell: self.stringValue) }</code> 落ちなくなった！！！！！！！！！！！</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">5</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">5</span></div>
             </div>
           </div>
         </div>
@@ -1634,7 +1631,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="takasek#2409" data-user-id="295054334234722305">takasek</span> <a href="/channels/307001146684342273?category=開発環境, ライブラリ&amp;channel=cocoa&amp;message_id=384526894282047498"><span class="chatlog__timestamp"><a href="#chatlog__message-container-384526894282047498">27-Nov-17 02:12 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">残念 <img loading="lazy" class="chatlog__emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/2/svg/1f622.svg"> Bridgeしたものの、何も情報が取れなくて悩んでいるのでした <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-objectivec"> XcodeApplication *app = [SBApplication applicationWithBundleIdentifier: @"com.apple.dt.Xcode"]; NSString *className = app.className; // ちゃんと @"XcodeApplication" になってる SBElementArray&lt;XcodeDocument *&gt; * docs = app.documents; SBElementArray&lt;XcodeWindow *&gt; * windows = app.windows; XcodeDocument *doc = docs.firstObject; // nil XcodeWindow *window = windows.firstObject; // nil NSUInteger docC = app.documents.count; // 0 NSUInteger windowC = app.windows.count; // 0 NSString *name = app.name; // nil XcodeWorkspaceDocument *workspaceDocument = app.activeWorkspaceDocument; XcodeScheme *scheme = workspaceDocument.activeScheme; NSString *schemeName = scheme.name; // nil NSURL *url = workspaceDocument.file; // nil NSString *path = workspaceDocument.path; // nil SBElementArray&lt;XcodeProject *&gt; *projects = workspaceDocument.projects; XcodeProject *proj = projects.firstObject; // nil NSUInteger projC = projects.count; // 0</code> APIアクセスするたびにコンソールログには <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Error #17 (os/kern) invalid right attempting to add send right to port ( port:47563/0xb9cb rcv:1,send:0,d:0 limit:5).</code> というエラーが吐かれるので何か問題があるのだろうけれど、その正体が掴めていません。</span> <span class="chatlog__edited-timestamp" title="27-Nov-17 02:13 AM">(edited)</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">残念 <img loading="lazy" class="chatlog__emoji " alt="😢" title="cry" src="https://twemoji.maxcdn.com/v/latest/svg/1f622.svg"> Bridgeしたものの、何も情報が取れなくて悩んでいるのでした <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-objectivec"> XcodeApplication *app = [SBApplication applicationWithBundleIdentifier: @"com.apple.dt.Xcode"]; NSString *className = app.className; // ちゃんと @"XcodeApplication" になってる SBElementArray&lt;XcodeDocument *&gt; * docs = app.documents; SBElementArray&lt;XcodeWindow *&gt; * windows = app.windows; XcodeDocument *doc = docs.firstObject; // nil XcodeWindow *window = windows.firstObject; // nil NSUInteger docC = app.documents.count; // 0 NSUInteger windowC = app.windows.count; // 0 NSString *name = app.name; // nil XcodeWorkspaceDocument *workspaceDocument = app.activeWorkspaceDocument; XcodeScheme *scheme = workspaceDocument.activeScheme; NSString *schemeName = scheme.name; // nil NSURL *url = workspaceDocument.file; // nil NSString *path = workspaceDocument.path; // nil SBElementArray&lt;XcodeProject *&gt; *projects = workspaceDocument.projects; XcodeProject *proj = projects.firstObject; // nil NSUInteger projC = projects.count; // 0</code> APIアクセスするたびにコンソールログには <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Error #17 (os/kern) invalid right attempting to add send right to port ( port:47563/0xb9cb rcv:1,send:0,d:0 limit:5).</code> というエラーが吐かれるので何か問題があるのだろうけれど、その正体が掴めていません。</span> <span class="chatlog__edited-timestamp" title="27-Nov-17 02:13 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1899,8 +1896,8 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="takasek#2409" data-user-id="295054334234722305">takasek</span> <a href="/channels/307001146684342273?category=開発環境, ライブラリ&amp;channel=cocoa&amp;message_id=385948309107376139"><span class="chatlog__timestamp"><a href="#chatlog__message-container-385948309107376139">01-Dec-17 12:20 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やはり。デバッグ実行はこちらでもうまくいかなくて、Xcode9.0では大丈夫だったのになーと思ってました。 &gt;Copy Files ズバリでした。これ追加したら、動作させられました！ ありがとうございます！ 先日の質問の件も合わせ、extension→XPC→ScriptingBridgeと経由して色々遊べるようにできました。 このあたりの知見、Qiitaにまとめさせていただけたらと思います！</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1930,7 +1927,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
             </div>
           </div>
         </div>
@@ -2196,7 +2193,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/307001146684342273?category=開発環境, ライブラリ&amp;channel=cocoa&amp;message_id=390807144959705088"><span class="chatlog__timestamp"><a href="#chatlog__message-container-390807144959705088">14-Dec-17 10:08 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">解決しました。 Sierraでも、NSTableCellViewの子のNSTextFieldに mouseDown イベントは到達していない状態でした。 それでもSierraでは、 そのNSTextField にaddされたNSClickGestureRecognizerは動作するようでした。 一方HighSierraでは、NSTextFieldにmouseDownイベントが到達しない状況においては、それに追加された NSClickGestureRecognizer も動作しないようでした。 NSGestureRecognizerDelegateの shouldRecognizeSimultaneouslyWith でもだめで、そもそもそれ自体呼び出されませんでした。 このmouseDownイベントが到達しないのは NSTableView の仕様で、 validateProposedFirstResponder をオーバライドして挙動に手をいれてやることで到達するようにできました。 この状況では、 GestureRecognizer も期待通りに動作しました。 この TableView の挙動、仕様については、下記の Specifying How Subviews Should Respond to Events に情報がありました。 <a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/TableView/RowSelection/RowSelection.html#//apple_ref/doc/uid/10000026i-CH6-SW9">https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/TableView/RowSelection/RowSelection.html#//apple_ref/doc/uid/10000026i-CH6-SW9</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="writing_hand_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="✍🏻" src="https://twemoji.maxcdn.com/2/svg/270d-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="writing_hand_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="✍🏻" src="https://twemoji.maxcdn.com/v/latest/svg/270d-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -2341,8 +2338,8 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/307001146684342273?category=開発環境, ライブラリ&amp;channel=cocoa&amp;message_id=413661478944505857"><span class="chatlog__timestamp"><a href="#chatlog__message-container-413661478944505857">15-Feb-18 11:43 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention">#macos</span> に移動</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="yum"><img class="chatlog__emoji chatlog__emoji--small" alt="😋" src="https://twemoji.maxcdn.com/2/svg/1f60b.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
-              <div class="chatlog__reaction" title="smiley"><img class="chatlog__emoji chatlog__emoji--small" alt="😃" src="https://twemoji.maxcdn.com/2/svg/1f603.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="yum"><img class="chatlog__emoji chatlog__emoji--small" alt="😋" src="https://twemoji.maxcdn.com/v/latest/svg/1f60b.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="smiley"><img class="chatlog__emoji chatlog__emoji--small" alt="😃" src="https://twemoji.maxcdn.com/v/latest/svg/1f603.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -2443,7 +2440,7 @@
             <div class="chatlog__short-timestamp" title="28-Mar-19 12:52 AM">00:52</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そして上リンクは開くとInvite Invalid<img loading="lazy" class="chatlog__emoji " alt="😩" title="weary" src="https://twemoji.maxcdn.com/2/svg/1f629.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そして上リンクは開くとInvite Invalid<img loading="lazy" class="chatlog__emoji " alt="😩" title="weary" src="https://twemoji.maxcdn.com/v/latest/svg/1f629.svg"></span></div>
           </div>
         </div>
       </div>

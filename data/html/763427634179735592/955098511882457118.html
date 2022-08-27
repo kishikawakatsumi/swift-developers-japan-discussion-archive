@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -806,7 +803,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955098995934519346"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955098891643133962">20-Mar-22 01:42 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955098995934519346"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955098891643133962">20-Mar-22 01:42 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お疲れ様でした</span></div>
           </div>
         </div>
@@ -817,7 +814,7 @@
             <div class="chatlog__short-timestamp" title="20-Mar-22 01:42 PM">13:42</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">同じくEはダメでした<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://twemoji.maxcdn.com/2/svg/1f616.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">同じくEはダメでした<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://twemoji.maxcdn.com/v/latest/svg/1f616.svg"></span></div>
           </div>
         </div>
       </div>
@@ -849,7 +846,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955099608072212591"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955099461187698708">20-Mar-22 01:44 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955099608072212591"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955099461187698708">20-Mar-22 01:44 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">問題見てDPかなっていう印象あったのですが、それ以外に取っ掛かりが思いつかず…</span></div>
           </div>
         </div>
@@ -860,7 +857,7 @@
             <div class="chatlog__short-timestamp" title="20-Mar-22 01:44 PM">13:44</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">C問題は珍しい形式でしたね<img loading="lazy" class="chatlog__emoji " alt="👀" title="eyes" src="https://twemoji.maxcdn.com/2/svg/1f440.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">C問題は珍しい形式でしたね<img loading="lazy" class="chatlog__emoji " alt="👀" title="eyes" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg"></span></div>
           </div>
         </div>
       </div>
@@ -884,7 +881,7 @@
             <div class="chatlog__short-timestamp" title="20-Mar-22 01:45 PM">13:45</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ただ、flushが完全に理解できてないので、ちょっとこっちに来ないでほしかった <img loading="lazy" class="chatlog__emoji " alt="😭" title="sob" src="https://twemoji.maxcdn.com/2/svg/1f62d.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ただ、flushが完全に理解できてないので、ちょっとこっちに来ないでほしかった <img loading="lazy" class="chatlog__emoji " alt="😭" title="sob" src="https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg"></span></div>
           </div>
         </div>
       </div>
@@ -905,8 +902,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955100007961342032"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955100007961342032">20-Mar-22 01:46 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">flushはどうすればいいのか分からず、適当にググったものを書きました<img loading="lazy" class="chatlog__emoji " alt="💦" title="sweat_drops" src="https://twemoji.maxcdn.com/2/svg/1f4a6.svg"></span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955100007961342032"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955100007961342032">20-Mar-22 01:46 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">flushはどうすればいいのか分からず、適当にググったものを書きました<img loading="lazy" class="chatlog__emoji " alt="💦" title="sweat_drops" src="https://twemoji.maxcdn.com/v/latest/svg/1f4a6.svg"></span></div>
           </div>
         </div>
       </div>
@@ -938,7 +935,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955100217273901127"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955100183123877899">20-Mar-22 01:47 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955100217273901127"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955100183123877899">20-Mar-22 01:47 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">fflush(stdout)</code></span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="t_desune"><img class="chatlog__emoji chatlog__emoji--small" alt="t_desune" src="https://cdn.discordapp.com/emojis/940212417420468234.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -965,7 +962,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="tockrock#4224" data-user-id="131342384406462464">tockrock</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955100229995229234"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955100229995229234">20-Mar-22 01:47 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お疲れ様でした！4完でした。もうちょっとでEもできそうなのですが…</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1064,7 +1061,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="quesera2#1882" data-user-id="941518510000046101">quesera2</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955101411987841074"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955101411987841074">20-Mar-22 01:52 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">mod3するの忘れてなんで〜〜ってWA出しまくりました</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="innocent"><img class="chatlog__emoji chatlog__emoji--small" alt="😇" src="https://twemoji.maxcdn.com/2/svg/1f607.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="innocent"><img class="chatlog__emoji chatlog__emoji--small" alt="😇" src="https://twemoji.maxcdn.com/v/latest/svg/1f607.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1097,7 +1094,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955102950060081243"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955102655510872074">20-Mar-22 01:56 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/955098511882457118?category=atcoder&amp;channel=abc244&amp;message_id=955102950060081243"><span class="chatlog__timestamp"><a href="#chatlog__message-container-955102655510872074">20-Mar-22 01:56 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">10^18見てfor文回さない方法を考えました</span></div>
           </div>
         </div>

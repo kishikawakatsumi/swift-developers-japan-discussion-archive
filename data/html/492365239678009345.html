@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -761,7 +758,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="Kuniwak#7542" data-user-id="387843027072188417">Kuniwak</span> <a href="/channels/492365239678009345?category=開発環境, ライブラリ&amp;channel=appcode&amp;message_id=492366402863366147"><span class="chatlog__timestamp"><a href="#chatlog__message-container-492365355084283909">20-Sep-18 04:04 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">AppCode は最高！！！！やっていくぞ！！！！！！！！！</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="smiley"><img class="chatlog__emoji chatlog__emoji--small" alt="😃" src="https://twemoji.maxcdn.com/2/svg/1f603.svg" loading="lazy"> <span class="chatlog__reaction-count">6</span></div>
+              <div class="chatlog__reaction" title="smiley"><img class="chatlog__emoji chatlog__emoji--small" alt="😃" src="https://twemoji.maxcdn.com/v/latest/svg/1f603.svg" loading="lazy"> <span class="chatlog__reaction-count">6</span></div>
             </div>
           </div>
         </div>
@@ -1102,7 +1099,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -1114,7 +1111,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/267150054869958657/229d6e62f95fdb7f8f6836578e4ef32e.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="Kagahiro_Kasumi#9426" data-user-id="267150054869958657">Kagahiro_Kasumi</span> <a href="/channels/492365239678009345?category=開発環境, ライブラリ&amp;channel=appcode&amp;message_id=492958763679088640"><span class="chatlog__timestamp"><a href="#chatlog__message-container-492958763679088640">22-Sep-18 07:22 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention">#appcode</span> <img loading="lazy" class="chatlog__emoji " alt="🎉" title="tada" src="https://twemoji.maxcdn.com/2/svg/1f389.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention">#appcode</span> <img loading="lazy" class="chatlog__emoji " alt="🎉" title="tada" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg"></span></div>
           </div>
         </div>
       </div>
@@ -1193,7 +1190,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="rizumita#3212" data-user-id="294030912793083905">rizumita</span> <a href="/channels/492365239678009345?category=開発環境, ライブラリ&amp;channel=appcode&amp;message_id=495047927492771840"><span class="chatlog__timestamp"><a href="#chatlog__message-container-495047927492771840">28-Sep-18 01:43 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうですね。複数作成します。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1243,9 +1240,9 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/387843027072188417/47c96b35135f39a117c2d3e88950c7ab.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="Kuniwak#7542" data-user-id="387843027072188417">Kuniwak</span> <a href="/channels/492365239678009345?category=開発環境, ライブラリ&amp;channel=appcode&amp;message_id=496507371321950208"><span class="chatlog__timestamp"><a href="#chatlog__message-container-496507371321950208">02-Oct-18 02:23 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">長年の布教活動のおかげか、<img loading="lazy" class="chatlog__emoji " alt="☝" title="☝" src="https://twemoji.maxcdn.com/2/svg/261d.svg">️ の Ask the specialist 枠で出ることになりました。ご質問等あれば、お越しください！</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">長年の布教活動のおかげか、<img loading="lazy" class="chatlog__emoji " alt="☝" title="☝" src="https://twemoji.maxcdn.com/v/latest/svg/261d.svg">️ の Ask the specialist 枠で出ることになりました。ご質問等あれば、お越しください！</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">12</span></div>
+              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">12</span></div>
             </div>
           </div>
         </div>

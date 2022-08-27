@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -986,7 +983,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="N.#0939" data-user-id="291092492043026432">N.</span> <a href="/channels/454536846140112926?category=開発環境, ライブラリ&amp;channel=coreml&amp;message_id=454589756043558924"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454589756043558924">08-Jun-18 10:17 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="hiragram#3838">@hiragram</span>さんがやりたい事と合致してるかわかりませんが、このサンプルコード iOS11実機で動きましたよ。これ凄いです。 Tracking Multiple Objects or Rectangles in Video (iOS 11.3+, Xcode 10.0+) <a href="https://developer.apple.com/documentation/vision/tracking_multiple_objects_or_rectangles_in_video">https://developer.apple.com/documentation/vision/tracking_multiple_objects_or_rectangles_in_video</a></span> <span class="chatlog__edited-timestamp" title="08-Jun-18 10:21 AM">(edited)</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="smile"><img class="chatlog__emoji chatlog__emoji--small" alt="😄" src="https://twemoji.maxcdn.com/2/svg/1f604.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="smile"><img class="chatlog__emoji chatlog__emoji--small" alt="😄" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1020,7 +1017,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">VNDetectFaceRectanglesRequest をカスタムのCoreMLモデルに差し替える、みたいなAPIがあればいいんですかねえ</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="point_up_2"><img class="chatlog__emoji chatlog__emoji--small" alt="👆" src="https://twemoji.maxcdn.com/2/svg/1f446.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="point_up_2"><img class="chatlog__emoji chatlog__emoji--small" alt="👆" src="https://twemoji.maxcdn.com/v/latest/svg/1f446.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1072,7 +1069,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">エラーログ見たら分かる気がします</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>

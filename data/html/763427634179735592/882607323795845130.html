@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -777,7 +774,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/763427634179735592/882607323795845130?category=atcoder&amp;channel=algo-341&amp;message_id=882611760941649941"><span class="chatlog__timestamp"><a href="#chatlog__message-container-882611216638410823">01-Sep-21 01:01 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんか普通の問題に戻りましたね。 <a href="https://algo-method.com/submissions/49061">https://algo-method.com/submissions/49061</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -811,7 +808,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="log5#5350" data-user-id="679492030556143654">log5</span> <a href="/channels/763427634179735592/882607323795845130?category=atcoder&amp;channel=algo-341&amp;message_id=882616177589899275"><span class="chatlog__timestamp"><a href="#chatlog__message-container-882616177589899275">01-Sep-21 01:21 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">昨日よりは苦労せずにできました <a href="https://algo-method.com/submissions/49121">https://algo-method.com/submissions/49121</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>
@@ -825,7 +822,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/763427634179735592/882607323795845130?category=atcoder&amp;channel=algo-341&amp;message_id=882616358913847366"><span class="chatlog__timestamp"><a href="#chatlog__message-container-882616358913847366">01-Sep-21 01:22 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これまで通りの見た目の問題に戻ったので考えやすいですよね。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -847,7 +844,7 @@
                         <div class="chatlog__embed-author">Kosuke Ogawa🌗宮崎🏝エンジニア (@koogawa)</div>
                       </a></div>
                     <div class="chatlog__embed-description">
-                      <div class="chatlog__markdown chatlog__markdown-preserve">今日はすんなり解けた。 アルルは箱にいくつかのボールを〜みたいな問題文でなければ割と解ける。 つまり、ワシは応用が効かないヤツなんだと思う<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"> 「動的計画法 3-3」の提出結果は AC(正解！) でした！ 詳細はこちら↓ <a href="https://t.co/Kkaksi6GKt">https://t.co/Kkaksi6GKt</a> #アルゴ式 #カメのアルルと繋がりたい</div>
+                      <div class="chatlog__markdown chatlog__markdown-preserve">今日はすんなり解けた。 アルルは箱にいくつかのボールを〜みたいな問題文でなければ割と解ける。 つまり、ワシは応用が効かないヤツなんだと思う<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg"> 「動的計画法 3-3」の提出結果は AC(正解！) でした！ 詳細はこちら↓ <a href="https://t.co/Kkaksi6GKt">https://t.co/Kkaksi6GKt</a> #アルゴ式 #カメのアルルと繋がりたい</div>
                     </div>
                   </div>
                 </div>
@@ -858,7 +855,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>
@@ -869,7 +866,7 @@
             <div class="chatlog__short-timestamp" title="01-Sep-21 01:28 PM">13:28</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">たぶん昨日みたいに「ボールが〜」みたいな問題だったら解けなかったと思います<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">たぶん昨日みたいに「ボールが〜」みたいな問題だったら解けなかったと思います<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg"></span></div>
           </div>
         </div>
       </div>
@@ -894,7 +891,7 @@
             <div class="chatlog__short-timestamp" title="01-Sep-21 01:31 PM">13:31</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おそらく AtCoder 等では今日みたいなわかりやすい問題文ではなく、「ボールの入れ方は〜」の方で出題されると思うので、昨日の algo-337 みたいな問題が解けないと実戦では通用しない気がしています <img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg"></span> <span class="chatlog__edited-timestamp" title="01-Sep-21 01:32 PM">(edited)</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おそらく AtCoder 等では今日みたいなわかりやすい問題文ではなく、「ボールの入れ方は〜」の方で出題されると思うので、昨日の algo-337 みたいな問題が解けないと実戦では通用しない気がしています <img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/v/latest/svg/1f914.svg"></span> <span class="chatlog__edited-timestamp" title="01-Sep-21 01:32 PM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -932,7 +929,7 @@
                   <div class="chatlog__markdown-quote-content">黒いボールが 5 個、白いボールが 3 個あります。それらのボールを一列に並べるとき、どの白いボールも隣り合わない並べ方は何通りありますか。ただし、同じ色のボールは区別できないものとします。 </div>
                 </div> みたいなやつですね。↓の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">o</code> を黒いボールとして、その間の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_</code> から白いボールを入れる場所を 3 個選べばいいから 6C3 で計算できるという。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">_o_o_o_o_o_</code> こういうのってなかなか思い付かない気がして、経験を積めば発想の仕方がわかってくる気がするんですよね。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -978,7 +975,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="masakihori#9460" data-user-id="431049118421483540">masakihori</span> <a href="/channels/763427634179735592/882607323795845130?category=atcoder&amp;channel=algo-341&amp;message_id=882621828395311225"><span class="chatlog__timestamp"><a href="#chatlog__message-container-882621821395025960">01-Sep-21 01:44 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">できました</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>
@@ -1003,7 +1000,7 @@
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほどなるほど。例えばこんな問題があったとき、あーこれはナップサックをちょっと応用すれば解けるな、みたいな状態にまで持っていけたら強くなれそう</span></div>
             <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/882607323795845130/882622888254005318/unknown.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/882607323795845130/882622888254005318/unknown.png" alt="Image attachment" title="Image: unknown.png (24.8 KB)" loading="lazy"> </a></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1017,7 +1014,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span> <a href="/channels/763427634179735592/882607323795845130?category=atcoder&amp;channel=algo-341&amp;message_id=882626305345085494"><span class="chatlog__timestamp"><a href="#chatlog__message-container-882626305345085494">01-Sep-21 02:01 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今から解きます！</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>
@@ -1050,7 +1047,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>

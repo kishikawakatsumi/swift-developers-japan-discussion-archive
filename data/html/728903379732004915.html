@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -774,7 +771,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="sunglasses"><img class="chatlog__emoji chatlog__emoji--small" alt="😎" src="https://twemoji.maxcdn.com/2/svg/1f60e.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="sunglasses"><img class="chatlog__emoji chatlog__emoji--small" alt="😎" src="https://twemoji.maxcdn.com/v/latest/svg/1f60e.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -836,7 +833,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806684379082391592"><span class="chatlog__timestamp"><a href="#chatlog__message-container-806684379082391592">04-Feb-21 12:35 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ついにDTK返してってメールきた</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -891,7 +888,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="cry"><img class="chatlog__emoji chatlog__emoji--small" alt="😢" src="https://twemoji.maxcdn.com/2/svg/1f622.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="cry"><img class="chatlog__emoji chatlog__emoji--small" alt="😢" src="https://twemoji.maxcdn.com/v/latest/svg/1f622.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1048,7 +1045,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="treastrain_spla#3013" data-user-id="485766664445624323">treastrain / Tanaka.R</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=806772854116319233"><span class="chatlog__timestamp"><a href="#chatlog__message-container-806772854116319233">04-Feb-21 06:27 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">返さなかった場合に Developer アカウントが BAN されるとかないでしょうか…？</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="fearful"><img class="chatlog__emoji chatlog__emoji--small" alt="😨" src="https://twemoji.maxcdn.com/2/svg/1f628.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="fearful"><img class="chatlog__emoji chatlog__emoji--small" alt="😨" src="https://twemoji.maxcdn.com/v/latest/svg/1f628.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -1071,9 +1068,9 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=807472584332804096"><span class="chatlog__timestamp"><a href="#chatlog__message-container-807472584332804096">06-Feb-21 04:47 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">クレジットの増加と返却期限の延長<img loading="lazy" class="chatlog__emoji " alt="😄" title="smile" src="https://twemoji.maxcdn.com/2/svg/1f604.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">クレジットの増加と返却期限の延長<img loading="lazy" class="chatlog__emoji " alt="😄" title="smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg"></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="laughing"><img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/2/svg/1f606.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="laughing"><img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/v/latest/svg/1f606.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -1085,7 +1082,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=807495347739557898"><span class="chatlog__timestamp"><a href="#chatlog__message-container-807495235298394112">06-Feb-21 06:17 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがたい<img loading="lazy" class="chatlog__emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/2/svg/263a.svg">️</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがたい<img loading="lazy" class="chatlog__emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/v/latest/svg/263a.svg">️</span></div>
           </div>
         </div>
       </div>
@@ -1097,7 +1094,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あとクレジットの利用対象も変更になってますね</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="laughing"><img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/2/svg/1f606.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="laughing"><img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/v/latest/svg/1f606.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -1131,9 +1128,9 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=815149487156625428"><span class="chatlog__timestamp"><a href="#chatlog__message-container-815149097421504582">27-Feb-21 09:11 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DTKの返却、詳細のメールが来てすでにヤマトの集荷が一方的に決まってて3/8に取りに来るらしい<img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg">めんどうがなくて私はめっちゃいいと思うけど。</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DTKの返却、詳細のメールが来てすでにヤマトの集荷が一方的に決まってて3/8に取りに来るらしい<img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/v/latest/svg/1f602.svg">めんどうがなくて私はめっちゃいいと思うけど。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="exclamation"><img class="chatlog__emoji chatlog__emoji--small" alt="❗" src="https://twemoji.maxcdn.com/2/svg/2757.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="exclamation"><img class="chatlog__emoji chatlog__emoji--small" alt="❗" src="https://twemoji.maxcdn.com/v/latest/svg/2757.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1286,7 +1283,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=821323256429936650"><span class="chatlog__timestamp"><a href="#chatlog__message-container-821323256429936650">16-Mar-21 10:05 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">む、ウチはまだだなあ<img loading="lazy" class="chatlog__emoji " alt="😌" title="relieved" src="https://twemoji.maxcdn.com/2/svg/1f60c.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">む、ウチはまだだなあ<img loading="lazy" class="chatlog__emoji " alt="😌" title="relieved" src="https://twemoji.maxcdn.com/v/latest/svg/1f60c.svg"></span></div>
           </div>
         </div>
       </div>
@@ -1299,7 +1296,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=823441079189110784"><span class="chatlog__timestamp"><a href="#chatlog__message-container-823440998230261770">22-Mar-21 06:20 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">プロモーションコードってメールで送られてくるのと思ってましたが、DTK Portalにアクセスしたらコードが表示されるってことなんですね。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1442,7 +1439,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855836153104957480"><span class="chatlog__timestamp"><a href="#chatlog__message-container-855836153104957480">19-Jun-21 03:47 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それですね。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏🏻" src="https://twemoji.maxcdn.com/2/svg/1f64f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏🏻" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1454,7 +1451,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855837162716135435"><span class="chatlog__timestamp"><a href="#chatlog__message-container-855837162716135435">19-Jun-21 03:51 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">さっきよりずいぶん進んだのでうまくいきそうです（ビルドは結構時間かかる）。どうもありがとうございます <img loading="lazy" class="chatlog__emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/2/svg/263a.svg">️</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">さっきよりずいぶん進んだのでうまくいきそうです（ビルドは結構時間かかる）。どうもありがとうございます <img loading="lazy" class="chatlog__emoji " alt="☺" title="☺" src="https://twemoji.maxcdn.com/v/latest/svg/263a.svg">️</span></div>
           </div>
         </div>
       </div>
@@ -1489,7 +1486,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/728903379732004915?category=開発環境, ライブラリ&amp;channel=apple-silicon&amp;message_id=855839059826311198"><span class="chatlog__timestamp"><a href="#chatlog__message-container-855839059826311198">19-Jun-21 03:58 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やったあ。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="smiling_face_with_3_hearts"><img class="chatlog__emoji chatlog__emoji--small" alt="🥰" src="https://twemoji.maxcdn.com/2/svg/1f970.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="smiling_face_with_3_hearts"><img class="chatlog__emoji chatlog__emoji--small" alt="🥰" src="https://twemoji.maxcdn.com/v/latest/svg/1f970.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>

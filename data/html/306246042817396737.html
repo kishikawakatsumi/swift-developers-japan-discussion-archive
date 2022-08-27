@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -787,7 +784,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">手元ではubuntu 16.04で検証をしていたのですが、どなたか14.04と16.04での違いとか知っている方はいませんかね…</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="astonished"><img class="chatlog__emoji chatlog__emoji--small" alt="😲" src="https://twemoji.maxcdn.com/2/svg/1f632.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="astonished"><img class="chatlog__emoji chatlog__emoji--small" alt="😲" src="https://twemoji.maxcdn.com/v/latest/svg/1f632.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -969,7 +966,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=306258180810342413"><span class="chatlog__timestamp"><a href="#chatlog__message-container-306258180810342413">25-Apr-17 02:40 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえず debug の tip として、 特定のテストだけ走らせるには <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight"># test/SourceKit ディレクトリ内だけ全部 $ utils/run-test --build-dir ../build/Ninja-DebugAssert/ test/SourceKit/ # 特定のテストケースだけ $ utils/run-test --build-dir ../build/Ninja-DebugAssert/ test/SourceKit/ExtractComment/extract_comments.swift # verbose出力 $ utils/run-test -v --build-dir ../build/Ninja-DebugAssert/ test/SourceKit/ExtractComment/extract_comments.swift</code> verbose 出力で実際の実行コマンド群が見えるのでそれをデバッガで見ていく感じです。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="❤"><img class="chatlog__emoji chatlog__emoji--small" alt="❤" src="https://twemoji.maxcdn.com/2/svg/2764.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="❤"><img class="chatlog__emoji chatlog__emoji--small" alt="❤" src="https://twemoji.maxcdn.com/v/latest/svg/2764.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1026,7 +1023,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SourceKitはLinux版とmacOS版でそれぞれInProcとXPCに一部実装が分かれていて、InProc版のテストが無効化されているせいで破壊的な変更がXPC版だけに入ってしまい、InProc版が壊れてきてた。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="disappointed_relieved"><img class="chatlog__emoji chatlog__emoji--small" alt="😥" src="https://twemoji.maxcdn.com/2/svg/1f625.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="disappointed_relieved"><img class="chatlog__emoji chatlog__emoji--small" alt="😥" src="https://twemoji.maxcdn.com/v/latest/svg/1f625.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1321,7 +1318,7 @@
             <div class="chatlog__short-timestamp" title="29-Apr-17 07:39 AM">07:39</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftPMのテストだったので、SwiftPMのSlackでaciidさんに相談してCIをスタートしてもらった <img loading="lazy" class="chatlog__emoji " alt="🙂" title="slight_smile" src="https://twemoji.maxcdn.com/2/svg/1f642.svg"></span> <span class="chatlog__edited-timestamp" title="29-Apr-17 07:42 AM">(edited)</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftPMのテストだったので、SwiftPMのSlackでaciidさんに相談してCIをスタートしてもらった <img loading="lazy" class="chatlog__emoji " alt="🙂" title="slight_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg"></span> <span class="chatlog__edited-timestamp" title="29-Apr-17 07:42 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1417,7 +1414,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=313974280939503618"><span class="chatlog__timestamp"><a href="#chatlog__message-container-313974280939503618">16-May-17 09:41 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ネストした <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">NSDictionary</code> の比較がLinuxで正しく動いていないことを知って、ガッカリ <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/2/svg/1f61e.svg"> <a href="https://github.com/jpsim/SourceKitten/issues/384">https://github.com/jpsim/SourceKitten/issues/384</a></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ネストした <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">NSDictionary</code> の比較がLinuxで正しく動いていないことを知って、ガッカリ <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/v/latest/svg/1f61e.svg"> <a href="https://github.com/jpsim/SourceKitten/issues/384">https://github.com/jpsim/SourceKitten/issues/384</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
               <div class="chatlog__embed-content-container">
@@ -1427,7 +1424,7 @@
                         <div class="chatlog__markdown chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">compareJSONString</code> does not detect changes on Linux · Issue #384 · jpsim/SourceKitten</div>
                       </a></div>
                     <div class="chatlog__embed-description">
-                      <div class="chatlog__markdown chatlog__markdown-preserve">It seems comparing nested NSDictionary on Linux does not working at all since Swift 3.0.2. <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/2/svg/1f61e.svg"> It works as expected on macOS: ➜ 18:33:37 git:(master) ✗ swift swift_oss_helper command enabled. Welcom...</div>
+                      <div class="chatlog__markdown chatlog__markdown-preserve">It seems comparing nested NSDictionary on Linux does not working at all since Swift 3.0.2. <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/v/latest/svg/1f61e.svg"> It works as expected on macOS: ➜ 18:33:37 git:(master) ✗ swift swift_oss_helper command enabled. Welcom...</div>
                     </div>
                   </div>
                   <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/B6IqNs4SqLDt5OU9FNZ37jFFLQ5-CvkemfuzeAbLoKE/%3Fv%3D3%26s%3D400/https/avatars1.githubusercontent.com/u/33430"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/B6IqNs4SqLDt5OU9FNZ37jFFLQ5-CvkemfuzeAbLoKE/%3Fv%3D3%26s%3D400/https/avatars1.githubusercontent.com/u/33430" alt="Thumbnail" loading="lazy"> </a></div>
@@ -1609,7 +1606,7 @@
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
-                  <div class="chatlog__markdown-quote-content">ネストした NSDictionary の比較がLinuxで正しく動いていないことを知って、ガッカリ <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/2/svg/1f61e.svg">
+                  <div class="chatlog__markdown-quote-content">ネストした NSDictionary の比較がLinuxで正しく動いていないことを知って、ガッカリ <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/v/latest/svg/1f61e.svg">
                   </div>
                 </div>正確には、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">NSArray</code> に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Hashable</code> でない <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_ObjectBridgeable</code> な要素が入ってる時の比較がおかしかった。
               </span></div>
@@ -1623,7 +1620,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=314746641846501378"><span class="chatlog__timestamp"><a href="#chatlog__message-container-314746549848768513">18-May-17 12:50 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji chatlog__emoji--large" alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji chatlog__emoji--large" alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/v/latest/svg/1f914.svg"></span></div>
           </div>
         </div>
       </div>
@@ -1684,7 +1681,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=314747596436537344"><span class="chatlog__timestamp"><a href="#chatlog__message-container-314747596436537344">18-May-17 12:54 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">です。要素数が同じなら <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">isEqual(to:)</code> が真になってました。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="fearful"><img class="chatlog__emoji chatlog__emoji--small" alt="😨" src="https://twemoji.maxcdn.com/2/svg/1f628.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="fearful"><img class="chatlog__emoji chatlog__emoji--small" alt="😨" src="https://twemoji.maxcdn.com/v/latest/svg/1f628.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -1845,7 +1842,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=330538692957700097"><span class="chatlog__timestamp"><a href="#chatlog__message-container-330538692957700097">01-Jul-17 02:42 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">swift-corelibs-foundationのコードが… <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/2/svg/1f61e.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">swift-corelibs-foundationのコードが… <img loading="lazy" class="chatlog__emoji " alt="😞" title="disappointed" src="https://twemoji.maxcdn.com/v/latest/svg/1f61e.svg"></span></div>
           </div>
         </div>
       </div>
@@ -2418,7 +2415,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=351901568997654539"><span class="chatlog__timestamp"><a href="#chatlog__message-container-351901409328758785">29-Aug-17 01:30 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">このような「バグでコンパイルできてしまう」パターンは、 既存の NSNumber 実装が踏み抜いている。 https://github.com/apple/swift-corelibs-foundation/blob/87466c45462cba5a085d5cd41d785d681016542d/Foundation/NSNumber.swift#L266</code> 僕のcommitですね <img loading="lazy" class="chatlog__emoji " alt="🙂" title="slight_smile" src="https://twemoji.maxcdn.com/2/svg/1f642.svg"> これを元にphauslerさんがFactoryパターンで大幅に書き換えてるPR <a href="https://github.com/apple/swift-corelibs-foundation/pull/1095">https://github.com/apple/swift-corelibs-foundation/pull/1095</a> がしばらく前から止まってるけど、非公開なブランチがApple内部で進んでるのかな？</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">このような「バグでコンパイルできてしまう」パターンは、 既存の NSNumber 実装が踏み抜いている。 https://github.com/apple/swift-corelibs-foundation/blob/87466c45462cba5a085d5cd41d785d681016542d/Foundation/NSNumber.swift#L266</code> 僕のcommitですね <img loading="lazy" class="chatlog__emoji " alt="🙂" title="slight_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg"> これを元にphauslerさんがFactoryパターンで大幅に書き換えてるPR <a href="https://github.com/apple/swift-corelibs-foundation/pull/1095">https://github.com/apple/swift-corelibs-foundation/pull/1095</a> がしばらく前から止まってるけど、非公開なブランチがApple内部で進んでるのかな？</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
               <div class="chatlog__embed-content-container">
@@ -2896,7 +2893,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=351939012866342913"><span class="chatlog__timestamp"><a href="#chatlog__message-container-351939012866342913">29-Aug-17 03:59 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Rule 2 の「superclassのすべてのdesignated initialzerを実装していれば、 superclass の すべてのconvenience initalizer が継承される」</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -2951,7 +2948,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=351939627604508673"><span class="chatlog__timestamp"><a href="#chatlog__message-container-351939627604508673">29-Aug-17 04:02 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">拝んでおこう <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">拝んでおこう <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"></span></div>
           </div>
         </div>
       </div>
@@ -2983,7 +2980,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=372982394585874442"><span class="chatlog__timestamp"><a href="#chatlog__message-container-372982394585874442">26-Oct-17 05:38 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift-4.1-DEVELOPMENT-SNAPSHOT-2017-10-25-a</code> を試したら、REPL起動時に<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-I/usr/lib/swift/clang/include</code>を渡さなくても<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">import Foundation</code>でエラーにならなくなってた <img loading="lazy" class="chatlog__emoji " alt="🙌" title="raised_hands" src="https://twemoji.maxcdn.com/2/svg/1f64c.svg"></span> <span class="chatlog__edited-timestamp" title="26-Oct-17 05:39 AM">(edited)</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift-4.1-DEVELOPMENT-SNAPSHOT-2017-10-25-a</code> を試したら、REPL起動時に<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-I/usr/lib/swift/clang/include</code>を渡さなくても<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">import Foundation</code>でエラーにならなくなってた <img loading="lazy" class="chatlog__emoji " alt="🙌" title="raised_hands" src="https://twemoji.maxcdn.com/v/latest/svg/1f64c.svg"></span> <span class="chatlog__edited-timestamp" title="26-Oct-17 05:39 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -2994,7 +2991,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/336752697338232832/f41ec5a5c6e90269c119eaf1b1c8caf2.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="もあい#7291" data-user-id="336752697338232832">もあい</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=375124126093803531"><span class="chatlog__timestamp"><a href="#chatlog__message-container-375124126093803531">01-Nov-17 03:29 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">REPLで面倒なコマンド打たなくても良いんですね <img loading="lazy" class="chatlog__emoji " alt="🎉" title="tada" src="https://twemoji.maxcdn.com/2/svg/1f389.svg"> <img loading="lazy" class="chatlog__emoji " alt="🎉" title="tada" src="https://twemoji.maxcdn.com/2/svg/1f389.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">REPLで面倒なコマンド打たなくても良いんですね <img loading="lazy" class="chatlog__emoji " alt="🎉" title="tada" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg"> <img loading="lazy" class="chatlog__emoji " alt="🎉" title="tada" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg"></span></div>
           </div>
         </div>
       </div>
@@ -3812,7 +3809,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">enumeratorにしたら期待通りに動きました〜〜ありがとうございます</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -4200,9 +4197,9 @@
             <div class="chatlog__short-timestamp" title="17-Nov-17 02:21 PM">14:21</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">無事Swift 3.0で動きました <img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/2/svg/1f602.svg"> <a href="https://travis-ci.org/Quick/Nimble/jobs/303553458">https://travis-ci.org/Quick/Nimble/jobs/303553458</a></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">無事Swift 3.0で動きました <img loading="lazy" class="chatlog__emoji " alt="😂" title="joy" src="https://twemoji.maxcdn.com/v/latest/svg/1f602.svg"> <a href="https://travis-ci.org/Quick/Nimble/jobs/303553458">https://travis-ci.org/Quick/Nimble/jobs/303553458</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -4213,7 +4210,7 @@
             <div class="chatlog__short-timestamp" title="17-Nov-17 02:21 PM">14:21</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます!! <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます!! <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"></span></div>
           </div>
         </div>
       </div>
@@ -4264,7 +4261,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -4793,7 +4790,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="t.ae#5802" data-user-id="269801719796334592">t.ae</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=407828981815967744"><span class="chatlog__timestamp"><a href="#chatlog__message-container-407828981815967744">30-Jan-18 09:26 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">win/macともにdocker上では問題ないですね</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -4837,7 +4834,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=425633454932230146"><span class="chatlog__timestamp"><a href="#chatlog__message-container-425633454932230146">20-Mar-18 12:35 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">REPLで<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">:type lookup</code>だと型の情報が出るのに、使おうとするとunresolved identifierになる <img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">REPLで<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">:type lookup</code>だと型の情報が出るのに、使おうとするとunresolved identifierになる <img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/v/latest/svg/1f914.svg">
                 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">$ docker run --privileged -it --rm norionomura/swift:40 swift -I/usr/lib/swift/clang/include Welcome to Swift version 4.0 (swift-4.0-RELEASE). Type :help for assistance. 1&gt; import Foundation 2&gt; :type lookup DBL_DECIMAL_DIG var DBL_DECIMAL_DIG: Swift.Int32 { get {} } 2&gt; print(DBL_DECIMAL_DIG) error: repl.swift:2:7: error: use of unresolved identifier 'DBL_DECIMAL_DIG' print(DBL_DECIMAL_DIG) ^~~~~~~~~~~~~~~</code></span> <span class="chatlog__edited-timestamp" title="20-Mar-18 12:37 PM">(edited)</span></div>
           </div>
         </div>
@@ -4899,7 +4896,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Darwinのバックトレースと同様にクロージャとかまで表示してくれます。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="heart_eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="😍" src="https://twemoji.maxcdn.com/2/svg/1f60d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="heart_eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="😍" src="https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -5404,7 +5401,7 @@
             <div class="chatlog__short-timestamp" title="09-Nov-18 02:27 AM">02:27</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえずLinux向けの分岐では <span class="chatlog__markdown-mention" title="koher#9336">@koher</span> 案で対応しときます <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえずLinux向けの分岐では <span class="chatlog__markdown-mention" title="koher#9336">@koher</span> 案で対応しときます <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"></span></div>
           </div>
         </div>
       </div>
@@ -5497,7 +5494,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -5962,7 +5959,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=512209907748044802"><span class="chatlog__timestamp"><a href="#chatlog__message-container-512209907748044802">14-Nov-18 10:19 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">私もやるのは早くて23時くらいからなのでゆっくりで。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -6052,7 +6049,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=512265557467463680"><span class="chatlog__timestamp"><a href="#chatlog__message-container-512264303844261918">14-Nov-18 01:55 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえずビルド始めました。メモリ1GBディスク25GBの貧弱マシンでメモリは初めから60%消費してる状態だけど別にそこから増えることもなくビルド進んでますね。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -7309,7 +7306,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">マージされた</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/2/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">7</span></div>
+              <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://twemoji.maxcdn.com/v/latest/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">7</span></div>
             </div>
           </div>
         </div>
@@ -7519,7 +7516,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=562825511382941697"><span class="chatlog__timestamp"><a href="#chatlog__message-container-562825511382941697">03-Apr-19 02:27 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">何をもってBreaking Changeというのか難しい <img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/2/svg/1f914.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">何をもってBreaking Changeというのか難しい <img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://twemoji.maxcdn.com/v/latest/svg/1f914.svg"></span></div>
           </div>
         </div>
       </div>
@@ -7532,7 +7529,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=562826105048793098"><span class="chatlog__timestamp"><a href="#chatlog__message-container-562826105048793098">03-Apr-19 02:30 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もともとがbrokenだっただけって思うんですけどねえ</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -7546,7 +7543,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="ikesyo#7254" data-user-id="294103726682144768">ikesyo</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=562826365993222170"><span class="chatlog__timestamp"><a href="#chatlog__message-container-562826365993222170">03-Apr-19 02:31 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これはRxSwiftが直しましょうねって感じですね</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="grinning"><img class="chatlog__emoji chatlog__emoji--small" alt="😀" src="https://twemoji.maxcdn.com/2/svg/1f600.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="grinning"><img class="chatlog__emoji chatlog__emoji--small" alt="😀" src="https://twemoji.maxcdn.com/v/latest/svg/1f600.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -8123,7 +8120,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=606320614218924048"><span class="chatlog__timestamp"><a href="#chatlog__message-container-606320614218924048">01-Aug-19 03:01 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">XMLParserはあった。ぼくもいま気づきました <img loading="lazy" class="chatlog__emoji " alt="🙂" title="slight_smile" src="https://twemoji.maxcdn.com/2/svg/1f642.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">XMLParserはあった。ぼくもいま気づきました <img loading="lazy" class="chatlog__emoji " alt="🙂" title="slight_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg"></span></div>
           </div>
         </div>
       </div>
@@ -8234,7 +8231,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=670465880798527489"><span class="chatlog__timestamp"><a href="#chatlog__message-container-670465880798527489">25-Jan-20 03:12 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ついに公式のNightly dockerイメージが来た。 <a href="https://forums.swift.org/t/nightly-swift-docker-images/33029">https://forums.swift.org/t/nightly-swift-docker-images/33029</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">6</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">6</span></div>
             </div>
           </div>
         </div>
@@ -8774,7 +8771,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">パッチ作っておきます</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -8937,7 +8934,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=776699799139254303"><span class="chatlog__timestamp"><a href="#chatlog__message-container-776699799139254303">13-Nov-20 06:47 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">--static-swift-stdlib</code> 全然テストされてない…</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="sweat_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="😅" src="https://twemoji.maxcdn.com/2/svg/1f605.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="sweat_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="😅" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -8960,7 +8957,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=776701860806656010"><span class="chatlog__timestamp"><a href="#chatlog__message-container-776701860806656010">13-Nov-20 06:55 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お願いします <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お願いします <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"></span></div>
           </div>
         </div>
       </div>
@@ -9043,7 +9040,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=776707241687515186"><span class="chatlog__timestamp"><a href="#chatlog__message-container-776707241687515186">13-Nov-20 07:17 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございますリファレンスしました〜</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -9120,7 +9117,7 @@
             <div class="chatlog__short-timestamp" title="13-Nov-20 07:31 AM">07:31</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">mainブランチからブランチ切ったせいでSourceKittenのマニフェストをビルドできなくなった <img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">mainブランチからブランチ切ったせいでSourceKittenのマニフェストをビルドできなくなった <img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg"></span></div>
           </div>
         </div>
       </div>
@@ -9298,9 +9295,9 @@
             <div class="chatlog__short-timestamp" title="14-Nov-20 02:17 AM">02:17</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういえばSwiftPMのPRは無事マージされました <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういえばSwiftPMのPRは無事マージされました <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="heart"><img class="chatlog__emoji chatlog__emoji--small" alt="❤️" src="https://twemoji.maxcdn.com/2/svg/2764.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="heart"><img class="chatlog__emoji chatlog__emoji--small" alt="❤️" src="https://twemoji.maxcdn.com/v/latest/svg/2764.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -9314,7 +9311,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=777121859790569472"><span class="chatlog__timestamp"><a href="#chatlog__message-container-777121859790569472">14-Nov-20 10:44 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift-DEVELOPMENT-SNAPSHOT-2020-11-13-a</code>で試そうと思ったら、まだPRの変更が含まれてなかった。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="person_facepalming"><img class="chatlog__emoji chatlog__emoji--small" alt="🤦" src="https://twemoji.maxcdn.com/2/svg/1f926.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="person_facepalming"><img class="chatlog__emoji chatlog__emoji--small" alt="🤦" src="https://twemoji.maxcdn.com/v/latest/svg/1f926.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -9697,7 +9694,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=836557289485107200"><span class="chatlog__timestamp"><a href="#chatlog__message-container-836557289485107200">27-Apr-21 11:00 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">bugsに上げました <a href="https://bugs.swift.org/browse/SR-14536">https://bugs.swift.org/browse/SR-14536</a></span> <span class="chatlog__edited-timestamp" title="27-Apr-21 11:00 AM">(edited)</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -9709,7 +9706,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=882869823200186378"><span class="chatlog__timestamp"><a href="#chatlog__message-container-882869823200186378">02-Sep-21 06:09 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">直してくれてありがとう <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">直してくれてありがとう <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg">
                 <a href="https://kateinoigakukun.hatenablog.com/entry/2021/09/02/110000">https://kateinoigakukun.hatenablog.com/entry/2021/09/02/110000</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -9731,7 +9728,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -9743,7 +9740,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=882871782367985674"><span class="chatlog__timestamp"><a href="#chatlog__message-container-882871782367985674">02-Sep-21 06:17 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji chatlog__emoji--large" alt="😁" title="grin" src="https://twemoji.maxcdn.com/2/svg/1f601.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji chatlog__emoji--large" alt="😁" title="grin" src="https://twemoji.maxcdn.com/v/latest/svg/1f601.svg"></span></div>
           </div>
         </div>
       </div>
@@ -10253,6 +10250,9 @@
                   <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/tgmMmJP8VcW865loDpRlLLnemp0IaZpcnA3D9hrP760/https/opengraph.githubassets.com/f1eb2ed60e8bf760db5d163ad1e481ab547f4ea8d2cae1e844ec1009fd97f66d/norio-nomura/gh-query-tags"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/tgmMmJP8VcW865loDpRlLLnemp0IaZpcnA3D9hrP760/https/opengraph.githubassets.com/f1eb2ed60e8bf760db5d163ad1e481ab547f4ea8d2cae1e844ec1009fd97f66d/norio-nomura/gh-query-tags" alt="Thumbnail" loading="lazy"> </a></div>
                 </div>
               </div>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>

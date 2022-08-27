@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -1018,7 +1015,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="mono#5154" data-user-id="291046514573312001">mono</span> <a href="/channels/304938512669474816?category=開発環境, ライブラリ&amp;channel=xamarin&amp;message_id=337439254483435531"><span class="chatlog__timestamp"><a href="#chatlog__message-container-337439254483435531">20-Jul-17 03:43 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういうニュアンスでした。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1053,7 +1050,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1067,7 +1064,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="Puramu#8976" data-user-id="372331733888270339">Puramu</span> <a href="/channels/304938512669474816?category=開発環境, ライブラリ&amp;channel=xamarin&amp;message_id=372462940412051457"><span class="chatlog__timestamp"><a href="#chatlog__message-container-372462940412051457">24-Oct-17 07:14 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">少し前の話題みたいですが、私自身がSwiftの後Xamarinの勉強もしてみようかと考えていて興味深かったので、新参者ですがちょっとお邪魔させてください。 私の場合ですが、何故Xamarinをという考えに至ったのかには大きく3つの理由があります。 <u>1つ、Windowsで開発できるということ。</u> 最終的にはMacでビルド・検証しなくてはいけないのですが、うちの会社は元々社員の開発用端末はWindowsで、MacはiOS向けアプリの開発勉強のために1台買ってもらっただけしかありません。 今まで地元でMacを見たこともなく(電気屋さんでも売っているのを見たことがない)、今回本社から送られてきたのが初めて触ったMacというくらい馴染みがないというのもあり、Windowsで開発できるのはやりやすいなと思いました。 ※Switchや紅白の例は、この理由はほぼないかとは思います。 <u>2つ、XAML+C#という組み合わせ</u> Xamarin.Formsの話になりますが、XAML+C#という組み合わせがWPFの開発経験があるととっつきやすいです。 また、Swiftはかなり新しい言語なのでバージョンが上がる時に文法が結構変わることもあって、保守を考えるとC#というのもありだと思いました。 ※バージョン指定できますし、企業向けアプリだと会社支給端末のバージョンがバンバン勝手に上げられるというのはあまりないので、これはそれほど気にしなくても良いかなとは思うのですが。 <u>3つ、クロス実装が可能</u> 今、私がiOS向けのアプリ開発について勉強している理由のうちの1つに、元々Android用に作っていたアプリをiOS用に作るというのが受注しそうだというのがあります。 ゆえに今後のことを考えると、クロス実装出来るようにした方がメンテナンスが楽そうだと思いました。 以上3つの理由でXamarinもしてみようとは考えていますが、 ・今後本格的な開発のためにMacは追加購入してもらえる予定 ・最終的にXamarinを採用することになるにせよSwiftの知識はあった方が良い ・個人的にSwiftの勉強もしたかった ということで、現状は先にSwiftから勉強を始めています。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1092,7 +1089,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="Puramu#8976" data-user-id="372331733888270339">Puramu</span> <a href="/channels/304938512669474816?category=開発環境, ライブラリ&amp;channel=xamarin&amp;message_id=372600982670147585"><span class="chatlog__timestamp"><a href="#chatlog__message-container-372600982670147585">25-Oct-17 04:23 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">先の話になりそうですが、実際にXamarinについて勉強してみたら、ここに報告してみたいと思います。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
             </div>
           </div>
         </div>
@@ -1106,8 +1103,8 @@
             <div class="chatlog__header"><span class="chatlog__author" title="jaaaaaaaai#3973" data-user-id="204612516590911489">jaaaaaaaai</span> <a href="/channels/304938512669474816?category=開発環境, ライブラリ&amp;channel=xamarin&amp;message_id=417742924017565709"><span class="chatlog__timestamp"><a href="#chatlog__message-container-417742343291273217">26-Feb-18 05:58 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">2010年頃からObjective-C、Swiftは1.3頃からSwift3.xくらいまでいじってるiOSメインのエンジニアです。 ここ最近業務で割とガッツリXamarin.iOSを使ったので感想書いてみます。 Xcode + SwiftとXamarin.iOSを比較してのよかったこと、よくなかったこと、どっちもどっちなこと、的な感じで。 (プロジェクトでは、Xcode8とXamarin 7.1を主に利用していました) ではさっそく。 よかったこと - C#のおかげでSwiftの破壊的なアップデートに巻き込まれない。Xcode9へのアップデートもシンタックスは変更なしでOK - C#がデフォルトで備えてるLINQが強力 - Visual Studioのビルドが速い - Visual Studioが安定してる(なんならXcodeよりSimulatorの立ち上がる安定感が上) - コード補完も速い - パッケージマネージャのNugetがCocoaPodsと比べてだいぶ安定している気がする Xamarinを採用したことでこまった、もしくは困りそうなこと - 現時点で複数バージョンのXamarinを共存させることができないようなので、いわゆる「デッキ」が組めない(Xcode_8.3.3.app、Xcode_9.2.0.appといった名前で複数バージョンの開発環境を保持するアレ。Xamarin.iOSは1対1でXcodeの指定バージョンと紐づいてしまうので、古いバージョンに戻したい場合は古いVisual Studioのインストーラを取っておいて、Visual Studioのアンインストール&amp;インストールしなおしが必要だった) - バージョンアップするなら一気にアップデートしないといけないので、受託などで複数案件を掛け持つ場合は厳しそう) - Nugetに対応していない広告SDKなどを自力でバインディングするのはそこそこパワーが要る - C#のバージョンが古くNull safeに書くのが困難(Objectは全てオプショナルのようなものなのだがnullに触ると死ぬので、?を多様してクラッシュを避ける感じ) - インストール容量40GBがMac SSDに厳しい XamarinもXcodeもどっちもどっちなところ - iOS SDKのメジャーバージョンアップでちょこちょこ振る舞いが変わるのはどちらも同じ - エディタはどちらもところどころ使いづらい。特にMacのVisual Studioエディタは日本語入力が結構つらい。自動保存のたびにBOMが増え続ける不具合などもあった という感じです。 で、アリなの？というところですが、エンジニアの裁量が大きい組織であれば「アリ」だと思います。 思いのほか安定していて普通に業務に耐えうる品質です。コード補完が速い、ビルドが速い、だけでも十分価値があって、Xcodeのプロダクトと複数保守しているとついついXamarin側をいじりたくなるくらい快適でした。リリースしたアプリも99.8%くらいのクラッシュフリーで動いてますし、内部的にはRubymotionなどと同じでネイティブなコンポーネントが使われています。 あまり使っている方はいらっしゃらないかもですが、何かのご参考になれば幸いですー</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>

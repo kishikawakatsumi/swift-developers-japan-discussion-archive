@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -796,7 +793,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -810,7 +807,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/763427634179735592/881495313670615050?category=atcoder&amp;channel=algo-335&amp;message_id=881526714801487872"><span class="chatlog__timestamp"><a href="#chatlog__message-container-881526714801487872">29-Aug-21 01:12 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">昨日の問題が罠になってますね。 <a href="https://algo-method.com/submissions/43322">https://algo-method.com/submissions/43322</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -824,7 +821,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koogawa#4610" data-user-id="372296616826109952">koogawa</span> <a href="/channels/763427634179735592/881495313670615050?category=atcoder&amp;channel=algo-335&amp;message_id=881536524867469353"><span class="chatlog__timestamp"><a href="#chatlog__message-container-881536524867469353">29-Aug-21 01:51 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">昨日のをちょこっといじったら解けました！ <a href="https://algo-method.com/submissions/43348">https://algo-method.com/submissions/43348</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -859,7 +856,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">for index in stride(from: 5, to: 1, by: -1) { print(index) } //prints 5, 4, 3, 2 for index in stride(from: 5, through: 1, by: -1) { print(index) } //prints 5, 4, 3, 2, 1</code></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -894,7 +891,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓のときの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">reversed</code> は <a href="https://developer.apple.com/documentation/swift/array/1690025-reversed">https://developer.apple.com/documentation/swift/array/1690025-reversed</a> で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ReversedCollection</code> が作られるだけなので O(1) です。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">for i in (0 ..&lt; n).reversed() { }</code></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -907,7 +904,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">一方で、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let reverseArray: [Int] = array.reversed()</code> などとすると <a href="https://developer.apple.com/documentation/swift/sequence/1641355-reversed">https://developer.apple.com/documentation/swift/sequence/1641355-reversed</a> が呼ばれて O(N) です（新しい <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Array</code> を作らないといけないので、当然要素数分だけの回数のオペレーションが必要）。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -921,7 +918,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="uhooi#8263" data-user-id="578033825121304576">uhooi</span> <a href="/channels/763427634179735592/881495313670615050?category=atcoder&amp;channel=algo-335&amp;message_id=881541239319715871"><span class="chatlog__timestamp"><a href="#chatlog__message-container-881541239319715871">29-Aug-21 02:10 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ReversedCollection</code> 、最初は使いづらいと思いましたが、パフォーマンスの観点では素晴らしい仕組みだと思いました…！</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/2/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://twemoji.maxcdn.com/v/latest/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -975,7 +972,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/763427634179735592/881495313670615050?category=atcoder&amp;channel=algo-335&amp;message_id=881543889129996298"><span class="chatlog__timestamp"><a href="#chatlog__message-container-881542363296714772">29-Aug-21 02:14 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">zip(array1, array2)</code> とやっても新しい <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Array</code> が作られるわけではなくて、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ZipSequence</code> というガワが作られるだけです。なので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">zip</code> 自体は O(1) 。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -988,7 +985,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">zip(numbers, strings)</code> の結果としてほしいのは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Zip2Sequence&lt;[Int], [String]&gt;</code> ではなく <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Element == (Int ,String)</code> な何らかの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Sequence</code> なので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">zip</code> が返す <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Sequence</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Zip2Sequence&lt;[Int], [String]&gt;</code> という特定の型であることを露出する必要はなく、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">some Sequence&lt;.Element == (Int, String)&gt;</code> であれば十分というわけです。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1001,7 +998,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">同様に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">string.reversed</code> も <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ReversedCollection&lt;[String]&gt;</code> である必要はなく、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">some Collection&lt;.Element == String&gt;</code> が返ってくれば十分です。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>

@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -789,7 +786,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
             </div>
           </div>
         </div>
@@ -826,7 +823,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/2/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
             </div>
           </div>
         </div>
@@ -887,7 +884,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/863080850094817300/db5b85972016825f9ae7b0fcee86bf9f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="strmikan#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/950714324006080552?category=atcoder&amp;channel=algo-822&amp;message_id=950726488469151755"><span class="chatlog__timestamp"><a href="#chatlog__message-container-950726486430720010">08-Mar-22 12:07 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k-mi#9165" data-user-id="863080850094817300">strmikan</span> <a href="/channels/763427634179735592/950714324006080552?category=atcoder&amp;channel=algo-822&amp;message_id=950726488469151755"><span class="chatlog__timestamp"><a href="#chatlog__message-container-950726486430720010">08-Mar-22 12:07 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ACしました！</span></div>
           </div>
         </div>
@@ -913,7 +910,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/2/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
             </div>
           </div>
         </div>
@@ -940,7 +937,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/2/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="clap_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👏🏻" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
             </div>
           </div>
         </div>
@@ -954,7 +951,7 @@
             <div class="chatlog__header"><span class="chatlog__author" title="tockrock#4224" data-user-id="131342384406462464">tockrock</span> <a href="/channels/763427634179735592/950714324006080552?category=atcoder&amp;channel=algo-822&amp;message_id=950912003935981608"><span class="chatlog__timestamp"><a href="#chatlog__message-container-950912003935981608">09-Mar-22 12:24 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ACしました！ とはいっても、 解き方は想定と違う方法だと知りつつでしたが…。 その後改めて、解説をチラ見して <span class="chatlog__markdown-spoiler chatlog__markdown-spoiler--hidden" onclick="showSpoiler(event, this)">組み合わせ</span> を使って解きました。 こういう似たような問題を繰り返し解いて感覚を掴みたいところです… 自力: <a href="https://algo-method.com/submissions/343097">https://algo-method.com/submissions/343097</a> チラ見: <a href="https://algo-method.com/submissions/343102">https://algo-method.com/submissions/343102</a></span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/2/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+              <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>

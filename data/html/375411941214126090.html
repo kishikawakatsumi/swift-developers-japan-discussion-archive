@@ -696,13 +696,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
-        const imageDataUrl = e.getAttribute('data-source');
         const anim = lottie.loadAnimation({
           container: e,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: imageDataUrl
+          path: e.getAttribute('data-source')
         });
         anim.addEventListener('data_failed', () => e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>');
       });
@@ -710,7 +709,7 @@
   </script>
   <script>
     function scrollToMessage(event, id) {
-      var element = document.getElementById('chatlog__message-container-' + id);
+      const element = document.getElementById('chatlog__message-container-' + id);
       if (!element) return;
       event.preventDefault();
       element.classList.add('chatlog__message-container--highlighted');
@@ -718,9 +717,7 @@
         top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
         behavior: 'smooth'
       });
-      window.setTimeout(function() {
-        element.classList.remove('chatlog__message-container--highlighted');
-      }, 2000);
+      window.setTimeout(() => element.classList.remove('chatlog__message-container--highlighted'), 2000);
     }
 
     function showSpoiler(event, element) {
@@ -797,7 +794,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">スレチな可能性</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="rolling_eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="🙄" src="https://twemoji.maxcdn.com/2/svg/1f644.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="rolling_eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="🙄" src="https://twemoji.maxcdn.com/v/latest/svg/1f644.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -811,7 +808,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=430225967080931328"><span class="chatlog__timestamp"><a href="#chatlog__message-container-430225967080931328">02-Apr-18 04:44 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">直接の原因としては同じDynamic Frameworkが２つ含まれちゃってるんですね。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="open_mouth"><img class="chatlog__emoji chatlog__emoji--small" alt="😮" src="https://twemoji.maxcdn.com/2/svg/1f62e.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="open_mouth"><img class="chatlog__emoji chatlog__emoji--small" alt="😮" src="https://twemoji.maxcdn.com/v/latest/svg/1f62e.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
           </div>
         </div>
@@ -912,7 +909,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ターゲットが増えても理屈は同じです。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="blush"><img class="chatlog__emoji chatlog__emoji--small" alt="😊" src="https://twemoji.maxcdn.com/2/svg/1f60a.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+              <div class="chatlog__reaction" title="blush"><img class="chatlog__emoji chatlog__emoji--small" alt="😊" src="https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>
@@ -983,7 +980,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296270044306997259/857448058699b0be05687e672beb9b30.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=463907615433293825"><span class="chatlog__timestamp"><a href="#chatlog__message-container-463907615433293825">04-Jul-18 03:23 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。あんまりこのpost_installのスクリプトを手で書きたくないので、何かあるといいんですけどね<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。あんまりこのpost_installのスクリプトを手で書きたくないので、何かあるといいんですけどね<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg"></span></div>
           </div>
         </div>
       </div>
@@ -1437,7 +1434,7 @@
             <div class="chatlog__short-timestamp" title="07-Aug-18 06:06 AM">06:06</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、まさに今回みたいな話をtry!Swift のFirestoreのワークショップで話していたと思うんですけど、通訳に必死で内容を覚えていない<img loading="lazy" class="chatlog__emoji " alt="😪" title="sleepy" src="https://twemoji.maxcdn.com/2/svg/1f62a.svg">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、まさに今回みたいな話をtry!Swift のFirestoreのワークショップで話していたと思うんですけど、通訳に必死で内容を覚えていない<img loading="lazy" class="chatlog__emoji " alt="😪" title="sleepy" src="https://twemoji.maxcdn.com/v/latest/svg/1f62a.svg">
                 <span class="chatlog__markdown-mention" title="nade#8341">@nade</span> Firebase CommunityのSlackのFirestoreチャンネルで聞いてみてもらえますか？Firebaseの中の人のアサインなど、フォローはします。</span></div>
           </div>
         </div>
@@ -1461,7 +1458,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=476270215437615105"><span class="chatlog__timestamp"><a href="#chatlog__message-container-476270215437615105">07-Aug-18 06:07 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど、そういうことができるんですね。 &lt; セキュリティルールで防いでいく</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="smile"><img class="chatlog__emoji chatlog__emoji--small" alt="😄" src="https://twemoji.maxcdn.com/2/svg/1f604.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="smile"><img class="chatlog__emoji chatlog__emoji--small" alt="😄" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1475,8 +1472,8 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="nade#8341" data-user-id="392760542634180619">nade</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=476275640111333377"><span class="chatlog__timestamp"><a href="#chatlog__message-container-476275640111333377">07-Aug-18 06:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="d_date#8946">@d_date</span> さん 調査ありがとうございます．現状セキュリティルールで工夫するしかなさそうですね． Firebase Community聞いてみようと思います．フォローお願いします．</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="ok_hand"><img class="chatlog__emoji chatlog__emoji--small" alt="👌" src="https://twemoji.maxcdn.com/2/svg/1f44c.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
-              <div class="chatlog__reaction" title="white_check_mark"><img class="chatlog__emoji chatlog__emoji--small" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="ok_hand"><img class="chatlog__emoji chatlog__emoji--small" alt="👌" src="https://twemoji.maxcdn.com/v/latest/svg/1f44c.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="white_check_mark"><img class="chatlog__emoji chatlog__emoji--small" alt="✅" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1490,7 +1487,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=476282675544457236"><span class="chatlog__timestamp"><a href="#chatlog__message-container-476282675544457236">07-Aug-18 06:57 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そろそろ向こうは日付まわるぐらいなので、気長に待っていてください</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="ok_hand"><img class="chatlog__emoji chatlog__emoji--small" alt="👌" src="https://twemoji.maxcdn.com/2/svg/1f44c.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="ok_hand"><img class="chatlog__emoji chatlog__emoji--small" alt="👌" src="https://twemoji.maxcdn.com/v/latest/svg/1f44c.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1794,7 +1791,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=478821727829360649"><span class="chatlog__timestamp"><a href="#chatlog__message-container-478821727829360649">14-Aug-18 07:06 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そう。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/2/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -1900,7 +1897,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="laughing"><img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/2/svg/1f606.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="laughing"><img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://twemoji.maxcdn.com/v/latest/svg/1f606.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -2499,7 +2496,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=478946212050108416"><span class="chatlog__timestamp"><a href="#chatlog__message-container-478945506547204097">14-Aug-18 03:18 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji chatlog__emoji--large" alt="👍" title="thumbsup" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji chatlog__emoji--large" alt="👍" title="thumbsup" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg"></span></div>
           </div>
         </div>
       </div>
@@ -2859,7 +2856,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=478956113736368130"><span class="chatlog__timestamp"><a href="#chatlog__message-container-478956113736368130">14-Aug-18 04:00 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">良さそう <a href="https://github.com/omochi/Firebase-Carthage-fbapp/commit/0aa1318f8a0da0987309b73658693eb6d2f6dc57">https://github.com/omochi/Firebase-Carthage-fbapp/commit/0aa1318f8a0da0987309b73658693eb6d2f6dc57</a> <img loading="lazy" class="chatlog__emoji " alt="👍" title="thumbsup" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">良さそう <a href="https://github.com/omochi/Firebase-Carthage-fbapp/commit/0aa1318f8a0da0987309b73658693eb6d2f6dc57">https://github.com/omochi/Firebase-Carthage-fbapp/commit/0aa1318f8a0da0987309b73658693eb6d2f6dc57</a> <img loading="lazy" class="chatlog__emoji " alt="👍" title="thumbsup" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg"></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
               <div class="chatlog__embed-content-container">
@@ -2946,8 +2943,8 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">^ まあリンク周りに関してはは似たようなものか。どっちもうまくいってる間は簡単だけど、何か起こったらけっこう大変。</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="crab"><img class="chatlog__emoji chatlog__emoji--small" alt="🦀" src="https://twemoji.maxcdn.com/2/svg/1f980.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
-              <div class="chatlog__reaction" title="frowning"><img class="chatlog__emoji chatlog__emoji--small" alt="😦" src="https://twemoji.maxcdn.com/2/svg/1f626.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="crab"><img class="chatlog__emoji chatlog__emoji--small" alt="🦀" src="https://twemoji.maxcdn.com/v/latest/svg/1f980.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="frowning"><img class="chatlog__emoji chatlog__emoji--small" alt="😦" src="https://twemoji.maxcdn.com/v/latest/svg/1f626.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -3328,7 +3325,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/431048656884334606/12404c3148cdca1fed20bebbbc820a81.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="acevif#0050" data-user-id="431048656884334606">acevif</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=502810533872009228"><span class="chatlog__timestamp"><a href="#chatlog__message-container-502810533872009228">19-Oct-18 11:49 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます！ <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/2/svg/1f64f.svg"> <img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/2/svg/1f647.svg"> なるほどそういう感じなら導入を積極的に考えていってよさそうです。 検討しつつFirebase summitのアナウンスを待ってから決定していこうと思います。</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます！ <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"> <img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://twemoji.maxcdn.com/v/latest/svg/1f647.svg"> なるほどそういう感じなら導入を積極的に考えていってよさそうです。 検討しつつFirebase summitのアナウンスを待ってから決定していこうと思います。</span></div>
           </div>
         </div>
       </div>
@@ -3357,8 +3354,8 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
-              <div class="chatlog__reaction" title="100"><img class="chatlog__emoji chatlog__emoji--small" alt="💯" src="https://twemoji.maxcdn.com/2/svg/1f4af.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="100"><img class="chatlog__emoji chatlog__emoji--small" alt="💯" src="https://twemoji.maxcdn.com/v/latest/svg/1f4af.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -3392,7 +3389,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296270044306997259/857448058699b0be05687e672beb9b30.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=506451673732874241"><span class="chatlog__timestamp"><a href="#chatlog__message-container-506451673732874241">29-Oct-18 12:58 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今日出たばかりなので、まだこれからです<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/2/svg/1f605.svg"></span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今日出たばかりなので、まだこれからです<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg"></span></div>
           </div>
         </div>
       </div>
@@ -3440,7 +3437,7 @@
                         <div class="chatlog__markdown chatlog__markdown-preserve">Failure to archive with new build system, extensions, and subspec ...</div>
                       </a></div>
                     <div class="chatlog__embed-description">
-                      <div class="chatlog__markdown chatlog__markdown-preserve">I've read and understood the CONTRIBUTING guidelines and have done my best effort to follow. <img loading="lazy" class="chatlog__emoji " alt="🌈" title="rainbow" src="https://twemoji.maxcdn.com/2/svg/1f308.svg"> Report What did you do? Product -&gt; Archive What did you expect to happen? Successful archive Wh...</div>
+                      <div class="chatlog__markdown chatlog__markdown-preserve">I've read and understood the CONTRIBUTING guidelines and have done my best effort to follow. <img loading="lazy" class="chatlog__emoji " alt="🌈" title="rainbow" src="https://twemoji.maxcdn.com/v/latest/svg/1f308.svg"> Report What did you do? Product -&gt; Archive What did you expect to happen? Successful archive Wh...</div>
                     </div>
                   </div>
                   <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/yZyJPVmFeD82G-whFmrDNEoPtvvddqrPE45LQp8KIuo/%3Fs%3D400%26v%3D4/https/avatars0.githubusercontent.com/u/73870"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/yZyJPVmFeD82G-whFmrDNEoPtvvddqrPE45LQp8KIuo/%3Fs%3D400%26v%3D4/https/avatars0.githubusercontent.com/u/73870" alt="Thumbnail" loading="lazy"> </a></div>
@@ -3776,7 +3773,7 @@
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=768470382507196417"><span class="chatlog__timestamp"><a href="#chatlog__message-container-768470163376308236">21-Oct-20 01:46 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まあエラーはさすがにResultで返してええやろ</span></div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
             </div>
           </div>
         </div>
@@ -3816,8 +3813,8 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="frowning2"><img class="chatlog__emoji chatlog__emoji--small" alt="☹️" src="https://twemoji.maxcdn.com/2/svg/2639.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
-              <div class="chatlog__reaction" title="cry"><img class="chatlog__emoji chatlog__emoji--small" alt="😢" src="https://twemoji.maxcdn.com/2/svg/1f622.svg" loading="lazy"> <span class="chatlog__reaction-count">5</span></div>
+              <div class="chatlog__reaction" title="frowning2"><img class="chatlog__emoji chatlog__emoji--small" alt="☹️" src="https://twemoji.maxcdn.com/v/latest/svg/2639.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="cry"><img class="chatlog__emoji chatlog__emoji--small" alt="😢" src="https://twemoji.maxcdn.com/v/latest/svg/1f622.svg" loading="lazy"> <span class="chatlog__reaction-count">5</span></div>
             </div>
           </div>
         </div>
