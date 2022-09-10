@@ -5101,9 +5101,326 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1014026988870185040" class="chatlog__message-container" data-message-id="1014026988870185040">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1014027696197615656"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1014026988870185040">30-Aug-22 04:21 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftSyntaxのSwift Parserに <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">""""</code> を食わせると、１文字目と５文字目に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">"</code> が足りませんよ、っていう出力になるんだが <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">""""""</code> は別に正しいコードになってないので謎だ。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014027035942850560" class="chatlog__message-container" data-message-id="1014027035942850560">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 04:21 AM">04:21</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">[omochi@omochi-iMacPro swift-syntax (add-fixed-issues-test %=)]$ .build/debug/swift-parser-test dump-tree crash.swift SourceFileSyntax children=2 0: CodeBlockItemListSyntax children=1 0: CodeBlockItemSyntax children=1 0: StringLiteralExprSyntax children=3 0: stringQuote MISSING 1: StringLiteralSegmentsSyntax children=1 0: StringSegmentSyntax children=1 0: stringSegment("\"\"\"\"") 2: stringQuote MISSING 1: eof</code></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014027510150869002" class="chatlog__message-container" data-message-id="1014027510150869002">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 04:23 AM">04:23</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">パース結果としてはこうなってるんだけど、「ダブルクォート4個のstring segment」が一つだけの文字列になっているのも謎だ。ダブルクォートが文字列のコンテンツになっちゃった。そして文字列を包むダブルクォートは両端で消失。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014027696197615656" class="chatlog__message-container" data-message-id="1014027696197615656">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 04:24 AM">04:24</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">実装を追って調べてみようと思う。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1014062212232527892" class="chatlog__message-container" data-message-id="1014062212232527892">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1014062894398328842"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1014062212232527892">30-Aug-22 06:41 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Lexerでは トリプルクォートのオープン＋内容がダブルクォート１文字（改行が無い不正を無視、クローズクォート行方不明）として処理され、結果的にクワドラクォートのstring literal token になり</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014062311327150091" class="chatlog__message-container" data-message-id="1014062311327150091">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 06:41 AM">06:41</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Parserではstring literal tokenの再解釈で異なるロジックになり、</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014062413529743380" class="chatlog__message-container" data-message-id="1014062413529743380">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 06:41 AM">06:41</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">さらにParser内部でも、オープンクォートのパース時には <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">"</code> + <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">""</code> + <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">"</code> に解釈しようとしかけるが、(ダブルクォート2つがコンテンツである文字列)</span> <span class="chatlog__edited-timestamp" title="30-Aug-22 06:42 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014062682099421194" class="chatlog__message-container" data-message-id="1014062682099421194">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 06:43 AM">06:43</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">後段の処理はそのつもりが無くて ダブルクォート4つの文字列、オープナーが無いので 空文字列で挟まれている、とされ、</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014062745471168612" class="chatlog__message-container" data-message-id="1014062745471168612">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 06:43 AM">06:43</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Tokenの汎用処理でゼロ長トークンが missing 扱いされる</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1014062894398328842" class="chatlog__message-container" data-message-id="1014062894398328842">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="30-Aug-22 06:43 AM">06:43</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">って感じで壮大に混乱しながら処理が進行してたｗ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1014063542602829895" class="chatlog__message-container" data-message-id="1014063542602829895">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1014063542602829895"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1014063542602829895">30-Aug-22 06:46 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">めっちゃ迷子になってるｗ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1014067804393197600" class="chatlog__message-container" data-message-id="1014067804393197600">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1014067804393197600"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1014067804393197600">30-Aug-22 07:03 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、ちょっと違うな、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">"</code> + <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">""</code> + <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">"</code> のロジックは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">#</code> がついてる時だけだ。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1015121051291746425" class="chatlog__message-container" data-message-id="1015121051291746425">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1015121051291746425"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1015121051291746425">02-Sep-22 04:48 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Doug先生が怒涛のバグ出ししててウケた</span></div>
+            <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/561853152408895518/1015121050402562048/2022-09-02_13.48.13.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/561853152408895518/1015121050402562048/2022-09-02_13.48.13.png" alt="Image attachment" title="Image: 2022-09-02_13.48.13.png (519.75 KB)" loading="lazy"> </a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1015368641245622414" class="chatlog__message-container" data-message-id="1015368641245622414">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1015369109262831677"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1015368641245622414">02-Sep-22 09:12 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://twitter.com/dgregor79/status/1564862291707052033">https://twitter.com/dgregor79/status/1564862291707052033</a></span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(29,161,242,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/9SSo6uVEghs7QP2cUKavw7dv6_aF5uNw2OwBxj748uc/https/pbs.twimg.com/profile_images/913662237616726016/enUcx7hl_400x400.jpg" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://twitter.com/dgregor79">
+                        <div class="chatlog__embed-author">Doug Gregor (@dgregor79)</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">I <em>love</em> when a bit of testing infrastructure instantly provides a giant leap forward in test coverage. With my latest hack, we can piggyback the new Swift parser on the real Swift compiler, looking for crashes and input source round-trip failures in everything we build.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chatlog__embed-footer"><img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy"> <span class="chatlog__embed-footer-text"> Twitter • 31-Aug-22 06:26 AM </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1015369109262831677" class="chatlog__message-container" data-message-id="1015369109262831677">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="02-Sep-22 09:14 PM">21:14</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このツイートで言及されている "my latest hack" は <a href="https://github.com/apple/swift/pull/60888">https://github.com/apple/swift/pull/60888</a> です</span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/apple/swift/pull/60888">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">Optional support for round-trip testing the new Swift parser. by Do...</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">When enabled, compile in support for round-trip testing the new SwiftSyntax-provided Swift parser alongside the existing parser. Right now, this means parsing every source file with the new parser ...</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/-dJWcmtgfOS_uWnh5SW6QrA_Jc9lcYGfMnSHNyPkz0U/https/opengraph.githubassets.com/b4b0cc07d7df96fa4f9b2a83d196220db41e8af8d826eacfee5e4d2ec9a0e045/apple/swift/pull/60888"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/-dJWcmtgfOS_uWnh5SW6QrA_Jc9lcYGfMnSHNyPkz0U/https/opengraph.githubassets.com/b4b0cc07d7df96fa4f9b2a83d196220db41e8af8d826eacfee5e4d2ec9a0e045/apple/swift/pull/60888" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1015448595991900231" class="chatlog__message-container" data-message-id="1015448595991900231">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1015448666393301022"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1015448595991900231">03-Sep-22 02:30 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おお、そういうことか！</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1015448666393301022" class="chatlog__message-container" data-message-id="1015448666393301022">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="03-Sep-22 02:30 AM">02:30</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">早速繋げてみたことでいろんな入力叩き込んでバグがみつけられたのね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1015466169546846272" class="chatlog__message-container" data-message-id="1015466169546846272">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1015466169546846272"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1015466169546846272">03-Sep-22 03:40 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ParseSourceFileRequest::evaluate</code> に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift_parser_consistencyCheck</code> とやらを仕込んだ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1015470802696671252" class="chatlog__message-container" data-message-id="1015470802696671252">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1015470802696671252"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1015470802696671252">03-Sep-22 03:58 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">private(set)</code> のパースを考えるときに <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">private(var</code> という入力が来たら、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">private(set) var</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">set)</code> がスッポ抜けていると考える という動作が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">parser.expect(.rightParen)</code> だとできるなあ</span> <span class="chatlog__edited-timestamp" title="03-Sep-22 03:59 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1015481533043327068" class="chatlog__message-container" data-message-id="1015481533043327068">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1015481533043327068"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1015481533043327068">03-Sep-22 04:41 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でも <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">private(get, set)</code> を考えると、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">,</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">)</code> より強いので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">get, </code> をノイズと判定できずに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">,</code> で力尽きて <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">set)</code> の不存在と、 後続ノイズの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> set)</code> になってしまうな。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1016252362513469450" class="chatlog__message-container" data-message-id="1016252362513469450">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1016253149213884486"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1016252362513469450">05-Sep-22 07:44 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift-syntax/pull/704#discussion_r962583292">https://github.com/apple/swift-syntax/pull/704#discussion_r962583292</a> 英会話難しい</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1016252848956243968" class="chatlog__message-container" data-message-id="1016252848956243968">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Sep-22 07:46 AM">07:46</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">expect</code> 使ったら？というコメントが来たので、それだと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">private(get, set)</code> のパースが微妙になってしまう、という返事をしたけど、 もしいろいろ誤読してるとややこしくなりそうなので実装例も用意して説明をした</span> <span class="chatlog__edited-timestamp" title="05-Sep-22 07:46 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1016253149213884486" class="chatlog__message-container" data-message-id="1016253149213884486">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Sep-22 07:47 AM">07:47</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">extra token munging here.</code> はおそらく先行する２つのwhile loopとかを言ってるんだと思うけど、もしかしたらただ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">consume(if:)</code> の1行だけを指してるのかもしれない・・・</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1016592440448262154" class="chatlog__message-container" data-message-id="1016592440448262154">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1016592440448262154"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1016592440448262154">06-Sep-22 06:15 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift-syntax/pull/707">https://github.com/apple/swift-syntax/pull/707</a> ↑ワイの困りについて書いたら、token precedence自体に改修が入りそう。これだと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">)</code> を探すときに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">get</code> も <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">,</code> も 食えるから助かるな。 openとcloseでレベルが違う事になってるけどそれは問題ないんだろうか</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1016958786541469736" class="chatlog__message-container" data-message-id="1016958786541469736">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1016958786541469736"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1016958786541469736">07-Sep-22 06:31 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">expectで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">)</code> まで走るのは求めてるのとちょっと違うな。 探してるものが見つからずに強いトークンにぶつかった場合、 先読み失敗じゃなくてそこで止まってほしいわ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1018015109722951730" class="chatlog__message-container" data-message-id="1018015109722951730">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1018016404299075595"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1018015109722951730">10-Sep-22 04:28 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">expectシステムがめっちゃ改良された・・・</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1018016404299075595" class="chatlog__message-container" data-message-id="1018016404299075595">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="10-Sep-22 04:33 AM">04:33</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あーすげえ declaration のパースロジックがめっちゃ先読みベースに変わってる</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 360 message(s)</div>
+    <div class="postamble__entry">Exported 387 message(s)</div>
   </div>
 </body>
 
