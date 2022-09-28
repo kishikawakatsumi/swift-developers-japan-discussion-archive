@@ -58,7 +58,7 @@ jobs:
           sudo npx js-beautify --file data/html/**/*.html --type html --replace --indent-size 2 --no-preserve-newlines
 
           node dev/generate_sitemap.js
-          node dev/update_search_index.js
+          node --max-old-space-size=8192 dev/update_search_index.js
 
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
           git config --global user.name "${GITHUB_ACTOR}"
