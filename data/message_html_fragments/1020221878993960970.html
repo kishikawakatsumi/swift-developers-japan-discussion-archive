@@ -1,0 +1,46 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1020221278872944670" class="chatlog__message-container" data-message-id="1020221278872944670">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020221946660663326"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1020221278872944670">16-Sep-22 06:35 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これじゃあスレッド爆発か先行処理待ちが起きてしまう</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1020221500516728923" class="chatlog__message-container" data-message-id="1020221500516728923">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="16-Sep-22 06:36 AM">06:36</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">/// `NonBlockingFileIO` is a helper that allows you to read files without blocking the calling thread. /// /// It is worth noting that `kqueue`, `epoll` or `poll` returning claiming a file is readable does not mean that the /// data is already available in the kernel's memory. In other words, a `read` from a file can still block even if /// reported as readable. This behaviour is also documented behaviour: /// /// - [`poll`](http://pubs.opengroup.org/onlinepubs/009695399/functions/poll.html): "Regular files shall always poll TRUE for reading and writing." /// - [`epoll`](http://man7.org/linux/man-pages/man7/epoll.7.html): "epoll is simply a faster poll(2), and can be used wherever the latter is used since it shares the same semantics." /// - [`kqueue`](https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2): "Returns when the file pointer is not at the end of file." /// /// `NonBlockingFileIO` helps to work around this issue by maintaining its own thread pool that is used to read the data /// from the files into memory. It will then hand the (in-memory) data back which makes it available without the possibility /// of blocking.</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1020221878993960970" class="chatlog__message-container" data-message-id="1020221878993960970">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="16-Sep-22 06:37 AM">06:37</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">It is worth noting that <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">kqueue</code>, <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">epoll</code> or <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">poll</code> returning claiming a file is readable does not mean that the data is already available in the kernel's memory. In other words, a <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">read</code> from a file can still block even if reported as readable. This behaviour is also documented behaviour</div>
+            </div>
+          </span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1020221946660663326" class="chatlog__message-container" data-message-id="1020221946660663326">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="16-Sep-22 06:37 AM">06:37</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">pollがreadableを返したとしても、その直後にreadをするとブロッキングされる事がある！？</span></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,7 +43,8 @@
       color: #23262a;
       font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
-      font-weight: 500
+      font-weight: 500;
+      scroll-behavior: smooth
     }
 
     a {
@@ -229,6 +230,38 @@
       unicode-bidi: bidi-override
     }
 
+    .chatlog__system-notification-icon {
+      width: 18px;
+      height: 18px
+    }
+
+    .chatlog__system-notification-author {
+      font-weight: 600;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-content {
+      color: #5e6772
+    }
+
+    .chatlog__system-notification-link {
+      font-weight: 500;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-timestamp {
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override
+    }
+
+    .chatlog__system-notification-timestamp a {
+      color: inherit
+    }
+
     .chatlog__header {
       margin-bottom: 0.1rem
     }
@@ -261,7 +294,7 @@
     }
 
     .chatlog__timestamp a {
-      color: #5e6772
+      color: inherit
     }
 
     .chatlog__content {
@@ -515,7 +548,14 @@
       font-weight: 500
     }
 
-    .chatlog__embed-plainimage {
+    .chatlog__embed-generic-image {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px
+    }
+
+    .chatlog__embed-generic-gifv {
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -734,13 +774,24 @@
   </script>
 </head>
 
-<body><svg style="display:none">
-    <symbol id="attachment-icon" viewBox="0 0 720 960">
-      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
-      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
-      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
-      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
-    </symbol>
+<body><svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="attachment-icon" viewBox="0 0 720 960">
+        <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+        <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+        <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+        <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+      </symbol>
+      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="call-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
+      </symbol>
+      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+    </defs>
   </svg>
   <div class="preamble">
     <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
@@ -16681,7 +16732,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="rre#5555" data-user-id="210717191840989184">rre</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=402337900101894145"><span class="chatlog__timestamp"><a href="#chatlog__message-container-402337795265396746">15-Jan-18 05:46 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="🐟🐠🐟🐠#5555" data-user-id="210717191840989184">🐟🐠🐟🐠</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=402337900101894145"><span class="chatlog__timestamp"><a href="#chatlog__message-container-402337795265396746">15-Jan-18 05:46 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうですね 私も以前Nitroユーザーだったので自分用サーバー作って変な絵文字使ってましたが飽きたのでやめました</span></div>
           </div>
         </div>
@@ -16787,8 +16838,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=402346739178405898"><span class="chatlog__timestamp"><a href="#chatlog__message-container-402346723722264577">15-Jan-18 06:22 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"></div>
-            <div class="chatlog__embed"><a href="https://developer.apple.com/swift/images/swift-og.png"> <img class="chatlog__embed-plainimage" src="https://developer.apple.com/swift/images/swift-og.png" alt="Embedded image" loading="lazy"> </a></div>
+            <div class="chatlog__embed"><a href="https://developer.apple.com/swift/images/swift-og.png"> <img class="chatlog__embed-generic-image" src="https://developer.apple.com/swift/images/swift-og.png" alt="Embedded image" loading="lazy"> </a></div>
           </div>
         </div>
       </div>
@@ -16907,16 +16957,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=402347508917075969"><span class="chatlog__timestamp"><a href="#chatlog__message-container-402347508917075969">15-Jan-18 06:25 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://rlovelett.gallerycdn.vsassets.io/extensions/rlovelett/vscode-swift-language/0.1.0/1481439103618/Microsoft.VisualStudio.Services.Icons.Default">https://rlovelett.gallerycdn.vsassets.io/extensions/rlovelett/vscode-swift-language/0.1.0/1481439103618/Microsoft.VisualStudio.Services.Icons.Default</a></span></div>
-            <div class="chatlog__embed">
-              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-              <div class="chatlog__embed-content-container">
-                <div class="chatlog__embed-content">
-                  <div class="chatlog__embed-text"></div>
-                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/vJJqrZlYuF02nyOTg2Mgj0tMfsRluf0EVa4tQ3RSqgw/https/rlovelett.gallerycdn.vsassets.io/extensions/rlovelett/vscode-swift-language/0.1.0/1481439103618/Microsoft.VisualStudio.Services.Icons.Default"> <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/vJJqrZlYuF02nyOTg2Mgj0tMfsRluf0EVa4tQ3RSqgw/https/rlovelett.gallerycdn.vsassets.io/extensions/rlovelett/vscode-swift-language/0.1.0/1481439103618/Microsoft.VisualStudio.Services.Icons.Default" alt="Thumbnail" loading="lazy"> </a></div>
-                </div>
-              </div>
-            </div>
+            <div class="chatlog__embed"><a href="https://rlovelett.gallerycdn.vsassets.io/extensions/rlovelett/vscode-swift-language/0.1.0/1481439103618/Microsoft.VisualStudio.Services.Icons.Default"> <img class="chatlog__embed-generic-image" src="https://rlovelett.gallerycdn.vsassets.io/extensions/rlovelett/vscode-swift-language/0.1.0/1481439103618/Microsoft.VisualStudio.Services.Icons.Default" alt="Embedded image" loading="lazy"> </a></div>
           </div>
         </div>
       </div>
@@ -29044,7 +29085,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=454234403573596171"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454234403573596171">07-Jun-18 10:45 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=454234403573596171"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454234403573596171">07-Jun-18 10:45 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="hiragram#3838">@hiragram</span> 招待おねがいします！</span></div>
           </div>
         </div>
@@ -29078,7 +29119,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=454300850161057802"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454300850161057802">07-Jun-18 03:09 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="tikidunpon#8031">@tikidunpon</span> <span class="chatlog__markdown-mention" title="gin0606#6272">@gin0606</span> <span class="chatlog__markdown-mention" title="hiragram#3838">@hiragram</span> 対応しました。</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="tanako#8031">@tanako</span> <span class="chatlog__markdown-mention" title="gin0606#6272">@gin0606</span> <span class="chatlog__markdown-mention" title="hiragram#3838">@hiragram</span> 対応しました。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
               <div class="chatlog__reaction" title="swift"><img class="chatlog__emoji chatlog__emoji--small" alt="swift" src="https://cdn.discordapp.com/emojis/402348007309443072.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -37424,16 +37465,10 @@
     <div class="chatlog__message-group">
       <div id="chatlog__message-container-870016973885558787" class="chatlog__message-container" data-message-id="870016973885558787">
         <div class="chatlog__message">
-          <div class="chatlog__message-aside">
-            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy">
-          </div>
-          <div class="chatlog__message-primary">
-            <div class="chatlog__reference">
-              <div class="chatlog__reference-unknown">Original message was deleted or could not be loaded.</div>
-            </div>
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=870016973885558787"><span class="chatlog__timestamp"><a href="#chatlog__message-container-870016973885558787">28-Jul-21 06:56 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">スレッドテスト</span></div>
-          </div>
+          <div class="chatlog__message-aside"><svg class="chatlog__system-notification-icon">
+              <use href="#thread-created-icon"></use>
+            </svg></div>
+          <div class="chatlog__message-primary"><span class="chatlog__system-notification-author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <span class="chatlog__system-notification-content"> <span>started a thread.</span> </span> <span class="chatlog__system-notification-timestamp"> <a href="#chatlog__message-container-870016973885558787">28-Jul-21 06:56 PM</a> </span></div>
         </div>
       </div>
     </div>
@@ -39228,7 +39263,7 @@
                   <div class="chatlog__markdown-quote-content">Apple自身が制限しているので、Mac OSデバイスの場合、拡張モードでは、2つの外部モニタの画像は同じになります。 </div>
                 </div>トリプルディスプレイ用途ではダメそうですね… 別の機種でHyperDrive GEN2というのを持っていますが、M1 Maxで使ってみたところ外部モニタはミラーリング表示でしたのでこれも同じような感じになりそうですね。 <a href="https://www.mycase.jp/goodsimg/gadget/hp48021_4.jpg">https://www.mycase.jp/goodsimg/gadget/hp48021_4.jpg</a>
               </span></div>
-            <div class="chatlog__embed"><a href="https://www.mycase.jp/goodsimg/gadget/hp48021_4.jpg"> <img class="chatlog__embed-plainimage" src="https://www.mycase.jp/goodsimg/gadget/hp48021_4.jpg" alt="Embedded image" loading="lazy"> </a></div>
+            <div class="chatlog__embed"><a href="https://www.mycase.jp/goodsimg/gadget/hp48021_4.jpg"> <img class="chatlog__embed-generic-image" src="https://www.mycase.jp/goodsimg/gadget/hp48021_4.jpg" alt="Embedded image" loading="lazy"> </a></div>
           </div>
         </div>
       </div>
@@ -39731,9 +39766,117 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021360902475350018" class="chatlog__message-container" data-message-id="1021360902475350018">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021360902475350018"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021360902475350018">19-Sep-22 10:03 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DiscordにForumっていう機能が来るらしいんだけどどう違うんだろうね。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021366469801558026" class="chatlog__message-container" data-message-id="1021366469801558026">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021366469801558026"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021366469801558026">19-Sep-22 10:25 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">新しいチャンネルを作るときにフォーラムのチャンネルを作れるみたいですね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021367992673640498" class="chatlog__message-container" data-message-id="1021367992673640498">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021367992673640498"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021367992673640498">19-Sep-22 10:31 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">テーマを決めて議論できる、って感じなのかな。スレッドにタイトルがつけられる、みたいな。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021368117563232277" class="chatlog__message-container" data-message-id="1021368117563232277">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021368132956332062"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021368117563232277">19-Sep-22 10:32 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">試してみようと思ったんですが、自鯖もここも選択肢がないのでよくわからなかった</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021368132956332062" class="chatlog__message-container" data-message-id="1021368132956332062">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="19-Sep-22 10:32 AM">10:32</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">テスト中かなぁ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021368237348372542" class="chatlog__message-container" data-message-id="1021368237348372542">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021368237348372542"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021368237348372542">19-Sep-22 10:32 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まだ誰でも使えるわけではないのか。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021614265272123483" class="chatlog__message-container" data-message-id="1021614265272123483">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/265102069655011328/c537c67fbddb1ea637a4e17e492b600d.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="rinsuki#6597" data-user-id="265102069655011328">rinsuki</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021614265272123483"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021614265272123483">20-Sep-22 02:50 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">コミュニティサーバーなら使えるはず？来なかったらDiscordクライアント再起動すると来るかもしれない</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021621748648640522" class="chatlog__message-container" data-message-id="1021621748648640522">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021621771692150874"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021621748648640522">20-Sep-22 03:20 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">チャンネル設定にStageというのがあるけど、これはまた違いますよね</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021621771692150874" class="chatlog__message-container" data-message-id="1021621771692150874">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 03:20 AM">03:20</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">プレゼンに使うやつかなこれは。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021643147236888666" class="chatlog__message-container" data-message-id="1021643147236888666">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/265102069655011328/c537c67fbddb1ea637a4e17e492b600d.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="rinsuki#6597" data-user-id="265102069655011328">rinsuki</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1021643147236888666"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021643147236888666">20-Sep-22 04:45 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それはまた別ですね、Twitter Spaces とか Clubhouseみたいなやつ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 3,237 message(s)</div>
+    <div class="postamble__entry">Exported 3,247 message(s)</div>
   </div>
 </body>
 

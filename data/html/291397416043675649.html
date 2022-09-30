@@ -43,7 +43,8 @@
       color: #23262a;
       font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
-      font-weight: 500
+      font-weight: 500;
+      scroll-behavior: smooth
     }
 
     a {
@@ -229,6 +230,38 @@
       unicode-bidi: bidi-override
     }
 
+    .chatlog__system-notification-icon {
+      width: 18px;
+      height: 18px
+    }
+
+    .chatlog__system-notification-author {
+      font-weight: 600;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-content {
+      color: #5e6772
+    }
+
+    .chatlog__system-notification-link {
+      font-weight: 500;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-timestamp {
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override
+    }
+
+    .chatlog__system-notification-timestamp a {
+      color: inherit
+    }
+
     .chatlog__header {
       margin-bottom: 0.1rem
     }
@@ -261,7 +294,7 @@
     }
 
     .chatlog__timestamp a {
-      color: #5e6772
+      color: inherit
     }
 
     .chatlog__content {
@@ -515,7 +548,14 @@
       font-weight: 500
     }
 
-    .chatlog__embed-plainimage {
+    .chatlog__embed-generic-image {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px
+    }
+
+    .chatlog__embed-generic-gifv {
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -734,13 +774,24 @@
   </script>
 </head>
 
-<body><svg style="display:none">
-    <symbol id="attachment-icon" viewBox="0 0 720 960">
-      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
-      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
-      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
-      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
-    </symbol>
+<body><svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="attachment-icon" viewBox="0 0 720 960">
+        <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+        <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+        <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+        <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+      </symbol>
+      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="call-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
+      </symbol>
+      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+    </defs>
   </svg>
   <div class="preamble">
     <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
@@ -13177,9 +13228,544 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020215417224056853" class="chatlog__message-container" data-message-id="1020215417224056853">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020215661135417426"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020215417224056853">16-Sep-22 06:11 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://zenn.dev/iceman/articles/52cc0ab6f12901">https://zenn.dev/iceman/articles/52cc0ab6f12901</a></span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://zenn.dev/iceman/articles/52cc0ab6f12901">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">ベンチが通る！ISUCON12予選Swift参考実装</div>
+                      </a></div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/3C7mpB7OxzFKOUidC73iQhk8M7xgEO_L1YTK8Es0i6U/https/res.cloudinary.com/zenn/image/upload/s--91fj6TBN--/co_rgb%3A222%252Cg_south_west%252Cl_text%3Anotosansjp-medium.otf_37_bold%3AIceman%252Cx_203%252Cy_98/c_fit%252Cco_rgb%3A222%252Cg_north_west%252Cl_text%3Anotosansjp-medium.otf_70_bold%3A%2525E3%252583%252599%2525E3%252583%2525B3%2525E3%252583%252581%2525E3%252581%25258C%2525E9%252580%25259A%2525E3%252582%25258B%2525EF%2525BC%252581ISUCON12%2525E4%2525BA%252588%2525E9%252581%2525B8Swift%2525E5%25258F%252582%2525E8%252580%252583%2525E5%2525AE%25259F%2525E8%2525A3%252585%252Cw_1010%252Cx_90%252Cy_100/g_south_west%252Ch_90%252Cl_fetch%3AaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vemVubi9pbWFnZS9mZXRjaC9zLS10ajV4NU9yVy0tL2NfbGltaXQlMkNmX2F1dG8lMkNmbF9wcm9ncmVzc2l2ZSUyQ3FfYXV0byUyQ3dfNzAvaHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMzkxOWZhNzEuanBlZw%3D%3D%252Cr_max%252Cw_90%252Cx_87%252Cy_72/v1627274783/default/og-base_z4sxah.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/3C7mpB7OxzFKOUidC73iQhk8M7xgEO_L1YTK8Es0i6U/https/res.cloudinary.com/zenn/image/upload/s--91fj6TBN--/co_rgb%3A222%252Cg_south_west%252Cl_text%3Anotosansjp-medium.otf_37_bold%3AIceman%252Cx_203%252Cy_98/c_fit%252Cco_rgb%3A222%252Cg_north_west%252Cl_text%3Anotosansjp-medium.otf_70_bold%3A%2525E3%252583%252599%2525E3%252583%2525B3%2525E3%252583%252581%2525E3%252581%25258C%2525E9%252580%25259A%2525E3%252582%25258B%2525EF%2525BC%252581ISUCON12%2525E4%2525BA%252588%2525E9%252581%2525B8Swift%2525E5%25258F%252582%2525E8%252580%252583%2525E5%2525AE%25259F%2525E8%2525A3%252585%252Cw_1010%252Cx_90%252Cy_100/g_south_west%252Ch_90%252Cl_fetch%3AaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vemVubi9pbWFnZS9mZXRjaC9zLS10ajV4NU9yVy0tL2NfbGltaXQlMkNmX2F1dG8lMkNmbF9wcm9ncmVzc2l2ZSUyQ3FfYXV0byUyQ3dfNzAvaHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMzkxOWZhNzEuanBlZw%3D%3D%252Cr_max%252Cw_90%252Cx_87%252Cy_72/v1627274783/default/og-base_z4sxah.png" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020215570773327893" class="chatlog__message-container" data-message-id="1020215570773327893">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:12 AM">06:12</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+                <div class="chatlog__markdown-quote">
+                  <div class="chatlog__markdown-quote-border"></div>
+                  <div class="chatlog__markdown-quote-content">また、ホップによるオーバーヘッドが気になっていたのでEventLoopで全て実装を書き換えもしました。この書き換えによってスコアに差が出ませんでした。これは個人的に驚きで、リクエスト単位では確実に微小なオーバーヘッドがあるはずですが、サーバ全体で見れば完全に無視できるという結果になりました。</div>
+                </div>
+              </span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020215661135417426" class="chatlog__message-container" data-message-id="1020215661135417426">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:12 AM">06:12</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">NIO-EventLoop環境でasync/await使っても、オーバーヘッド問題ないらしい</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020216116150284288" class="chatlog__message-container" data-message-id="1020216116150284288">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020216649804165190"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020216116150284288">16-Sep-22 06:14 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">async/awaitでSwiftサーバ書いても大丈夫なのでSwift on Serverよろしくお願いします</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020216649804165190" class="chatlog__message-container" data-message-id="1020216649804165190">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:16 AM">06:16</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">for文の中でawaitする処理をNIOだとsequencedFlatMapEachで書いたりして、それのへんでNIO不利な面もあったりしそう</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020217146875334716" class="chatlog__message-container" data-message-id="1020217146875334716">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020217447074246696"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020217146875334716">16-Sep-22 06:18 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">同時にどのくらいリクエストくるんでしたっけ</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020217447074246696" class="chatlog__message-container" data-message-id="1020217447074246696">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:19 AM">06:19</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">数によっては各スレッドのGlobal Executorがヒマしてて2重スケジューリングのオーバーヘッドが安く済んでるのかもなと</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020217544138829824" class="chatlog__message-container" data-message-id="1020217544138829824">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020218167508881429"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020217544138829824">16-Sep-22 06:20 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ulimit -n 1024</code> だとだめで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ulimit -n 2048</code> した記憶があるので、その間かと</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020217858426413107" class="chatlog__message-container" data-message-id="1020217858426413107">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:21 AM">06:21</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">さすがにでかすぎるな。いくつなんだろう。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020218167508881429" class="chatlog__message-container" data-message-id="1020218167508881429">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:22 AM">06:22</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">200rps以上はいってると思う</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020218416138813461" class="chatlog__message-container" data-message-id="1020218416138813461">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020218674507960420"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020218416138813461">16-Sep-22 06:23 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ふむふむ</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020218674507960420" class="chatlog__message-container" data-message-id="1020218674507960420">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:24 AM">06:24</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">System.coreCount</code> は10くらいですか</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020218725443588166" class="chatlog__message-container" data-message-id="1020218725443588166">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020218725443588166"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020218725443588166">16-Sep-22 06:24 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CPU2個しかあげてない仮想マシンなんで多分2です</span> <span class="chatlog__edited-timestamp" title="16-Sep-22 06:30 AM">(edited)</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="face_with_monocle"><img class="chatlog__emoji chatlog__emoji--small" alt="🧐" src="https://twemoji.maxcdn.com/v/latest/svg/1f9d0.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020219188314382386" class="chatlog__message-container" data-message-id="1020219188314382386">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020219361102929940"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020219188314382386">16-Sep-22 06:26 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういえばこのロックを取るところの話、</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020219228671987753" class="chatlog__message-container" data-message-id="1020219228671987753">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:26 AM">06:26</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">本来的にこの手のアーキテクチャで正しいのは、</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020219303817138216" class="chatlog__message-container" data-message-id="1020219303817138216">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:27 AM">06:27</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ロック解放を非同期に通知する、非同期IOなローレベルAPIの上で実装する形だと思った</span> <span class="chatlog__edited-timestamp" title="16-Sep-22 06:27 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020219361102929940" class="chatlog__message-container" data-message-id="1020219361102929940">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:27 AM">06:27</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">使ってるライブラリとかがそうなってないから、どうしようもなさそうだけど</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020219580309852220" class="chatlog__message-container" data-message-id="1020219580309852220">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020219663134756875"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020219580309852220">16-Sep-22 06:28 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そこはそうなってないので、諦めてました <a href="https://github.com/apple/swift-tools-support-core/blob/e08105d5e8bb0aa219e1b06e9891b153b82f8ad7/Sources/TSCBasic/Lock.swift#L60">https://github.com/apple/swift-tools-support-core/blob/e08105d5e8bb0aa219e1b06e9891b153b82f8ad7/Sources/TSCBasic/Lock.swift#L60</a></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020219663134756875" class="chatlog__message-container" data-message-id="1020219663134756875">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:28 AM">06:28</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">(競技的にもそのうち剥がすやつなので消える存在だったのもある)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020219769644916806" class="chatlog__message-container" data-message-id="1020219769644916806">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020221051302584320"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020219769644916806">16-Sep-22 06:29 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">内部はflockかー</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020220217483350058" class="chatlog__message-container" data-message-id="1020220217483350058">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:30 AM">06:30</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift-nio/blob/6c54e11eaa0ec270a86cd2bed48fe9ec99200956/Sources/NIOPosix/NonBlockingFileIO.swift">https://github.com/apple/swift-nio/blob/6c54e11eaa0ec270a86cd2bed48fe9ec99200956/Sources/NIOPosix/NonBlockingFileIO.swift</a></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020220247925592066" class="chatlog__message-container" data-message-id="1020220247925592066">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:31 AM">06:31</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">NIOのNonBlockingFileIOでもロックは提供が無いな</span> <span class="chatlog__edited-timestamp" title="16-Sep-22 06:31 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020220304116699166" class="chatlog__message-container" data-message-id="1020220304116699166">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:31 AM">06:31</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DispatchIOにも見当たらなかった</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020221051302584320" class="chatlog__message-container" data-message-id="1020221051302584320">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:34 AM">06:34</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">NIOのNonBlockingFileIO、スレッドプール使ってるだけで非同期IOになってなくね・・・？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020221087914672149" class="chatlog__message-container" data-message-id="1020221087914672149">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020221087914672149"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020221087914672149">16-Sep-22 06:34 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうなんですよ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020221118998659133" class="chatlog__message-container" data-message-id="1020221118998659133">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020221118998659133"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020221118998659133">16-Sep-22 06:34 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">うそやんけ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020221152506937416" class="chatlog__message-container" data-message-id="1020221152506937416">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020221152506937416"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020221152506937416">16-Sep-22 06:34 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ノンブロッキング。。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020221278872944670" class="chatlog__message-container" data-message-id="1020221278872944670">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020221946660663326"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020221278872944670">16-Sep-22 06:35 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これじゃあスレッド爆発か先行処理待ちが起きてしまう</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020221500516728923" class="chatlog__message-container" data-message-id="1020221500516728923">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:36 AM">06:36</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">/// `NonBlockingFileIO` is a helper that allows you to read files without blocking the calling thread. /// /// It is worth noting that `kqueue`, `epoll` or `poll` returning claiming a file is readable does not mean that the /// data is already available in the kernel's memory. In other words, a `read` from a file can still block even if /// reported as readable. This behaviour is also documented behaviour: /// /// - [`poll`](http://pubs.opengroup.org/onlinepubs/009695399/functions/poll.html): "Regular files shall always poll TRUE for reading and writing." /// - [`epoll`](http://man7.org/linux/man-pages/man7/epoll.7.html): "epoll is simply a faster poll(2), and can be used wherever the latter is used since it shares the same semantics." /// - [`kqueue`](https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2): "Returns when the file pointer is not at the end of file." /// /// `NonBlockingFileIO` helps to work around this issue by maintaining its own thread pool that is used to read the data /// from the files into memory. It will then hand the (in-memory) data back which makes it available without the possibility /// of blocking.</code></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020221878993960970" class="chatlog__message-container" data-message-id="1020221878993960970">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:37 AM">06:37</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+                <div class="chatlog__markdown-quote">
+                  <div class="chatlog__markdown-quote-border"></div>
+                  <div class="chatlog__markdown-quote-content">It is worth noting that <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">kqueue</code>, <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">epoll</code> or <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">poll</code> returning claiming a file is readable does not mean that the data is already available in the kernel's memory. In other words, a <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">read</code> from a file can still block even if reported as readable. This behaviour is also documented behaviour</div>
+                </div>
+              </span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020221946660663326" class="chatlog__message-container" data-message-id="1020221946660663326">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:37 AM">06:37</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">pollがreadableを返したとしても、その直後にreadをするとブロッキングされる事がある！？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020222144912822342" class="chatlog__message-container" data-message-id="1020222144912822342">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020222144912822342"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020222144912822342">16-Sep-22 06:38 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ノンノンブロッキングだ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020222795113836565" class="chatlog__message-container" data-message-id="1020222795113836565">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020222915783962625"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020222795113836565">16-Sep-22 06:41 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+                <div class="chatlog__markdown-quote">
+                  <div class="chatlog__markdown-quote-border"></div>
+                  <div class="chatlog__markdown-quote-content">Regular files shall always poll TRUE for reading and writing. </div>
+                </div>え〜じゃあpollってソケットとかには意味があるけどローカルファイルには意味が無いのか・・・？
+              </span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020222839023996978" class="chatlog__message-container" data-message-id="1020222839023996978">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:41 AM">06:41</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">非同期IOって存在しなかったの？</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020222915783962625" class="chatlog__message-container" data-message-id="1020222915783962625">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:41 AM">06:41</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">信じてきたものが存在していなかった・・・？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020222948231106631" class="chatlog__message-container" data-message-id="1020222948231106631">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184">kateinoigakukun</div>
+              <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'1020217146875334716')"> 同時にどのくらいリクエストくるんでしたっけ </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020222948231106631"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020222948231106631">16-Sep-22 06:41 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いまベンチ動かしたら1500くらいでしたベンチ内の仮想ユーザ数</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020223611925188688" class="chatlog__message-container" data-message-id="1020223611925188688">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020224871709560872"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020223611925188688">16-Sep-22 06:44 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Linuxではnon-blocking IOとasynchronous IOは別概念として存在していて</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020223692770390066" class="chatlog__message-container" data-message-id="1020223692770390066">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:44 AM">06:44</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Linux5.1で入ったio_uringはasynchronous IOらしい</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020224871709560872" class="chatlog__message-container" data-message-id="1020224871709560872">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 06:49 AM">06:49</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://qiita.com/tmsn/items/0b9e5f84f9fbc56c1c82">https://qiita.com/tmsn/items/0b9e5f84f9fbc56c1c82</a> わかりやすかった。io_uringベースの非同期IOが入るべき。</span> <span class="chatlog__edited-timestamp" title="16-Sep-22 06:49 AM">(edited)</span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(85,197,0,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://qiita.com/tmsn/items/0b9e5f84f9fbc56c1c82">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">Linuxにおける非同期IOの実装について - Qiita</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">はじめに Linux 5.1に新しい非同期IOの仕組みとしてio_uringがマージされてから既に1年以上経ってしまいましたが、これまでのLinuxにおける非同期IOの使い方や実装を見ていきながら、io_uringが登場した背景...</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/YKiAcIKMT7VyAfZl0iQB-3p-_ZOiM-3RCLutdpyyAac/%3Fixlib%3Drb-4.0.0%26w%3D1200%26mark64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTkxNiZ0eHQ9TGludXglRTMlODElQUIlRTMlODElOEElRTMlODElOTElRTMlODIlOEIlRTklOUQlOUUlRTUlOTAlOEMlRTYlOUMlOUZJTyVFMyU4MSVBRSVFNSVBRSU5RiVFOCVBMyU4NSVFMyU4MSVBQiVFMyU4MSVBNCVFMyU4MSU4NCVFMyU4MSVBNiZ0eHQtY29sb3I9JTIzMjEyMTIxJnR4dC1mb250PUhpcmFnaW5vJTIwU2FucyUyMFc2JnR4dC1zaXplPTU2JnR4dC1jbGlwPWVsbGlwc2lzJnR4dC1hbGlnbj1sZWZ0JTJDdG9wJnM9MmExY2QxMDA3YzY2MzQwZDNjMDc2ODZlZWU0YmQ4MTE%26mark-x%3D142%26mark-y%3D112%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTYxNiZ0eHQ9JTQwdG1zbiZ0eHQtY29sb3I9JTIzMjEyMTIxJnR4dC1mb250PUhpcmFnaW5vJTIwU2FucyUyMFc2JnR4dC1zaXplPTM2JnR4dC1hbGlnbj1sZWZ0JTJDdG9wJnM9MDY0MTAyMWUyMTc5NTY2YTIyOTQ3ZTI4YzllOGMyNTM%26blend-x%3D142%26blend-y%3D491%26blend-mode%3Dnormal%26s%3D955c05e058bbfb7fc3649a261a55b48a/https/qiita-user-contents.imgix.net/https%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-9f5428127621718a910c8b63951390ad.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/YKiAcIKMT7VyAfZl0iQB-3p-_ZOiM-3RCLutdpyyAac/%3Fixlib%3Drb-4.0.0%26w%3D1200%26mark64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTkxNiZ0eHQ9TGludXglRTMlODElQUIlRTMlODElOEElRTMlODElOTElRTMlODIlOEIlRTklOUQlOUUlRTUlOTAlOEMlRTYlOUMlOUZJTyVFMyU4MSVBRSVFNSVBRSU5RiVFOCVBMyU4NSVFMyU4MSVBQiVFMyU4MSVBNCVFMyU4MSU4NCVFMyU4MSVBNiZ0eHQtY29sb3I9JTIzMjEyMTIxJnR4dC1mb250PUhpcmFnaW5vJTIwU2FucyUyMFc2JnR4dC1zaXplPTU2JnR4dC1jbGlwPWVsbGlwc2lzJnR4dC1hbGlnbj1sZWZ0JTJDdG9wJnM9MmExY2QxMDA3YzY2MzQwZDNjMDc2ODZlZWU0YmQ4MTE%26mark-x%3D142%26mark-y%3D112%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTYxNiZ0eHQ9JTQwdG1zbiZ0eHQtY29sb3I9JTIzMjEyMTIxJnR4dC1mb250PUhpcmFnaW5vJTIwU2FucyUyMFc2JnR4dC1zaXplPTM2JnR4dC1hbGlnbj1sZWZ0JTJDdG9wJnM9MDY0MTAyMWUyMTc5NTY2YTIyOTQ3ZTI4YzllOGMyNTM%26blend-x%3D142%26blend-y%3D491%26blend-mode%3Dnormal%26s%3D955c05e058bbfb7fc3649a261a55b48a/https/qiita-user-contents.imgix.net/https%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-9f5428127621718a910c8b63951390ad.png" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020293632449839215" class="chatlog__message-container" data-message-id="1020293632449839215">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020293679535095808"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020293632449839215">16-Sep-22 11:22 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift-nio/pull/1804">https://github.com/apple/swift-nio/pull/1804</a></span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/apple/swift-nio/pull/1804">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">Added second implementation of liburing as discussed in #1761. by h...</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">Motivation: As outlined in #1761, io_uring is a new async I/O facility on Linux that should have less overhead than epoll. This commit includes a second stab at adding this to SwiftNIO with a much ...</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/6X75BUXu4GMIAuGWIZCNvdVMZgArKX_k_9KQ8slJSX0/https/opengraph.githubassets.com/d821d79d9fd0940373dafce4be40ffc14c20f3204ad050c356db376a78fe5ad9/apple/swift-nio/pull/1804"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/6X75BUXu4GMIAuGWIZCNvdVMZgArKX_k_9KQ8slJSX0/https/opengraph.githubassets.com/d821d79d9fd0940373dafce4be40ffc14c20f3204ad050c356db376a78fe5ad9/apple/swift-nio/pull/1804" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020293658555191316" class="chatlog__message-container" data-message-id="1020293658555191316">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 11:22 AM">11:22</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">io_uringもう使ってた</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1020293679535095808" class="chatlog__message-container" data-message-id="1020293679535095808">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="16-Sep-22 11:22 AM">11:22</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ファイルIOがこれになってないだけかも</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020331865040769094" class="chatlog__message-container" data-message-id="1020331865040769094">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" title="Iceman#5499">Iceman</div>
+              <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'1020222948231106631')"> いまベンチ動かしたら1500くらいでしたベンチ内の仮想ユーザ数 </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020331865040769094"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020331865040769094">16-Sep-22 01:54 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ということはそのくらいなら全然詰まらないんですねぇ。DispatchQueueすごい</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020331994946740234" class="chatlog__message-container" data-message-id="1020331994946740234">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291397416043675649?category=開発環境, ライブラリ&amp;channel=server-side&amp;message_id=1020331994946740234"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020331994946740234">16-Sep-22 01:55 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">すごいですね〜</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 1,047 message(s)</div>
+    <div class="postamble__entry">Exported 1,091 message(s)</div>
   </div>
 </body>
 

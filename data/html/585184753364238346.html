@@ -43,7 +43,8 @@
       color: #23262a;
       font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
-      font-weight: 500
+      font-weight: 500;
+      scroll-behavior: smooth
     }
 
     a {
@@ -229,6 +230,38 @@
       unicode-bidi: bidi-override
     }
 
+    .chatlog__system-notification-icon {
+      width: 18px;
+      height: 18px
+    }
+
+    .chatlog__system-notification-author {
+      font-weight: 600;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-content {
+      color: #5e6772
+    }
+
+    .chatlog__system-notification-link {
+      font-weight: 500;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-timestamp {
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override
+    }
+
+    .chatlog__system-notification-timestamp a {
+      color: inherit
+    }
+
     .chatlog__header {
       margin-bottom: 0.1rem
     }
@@ -261,7 +294,7 @@
     }
 
     .chatlog__timestamp a {
-      color: #5e6772
+      color: inherit
     }
 
     .chatlog__content {
@@ -515,7 +548,14 @@
       font-weight: 500
     }
 
-    .chatlog__embed-plainimage {
+    .chatlog__embed-generic-image {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px
+    }
+
+    .chatlog__embed-generic-gifv {
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -734,13 +774,24 @@
   </script>
 </head>
 
-<body><svg style="display:none">
-    <symbol id="attachment-icon" viewBox="0 0 720 960">
-      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
-      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
-      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
-      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
-    </symbol>
+<body><svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="attachment-icon" viewBox="0 0 720 960">
+        <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+        <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+        <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+        <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+      </symbol>
+      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="call-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
+      </symbol>
+      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+    </defs>
   </svg>
   <div class="preamble">
     <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
@@ -3344,7 +3395,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=603515874904899584"><span class="chatlog__timestamp"><a href="#chatlog__message-container-603515874904899584">24-Jul-19 09:16 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=603515874904899584"><span class="chatlog__timestamp"><a href="#chatlog__message-container-603515874904899584">24-Jul-19 09:16 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CGDrawingViewがLabelかButtonかなどのメタ情報の取り方を知ってる方いますか？色々試したんですが無さそうでして</span></div>
           </div>
         </div>
@@ -3366,7 +3417,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=603520874846617600"><span class="chatlog__timestamp"><a href="#chatlog__message-container-603520874846617600">24-Jul-19 09:36 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=603520874846617600"><span class="chatlog__timestamp"><a href="#chatlog__message-container-603520874846617600">24-Jul-19 09:36 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ですよねー、SwiftSyntaxでコードを喰わせればなんだったを保持して置くことは出来そうな気もしてたんですが</span></div>
           </div>
         </div>
@@ -4473,15 +4524,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="swiftbot#4647" data-user-id="429913902340636675">swiftbot</span> <span class="chatlog__bot-label">BOT</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=663535133286072350"><span class="chatlog__timestamp"><a href="#chatlog__message-container-663535133286072350">06-Jan-20 12:11 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://i.imgur.com/hnFwzEJ.png">https://i.imgur.com/hnFwzEJ.png</a></span></div>
-            <div class="chatlog__embed">
-              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-              <div class="chatlog__embed-content-container">
-                <div class="chatlog__embed-content">
-                  <div class="chatlog__embed-text"></div>
-                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/tBkxn9hRjQ-dywNKpeh-rj5i8vlAwqZqDF0KKH-ASzg/https/i.imgur.com/hnFwzEJ.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/tBkxn9hRjQ-dywNKpeh-rj5i8vlAwqZqDF0KKH-ASzg/https/i.imgur.com/hnFwzEJ.png" alt="Thumbnail" loading="lazy"> </a></div>
-                </div>
-              </div>
-            </div>
+            <div class="chatlog__embed"><a href="https://imgur.com/hnFwzEJ"> <img class="chatlog__embed-generic-image" src="https://imgur.com/hnFwzEJ" alt="Embedded image" loading="lazy"> </a></div>
           </div>
         </div>
       </div>
@@ -4647,15 +4690,7 @@
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="swiftbot#4647" data-user-id="429913902340636675">swiftbot</span> <span class="chatlog__bot-label">BOT</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=663545703909556265"><span class="chatlog__timestamp"><a href="#chatlog__message-container-663545703909556265">06-Jan-20 12:53 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://i.imgur.com/a4a7F9v.png">https://i.imgur.com/a4a7F9v.png</a></span></div>
-            <div class="chatlog__embed">
-              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
-              <div class="chatlog__embed-content-container">
-                <div class="chatlog__embed-content">
-                  <div class="chatlog__embed-text"></div>
-                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/27R_f1JBt9nOPOnEllXPptjDrOZA8L5WH-NbTjA6EuY/https/i.imgur.com/a4a7F9v.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/27R_f1JBt9nOPOnEllXPptjDrOZA8L5WH-NbTjA6EuY/https/i.imgur.com/a4a7F9v.png" alt="Thumbnail" loading="lazy"> </a></div>
-                </div>
-              </div>
-            </div>
+            <div class="chatlog__embed"><a href="https://imgur.com/a4a7F9v"> <img class="chatlog__embed-generic-image" src="https://imgur.com/a4a7F9v" alt="Embedded image" loading="lazy"> </a></div>
           </div>
         </div>
       </div>
@@ -5137,8 +5172,7 @@
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/429913902340636675/07e5ed361c9fa5ddc26ab81d07b2bc5b.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="swiftbot#4647" data-user-id="429913902340636675">swiftbot</span> <span class="chatlog__bot-label">BOT</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=669443141107056655"><span class="chatlog__timestamp"><a href="#chatlog__message-container-669443141107056655">22-Jan-20 07:28 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"></div>
-            <div class="chatlog__embed"><a href="https://swiftui-playground.kishikawakatsumi.com/results/887d707f1e76a17b3220/preview_00.png"> <img class="chatlog__embed-plainimage" src="https://swiftui-playground.kishikawakatsumi.com/results/887d707f1e76a17b3220/preview_00.png" alt="Embedded image" loading="lazy"> </a></div>
+            <div class="chatlog__embed"><a href="https://swiftui-playground.kishikawakatsumi.com/results/887d707f1e76a17b3220/preview_00.png"> <img class="chatlog__embed-generic-image" src="https://swiftui-playground.kishikawakatsumi.com/results/887d707f1e76a17b3220/preview_00.png" alt="Embedded image" loading="lazy"> </a></div>
           </div>
         </div>
       </div>
@@ -11664,7 +11698,7 @@
     <div class="chatlog__message-group">
       <div id="chatlog__message-container-756830972116205669" class="chatlog__message-container" data-message-id="756830972116205669">
         <div class="chatlog__message">
-          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/212513828641046529/8936dcb051dcdda1d686e75adc9e04ba.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/212513828641046529/3ecab7a85add17c90c612f1b145734e8.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="Sumidora#8931" data-user-id="212513828641046529">Sumidora</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=756830972116205669"><span class="chatlog__timestamp"><a href="#chatlog__message-container-756830972116205669">19-Sep-20 10:56 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">swiftUIのlistについて質問があります。 現在listでは、内部でForEachを使用することで、onDeleteを使用することができます。 ですが、deleteボタン以外を追加する方法がわかりません。 色々調べたのですが、左右のスワイプで表示されるボタンの作り方がどうしてもわかりません。 どなたかご教授願えませんでしょうか。 （こういうやつを出したいです）</span> <span class="chatlog__edited-timestamp" title="19-Sep-20 10:56 AM">(edited)</span></div>
@@ -11687,7 +11721,7 @@
     <div class="chatlog__message-group">
       <div id="chatlog__message-container-758212566702620703" class="chatlog__message-container" data-message-id="758212566702620703">
         <div class="chatlog__message">
-          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/212513828641046529/8936dcb051dcdda1d686e75adc9e04ba.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/212513828641046529/3ecab7a85add17c90c612f1b145734e8.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
             <div class="chatlog__header"><span class="chatlog__author" title="Sumidora#8931" data-user-id="212513828641046529">Sumidora</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=758212566702620703"><span class="chatlog__timestamp"><a href="#chatlog__message-container-758212566702620703">23-Sep-20 06:26 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">返信遅くなりすみません<img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"> 背面でやるしかないようですね.... もしくはUIKitを使うしかないのでしょうか.... ありがとうございます！</span></div>
@@ -15642,9 +15676,61 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1024902287971340339" class="chatlog__message-container" data-message-id="1024902287971340339">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1024902973018611833"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1024902287971340339">29-Sep-22 04:35 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://twitter.com/noppefoxwolf/status/1575206701590286336?s=21&amp;t=G0ANhf7bMCkZC9iJV7RT0w">https://twitter.com/noppefoxwolf/status/1575206701590286336?s=21&amp;t=G0ANhf7bMCkZC9iJV7RT0w</a> SwiftUIでホロカードの再現やってみたんですけど、SwiftUIの.blendModeが強力でこういうことするのに向いてますね。 iOSのUIKitでやるとすごい大変だと思う。</span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(29,161,242,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/g6gNQu8sOvzXZ-_KGdkPz1JFEeMDgqrtQKOf6TSsro4/https/pbs.twimg.com/profile_images/1563860111306772480/BgTiSqkc_400x400.png" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://twitter.com/noppefoxwolf">
+                        <div class="chatlog__embed-author">noppe (@noppefoxwolf)</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">3D holographic card effect #SwiftUI</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/VDHqYt8XyiZ05XTZiOtNDvUW6dtyPNtew-0MYTlC1jI/https/pbs.twimg.com/ext_tw_video_thumb/1575206665405616128/pu/img/wgfUjlU-kvBAqu4G.jpg"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/VDHqYt8XyiZ05XTZiOtNDvUW6dtyPNtew-0MYTlC1jI/https/pbs.twimg.com/ext_tw_video_thumb/1575206665405616128/pu/img/wgfUjlU-kvBAqu4G.jpg" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+                <div class="chatlog__embed-footer"><img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy"> <span class="chatlog__embed-footer-text"> Twitter • 28-Sep-22 07:31 PM </span></div>
+              </div>
+            </div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1024902973018611833" class="chatlog__message-container" data-message-id="1024902973018611833">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="29-Sep-22 04:38 AM">04:38</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">vividLightみたいなブレンドも <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">.blendMode(.colorBurn) .blendMode(.colorDodge)</code> って感じで重ねがけできて、簡易的なシェーダービルダーDSLとしての側面もあるなという感じ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1025218050670219336" class="chatlog__message-container" data-message-id="1025218050670219336">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/6da98385f4dd2e1516c3ea4fe051e529.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1025218050670219336"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1025218050670219336">30-Sep-22 01:30 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">便利…</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 1,248 message(s)</div>
+    <div class="postamble__entry">Exported 1,251 message(s)</div>
   </div>
 </body>
 

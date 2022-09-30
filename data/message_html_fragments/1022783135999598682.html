@@ -1,0 +1,28 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1022783135999598682" class="chatlog__message-container" data-message-id="1022783135999598682">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reference-author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184">kateinoigakukun</div>
+          <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'1022775808596647986')"> だからよく考えると今回のキャプチャチェインの問題は↑の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift_release</code>は関係なかったです。キャプチャ時のretainに対応するreleaseが <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_ = await old?.value</code> の直後に入るのでキャプチャする側のクロージャが解放される前にTaskを手放せるからリークしない、ということでした。 </span> <span class="chatlog__reference-edited-timestamp" title="23-Sep-22 07:46 AM">(edited)</span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1022783575558471690"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1022783135999598682">23-Sep-22 08:15 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あーここに入ってるんだ。 それだと元コードの安全性は微妙だな。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1022783575558471690" class="chatlog__message-container" data-message-id="1022783575558471690">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="23-Sep-22 08:16 AM">08:16</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="nanasi#7185">@nanasi</span>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">old</code> を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">var</code> にして、以下のように明示的に解放すると確実に安全で良いと思います。 現状リークしないのはコンパイラのコード生成のブレに依存してるようです。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> _ = await old?.value old = nil</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,7 +43,8 @@
       color: #23262a;
       font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
-      font-weight: 500
+      font-weight: 500;
+      scroll-behavior: smooth
     }
 
     a {
@@ -229,6 +230,38 @@
       unicode-bidi: bidi-override
     }
 
+    .chatlog__system-notification-icon {
+      width: 18px;
+      height: 18px
+    }
+
+    .chatlog__system-notification-author {
+      font-weight: 600;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-content {
+      color: #5e6772
+    }
+
+    .chatlog__system-notification-link {
+      font-weight: 500;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-timestamp {
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override
+    }
+
+    .chatlog__system-notification-timestamp a {
+      color: inherit
+    }
+
     .chatlog__header {
       margin-bottom: 0.1rem
     }
@@ -261,7 +294,7 @@
     }
 
     .chatlog__timestamp a {
-      color: #5e6772
+      color: inherit
     }
 
     .chatlog__content {
@@ -515,7 +548,14 @@
       font-weight: 500
     }
 
-    .chatlog__embed-plainimage {
+    .chatlog__embed-generic-image {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px
+    }
+
+    .chatlog__embed-generic-gifv {
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -734,13 +774,24 @@
   </script>
 </head>
 
-<body><svg style="display:none">
-    <symbol id="attachment-icon" viewBox="0 0 720 960">
-      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
-      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
-      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
-      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
-    </symbol>
+<body><svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="attachment-icon" viewBox="0 0 720 960">
+        <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+        <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+        <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+        <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+      </symbol>
+      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="call-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
+      </symbol>
+      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+    </defs>
   </svg>
   <div class="preamble">
     <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
@@ -12578,7 +12629,362 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="swift"><img class="chatlog__emoji chatlog__emoji--small" alt="swift" src="https://cdn.discordapp.com/emojis/402348007309443072.png" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+              <div class="chatlog__reaction" title="swift"><img class="chatlog__emoji chatlog__emoji--small" alt="swift" src="https://cdn.discordapp.com/emojis/402348007309443072.png" loading="lazy"> <span class="chatlog__reaction-count">6</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1018996788927156265" class="chatlog__message-container" data-message-id="1018996788927156265">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz#7087" data-user-id="382314715495399425">shiz</span> <a href="/channels/981108847714381844?category=コミュニティ&amp;channel=swift-doc-jp&amp;message_id=1018996788927156265"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1018996788927156265">12-Sep-22 09:29 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Document Historyの日付が更新されていましたが、内容は変わっていないので、地道に変わったところを探していくしかなさそうですね<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://twemoji.maxcdn.com/v/latest/svg/1f605.svg">
+                <a href="https://docs.swift.org/swift-book/RevisionHistory/RevisionHistory.html">https://docs.swift.org/swift-book/RevisionHistory/RevisionHistory.html</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1018998875643711569" class="chatlog__message-container" data-message-id="1018998875643711569">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz#7087" data-user-id="382314715495399425">shiz</span> <a href="/channels/981108847714381844?category=コミュニティ&amp;channel=swift-doc-jp&amp;message_id=1018998875643711569"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1018998875643711569">12-Sep-22 09:37 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">と思ったらもしかしたらまだ内容変わってないっぽいですね。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020640411473166376" class="chatlog__message-container" data-message-id="1020640411473166376">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz#7087" data-user-id="382314715495399425">shiz</span> <a href="/channels/981108847714381844?category=コミュニティ&amp;channel=swift-doc-jp&amp;message_id=1020640411473166376"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020640411473166376">17-Sep-22 10:20 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">こちらを追っていけばどこが更新されていったかがわかるので、更新箇所を見つけやすくなりましたね<img loading="lazy" class="chatlog__emoji " alt="👏" title="clap" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg"><img loading="lazy" class="chatlog__emoji " alt="🏻" title="🏻" src="https://twemoji.maxcdn.com/v/latest/svg/1f3fb.svg">
+                <a href="https://github.com/apple/swift-book">https://github.com/apple/swift-book</a></span> <span class="chatlog__edited-timestamp" title="17-Sep-22 06:48 PM">(edited)</span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/apple/swift-book">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">GitHub - apple/swift-book: The Swift Programming Language book</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">The Swift Programming Language book. Contribute to apple/swift-book development by creating an account on GitHub.</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/teTNdrYG7rPQopBi3EGfT1K4WvO8u-exWJgQyo7yE9A/https/opengraph.githubassets.com/83f88e8081cf41a10ff7d21d5079e9ef5bb4222ff8d5c2725e1bbbaaea89f04d/apple/swift-book"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/teTNdrYG7rPQopBi3EGfT1K4WvO8u-exWJgQyo7yE9A/https/opengraph.githubassets.com/83f88e8081cf41a10ff7d21d5079e9ef5bb4222ff8d5c2725e1bbbaaea89f04d/apple/swift-book" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1020643504424222821" class="chatlog__message-container" data-message-id="1020643504424222821">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/992751276427325513/df91181b3f1cf0ef1592fbe18e0962d7.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="GitHub#0000" data-user-id="992751276427325513">GitHub</span> <span class="chatlog__bot-label">BOT</span> <a href="/channels/981108847714381844?category=コミュニティ&amp;channel=swift-doc-jp&amp;message_id=1020643504424222821"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1020643504424222821">17-Sep-22 10:32 AM</a></span></a></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(0,152,0,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/355">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request opened: #355 [バージョン互換性]対応バージョンの修正</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">バージョンの記載が変わっていたので修正しました。</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021838504508018779" class="chatlog__message-container" data-message-id="1021838504508018779">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/992751276427325513/df91181b3f1cf0ef1592fbe18e0962d7.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="GitHub#0000" data-user-id="992751276427325513">GitHub</span> <span class="chatlog__bot-label">BOT</span> <a href="/channels/981108847714381844?category=コミュニティ&amp;channel=swift-doc-jp&amp;message_id=1021838504508018779"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021838504508018779">20-Sep-22 05:41 PM</a></span></a></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(0,152,0,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/356">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request opened: #356 [文]不要な文言の削除</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">このPRに合わせた修正です。 <a href="https://github.com/apple/swift-book/pull/32">https://github.com/apple/swift-book/pull/32</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1022541942652928061" class="chatlog__message-container" data-message-id="1022541942652928061">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/992751276427325513/df91181b3f1cf0ef1592fbe18e0962d7.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="GitHub#0000" data-user-id="992751276427325513">GitHub</span> <span class="chatlog__bot-label">BOT</span> <a href="/channels/981108847714381844?category=コミュニティ&amp;channel=swift-doc-jp&amp;message_id=1022542332077289656"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1022541942652928061">22-Sep-22 04:16 PM</a></span></a></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(191,229,191,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/355#issuecomment-1255254608">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] New comment on pull request #355: [バージョン互換性]対応バージョンの修正</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">異論がなさそうですのでマージします！</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022541985195774002" class="chatlog__message-container" data-message-id="1022541985195774002">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="22-Sep-22 04:16 PM">16:16</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/355">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request closed: #355 [バージョン互換性]対応バージョンの修正</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022542060164759673" class="chatlog__message-container" data-message-id="1022542060164759673">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="22-Sep-22 04:17 PM">16:17</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(0,152,0,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/_CwfCdplc_-IM7gzSEItjRU05cQVWLm8aOcdAZgswG8/%3Fv%3D4/https/avatars.githubusercontent.com/in/15368" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/apps/github-actions">
+                        <div class="chatlog__embed-author">github-actions[bot]</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/357">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request opened: #357 contributors readme action update</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022542149050441798" class="chatlog__message-container" data-message-id="1022542149050441798">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="22-Sep-22 04:17 PM">16:17</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(191,229,191,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/356#issuecomment-1255255598">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] New comment on pull request #356: [文]不要な文言の削除</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">こちらも異論がなさそうなのでマージします！</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022542179043901490" class="chatlog__message-container" data-message-id="1022542179043901490">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="22-Sep-22 04:17 PM">16:17</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/356">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request closed: #356 [文]不要な文言の削除</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022542243770409033" class="chatlog__message-container" data-message-id="1022542243770409033">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="22-Sep-22 04:17 PM">16:17</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(0,152,0,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/_CwfCdplc_-IM7gzSEItjRU05cQVWLm8aOcdAZgswG8/%3Fv%3D4/https/avatars.githubusercontent.com/in/15368" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/apps/github-actions">
+                        <div class="chatlog__embed-author">github-actions[bot]</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/358">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request opened: #358 contributors readme action update</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022542300737441873" class="chatlog__message-container" data-message-id="1022542300737441873">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="22-Sep-22 04:18 PM">16:18</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(0,152,0,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/357#pullrequestreview-1117344592">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request review submitted: #357 contributors readme action update</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022542332077289656" class="chatlog__message-container" data-message-id="1022542332077289656">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="22-Sep-22 04:18 PM">16:18</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/357">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request closed: #357 contributors readme action update</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1022734837901180938" class="chatlog__message-container" data-message-id="1022734837901180938">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/992751276427325513/df91181b3f1cf0ef1592fbe18e0962d7.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="GitHub#0000" data-user-id="992751276427325513">GitHub</span> <span class="chatlog__bot-label">BOT</span> <a href="/channels/981108847714381844?category=コミュニティ&amp;channel=swift-doc-jp&amp;message_id=1022734859485073479"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1022734837901180938">23-Sep-22 05:03 AM</a></span></a></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(0,152,0,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/358#pullrequestreview-1117922257">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request review submitted: #358 contributors readme action update</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1022734859485073479" class="chatlog__message-container" data-message-id="1022734859485073479">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="23-Sep-22 05:03 AM">05:03</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-author-container"><img class="chatlog__embed-author-icon" src="https://images-ext-2.discordapp.net/external/KsNZx8Dx8CDn7jc-gjIkgmL2PYhgZb0Sr3G4D1X7C20/%3Fv%3D4/https/avatars.githubusercontent.com/u/35151927" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'"> <a class="chatlog__embed-author-link" href="https://github.com/stzn">
+                        <div class="chatlog__embed-author">stzn</div>
+                      </a></div>
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/stzn/the-swift-programming-language-jp/pull/358">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[stzn/the-swift-programming-language-jp] Pull request closed: #358 contributors readme action update</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -12586,7 +12992,7 @@
     </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 521 message(s)</div>
+    <div class="postamble__entry">Exported 536 message(s)</div>
   </div>
 </body>
 

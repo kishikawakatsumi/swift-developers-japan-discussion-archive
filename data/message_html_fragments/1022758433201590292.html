@@ -1,0 +1,41 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1022757682135961622" class="chatlog__message-container" data-message-id="1022757682135961622">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="nanasi#7185" data-user-id="504646030403436544">nanasi</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1022758433201590292"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1022757682135961622">23-Sep-22 06:33 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます！</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1022757762641432597" class="chatlog__message-container" data-message-id="1022757762641432597">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="23-Sep-22 06:34 AM">06:34</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class Buffer { &nbsp; &nbsp; let data: Data &nbsp; &nbsp; init(data: Data) { &nbsp; &nbsp; &nbsp; &nbsp; self.data = data &nbsp; &nbsp; } &nbsp; &nbsp; deinit { &nbsp; &nbsp; &nbsp; &nbsp; print("deinit buffer", data) &nbsp; &nbsp; } } actor ViewModel: ObservableObject { &nbsp; &nbsp; var currentTask: Task&lt;Buffer, Never&gt;? &nbsp; &nbsp; func action(_ new: @escaping () async -&gt; Data) { &nbsp; &nbsp; &nbsp; &nbsp; let old = currentTask &nbsp; &nbsp; &nbsp; &nbsp; currentTask = Task { &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _ = await old?.value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let data = await new() &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; print("allocated", data) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return Buffer(data: data) &nbsp; &nbsp; &nbsp; &nbsp; } &nbsp; &nbsp; } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1022758099997696030" class="chatlog__message-container" data-message-id="1022758099997696030">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="23-Sep-22 06:35 AM">06:35</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">こんな感じにしてみて memory graph の様子をしばらく見てみましたが怪しく増えるオブジェクトはなさそうでした</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1022758433201590292" class="chatlog__message-container" data-message-id="1022758433201590292">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="23-Sep-22 06:36 AM">06:36</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Buffer</code> はひとつ遅れて開放されるので若干リークといえるかもしれませんが…</span></div>
+      </div>
+    </div>
+  </div>
+</div>

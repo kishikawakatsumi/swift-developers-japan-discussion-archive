@@ -43,7 +43,8 @@
       color: #23262a;
       font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
-      font-weight: 500
+      font-weight: 500;
+      scroll-behavior: smooth
     }
 
     a {
@@ -229,6 +230,38 @@
       unicode-bidi: bidi-override
     }
 
+    .chatlog__system-notification-icon {
+      width: 18px;
+      height: 18px
+    }
+
+    .chatlog__system-notification-author {
+      font-weight: 600;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-content {
+      color: #5e6772
+    }
+
+    .chatlog__system-notification-link {
+      font-weight: 500;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-timestamp {
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override
+    }
+
+    .chatlog__system-notification-timestamp a {
+      color: inherit
+    }
+
     .chatlog__header {
       margin-bottom: 0.1rem
     }
@@ -261,7 +294,7 @@
     }
 
     .chatlog__timestamp a {
-      color: #5e6772
+      color: inherit
     }
 
     .chatlog__content {
@@ -515,7 +548,14 @@
       font-weight: 500
     }
 
-    .chatlog__embed-plainimage {
+    .chatlog__embed-generic-image {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px
+    }
+
+    .chatlog__embed-generic-gifv {
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -734,13 +774,24 @@
   </script>
 </head>
 
-<body><svg style="display:none">
-    <symbol id="attachment-icon" viewBox="0 0 720 960">
-      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
-      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
-      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
-      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
-    </symbol>
+<body><svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="attachment-icon" viewBox="0 0 720 960">
+        <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+        <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+        <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+        <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+      </symbol>
+      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="call-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
+      </symbol>
+      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+    </defs>
   </svg>
   <div class="preamble">
     <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
@@ -24635,9 +24686,202 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021580238544711791" class="chatlog__message-container" data-message-id="1021580238544711791">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1021580709695066232"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021580238544711791">20-Sep-22 12:35 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift/pulls?q=task-to-thread">https://github.com/apple/swift/pulls?q=task-to-thread</a></span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/apple/swift/pulls?q=task-to-thread">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">Pull requests · apple/swift</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">The Swift Programming Language. Contribute to apple/swift development by creating an account on GitHub.</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/tla1bB-weHJaZ99nZjpQNsHUYMtk2G8CMN1pHsgX_pA/https/opengraph.githubassets.com/1a1133375f3988d80e567e7c2ea5a4266c4e41a7ca134ea01306e4457fbc8a3d/apple/swift"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/tla1bB-weHJaZ99nZjpQNsHUYMtk2G8CMN1pHsgX_pA/https/opengraph.githubassets.com/1a1133375f3988d80e567e7c2ea5a4266c4e41a7ca134ea01306e4457fbc8a3d/apple/swift" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021580330391580714" class="chatlog__message-container" data-message-id="1021580330391580714">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 12:35 AM">00:35</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">最近 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">[Freestanding]</code> で task-to-thread model 向けの修正というのがされていて</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021580400314830929" class="chatlog__message-container" data-message-id="1021580400314830929">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 12:35 AM">00:35</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">内容としてはconcurrency系の機能を無効にしてるだけ？に見えるんだけど</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021580468635844648" class="chatlog__message-container" data-message-id="1021580468635844648">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 12:36 AM">00:36</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">task-to-thread modelがなんなのかわからなくて気になっている</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021580641344684142" class="chatlog__message-container" data-message-id="1021580641344684142">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 12:36 AM">00:36</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">コード書いてる rokhinipさんは プロフィールが <div class="chatlog__markdown-quote">
+                  <div class="chatlog__markdown-quote-border"></div>
+                  <div class="chatlog__markdown-quote-content">Kernel and Runtime @apple </div>
+                </div>となっているので、</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021580709695066232" class="chatlog__message-container" data-message-id="1021580709695066232">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 12:37 AM">00:37</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">macOS内部にSwift使おうとしてるんだろうか？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021825079698526229" class="chatlog__message-container" data-message-id="1021825079698526229">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="kebo#5285" data-user-id="341261694279876609">kebo</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1021825079698526229"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021825079698526229">20-Sep-22 04:48 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">task-to-thread model は一般的な概念というよりフリースタンディング環境向けに標準ライブラリをビルドする場合の分岐を指す造語な気がします． 以下の各コミットメッセージの 2 行目以下を読むと task-to-thread model がどういうものかという定義が書いてありましたよ．(すでに読まれていらっしゃるかもしれませんが) <a href="https://github.com/apple/swift/pull/59726/commits">https://github.com/apple/swift/pull/59726/commits</a></span> <span class="chatlog__edited-timestamp" title="20-Sep-22 04:50 PM">(edited)</span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/apple/swift/pull/59726/commits">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">[Freestanding] Disable unstructured tasks. by nate-chandler · Pull ...</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">Add a new task-to-thread concurrency model for use by freestanding, and disable task creation, global actors, MainActor, and custom executors there.</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/29iDHjZjBEzeOdcl7xL0rqWnuJLJlAInUrrfTBvQlE4/https/opengraph.githubassets.com/a259f0a980ed0588203177595a0c9f86168eae90f55d07b5f1b2b58f4963c0e5/apple/swift/pull/59726"> <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/29iDHjZjBEzeOdcl7xL0rqWnuJLJlAInUrrfTBvQlE4/https/opengraph.githubassets.com/a259f0a980ed0588203177595a0c9f86168eae90f55d07b5f1b2b58f4963c0e5/apple/swift/pull/59726" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021827494959136820" class="chatlog__message-container" data-message-id="1021827494959136820">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1021829064123764766"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021827494959136820">20-Sep-22 04:57 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">task-to-threadってすごくわかりにくい名前ですよね。最初libdispatchでスケジューリングするんじゃなくてTaskごとにThread割り当てるのかなと思ってました。</span> <span class="chatlog__edited-timestamp" title="20-Sep-22 04:57 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021828219525152858" class="chatlog__message-container" data-message-id="1021828219525152858">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 05:00 PM">17:00</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">実際は非同期なAPIが無い環境、つまりasyncな関数だったとしても中断せずに関数の最後まで1回の実行で到達することが保証できる環境で、syncなコンテキストからasync関数をlibdispatchにスケジューリングせず、今のスレッドでインラインに実行する、という感じだと思ってます。</span> <span class="chatlog__edited-timestamp" title="20-Sep-22 05:02 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021828614850887841" class="chatlog__message-container" data-message-id="1021828614850887841">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 05:02 PM">17:02</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このコミット面白い <a href="https://github.com/apple/swift/pull/59726/commits/34c08b834495b0c691bfc128a469fc61dc3894a4">https://github.com/apple/swift/pull/59726/commits/34c08b834495b0c691bfc128a469fc61dc3894a4</a>
+                <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public static func runInline(_ body: () async throws -&gt; Success) rethrows -&gt; Success</code></span> <span class="chatlog__edited-timestamp" title="20-Sep-22 05:02 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021829064123764766" class="chatlog__message-container" data-message-id="1021829064123764766">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 05:03 PM">17:03</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Secure EnclaveでSwiftを動かしてるという話が今年のWWDCであったので、その辺のプロジェクトで使われてるんじゃないかなぁと推測</span> <span class="chatlog__edited-timestamp" title="20-Sep-22 05:05 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021892055296901171" class="chatlog__message-container" data-message-id="1021892055296901171">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" title="kebo#5285">kebo</div>
+              <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'1021825079698526229')"> task-to-thread model は一般的な概念というよりフリースタンディング環境向けに標準ライブラリをビルドする場合の分岐を指す造語な気がします． 以下の各コミットメッセージの 2 行目以下を読むと task-to-thread model がどういうものかという定義が書いてありましたよ．(すでに読まれていらっしゃるかもしれませんが) <a href="https://github.com/apple/swift/pull/59726/commits">https://github.com/apple/swift/pull/59726/commits</a> </span> <span class="chatlog__reference-edited-timestamp" title="20-Sep-22 04:50 PM">(edited)</span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1021892055296901171"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021892055296901171">20-Sep-22 09:14 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1021892783805571073" class="chatlog__message-container" data-message-id="1021892783805571073">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184">kateinoigakukun</div>
+              <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'1021828219525152858')"> 実際は非同期なAPIが無い環境、つまりasyncな関数だったとしても中断せずに関数の最後まで1回の実行で到達することが保証できる環境で、syncなコンテキストからasync関数をlibdispatchにスケジューリングせず、今のスレッドでインラインに実行する、という感じだと思ってます。 </span> <span class="chatlog__reference-edited-timestamp" title="20-Sep-22 05:02 PM">(edited)</span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1021893260702138379"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1021892783805571073">20-Sep-22 09:17 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おお，そういうことか。 つまりTaskがスレッドに対応して、awaitが同期的な待機になるのか。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1021893260702138379" class="chatlog__message-container" data-message-id="1021893260702138379">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="20-Sep-22 09:18 PM">21:18</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">async awaitがまだ計画しかなかったときに、その方法で擬似的にasync awaitスタイルをライブラリ実装したデモを見たけど、それと同じloweringをするわけだ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 2,034 message(s)</div>
+    <div class="postamble__entry">Exported 2,048 message(s)</div>
   </div>
 </body>
 

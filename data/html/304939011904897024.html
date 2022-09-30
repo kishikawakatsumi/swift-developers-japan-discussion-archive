@@ -43,7 +43,8 @@
       color: #23262a;
       font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 17px;
-      font-weight: 500
+      font-weight: 500;
+      scroll-behavior: smooth
     }
 
     a {
@@ -229,6 +230,38 @@
       unicode-bidi: bidi-override
     }
 
+    .chatlog__system-notification-icon {
+      width: 18px;
+      height: 18px
+    }
+
+    .chatlog__system-notification-author {
+      font-weight: 600;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-content {
+      color: #5e6772
+    }
+
+    .chatlog__system-notification-link {
+      font-weight: 500;
+      color: #2f3136
+    }
+
+    .chatlog__system-notification-timestamp {
+      margin-left: 0.3rem;
+      color: #5e6772;
+      font-size: 0.75rem;
+      font-weight: 500;
+      direction: ltr;
+      unicode-bidi: bidi-override
+    }
+
+    .chatlog__system-notification-timestamp a {
+      color: inherit
+    }
+
     .chatlog__header {
       margin-bottom: 0.1rem
     }
@@ -261,7 +294,7 @@
     }
 
     .chatlog__timestamp a {
-      color: #5e6772
+      color: inherit
     }
 
     .chatlog__content {
@@ -515,7 +548,14 @@
       font-weight: 500
     }
 
-    .chatlog__embed-plainimage {
+    .chatlog__embed-generic-image {
+      max-width: 45vw;
+      max-height: 500px;
+      vertical-align: top;
+      border-radius: 3px
+    }
+
+    .chatlog__embed-generic-gifv {
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -734,13 +774,24 @@
   </script>
 </head>
 
-<body><svg style="display:none">
-    <symbol id="attachment-icon" viewBox="0 0 720 960">
-      <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
-      <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
-      <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
-      <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
-    </symbol>
+<body><svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="attachment-icon" viewBox="0 0 720 960">
+        <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"></path>
+        <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"></path>
+        <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
+        <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
+      </symbol>
+      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="call-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
+      </symbol>
+      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+    </defs>
   </svg>
   <div class="preamble">
     <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
@@ -11186,7 +11237,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611355341782777886"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611355341782777886">15-Aug-19 12:27 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611355341782777886"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611355341782777886">15-Aug-19 12:27 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これXcode11 beta3だとビルドできるけど、swift-tools-version:5.1でswift buildすると$SDKROOTは解釈されないんですよね。そのうちswift buildでも解釈できるようになるんだろうか。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> .target( name: "Clibxml2", // Headers and linking for libxml2 cSettings: [.headerSearchPath("$(SDKROOT)/usr/include/libxml2")], linkerSettings: [.linkedLibrary("xml2")] ),</code></span> <span class="chatlog__edited-timestamp" title="15-Aug-19 12:47 AM">(edited)</span></div>
           </div>
         </div>
@@ -11244,7 +11295,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611440997603213312"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611440997603213312">15-Aug-19 06:08 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611440997603213312"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611440997603213312">15-Aug-19 06:08 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど、ここで取られてたアプローチだったんですけど、beta5で動かないんですね。 <a href="https://github.com/cezheng/Fuzi/blob/master/Package.swift">https://github.com/cezheng/Fuzi/blob/master/Package.swift</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -11327,7 +11378,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611856819182108693"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611856819182108693">16-Aug-19 09:40 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611856819182108693"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611856819182108693">16-Aug-19 09:40 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">はい、その通りです。genarate-xcodeprojで作った時にだけ使えたのを確認してます。</span></div>
           </div>
         </div>
@@ -11349,7 +11400,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611868441955270676"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611868441955270676">16-Aug-19 10:26 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611868441955270676"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611868441955270676">16-Aug-19 10:26 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今はこんな感じにビルドしてたので、パスをハードコードせずできないかな？と思って、 色々試していたのが動機でした.. <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-sh">swift build -Xcc -I/usr/local/Cellar/libxml2/2.9.9_2/include/libxml2</code></span> <span class="chatlog__edited-timestamp" title="16-Aug-19 10:28 AM">(edited)</span></div>
           </div>
         </div>
@@ -11371,7 +11422,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611876677462523904"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611876677462523904">16-Aug-19 10:59 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611876677462523904"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611876677462523904">16-Aug-19 10:59 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">pkgConfigを指定してはいるんですが <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> .systemLibrary( name: "Clibxml2", pkgConfig: "libxml-2.0.pc", providers: [ .brew(["libxml2"]), .apt(["libxml2-dev"]) ]),</code> Xccでフラグ渡さないと、ヘッダが見つけられないんですよね。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">/usr/local/Cellar/libxml2/2.9.9_2/include/libxml2/libxml/chvalid.h:17:10: error: 'libxml/xmlversion.h' file not found #include &lt;libxml/xmlversion.h&gt;</code></span> <span class="chatlog__edited-timestamp" title="16-Aug-19 11:00 AM">(edited)</span></div>
           </div>
         </div>
@@ -11393,7 +11444,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611878004821327898"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611878004821327898">16-Aug-19 11:04 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611878004821327898"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611878004821327898">16-Aug-19 11:04 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">pkg-config --cflags --libs "libxml-2.0 &gt; 2.6.17"</code> ならパスがでますが <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-sh">pkg-config --cflags --libs "libxml-2.0 &gt; 2.6.17" -I/usr/include/libxml2 -lxml2</code>
                 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$ pkg-config --cflags libxml2</code> では出ないですね <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">Package libxml2 was not found in the pkg-config search path. Perhaps you should add the directory containing `libxml2.pc' to the PKG_CONFIG_PATH environment variable</code></span> <span class="chatlog__edited-timestamp" title="16-Aug-19 11:07 AM">(edited)</span></div>
           </div>
@@ -11456,7 +11507,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611879769591644160"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611879769591644160">16-Aug-19 11:11 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611879769591644160"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611879769591644160">16-Aug-19 11:11 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">brewがみているpkgConfigがusr/indude前提になっていたような</span></div>
           </div>
         </div>
@@ -11498,7 +11549,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611880309461483520"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611880145606803456">16-Aug-19 11:13 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611880309461483520"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611880145606803456">16-Aug-19 11:13 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://discourse.brew.sh/t/macos-mojave-doesn-t-install-headers-in-usr/3865">https://discourse.brew.sh/t/macos-mojave-doesn-t-install-headers-in-usr/3865</a></span></div>
           </div>
         </div>
@@ -11586,7 +11637,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611880891433746453"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611880891433746453">16-Aug-19 11:16 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611880891433746453"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611880891433746453">16-Aug-19 11:16 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今swiftpmの入門本を技術書典向けに書いてるんですが、ここでひたすらハマっている感じですね 調べるほどsystemLibraryの現時点での辛さが..</span> <span class="chatlog__edited-timestamp" title="16-Aug-19 11:16 AM">(edited)</span></div>
           </div>
         </div>
@@ -11644,7 +11695,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611881135693365250"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611881135693365250">16-Aug-19 11:17 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611881135693365250"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611881135693365250">16-Aug-19 11:17 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あー古いやりかたのほうですね、試してみます</span> <span class="chatlog__edited-timestamp" title="16-Aug-19 11:19 AM">(edited)</span></div>
           </div>
         </div>
@@ -11722,7 +11773,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611884375620976640"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611884375620976640">16-Aug-19 11:30 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=611884375620976640"><span class="chatlog__timestamp"><a href="#chatlog__message-container-611884375620976640">16-Aug-19 11:30 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おお、別パッケージってgitリポジトリ化する必要があると思ってたんですが、linkedLibraryに指定するんですね。これならmac/iOSでも動くのかな。↑の方法でも相変わらずでした。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/libxml2/libxml/HTMLparser.h:15:10: error: 'libxml/xmlversion.h' file not found #include &lt;libxml/xmlversion.h&gt;</code></span> <span class="chatlog__edited-timestamp" title="16-Aug-19 11:35 PM">(edited)</span></div>
           </div>
         </div>
@@ -12034,7 +12085,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=614278306023604235"><span class="chatlog__timestamp"><a href="#chatlog__message-container-614278306023604235">23-Aug-19 02:02 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=614278306023604235"><span class="chatlog__timestamp"><a href="#chatlog__message-container-614278306023604235">23-Aug-19 02:02 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">dependency-mirroringを試してるんですけど <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-sh">$ swift package config set-mirror \ --mirror-url https://github.com/kishikawakatsumi/KeychainAccess \ --package-url https://github.com/tikidunpon/KeychainAccess</code> こうしても必ずmirrorの方がはじめにcloneされる..forkには対応していない？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">.package(url: "https://github.com/tikidunpon/KeychainAccess", from: "3.0.0"),</code> beta3だからかな、beta6同梱の方で後で試すか</span> <span class="chatlog__edited-timestamp" title="23-Aug-19 02:10 AM">(edited)</span></div>
           </div>
         </div>
@@ -12045,7 +12096,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=614284643696377856"><span class="chatlog__timestamp"><a href="#chatlog__message-container-614284643696377856">23-Aug-19 02:27 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=614284643696377856"><span class="chatlog__timestamp"><a href="#chatlog__message-container-614284643696377856">23-Aug-19 02:27 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、mirrorがcloneされるのが正しい動きなのか。<a href="https://github.com/apple/swift-evolution/blob/master/proposals/0219-package-manager-dependency-mirroring.md#proposed-solution">https://github.com/apple/swift-evolution/blob/master/proposals/0219-package-manager-dependency-mirroring.md#proposed-solution</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -12290,7 +12341,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=628181035938611203"><span class="chatlog__timestamp"><a href="#chatlog__message-container-628181035938611203">30-Sep-19 10:47 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=628181035938611203"><span class="chatlog__timestamp"><a href="#chatlog__message-container-628181035938611203">30-Sep-19 10:47 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">swiftpmからlibxml2に依存できない問題,bug reportあがってた <a href="https://bugs.swift.org/browse/SR-11427">https://bugs.swift.org/browse/SR-11427</a></span> <span class="chatlog__edited-timestamp" title="30-Sep-19 12:17 PM">(edited)</span></div>
           </div>
         </div>
@@ -12839,7 +12890,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=664730155679219747"><span class="chatlog__timestamp"><a href="#chatlog__message-container-664730155679219747">09-Jan-20 07:20 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=664730155679219747"><span class="chatlog__timestamp"><a href="#chatlog__message-container-664730155679219747">09-Jan-20 07:20 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういえばBinary DependenciesがAcceptされてました。 <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0272-swiftpm-binary-dependencies.md">https://github.com/apple/swift-evolution/blob/master/proposals/0272-swiftpm-binary-dependencies.md</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -13047,7 +13098,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/af4e355281b86115555964a423bef439.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tikidunpon#8031" data-user-id="373007528428306433">tikidunpon</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=683529639024525366"><span class="chatlog__timestamp"><a href="#chatlog__message-container-683529639024525366">01-Mar-20 04:22 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=683529639024525366"><span class="chatlog__timestamp"><a href="#chatlog__message-container-683529639024525366">01-Mar-20 04:22 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">__resourcesは5.2では出ないみたいですね。 Remove resources API since it not shipping in swift 5.2 <a href="https://github.com/apple/swift-package-manager/commit/046728ad403546070ce9b0d877333d3887bf5d49">https://github.com/apple/swift-package-manager/commit/046728ad403546070ce9b0d877333d3887bf5d49</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -29708,7 +29759,7 @@
               </div>
             </div>
             <div class="chatlog__reactions">
-              <div class="chatlog__reaction" title="sob"><img class="chatlog__emoji chatlog__emoji--small" alt="😭" src="https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+              <div class="chatlog__reaction" title="sob"><img class="chatlog__emoji chatlog__emoji--small" alt="😭" src="https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
             </div>
           </div>
         </div>
@@ -29795,9 +29846,23 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1018898460478558359" class="chatlog__message-container" data-message-id="1018898460478558359">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/321335883460771840/f0a6952666adbcf62823bed998c099ed.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="taktem#5164" data-user-id="321335883460771840">taktem</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1018898460478558359"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1018898460478558359">12-Sep-22 02:58 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今日だてさんに相談させてもらっていた件ですが 取り急ぎarm64-to-sim試したところ、残念ながら条件満たしておらずでした arm64シミュレータへの適用はいったん諦める方針で直近調整してみます。 もろもろありがとうございました ※イベント終わっちゃったので、こちらのルームで</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 2,342 message(s)</div>
+    <div class="postamble__entry">Exported 2,343 message(s)</div>
   </div>
 </body>
 
