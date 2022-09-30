@@ -80,7 +80,13 @@ fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
       "utf-8"
     ),
   }));
-  await index.saveObjects(messages, { autoGenerateObjectIDIfNotExist: false });
+  try {
+    await index.saveObjects(messages, {
+      autoGenerateObjectIDIfNotExist: false,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 
   const optOutMessageIds = messages
     .filter((message) => {
