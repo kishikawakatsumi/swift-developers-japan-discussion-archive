@@ -30803,9 +30803,9 @@
       "content": "質問失礼します。\n以下を参考にSwiftUIのNavigationLinkで複数回画面遷移をした後に一気に最初の画面に戻る実装をしています。記事ではNavigationLinkに`.isDetailLink(false)`をつけなければ最初のView戻ることはできないと言及されています。\n\nしかし、`.isDetailLink(false)`をつけない場合や、`.isDetailLink(true)`にした場合でも同様に最初のViewに戻ることができました。これは、SwiftUIの仕様変更等が原因なのでしょうか？？何かご存知の方がいられましたらご教授いただければ幸いです。\n\nhttps://www.yururiwork.net/archives/148\n\nhttps://stackoverflow.com/questions/57334455/how-can-i-pop-to-the-root-view-using-swiftui/59662275#59662275\n\n以下ソースコードです。\n```swift\nstruct FirstView: View {\n\n    @State private var isActive = false\n\n    var body: some View {\n        NavigationView {\n            NavigationLink(destination: SecondView(isFirstViewActive: $isActive), isActive: $isActive) {\n                Button(action: {\n                    self.isActive = true\n                }, label: {\n                    Text(\"Forward to Second View.\")\n                })\n            }\n            .navigationBarTitle(\"First View\")\n        }\n    }\n}\n\nstruct SecondView: View {\n\n    @State private var isActive = false\n    @Binding var isFirstViewActive: Bool\n\n    var body: some View {\n        NavigationLink(destination: ThirdView(isFirstViewActive: $isFirstViewActive), isActive: $isActive) {\n            Button(action: {\n                self.isActive = true\n            }, label: {\n                Text(\"Forward to Third View.\")\n            })\n        }\n        .isDetailLink(false) //ここをコメントアウトしてもFirstViewに戻れる。\n        .navigationBarTitle(\"Second View\")\n    }\n}\n\nstruct ThirdView: View {\n\n    @Binding var isFirstViewActive: Bool\n\n    var body: some View {\n        Button(action: {\n            self.isFirstViewActive = false\n        }, label: {\n            Text(\"Back to First View.\")\n        })\n        .navigationBarTitle(\"Third View\")\n    }\n}\n\n```",
       "author": {
         "id": "849121205792538624",
-        "name": "れい 中岡黎 rei_nakaoka",
+        "name": "rei.nakaoka",
         "discriminator": "5514",
-        "nickname": "れい 中岡黎 rei_nakaoka",
+        "nickname": "rei.nakaoka",
         "color": null,
         "isBot": false,
         "avatarUrl": "https://cdn.discordapp.com/avatars/849121205792538624/e14e0baaed36f611a2cc51548e74160d.png?size=512"
@@ -31186,7 +31186,7 @@
             "isAnimated": false,
             "imageUrl": "https://twemoji.maxcdn.com/v/latest/svg/1f440.svg"
           },
-          "count": 1
+          "count": 2
         }
       ],
       "mentions": []
