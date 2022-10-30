@@ -1,0 +1,67 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1035904132420218900" class="chatlog__message-container" data-message-id="1035904132420218900">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/499393715140558881?category=コミュニティ&amp;channel=swift-zoomin&amp;message_id=1035904600370315374"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1035904132420218900">29-Oct-22 01:13 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol MyIteratorProtocol&lt;Element&gt; { associatedtype Element mutating func next() -&gt; Element? } protocol MySequence&lt;Element&gt; { associatedtype Element associatedtype Iterator: MyIteratorProtocol&lt;Element&gt; func makeIterator() -&gt; Iterator // func makeIterator() -&gt; any MyIteratorProtocol&lt;Element&gt; } protocol MyCollection&lt;Element&gt;: MySequence { associatedtype Index: Comparable associatedtype Indices: MyCollection where Indices.Element == Index associatedtype SubSequence: MyCollection where SubSequence.Element == Element, SubSequence.Index == Index, SubSequence.SubSequence == SubSequence subscript(index: Index) -&gt; Element { get } subscript(range: Range&lt;Index&gt;) -&gt; SubSequence { get } var indices: Indices { get } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1035904223667290134" class="chatlog__message-container" data-message-id="1035904223667290134">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="29-Oct-22 01:13 PM">13:13</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct Pair&lt;Element&gt;: MySequence { var elements: (Element, Element) func makeIterator() -&gt; some MyIteratorProtocol&lt;Element&gt; { PairIterator(pair: self) } } struct PairIterator&lt;Element&gt;: MyIteratorProtocol { var pair: Pair&lt;Element&gt; var index: Int = 0 mutating func next() -&gt; Element? { defer { index += 1 } switch index { case 0: return pair.elements.0 case 1: return pair.elements.1 case _: return nil } } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1035904282957971607" class="chatlog__message-container" data-message-id="1035904282957971607">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="29-Oct-22 01:13 PM">13:13</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let pair: Pair&lt;Int&gt; = .init(elements: (2, 3)) //for element in pair { // print(element) //} var iterator = pair.makeIterator() while let element = iterator.next() { print(element) }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1035904430010282056" class="chatlog__message-container" data-message-id="1035904430010282056">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="29-Oct-22 01:14 PM">13:14</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// ジェネリクス地獄 class MyIteratorProtocol&lt;Element&gt; { func next() -&gt; Element? { fatalError() } } class MySequence&lt;Element, Iterator: MyIteratorProtocol&lt;Element&gt;&gt; { func makeIterator() -&gt; Iterator { fatalError() } } class MyCollection&lt; Element, Index: Comparable, IndicesIndex, IndicesIterator: MyIteratorProtocol&lt;Index&gt;, Indices: MyCollection&lt; Index, IndicesIndex, IndicesIterator, &gt;, Iterator: MyIteratorProtocol&lt;Element&gt;, SubSequenceIterator: MyIteratorProtocol&lt;Element&gt;, SubSequence: MyCollection&lt; Element, Index, SubSequenceIterator, SubSequenceIterator, SubSequence &gt; &gt;: MySequence&lt;Element, Iterator&gt; { subscript(index: Index) -&gt; Element { fatalError() } subscript(range: Range&lt;Index&gt;) -&gt; SubSequence { fatalError() } var indices: Indices { fatalError() } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1035904600370315374" class="chatlog__message-container" data-message-id="1035904600370315374">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="29-Oct-22 01:15 PM">13:15</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://qiita.com/koher/items/b21879a31210f7408502">https://qiita.com/koher/items/b21879a31210f7408502</a></span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(85,197,0,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://qiita.com/koher/items/b21879a31210f7408502">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">なぜSwiftのプロトコルはジェネリクスをサポートしないのか - Qiita</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Swift のプロトコルは、 Java や C# などのインタフェースのようなものと説明されることが多いですが、いくつかの違いがあります。最も大きな違いの一つが、 Swift のプロトコルはジェネリクスをサポートしていないということで...</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/v33_Ww9xIHG_xqrJ3DW7UQ78FfIKHVU_XFCUql26Wg8/%3Fixlib%3Drb-4.0.0%26w%3D1200%26mark64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTkxNiZ0eHQ9JUUzJTgxJUFBJUUzJTgxJTlDU3dpZnQlRTMlODElQUUlRTMlODMlOTclRTMlODMlQUQlRTMlODMlODglRTMlODIlQjMlRTMlODMlQUIlRTMlODElQUYlRTMlODIlQjglRTMlODIlQTclRTMlODMlOEQlRTMlODMlQUElRTMlODIlQUYlRTMlODIlQjklRTMlODIlOTIlRTMlODIlQjUlRTMlODMlOUQlRTMlODMlQkMlRTMlODMlODglRTMlODElOTclRTMlODElQUElRTMlODElODQlRTMlODElQUUlRTMlODElOEImdHh0LWNvbG9yPSUyMzIxMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT01NiZ0eHQtY2xpcD1lbGxpcHNpcyZ0eHQtYWxpZ249bGVmdCUyQ3RvcCZzPWI3MzI2NzE4YzJlNmYxYzc3Yzg1YjY3ZDViOGFhZGVj%26mark-x%3D142%26mark-y%3D112%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTYxNiZ0eHQ9JTQwa29oZXImdHh0LWNvbG9yPSUyMzIxMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT0zNiZ0eHQtYWxpZ249bGVmdCUyQ3RvcCZzPWQ1OThmY2M2NGE4YTc4NTU0MDUzZWIxYTQzZWQyNjdk%26blend-x%3D142%26blend-y%3D491%26blend-mode%3Dnormal%26s%3D680caf01d6f3f0659ac4ad4066dcfcc0/https/qiita-user-contents.imgix.net/https%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-9f5428127621718a910c8b63951390ad.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/v33_Ww9xIHG_xqrJ3DW7UQ78FfIKHVU_XFCUql26Wg8/%3Fixlib%3Drb-4.0.0%26w%3D1200%26mark64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTkxNiZ0eHQ9JUUzJTgxJUFBJUUzJTgxJTlDU3dpZnQlRTMlODElQUUlRTMlODMlOTclRTMlODMlQUQlRTMlODMlODglRTMlODIlQjMlRTMlODMlQUIlRTMlODElQUYlRTMlODIlQjglRTMlODIlQTclRTMlODMlOEQlRTMlODMlQUElRTMlODIlQUYlRTMlODIlQjklRTMlODIlOTIlRTMlODIlQjUlRTMlODMlOUQlRTMlODMlQkMlRTMlODMlODglRTMlODElOTclRTMlODElQUElRTMlODElODQlRTMlODElQUUlRTMlODElOEImdHh0LWNvbG9yPSUyMzIxMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT01NiZ0eHQtY2xpcD1lbGxpcHNpcyZ0eHQtYWxpZ249bGVmdCUyQ3RvcCZzPWI3MzI2NzE4YzJlNmYxYzc3Yzg1YjY3ZDViOGFhZGVj%26mark-x%3D142%26mark-y%3D112%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjAuMCZ3PTYxNiZ0eHQ9JTQwa29oZXImdHh0LWNvbG9yPSUyMzIxMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT0zNiZ0eHQtYWxpZ249bGVmdCUyQ3RvcCZzPWQ1OThmY2M2NGE4YTc4NTU0MDUzZWIxYTQzZWQyNjdk%26blend-x%3D142%26blend-y%3D491%26blend-mode%3Dnormal%26s%3D680caf01d6f3f0659ac4ad4066dcfcc0/https/qiita-user-contents.imgix.net/https%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-9f5428127621718a910c8b63951390ad.png" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

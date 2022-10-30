@@ -1,0 +1,51 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1031813486755454996" class="chatlog__message-container" data-message-id="1031813486755454996">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1031814656035147877"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1031813486755454996">18-Oct-22 06:18 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol Cleanup { func cleanup() } macro(contexts: [.statement], external: "MyMacros.LocalCleanup") func localCleanup&lt;Value: Cleanup&gt;(_ varName: String, _ initializer: Value) --- #localCleanup("file", File(opening: "hello.txt")) --- let file = File(opening: "hello.txt") defer { file.cleanup() }</code></span> <span class="chatlog__edited-timestamp" title="18-Oct-22 06:18 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1031813705874288671" class="chatlog__message-container" data-message-id="1031813705874288671">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="18-Oct-22 06:19 AM">06:19</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">defer生み出せるの面白いな。moveonly typeがあれば要らないマクロですが・・・</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1031814588452307015" class="chatlog__message-container" data-message-id="1031814588452307015">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="18-Oct-22 06:22 AM">06:22</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// In the standard library extension Equatable { macro(contexts: [.conformance], external: "MyMacros.EquatableSynthesis") static func ==(lhs: Self, rhs: Self) -&gt; Bool } // In the macro definition library struct EquatableSynthesis: ConformanceMacro { public static func apply( conformingType: TypeDecl, protocol: ProtocolDecl, witness: FunctionDeclSyntax, in context: MacroEvaluationContext ) -&gt; (FunctionDeclSyntax, [Diagnostic]) { let comparisons: [ExprSyntax] = conformingType.storedProperties.map { property in "lhs.\(property.name) == rhs.\(property.name)" } let comparisonExpr: ExprSyntax = comparisons.map { $0.description }.joined(separator: " &amp;&amp; ") return witness.withBody( """ { return \(comparisonExpr) } """ ) } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1031814628797325392" class="chatlog__message-container" data-message-id="1031814628797325392">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="18-Oct-22 06:22 AM">06:22</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">TypeDecl</code> は今無いやつだ、めっちゃ欲しい</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1031814656035147877" class="chatlog__message-container" data-message-id="1031814656035147877">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="18-Oct-22 06:23 AM">06:23</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">無いので自作してるやつ</span></div>
+      </div>
+    </div>
+  </div>
+</div>
