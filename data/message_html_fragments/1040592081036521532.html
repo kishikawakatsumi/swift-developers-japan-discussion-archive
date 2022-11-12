@@ -1,0 +1,57 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1040591695126990898" class="chatlog__message-container" data-message-id="1040591695126990898">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1040592203807993867"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1040591695126990898">11-Nov-22 11:39 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@main struct Main { static func main() { testPowerAssert() } static func testPowerAssert() { let a = 4 let b = 7 let c = 12 #powerAssert(max(a, b) == c) #powerAssert(a + b &gt; c) struct Person { let name: String let age: Int var isTeenager: Bool { return age &lt;= 12 &amp;&amp; age &gt;= 20 } } let john = Person(name: "John", age: 42) let mike = Person(name: "Mike", age: 13) #powerAssert(john.isTeenager) #powerAssert(mike.isTeenager &amp;&amp; john.age &lt; mike.age) } }</code> ^ こんなマクロを書くと</span> <span class="chatlog__edited-timestamp" title="11-Nov-22 11:42 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1040591916124872704" class="chatlog__message-container" data-message-id="1040591916124872704">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Nov-22 11:40 AM">11:40</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@main struct Main { static func main() { testPowerAssert() } static func testPowerAssert() { let a = 4 let b = 7 let c = 12 PowerAssert.Assertion("#powerAssert(max(a, b) == c)", line: 12, verbose: true).assert(max(a, b) == c).record(expression: max(a, b), column: 13).record(expression: a, column: 17).record(expression: b, column: 20).record(expression: max(a, b) == c, column: 23).record(expression: c, column: 26).render() PowerAssert.Assertion("#powerAssert(a + b &gt; c)", line: 13, verbose: true).assert(a + b &gt; c).record(expression: a, column: 13).record(expression: b, column: 17).record(expression: a + b &gt; c, column: 19).record(expression: c, column: 21).render() struct Person { let name: String let age: Int var isTeenager: Bool { return age &lt;= 12 &amp;&amp; age &gt;= 20 } } let john = Person(name: "John", age: 42) let mike = Person(name: "Mike", age: 13) PowerAssert.Assertion("#powerAssert(john.isTeenager)", line: 27, verbose: true).assert(john.isTeenager).record(expression: john.isTeenager, column: 18).record(expression: john, column: 13).render() PowerAssert.Assertion("#powerAssert(mike.isTeenager &amp;&amp; john.age &lt; mike.age)", line: 28, verbose: true).assert(mike.isTeenager &amp;&amp; john.age &lt; mike.age).record(expression: mike.isTeenager, column: 18).record(expression: mike, column: 13).record(expression: john.age, column: 37).record(expression: john, column: 32).record(expression: mike.isTeenager &amp;&amp; john.age &lt; mike.age, column: 41).record(expression: mike.age, column: 48).record(expression: mike, column: 43).render() } }</code> ^ こういうコードに展開されて、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1040592081036521532" class="chatlog__message-container" data-message-id="1040592081036521532">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Nov-22 11:41 AM">11:41</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">#powerAssert(max(a, b) == c) | | | | | 7 4 7 | 12 false #powerAssert(a + b &gt; c) | | | | 4 7 | 12 false #powerAssert(john.isTeenager) | | | false Person(name: "John", age: 42) #powerAssert(mike.isTeenager &amp;&amp; john.age &lt; mike.age) | | | | | | | | false | 42 | | 13 | | | Person(name: "Mike", age: 13) | | false | Person(name: "John", age: 42) Person(name: "Mike", age: 13)</code> ^ このような結果が得られる。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1040592203807993867" class="chatlog__message-container" data-message-id="1040592203807993867">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Nov-22 11:41 AM">11:41</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">というのがなんとなくできた。 <a href="https://github.com/kishikawakatsumi/swift-syntax/commit/dc962129da32c5ebbbb6719fe35838568515e45f">https://github.com/kishikawakatsumi/swift-syntax/commit/dc962129da32c5ebbbb6719fe35838568515e45f</a></span> <span class="chatlog__edited-timestamp" title="11-Nov-22 11:43 AM">(edited)</span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/kishikawakatsumi/swift-syntax/commit/dc962129da32c5ebbbb6719fe35838568515e45f">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">Implement proof of concept for power assert · kishikawakatsumi/swif...</div>
+                  </a></div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/nAgOdOKdNfuehFq55gKcH5EI01lqcwR-n1mLS4iooyo/https/opengraph.githubassets.com/540e51ad4040852b74726cd3b35358e5f05a631439832f6edcd3f6b3175f185f/kishikawakatsumi/swift-syntax/commit/dc962129da32c5ebbbb6719fe35838568515e45f"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/nAgOdOKdNfuehFq55gKcH5EI01lqcwR-n1mLS4iooyo/https/opengraph.githubassets.com/540e51ad4040852b74726cd3b35358e5f05a631439832f6edcd3f6b3175f185f/kishikawakatsumi/swift-syntax/commit/dc962129da32c5ebbbb6719fe35838568515e45f" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://twemoji.maxcdn.com/v/latest/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
