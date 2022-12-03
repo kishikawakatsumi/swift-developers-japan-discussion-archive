@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1047377888896364597" class="chatlog__message-container" data-message-id="1047377888896364597">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1047378213405474976"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1047377888896364597">30-Nov-22 05:05 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">結論から言うと、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift</code> コマンドで実行した場合はスクリプト側の行番号などはスタックトレースに表示できません。<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift</code> コマンドでの実行にこだわりがなければ、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swiftc -g foo.swift</code> でデバッグ情報付きの実行ファイルを作って、lldbなどで実行した上で、クラッシュ時のバックトレースをみるのが良いと思います。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1047378213405474976" class="chatlog__message-container" data-message-id="1047378213405474976">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="30-Nov-22 05:07 AM">05:07</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">こんなかんじです <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">tmp.naXATKx4$ swiftc foo.swift -g foo.swift:2:2: warning: expression of type 'Int' is unused a[0] ~^~~ foo.swift:2:2: warning: expression of type 'Int' is unused a[0] ~^~~ tmp.naXATKx4$ lldb ./foo (lldb) target create "./foo" Current executable set to '/var/folders/k2/q6yzck31253_q1j4kxkzq5jh0000gn/T/tmp.naXATKx4/foo' (arm64). (lldb) run Process 11150 launched: '/var/folders/k2/q6yzck31253_q1j4kxkzq5jh0000gn/T/tmp.naXATKx4/foo' (arm64) Swift/ContiguousArrayBuffer.swift:600: Fatal error: Index out of range 2022-11-30 14:06:07.610207+0900 foo[11150:3677660] Swift/ContiguousArrayBuffer.swift:600: Fatal error: Index out of range Process 11150 stopped * thread #1, queue = 'com.apple.main-thread', stop reason = Fatal error: Index out of range frame #0: 0x0000000193d93ae8 libswiftCore.dylib`_swift_runtime_on_report libswiftCore.dylib`: -&gt; 0x193d93ae8 &lt;+0&gt;: ret libswiftCore.dylib`: 0x193d93aec &lt;+0&gt;: b 0x193d93ae8 ; _swift_runtime_on_report libswiftCore.dylib`: 0x193d93af0 &lt;+0&gt;: adrp x8, 308504 0x193d93af4 &lt;+4&gt;: ldrb w0, [x8, #0x6dc] Target 0: (foo) stopped. (lldb) thread backtrace * thread #1, queue = 'com.apple.main-thread', stop reason = Fatal error: Index out of range ... frame #8: 0x0000000100003f88 foo`main at foo.swift:2:2 frame #9: 0x00000001859a7e50 dyld`start + 2544 (lldb)</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
