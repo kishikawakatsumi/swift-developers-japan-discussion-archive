@@ -15476,9 +15476,775 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060389207912218715" class="chatlog__message-container" data-message-id="1060389207912218715">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060389207912218715"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060389207912218715">05-Jan-23 02:48 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="kateinoigakukun#2184">@kateinoigakukun</span> <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">var dic: [Int: CInt] = [0: 42] func getValue() -&gt; CInt { dic[0] ?? -1 }</code> この関数の返り値が<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-1</code> か <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">42</code> のランダムになるっていう不思議現象に遭遇したのですが、何か原因に心当たりありますか？ 簡単な再現手順も用意しました <a href="https://github.com/sidepelican/SwiftWasmDicIssue">https://github.com/sidepelican/SwiftWasmDicIssue</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060390385563738212" class="chatlog__message-container" data-message-id="1060390385563738212">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060390655467208784"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060390385563738212">05-Jan-23 02:52 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おおー、色々要因がありそうでむずかしいですねぇ</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060390478849265744" class="chatlog__message-container" data-message-id="1060390478849265744">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:53 AM">02:53</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえず環境変数<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">SWIFT_DETERMINISTIC_HASHING=1</code>でハッシュのシード固定して再現するか見てもらえますか？</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060390655467208784" class="chatlog__message-container" data-message-id="1060390655467208784">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:53 AM">02:53</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、でもサンプルでWASI ABIの違反があるな</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060390713688346644" class="chatlog__message-container" data-message-id="1060390713688346644">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060390713688346644"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060390713688346644">05-Jan-23 02:54 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おおーSWIFT_DETERMINISTIC_HASHING=1つけたらうまく動くようになりました</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060390779022999612" class="chatlog__message-container" data-message-id="1060390779022999612">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060390779022999612"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060390779022999612">05-Jan-23 02:54 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">exportを複数回外から呼ぶ場合はreactorモードというやつでビルドしないといけないんですよね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060390839798476800" class="chatlog__message-container" data-message-id="1060390839798476800">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060390839798476800"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060390839798476800">05-Jan-23 02:54 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">初耳だ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060390850296811570" class="chatlog__message-container" data-message-id="1060390850296811570">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060390883415040052"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060390850296811570">05-Jan-23 02:54 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://book.swiftwasm.org/examples/exporting-function.html">https://book.swiftwasm.org/examples/exporting-function.html</a></span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(255,255,255,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://book.swiftwasm.org/examples/exporting-function.html">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">Exporting function - Swift and WebAssembly</div>
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060390883415040052" class="chatlog__message-container" data-message-id="1060390883415040052">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:54 AM">02:54</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">最近書き足したのでこちらを</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://twemoji.maxcdn.com/v/latest/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060391628348588113" class="chatlog__message-container" data-message-id="1060391628348588113">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060391673588363334"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060391628348588113">05-Jan-23 02:57 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">❯ swiftc -target wasm32-unknown-wasi Lib.swift -o Lib.wasm -Xlinker --export=get_value -Xswiftc -Xclang-linker -Xswiftc -mexec-model=reactor &lt;unknown&gt;:0: error: unknown argument: '-Xswiftc' &lt;unknown&gt;:0: error: unknown argument: '-mexec-model=reactor'</code></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060391673588363334" class="chatlog__message-container" data-message-id="1060391673588363334">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:57 AM">02:57</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これ順番大事なんでしたっけ？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060391699538522122" class="chatlog__message-container" data-message-id="1060391699538522122">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060391909396328479"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060391699538522122">05-Jan-23 02:58 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">えーと、swiftc直接叩く場合は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Xswiftc</code> を削って大丈夫ですー</span> <span class="chatlog__edited-timestamp" title="05-Jan-23 02:58 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060391909396328479" class="chatlog__message-container" data-message-id="1060391909396328479">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:58 AM">02:58</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、ドキュメントがまちがっておるな</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060391924671971378" class="chatlog__message-container" data-message-id="1060391924671971378">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060391924671971378"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060391924671971378">05-Jan-23 02:58 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、なるほど？例のほうも間違ってそうですね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060392100602064927" class="chatlog__message-container" data-message-id="1060392100602064927">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060392100602064927"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060392100602064927">05-Jan-23 02:59 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">直しておきます〜 <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060392146638745651" class="chatlog__message-container" data-message-id="1060392146638745651">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060392146638745651"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060392146638745651">05-Jan-23 02:59 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Xclang-linker -mexec-model=reactor</code> 足したら <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_start</code> がいなくなってしまった</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060392380395700325" class="chatlog__message-container" data-message-id="1060392380395700325">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060392380395700325"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060392380395700325">05-Jan-23 03:00 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ですねー、なので <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_initialize</code> を代わりに。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060392934735888385" class="chatlog__message-container" data-message-id="1060392934735888385">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060392971863863356"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060392934735888385">05-Jan-23 03:02 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">wasmer/wasiはそれで許されてる？</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060392971863863356" class="chatlog__message-container" data-message-id="1060392971863863356">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 03:03 AM">03:03</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">nodeのwasiは<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_start</code>じゃないと許してくれないっぽいですね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060393171512737904" class="chatlog__message-container" data-message-id="1060393171512737904">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060393171512737904"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060393171512737904">05-Jan-23 03:03 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Node.jsのwasi実装では専用のメソッドが生えてるんですよ <a href="https://nodejs.org/api/wasi.html#wasiinitializeinstance">https://nodejs.org/api/wasi.html#wasiinitializeinstance</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060393328220319895" class="chatlog__message-container" data-message-id="1060393328220319895">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060393328220319895"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060393328220319895">05-Jan-23 03:04 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そっちから呼んでも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_start</code>くれって怒られちゃうんですよね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060393427264614430" class="chatlog__message-container" data-message-id="1060393427264614430">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060393427264614430"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060393427264614430">05-Jan-23 03:04 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">えぇ〜</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060393450098405477" class="chatlog__message-container" data-message-id="1060393450098405477">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060393482465849414"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060393450098405477">05-Jan-23 03:04 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">うわ、嘘でしたすみません</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060393482465849414" class="chatlog__message-container" data-message-id="1060393482465849414">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 03:05 AM">03:05</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">手ミスでした</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060393509514919937" class="chatlog__message-container" data-message-id="1060393509514919937">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060393509514919937"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060393509514919937">05-Jan-23 03:05 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほどw</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060393570940502036" class="chatlog__message-container" data-message-id="1060393570940502036">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060393570940502036"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060393570940502036">05-Jan-23 03:05 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そして、reactor指定したら毎回必ず <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-1</code> が返りますねｗ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060393666121846904" class="chatlog__message-container" data-message-id="1060393666121846904">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060393737815080990"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060393666121846904">05-Jan-23 03:05 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">main呼んでますか？</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060393737815080990" class="chatlog__message-container" data-message-id="1060393737815080990">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 03:06 AM">03:06</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">トップレベルにコードある場合それ呼ばないとだめですね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060394064152899606" class="chatlog__message-container" data-message-id="1060394064152899606">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060394064152899606"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060394064152899606">05-Jan-23 03:07 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど・・。呼んでませんでした。呼んだら <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">42</code> になりました</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060394108721565716" class="chatlog__message-container" data-message-id="1060394108721565716">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060394108721565716"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060394108721565716">05-Jan-23 03:07 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おおー</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060394210458615918" class="chatlog__message-container" data-message-id="1060394210458615918">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060394379581341777"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060394210458615918">05-Jan-23 03:08 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">つまりreactorモードにうまくできていれば問題は解決しそうです</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060394379581341777" class="chatlog__message-container" data-message-id="1060394379581341777">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 03:08 AM">03:08</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちなみにこのreactorモードって、exportしてる関数全体にかかるものですか？（<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.c</code>経由して <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Xlinker</code> オプション使わずにexportしてても大丈夫？）</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060394416302457024" class="chatlog__message-container" data-message-id="1060394416302457024">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060394667797131365"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060394416302457024">05-Jan-23 03:08 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でもこれは所見じゃ気づけ無いよなぁ。良い感じの診断を出せると良いんですが</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060394484967428147" class="chatlog__message-container" data-message-id="1060394484967428147">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 03:09 AM">03:09</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">大丈夫です</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060394667797131365" class="chatlog__message-container" data-message-id="1060394667797131365">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 03:09 AM">03:09</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">wasm-ldでリンクするときにexportエントリにラッパが挟まるか否かが変わるだけなので</span> <span class="chatlog__edited-timestamp" title="05-Jan-23 03:09 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060394911616221204" class="chatlog__message-container" data-message-id="1060394911616221204">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060394911616221204"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060394911616221204">05-Jan-23 03:10 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。全然わかんなかったのにすぐ解決して助かりました。ありがとうございます！</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="pray"><img class="chatlog__emoji chatlog__emoji--small" alt="🙏" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060437304910561341" class="chatlog__message-container" data-message-id="1060437304910561341">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060437304910561341"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060437304910561341">05-Jan-23 05:59 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このスレむずいな</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060557541865705564" class="chatlog__message-container" data-message-id="1060557541865705564">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060557938672013413"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060557541865705564">05-Jan-23 01:57 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">commandモードとreactorモードのwat見比べてみると、commandモードの方がexportされた関数それぞれの先頭で何か関数を実行してるんですね</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060557594806198324" class="chatlog__message-container" data-message-id="1060557594806198324">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 01:57 PM">13:57</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">reactorモードは特に何もしないっぽい</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060557938672013413" class="chatlog__message-container" data-message-id="1060557938672013413">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 01:58 PM">13:58</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この毎回先頭で呼んでるのがmain相当の処理なのかな</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060558033522004098" class="chatlog__message-container" data-message-id="1060558033522004098">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060558033522004098"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060558033522004098">05-Jan-23 01:58 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それでctor/dtorを実行するタイミングが変わるんですよね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060558198169419857" class="chatlog__message-container" data-message-id="1060558198169419857">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060558288137236560"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060558198169419857">05-Jan-23 01:59 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いやmain相当の処理は<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_start</code>のはずか</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060558288137236560" class="chatlog__message-container" data-message-id="1060558288137236560">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:00 PM">14:00</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ん？<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_initialize</code>には<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">main</code>入ってないからそうではないか</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060558443120959488" class="chatlog__message-container" data-message-id="1060558443120959488">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060558659354116177"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060558443120959488">05-Jan-23 02:00 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">_startはcommandモードではctor,main,dtorの順で呼んで、</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060558659354116177" class="chatlog__message-container" data-message-id="1060558659354116177">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:01 PM">14:01</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">reactorモードの_initializeはctorだけ呼んで、main関数を呼ぶかどうかはユーザ次第になってます</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060559081703739452" class="chatlog__message-container" data-message-id="1060559081703739452">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060559081703739452"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060559081703739452">05-Jan-23 02:03 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">dtorってmain関数内で生成された各種インスタンスを破棄する関数のことですか？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060559134740717608" class="chatlog__message-container" data-message-id="1060559134740717608">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060559134740717608"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060559134740717608">05-Jan-23 02:03 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">commandモードでexportされた関数は_startと同様にctor,関数本体,dtorの呼び出しシーケンスになるようにリンカが調整してます</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060559349677817896" class="chatlog__message-container" data-message-id="1060559349677817896">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060559349677817896"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060559349677817896">05-Jan-23 02:04 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ああ、つまりstartでもctor,main,dtorするし、各種export関数でもctor, func, dtorと呼び出されるのか</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060559567425126410" class="chatlog__message-container" data-message-id="1060559567425126410">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060559567425126410"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060559567425126410">05-Jan-23 02:05 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ctor/dtorはグローバル変数のコンストラクタデストラクタのために使われたりします</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060559757670363186" class="chatlog__message-container" data-message-id="1060559757670363186">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060559757670363186"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060559757670363186">05-Jan-23 02:05 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ていうかwasmって高階関数持てるんですね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060560076630405120" class="chatlog__message-container" data-message-id="1060560076630405120">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060560076630405120"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060560076630405120">05-Jan-23 02:07 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でもctorはもっぱらmain関数より前に実行する目的で使われることが多くて、Swiftの場合だとメタデータリストの構築だったり、ハッシュシードの取得だったりで使われてます</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060560247053353010" class="chatlog__message-container" data-message-id="1060560247053353010">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" title="Iceman#5499">Iceman</div>
+              <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'1060559757670363186')"> ていうかwasmって高階関数持てるんですね </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060560247053353010"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060560247053353010">05-Jan-23 02:07 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お、どのレイヤの話でしょう</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060560343530733678" class="chatlog__message-container" data-message-id="1060560343530733678">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060561049230786590"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060560343530733678">05-Jan-23 02:08 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-wat">call 27 block (result i32) ;; label = @1 global.get 0 ...</code> こういう呼び出しがあって</span> <span class="chatlog__edited-timestamp" title="05-Jan-23 02:08 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060560605922197514" class="chatlog__message-container" data-message-id="1060560605922197514">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:09 PM">14:09</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">27は <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">(func (;27;) (type 20) (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i64 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i64 f64) </code> こう定義されてて、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">type 20</code>は<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">(type (;20;) (func))</code> だったのでこれ関数型なのかな？と</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060561049230786590" class="chatlog__message-container" data-message-id="1060561049230786590">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:10 PM">14:10</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">exportされた関数全てが初手でcall 27をしてて、ctor/dtorでラップする動作とあってるなぁと</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060561125483229335" class="chatlog__message-container" data-message-id="1060561125483229335">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060561366349512725"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060561125483229335">05-Jan-23 02:11 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">関数型はあるけど、関数のパラメータ部分には拡張仕様がないと取れないやつです</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060561366349512725" class="chatlog__message-container" data-message-id="1060561366349512725">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:12 PM">14:12</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そこの型は単純に27番目の関数が0引数0返り値の関数であることを示してるやつですね</span> <span class="chatlog__edited-timestamp" title="05-Jan-23 02:12 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060561714950705213" class="chatlog__message-container" data-message-id="1060561714950705213">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060563818062807172"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060561714950705213">05-Jan-23 02:13 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">雰囲気で早とちりしてしまった</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060561978663391303" class="chatlog__message-container" data-message-id="1060561978663391303">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:14 PM">14:14</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">よくみたらおしりでdtor呼んでる様子があった</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060562438128418816" class="chatlog__message-container" data-message-id="1060562438128418816">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:16 PM">14:16</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかしcommandモードかreactorモードかって結構動作に重要な影響がある上にWASIのセットアップ方法も変化するのに、概念として難しいしビルド設定もunsafeな記述が必要で厄介ですね</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060563818062807172" class="chatlog__message-container" data-message-id="1060563818062807172">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05-Jan-23 02:21 PM">14:21</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">僕が以前JSからSwift関数を高速で呼び出したらめちゃくちゃ重いと発言したけど、実は1呼び出しごとにSwift全体の初期化をしててそれが重かった説はありそうだなぁ</span> <span class="chatlog__edited-timestamp" title="05-Jan-23 02:22 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060734103235858482" class="chatlog__message-container" data-message-id="1060734103235858482">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reference-author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184">kateinoigakukun</div>
+              <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'1060558443120959488')"> _startはcommandモードではctor,main,dtorの順で呼んで、 </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060734306781253733"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060734103235858482">06-Jan-23 01:38 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">デストラクタも呼ばれるのってなんで？</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060734306781253733" class="chatlog__message-container" data-message-id="1060734306781253733">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="06-Jan-23 01:39 AM">01:39</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いや、mainが呼ばれてるからそうなのか？ プロセスが終わってるみたいで変な感じ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060734602278350918" class="chatlog__message-container" data-message-id="1060734602278350918">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060734697182859404"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060734602278350918">06-Jan-23 01:40 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/WebAssembly/WASI/issues/13">https://github.com/WebAssembly/WASI/issues/13</a></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1060734697182859404" class="chatlog__message-container" data-message-id="1060734697182859404">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="06-Jan-23 01:40 AM">01:40</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">実際プログラムが終わった状態を期待してそうです</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060736343417823283" class="chatlog__message-container" data-message-id="1060736343417823283">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060736343417823283"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060736343417823283">06-Jan-23 01:47 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ほおー、、、 reactor modeの方がいいなと思ったけどwasm runtimeの中にイベントループあるのか うーん</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060736826765221988" class="chatlog__message-container" data-message-id="1060736826765221988">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun#2184" data-user-id="291062140079570944">kateinoigakukun</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060736826765221988"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060736826765221988">06-Jan-23 01:49 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">JSの中で使うなら基本的にreactor一択です</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060737046790012968" class="chatlog__message-container" data-message-id="1060737046790012968">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060737046790012968"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060737046790012968">06-Jan-23 01:50 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうよね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1060740959748497429" class="chatlog__message-container" data-message-id="1060740959748497429">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1060740959748497429"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1060740959748497429">06-Jan-23 02:05 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">イベントループ(の切れ端？)をゲスト言語の実装で提供しないと大変そうな気がするけど、結局根元で呼ぶところに共通の仕組みが必要だからランタイム側にあるのでよいのかな</span> <span class="chatlog__edited-timestamp" title="06-Jan-23 02:06 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 1,232 message(s)</div>
+    <div class="postamble__entry">Exported 1,301 message(s)</div>
   </div>
 </body>
 
