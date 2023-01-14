@@ -7,7 +7,7 @@
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ファイルを削除しようとして見つからなかった時のエラーハンドリングを、今まで以下のように書いていましたが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">do { try FileManager.default.removeItem(at: .documentsDirectory.appendingPathComponent("aaa")) } catch let error as NSError { if error.domain == "NSCocoaErrorDomain", error.code == 4 { print("削除しようとしたファイルが見つからなかった") } }</code> こちらの記事を読んでCocoaError.fileNoSuchFileでcatchできることを知りました。 <a href="https://developer.apple.com/documentation/swift/handling-cocoa-errors-in-swift">https://developer.apple.com/documentation/swift/handling-cocoa-errors-in-swift</a>
             <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">do { try FileManager.default.removeItem(at: .documentsDirectory.appendingPathComponent("aaa")) } catch CocoaError.fileNoSuchFile { print("削除しようとしたファイルが見つからなかった") }</code> 後者のほうが見やすいのでこれは良いのですが、 Error(NSError)からCocoaError.fileNoSuchFileにたどり着く方法が分からずじまいです。 せいぜいドメイン(NSCocoaErrorDomain)とコード(4)までしか分からないのですが、何かいい方法があるのでしょうか？</span></div>
         <div class="chatlog__reactions">
-          <div class="chatlog__reaction" title="open_mouth"><img class="chatlog__emoji chatlog__emoji--small" alt="😮" src="https://twemoji.maxcdn.com/v/latest/svg/1f62e.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+          <div class="chatlog__reaction" title="open_mouth"><img class="chatlog__emoji chatlog__emoji--small" alt="😮" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f62e.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
         </div>
       </div>
     </div>
