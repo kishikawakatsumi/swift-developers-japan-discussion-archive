@@ -1,0 +1,101 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1073914371350208632" class="chatlog__message-container" data-message-id="1073914371350208632">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=1073915156595228722"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1073914371350208632">11-Feb-23 10:32 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DispatchQueueはなんだかんだかなりたくさんスレッド作るんですよね</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073914443106369627" class="chatlog__message-container" data-message-id="1073914443106369627">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:32 AM">10:32</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">run outするのはほんとに1000とかのOS（が割り当てたプロセスに対する）上限だと思います</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073914511565791232" class="chatlog__message-container" data-message-id="1073914511565791232">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:32 AM">10:32</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">swift concurrencyは最初から強気に(CPUコアに応じた)8とかで固定してそうなので</span> <span class="chatlog__edited-timestamp" title="11-Feb-23 10:32 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073914677173694574" class="chatlog__message-container" data-message-id="1073914677173694574">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:33 AM">10:33</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お行儀の悪いコードを書いたときに実際にスレッドが全部詰まる可能性があると思ってます</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073914763362439188" class="chatlog__message-container" data-message-id="1073914763362439188">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:33 AM">10:33</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そのへんの話は thread explosion って話があって</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073914805133525073" class="chatlog__message-container" data-message-id="1073914805133525073">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:34 AM">10:34</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Dispatch Queueのアプローチは、たとえ1000スレッドまでスケールしたとしても</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073914836762775552" class="chatlog__message-container" data-message-id="1073914836762775552">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:34 AM">10:34</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それはそれでthread explosion 問題があるんですよね</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073914938063605920" class="chatlog__message-container" data-message-id="1073914938063605920">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:34 AM">10:34</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">物理的には4とか8でしか並列実行できないので、1000とかあると、スレッドにCPUを割り当てるためのスイッチングコストが無駄にかかりすぎる</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073915011711381514" class="chatlog__message-container" data-message-id="1073915011711381514">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:34 AM">10:34</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あとメモリもかなり食います（スレッドごとに数MBのスタックメモリ領域を事前確保するので）</span> <span class="chatlog__edited-timestamp" title="11-Feb-23 10:34 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1073915156595228722" class="chatlog__message-container" data-message-id="1073915156595228722">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="11-Feb-23 10:35 AM">10:35</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift concurrencyはthread explosionないように最適なスレッド数しか最初から用意しないよってWWDC動画でいってました</span></div>
+      </div>
+    </div>
+  </div>
+</div>
