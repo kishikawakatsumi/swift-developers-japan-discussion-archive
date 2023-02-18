@@ -140,7 +140,7 @@
       text-align: center
     }
 
-    .chatlog__reference-symbol {
+    .chatlog__reply-symbol {
       height: 10px;
       margin: 6px 4px 4px 36px;
       border-left: 2px solid #c7ccd1;
@@ -168,7 +168,7 @@
       min-width: 0
     }
 
-    .chatlog__reference {
+    .chatlog__reply {
       display: flex;
       margin-bottom: 0.15rem;
       align-items: center;
@@ -179,49 +179,49 @@
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-avatar {
+    .chatlog__reply-avatar {
       width: 16px;
       height: 16px;
       margin-right: 0.25rem;
       border-radius: 50%
     }
 
-    .chatlog__reference-author {
+    .chatlog__reply-author {
       margin-right: 0.3rem;
       font-weight: 600
     }
 
-    .chatlog__reference-content {
+    .chatlog__reply-content {
       overflow: hidden;
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-link {
+    .chatlog__reply-link {
       cursor: pointer
     }
 
-    .chatlog__reference-link * {
+    .chatlog__reply-link * {
       display: inline;
       pointer-events: none
     }
 
-    .chatlog__reference-link .chatlog__markdown-quote {
+    .chatlog__reply-link .chatlog__markdown-quote {
       display: inline
     }
 
-    .chatlog__reference-link .chatlog__markdown-pre {
+    .chatlog__reply-link .chatlog__markdown-pre {
       display: inline
     }
 
-    .chatlog__reference-link:hover {
+    .chatlog__reply-link:hover {
       color: #2f3136
     }
 
-    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+    .chatlog__reply-link:hover *:not(.chatlog__markdown-spoiler) {
       color: inherit
     }
 
-    .chatlog__reference-edited-timestamp {
+    .chatlog__reply-edited-timestamp {
       margin-left: 0.25rem;
       color: #5e6772;
       font-size: 0.75rem;
@@ -271,7 +271,7 @@
       color: #2f3136
     }
 
-    .chatlog__bot-label {
+    .chatlog__author-tag {
       position: relative;
       top: -0.1rem;
       margin-left: 0.3rem;
@@ -549,6 +549,8 @@
     }
 
     .chatlog__embed-generic-image {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -556,10 +558,62 @@
     }
 
     .chatlog__embed-generic-gifv {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
       border-radius: 3px
+    }
+
+    .chatlog__embed-invite-container {
+      min-width: 320px;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-radius: 3px;
+      background-color: rgba(249, 249, 249, 0.3)
+    }
+
+    .chatlog__embed-invite-title {
+      margin: 0 0 0.8rem 0;
+      color: #4f5660;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase
+    }
+
+    .chatlog__embed-invite {
+      display: flex
+    }
+
+    .chatlog__embed-invite-guild-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 0.85rem
+    }
+
+    .chatlog__embed-invite-info {
+      margin-left: 1rem
+    }
+
+    .chatlog__embed-invite-guild-name {
+      color: #36393e;
+      font-weight: 600
+    }
+
+    .chatlog__embed-invite-guild-name a {
+      color: inherit
+    }
+
+    .chatlog__embed-invite-channel-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: bottom
+    }
+
+    .chatlog__embed-invite-channel-name {
+      font-size: 0.9rem;
+      font-weight: 600
     }
 
     .chatlog__embed-spotify {
@@ -627,6 +681,7 @@
 
     .chatlog__markdown-spoiler {
       background-color: rgba(0, 0, 0, 0.1);
+      padding: 0 2px;
       border-radius: 3px
     }
 
@@ -658,7 +713,8 @@
     .chatlog__markdown-pre {
       background-color: #f9f9f9;
       font-family: "Consolas", "Courier New", Courier, monospace;
-      font-size: 0.85rem
+      font-size: 0.85rem;
+      text-decoration: inherit
     }
 
     .chatlog__markdown-pre--multiline {
@@ -695,9 +751,9 @@
     }
 
     .chatlog__markdown-timestamp {
-      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.1);
       padding: 0 2px;
-      color: #5e6772
+      border-radius: 3px
     }
 
     .chatlog__emoji {
@@ -782,20 +838,32 @@
         <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
         <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
       </symbol>
-      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
-        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      <symbol id="join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+      <symbol id="leave-icon" viewBox="0 0 18 18">
+        <path fill="#ed4245" d="m3.8 8 3.6-3.6-1.4-1.4-6 6 6 6 1.4-1.4-3.6-3.6h14.2v-2"></path>
       </symbol>
       <symbol id="call-icon" viewBox="0 0 18 18">
         <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
       </symbol>
-      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
-        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      <symbol id="pencil-icon" viewBox="0 0 18 18">
+        <path fill="#99aab5" d="m0 14.25v3.75h3.75l11.06-11.06-3.75-3.75zm17.71-10.21c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75z"></path>
+      </symbol>
+      <symbol id="pin-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="channel-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"></path>
+      </symbol>
+      <symbol id="thread-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.43309 21C5.35842 21 5.30189 20.9325 5.31494 20.859L5.99991 17H2.14274C2.06819 17 2.01168 16.9327 2.02453 16.8593L2.33253 15.0993C2.34258 15.0419 2.39244 15 2.45074 15H6.34991L7.40991 9H3.55274C3.47819 9 3.42168 8.93274 3.43453 8.85931L3.74253 7.09931C3.75258 7.04189 3.80244 7 3.86074 7H7.75991L8.45234 3.09903C8.46251 3.04174 8.51231 3 8.57049 3H10.3267C10.4014 3 10.4579 3.06746 10.4449 3.14097L9.75991 7H15.7599L16.4523 3.09903C16.4625 3.04174 16.5123 3 16.5705 3H18.3267C18.4014 3 18.4579 3.06746 18.4449 3.14097L17.7599 7H21.6171C21.6916 7 21.7481 7.06725 21.7353 7.14069L21.4273 8.90069C21.4172 8.95811 21.3674 9 21.3091 9H17.4099L17.0495 11.04H15.05L15.4104 9H9.41035L8.35035 15H10.5599V17H7.99991L7.30749 20.901C7.29732 20.9583 7.24752 21 7.18934 21H5.43309Z"></path>
+        <path fill="#b9bbbe" d="M13.4399 12.96C12.9097 12.96 12.4799 13.3898 12.4799 13.92V20.2213C12.4799 20.7515 12.9097 21.1813 13.4399 21.1813H14.3999C14.5325 21.1813 14.6399 21.2887 14.6399 21.4213V23.4597C14.6399 23.6677 14.8865 23.7773 15.0408 23.6378L17.4858 21.4289C17.6622 21.2695 17.8916 21.1813 18.1294 21.1813H22.5599C23.0901 21.1813 23.5199 20.7515 23.5199 20.2213V13.92C23.5199 13.3898 23.0901 12.96 22.5599 12.96H13.4399Z"></path>
       </symbol>
     </defs>
   </svg>
   <div class="preamble">
-    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
-    </div>
+    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
     <div class="preamble__entries-container">
       <div class="preamble__entry">swift-developers-japan</div>
       <div class="preamble__entry">開発環境, ライブラリ / catalyst</div>
@@ -807,7 +875,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658139586681372679"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658138187973263361">22-Dec-19 02:46 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658139586681372679"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658138187973263361">12/22/2019 2:46 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Mac Catalystを利用してiPadアプリをMacアプリにしていっていみる。</span></div>
           </div>
         </div>
@@ -815,7 +883,7 @@
       <div id="chatlog__message-container-658138384933453824" class="chatlog__message-container" data-message-id="658138384933453824">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 02:46 AM">02:46</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 2:46 AM">02:46</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まずは、さらのプロジェクトにMacチェックでMacで動くか確認。→動く</span></div>
@@ -825,7 +893,7 @@
       <div id="chatlog__message-container-658138757924519946" class="chatlog__message-container" data-message-id="658138757924519946">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 02:48 AM">02:48</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 2:48 AM">02:48</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">pod 'Firebase/Analytics'でFireBaseを追加</span></div>
@@ -835,7 +903,7 @@
       <div id="chatlog__message-container-658138814673453107" class="chatlog__message-container" data-message-id="658138814673453107">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 02:48 AM">02:48</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 2:48 AM">02:48</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">→えらーいっぱい。</span></div>
@@ -845,7 +913,7 @@
       <div id="chatlog__message-container-658139183159836674" class="chatlog__message-container" data-message-id="658139183159836674">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 02:50 AM">02:50</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 2:50 AM">02:50</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえず、この問題から解決していきながら、Catalystを理解していきたいと思う。 もちろん、Catalystに関することなら、なんでも歓迎です。</span></div>
@@ -855,7 +923,7 @@
       <div id="chatlog__message-container-658139269751373876" class="chatlog__message-container" data-message-id="658139269751373876">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 02:50 AM">02:50</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 2:50 AM">02:50</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえず、これからやってみる。 <a href="https://www.bitbuildr.com/tech-blog/mac-catalyst-porting-an-app-using-crashlytics-firebase">https://www.bitbuildr.com/tech-blog/mac-catalyst-porting-an-app-using-crashlytics-firebase</a></span></div>
@@ -881,7 +949,7 @@
       <div id="chatlog__message-container-658139586681372679" class="chatlog__message-container" data-message-id="658139586681372679">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 02:51 AM">02:51</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 2:51 AM">02:51</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">'post_install do |installer| installer.pods_project.targets.each do |target| if target.name == "Pods-[Name of Project]" puts "Updating # OTHER_LDFLAGS to OTHER_LDFLAGS[sdk=iphone<em>]" target.build_configurations.each do |config| xcconfig_path = config.base_configuration_reference.real_path xcconfig = File.read(xcconfig_path) new_xcconfig = xcconfig.sub('OTHER_LDFLAGS =', 'OTHER_LDFLAGS[sdk=iphone</em>] =') File.open(xcconfig_path, "w") { |file| file &lt;&lt; new_xcconfig } end end end end'</span></div>
@@ -894,8 +962,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658141495907450920"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658141495907450920">22-Dec-19 02:59 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">試してみましたけど、バイナリ形式でダウンロードされるもののいくつかがiOS用にビルドされているのが原因ですね。 必要のないものだったら除いて動かしたら良さそうですけど、Analyticsで使われる FIRAnalyticsConnector.framework などがそうなので、Firebaseに要望を出して対応を待つのがいいんじゃないですか。</span> <span class="chatlog__edited-timestamp" title="22-Dec-19 02:59 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658141495907450920"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658141495907450920">12/22/2019 2:59 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">試してみましたけど、バイナリ形式でダウンロードされるもののいくつかがiOS用にビルドされているのが原因ですね。 必要のないものだったら除いて動かしたら良さそうですけど、Analyticsで使われる FIRAnalyticsConnector.framework などがそうなので、Firebaseに要望を出して対応を待つのがいいんじゃないですか。</span> <span class="chatlog__edited-timestamp" title="12/22/2019 2:59 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -905,7 +973,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658142879180521472"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658142779939094528">22-Dec-19 03:04 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658142879180521472"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658142779939094528">12/22/2019 3:04 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://firebase.google.com/support/release-notes/ios">https://firebase.google.com/support/release-notes/ios</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(3,155,229,255)"></div>
@@ -925,7 +993,7 @@
       <div id="chatlog__message-container-658142879180521472" class="chatlog__message-container" data-message-id="658142879180521472">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:04 AM">03:04</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:04 AM">03:04</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">結構対応進んでるようですが、やっぱりまだまだなんですねぇ。</span></div>
@@ -938,7 +1006,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658143384753537047"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658142934796861453">22-Dec-19 03:05 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658143384753537047"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658142934796861453">12/22/2019 3:05 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">^ に書いてある解決方法も結局MacCatalystのときに分岐してFIrebase関連のもの（例はCrashlytics）を使わないというものなので、望んでるものではないと思います。</span></div>
           </div>
         </div>
@@ -946,7 +1014,7 @@
       <div id="chatlog__message-container-658143384753537047" class="chatlog__message-container" data-message-id="658143384753537047">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:06 AM">03:06</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:06 AM">03:06</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">（MacCatalystのときに使わない、でいいなら合ってます。上に書いてあるのはコードで#if !targetEnvironment(macCatalyst) で使わないようにしつつ、それだけだとCocoaPodsがバイナリをリンクしてしまうので、CocoaPodsの方にも条件分岐を入れる、というものです。）</span></div>
@@ -959,7 +1027,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658143986850070548"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658143558464962620">22-Dec-19 03:07 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658143986850070548"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658143558464962620">12/22/2019 3:07 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">個人的にはDatabaseだけでも使いたいんですけど、まだまだ検証不足です。</span></div>
           </div>
         </div>
@@ -967,7 +1035,7 @@
       <div id="chatlog__message-container-658143986850070548" class="chatlog__message-container" data-message-id="658143986850070548">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:09 AM">03:09</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:09 AM">03:09</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえずFirebaseに要望だしてみます。</span></div>
@@ -980,7 +1048,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658144211815759893"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658144211815759893">22-Dec-19 03:10 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658144211815759893"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658144211815759893">12/22/2019 3:10 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">基本的にバイナリは全部xcframework形式で配布する必要があって（そうでないとシミュレータ用のビルドとCatalyst用のビルドが区別できない） 依存関係のうちバイナリでダウンロードされるFramework（上記のFIRAnalyticsConnector.frameworkなど）と、依存関係の libXXX.aもxcframeworkにまとめないといけないんで、もうちょっと時間かかりそう、、というか優先度をあげてもらわないとなかなか難しそうなやつですね。</span></div>
           </div>
         </div>
@@ -991,7 +1059,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658144804487692288"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658144550291898370">22-Dec-19 03:11 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658144804487692288"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658144550291898370">12/22/2019 3:11 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今の所は余計なもの入れずにCatalystで動かすことに注力して学ぶほうがよさそうですね。</span></div>
           </div>
         </div>
@@ -999,7 +1067,7 @@
       <div id="chatlog__message-container-658144804487692288" class="chatlog__message-container" data-message-id="658144804487692288">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:12 AM">03:12</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:12 AM">03:12</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">基本的に自分の作ってるアプリには全部Firebase入れてるので、出鼻でくじかれてましたw</span></div>
@@ -1012,7 +1080,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658144925887627264"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658144925887627264">22-Dec-19 03:12 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658144925887627264"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658144925887627264">12/22/2019 3:12 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">手元でできる解決方法として、 MacCatalystは自身にBundleを含めてプラグインモジュールのようにロードして使える、というのがあるので、 Firebaseはそこから使うようにして、MacCatalystじゃなくてmacOS用のビルドをそのプラグインバンドルにリンクする、というのができそうです。</span></div>
           </div>
         </div>
@@ -1023,7 +1091,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658145397797158932"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658145397797158932">22-Dec-19 03:14 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658145397797158932"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658145397797158932">12/22/2019 3:14 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おお。難易度たかそう。（よくわかってない）</span></div>
           </div>
         </div>
@@ -1034,7 +1102,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658145599794839552"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658145510993166348">22-Dec-19 03:15 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658145599794839552"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658145510993166348">12/22/2019 3:15 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">「メインのアプリ（MacCatalyst）」 =&gt; 「バンドル（Mac）」=&gt;「Firebaseのライブラリ群（Mac）」 ^ ここでメインのアプリからはバンドルを操作するだけで直接 Firebaseを使わない、、、 まあちょっとラップするコードを書くことになるんで、うまく行ってもどれくらいFirebaseの操作をしてるかで大変さがあがりそうです。</span></div>
           </div>
         </div>
@@ -1042,7 +1110,7 @@
       <div id="chatlog__message-container-658145599794839552" class="chatlog__message-container" data-message-id="658145599794839552">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:15 AM">03:15</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:15 AM">03:15</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そもそもできるかどうか、あとで試してみますよ。</span></div>
@@ -1055,7 +1123,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658146145284915218"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658145712755834909">22-Dec-19 03:16 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658146145284915218"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658145712755834909">12/22/2019 3:16 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます。ここで詰まって諦めてる開発者僕以外にもいっぱいいそう。</span></div>
           </div>
         </div>
@@ -1063,7 +1131,7 @@
       <div id="chatlog__message-container-658146069560950784" class="chatlog__message-container" data-message-id="658146069560950784">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:17 AM">03:17</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:17 AM">03:17</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/firebase/firebase-ios-sdk/pull/3512">https://github.com/firebase/firebase-ios-sdk/pull/3512</a></span></div>
@@ -1089,7 +1157,7 @@
       <div id="chatlog__message-container-658146145284915218" class="chatlog__message-container" data-message-id="658146145284915218">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:17 AM">03:17</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:17 AM">03:17</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">少しずつ対応はすすんでるんだなぁって感はあるんですけどね。</span></div>
@@ -1102,7 +1170,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658147174382829610"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658146306325479439">22-Dec-19 03:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658147174382829610"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658146306325479439">12/22/2019 3:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://www.highcaffeinecontent.com/blog/20190607-Beyond-the-Checkbox-with-Catalyst-and-AppKit">https://www.highcaffeinecontent.com/blog/20190607-Beyond-the-Checkbox-with-Catalyst-and-AppKit</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1123,7 +1191,7 @@
       <div id="chatlog__message-container-658146367373443092" class="chatlog__message-container" data-message-id="658146367373443092">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:18 AM">03:18</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:18 AM">03:18</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">^ バンドルでどうこう、っていうのはこれですね。</span></div>
@@ -1133,7 +1201,7 @@
       <div id="chatlog__message-container-658146776863473674" class="chatlog__message-container" data-message-id="658146776863473674">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:20 AM">03:20</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:20 AM">03:20</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これのLoading an AppKit bundleのところ、 MacCatalystはそれ自体はMacCatalyst用のバイナリが必要ですが、実行自体は普通のMac環境で動いているので、 アプリ内にバンドルとして別のバイナリを同梱して、それを実行時に動的に読み込む分には 普通のMac用ビルドのバイナリが動く、というものです。</span></div>
@@ -1143,7 +1211,7 @@
       <div id="chatlog__message-container-658147045936201758" class="chatlog__message-container" data-message-id="658147045936201758">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:21 AM">03:21</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:21 AM">03:21</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">動的ロードして静的に解決できないコードを呼び出すことになるので、 Swiftだといろいろ面倒、、、になるのでObjective-Cに抵抗がなければなお良いです。</span></div>
@@ -1153,7 +1221,7 @@
       <div id="chatlog__message-container-658147096263655444" class="chatlog__message-container" data-message-id="658147096263655444">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:21 AM">03:21</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:21 AM">03:21</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">（Swiftだけでも一応できます）</span></div>
@@ -1163,7 +1231,7 @@
       <div id="chatlog__message-container-658147174382829610" class="chatlog__message-container" data-message-id="658147174382829610">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:21 AM">03:21</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:21 AM">03:21</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">問題はバンドルにFirebaseも同梱して動かせるかどうか。。。</span></div>
@@ -1176,7 +1244,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658147541266726921"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658147541266726921">22-Dec-19 03:23 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658147541266726921"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658147541266726921">12/22/2019 3:23 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、一応自己紹介しておくと札幌のDevSapとWWDCで何度かお会いしてる松浦です。 ごぶさたしてます。こちらは仮想通貨界隈用のアカウントです。</span></div>
           </div>
         </div>
@@ -1187,7 +1255,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658147790115045377"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658147790115045377">22-Dec-19 03:24 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658147790115045377"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658147790115045377">12/22/2019 3:24 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あら、どうも。全然大丈夫ですね。Swift以前からやってる人だ。</span></div>
           </div>
         </div>
@@ -1198,7 +1266,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658148076812500994"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658148076812500994">22-Dec-19 03:25 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658148076812500994"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658148076812500994">12/22/2019 3:25 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Obj-Cは今年までしがみついてて、今年からSwiftデビューしてるので、いいんですけど、Mac開発はハードルたかそうだったので、MacKit?AppKit?は全然わかってないですw</span></div>
           </div>
         </div>
@@ -1209,7 +1277,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658148375618912277"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658148375618912277">22-Dec-19 03:26 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658148375618912277"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658148375618912277">12/22/2019 3:26 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">AppKit、は調べるのも大変なのでしょうがない。。。ただまあ今の話でいうと、Firebaseの呼び出しをラップしていくだけなので出てこないので大丈夫です。</span></div>
           </div>
         </div>
@@ -1220,7 +1288,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658148921784139825"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658148772664049674">22-Dec-19 03:28 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=658148921784139825"><span class="chatlog__timestamp"><a href="#chatlog__message-container-658148772664049674">12/22/2019 3:28 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今作ってるアプリと数年前にMac用に外注で作ったアプリをCatalystで対応したいなぁと、kisikawaさんのツイートみて思った次第で、Catalystもまだまだ初心者ですw</span></div>
           </div>
         </div>
@@ -1228,7 +1296,7 @@
       <div id="chatlog__message-container-658148921784139825" class="chatlog__message-container" data-message-id="658148921784139825">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="22-Dec-19 03:28 AM">03:28</div>
+            <div class="chatlog__short-timestamp" title="12/22/2019 3:28 AM">03:28</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いただいたヒントからまずは検証してみます。</span></div>
@@ -1241,8 +1309,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=669447235871965186"><span class="chatlog__timestamp"><a href="#chatlog__message-container-669447235871965186">22-Jan-20 07:44 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">---------------------- ハマりポイント ---------------------- ・ファイルをプロジェクトに追加すると Command CodeSign failed with a nonzero exit code で、ビルドできないことがある。 resource fork, Finder information, or similar detritus not allowed. も、ついたりするので、 <a href="https://goozenlab.com/blog/2019/12/error-xcode/">https://goozenlab.com/blog/2019/12/error-xcode/</a> の方法で対処したりもする。 規則性はいまいち不明で、削除したり追加したりしてたら治ったりする。 ---------------------- 機材チェック let dev = UIDevice.current let strModel = dev.model　　//iPad まぁMacなんだろうなと思って、上記の方法でモデル名をとったら、まさかのiPad.</span> <span class="chatlog__edited-timestamp" title="22-Jan-20 07:45 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=669447235871965186"><span class="chatlog__timestamp"><a href="#chatlog__message-container-669447235871965186">01/22/2020 7:44 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">---------------------- ハマりポイント ---------------------- ・ファイルをプロジェクトに追加すると Command CodeSign failed with a nonzero exit code で、ビルドできないことがある。 resource fork, Finder information, or similar detritus not allowed. も、ついたりするので、 <a href="https://goozenlab.com/blog/2019/12/error-xcode/">https://goozenlab.com/blog/2019/12/error-xcode/</a> の方法で対処したりもする。 規則性はいまいち不明で、削除したり追加したりしてたら治ったりする。 ---------------------- 機材チェック let dev = UIDevice.current let strModel = dev.model　　//iPad まぁMacなんだろうなと思って、上記の方法でモデル名をとったら、まさかのiPad.</span> <span class="chatlog__edited-timestamp" title="01/22/2020 7:45 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1252,7 +1320,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/371819449310773262/cca5760dee28feebdc4b59c7783f071f.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="fromkk#7975" data-user-id="371819449310773262">fromkk</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=698674126520320000"><span class="chatlog__timestamp"><a href="#chatlog__message-container-698673945599279104">11-Apr-20 11:20 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="fromkk#7975" data-user-id="371819449310773262">fromkk</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=698674126520320000"><span class="chatlog__timestamp"><a href="#chatlog__message-container-698673945599279104">04/11/2020 11:20 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CocoaPods経由でFirestoreを利用するとXcodeでArchiveできない問題がずっとあったんですがシェルスクリプトを実行しながらだとArchiveが可能になりました。 この件をQiitaに追記して、これまで難しかったリリースが可能になりました。（まだCI/CDでは難しい模様） <a href="https://qiita.com/fromkk/items/01aeb41544a52b577b96">https://qiita.com/fromkk/items/01aeb41544a52b577b96</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(85,197,0,255)"></div>
@@ -1279,7 +1347,7 @@
       <div id="chatlog__message-container-698674126520320000" class="chatlog__message-container" data-message-id="698674126520320000">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Apr-20 11:21 PM">23:21</div>
+            <div class="chatlog__short-timestamp" title="04/11/2020 11:21 PM">23:21</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そして宣伝になりますが# TypeのmacCatalyst版がリリースできました<img loading="lazy" class="chatlog__emoji " alt="🎉" title="tada" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f389.svg">
@@ -1312,7 +1380,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780701884624142358"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780699931261927424">24-Nov-20 07:42 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780701884624142358"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780699931261927424">11/24/2020 7:42 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="fromkk#7975">@fromkk</span> 参考にさせていただきましたー。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="heart"><img class="chatlog__emoji chatlog__emoji--small" alt="❤️" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1323,7 +1391,7 @@
       <div id="chatlog__message-container-780701085400563712" class="chatlog__message-container" data-message-id="780701085400563712">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="24-Nov-20 07:47 AM">07:47</div>
+            <div class="chatlog__short-timestamp" title="11/24/2020 7:47 AM">07:47</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">catalistで作ったMacAppのノラアプリ書き出しは、アーカイブ作ってOrgenizerで書き出すのが正解なんですかね。 上記の問題もあって、面倒なのでデバッグビルドしてMyMacで起動したものも、アイコンの場所を探れば、他のMacでも起動できますが、これだと機種専用になっちゃったりするんだろうか？ デバッグ実行時EditSchemeでリリースビルドに下場合は、上記の書き出しと違いはあるんでしょうか？ ノラアプリの正しい書き出し方が、いまひとつわからない。何かヒントくださいw</span></div>
@@ -1333,7 +1401,7 @@
       <div id="chatlog__message-container-780701884624142358" class="chatlog__message-container" data-message-id="780701884624142358">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="24-Nov-20 07:50 AM">07:50</div>
+            <div class="chatlog__short-timestamp" title="11/24/2020 7:50 AM">07:50</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ARM Macで起動できない</span></div>
@@ -1347,7 +1415,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780706829281263636"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780706829281263636">24-Nov-20 08:10 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780706829281263636"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780706829281263636">11/24/2020 8:10 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ArchiveしてDeveloper IDでExportですね。不特定多数に配布するならNotarizationをします。</span></div>
           </div>
         </div>
@@ -1358,7 +1426,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780706907249311774"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780706907249311774">24-Nov-20 08:10 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780706907249311774"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780706907249311774">11/24/2020 8:10 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます。やってみます！</span></div>
           </div>
         </div>
@@ -1369,7 +1437,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780791371191418890"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780791121097785394">24-Nov-20 01:45 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780791371191418890"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780791121097785394">11/24/2020 1:45 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">対応できました。 DeveloperIDでExportするときにAdmin権限が与えられたアカウントでも署名できなかったので、デベロッパ登録したアカウントで自動付与しました。 自分の会社のアカウントはいいですが、預かり物のアカウントだとめんどくさいですね。 その場合は手動でやるしかないのかな。継続調査します。 Notarizaitonしてるアプリは少数派な印象ですね。せっかくなので、試してみたい。</span></div>
           </div>
         </div>
@@ -1377,7 +1445,7 @@
       <div id="chatlog__message-container-780791371191418890" class="chatlog__message-container" data-message-id="780791371191418890">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="24-Nov-20 01:46 PM">13:46</div>
+            <div class="chatlog__short-timestamp" title="11/24/2020 1:46 PM">13:46</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">自分がMacで使いたいツールを作れるのはiOS開発者としては、ちょっと新鮮ですw</span></div>
@@ -1390,7 +1458,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780799811049226271"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780799811049226271">24-Nov-20 02:19 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780799811049226271"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780799811049226271">11/24/2020 2:19 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">少数派ですね。Notarizingは審査ではなくて機械処理ですぐ返ってくるし自動化も簡単というのが認知されてないっぽい。あとNotarize自体も認知されてない。単にApp Store以外のアプリの起動が制限されたと思われてる。</span></div>
           </div>
         </div>
@@ -1401,7 +1469,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780800073168584726"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780800073168584726">24-Nov-20 02:20 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780800073168584726"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780800073168584726">11/24/2020 2:20 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ダウンロードしてインストールするときに、アラートが少しは優しい表現になったりするんですかねw</span></div>
           </div>
         </div>
@@ -1412,7 +1480,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780800264986296356"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780800264986296356">24-Nov-20 02:21 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780800264986296356"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780800264986296356">11/24/2020 2:21 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">App Storeで配布しないアプリにも審査が入る、みたいに最初に思われたのも誤解の要因。 基本的にNotarizationがないアプリは普通の操作では起動できないっすよ。</span></div>
           </div>
         </div>
@@ -1423,7 +1491,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780800638589468713"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780800638589468713">24-Nov-20 02:22 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780800638589468713"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780800638589468713">11/24/2020 2:22 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">環境設定で許可が必要ってことですよね。誤解が解けるといいっすね。ノラは環境設定で許可して使うものという先入観すらありました。</span></div>
           </div>
         </div>
@@ -1434,7 +1502,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780934539320098816"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780934539320098816">24-Nov-20 11:15 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780934539320098816"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780934539320098816">11/24/2020 11:15 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Notarizationと、Gatekeeperごちゃ混ぜになってるのがわかりにくくしてる要因だよなあ。</span></div>
           </div>
         </div>
@@ -1445,7 +1513,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780935683623354408"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780935683623354408">24-Nov-20 11:19 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=780935683623354408"><span class="chatlog__timestamp"><a href="#chatlog__message-container-780935683623354408">11/24/2020 11:19 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。そうですねえ。</span></div>
           </div>
         </div>
@@ -1456,7 +1524,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=781049379854876722"><span class="chatlog__timestamp"><a href="#chatlog__message-container-781049379854876722">25-Nov-20 06:51 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=781049379854876722"><span class="chatlog__timestamp"><a href="#chatlog__message-container-781049379854876722">11/25/2020 6:51 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今まではMac専属開発者でその状況でしたが、これからはiOSエンジニアがはいってくるので改善されるといいですね。</span></div>
           </div>
         </div>
@@ -1467,8 +1535,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784243745360445460"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784243745360445460">04-Dec-20 02:24 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CatalystでMacのキーボード（主に矢印カーソル）でコントロールできる幅を広げたいのですが、タッチしたテーブルのセルなどにフォーカス（フォーカスリングっていうらしいTextFeledを選択したときに青い縁がつく）を移動する方法はありますか？ たまたまテーブルのセルにフォーカスリングがついたことがあって、その時は上下矢印で移動ができて便利でした。 ただフォーカスリングがついても、didselectが呼ばれるわけではないので、できれば矢印で動いてリターンでセレクトできるのがベストなんですが。。。</span> <span class="chatlog__edited-timestamp" title="04-Dec-20 02:25 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784243745360445460"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784243745360445460">12/04/2020 2:24 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CatalystでMacのキーボード（主に矢印カーソル）でコントロールできる幅を広げたいのですが、タッチしたテーブルのセルなどにフォーカス（フォーカスリングっていうらしいTextFeledを選択したときに青い縁がつく）を移動する方法はありますか？ たまたまテーブルのセルにフォーカスリングがついたことがあって、その時は上下矢印で移動ができて便利でした。 ただフォーカスリングがついても、didselectが呼ばれるわけではないので、できれば矢印で動いてリターンでセレクトできるのがベストなんですが。。。</span> <span class="chatlog__edited-timestamp" title="12/04/2020 2:25 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1478,7 +1546,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784486024452898857"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784485827979378718">04-Dec-20 06:26 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784486024452898857"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784485827979378718">12/04/2020 6:26 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">幅を広げる...?</span></div>
           </div>
         </div>
@@ -1486,7 +1554,7 @@
       <div id="chatlog__message-container-784486024452898857" class="chatlog__message-container" data-message-id="784486024452898857">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-Dec-20 06:27 PM">18:27</div>
+            <div class="chatlog__short-timestamp" title="12/04/2020 6:27 PM">18:27</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これのことかな?</span></div>
@@ -1500,7 +1568,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784837660694806529"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784837660694806529">05-Dec-20 05:44 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784837660694806529"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784837660694806529">12/05/2020 5:44 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お。どこだろうw</span></div>
           </div>
         </div>
@@ -1511,7 +1579,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784837880731271188"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784837880731271188">05-Dec-20 05:45 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784837880731271188"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784837880731271188">12/05/2020 5:45 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">システム環境設定の、キーボードの設定ですね</span></div>
           </div>
         </div>
@@ -1522,7 +1590,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784838007714480158"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784838007714480158">05-Dec-20 05:46 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784838007714480158"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784838007714480158">12/05/2020 5:46 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ああ、アプリ開発側じゃなく、Macの設定ですかぁ。。</span></div>
           </div>
         </div>
@@ -1533,7 +1601,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784838138065059887"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784838138065059887">05-Dec-20 05:46 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784838138065059887"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784838138065059887">12/05/2020 5:46 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうです</span></div>
           </div>
         </div>
@@ -1544,7 +1612,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784839105132363796"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784838861616054282">05-Dec-20 05:49 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784839105132363796"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784838861616054282">12/05/2020 5:49 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あーすごく惜しいw TABでフォーカスが変わるところまでは動きました。</span></div>
           </div>
         </div>
@@ -1552,7 +1620,7 @@
       <div id="chatlog__message-container-784839105132363796" class="chatlog__message-container" data-message-id="784839105132363796">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="05-Dec-20 05:50 PM">17:50</div>
+            <div class="chatlog__short-timestamp" title="12/05/2020 5:50 PM">17:50</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">逆にOSでこういうのがフォローされてると、アプリで独自に実装するとぶつかりそうorz</span></div>
@@ -1565,7 +1633,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784839225937625138"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784839225937625138">05-Dec-20 05:50 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784839225937625138"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784839225937625138">12/05/2020 5:50 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうですね、確かに。</span></div>
           </div>
         </div>
@@ -1576,7 +1644,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784840307602096128"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784839592750743604">05-Dec-20 05:52 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=784840307602096128"><span class="chatlog__timestamp"><a href="#chatlog__message-container-784839592750743604">12/05/2020 5:52 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Appleの公式メールみたいに選択してる記事を↑↓で移動したいだけなんですけどねぇ。。</span></div>
           </div>
         </div>
@@ -1584,7 +1652,7 @@
       <div id="chatlog__message-container-784839909524635678" class="chatlog__message-container" data-message-id="784839909524635678">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="05-Dec-20 05:53 PM">17:53</div>
+            <div class="chatlog__short-timestamp" title="12/05/2020 5:53 PM">17:53</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">理想は上下でカーソルリング移動、リターンで記事を選択（touch up insideと同等処理）なんですが、ハードル高そう。</span></div>
@@ -1594,7 +1662,7 @@
       <div id="chatlog__message-container-784840307602096128" class="chatlog__message-container" data-message-id="784840307602096128">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="05-Dec-20 05:55 PM">17:55</div>
+            <div class="chatlog__short-timestamp" title="12/05/2020 5:55 PM">17:55</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ショートカットみたいにキーボード監視して独自実装もできそうだけど、そうなるとOSレベルである程度動くのが邪魔。</span></div>
@@ -1607,7 +1675,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341543119231385600/0fbf33e61f6ce7b2a6d34a3e86358640.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=792781732767334461"><span class="chatlog__timestamp"><a href="#chatlog__message-container-792781732767334461">27-Dec-20 03:51 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="TASK#3353" data-user-id="341543119231385600">TASK</span> <a href="/channels/657963821398228992?category=開発環境, ライブラリ&amp;channel=catalyst&amp;message_id=792781732767334461"><span class="chatlog__timestamp"><a href="#chatlog__message-container-792781732767334461">12/27/2020 3:51 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Macのアプリアイコンにドラッグアンドドロップでファイルを読ませる方法ご存知ないですか？ アプリウインドウへのドラッグアンドドロップはできています。</span></div>
           </div>
         </div>

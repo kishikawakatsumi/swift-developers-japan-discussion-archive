@@ -140,7 +140,7 @@
       text-align: center
     }
 
-    .chatlog__reference-symbol {
+    .chatlog__reply-symbol {
       height: 10px;
       margin: 6px 4px 4px 36px;
       border-left: 2px solid #c7ccd1;
@@ -168,7 +168,7 @@
       min-width: 0
     }
 
-    .chatlog__reference {
+    .chatlog__reply {
       display: flex;
       margin-bottom: 0.15rem;
       align-items: center;
@@ -179,49 +179,49 @@
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-avatar {
+    .chatlog__reply-avatar {
       width: 16px;
       height: 16px;
       margin-right: 0.25rem;
       border-radius: 50%
     }
 
-    .chatlog__reference-author {
+    .chatlog__reply-author {
       margin-right: 0.3rem;
       font-weight: 600
     }
 
-    .chatlog__reference-content {
+    .chatlog__reply-content {
       overflow: hidden;
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-link {
+    .chatlog__reply-link {
       cursor: pointer
     }
 
-    .chatlog__reference-link * {
+    .chatlog__reply-link * {
       display: inline;
       pointer-events: none
     }
 
-    .chatlog__reference-link .chatlog__markdown-quote {
+    .chatlog__reply-link .chatlog__markdown-quote {
       display: inline
     }
 
-    .chatlog__reference-link .chatlog__markdown-pre {
+    .chatlog__reply-link .chatlog__markdown-pre {
       display: inline
     }
 
-    .chatlog__reference-link:hover {
+    .chatlog__reply-link:hover {
       color: #2f3136
     }
 
-    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+    .chatlog__reply-link:hover *:not(.chatlog__markdown-spoiler) {
       color: inherit
     }
 
-    .chatlog__reference-edited-timestamp {
+    .chatlog__reply-edited-timestamp {
       margin-left: 0.25rem;
       color: #5e6772;
       font-size: 0.75rem;
@@ -271,7 +271,7 @@
       color: #2f3136
     }
 
-    .chatlog__bot-label {
+    .chatlog__author-tag {
       position: relative;
       top: -0.1rem;
       margin-left: 0.3rem;
@@ -549,6 +549,8 @@
     }
 
     .chatlog__embed-generic-image {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -556,10 +558,62 @@
     }
 
     .chatlog__embed-generic-gifv {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
       border-radius: 3px
+    }
+
+    .chatlog__embed-invite-container {
+      min-width: 320px;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-radius: 3px;
+      background-color: rgba(249, 249, 249, 0.3)
+    }
+
+    .chatlog__embed-invite-title {
+      margin: 0 0 0.8rem 0;
+      color: #4f5660;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase
+    }
+
+    .chatlog__embed-invite {
+      display: flex
+    }
+
+    .chatlog__embed-invite-guild-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 0.85rem
+    }
+
+    .chatlog__embed-invite-info {
+      margin-left: 1rem
+    }
+
+    .chatlog__embed-invite-guild-name {
+      color: #36393e;
+      font-weight: 600
+    }
+
+    .chatlog__embed-invite-guild-name a {
+      color: inherit
+    }
+
+    .chatlog__embed-invite-channel-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: bottom
+    }
+
+    .chatlog__embed-invite-channel-name {
+      font-size: 0.9rem;
+      font-weight: 600
     }
 
     .chatlog__embed-spotify {
@@ -627,6 +681,7 @@
 
     .chatlog__markdown-spoiler {
       background-color: rgba(0, 0, 0, 0.1);
+      padding: 0 2px;
       border-radius: 3px
     }
 
@@ -658,7 +713,8 @@
     .chatlog__markdown-pre {
       background-color: #f9f9f9;
       font-family: "Consolas", "Courier New", Courier, monospace;
-      font-size: 0.85rem
+      font-size: 0.85rem;
+      text-decoration: inherit
     }
 
     .chatlog__markdown-pre--multiline {
@@ -695,9 +751,9 @@
     }
 
     .chatlog__markdown-timestamp {
-      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.1);
       padding: 0 2px;
-      color: #5e6772
+      border-radius: 3px
     }
 
     .chatlog__emoji {
@@ -782,20 +838,32 @@
         <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
         <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
       </symbol>
-      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
-        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      <symbol id="join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+      <symbol id="leave-icon" viewBox="0 0 18 18">
+        <path fill="#ed4245" d="m3.8 8 3.6-3.6-1.4-1.4-6 6 6 6 1.4-1.4-3.6-3.6h14.2v-2"></path>
       </symbol>
       <symbol id="call-icon" viewBox="0 0 18 18">
         <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
       </symbol>
-      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
-        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      <symbol id="pencil-icon" viewBox="0 0 18 18">
+        <path fill="#99aab5" d="m0 14.25v3.75h3.75l11.06-11.06-3.75-3.75zm17.71-10.21c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75z"></path>
+      </symbol>
+      <symbol id="pin-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="channel-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"></path>
+      </symbol>
+      <symbol id="thread-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.43309 21C5.35842 21 5.30189 20.9325 5.31494 20.859L5.99991 17H2.14274C2.06819 17 2.01168 16.9327 2.02453 16.8593L2.33253 15.0993C2.34258 15.0419 2.39244 15 2.45074 15H6.34991L7.40991 9H3.55274C3.47819 9 3.42168 8.93274 3.43453 8.85931L3.74253 7.09931C3.75258 7.04189 3.80244 7 3.86074 7H7.75991L8.45234 3.09903C8.46251 3.04174 8.51231 3 8.57049 3H10.3267C10.4014 3 10.4579 3.06746 10.4449 3.14097L9.75991 7H15.7599L16.4523 3.09903C16.4625 3.04174 16.5123 3 16.5705 3H18.3267C18.4014 3 18.4579 3.06746 18.4449 3.14097L17.7599 7H21.6171C21.6916 7 21.7481 7.06725 21.7353 7.14069L21.4273 8.90069C21.4172 8.95811 21.3674 9 21.3091 9H17.4099L17.0495 11.04H15.05L15.4104 9H9.41035L8.35035 15H10.5599V17H7.99991L7.30749 20.901C7.29732 20.9583 7.24752 21 7.18934 21H5.43309Z"></path>
+        <path fill="#b9bbbe" d="M13.4399 12.96C12.9097 12.96 12.4799 13.3898 12.4799 13.92V20.2213C12.4799 20.7515 12.9097 21.1813 13.4399 21.1813H14.3999C14.5325 21.1813 14.6399 21.2887 14.6399 21.4213V23.4597C14.6399 23.6677 14.8865 23.7773 15.0408 23.6378L17.4858 21.4289C17.6622 21.2695 17.8916 21.1813 18.1294 21.1813H22.5599C23.0901 21.1813 23.5199 20.7515 23.5199 20.2213V13.92C23.5199 13.3898 23.0901 12.96 22.5599 12.96H13.4399Z"></path>
       </symbol>
     </defs>
   </svg>
   <div class="preamble">
-    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
-    </div>
+    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
     <div class="preamble__entries-container">
       <div class="preamble__entry">swift-developers-japan</div>
       <div class="preamble__entry">開発環境, ライブラリ / macos</div>
@@ -807,7 +875,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=413661705915072512"><span class="chatlog__timestamp"><a href="#chatlog__message-container-413661705915072512">15-Feb-18 11:43 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=413661705915072512"><span class="chatlog__timestamp"><a href="#chatlog__message-container-413661705915072512">02/15/2018 11:43 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="rintaro#0001">@rintaro</span> DispatchSourceがフリーズするやつ、メインキューが埋まってると問題が生じない現象を観察できるtest4を追加しました。 <a href="https://github.com/omochi/DispatchSocketIssue">https://github.com/omochi/DispatchSocketIssue</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -834,7 +902,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=413661919577374721"><span class="chatlog__timestamp"><a href="#chatlog__message-container-413661919577374721">15-Feb-18 11:44 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=413661919577374721"><span class="chatlog__timestamp"><a href="#chatlog__message-container-413661919577374721">02/15/2018 11:44 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ああー、まだきちんと見てないです。bugreport にはまだ出してないんですか？</span></div>
           </div>
         </div>
@@ -845,7 +913,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=413662022845202452"><span class="chatlog__timestamp"><a href="#chatlog__message-container-413662022845202452">15-Feb-18 11:45 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=413662022845202452"><span class="chatlog__timestamp"><a href="#chatlog__message-container-413662022845202452">02/15/2018 11:45 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まだです、このtest4現象も確認したかったので（いまやった）</span></div>
           </div>
         </div>
@@ -856,7 +924,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454178187602034690"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454178052935778314">07-Jun-18 07:01 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454178187602034690"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454178052935778314">06/07/2018 7:01 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://twitter.com/modocache/status/1004618512659353600">https://twitter.com/modocache/status/1004618512659353600</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -880,7 +948,7 @@
       <div id="chatlog__message-container-454178134548283393" class="chatlog__message-container" data-message-id="454178134548283393">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 07:01 AM">07:01</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 7:01 AM">07:01</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/zhuowei/MarzipanTool">https://github.com/zhuowei/MarzipanTool</a></span></div>
@@ -906,7 +974,7 @@
       <div id="chatlog__message-container-454178187602034690" class="chatlog__message-container" data-message-id="454178187602034690">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 07:01 AM">07:01</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 7:01 AM">07:01</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">詳細謎なんだけどすでにUIKit動かしてる人が居る・・・</span></div>
@@ -919,7 +987,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454178843935244298"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454178843935244298">07-Jun-18 07:04 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454178843935244298"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454178843935244298">06/07/2018 7:04 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Android ？ macOS ？</span></div>
           </div>
         </div>
@@ -930,7 +998,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179089276731397"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454178887006552064">07-Jun-18 07:04 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179089276731397"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454178887006552064">06/07/2018 7:04 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://twitter.com/stroughtonsmith/status/1004064617021300736">https://twitter.com/stroughtonsmith/status/1004064617021300736</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -970,7 +1038,7 @@
       <div id="chatlog__message-container-454179089276731397" class="chatlog__message-container" data-message-id="454179089276731397">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 07:05 AM">07:05</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 7:05 AM">07:05</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">macですね</span></div>
@@ -983,7 +1051,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179309813366795"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179309813366795">07-Jun-18 07:06 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179309813366795"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179309813366795">06/07/2018 7:06 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
@@ -999,7 +1067,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179444664434699"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179444664434699">07-Jun-18 07:06 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179444664434699"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179444664434699">06/07/2018 7:06 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もどかしさんは彼の別の功績も紹介してる感じ</span></div>
           </div>
         </div>
@@ -1010,7 +1078,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179499584520192"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179499584520192">07-Jun-18 07:07 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454179499584520192"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179499584520192">06/07/2018 7:07 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Android もやってるし、今回は macOS もやったのか。</span></div>
           </div>
         </div>
@@ -1021,7 +1089,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454180463364276224"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179679251857416">07-Jun-18 07:07 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=454180463364276224"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454179679251857416">06/07/2018 7:07 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おそらくWWDCで出てきたNewsアプリとかすでにUIKit on Macで走ってるからそれを繋ぎこんでビルドする方法をみつけたぜって事なんだと思う。</span></div>
           </div>
         </div>
@@ -1029,7 +1097,7 @@
       <div id="chatlog__message-container-454179762835947531" class="chatlog__message-container" data-message-id="454179762835947531">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 07:08 AM">07:08</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 7:08 AM">07:08</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やり方のチュートリアルはあるけど背景技術があまり解説がなくてようわからぬ</span></div>
@@ -1039,7 +1107,7 @@
       <div id="chatlog__message-container-454180463364276224" class="chatlog__message-container" data-message-id="454180463364276224">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 07:11 AM">07:11</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 7:11 AM">07:11</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ツイートでハッキング実況してるな・・・</span></div>
@@ -1052,7 +1120,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514000573452910592"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514000573452910592">19-Nov-18 08:54 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514000573452910592"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514000573452910592">11/19/2018 8:54 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">macosとiosで共通で使えるcocoa frameworkって作れるのでしょうか？ cocoa frameworkとcocoa touch frameworkを作って両方で同じソースを参照するみたいな配置になりますか？</span></div>
           </div>
         </div>
@@ -1063,7 +1131,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514001282843803668"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514001131689476126">19-Nov-18 08:56 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514001282843803668"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514001131689476126">11/19/2018 8:56 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">最新のXcodeでは試してないですけど、ターゲットとして共有しようとすると変な事が起きた記憶があります</span></div>
           </div>
         </div>
@@ -1071,7 +1139,7 @@
       <div id="chatlog__message-container-514001261725483021" class="chatlog__message-container" data-message-id="514001261725483021">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Nov-18 08:57 AM">08:57</div>
+            <div class="chatlog__short-timestamp" title="11/19/2018 8:57 AM">08:57</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Mac用とiOS用でターゲットは両方作って、ソースは両方に入れていくのが無難です</span></div>
@@ -1081,7 +1149,7 @@
       <div id="chatlog__message-container-514001282843803668" class="chatlog__message-container" data-message-id="514001282843803668">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Nov-18 08:57 AM">08:57</div>
+            <div class="chatlog__short-timestamp" title="11/19/2018 8:57 AM">08:57</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">RxSwiftとかもそうなってます。</span></div>
@@ -1094,7 +1162,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514001560771100672"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514001560771100672">19-Nov-18 08:58 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514001560771100672"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514001560771100672">11/19/2018 8:58 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">確かに、RxSwift参考になりそうですね ありがとうございます！ちょっと覗いてみます</span></div>
           </div>
         </div>
@@ -1105,7 +1173,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514002172673785867"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514001907681984523">19-Nov-18 09:00 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514002172673785867"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514001907681984523">11/19/2018 9:00 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/kishikawakatsumi/KeychainAccess">https://github.com/kishikawakatsumi/KeychainAccess</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1129,7 +1197,7 @@
       <div id="chatlog__message-container-514001923746037772" class="chatlog__message-container" data-message-id="514001923746037772">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Nov-18 09:00 AM">09:00</div>
+            <div class="chatlog__short-timestamp" title="11/19/2018 9:00 AM">09:00</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">参考にしてください。</span></div>
@@ -1139,7 +1207,7 @@
       <div id="chatlog__message-container-514002172673785867" class="chatlog__message-container" data-message-id="514002172673785867">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Nov-18 09:01 AM">09:01</div>
+            <div class="chatlog__short-timestamp" title="11/19/2018 9:01 AM">09:01</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">基本的な考え方は <a href="https://github.com/mrackwitz/xcconfigs">https://github.com/mrackwitz/xcconfigs</a> です。</span></div>
@@ -1168,7 +1236,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514002312876916736"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514002312876916736">19-Nov-18 09:01 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514002312876916736"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514002312876916736">11/19/2018 9:01 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お、一個になっている。</span></div>
           </div>
         </div>
@@ -1179,7 +1247,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514003365190041620"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514003125766455296">19-Nov-18 09:04 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514003365190041620"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514003125766455296">11/19/2018 9:04 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">iOS/tvOS/macOS/watchOSはmacとシミュレータ（i386/x64）, iOSとtvoS(arm64)などアーキテクチャが共通でも同じバイナリはリンクできないので（Fatバイナリも不可）、少なくともプラットフォームぶんの数は必要になります。</span></div>
           </div>
         </div>
@@ -1187,7 +1255,7 @@
       <div id="chatlog__message-container-514003365190041620" class="chatlog__message-container" data-message-id="514003365190041620">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Nov-18 09:05 AM">09:05</div>
+            <div class="chatlog__short-timestamp" title="11/19/2018 9:05 AM">09:05</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">成果物が。^ はソースコードとターゲット、を１つにしてビルド設定をxcconfigで共通化しつつ差分だけ管理するみたいな感じです。</span></div>
@@ -1200,7 +1268,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514003584489095179"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514003584489095179">19-Nov-18 09:06 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514003584489095179"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514003584489095179">11/19/2018 9:06 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まさにこんな感じのを想定してました、なるほどplatformとかdeployment targetそれぞれ書いて行けばよしなな感じになるんですね</span></div>
           </div>
         </div>
@@ -1211,7 +1279,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514004253195632651"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514004253195632651">19-Nov-18 09:09 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514004253195632651"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514004253195632651">11/19/2018 9:09 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SUPPORTED_PLATFORMSとTARGETED_DEVICE_FAMILYを全部書きつつ、違いをxcconfigのCondition（[sdk=iphone*]）で吸収する感じですね。 macOSとその他ではLD_RUNPATH_SEARCH_PATHSが違う、watchOSではテストをビルドできない、とかが違いですかね。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="❤"><img class="chatlog__emoji chatlog__emoji--small" alt="❤" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1225,7 +1293,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514012379013447690"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514012379013447690">19-Nov-18 09:41 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514012379013447690"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514012379013447690">11/19/2018 9:41 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑できました！ありがとうございます〜</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1239,8 +1307,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514075179572264980"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514075179572264980">19-Nov-18 01:51 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういえば、MojaveはiOSと同じフラットなバンドル構造をサポートしたんだっけ？</span> <span class="chatlog__edited-timestamp" title="19-Nov-18 01:58 PM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514075179572264980"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514075179572264980">11/19/2018 1:51 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういえば、MojaveはiOSと同じフラットなバンドル構造をサポートしたんだっけ？</span> <span class="chatlog__edited-timestamp" title="11/19/2018 1:58 PM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1250,7 +1318,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514079116710903809"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514079116710903809">19-Nov-18 02:06 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514079116710903809"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514079116710903809">11/19/2018 2:06 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">リリース版でもサポートされてるのかな？ <a href="https://twitter.com/pvieito/status/1013447017962631170">https://twitter.com/pvieito/status/1013447017962631170</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1288,7 +1356,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514280442367836172"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514280442367836172">20-Nov-18 03:26 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=514280442367836172"><span class="chatlog__timestamp"><a href="#chatlog__message-container-514280442367836172">11/20/2018 3:26 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">^ へえ。そうするとライブラリ作る側は設定が簡単になりますね。</span></div>
           </div>
         </div>
@@ -1299,7 +1367,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/431030854513459200/323e3ba1ab891c324dc5e7367cff379b.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="1024jp#7450" data-user-id="431030854513459200">1024jp</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=560765969019043841"><span class="chatlog__timestamp"><a href="#chatlog__message-container-560765501824040980">28-Mar-19 10:01 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="1024jp#7450" data-user-id="431030854513459200">1024jp</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=560765969019043841"><span class="chatlog__timestamp"><a href="#chatlog__message-container-560765501824040980">03/28/2019 10:01 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">macOS app開発周りのdiscordグループ立ち上げたので、よろしければどうぞ。宣伝でした。 <a href="https://discord.gg/gtBvPc">https://discord.gg/gtBvPc</a></span></div>
           </div>
         </div>
@@ -1307,7 +1375,7 @@
       <div id="chatlog__message-container-560765969019043841" class="chatlog__message-container" data-message-id="560765969019043841">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="28-Mar-19 10:03 AM">10:03</div>
+            <div class="chatlog__short-timestamp" title="03/28/2019 10:03 AM">10:03</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、これ期限があるのか。これです。 <a href="https://discord.gg/XrSEYPb">https://discord.gg/XrSEYPb</a></span></div>
@@ -1320,7 +1388,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=571203883435819010"><span class="chatlog__timestamp"><a href="#chatlog__message-container-571203883435819010">26-Apr-19 05:20 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=571203883435819010"><span class="chatlog__timestamp"><a href="#chatlog__message-container-571203883435819010">04/26/2019 5:20 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="kishikawakatsumi#7600">@Kishikawa Katsumi</span> 昨日のLayer Backed Viewの話、↑で話してます、よかったらご参加ください</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="smile"><img class="chatlog__emoji chatlog__emoji--small" alt="😄" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f604.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1334,7 +1402,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=573128320636682240"><span class="chatlog__timestamp"><a href="#chatlog__message-container-573128320636682240">01-May-19 12:47 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=573128320636682240"><span class="chatlog__timestamp"><a href="#chatlog__message-container-573128320636682240">05/01/2019 12:47 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">HomebrewでXcodeに依存するFormulaは、Xcode 10.2が入っていないmacOS Mojaveへインストールできなくなるらしい… <a href="https://github.com/Homebrew/brew/pull/6083">https://github.com/Homebrew/brew/pull/6083</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1361,7 +1429,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692511222385344565"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692511222385344565">25-Mar-20 11:12 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692511222385344565"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692511222385344565">03/25/2020 11:12 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このXPCの呼び出しをキューに載せたの、中の処理は非同期的に実行されるわけだからあんまり意味ないような気がしてきたけどなんでこれでうまくいくんだろう。中の処理が終わるまでセマフォとかで止めて待つのが実は正しいんじゃないだろうか。 <a href="https://discordapp.com/channels/291054398077927425/472019265369669634/691468530398396428" onclick="scrollToMessage(event, '691468530398396428')">https://discordapp.com/channels/291054398077927425/472019265369669634/691468530398396428</a></span></div>
           </div>
         </div>
@@ -1372,8 +1440,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692517098227892236"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692517098227892236">25-Mar-20 11:35 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">man xpc_abort</code>によると、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_xpc_api_misuse</code>でクラッシュしたらlldbで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">expression -l c -- (char*)xpc_debugger_api_misuse_info()</code> してクラッシュした理由を調べられるらしい。</span> <span class="chatlog__edited-timestamp" title="25-Mar-20 11:55 PM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692517098227892236"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692517098227892236">03/25/2020 11:35 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">man xpc_abort</code>によると、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_xpc_api_misuse</code>でクラッシュしたらlldbで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">expression -l c -- (char*)xpc_debugger_api_misuse_info()</code> してクラッシュした理由を調べられるらしい。</span> <span class="chatlog__edited-timestamp" title="03/25/2020 11:55 PM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1383,8 +1451,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692522616396840971"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692522616396840971">25-Mar-20 11:57 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やってみた。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-lldb">(lldb) expression -l c -- (char*)xpc_debugger_api_misuse_info() (char *) $9 = 0x00007000029e6f90 "XPC API Misuse: Over-resume of a connection."</code></span> <span class="chatlog__edited-timestamp" title="25-Mar-20 11:57 PM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692522616396840971"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692522616396840971">03/25/2020 11:57 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やってみた。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-lldb">(lldb) expression -l c -- (char*)xpc_debugger_api_misuse_info() (char *) $9 = 0x00007000029e6f90 "XPC API Misuse: Over-resume of a connection."</code></span> <span class="chatlog__edited-timestamp" title="03/25/2020 11:57 PM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1394,7 +1462,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692524417166606377"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692524417166606377">26-Mar-20 12:04 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692524417166606377"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692524417166606377">03/26/2020 12:04 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">synchronousRemoteObjectProxyWithErrorHandler(_:)</code>なんてのがあるくらいだから、シリアルキューにしたのは正しい様に見える。</span></div>
           </div>
         </div>
@@ -1405,15 +1473,15 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692527431185072199"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692526538314350632">26-Mar-20 12:13 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">API Misuse: Over-resume of a connection</code> だからシリアルキューに積むのは合ってる（と思う）、んですけどシリアルキューに入れた処理は非同期だからすぐ抜けてしまうので、connection が先の処理をしている間にまた別のresumeが呼ばれてしまう状況は直ってないんじゃないかな、と思ったんですよね。 順次処理にするのは正しいけど、現状は順次処理に結局なっていないのでは？という疑問です。</span> <span class="chatlog__edited-timestamp" title="26-Mar-20 12:13 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692527431185072199"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692526538314350632">03/26/2020 12:13 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">API Misuse: Over-resume of a connection</code> だからシリアルキューに積むのは合ってる（と思う）、んですけどシリアルキューに入れた処理は非同期だからすぐ抜けてしまうので、connection が先の処理をしている間にまた別のresumeが呼ばれてしまう状況は直ってないんじゃないかな、と思ったんですよね。 順次処理にするのは正しいけど、現状は順次処理に結局なっていないのでは？という疑問です。</span> <span class="chatlog__edited-timestamp" title="03/26/2020 12:13 AM">(edited)</span></div>
           </div>
         </div>
       </div>
       <div id="chatlog__message-container-692527431185072199" class="chatlog__message-container" data-message-id="692527431185072199">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="26-Mar-20 12:16 AM">00:16</div>
+            <div class="chatlog__short-timestamp" title="03/26/2020 12:16 AM">00:16</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">synchronousRemoteObjectProxyWithErrorHandlerで呼んだ方が確実かな。でもasyncとsyncがあるということはover resumeしてはいけない期間は呼び出し中というわけでもないのか。そうだったらasyncほとんど意味ないことになるし。</span></div>
@@ -1426,7 +1494,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692529883057881149"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692529883057881149">26-Mar-20 12:26 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692529883057881149"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692529883057881149">03/26/2020 12:26 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">呼ばれた側の処理が非同期だとまずいなら、呼ばれた側が対処しないとまずいのでは。</span></div>
           </div>
         </div>
@@ -1437,7 +1505,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692530391613046845"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692530391613046845">26-Mar-20 12:28 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692530391613046845"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692530391613046845">03/26/2020 12:28 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちょっと私が全然わかってないので勉強が必要ですね。</span></div>
           </div>
         </div>
@@ -1448,7 +1516,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692531544979669004"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692531394215149569">26-Mar-20 12:32 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692531544979669004"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692531394215149569">03/26/2020 12:32 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">XPC のことは正直全然わかってないんですが、<a href="https://github.com/apple/swift/blob/master/tools/SourceKit/tools/sourcekitd/bin/XPC/Client/sourcekitd.cpp">https://github.com/apple/swift/blob/master/tools/SourceKit/tools/sourcekitd/bin/XPC/Client/sourcekitd.cpp</a> を見る限り <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">resume</code> は初期化時に一回だけやって、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">suspend</code> は必要なし。ってかんじじゃないです？</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1472,7 +1540,7 @@
       <div id="chatlog__message-container-692531544979669004" class="chatlog__message-container" data-message-id="692531544979669004">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="26-Mar-20 12:33 AM">00:33</div>
+            <div class="chatlog__short-timestamp" title="03/26/2020 12:33 AM">00:33</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">リクエスト毎に resume()/suspend() はしてないように見えます。</span></div>
@@ -1485,7 +1553,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692532113869897758"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692532113869897758">26-Mar-20 12:35 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692532113869897758"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692532113869897758">03/26/2020 12:35 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ホントですね。最初にGlobalConnを作ってresumeして後はsendmessageでいいのか。</span></div>
           </div>
         </div>
@@ -1496,7 +1564,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692537269994913862"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692537269994913862">26-Mar-20 12:55 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692537269994913862"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692537269994913862">03/26/2020 12:55 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">毎回<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">resume()</code>しないなら、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">interruptionHandler</code>をちゃんと設定しないとまずそう。</span></div>
           </div>
         </div>
@@ -1507,7 +1575,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692539628036816956"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692539628036816956">26-Mar-20 01:05 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/413661429351186432?category=開発環境, ライブラリ&amp;channel=macos&amp;message_id=692539628036816956"><span class="chatlog__timestamp"><a href="#chatlog__message-container-692539628036816956">03/26/2020 1:05 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">interruptionHandler</code>での処理が面倒で、毎回<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">resume()</code>, <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">suspend()</code>を呼ぶ様にしたことがあった様な…</span></div>
           </div>
         </div>

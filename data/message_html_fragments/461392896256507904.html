@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/304938790424805378?category=開発環境, ライブラリ&amp;channel=ios&amp;message_id=461392896256507904"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-461392400409952267">27-Jun-18 04:48 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/304938790424805378?category=開発環境, ライブラリ&amp;channel=ios&amp;message_id=461392896256507904"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-461392400409952267">06/27/2018 4:48 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちょっと変更して、必ず <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">DispatchQueue.main.async</code> を通してコールバックが呼ばれるようにして、コールバックに渡された <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">image</code> も <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">inout</code> にしてそのまま編集できるようにしました。 ↓は画像のピクセルにアクセスして編集して、ネガポジ反転してる例です。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import UIKit import AVFoundation import EasyCamery import EasyImagy class ViewController: UIViewController { @IBOutlet var imageView: UIImageView! private let camera: Camera&lt;RGBA&lt;UInt8&gt;&gt; = try! Camera(sessionPreset: .vga640x480, focusMode: .continuousAutoFocus) override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) camera.start { [weak self] image in // Makes `image` negative image.update { pixel in pixel.red = 255 - pixel.red pixel.green = 255 - pixel.green pixel.blue = 255 - pixel.blue } self?.imageView.image = image.uiImage } } override func viewWillDisappear(_ animated: Bool) { camera.stop() super.viewWillDisappear(animated) } }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-461392896256507904" class="chatlog__message-container" data-message-id="461392896256507904">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="27-Jun-18 04:50 AM">04:50</div>
+        <div class="chatlog__short-timestamp" title="06/27/2018 4:50 AM">04:50</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">

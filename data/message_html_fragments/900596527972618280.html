@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=900597270129549353"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-900595514888826962">21-Oct-21 04:05 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=900597270129549353"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-900595514888826962">10/21/2021 4:05 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もしかして、↓の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self?.state</code> も本来ダメなんでしょうか・・・。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class UserViewController: UIViewController { private let state: UserViewState ... override func viewDidLoad() { super.viewDidLoad() ... let task = Task { [weak self] in guard let state = self?.state else { return } // この self もダメ？🤔 for await _ in state.objectWillChange.values { guard let self = self else { return } // state を View に反映する処理 self.nameLabel.text = state.user?.name } } cancellables.insert(.init { task.cancel() }) } ... }</code>
             <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task { }</code> の外側で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">let state = self.state</code> しておくのがいいのかな。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">state</code> （ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">UserViewState</code> ）は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</code> が付与されてるから <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Sendable</code> になるはず。</span></div>
       </div>
@@ -12,20 +12,20 @@
   <div id="chatlog__message-container-900596527972618280" class="chatlog__message-container" data-message-id="900596527972618280">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="21-Oct-21 04:09 AM">04:09</div>
+        <div class="chatlog__short-timestamp" title="10/21/2021 4:09 AM">04:09</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あれ？違うか。 VC は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</code> だからいいのか。</span> <span class="chatlog__edited-timestamp" title="21-Oct-21 04:09 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あれ？違うか。 VC は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</code> だからいいのか。</span> <span class="chatlog__edited-timestamp" title="10/21/2021 4:09 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-900597270129549353" class="chatlog__message-container" data-message-id="900597270129549353">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="21-Oct-21 04:12 AM">04:12</div>
+        <div class="chatlog__short-timestamp" title="10/21/2021 4:12 AM">04:12</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これ↓も本来 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MyViewClass</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code> だから警告出ないのが正しい？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">print(value) // Cannot use parameter 'self' with a non-sendable type 'MyViewClass' from concurrently-executed code</code></span> <span class="chatlog__edited-timestamp" title="21-Oct-21 04:12 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これ↓も本来 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MyViewClass</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code> だから警告出ないのが正しい？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">print(value) // Cannot use parameter 'self' with a non-sendable type 'MyViewClass' from concurrently-executed code</code></span> <span class="chatlog__edited-timestamp" title="10/21/2021 4:12 AM">(edited)</span></div>
       </div>
     </div>
   </div>

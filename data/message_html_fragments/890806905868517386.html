@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890808186649587742"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-890806905868517386">24-Sep-21 03:48 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890808186649587742"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-890806905868517386">09/24/2021 3:48 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そのまま継続しても、新しく乗せても、メインスレッドで実行されるはずなのに、脱法によって継続元が別のスレッドにいる場合ができてるから、コンパイラ的には意図せず、foo の方の末端の Task が false になってると考えれば辻褄はあう気がします。</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-890807225000525834" class="chatlog__message-container" data-message-id="890807225000525834">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="24-Sep-21 03:49 AM">03:49</div>
+        <div class="chatlog__short-timestamp" title="09/24/2021 3:49 AM">03:49</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">コンパイラがというよりは MainActor のglobalActorの実装が、ですかね。</span></div>
@@ -21,17 +21,17 @@
   <div id="chatlog__message-container-890807721052479529" class="chatlog__message-container" data-message-id="890807721052479529">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="24-Sep-21 03:51 AM">03:51</div>
+        <div class="chatlog__short-timestamp" title="09/24/2021 3:51 AM">03:51</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">現在の DispatchQueue.async には <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</code> はついていないのだから、コンパイラのお気持ちとしては <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@MainActor func foo() { // ここはMainActor print("#0", Thread.current, Thread.current == Thread.main) DispatchQueue.global().async { // ここもMainActor print("#1", Thread.current, Thread.current == Thread.main) Task { // ここもMainActor print("#2", Thread.current, Thread.current == Thread.main) } } }</code></span> <span class="chatlog__edited-timestamp" title="24-Sep-21 03:52 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">現在の DispatchQueue.async には <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</code> はついていないのだから、コンパイラのお気持ちとしては <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@MainActor func foo() { // ここはMainActor print("#0", Thread.current, Thread.current == Thread.main) DispatchQueue.global().async { // ここもMainActor print("#1", Thread.current, Thread.current == Thread.main) Task { // ここもMainActor print("#2", Thread.current, Thread.current == Thread.main) } } }</code></span> <span class="chatlog__edited-timestamp" title="09/24/2021 3:52 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-890808186649587742" class="chatlog__message-container" data-message-id="890808186649587742">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="24-Sep-21 03:53 AM">03:53</div>
+        <div class="chatlog__short-timestamp" title="09/24/2021 3:53 AM">03:53</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">だから、#1のprintが終わったあとのTaskをそのままそのスレッドで実行してもいいし、次のタイミングでメインスレッドで実行してもいい、と考えてよいはず。</span></div>

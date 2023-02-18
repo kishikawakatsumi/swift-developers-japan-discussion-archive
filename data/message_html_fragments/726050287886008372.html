@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=726050287886008372"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-726048045023625306">26-Jun-20 12:15 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=726050287886008372"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-726048045023625306">06/26/2020 12:15 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct ContentView: View { var body: some View { NavigationView { FirstView() } .environmentObject(Env(items: [ Item(id: "C"), Item(id: "B"), Item(id: "A"), ])) } } struct FirstView: View { @EnvironmentObject var env: Env var body: some View { VStack { Button("move") { self.env.items = [ Item(id: "A"), Item(id: "C"), Item(id: "B"), ] } List(env.items) { item in ItemView(id: item.id) } } } } struct ItemView: View { let id: String @State var flag: Bool = false var body: some View { HStack { Text("\(id)") Button(flag ? "true" : "false") { self.flag.toggle() } } } } struct Item: Identifiable { let id: String } final class Env: ObservableObject { @Published var items: [Item] init(items: [Item]) { self.items = items } }</code> ↑ぼくの疑問だった <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> は並び替えてもちゃんと保たれている様子。（falseの部分をタップするとtrueとfalseがトグルするので適当に変更してからmoveを押して並び替えてもtrue, falseは保たれて並び変わる）</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-726049178718830622" class="chatlog__message-container" data-message-id="726049178718830622">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Jun-20 12:20 PM">12:20</div>
+        <div class="chatlog__short-timestamp" title="06/26/2020 12:20 PM">12:20</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI struct ContentView: View { var body: some View { NavigationView { FirstView() } .environmentObject(Env(items: [ Item(id: "C"), Item(id: "B"), Item(id: "A"), ])) } } struct FirstView: View { @EnvironmentObject var env: Env var body: some View { VStack { Button("move") { self.env.items = [ Item(id: "A"), Item(id: "C"), Item(id: "B"), ] } List(env.items) { item in ItemView(id: item.id) } } } } struct ItemView: View { let id: String @State var flag: Bool = false var body: some View { NavigationLink(destination: SecondView(id: id)) { HStack { Text("\(id)") Text(flag ? "true" : "false") .onTapGesture { self.flag.toggle() } } } } } struct SecondView: View { @EnvironmentObject var env: Env let id: String init(id: String) { self.id = id } var body: some View { Button("\(id)") { self.env.items = [ Item(id: "A"), Item(id: "C"), Item(id: "B"), ] } } } struct Item: Identifiable { let id: String }</code></span></div>
@@ -21,17 +21,17 @@
   <div id="chatlog__message-container-726049345664712736" class="chatlog__message-container" data-message-id="726049345664712736">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Jun-20 12:20 PM">12:20</div>
+        <div class="chatlog__short-timestamp" title="06/26/2020 12:20 PM">12:20</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑うん？ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">NavigationLink</code> で遷移して強制的にpopされるパターンだと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> で覚えてるやつもクリアされる。どうも完全にリセットされてるっぽいですね。</span> <span class="chatlog__edited-timestamp" title="26-Jun-20 12:27 PM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑うん？ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">NavigationLink</code> で遷移して強制的にpopされるパターンだと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> で覚えてるやつもクリアされる。どうも完全にリセットされてるっぽいですね。</span> <span class="chatlog__edited-timestamp" title="06/26/2020 12:27 PM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-726049618248597554" class="chatlog__message-container" data-message-id="726049618248597554">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Jun-20 12:21 PM">12:21</div>
+        <div class="chatlog__short-timestamp" title="06/26/2020 12:21 PM">12:21</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">（falseの部分をタップするとtrueとfalseがトグルするので適当に変更してから、Aの行をタップして次画面へ遷移したのち、Aをタップしてpopで戻されると、全部falseになってる）</span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-726050287886008372" class="chatlog__message-container" data-message-id="726050287886008372">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Jun-20 12:24 PM">12:24</div>
+        <div class="chatlog__short-timestamp" title="06/26/2020 12:24 PM">12:24</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この例、一度再現したあとに再度同じ操作を続けて行っても、最後に並び替わらないのでpopされないんだけど、そのときBackで戻ってもちゃんと true, false は残ってる。たぶん実際は因果関係が逆で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> で覚えてるようなものがリセットされるからpopされるんだとは思いますが。</span></div>

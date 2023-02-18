@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1040558464298135562"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1040558009451036672">11-Nov-22 09:26 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1040558464298135562"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1040558009451036672">11/11/2022 9:26 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> internal var _canonicalBox: _AnyHashableBox { // We need to follow NSNumber semantics here; the AnyHashable forms of // integer types holding the same mathematical value should compare equal. // Sign-extend value to a 64-bit integer. This will generate hash conflicts // between, say -1 and UInt.max, but that's fine. if _value &lt; 0 { return _IntegerAnyHashableBox&lt;Int64&gt;(Int64(truncatingIfNeeded: _value)) } return _IntegerAnyHashableBox&lt;UInt64&gt;(UInt64(truncatingIfNeeded: _value)) }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-1040558305233342474" class="chatlog__message-container" data-message-id="1040558305233342474">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="11-Nov-22 09:27 AM">09:27</div>
+        <div class="chatlog__short-timestamp" title="11/11/2022 9:27 AM">09:27</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">% if bits != 16: internal struct _${Self}AnyHashableBox: _AnyHashableBox { internal typealias Base = ${Self} internal let _value: Base internal init(_ value: Base) { self._value = value } internal var _canonicalBox: _AnyHashableBox { // Float and Double are bridged with NSNumber, so we have to follow // NSNumber's rules for equality. I.e., we need to make sure equal // numerical values end up in identical boxes after canonicalization, so // that _isEqual will consider them equal and they're hashed the same way. // // Note that these AnyHashable boxes don't currently feed discriminator bits // to the hasher, so we allow repeatable collisions. E.g., -1 will always // collide with UInt64.max. if _value &lt; 0 { if let i = Int64(exactly: _value) { return _IntegerAnyHashableBox(i) } } else { if let i = UInt64(exactly: _value) { return _IntegerAnyHashableBox(i) } } if let d = Double(exactly: _value) { return _DoubleAnyHashableBox(d) } // If a value can't be represented by a Double, keep it in its original // representation so that it won't compare equal to approximations. (So that // we don't round off Float80 values.) return self }</code></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-1040558329346408458" class="chatlog__message-container" data-message-id="1040558329346408458">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="11-Nov-22 09:27 AM">09:27</div>
+        <div class="chatlog__short-timestamp" title="11/11/2022 9:27 AM">09:27</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift/blob/448c41185d7bc391fa209cada2e142b90dbeb930/stdlib/public/core/FloatingPointTypes.swift.gyb">https://github.com/apple/swift/blob/448c41185d7bc391fa209cada2e142b90dbeb930/stdlib/public/core/FloatingPointTypes.swift.gyb</a></span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-1040558464298135562" class="chatlog__message-container" data-message-id="1040558464298135562">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="11-Nov-22 09:27 AM">09:27</div>
+        <div class="chatlog__short-timestamp" title="11/11/2022 9:27 AM">09:27</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Floatのほうが <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Int64(exactly:)</code> つかって <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">_IntegerAnyHashableBox</code> にすり寄っていくらしい</span></div>

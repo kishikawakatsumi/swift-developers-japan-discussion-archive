@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=512115650106490910"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-512113963769659423">14-Nov-18 03:58 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=512115650106490910"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-512113963769659423">11/14/2018 3:58 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この前の↓だけど、このロジックでいけば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">JSONDecoder.decode</code> とかは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">throws</code> じゃなくて <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-&gt; Result&lt;...&gt;</code> であるべきということになりそうだけどどうだろう？ <div class="chatlog__markdown-quote">
               <div class="chatlog__markdown-quote-border"></div>
               <div class="chatlog__markdown-quote-content">I think throws and Result can be seen as addressing different corners of the design space. As the rationale describes, throws was designed for systemic errors, which tend to have a large distance between error source and error handler, so source and handler end up needing to be rather loosely coupled, which was a motivator for the exception-like propagation and lack of specific typing in the current throws feature. Result on the other hand is great for conditions that are intended to be immediately handled by the caller, for which being an regular return value with a more specific failure type is in fact the more convenient representation. </div>
@@ -30,7 +30,7 @@
   <div id="chatlog__message-container-512115650106490910" class="chatlog__message-container" data-message-id="512115650106490910">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="14-Nov-18 04:04 AM">04:04</div>
+        <div class="chatlog__short-timestamp" title="11/14/2018 4:04 AM">04:04</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">I/O エラーやネットワークエラーみたいなのを "systemic errors" と呼んでいるとすると、それらを Recoverable Error として <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">throws</code> で扱うのに対して、 JSON のデコードの失敗はもっと確定的な処理で、 "an regular return value with a more specific failure type" に適しているように感じる。一種の Simple Domain Error になる？</span></div>

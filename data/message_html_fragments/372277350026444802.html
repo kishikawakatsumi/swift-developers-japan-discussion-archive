@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=372277350026444802"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-372277070140669952">24-Oct-17 06:56 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=372277350026444802"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-372277070140669952">10/24/2017 6:56 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">NSDictionaryからDataを経由せずに直接デコードしたい…</code> 作った。 <a href="https://github.com/norio-nomura/ObjectEncoder">https://github.com/norio-nomura/ObjectEncoder</a></span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -27,7 +27,7 @@
   <div id="chatlog__message-container-372277350026444802" class="chatlog__message-container" data-message-id="372277350026444802">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="24-Oct-17 06:57 AM">06:57</div>
+        <div class="chatlog__short-timestamp" title="10/24/2017 6:57 AM">06:57</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Foundation import ObjectEncoder // single value let string = "Hello, ObjectEncoder" let encodedString = try ObjectEncoder().encode(string) (encodedString as AnyObject).isEqual(to: string) // true let decodedString = try ObjectDecoder().decode(String.self, from: encodedString) // dictionary struct S: Codable { let p1: String } let s = S(p1: "string") guard let encodedS = try ObjectEncoder().encode(s) as? [String: Any] else { fatalError() } encodedS["p1"] // "string" let decodedS = try ObjectDecoder().decode(S.self, from: encodedS) decodedS.p1 // "string" // array let array: [S] = [s, s] guard let encoded = try ObjectEncoder().encode(array) as? [[String: Any]] else { fatalError() } encoded[0]["p1"] // "string" let decoded = try ObjectDecoder().decode([S].self, from: encoded) decoded[0].p1 // "string"</code></span></div>

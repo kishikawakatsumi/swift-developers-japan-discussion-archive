@@ -2,14 +2,14 @@
   <div id="chatlog__message-container-806738821492244520" class="chatlog__message-container" data-message-id="806738821492244520">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512" alt="Avatar" loading="lazy">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512" alt="Avatar" loading="lazy">
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
-          <div class="chatlog__reference-author" style="color:rgb(17,128,106)" title="koher#9336">koher</div>
-          <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'806734743831838761')"> Swift 5.2.1 で <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let s = readLine()! let a = (0..&lt;2).map(s.dropFirst).count</code> を実行して <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">11111111111111111</code> など 15 or 16 文字以上の文字列を標準入力として与えると <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-O</code> または <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Ounchecked</code> 時に実行時エラーになるそうです。気持ち悪い・・・。 <a href="https://twitter.com/_kebo/status/1357011619440599044">https://twitter.com/_kebo/status/1357011619440599044</a> </span></div>
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(17,128,106)" title="koher#9336">koher</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'806734743831838761')"> Swift 5.2.1 で <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let s = readLine()! let a = (0..&lt;2).map(s.dropFirst).count</code> を実行して <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">11111111111111111</code> など 15 or 16 文字以上の文字列を標準入力として与えると <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-O</code> または <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Ounchecked</code> 時に実行時エラーになるそうです。気持ち悪い・・・。 <a href="https://twitter.com/_kebo/status/1357011619440599044">https://twitter.com/_kebo/status/1357011619440599044</a> </span></div>
         </div>
-        <div class="chatlog__header"><span class="chatlog__author" title="kebo#5285" data-user-id="341261694279876609">kebo</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=806738996880343050"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-806738821492244520">04-Feb-21 04:12 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="kebo#5285" data-user-id="341261694279876609">kebo</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=806738996880343050"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-806738821492244520">02/04/2021 4:12 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうなんですよね。koher さんがリプライで書いてくださっていた <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">s.dropFirst</code> を変数に束縛するのでも再現しなくなるみたいですし、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">{ s.dropFirst($0) }</code> のようにクロージャにしても再現しなくなりますし、あとは (ちゃんと記録してませんでしたが) 形を変えて行った時にどこかで二重解放の実行時エラーが出ていたので、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">s</code> が解放されちゃいけないタイミングで解放されているのかなぁという気がしてます。 かといって <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">withExtendedLifetime</code> で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">s</code> のライフタイムを伸ばしても変わらなかったので、何処かの最適化フェーズに問題があったのではと睨んでます。</span></div>
       </div>
     </div>
@@ -17,7 +17,7 @@
   <div id="chatlog__message-container-806738996880343050" class="chatlog__message-container" data-message-id="806738996880343050">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="04-Feb-21 04:12 AM">04:12</div>
+        <div class="chatlog__short-timestamp" title="02/04/2021 4:12 AM">04:12</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">5.3 で再現しなくなったので意識して修正された問題だとしたら apple/swift のコミットログを追うとそれっぽいのがあるかなと思って昨日見ていたんですが、ざっと探したかぎりではそれっぽいのはありませんでしたね...</span></div>

@@ -140,7 +140,7 @@
       text-align: center
     }
 
-    .chatlog__reference-symbol {
+    .chatlog__reply-symbol {
       height: 10px;
       margin: 6px 4px 4px 36px;
       border-left: 2px solid #c7ccd1;
@@ -168,7 +168,7 @@
       min-width: 0
     }
 
-    .chatlog__reference {
+    .chatlog__reply {
       display: flex;
       margin-bottom: 0.15rem;
       align-items: center;
@@ -179,49 +179,49 @@
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-avatar {
+    .chatlog__reply-avatar {
       width: 16px;
       height: 16px;
       margin-right: 0.25rem;
       border-radius: 50%
     }
 
-    .chatlog__reference-author {
+    .chatlog__reply-author {
       margin-right: 0.3rem;
       font-weight: 600
     }
 
-    .chatlog__reference-content {
+    .chatlog__reply-content {
       overflow: hidden;
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-link {
+    .chatlog__reply-link {
       cursor: pointer
     }
 
-    .chatlog__reference-link * {
+    .chatlog__reply-link * {
       display: inline;
       pointer-events: none
     }
 
-    .chatlog__reference-link .chatlog__markdown-quote {
+    .chatlog__reply-link .chatlog__markdown-quote {
       display: inline
     }
 
-    .chatlog__reference-link .chatlog__markdown-pre {
+    .chatlog__reply-link .chatlog__markdown-pre {
       display: inline
     }
 
-    .chatlog__reference-link:hover {
+    .chatlog__reply-link:hover {
       color: #2f3136
     }
 
-    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+    .chatlog__reply-link:hover *:not(.chatlog__markdown-spoiler) {
       color: inherit
     }
 
-    .chatlog__reference-edited-timestamp {
+    .chatlog__reply-edited-timestamp {
       margin-left: 0.25rem;
       color: #5e6772;
       font-size: 0.75rem;
@@ -271,7 +271,7 @@
       color: #2f3136
     }
 
-    .chatlog__bot-label {
+    .chatlog__author-tag {
       position: relative;
       top: -0.1rem;
       margin-left: 0.3rem;
@@ -549,6 +549,8 @@
     }
 
     .chatlog__embed-generic-image {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -556,10 +558,62 @@
     }
 
     .chatlog__embed-generic-gifv {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
       border-radius: 3px
+    }
+
+    .chatlog__embed-invite-container {
+      min-width: 320px;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-radius: 3px;
+      background-color: rgba(249, 249, 249, 0.3)
+    }
+
+    .chatlog__embed-invite-title {
+      margin: 0 0 0.8rem 0;
+      color: #4f5660;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase
+    }
+
+    .chatlog__embed-invite {
+      display: flex
+    }
+
+    .chatlog__embed-invite-guild-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 0.85rem
+    }
+
+    .chatlog__embed-invite-info {
+      margin-left: 1rem
+    }
+
+    .chatlog__embed-invite-guild-name {
+      color: #36393e;
+      font-weight: 600
+    }
+
+    .chatlog__embed-invite-guild-name a {
+      color: inherit
+    }
+
+    .chatlog__embed-invite-channel-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: bottom
+    }
+
+    .chatlog__embed-invite-channel-name {
+      font-size: 0.9rem;
+      font-weight: 600
     }
 
     .chatlog__embed-spotify {
@@ -627,6 +681,7 @@
 
     .chatlog__markdown-spoiler {
       background-color: rgba(0, 0, 0, 0.1);
+      padding: 0 2px;
       border-radius: 3px
     }
 
@@ -658,7 +713,8 @@
     .chatlog__markdown-pre {
       background-color: #f9f9f9;
       font-family: "Consolas", "Courier New", Courier, monospace;
-      font-size: 0.85rem
+      font-size: 0.85rem;
+      text-decoration: inherit
     }
 
     .chatlog__markdown-pre--multiline {
@@ -695,9 +751,9 @@
     }
 
     .chatlog__markdown-timestamp {
-      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.1);
       padding: 0 2px;
-      color: #5e6772
+      border-radius: 3px
     }
 
     .chatlog__emoji {
@@ -782,20 +838,32 @@
         <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
         <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
       </symbol>
-      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
-        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      <symbol id="join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+      <symbol id="leave-icon" viewBox="0 0 18 18">
+        <path fill="#ed4245" d="m3.8 8 3.6-3.6-1.4-1.4-6 6 6 6 1.4-1.4-3.6-3.6h14.2v-2"></path>
       </symbol>
       <symbol id="call-icon" viewBox="0 0 18 18">
         <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
       </symbol>
-      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
-        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      <symbol id="pencil-icon" viewBox="0 0 18 18">
+        <path fill="#99aab5" d="m0 14.25v3.75h3.75l11.06-11.06-3.75-3.75zm17.71-10.21c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75z"></path>
+      </symbol>
+      <symbol id="pin-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="channel-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"></path>
+      </symbol>
+      <symbol id="thread-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.43309 21C5.35842 21 5.30189 20.9325 5.31494 20.859L5.99991 17H2.14274C2.06819 17 2.01168 16.9327 2.02453 16.8593L2.33253 15.0993C2.34258 15.0419 2.39244 15 2.45074 15H6.34991L7.40991 9H3.55274C3.47819 9 3.42168 8.93274 3.43453 8.85931L3.74253 7.09931C3.75258 7.04189 3.80244 7 3.86074 7H7.75991L8.45234 3.09903C8.46251 3.04174 8.51231 3 8.57049 3H10.3267C10.4014 3 10.4579 3.06746 10.4449 3.14097L9.75991 7H15.7599L16.4523 3.09903C16.4625 3.04174 16.5123 3 16.5705 3H18.3267C18.4014 3 18.4579 3.06746 18.4449 3.14097L17.7599 7H21.6171C21.6916 7 21.7481 7.06725 21.7353 7.14069L21.4273 8.90069C21.4172 8.95811 21.3674 9 21.3091 9H17.4099L17.0495 11.04H15.05L15.4104 9H9.41035L8.35035 15H10.5599V17H7.99991L7.30749 20.901C7.29732 20.9583 7.24752 21 7.18934 21H5.43309Z"></path>
+        <path fill="#b9bbbe" d="M13.4399 12.96C12.9097 12.96 12.4799 13.3898 12.4799 13.92V20.2213C12.4799 20.7515 12.9097 21.1813 13.4399 21.1813H14.3999C14.5325 21.1813 14.6399 21.2887 14.6399 21.4213V23.4597C14.6399 23.6677 14.8865 23.7773 15.0408 23.6378L17.4858 21.4289C17.6622 21.2695 17.8916 21.1813 18.1294 21.1813H22.5599C23.0901 21.1813 23.5199 20.7515 23.5199 20.2213V13.92C23.5199 13.3898 23.0901 12.96 22.5599 12.96H13.4399Z"></path>
       </symbol>
     </defs>
   </svg>
   <div class="preamble">
-    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
-    </div>
+    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
     <div class="preamble__entries-container">
       <div class="preamble__entry">swift-developers-japan</div>
       <div class="preamble__entry">main / ci</div>
@@ -807,7 +875,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420755083123359755"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420755083123359755">07-Mar-18 01:30 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420755083123359755"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420755083123359755">03/07/2018 1:30 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention">#zatsu</span> で質問した内容こちらに投下させて頂きますー noppe - 今日 午前10時17分 fastlaneのafter_allでlaneで行われた変更をロールバック(例えばアイコンに付けたバッチを戻したり)しているのですが、デプロイフロー以外のlaneを実行する際もafter_allが走ってしまって困る事があるのですが特定のlaneだけbefore_all/after_allを回避する方法はあるのでしょうか？ after_allの中で実行されたlaneを弾くのはなんか微妙な感じもしており良い方法あればなぁと…(そしてこういう話題はこのチャンネルで良いのでしょうか) そもそもfastlaneをタスクランナーとして使うみたいなのはちょっと使い方からズレている気もしなくはないのでどうなのという話もありますが…</span></div>
           </div>
         </div>
@@ -818,7 +886,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420767705499566102"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420767618673410048">07-Mar-18 02:20 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420767705499566102"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420767618673410048">03/07/2018 2:20 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">微妙な感じとおっしゃってますが、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">after_all</code>の中で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">if lane == ...</code> のように特定のlaneについて場合分けをするというのが意図した方法じゃないかと思います。</span></div>
           </div>
         </div>
@@ -826,7 +894,7 @@
       <div id="chatlog__message-container-420767705499566102" class="chatlog__message-container" data-message-id="420767705499566102">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Mar-18 02:20 AM">02:20</div>
+            <div class="chatlog__short-timestamp" title="03/07/2018 2:20 AM">02:20</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">私はあまりfastlaneを使わないので、もっといい方法があるのかもしれませんが。</span></div>
@@ -839,7 +907,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420786469955960835"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420786381841891339">07-Mar-18 03:34 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420786469955960835"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420786381841891339">03/07/2018 3:34 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます！ 微妙というのは、おっしゃる通りafter_all内でlaneによって処理を分岐するという点です。 ちょっとしたlaneを作るのに毎回after_allに弾く処理を書くのはシンプルではないと思いました。</span></div>
           </div>
         </div>
@@ -847,7 +915,7 @@
       <div id="chatlog__message-container-420786469955960835" class="chatlog__message-container" data-message-id="420786469955960835">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Mar-18 03:35 AM">03:35</div>
+            <div class="chatlog__short-timestamp" title="03/07/2018 3:35 AM">03:35</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">category 'deploy' do lane :beta do end after_all do clean end end category 'generate' do lane :dummy_icons do end after_all do end end</code> みたいな事が出来たら素敵だなぁと…。</span></div>
@@ -860,7 +928,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420788718564278273"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420788531267502092">07-Mar-18 03:43 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420788718564278273"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420788531267502092">03/07/2018 3:43 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
@@ -869,14 +937,14 @@
                   <div class="chatlog__markdown-quote-border"></div>
                   <div class="chatlog__markdown-quote-content">after_allの中で if lane == ... のように特定のlaneについて場合分けをするというのが意図した方法 </div>
                 </div> そういうことですよね
-              </span> <span class="chatlog__edited-timestamp" title="07-Mar-18 03:43 AM">(edited)</span></div>
+              </span> <span class="chatlog__edited-timestamp" title="03/07/2018 3:43 AM">(edited)</span></div>
           </div>
         </div>
       </div>
       <div id="chatlog__message-container-420788718564278273" class="chatlog__message-container" data-message-id="420788718564278273">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Mar-18 03:44 AM">03:44</div>
+            <div class="chatlog__short-timestamp" title="03/07/2018 3:44 AM">03:44</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しっくり来ました、ありがとうございます！</span></div>
@@ -889,7 +957,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296270044306997259/857448058699b0be05687e672beb9b30.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420832699230584832"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420832699230584832">07-Mar-18 06:38 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=420832699230584832"><span class="chatlog__timestamp"><a href="#chatlog__message-container-420832699230584832">03/07/2018 6:38 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">before_all, after_all に書く処理って少ないんですよね。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">before_all</code> だと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">circleci_setup</code> とENVの設定、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">after_all</code> は空です。slackに通知するというのもあると思うのですが、証明書の管理などでローカルでmatchを使うことがあり、その場合にslackがいちいち飛んでくるのはうざいので、特定のlaneでしかslack発火しないようにしています。なのでafter_allの需要がないです。</span></div>
           </div>
         </div>
@@ -900,7 +968,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=430936637325967371"><span class="chatlog__timestamp"><a href="#chatlog__message-container-430936051004211202">04-Apr-18 03:46 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=430936637325967371"><span class="chatlog__timestamp"><a href="#chatlog__message-container-430936051004211202">04/04/2018 3:46 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift版Dangerを使ってる方いますか？ <a href="http://danger.systems/js/swift.html">http://danger.systems/js/swift.html</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -924,7 +992,7 @@
       <div id="chatlog__message-container-430936489677946891" class="chatlog__message-container" data-message-id="430936489677946891">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-Apr-18 03:47 AM">03:47</div>
+            <div class="chatlog__short-timestamp" title="04/04/2018 3:47 AM">03:47</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftLintでRuby版Dangerを使ってるのですが、いまいち気に入らなくて。</span></div>
@@ -934,7 +1002,7 @@
       <div id="chatlog__message-container-430936637325967371" class="chatlog__message-container" data-message-id="430936637325967371">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-Apr-18 03:48 AM">03:48</div>
+            <div class="chatlog__short-timestamp" title="04/04/2018 3:48 AM">03:48</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">気に入らない部分が言語ではなくDanger自体に理由がある可能性もありますが…</span></div>
@@ -947,7 +1015,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296270044306997259/857448058699b0be05687e672beb9b30.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=431306738751373322"><span class="chatlog__timestamp"><a href="#chatlog__message-container-431306738751373322">05-Apr-18 04:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=431306738751373322"><span class="chatlog__timestamp"><a href="#chatlog__message-container-431306738751373322">04/05/2018 4:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まだ導入には踏み切ってないですが、Swiftで使えるプラグインが少ないので、Danger.swiftが出てからこんなの作りました。 <a href="https://github.com/d-date/LGTMKit">https://github.com/d-date/LGTMKit</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -978,7 +1046,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=431401278631968768"><span class="chatlog__timestamp"><a href="#chatlog__message-container-431401278631968768">05-Apr-18 10:34 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=431401278631968768"><span class="chatlog__timestamp"><a href="#chatlog__message-container-431401278631968768">04/05/2018 10:34 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">えっと、用途としてはDangerのチェックが通ったらLGTMなイメージを貼ってくれる、的な感じ？</span></div>
           </div>
         </div>
@@ -989,7 +1057,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296270044306997259/857448058699b0be05687e672beb9b30.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=431649993531588620"><span class="chatlog__timestamp"><a href="#chatlog__message-container-431649993531588620">06-Apr-18 03:02 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=431649993531588620"><span class="chatlog__timestamp"><a href="#chatlog__message-container-431649993531588620">04/06/2018 3:02 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうですw もともとRuby版Dangerのプラグインにはdanger-lgtmがあって、それのSwift版をつくってみました。貼るのはDangerfile.swiftに書く感じですね。 <a href="https://github.com/leonhartX/danger-lgtm">https://github.com/leonhartX/danger-lgtm</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1016,7 +1084,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/302289660611264512/4d2afe61b256d2bfaf3b36d17f3b7bd6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441941686982148098"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441941686982148098">04-May-18 12:38 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441941686982148098"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441941686982148098">05/04/2018 12:38 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CircleCIとfastlaneとDangerを使ってiOSのCI環境を構築しています。 GitHub上でPRを作ったタイミングだとCircleCIの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CI_PULL_REQUEST</code> の環境変数がなくてDangerがスキップされてしまいます。 次にそのPRに新たなコミットをpushすると <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CI_PULL_REQUEST</code> にPRのURLが入ってDangerが実行されます。 GitHub上でPRを作ったタイミングで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CI_PULL_REQUEST</code> にPRのURLを設定する良い方法、またはPRの作成時にDangerをスキップさせずに実行させる良い方法を知っている方はいらっしゃいませんか？</span></div>
           </div>
         </div>
@@ -1027,7 +1095,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441954778722074645"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441953220030496768">04-May-18 01:24 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441954778722074645"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441953220030496768">05/04/2018 1:24 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CircleCIを使ってるいくつかのプロジェクトのログを確認してみましたが、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CI_PULL_REQUEST</code>が必ず入ってくるプロジェクトと、全く入ってこないプロジェクトがありますね。</span></div>
           </div>
         </div>
@@ -1035,7 +1103,7 @@
       <div id="chatlog__message-container-441953442911485962" class="chatlog__message-container" data-message-id="441953442911485962">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-May-18 01:25 PM">13:25</div>
+            <div class="chatlog__short-timestamp" title="05/04/2018 1:25 PM">13:25</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">入る／入らないの違いは、ぱっと見では分かりませんでした。</span></div>
@@ -1045,7 +1113,7 @@
       <div id="chatlog__message-container-441953712613883910" class="chatlog__message-container" data-message-id="441953712613883910">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-May-18 01:26 PM">13:26</div>
+            <div class="chatlog__short-timestamp" title="05/04/2018 1:26 PM">13:26</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ドキュメントを読むと<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CI_PULL_REQUEST</code>は1.0との互換性の為に残されてて、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CIRCLE_PULL_REQUEST</code>へ移行したいのかも？ <a href="https://circleci.com/docs/2.0/env-vars/#build-specific-environment-variables">https://circleci.com/docs/2.0/env-vars/#build-specific-environment-variables</a></span></div>
@@ -1070,7 +1138,7 @@
       <div id="chatlog__message-container-441953910706667521" class="chatlog__message-container" data-message-id="441953910706667521">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-May-18 01:27 PM">13:27</div>
+            <div class="chatlog__short-timestamp" title="05/04/2018 1:27 PM">13:27</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかし、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CI_PULL_REQUEST</code>が全く入ってこないプロジェクトには<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CIRCLE_PULL_REQUEST</code>も入っていなかったです。</span></div>
@@ -1080,7 +1148,7 @@
       <div id="chatlog__message-container-441954778722074645" class="chatlog__message-container" data-message-id="441954778722074645">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-May-18 01:30 PM">13:30</div>
+            <div class="chatlog__short-timestamp" title="05/04/2018 1:30 PM">13:30</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DISCUSSを検索すると似たような話がたくさん出てくる。 <a href="https://discuss.circleci.com/search?q=CI_PULL_REQUEST">https://discuss.circleci.com/search?q=CI_PULL_REQUEST</a></span></div>
@@ -1108,7 +1176,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/302289660611264512/4d2afe61b256d2bfaf3b36d17f3b7bd6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441961616867590154"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441961425158799360">04-May-18 01:56 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441961616867590154"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441961425158799360">05/04/2018 1:56 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど、調べが甘かったです。自分のプロジェクトも、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CI_PULL_REQUEST</code> がないときは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CIRCLE_PULL_REQUEST </code> も設定されてなかったです。</span></div>
           </div>
         </div>
@@ -1116,7 +1184,7 @@
       <div id="chatlog__message-container-441961616867590154" class="chatlog__message-container" data-message-id="441961616867590154">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-May-18 01:57 PM">13:57</div>
+            <div class="chatlog__short-timestamp" title="05/04/2018 1:57 PM">13:57</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DISCUSSの検索結果を読んで何かヒントがないか探してみます。ありがとうございます。</span></div>
@@ -1129,7 +1197,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/302289660611264512/4d2afe61b256d2bfaf3b36d17f3b7bd6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441964081226842133"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441963913035382795">04-May-18 02:06 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=441964081226842133"><span class="chatlog__timestamp"><a href="#chatlog__message-container-441963913035382795">05/04/2018 2:06 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://discuss.circleci.com/t/circle-pull-request-not-being-set/14409/11">https://discuss.circleci.com/t/circle-pull-request-not-being-set/14409/11</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(255,255,255,255)"></div>
@@ -1156,7 +1224,7 @@
       <div id="chatlog__message-container-441964035869769730" class="chatlog__message-container" data-message-id="441964035869769730">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-May-18 02:07 PM">14:07</div>
+            <div class="chatlog__short-timestamp" title="05/04/2018 2:07 PM">14:07</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これが答えぽい。 &gt; For now, rebuilding is the only suggestion I have while our engineers look into this further.</span></div>
@@ -1166,7 +1234,7 @@
       <div id="chatlog__message-container-441964081226842133" class="chatlog__message-container" data-message-id="441964081226842133">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="04-May-18 02:07 PM">14:07</div>
+            <div class="chatlog__short-timestamp" title="05/04/2018 2:07 PM">14:07</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji chatlog__emoji--large" alt="😭" title="sob" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f62d.svg"></span></div>
@@ -1179,7 +1247,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/212062246996672512/fb716d8e7bbeba63619a661ee761e012.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="gin0606#6272" data-user-id="212062246996672512">gin0606</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=443264375990779914"><span class="chatlog__timestamp"><a href="#chatlog__message-container-443264375990779914">08-May-18 04:14 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="gin0606#6272" data-user-id="212062246996672512">gin0606</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=443264375990779914"><span class="chatlog__timestamp"><a href="#chatlog__message-container-443264375990779914">05/08/2018 4:14 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="sutokuro#5314">@sutokuro</span> dangerをCircleCIで使うときは、CircleCIの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Only Build pull requests.</code> という設定を有効にするのが推奨されてるみたいです。前は <a href="http://danger.systems">http://danger.systems</a> の結構わかりやすいところに書いてあったんですけど、今見るとどこに書いてあるか分かりませんね<img loading="lazy" class="chatlog__emoji " alt="😔" title="pensive" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f614.svg">
                 <a href="https://github.com/danger/danger/blob/e2709a8403d20f37cb1176351157fb6608392122/lib/danger/ci_source/circle.rb#L9-L11">https://github.com/danger/danger/blob/e2709a8403d20f37cb1176351157fb6608392122/lib/danger/ci_source/circle.rb#L9-L11</a></span></div>
             <div class="chatlog__embed">
@@ -1207,7 +1275,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/302289660611264512/4d2afe61b256d2bfaf3b36d17f3b7bd6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=443279621727977472"><span class="chatlog__timestamp"><a href="#chatlog__message-container-443279621727977472">08-May-18 05:14 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=443279621727977472"><span class="chatlog__timestamp"><a href="#chatlog__message-container-443279621727977472">05/08/2018 5:14 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おお！ありがとうございます！試してみます！</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="grinning"><img class="chatlog__emoji chatlog__emoji--small" alt="😀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f600.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1221,8 +1289,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/302289660611264512/4d2afe61b256d2bfaf3b36d17f3b7bd6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=443318186880925700"><span class="chatlog__timestamp"><a href="#chatlog__message-container-443318186880925700">08-May-18 07:48 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Only Build pull requests.</code> をONにすると、PR作成時にdangerがスキップされることなく実行されました！このままでCIの動作に問題ないか、いろいろ試してみます。 <span class="chatlog__markdown-mention" title="gin0606#6272">@gin0606</span> さんありがとうございました！</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=443318186880925700"><span class="chatlog__timestamp"><a href="#chatlog__message-container-443318186880925700">05/08/2018 7:48 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Only Build pull requests.</code> をONにすると、PR作成時にdangerがスキップされることなく実行されました！このままでCIの動作に問題ないか、いろいろ試してみます。 <span class="chatlog__markdown-mention" title="Unknown">@Unknown</span> さんありがとうございました！</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
               <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1236,7 +1304,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/92ec1c503bdfd8d5cd49c92bbb38c7ab.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="lovee#6218" data-user-id="332734073565085699">lovee</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=445127747837231104"><span class="chatlog__timestamp"><a href="#chatlog__message-container-445127747837231104">13-May-18 07:38 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="lovee#6218" data-user-id="332734073565085699">lovee</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=445127747837231104"><span class="chatlog__timestamp"><a href="#chatlog__message-container-445127747837231104">05/13/2018 7:38 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういえばBitriseで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">brew bundle</code> 使ったことある人いますか？</span></div>
           </div>
         </div>
@@ -1247,7 +1315,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=455887986991824926"><span class="chatlog__timestamp"><a href="#chatlog__message-container-455887986991824926">12-Jun-18 12:16 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=455887986991824926"><span class="chatlog__timestamp"><a href="#chatlog__message-container-455887986991824926">06/12/2018 12:16 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://twitter.com/CircleCIJapan/status/1006320209009901568">https://twitter.com/CircleCIJapan/status/1006320209009901568</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1274,7 +1342,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/321320585697296385/55485a6b86559e8407bd2342a67d5c92.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="ぶるー#3286" data-user-id="321320585697296385">omatty_bot</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481278780028223499"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481278194758975489">21-Aug-18 01:47 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="ぶるー#3286" data-user-id="321320585697296385">omatty_bot</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481278780028223499"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481278194758975489">08/21/2018 1:47 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">こんにちわ</span></div>
           </div>
         </div>
@@ -1282,7 +1350,7 @@
       <div id="chatlog__message-container-481278419187925012" class="chatlog__message-container" data-message-id="481278419187925012">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="21-Aug-18 01:48 AM">01:48</div>
+            <div class="chatlog__short-timestamp" title="08/21/2018 1:48 AM">01:48</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">bitriseでdangerからgithubにPR等にコメントをつけたいのですが、bitriseのteamアカウントでないと有料でしょうか？</span></div>
@@ -1292,10 +1360,10 @@
       <div id="chatlog__message-container-481278780028223499" class="chatlog__message-container" data-message-id="481278780028223499">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="21-Aug-18 01:50 AM">01:50</div>
+            <div class="chatlog__short-timestamp" title="08/21/2018 1:50 AM">01:50</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">休みで聞けなかった。。知ってる方いらっしゃったらよろしくお願いします <img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647.svg"></span> <span class="chatlog__edited-timestamp" title="21-Aug-18 02:02 AM">(edited)</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">休みで聞けなかった。。知ってる方いらっしゃったらよろしくお願いします <img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647.svg"></span> <span class="chatlog__edited-timestamp" title="08/21/2018 2:02 AM">(edited)</span></div>
             <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/420754624975339520/481278780028223498/2018-08-21_10.49.25.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/420754624975339520/481278780028223498/2018-08-21_10.49.25.png" alt="Image attachment" title="Image: 2018-08-21_10.49.25.png (296.96 KB)" loading="lazy"> </a></div>
           </div>
         </div>
@@ -1306,7 +1374,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481290706539905028"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481290706539905028">21-Aug-18 02:37 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481290706539905028"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481290706539905028">08/21/2018 2:37 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Dangerは詳しくないですけどきっとGitHubのAPIを使うんだろうから、Bitriseのプランは関係ないんじゃないでしょうか。</span></div>
           </div>
         </div>
@@ -1317,7 +1385,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296270044306997259/857448058699b0be05687e672beb9b30.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481327512245370880"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481327512245370880">21-Aug-18 05:03 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481327512245370880"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481327512245370880">08/21/2018 5:03 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">関係ないです（断言）</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1331,7 +1399,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/321320585697296385/55485a6b86559e8407bd2342a67d5c92.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="ぶるー#3286" data-user-id="321320585697296385">omatty_bot</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481337287016448010"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481337287016448010">21-Aug-18 05:42 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="ぶるー#3286" data-user-id="321320585697296385">omatty_bot</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=481337287016448010"><span class="chatlog__timestamp"><a href="#chatlog__message-container-481337287016448010">08/21/2018 5:42 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHubのprivateレポジトリがenterpriseだからでしょうか。課金して会社のbotユーザーを作成してtoken発行+sshの更新をしたらいけました。 <img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647.svg"></span></div>
           </div>
         </div>
@@ -1342,7 +1410,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=488972621921255425"><span class="chatlog__timestamp"><a href="#chatlog__message-container-488972621921255425">11-Sep-18 07:22 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=488972621921255425"><span class="chatlog__timestamp"><a href="#chatlog__message-container-488972621921255425">09/11/2018 7:22 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">OSSでのAzure Pipelinesを試してみたけど、なかなか良いかも。CircleCIのOSS向けだとmacOSジョブは同時に1個しか走らないけど、これはちゃんと10個まで同時に走るみたい。 <a href="https://azure.microsoft.com/en-us/blog/announcing-azure-pipelines-with-unlimited-ci-cd-minutes-for-open-source/">https://azure.microsoft.com/en-us/blog/announcing-azure-pipelines-with-unlimited-ci-cd-minutes-for-open-source/</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1369,7 +1437,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382145780691238912/fdfa49dcd7aedd40a1821ac5a1b90942.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491529422495678475"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491529422495678475">18-Sep-18 08:42 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491529422495678475"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491529422495678475">09/18/2018 8:42 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">初めまして。Bitriseを導入してみたいと思ったのですがつまづいていて、質問させてください。 Carthageを使用しているプロジェクトだとビルドが無料枠の10分を超えてしまいます。 ローカルでコマンドラインからbitrise runを叩くとcache buildのオプションを有効にしているのでCarthageは解消できそうです(そもそも未インストールのシミュレーターの場合XCTestが失敗しているのですが……) 前置きが長くなりました。 要はCarthageのバイナリをgit ignoreしつつ、Bitriseではキャッシュを読み込むのはどうしたら良いでしょうか？ 一度git ignoreを外してgit管理下に置いてGithubにプッシュ、Bitriseでキャッシュが読み込めるようになったらまたgit ignoreすべきなのでしょうか？ 皆さま、お忙しいかと思いますが、ご都合のよろしいタイミングで答えていただけると幸いです。 よろしくお願いいたします。</span></div>
           </div>
         </div>
@@ -1380,7 +1448,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491531470599356419"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491531038137516032">18-Sep-18 08:48 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491531470599356419"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491531038137516032">09/18/2018 8:48 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">^ それでもいいと思いますし、Cartfileに１つずつFrameworkを追加していってキャッシュに載せてしまうとか、Carthageで全部のプラットフォームをビルドしているなら必要なものだけにしてみるとか、ですかね。 ただ、Bitriseの無料枠はビルド時間以外にもビルド回数の制限もあるので、基本的にトライアルという扱いで考えるべきで、無料枠で使い続けるのは普通に辛いと思いますよ。そういう風に設計されてないです。</span></div>
           </div>
         </div>
@@ -1388,7 +1456,7 @@
       <div id="chatlog__message-container-491531470599356419" class="chatlog__message-container" data-message-id="491531470599356419">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="18-Sep-18 08:50 AM">08:50</div>
+            <div class="chatlog__short-timestamp" title="09/18/2018 8:50 AM">08:50</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">節約が優先の場合はリポジトリをPublicにするのがオススメです。そうするとかなり選択肢が増えます。</span></div>
@@ -1401,7 +1469,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382145780691238912/fdfa49dcd7aedd40a1821ac5a1b90942.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491533942013296640"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491533942013296640">18-Sep-18 09:00 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491533942013296640"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491533942013296640">09/18/2018 9:00 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お忙しいところすぐに答えてくださってありがとうございます。 Bitriseに直接pushできないので、なんとかGithubにpushしてキャッシュされるしかないですよね。 無料枠の話について: 必要なら有料化も全然ありだと思ってます。ただ、試してみたいのと、僕1人と小規模な案件なので、プライベートリポジトリ+無料で収まるなら収めたいなという気持ちでした。</span></div>
           </div>
         </div>
@@ -1412,7 +1480,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491536156643557376"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491535472695312384">18-Sep-18 09:06 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491536156643557376"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491535472695312384">09/18/2018 9:06 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえずBitriseのキャッシュに載せて、、、っていう試行錯誤をしてるだけで一番安いプランでも時給を超えると思うので、とりあえずひと月分払ってやってみるっていうのをオススメします。</span></div>
           </div>
         </div>
@@ -1420,7 +1488,7 @@
       <div id="chatlog__message-container-491536156643557376" class="chatlog__message-container" data-message-id="491536156643557376">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="18-Sep-18 09:09 AM">09:09</div>
+            <div class="chatlog__short-timestamp" title="09/18/2018 9:09 AM">09:09</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Bitriseの無料プランは、本当に最初のちょっと試したい、っていう場合にのみわざわざクレジットカードの登録をしなくてもとりあえず使ってみることができる、というものなので、すでにフルビルドで10分を超えるプロジェクトを頑張って使えるようにするのはやめたほうがいいですね。 もし試したいなら、もっと小さい別のプロジェクトを用意して色々やってみるほうがいいです。</span></div>
@@ -1433,7 +1501,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382145780691238912/fdfa49dcd7aedd40a1821ac5a1b90942.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491538896723771392"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491538896723771392">18-Sep-18 09:20 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491538896723771392"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491538896723771392">09/18/2018 9:20 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど、ありがとうございます。 別のプロジェクトでBitriseでビルドできたことはあるので、検証とか考えずにBitriseを導入してくれるよう交渉してみます。</span></div>
           </div>
         </div>
@@ -1444,7 +1512,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491541765602410498"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491541765602410498">18-Sep-18 09:31 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491541765602410498"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491541765602410498">09/18/2018 9:31 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CIの試行錯誤ってめっちゃ時間溶けますよね・・・</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="tired_face"><img class="chatlog__emoji chatlog__emoji--small" alt="😫" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f62b.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1458,7 +1526,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382145780691238912/fdfa49dcd7aedd40a1821ac5a1b90942.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491543868068724737"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491543868068724737">18-Sep-18 09:39 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="がわわ#4689" data-user-id="382145780691238912">がわわ</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491543868068724737"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491543868068724737">09/18/2018 9:39 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど、有識者おふたりがそう言ってるならお金で解決ですね！ ただ先ほど上の人と話して業務都合で今のタイミングでCI入れられなさそうと言われました…… せっかく答えてくださったのにすみません。「お金で解決すべき」と個人的に知見が得られて良かったです。 ありがとうございました！</span></div>
           </div>
         </div>
@@ -1469,7 +1537,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491544164970790923"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491544164970790923">18-Sep-18 09:41 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=491544164970790923"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491544164970790923">09/18/2018 9:41 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">(僕はそんなに詳しくないです)</span></div>
           </div>
         </div>
@@ -1480,7 +1548,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/415160427287150603/bd6dfc7f15885436cd5fbdf372a93e23.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="mofneko#3869" data-user-id="415160427287150603">mofneko</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=494021355956731904"><span class="chatlog__timestamp"><a href="#chatlog__message-container-494021355956731904">25-Sep-18 05:44 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="mofneko#3869" data-user-id="415160427287150603">mofneko</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=494021355956731904"><span class="chatlog__timestamp"><a href="#chatlog__message-container-494021355956731904">09/25/2018 5:44 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">fastlaneについて質問させてください fastlaneで定常的にアプリの更新をしている方で，これまで規約の更新がWeb上に表示されるタイミングで 規約にリアクションせず(気付かず)ディベロッパーコンソール上の操作をfastlaneで行った時の挙動を知っている方はいらっしゃいますか？ また，規約への同意が必要な場合はどのように更新を監視していますか</span></div>
           </div>
         </div>
@@ -1491,7 +1559,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296270044306997259/857448058699b0be05687e672beb9b30.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=494556567870636043"><span class="chatlog__timestamp"><a href="#chatlog__message-container-494556567870636043">26-Sep-18 05:11 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="d_date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=494556567870636043"><span class="chatlog__timestamp"><a href="#chatlog__message-container-494556567870636043">09/26/2018 5:11 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><img loading="lazy" class="chatlog__emoji " alt="🐢" title="turtle" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f422.svg">ですが、Developerアカウントが必要な操作についてはコケるはずです。</span></div>
           </div>
         </div>
@@ -1502,7 +1570,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/415160427287150603/bd6dfc7f15885436cd5fbdf372a93e23.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="mofneko#3869" data-user-id="415160427287150603">mofneko</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=494778380667846666"><span class="chatlog__timestamp"><a href="#chatlog__message-container-494778380667846666">27-Sep-18 07:52 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="mofneko#3869" data-user-id="415160427287150603">mofneko</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=494778380667846666"><span class="chatlog__timestamp"><a href="#chatlog__message-container-494778380667846666">09/27/2018 7:52 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます CIでfastlane動かしていると突然エラー続きになりそうで怖いですね， 規約変更をハンドリングする方法はないでしょうか</span></div>
           </div>
         </div>
@@ -1513,7 +1581,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/212062246996672512/fb716d8e7bbeba63619a661ee761e012.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="gin0606#6272" data-user-id="212062246996672512">gin0606</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=496191956205043712"><span class="chatlog__timestamp"><a href="#chatlog__message-container-496191956205043712">01-Oct-18 05:29 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="gin0606#6272" data-user-id="212062246996672512">gin0606</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=496191956205043712"><span class="chatlog__timestamp"><a href="#chatlog__message-container-496191956205043712">10/01/2018 5:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Fastfileの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">error do |lane, exception| do ... end</code> の中でチャットツールに通知するようにしてます <img loading="lazy" class="chatlog__emoji " alt="💡" title="bulb" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f4a1.svg"></span></div>
           </div>
         </div>
@@ -1524,7 +1592,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/415160427287150603/bd6dfc7f15885436cd5fbdf372a93e23.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="mofneko#3869" data-user-id="415160427287150603">mofneko</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=496860917179351065"><span class="chatlog__timestamp"><a href="#chatlog__message-container-496860917179351065">03-Oct-18 01:47 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="mofneko#3869" data-user-id="415160427287150603">mofneko</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=496860917179351065"><span class="chatlog__timestamp"><a href="#chatlog__message-container-496860917179351065">10/03/2018 1:47 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます！ エラーハンドリングとしてのみ検知できるのですね<img loading="lazy" class="chatlog__emoji " alt="😭" title="sob" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f62d.svg"></span></div>
           </div>
         </div>
@@ -1535,7 +1603,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=515486331854389248"><span class="chatlog__timestamp"><a href="#chatlog__message-container-515486331854389248">23-Nov-18 11:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=515486331854389248"><span class="chatlog__timestamp"><a href="#chatlog__message-container-515486331854389248">11/23/2018 11:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">macOS 10.14.1以降で発生するバグを回避できている事をCIで確認したいのですが、macOS 10.14.xを使えるCIってありますか？ Azure Pipelines, CircleCI, Travis-CIはmacOS 10.13.6まででした。</span></div>
           </div>
         </div>
@@ -1546,7 +1614,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=515550785967358012"><span class="chatlog__timestamp"><a href="#chatlog__message-container-515550785967358012">23-Nov-18 03:34 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=515550785967358012"><span class="chatlog__timestamp"><a href="#chatlog__message-container-515550785967358012">11/23/2018 3:34 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Bitriseも10.13ですね。もじゃべが動くのはなさそう。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="worried"><img class="chatlog__emoji chatlog__emoji--small" alt="😟" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f61f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1560,7 +1628,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=524833200317661195"><span class="chatlog__timestamp"><a href="#chatlog__message-container-524833200317661195">19-Dec-18 06:19 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=524833200317661195"><span class="chatlog__timestamp"><a href="#chatlog__message-container-524833200317661195">12/19/2018 6:19 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub Actionsで<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift test</code>を実行してみたけど、エラーが出て動かなかった。 <a href="https://github.com/norio-nomura/Base32/pull/42/checks?check_run_id=42655724">https://github.com/norio-nomura/Base32/pull/42/checks?check_run_id=42655724</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1584,8 +1652,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=526791693907918858"><span class="chatlog__timestamp"><a href="#chatlog__message-container-526791569685217280">24-Dec-18 04:01 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub Actionの実行環境はChecks APIへの書き込み権限を持つ<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">GITHUB_TOKEN</code>を受け取れるため、Checks APIを使える。それを利用して、SwiftLintのViolationをAnnotationとしてPRに書き込むGitHub Actionを作った。 <a href="https://github.com/norio-nomura/action-swiftlint">https://github.com/norio-nomura/action-swiftlint</a></span> <span class="chatlog__edited-timestamp" title="25-Dec-18 04:11 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=526791693907918858"><span class="chatlog__timestamp"><a href="#chatlog__message-container-526791569685217280">12/24/2018 4:01 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub Actionの実行環境はChecks APIへの書き込み権限を持つ<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">GITHUB_TOKEN</code>を受け取れるため、Checks APIを使える。それを利用して、SwiftLintのViolationをAnnotationとしてPRに書き込むGitHub Actionを作った。 <a href="https://github.com/norio-nomura/action-swiftlint">https://github.com/norio-nomura/action-swiftlint</a></span> <span class="chatlog__edited-timestamp" title="12/25/2018 4:11 AM">(edited)</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
               <div class="chatlog__embed-content-container">
@@ -1611,7 +1679,7 @@
       <div id="chatlog__message-container-526791693907918858" class="chatlog__message-container" data-message-id="526791693907918858">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="24-Dec-18 04:02 PM">16:02</div>
+            <div class="chatlog__short-timestamp" title="12/24/2018 4:02 PM">16:02</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">実際に動かしてみたPR <a href="https://github.com/norio-nomura/test-action-swiftlint/pull/1/files#annotation_9749095">https://github.com/norio-nomura/test-action-swiftlint/pull/1/files#annotation_9749095</a></span></div>
@@ -1637,7 +1705,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=526947962333560833"><span class="chatlog__timestamp"><a href="#chatlog__message-container-526947962333560833">25-Dec-18 02:23 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=526947962333560833"><span class="chatlog__timestamp"><a href="#chatlog__message-container-526947962333560833">12/25/2018 2:23 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">わかりやすい</span></div>
           </div>
         </div>
@@ -1648,7 +1716,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=526955582780080149"><span class="chatlog__timestamp"><a href="#chatlog__message-container-526955582780080149">25-Dec-18 02:53 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=526955582780080149"><span class="chatlog__timestamp"><a href="#chatlog__message-container-526955582780080149">12/25/2018 2:53 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub Checks APIのパーミッションを持つトークンは、サーバーが必要なGitHub Appsでしか取得できなかったので、サーバーを立てることなくChecks APIを使えるGitHub Actionsの価値は大きいかも。</span></div>
           </div>
         </div>
@@ -1659,7 +1727,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527742373653118987"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527742373653118987">27-Dec-18 06:59 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527742373653118987"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527742373653118987">12/27/2018 6:59 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swiftlint autocorrect</code>での変更をPRのコメントでSuggestion Change出来たら便利なのでは？と指摘を受けて調べたけど、まだAPIが公開されていなかった。 <a href="https://blog.github.com/changelog/2018-10-16-suggested-changes/">https://blog.github.com/changelog/2018-10-16-suggested-changes/</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1686,8 +1754,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/294103726682144768/d482affc03b3c8a4059b69fcd08ebb70.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="ikesyo#7254" data-user-id="294103726682144768">ikesyo</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527746781635805203"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527745713606492160">27-Dec-18 07:13 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/r7kamura/danger-suggester">https://github.com/r7kamura/danger-suggester</a> こういうのがあって、codeblockの言語指定を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">suggestion</code> にするという手がありそうです（というかフォームから入力しようとすると勝手に```suggestionを入れてくれるようになっているんですね、知らなかった）。 <a href="https://github.com/r7kamura/danger-suggester/blob/23bbc78d814d5e93951e1acba5aa662f90afa020/lib/danger/suggester/suggestion.rb#L21">https://github.com/r7kamura/danger-suggester/blob/23bbc78d814d5e93951e1acba5aa662f90afa020/lib/danger/suggester/suggestion.rb#L21</a></span> <span class="chatlog__edited-timestamp" title="27-Dec-18 07:18 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="ikesyo#7254" data-user-id="294103726682144768">ikesyo</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527746781635805203"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527745713606492160">12/27/2018 7:13 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/r7kamura/danger-suggester">https://github.com/r7kamura/danger-suggester</a> こういうのがあって、codeblockの言語指定を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">suggestion</code> にするという手がありそうです（というかフォームから入力しようとすると勝手に```suggestionを入れてくれるようになっているんですね、知らなかった）。 <a href="https://github.com/r7kamura/danger-suggester/blob/23bbc78d814d5e93951e1acba5aa662f90afa020/lib/danger/suggester/suggestion.rb#L21">https://github.com/r7kamura/danger-suggester/blob/23bbc78d814d5e93951e1acba5aa662f90afa020/lib/danger/suggester/suggestion.rb#L21</a></span> <span class="chatlog__edited-timestamp" title="12/27/2018 7:18 AM">(edited)</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
               <div class="chatlog__embed-content-container">
@@ -1726,7 +1794,7 @@
       <div id="chatlog__message-container-527746781635805203" class="chatlog__message-container" data-message-id="527746781635805203">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="27-Dec-18 07:17 AM">07:17</div>
+            <div class="chatlog__short-timestamp" title="12/27/2018 7:17 AM">07:17</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">けどChecksのannotationからsuggestionできるかはよく分からないですね</span></div>
@@ -1739,7 +1807,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527790368780058624"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527790368780058624">27-Dec-18 10:10 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527790368780058624"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527790368780058624">12/27/2018 10:10 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ぬ、ただのコードブロックなのか。</span></div>
           </div>
         </div>
@@ -1750,15 +1818,15 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527805003411488800"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527803818927456267">27-Dec-18 11:03 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Danger::Suggester</code>を見る限り、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">suggestion</code>コードブロック入りコメントを含めてPull Request Reviewを作ってるみたいだな。</span> <span class="chatlog__edited-timestamp" title="27-Dec-18 11:04 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=527805003411488800"><span class="chatlog__timestamp"><a href="#chatlog__message-container-527803818927456267">12/27/2018 11:03 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Danger::Suggester</code>を見る限り、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">suggestion</code>コードブロック入りコメントを含めてPull Request Reviewを作ってるみたいだな。</span> <span class="chatlog__edited-timestamp" title="12/27/2018 11:04 AM">(edited)</span></div>
           </div>
         </div>
       </div>
       <div id="chatlog__message-container-527805003411488800" class="chatlog__message-container" data-message-id="527805003411488800">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="27-Dec-18 11:08 AM">11:08</div>
+            <div class="chatlog__short-timestamp" title="12/27/2018 11:08 AM">11:08</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今のGitHub Actionsはまだ<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">push</code>イベントしかサポートされていなくて、PRが存在しない時点で動くから、PRではなくcommitにしかコメントを付けられない。</span></div>
@@ -1771,8 +1839,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/302289660611264512/4d2afe61b256d2bfaf3b36d17f3b7bd6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=545498893840941056"><span class="chatlog__timestamp"><a href="#chatlog__message-container-545498263252500480">14-Feb-19 06:55 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">2/27の2FA必須の件で、<a href="https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-verification">https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-verification</a> の通りに、fastlane spaceauth -u user@example.org やって、FASTLANE_SESSION の中身を見ると、expiresは空で、max_age: 1800 と表示。つまり30分で無効になる<img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f914.svg">30分ごとにセッション保存や更新しないとCIを稼働させることができないてことでしょうか？</span> <span class="chatlog__edited-timestamp" title="14-Feb-19 06:56 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=545498893840941056"><span class="chatlog__timestamp"><a href="#chatlog__message-container-545498263252500480">02/14/2019 6:55 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">2/27の2FA必須の件で、<a href="https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-verification">https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-verification</a> の通りに、fastlane spaceauth -u user@example.org やって、FASTLANE_SESSION の中身を見ると、expiresは空で、max_age: 1800 と表示。つまり30分で無効になる<img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f914.svg">30分ごとにセッション保存や更新しないとCIを稼働させることができないてことでしょうか？</span> <span class="chatlog__edited-timestamp" title="02/14/2019 6:56 AM">(edited)</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
               <div class="chatlog__embed-content-container">
@@ -1795,7 +1863,7 @@
       <div id="chatlog__message-container-545498893840941056" class="chatlog__message-container" data-message-id="545498893840941056">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="14-Feb-19 06:57 AM">06:57</div>
+            <div class="chatlog__short-timestamp" title="02/14/2019 6:57 AM">06:57</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">すでに2FAのアカウントを使用して、fastlaneでCI運用してる方で何か知ってる方いると嬉しいのですが<img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f605.svg"></span></div>
@@ -1808,7 +1876,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/302289660611264512/4d2afe61b256d2bfaf3b36d17f3b7bd6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=545537337870909450"><span class="chatlog__timestamp"><a href="#chatlog__message-container-545537156307746827">14-Feb-19 09:29 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="sutokuro#5314" data-user-id="302289660611264512">sutokuro</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=545537337870909450"><span class="chatlog__timestamp"><a href="#chatlog__message-container-545537156307746827">02/14/2019 9:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://twitter.com/iseebi/status/1095958808554172417">https://twitter.com/iseebi/status/1095958808554172417</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1832,7 +1900,7 @@
       <div id="chatlog__message-container-545537337870909450" class="chatlog__message-container" data-message-id="545537337870909450">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="14-Feb-19 09:30 AM">09:30</div>
+            <div class="chatlog__short-timestamp" title="02/14/2019 9:30 AM">09:30</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ということなので、CI用のアカウントがAccount Holderよりも低いものであれば2FAにしなくても良さそうです。</span></div>
@@ -1845,8 +1913,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=591446412676431891"><span class="chatlog__timestamp"><a href="#chatlog__message-container-591446412676431891">21-Jun-19 01:56 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Azure PipelinesがcronスタイルのScheduleジョブ起動をサポートする様になったので、<s> CircleCIを使う</s> Azure Pipelinesを使わない理由がまた一つ減った。 <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops&amp;tabs=yaml#scheduled-triggers">https://docs.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops&amp;tabs=yaml#scheduled-triggers</a></span> <span class="chatlog__edited-timestamp" title="21-Jun-19 02:00 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=591446412676431891"><span class="chatlog__timestamp"><a href="#chatlog__message-container-591446412676431891">06/21/2019 1:56 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Azure PipelinesがcronスタイルのScheduleジョブ起動をサポートする様になったので、<s> CircleCIを使う</s> Azure Pipelinesを使わない理由がまた一つ減った。 <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops&amp;tabs=yaml#scheduled-triggers">https://docs.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops&amp;tabs=yaml#scheduled-triggers</a></span> <span class="chatlog__edited-timestamp" title="06/21/2019 2:00 AM">(edited)</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
               <div class="chatlog__embed-content-container">
@@ -1872,7 +1940,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=591448011008376867"><span class="chatlog__timestamp"><a href="#chatlog__message-container-591447915692687371">21-Jun-19 02:02 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=591448011008376867"><span class="chatlog__timestamp"><a href="#chatlog__message-container-591447915692687371">06/21/2019 2:02 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もうCI as a serviceはスケジュール実行も標準装備していかないといけない時代になったっぽいですね。昔はスケジュール実行は有料オプションの切り札みたいな感じだった気がする。</span></div>
           </div>
         </div>
@@ -1880,7 +1948,7 @@
       <div id="chatlog__message-container-591448011008376867" class="chatlog__message-container" data-message-id="591448011008376867">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="21-Jun-19 02:03 AM">02:03</div>
+            <div class="chatlog__short-timestamp" title="06/21/2019 2:03 AM">02:03</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Bitriseも無限にスケジュール登録できるし。</span></div>
@@ -1893,8 +1961,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=593276139620007972"><span class="chatlog__timestamp"><a href="#chatlog__message-container-593276139620007972">26-Jun-19 03:07 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Azure Pipelinesがスケジュール実行対応を公表したけど、実際には動かない例が多い。僕のも動かない。 <a href="https://developercommunity.visualstudio.com/content/problem/613157/new-cron-schedule-not-working.html">https://developercommunity.visualstudio.com/content/problem/613157/new-cron-schedule-not-working.html</a></span> <span class="chatlog__edited-timestamp" title="26-Jun-19 03:07 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=593276139620007972"><span class="chatlog__timestamp"><a href="#chatlog__message-container-593276139620007972">06/26/2019 3:07 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Azure Pipelinesがスケジュール実行対応を公表したけど、実際には動かない例が多い。僕のも動かない。 <a href="https://developercommunity.visualstudio.com/content/problem/613157/new-cron-schedule-not-working.html">https://developercommunity.visualstudio.com/content/problem/613157/new-cron-schedule-not-working.html</a></span> <span class="chatlog__edited-timestamp" title="06/26/2019 3:07 AM">(edited)</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
               <div class="chatlog__embed-content-container">
@@ -1919,7 +1987,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=598058103140909056"><span class="chatlog__timestamp"><a href="#chatlog__message-container-598058103140909056">09-Jul-19 07:49 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=598058103140909056"><span class="chatlog__timestamp"><a href="#chatlog__message-container-598058103140909056">07/09/2019 7:49 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://twitter.com/travisci/status/1148490795906977792">https://twitter.com/travisci/status/1148490795906977792</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1948,7 +2016,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609170980836868102"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609170812255207434">08-Aug-19 11:47 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609170980836868102"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609170812255207434">08/08/2019 11:47 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub ActionsをCI/CDとして使える様に。 <a href="https://github.blog/2019-08-08-github-actions-now-supports-ci-cd/">https://github.blog/2019-08-08-github-actions-now-supports-ci-cd/</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1975,7 +2043,7 @@
       <div id="chatlog__message-container-609170980836868102" class="chatlog__message-container" data-message-id="609170980836868102">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="08-Aug-19 11:47 PM">23:47</div>
+            <div class="chatlog__short-timestamp" title="08/08/2019 11:47 PM">23:47</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Windows, Ubuntu, macOSを使える。 <a href="https://help.github.com/en/articles/virtual-environments-for-github-actions#supported-virtual-environments">https://help.github.com/en/articles/virtual-environments-for-github-actions#supported-virtual-environments</a></span></div>
@@ -1988,7 +2056,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609171361931460629"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609171361931460629">08-Aug-19 11:49 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609171361931460629"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609171361931460629">08/08/2019 11:49 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Macホストも動くんだ<img loading="lazy" class="chatlog__emoji " alt="😮" title="open_mouth" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f62e.svg"></span></div>
           </div>
         </div>
@@ -1999,7 +2067,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609171682837659658"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609171682837659658">08-Aug-19 11:50 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609171682837659658"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609171682837659658">08/08/2019 11:50 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今まで、設定ファイルが<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.workflow</code>という独自形式だったのも、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">YAML</code>に変わった。</span></div>
           </div>
         </div>
@@ -2010,7 +2078,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609172156118466589"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609172156118466589">08-Aug-19 11:52 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609172156118466589"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609172156118466589">08/08/2019 11:52 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">よくある感じのCIっぽい。というかGitLabはCIの機能があるからそれに近づいたと言えるのか。最近入ったBranc hの自動削除もGitLabが先だし。</span></div>
           </div>
         </div>
@@ -2021,7 +2089,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609175812671012884"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609172557668810769">08-Aug-19 11:54 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609175812671012884"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609172557668810769">08/08/2019 11:54 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">macOSの環境。 <a href="https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions#macos-1014">https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions#macos-1014</a></span></div>
           </div>
         </div>
@@ -2029,7 +2097,7 @@
       <div id="chatlog__message-container-609172609749352450" class="chatlog__message-container" data-message-id="609172609749352450">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="08-Aug-19 11:54 PM">23:54</div>
+            <div class="chatlog__short-timestamp" title="08/08/2019 11:54 PM">23:54</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんとなくAzure Pipelinesぽさを感じる。</span></div>
@@ -2039,7 +2107,7 @@
       <div id="chatlog__message-container-609173311842156556" class="chatlog__message-container" data-message-id="609173311842156556">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="08-Aug-19 11:57 PM">23:57</div>
+            <div class="chatlog__short-timestamp" title="08/08/2019 11:57 PM">23:57</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
@@ -2054,7 +2122,7 @@
       <div id="chatlog__message-container-609173537948958720" class="chatlog__message-container" data-message-id="609173537948958720">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="08-Aug-19 11:58 PM">23:58</div>
+            <div class="chatlog__short-timestamp" title="08/08/2019 11:58 PM">23:58</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">iPhoneで見てた時にどこかでPricingを見かけたけど、見つけられないな…</span></div>
@@ -2064,7 +2132,7 @@
       <div id="chatlog__message-container-609174080306020382" class="chatlog__message-container" data-message-id="609174080306020382">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="09-Aug-19 12:00 AM">00:00</div>
+            <div class="chatlog__short-timestamp" title="08/09/2019 12:00 AM">00:00</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このページに載ってた。&gt; Pricing <a href="https://github.com/features/actions">https://github.com/features/actions</a></span></div>
@@ -2090,7 +2158,7 @@
       <div id="chatlog__message-container-609175760602660890" class="chatlog__message-container" data-message-id="609175760602660890">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="09-Aug-19 12:06 AM">00:06</div>
+            <div class="chatlog__short-timestamp" title="08/09/2019 12:06 AM">00:06</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">以前のBetaではWorkflowを開始するGitHubイベントとして<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">push</code>くらいしか使えなかったけど、色々解放されたぽい。 <a href="https://help.github.com/en/articles/events-that-trigger-workflows">https://help.github.com/en/articles/events-that-trigger-workflows</a></span></div>
@@ -2100,7 +2168,7 @@
       <div id="chatlog__message-container-609175812671012884" class="chatlog__message-container" data-message-id="609175812671012884">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="09-Aug-19 12:07 AM">00:07</div>
+            <div class="chatlog__short-timestamp" title="08/09/2019 12:07 AM">00:07</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">cronスタイルのスケジュールイベントも使える。</span></div>
@@ -2113,7 +2181,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609176083648217119"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609176083648217119">09-Aug-19 12:08 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609176083648217119"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609176083648217119">08/09/2019 12:08 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
@@ -2129,7 +2197,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609186944576126988"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609186944576126988">09-Aug-19 12:51 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609186944576126988"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609186944576126988">08/09/2019 12:51 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">以前作ったGitHub Actionを新しい設定ファイルにアップデートしたけど、動かない… <a href="https://github.com/norio-nomura/action-swiftlint/pull/6">https://github.com/norio-nomura/action-swiftlint/pull/6</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -2153,8 +2221,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609193101877182470"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609193101877182470">09-Aug-19 01:15 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GithubがCIを提供したんですか？(そもそもActionsが何か知らない</span> <span class="chatlog__edited-timestamp" title="09-Aug-19 01:16 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609193101877182470"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609193101877182470">08/09/2019 1:15 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GithubがCIを提供したんですか？(そもそもActionsが何か知らない</span> <span class="chatlog__edited-timestamp" title="08/09/2019 1:16 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -2164,7 +2232,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609199925581971466"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609199159479631882">09-Aug-19 01:39 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609199925581971466"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609199159479631882">08/09/2019 1:39 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そう＞CI</span></div>
           </div>
         </div>
@@ -2172,7 +2240,7 @@
       <div id="chatlog__message-container-609199925581971466" class="chatlog__message-container" data-message-id="609199925581971466">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="09-Aug-19 01:43 AM">01:43</div>
+            <div class="chatlog__short-timestamp" title="08/09/2019 1:43 AM">01:43</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このTweetからのスレッドを読むとざっくりわかる。 <a href="https://twitter.com/GitHubJapan/status/1159578789363376128">https://twitter.com/GitHubJapan/status/1159578789363376128</a></span></div>
@@ -2222,7 +2290,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609200272069099520"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609200272069099520">09-Aug-19 01:44 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609200272069099520"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609200272069099520">08/09/2019 1:44 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">マジかよ最高すぎる</span></div>
           </div>
         </div>
@@ -2233,7 +2301,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609201858224979975"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609201858224979975">09-Aug-19 01:50 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=609201858224979975"><span class="chatlog__timestamp"><a href="#chatlog__message-container-609201858224979975">08/09/2019 1:50 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
@@ -2249,8 +2317,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=610634174247731211"><span class="chatlog__timestamp"><a href="#chatlog__message-container-610634174247731211">13-Aug-19 12:42 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">リポジトリごとに新しいGitHub Actionへ切り替えられる様になって、旧バージョンで作ってあったActionも新バージョンで動く様になった。 <a href="https://github.com/norio-nomura/action-swiftlint/pull/6/checks">https://github.com/norio-nomura/action-swiftlint/pull/6/checks</a></span> <span class="chatlog__edited-timestamp" title="13-Aug-19 12:50 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=610634174247731211"><span class="chatlog__timestamp"><a href="#chatlog__message-container-610634174247731211">08/13/2019 12:42 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">リポジトリごとに新しいGitHub Actionへ切り替えられる様になって、旧バージョンで作ってあったActionも新バージョンで動く様になった。 <a href="https://github.com/norio-nomura/action-swiftlint/pull/6/checks">https://github.com/norio-nomura/action-swiftlint/pull/6/checks</a></span> <span class="chatlog__edited-timestamp" title="08/13/2019 12:50 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -2260,7 +2328,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=624511873341194240"><span class="chatlog__timestamp"><a href="#chatlog__message-container-624511873341194240">20-Sep-19 07:47 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=624511873341194240"><span class="chatlog__timestamp"><a href="#chatlog__message-container-624511873341194240">09/20/2019 7:47 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub Actionsで変更されたファイルのパスを使ってCI起動を制限できるの良い。 <a href="https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths">https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths</a></span></div>
           </div>
         </div>
@@ -2271,8 +2339,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=626255613025845258"><span class="chatlog__timestamp"><a href="#chatlog__message-container-626255613025845258">25-Sep-19 03:16 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">podspecを更新しただけなら<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">pod lib lint</code>だけ実行する様に設定できるGitHub Actions CI良い。 <a href="https://github.com/norio-nomura/Base32/pull/55">https://github.com/norio-nomura/Base32/pull/55</a></span> <span class="chatlog__edited-timestamp" title="25-Sep-19 03:17 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=626255613025845258"><span class="chatlog__timestamp"><a href="#chatlog__message-container-626255613025845258">09/25/2019 3:16 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">podspecを更新しただけなら<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">pod lib lint</code>だけ実行する様に設定できるGitHub Actions CI良い。 <a href="https://github.com/norio-nomura/Base32/pull/55">https://github.com/norio-nomura/Base32/pull/55</a></span> <span class="chatlog__edited-timestamp" title="09/25/2019 3:17 AM">(edited)</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
               <div class="chatlog__embed-content-container">
@@ -2295,7 +2363,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=641440487181516810"><span class="chatlog__timestamp"><a href="#chatlog__message-container-641440487181516810">06-Nov-19 12:55 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=641440487181516810"><span class="chatlog__timestamp"><a href="#chatlog__message-container-641440487181516810">11/06/2019 12:55 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub ActionsがSelf-hosted runnerを使える様になったぽい。 <a href="https://github.blog/2019-11-05-self-hosted-runners-for-github-actions-is-now-in-beta/">https://github.blog/2019-11-05-self-hosted-runners-for-github-actions-is-now-in-beta/</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -2325,7 +2393,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=641782960705765386"><span class="chatlog__timestamp"><a href="#chatlog__message-container-641782960705765386">06-Nov-19 11:36 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=641782960705765386"><span class="chatlog__timestamp"><a href="#chatlog__message-container-641782960705765386">11/06/2019 11:36 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いろいろ推してきたGitHub Actions、macOS 10.15追加と同時にmacOS 10.14削除かつXcode 9.x~10.x削除と、まったく推せない状態に… <a href="https://github.blog/changelog/2019-11-06-github-actions-macos-virtual-environment-updated-to-catalina/">https://github.blog/changelog/2019-11-06-github-actions-macos-virtual-environment-updated-to-catalina/</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -2358,7 +2426,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=641786735893807114"><span class="chatlog__timestamp"><a href="#chatlog__message-container-641786735893807114">06-Nov-19 11:51 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=641786735893807114"><span class="chatlog__timestamp"><a href="#chatlog__message-container-641786735893807114">11/06/2019 11:51 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえず、GitHub Actions仮想環境へのフィードバックはこちらかな？ <a href="https://github.com/actions/virtual-environments/issues/78">https://github.com/actions/virtual-environments/issues/78</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -2385,7 +2453,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=642148486644498443"><span class="chatlog__timestamp"><a href="#chatlog__message-container-642148486644498443">07-Nov-19 11:48 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=642148486644498443"><span class="chatlog__timestamp"><a href="#chatlog__message-container-642148486644498443">11/07/2019 11:48 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">10.14の指定が使えなくなるってメール来てた。 さすがにそんなにコロコロ変わられるとOSS向けはしんどい。 アプリならまあいいけど</span></div>
           </div>
         </div>
@@ -2396,8 +2464,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=642149022391599105"><span class="chatlog__timestamp"><a href="#chatlog__message-container-642149022391599105">07-Nov-19 11:50 PM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub ActionsのmacOSはMacStadiumらしいから、MacStadiumでSelf-hosted runnerを立ち上げて使うと良いのかも。お手軽感が全く無くなるけど。</span> <span class="chatlog__edited-timestamp" title="11-Nov-19 03:19 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=642149022391599105"><span class="chatlog__timestamp"><a href="#chatlog__message-container-642149022391599105">11/07/2019 11:50 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub ActionsのmacOSはMacStadiumらしいから、MacStadiumでSelf-hosted runnerを立ち上げて使うと良いのかも。お手軽感が全く無くなるけど。</span> <span class="chatlog__edited-timestamp" title="11/11/2019 3:19 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -2407,7 +2475,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=644319913015509002"><span class="chatlog__timestamp"><a href="#chatlog__message-container-644319913015509002">13-Nov-19 11:37 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=644319913015509002"><span class="chatlog__timestamp"><a href="#chatlog__message-container-644319913015509002">11/13/2019 11:37 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Docker Containerの中でmacOS VMを動かすらしい。 <a href="https://www.macstadium.com/orka">https://www.macstadium.com/orka</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -2436,7 +2504,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=703255422668111872"><span class="chatlog__timestamp"><a href="#chatlog__message-container-703255422668111872">24-Apr-20 02:45 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=703255422668111872"><span class="chatlog__timestamp"><a href="#chatlog__message-container-703255422668111872">04/24/2020 2:45 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GitHub ActionsのubuntuはSwift 5.2.1インストール済みらしい。 <a href="https://twitter.com/0xTim/status/1248561344904925185">https://twitter.com/0xTim/status/1248561344904925185</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(29,161,242,255)"></div>
@@ -2468,7 +2536,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=781769587263406160"><span class="chatlog__timestamp"><a href="#chatlog__message-container-781769587263406160">27-Nov-20 06:33 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=781769587263406160"><span class="chatlog__timestamp"><a href="#chatlog__message-container-781769587263406160">11/27/2020 6:33 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Azure Pipelinesの仮想環境情報、GitHub Actionsへ統合されてたのね。 <a href="https://github.com/microsoft/azure-pipelines-image-generation/">https://github.com/microsoft/azure-pipelines-image-generation/</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -2498,7 +2566,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=894810628877860884"><span class="chatlog__timestamp"><a href="#chatlog__message-container-894810082120974376">05-Oct-21 04:55 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=894810628877860884"><span class="chatlog__timestamp"><a href="#chatlog__message-container-894810082120974376">10/05/2021 4:55 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://opensource.microsoft.com/azure-credits">https://opensource.microsoft.com/azure-credits</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(36,41,46,255)"></div>
@@ -2522,7 +2590,7 @@
       <div id="chatlog__message-container-894810148567150603" class="chatlog__message-container" data-message-id="894810148567150603">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="05-Oct-21 04:56 AM">04:56</div>
+            <div class="chatlog__short-timestamp" title="10/05/2021 4:56 AM">04:56</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
@@ -2537,7 +2605,7 @@
       <div id="chatlog__message-container-894810628877860884" class="chatlog__message-container" data-message-id="894810628877860884">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="05-Oct-21 04:57 AM">04:57</div>
+            <div class="chatlog__short-timestamp" title="10/05/2021 4:57 AM">04:57</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="kishikawakatsumi#7600">@Kishikawa Katsumi</span> さんが応募してただホスティングできるようになってその経験をブログに書くまで想像した</span></div>
@@ -2550,7 +2618,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=894812522249617408"><span class="chatlog__timestamp"><a href="#chatlog__message-container-894811988071432243">05-Oct-21 05:03 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=894812522249617408"><span class="chatlog__timestamp"><a href="#chatlog__message-container-894811988071432243">10/05/2021 5:03 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おおー、いいものを教えてもらいました<img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f64f.svg"><img loading="lazy" class="chatlog__emoji " alt="🏻" title="🏻" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f3fb.svg"></span></div>
           </div>
         </div>
@@ -2558,7 +2626,7 @@
       <div id="chatlog__message-container-894812522249617408" class="chatlog__message-container" data-message-id="894812522249617408">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="05-Oct-21 05:05 AM">05:05</div>
+            <div class="chatlog__short-timestamp" title="10/05/2021 5:05 AM">05:05</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Code of Conductをなんとかして作れば応募できそう。それ以外はよくある内容。</span></div>
@@ -2571,7 +2639,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=894814450278879253"><span class="chatlog__timestamp"><a href="#chatlog__message-container-894814450278879253">05-Oct-21 05:13 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=894814450278879253"><span class="chatlog__timestamp"><a href="#chatlog__message-container-894814450278879253">10/05/2021 5:13 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうかそもそも1人プロジェクト、というのはあまり想定してないからCOCなのか。</span></div>
           </div>
         </div>
@@ -2582,7 +2650,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=895424399350591498"><span class="chatlog__timestamp"><a href="#chatlog__message-container-895424399350591498">06-Oct-21 09:36 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="niw#3551" data-user-id="375129448900591616">niw</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=895424399350591498"><span class="chatlog__timestamp"><a href="#chatlog__message-container-895424399350591498">10/06/2021 9:36 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ですねー。応募してみる価値はあるかと！</span></div>
           </div>
         </div>
@@ -2593,7 +2661,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291057993686974466/459a7a7d92d588e0a6d0e6b28373eb7c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="yutailang0119#3673" data-user-id="291057993686974466">yutailang0119</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905014530600472616"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905014530600472616">02-Nov-21 08:44 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="yutailang0119#3673" data-user-id="291057993686974466">yutailang0119</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905014530600472616"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905014530600472616">11/02/2021 8:44 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="kishikawakatsumi#7600">@Kishikawa Katsumi</span> <a href="https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks">https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks</a> を利用させてもらおうとしていて、最後のchecks投稿部分で403なんですが、エラーに思い当たることないでしょうか？ Xcode Result to CheckのGitHub Appsはリポジトリにインストール済みで、あとはセットされているghpトークンの権限くらいかなと思うんですが、変更がちょっと大変なので、先に聞いてみました テストをfastlane.scanで複数回やっている関係で、xcresultをstepに渡す前にmergeしたりしていて、このゴニョゴニョが影響している可能性もありますが... <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">/private/var/folders/g2/xnd8hpjs50v433gfrybz2nxh0000gn/T/bitrise810744939/step_src/node_modules/axios/lib/core/createError.js:16 var error = new Error(message); ^ Error: Request failed with status code 403 at createError (/private/var/folders/g2/xnd8hpjs50v433gfrybz2nxh0000gn/T/bitrise810744939/step_src/node_modules/axios/lib/core/createError.js:16:1) at settle (/private/var/folders/g2/xnd8hpjs50v433gfrybz2nxh0000gn/T/bitrise810744939/step_src/node_modules/axios/lib/core/settle.js:17:1) at IncomingMessage.handleStreamEnd (/private/var/folders/g2/xnd8hpjs50v433gfrybz2nxh0000gn/T/bitrise810744939/step_src/node_modules/axios/lib/adapters/http.js:293:1) at IncomingMessage.emit (events.js:326:22) at endReadableNT (_stream_readable.js:1241:12) at processTicksAndRejections (internal/process/task_queues.js:84:21) WARN[08:26:31] Step (git::https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks.git@main) failed, but was marked as skippable </code></span></div>
           </div>
         </div>
@@ -2604,7 +2672,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905018300860362753"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905015485295390761">02-Nov-21 08:48 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905018300860362753"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905015485295390761">11/02/2021 8:48 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">再現性ある感じですか？</span></div>
           </div>
         </div>
@@ -2612,7 +2680,7 @@
       <div id="chatlog__message-container-905016847273984032" class="chatlog__message-container" data-message-id="905016847273984032">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="02-Nov-21 08:53 AM">08:53</div>
+            <div class="chatlog__short-timestamp" title="11/02/2021 8:53 AM">08:53</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apps/xcode-result-to-check">https://github.com/apps/xcode-result-to-check</a> このGitHub Appsはリポジトリに入ってます？</span></div>
@@ -2622,7 +2690,7 @@
       <div id="chatlog__message-container-905018300860362753" class="chatlog__message-container" data-message-id="905018300860362753">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="02-Nov-21 08:59 AM">08:59</div>
+            <div class="chatlog__short-timestamp" title="11/02/2021 8:59 AM">08:59</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あとはなんだろう。私もBitriseからやるのは自分のアカウントでしか試してないからもしかしたら何か足りないのかも。</span></div>
@@ -2635,7 +2703,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291057993686974466/459a7a7d92d588e0a6d0e6b28373eb7c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="yutailang0119#3673" data-user-id="291057993686974466">yutailang0119</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905018723973337139"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905018630125785100">02-Nov-21 09:00 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="yutailang0119#3673" data-user-id="291057993686974466">yutailang0119</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905018723973337139"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905018630125785100">11/02/2021 9:00 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">3回実行して、全部403でした GitHub Appsもリポジトリに権限渡していて、入れ直したりもしてみているんですが、だめですね...</span></div>
           </div>
         </div>
@@ -2643,7 +2711,7 @@
       <div id="chatlog__message-container-905018723973337139" class="chatlog__message-container" data-message-id="905018723973337139">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="02-Nov-21 09:01 AM">09:01</div>
+            <div class="chatlog__short-timestamp" title="11/02/2021 9:01 AM">09:01</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もうちょっとエラーの詳細があるといいんだけど</span></div>
@@ -2656,7 +2724,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905024253638901760"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905024253638901760">02-Nov-21 09:23 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905024253638901760"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905024253638901760">11/02/2021 9:23 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Resource not accessible by integration</code> というエラーですね。 権限の問題っぽいからやっぱり他のアカウントでうまくいかないのかな。 ちょっと別アカウント作って試してみます。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="person_bowing"><img class="chatlog__emoji chatlog__emoji--small" alt="🙇" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -2670,7 +2738,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905291012577058817"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905291012577058817">03-Nov-21 03:03 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905291012577058817"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905291012577058817">11/03/2021 3:03 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">違うアカウントでセットアップしてみましたが問題なかったです。なんだろう。 <a href="https://github.com/yappli-buildbot/xcresulttool-example/pull/1/checks">https://github.com/yappli-buildbot/xcresulttool-example/pull/1/checks</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -2694,7 +2762,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905434465885638656"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905434465885638656">03-Nov-21 12:33 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905434465885638656"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905434465885638656">11/03/2021 12:33 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yutailang0119#3673">@yutailang0119</span> 内部でCommit ID(SHA)が実際に存在するかをチェックしていて、エラーはその部分で起こっています（コミットが対象のリポジトリから取得できない）。 おそらくだけど、プライベートリポジトリ（ですよね？）に対してはRepositoryの権限がAppに必要なんだと思います。 私はPublicリポジトリでしか確認してなかったのでそこは問題にならなかった、のではないかと。 ということで、ちょっとそのチェックを外したのでやり直してみてください <img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f64f.svg"></span></div>
           </div>
         </div>
@@ -2705,7 +2773,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291057993686974466/459a7a7d92d588e0a6d0e6b28373eb7c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="yutailang0119#3673" data-user-id="291057993686974466">yutailang0119</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905445317942603786"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905445317942603786">03-Nov-21 01:16 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="yutailang0119#3673" data-user-id="291057993686974466">yutailang0119</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905445317942603786"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905445317942603786">11/03/2021 1:16 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="kishikawakatsumi#7600">@Kishikawa Katsumi</span> 通りました、ありがとうございます！ (プライベートリポジトリでした)</span></div>
           </div>
         </div>
@@ -2716,7 +2784,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905446112025014344"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905445766703771658">03-Nov-21 01:18 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=905446112025014344"><span class="chatlog__timestamp"><a href="#chatlog__message-container-905445766703771658">11/03/2021 1:18 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">良かったです。</span></div>
           </div>
         </div>
@@ -2724,7 +2792,7 @@
       <div id="chatlog__message-container-905446112025014344" class="chatlog__message-container" data-message-id="905446112025014344">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="03-Nov-21 01:19 PM">13:19</div>
+            <div class="chatlog__short-timestamp" title="11/03/2021 1:19 PM">13:19</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちなみにBitriseのステップはマージされたのでUIから検索して追加できるようになりました。</span></div>
@@ -2740,7 +2808,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=935715747441828022"><span class="chatlog__timestamp"><a href="#chatlog__message-container-935715747441828022">26-Jan-22 02:00 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=935715747441828022"><span class="chatlog__timestamp"><a href="#chatlog__message-container-935715747441828022">01/26/2022 2:00 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いまってAppStoreのプロモーションコードによる配信って機能してますか？ 手元のデバイス2つ試したら「Appがダウンロードされます」と表示されたままダウンロードされず、なんだか壊れてるような気がするんですよね</span></div>
           </div>
         </div>
@@ -2750,14 +2818,14 @@
       <div id="chatlog__message-container-935721652321415188" class="chatlog__message-container" data-message-id="935721652321415188">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__reference-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Avatar" loading="lazy">
+            <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Avatar" loading="lazy">
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__reference"><img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy">
-              <div class="chatlog__reference-author" title="Iceman#5499">Iceman</div>
-              <div class="chatlog__reference-content"><span class="chatlog__reference-link" onclick="scrollToMessage(event,'935715747441828022')"> いまってAppStoreのプロモーションコードによる配信って機能してますか？ 手元のデバイス2つ試したら「Appがダウンロードされます」と表示されたままダウンロードされず、なんだか壊れてるような気がするんですよね </span></div>
+            <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reply-author" title="Iceman#5499">Iceman</div>
+              <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'935715747441828022')"> いまってAppStoreのプロモーションコードによる配信って機能してますか？ 手元のデバイス2つ試したら「Appがダウンロードされます」と表示されたままダウンロードされず、なんだか壊れてるような気がするんですよね </span></div>
             </div>
-            <div class="chatlog__header"><span class="chatlog__author" title="yhkaplan#4039" data-user-id="472627097219891211">yhkaplan</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=935721652321415188"><span class="chatlog__timestamp"><a href="#chatlog__message-container-935721652321415188">26-Jan-22 02:23 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="yhkaplan#4039" data-user-id="472627097219891211">yhkaplan</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=935721652321415188"><span class="chatlog__timestamp"><a href="#chatlog__message-container-935721652321415188">01/26/2022 2:23 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">関連してますかね <a href="https://www.macrumors.com/2022/01/25/apples-icloud-service-experiencing-outage/">https://www.macrumors.com/2022/01/25/apples-icloud-service-experiencing-outage/</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(26,26,26,255)"></div>
@@ -2784,7 +2852,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=935724242497060915"><span class="chatlog__timestamp"><a href="#chatlog__message-container-935724242497060915">26-Jan-22 02:34 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/420754624975339520?category=main&amp;channel=ci&amp;message_id=935724242497060915"><span class="chatlog__timestamp"><a href="#chatlog__message-container-935724242497060915">01/26/2022 2:34 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">AppStoreなので関係ないような気はしますが、裏で依存してて巻き添えで壊れてるとかはあるかもしれませんね</span></div>
           </div>
         </div>

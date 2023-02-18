@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/295071934889197578/e5f514e062778796ac06288270411f75.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" title="yyu#6765" data-user-id="295071934889197578">yyu</span> <a href="/channels/380329942505750529?category=コミュニティ&amp;channel=waiwai-swiftc&amp;message_id=459752890064699412"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-459751835067088896">22-Jun-18 04:09 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="yyu#6765" data-user-id="295071934889197578">yyu</span> <a href="/channels/380329942505750529?category=コミュニティ&amp;channel=waiwai-swiftc&amp;message_id=459752890064699412"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-459751835067088896">06/22/2018 4:09 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">別のことをしていてすっかり遅刻してしまいましたが、いちおうScalaを業務で書いているマンとしてちょっと<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">enum</code> vs <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">protocol</code> をやっていきたいと思います。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol A {} class B: A{} class C: A{}</code> vs <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">enum A { case b(B) case c(C) }</code></span></div>
         <div class="chatlog__reactions">
           <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -14,7 +14,7 @@
   <div id="chatlog__message-container-459752175728459796" class="chatlog__message-container" data-message-id="459752175728459796">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="22-Jun-18 04:11 PM">16:11</div>
+        <div class="chatlog__short-timestamp" title="06/22/2018 4:11 PM">16:11</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この2つですが、もしかして会場では答えでている可能性あって、そうしたら申し訳ないんですが、まさに上の方で議論されているようにSwiftには<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">seald</code>がないので、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">protocol</code>を利用した上の例では、予想しないような実装（クラス・構造体）が作られる恐れがあり、またパターンマッチで網羅性を検査することができません。</span></div>
@@ -24,7 +24,7 @@
   <div id="chatlog__message-container-459752429882310686" class="chatlog__message-container" data-message-id="459752429882310686">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="22-Jun-18 04:12 PM">16:12</div>
+        <div class="chatlog__short-timestamp" title="06/22/2018 4:12 PM">16:12</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">じゃあ、下の<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">enum</code>がいいのか、という議論になるかというとそうではなくて、（勘違いだったら申し訳ないんですが）Swiftの<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">enum</code>の各タグ（？、たとえば上記の例でいう<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">a</code>とか<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">b</code>）はたしか型パラメーターが取れないです。</span></div>
@@ -37,7 +37,7 @@
   <div id="chatlog__message-container-459752769839169536" class="chatlog__message-container" data-message-id="459752769839169536">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="22-Jun-18 04:13 PM">16:13</div>
+        <div class="chatlog__short-timestamp" title="06/22/2018 4:13 PM">16:13</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">だから、たとえば型レベルリスト（HList）のようなデータ構造を作りたいときは、パターンマッチの網羅性を犠牲にしてでも前者の<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">protocol</code>をつかって次のようにやるしかない、といった感じになるんじゃないでしょうか。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public protocol HList { } public struct HNil: HList { init() { } } public struct HCons&lt;H, T: HList&gt;: HList { public let head: H public let tail: T public init(_ h: H, _ t: T) { self.head = h self.tail = t } }</code></span></div>
@@ -47,7 +47,7 @@
   <div id="chatlog__message-container-459752890064699412" class="chatlog__message-container" data-message-id="459752890064699412">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="22-Jun-18 04:13 PM">16:13</div>
+        <div class="chatlog__short-timestamp" title="06/22/2018 4:13 PM">16:13</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この例ではタグ（？）として<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">HNil</code>と<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">HCons</code>がありますが、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">HCons</code>が型パラを取るので、こうしています。</span></div>

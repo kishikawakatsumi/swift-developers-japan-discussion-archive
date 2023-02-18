@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=756032611113238538"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-756030720022937632">17-Sep-20 05:56 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=756032611113238538"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-756030720022937632">09/17/2020 5:56 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">互換性の話の対象がズレてそう。</span></div>
       </div>
     </div>
@@ -11,17 +11,17 @@
   <div id="chatlog__message-container-756031230973050931" class="chatlog__message-container" data-message-id="756031230973050931">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="17-Sep-20 05:58 AM">05:58</div>
+        <div class="chatlog__short-timestamp" title="09/17/2020 5:58 AM">05:58</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まず前提として、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func loadData(file: String) throws IOError -&gt; Data { ... } func main(files: [String]) throws IOError { // loadDataの IOError が .map から返ってきて欲しい try files.map { try loadData(file: $0) } }</code></span> <span class="chatlog__edited-timestamp" title="17-Sep-20 05:58 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まず前提として、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func loadData(file: String) throws IOError -&gt; Data { ... } func main(files: [String]) throws IOError { // loadDataの IOError が .map から返ってきて欲しい try files.map { try loadData(file: $0) } }</code></span> <span class="chatlog__edited-timestamp" title="09/17/2020 5:58 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-756031664718741527" class="chatlog__message-container" data-message-id="756031664718741527">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="17-Sep-20 05:59 AM">05:59</div>
+        <div class="chatlog__short-timestamp" title="09/17/2020 5:59 AM">05:59</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、こうなるためには <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension Array { func map&lt;U&gt;(_ f: (Element) throws -&gt; U) rethrows -&gt; [U] }</code> ↑このrethrowsは、throwsのところのエラー型を投げる、としたいけど</span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-756032505634881578" class="chatlog__message-container" data-message-id="756032505634881578">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="17-Sep-20 06:03 AM">06:03</div>
+        <div class="chatlog__short-timestamp" title="09/17/2020 6:03 AM">06:03</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension Array { func map&lt;U&gt;(_ f: (Element) throws -&gt; U) rethrows -&gt; [U] { var ret: [U] = [] for i in indices { let x = self[i] do { ret.append(try f(x)) } catch (error) { throw ArrayMapError(index: i, element: x, underlyingError: error) } } return ret } }</code></span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-756032611113238538" class="chatlog__message-container" data-message-id="756032611113238538">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="17-Sep-20 06:03 AM">06:03</div>
+        <div class="chatlog__short-timestamp" title="09/17/2020 6:03 AM">06:03</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑例えばこのコードは従来はコンパイルできたけど、 rethrows を同じエラー型を投げる仕様にしてしまったら、コンパイルできなくなっちゃう。</span></div>

@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=881998403557556264"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-881996297849143297">30-Aug-21 08:18 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=881998403557556264"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-881996297849143297">08/30/2021 8:18 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">UIViewController</code> に付いてのか。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@MainActor class UIViewController : UIResponder</code>
             <a href="https://developer.apple.com/documentation/uikit/uiviewcontroller">https://developer.apple.com/documentation/uikit/uiviewcontroller</a></span></div>
       </div>
@@ -12,7 +12,7 @@
   <div id="chatlog__message-container-881996470121791508" class="chatlog__message-container" data-message-id="881996470121791508">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="30-Aug-21 08:19 PM">20:19</div>
+        <div class="chatlog__short-timestamp" title="08/30/2021 8:19 PM">20:19</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> だと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code> 上で実行されるけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">detached</code> だとそうじゃないからエラーになってしまったと。</span></div>
@@ -22,7 +22,7 @@
   <div id="chatlog__message-container-881997544027201636" class="chatlog__message-container" data-message-id="881997544027201636">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="30-Aug-21 08:23 PM">20:23</div>
+        <div class="chatlog__short-timestamp" title="08/30/2021 8:23 PM">20:23</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) Task.detached(priority: .background) { [self] in do { let user = try await fetchUser(for: userID) DispatchQueue.main.async { [self] in self.user = user } } catch { // エラーハンドリング } } }</code></span></div>
@@ -32,7 +32,7 @@
   <div id="chatlog__message-container-881997704752955463" class="chatlog__message-container" data-message-id="881997704752955463">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="30-Aug-21 08:23 PM">20:23</div>
+        <div class="chatlog__short-timestamp" title="08/30/2021 8:23 PM">20:23</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code> に戻したらいけたけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">DispatchQueue.main</code> よりもいい方法ないんだっけ？</span></div>
@@ -42,7 +42,7 @@
   <div id="chatlog__message-container-881998107787816990" class="chatlog__message-container" data-message-id="881998107787816990">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="30-Aug-21 08:25 PM">20:25</div>
+        <div class="chatlog__short-timestamp" title="08/30/2021 8:25 PM">20:25</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">DispatchQueue.main</code> って型じゃないけど、どうやって <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code> と紐付いてるの？（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">DispatchQueue.global()</code> だとコンパイルエラー）</span></div>
@@ -52,7 +52,7 @@
   <div id="chatlog__message-container-881998403557556264" class="chatlog__message-container" data-message-id="881998403557556264">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="30-Aug-21 08:26 PM">20:26</div>
+        <div class="chatlog__short-timestamp" title="08/30/2021 8:26 PM">20:26</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">よく考えたら Global Actor の Proposal ちゃんと読んでなかった。ここに答えがあるのかな・・・。 <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0316-global-actors.md">https://github.com/apple/swift-evolution/blob/main/proposals/0316-global-actors.md</a></span></div>

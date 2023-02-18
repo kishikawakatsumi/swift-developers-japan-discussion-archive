@@ -140,7 +140,7 @@
       text-align: center
     }
 
-    .chatlog__reference-symbol {
+    .chatlog__reply-symbol {
       height: 10px;
       margin: 6px 4px 4px 36px;
       border-left: 2px solid #c7ccd1;
@@ -168,7 +168,7 @@
       min-width: 0
     }
 
-    .chatlog__reference {
+    .chatlog__reply {
       display: flex;
       margin-bottom: 0.15rem;
       align-items: center;
@@ -179,49 +179,49 @@
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-avatar {
+    .chatlog__reply-avatar {
       width: 16px;
       height: 16px;
       margin-right: 0.25rem;
       border-radius: 50%
     }
 
-    .chatlog__reference-author {
+    .chatlog__reply-author {
       margin-right: 0.3rem;
       font-weight: 600
     }
 
-    .chatlog__reference-content {
+    .chatlog__reply-content {
       overflow: hidden;
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-link {
+    .chatlog__reply-link {
       cursor: pointer
     }
 
-    .chatlog__reference-link * {
+    .chatlog__reply-link * {
       display: inline;
       pointer-events: none
     }
 
-    .chatlog__reference-link .chatlog__markdown-quote {
+    .chatlog__reply-link .chatlog__markdown-quote {
       display: inline
     }
 
-    .chatlog__reference-link .chatlog__markdown-pre {
+    .chatlog__reply-link .chatlog__markdown-pre {
       display: inline
     }
 
-    .chatlog__reference-link:hover {
+    .chatlog__reply-link:hover {
       color: #2f3136
     }
 
-    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+    .chatlog__reply-link:hover *:not(.chatlog__markdown-spoiler) {
       color: inherit
     }
 
-    .chatlog__reference-edited-timestamp {
+    .chatlog__reply-edited-timestamp {
       margin-left: 0.25rem;
       color: #5e6772;
       font-size: 0.75rem;
@@ -271,7 +271,7 @@
       color: #2f3136
     }
 
-    .chatlog__bot-label {
+    .chatlog__author-tag {
       position: relative;
       top: -0.1rem;
       margin-left: 0.3rem;
@@ -549,6 +549,8 @@
     }
 
     .chatlog__embed-generic-image {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -556,10 +558,62 @@
     }
 
     .chatlog__embed-generic-gifv {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
       border-radius: 3px
+    }
+
+    .chatlog__embed-invite-container {
+      min-width: 320px;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-radius: 3px;
+      background-color: rgba(249, 249, 249, 0.3)
+    }
+
+    .chatlog__embed-invite-title {
+      margin: 0 0 0.8rem 0;
+      color: #4f5660;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase
+    }
+
+    .chatlog__embed-invite {
+      display: flex
+    }
+
+    .chatlog__embed-invite-guild-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 0.85rem
+    }
+
+    .chatlog__embed-invite-info {
+      margin-left: 1rem
+    }
+
+    .chatlog__embed-invite-guild-name {
+      color: #36393e;
+      font-weight: 600
+    }
+
+    .chatlog__embed-invite-guild-name a {
+      color: inherit
+    }
+
+    .chatlog__embed-invite-channel-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: bottom
+    }
+
+    .chatlog__embed-invite-channel-name {
+      font-size: 0.9rem;
+      font-weight: 600
     }
 
     .chatlog__embed-spotify {
@@ -627,6 +681,7 @@
 
     .chatlog__markdown-spoiler {
       background-color: rgba(0, 0, 0, 0.1);
+      padding: 0 2px;
       border-radius: 3px
     }
 
@@ -658,7 +713,8 @@
     .chatlog__markdown-pre {
       background-color: #f9f9f9;
       font-family: "Consolas", "Courier New", Courier, monospace;
-      font-size: 0.85rem
+      font-size: 0.85rem;
+      text-decoration: inherit
     }
 
     .chatlog__markdown-pre--multiline {
@@ -695,9 +751,9 @@
     }
 
     .chatlog__markdown-timestamp {
-      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.1);
       padding: 0 2px;
-      color: #5e6772
+      border-radius: 3px
     }
 
     .chatlog__emoji {
@@ -782,20 +838,32 @@
         <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
         <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
       </symbol>
-      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
-        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      <symbol id="join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+      <symbol id="leave-icon" viewBox="0 0 18 18">
+        <path fill="#ed4245" d="m3.8 8 3.6-3.6-1.4-1.4-6 6 6 6 1.4-1.4-3.6-3.6h14.2v-2"></path>
       </symbol>
       <symbol id="call-icon" viewBox="0 0 18 18">
         <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
       </symbol>
-      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
-        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      <symbol id="pencil-icon" viewBox="0 0 18 18">
+        <path fill="#99aab5" d="m0 14.25v3.75h3.75l11.06-11.06-3.75-3.75zm17.71-10.21c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75z"></path>
+      </symbol>
+      <symbol id="pin-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="channel-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"></path>
+      </symbol>
+      <symbol id="thread-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.43309 21C5.35842 21 5.30189 20.9325 5.31494 20.859L5.99991 17H2.14274C2.06819 17 2.01168 16.9327 2.02453 16.8593L2.33253 15.0993C2.34258 15.0419 2.39244 15 2.45074 15H6.34991L7.40991 9H3.55274C3.47819 9 3.42168 8.93274 3.43453 8.85931L3.74253 7.09931C3.75258 7.04189 3.80244 7 3.86074 7H7.75991L8.45234 3.09903C8.46251 3.04174 8.51231 3 8.57049 3H10.3267C10.4014 3 10.4579 3.06746 10.4449 3.14097L9.75991 7H15.7599L16.4523 3.09903C16.4625 3.04174 16.5123 3 16.5705 3H18.3267C18.4014 3 18.4579 3.06746 18.4449 3.14097L17.7599 7H21.6171C21.6916 7 21.7481 7.06725 21.7353 7.14069L21.4273 8.90069C21.4172 8.95811 21.3674 9 21.3091 9H17.4099L17.0495 11.04H15.05L15.4104 9H9.41035L8.35035 15H10.5599V17H7.99991L7.30749 20.901C7.29732 20.9583 7.24752 21 7.18934 21H5.43309Z"></path>
+        <path fill="#b9bbbe" d="M13.4399 12.96C12.9097 12.96 12.4799 13.3898 12.4799 13.92V20.2213C12.4799 20.7515 12.9097 21.1813 13.4399 21.1813H14.3999C14.5325 21.1813 14.6399 21.2887 14.6399 21.4213V23.4597C14.6399 23.6677 14.8865 23.7773 15.0408 23.6378L17.4858 21.4289C17.6622 21.2695 17.8916 21.1813 18.1294 21.1813H22.5599C23.0901 21.1813 23.5199 20.7515 23.5199 20.2213V13.92C23.5199 13.3898 23.0901 12.96 22.5599 12.96H13.4399Z"></path>
       </symbol>
     </defs>
   </svg>
   <div class="preamble">
-    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
-    </div>
+    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
     <div class="preamble__entries-container">
       <div class="preamble__entry">swift-developers-japan</div>
       <div class="preamble__entry">開発環境, ライブラリ / scenekit</div>
@@ -807,7 +875,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192174754430977"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192174754430977">07-Jun-18 07:57 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192174754430977"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192174754430977">06/07/2018 7:57 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓の API 、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">duration</code> を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">TimeInterval</code> で与えてるのにクロージャの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">elapsedTime</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CGFloat</code> で来るのおかしくないですか？ Obj-C で型の違いが軽視されてたから？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class func customAction(duration seconds: TimeInterval, action block: @escaping (SCNNode, CGFloat) -&gt; Void) -&gt; SCNAction</code>
                 <a href="https://developer.apple.com/documentation/scenekit/scnaction/1523692-customaction">https://developer.apple.com/documentation/scenekit/scnaction/1523692-customaction</a></span></div>
           </div>
@@ -819,7 +887,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192432100278303"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192432100278303">07-Jun-18 07:58 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192432100278303"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192432100278303">06/07/2018 7:58 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おかしそう</span></div>
           </div>
         </div>
@@ -830,7 +898,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192639655411714"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192639655411714">07-Jun-18 07:59 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192639655411714"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192639655411714">06/07/2018 7:59 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これは Apple のバグレポートに上げたらいいのかな？</span></div>
           </div>
         </div>
@@ -841,7 +909,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192718378303490"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192718378303490">07-Jun-18 07:59 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192718378303490"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192718378303490">06/07/2018 7:59 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やるとしたらそうっぽい</span></div>
           </div>
         </div>
@@ -852,7 +920,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192989489856513"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192753987944448">07-Jun-18 07:59 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454192989489856513"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454192753987944448">06/07/2018 7:59 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でも修正すると既存コードが動かなくなるから厳しそう・・・</span></div>
           </div>
         </div>
@@ -860,7 +928,7 @@
       <div id="chatlog__message-container-454192989489856513" class="chatlog__message-container" data-message-id="454192989489856513">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 08:00 AM">08:00</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 8:00 AM">08:00</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">elapsedTime</code> じゃなくて <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">rate</code> でほしい・・・</span></div>
@@ -873,7 +941,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193175691657217"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193175691657217">07-Jun-18 08:01 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193175691657217"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193175691657217">06/07/2018 8:01 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">修正&amp;古い方はDeprecatedでOverloadかな</span></div>
           </div>
         </div>
@@ -884,7 +952,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/269801719796334592/c7ac354c0870623258accfe97d7b8ffa.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="t.ae#5802" data-user-id="269801719796334592">t.ae</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193272156585984"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193272156585984">07-Jun-18 08:01 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="t.ae#5802" data-user-id="269801719796334592">t.ae</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193272156585984"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193272156585984">06/07/2018 8:01 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">オーバーロードじゃambiguousになりそうな・・・</span></div>
           </div>
         </div>
@@ -895,7 +963,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193309397549058"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193309397549058">07-Jun-18 08:02 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193309397549058"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193309397549058">06/07/2018 8:02 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CGFloatは型じゃなかったっけ</span></div>
           </div>
         </div>
@@ -906,7 +974,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193462590439425"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193462590439425">07-Jun-18 08:02 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193462590439425"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193462590439425">06/07/2018 8:02 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift では型だけど Obj-C では typealias じゃないっけ？</span></div>
           </div>
         </div>
@@ -917,7 +985,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193524896825354"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193524896825354">07-Jun-18 08:02 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193524896825354"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193524896825354">06/07/2018 8:02 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">public typealias TimeInterval = Double</code> TImeIntervalはエイリアス</span></div>
           </div>
         </div>
@@ -928,8 +996,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193636414980106"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193636414980106">07-Jun-18 08:03 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CGFloat は Obj-C では float か double の（環境によって変わる）エイリアスだった気が。</span> <span class="chatlog__edited-timestamp" title="07-Jun-18 08:03 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454193636414980106"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193636414980106">06/07/2018 8:03 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CGFloat は Obj-C では float か double の（環境によって変わる）エイリアスだった気が。</span> <span class="chatlog__edited-timestamp" title="06/07/2018 8:03 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -939,7 +1007,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454194192181231616"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193913205358594">07-Jun-18 08:04 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454194192181231616"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454193913205358594">06/07/2018 8:04 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-objc">#if defined(__LP64__) &amp;&amp; __LP64__ # define CGFLOAT_TYPE double # define CGFLOAT_IS_DOUBLE 1 # define CGFLOAT_MIN DBL_MIN # define CGFLOAT_MAX DBL_MAX #else # define CGFLOAT_TYPE float # define CGFLOAT_IS_DOUBLE 0 # define CGFLOAT_MIN FLT_MIN # define CGFLOAT_MAX FLT_MAX #endif /* Definition of the `CGFloat' type and `CGFLOAT_DEFINED'. */ typedef CGFLOAT_TYPE CGFloat;</code></span></div>
           </div>
         </div>
@@ -947,7 +1015,7 @@
       <div id="chatlog__message-container-454193922860908544" class="chatlog__message-container" data-message-id="454193922860908544">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 08:04 AM">08:04</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 8:04 AM">08:04</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうですね。</span></div>
@@ -957,7 +1025,7 @@
       <div id="chatlog__message-container-454194192181231616" class="chatlog__message-container" data-message-id="454194192181231616">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 08:05 AM">08:05</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 8:05 AM">08:05</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ObjCにおいては、 TimeInterval != CGFloat の場合に限ってオーバーロードすれば良さそう。</span></div>
@@ -970,7 +1038,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454194717303767040"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454194717303767040">07-Jun-18 08:07 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454194717303767040"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454194717303767040">06/07/2018 8:07 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかも Obj-C では float だとしても暗黙変換される？</span></div>
           </div>
         </div>
@@ -981,7 +1049,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454194883645800468"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454194834463522827">07-Jun-18 08:08 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454194883645800468"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454194834463522827">06/07/2018 8:08 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ObjCでのfloatからdoubleへの変換はデフォルトで暗黙 コンパイラの設定によっては警告が出る</span></div>
           </div>
         </div>
@@ -989,7 +1057,7 @@
       <div id="chatlog__message-container-454194883645800468" class="chatlog__message-container" data-message-id="454194883645800468">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="07-Jun-18 08:08 AM">08:08</div>
+            <div class="chatlog__short-timestamp" title="06/07/2018 8:08 AM">08:08</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">エラーにすることもできるかな・・・？</span></div>
@@ -1002,7 +1070,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454195427898818561"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454195427898818561">07-Jun-18 08:10 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon#9603" data-user-id="293572563010060288">tarunon</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454195427898818561"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454195427898818561">06/07/2018 8:10 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CGFloatとObjectMapperとIUOの組み合わせでクラッシュを引いたのを思い出した</span></div>
           </div>
         </div>
@@ -1013,7 +1081,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454198165076180992"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454198165076180992">07-Jun-18 08:21 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=454198165076180992"><span class="chatlog__timestamp"><a href="#chatlog__message-container-454198165076180992">06/07/2018 8:21 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">結局 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">rate</code> がほしかったので、↓になった。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension SCNAction { class func customActionWithRate(duration: TimeInterval, action block: @escaping (SCNNode, CGFloat) -&gt; Void) -&gt; SCNAction { return customAction(duration: duration) { node, elapsedTime in block(node, elapsedTime / CGFloat(duration)) } } }</code></span></div>
           </div>
         </div>
@@ -1024,7 +1092,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=463279596666748930"><span class="chatlog__timestamp"><a href="#chatlog__message-container-463279150418100235">02-Jul-18 09:45 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=463279596666748930"><span class="chatlog__timestamp"><a href="#chatlog__message-container-463279150418100235">07/02/2018 9:45 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> let plane = SCNPlane() self.plane = plane let planeNode = SCNNode(geometry: plane) scene.rootNode.addChildNode(planeNode) planeNode.scale = SCNVector3(4, 4, 4) let surfaceShader = """ auto diffuse = _surface.diffuse; diffuse = vec4(diffuse.r, 0, 0, 1); _surface.diffuse = diffuse; """ plane.firstMaterial!.shaderModifiers = [ SCNShaderModifierEntryPoint.surface: surfaceShader]</code></span></div>
           </div>
         </div>
@@ -1032,7 +1100,7 @@
       <div id="chatlog__message-container-463279280961355788" class="chatlog__message-container" data-message-id="463279280961355788">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="02-Jul-18 09:46 AM">09:46</div>
+            <div class="chatlog__short-timestamp" title="07/02/2018 9:46 AM">09:46</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SceneKitのマテリアルに対して shader modifier という仕組みで サブシェーダーが書ける。面白い。</span></div>
@@ -1045,7 +1113,7 @@
       <div id="chatlog__message-container-463279596666748930" class="chatlog__message-container" data-message-id="463279596666748930">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="02-Jul-18 09:47 AM">09:47</div>
+            <div class="chatlog__short-timestamp" title="07/02/2018 9:47 AM">09:47</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でも、このシェーダーがコンパイルエラーになってる時にそれを拾う方法がわからなくて死にそう</span></div>
@@ -1058,7 +1126,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=491511232247889920"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491511232247889920">18-Sep-18 07:30 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=491511232247889920"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491511232247889920">09/18/2018 7:30 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">iOS11で正しく表示されてたモデルがiOS12で真っ白になってしまった・・・</span></div>
           </div>
         </div>
@@ -1069,7 +1137,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=491526437971689481"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491526437971689481">18-Sep-18 08:30 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=491526437971689481"><span class="chatlog__timestamp"><a href="#chatlog__message-container-491526437971689481">09/18/2018 8:30 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">解決した。SCNSceneに.scnファイルを渡した時に、従来は即座にテクスチャがロードされていたが、最新では描画時にlazyにロードされるようになったっぽい。 従来挙動を前提にテクスチャファイルを削除していたので真っ白になったっぽい。</span></div>
           </div>
         </div>
@@ -1080,7 +1148,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963314666930176"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963314666930176">11-Dec-18 08:15 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963314666930176"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963314666930176">12/11/2018 8:15 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">USDZ、quicklookだとちゃんとテクスチャ貼られるけどMDLAssetで読んだらテクスチャ剥がれちゃった。</span></div>
           </div>
         </div>
@@ -1091,7 +1159,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963721568813087"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963721568813087">11-Dec-18 08:17 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963721568813087"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963721568813087">12/11/2018 8:17 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Model IOというのがあるんですね</span></div>
           </div>
         </div>
@@ -1102,7 +1170,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963859159023636"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963859159023636">11-Dec-18 08:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963859159023636"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963859159023636">12/11/2018 8:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SceneKit.ModelIO、これ使うとusdzもscenekitで読めるようになります！便利</span></div>
           </div>
         </div>
@@ -1113,7 +1181,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963909549391873"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963870101831680">11-Dec-18 08:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521963909549391873"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521963870101831680">12/11/2018 8:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">SCNScene.init(url:options:)</code>しか知らなかったです</span></div>
           </div>
         </div>
@@ -1121,7 +1189,7 @@
       <div id="chatlog__message-container-521963909549391873" class="chatlog__message-container" data-message-id="521963909549391873">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Dec-18 08:18 AM">08:18</div>
+            <div class="chatlog__short-timestamp" title="12/11/2018 8:18 AM">08:18</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。</span></div>
@@ -1134,7 +1202,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521965360614998028"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521964501403172865">11-Dec-18 08:20 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=521965360614998028"><span class="chatlog__timestamp"><a href="#chatlog__message-container-521964501403172865">12/11/2018 8:20 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑の件と全然関係ないけど、usdzってバンドルするとusdzのままipaに含まれるのかきになる</span></div>
           </div>
         </div>
@@ -1142,7 +1210,7 @@
       <div id="chatlog__message-container-521965360614998028" class="chatlog__message-container" data-message-id="521965360614998028">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Dec-18 08:23 AM">08:23</div>
+            <div class="chatlog__short-timestamp" title="12/11/2018 8:23 AM">08:23</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そのままだった</span></div>
@@ -1155,7 +1223,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533170640732291073"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533170640732291073">11-Jan-19 06:29 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533170640732291073"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533170640732291073">01/11/2019 6:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Fileで3Dオブジェクト選択すると綺麗に影が落ちてるんですけど、こういうのってどうやって作ってるんですかね… directionとかspotだとモデル本体にも光当たってしまって綺麗に影が落ちないなぁと</span></div>
           </div>
         </div>
@@ -1166,7 +1234,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533171214785708032"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533171062758834196">11-Jan-19 06:31 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533171214785708032"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533171062758834196">01/11/2019 6:31 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://developer.apple.com/documentation/scenekit/scnlight/lighttype">https://developer.apple.com/documentation/scenekit/scnlight/lighttype</a></span></div>
           </div>
         </div>
@@ -1174,7 +1242,7 @@
       <div id="chatlog__message-container-533171080886747146" class="chatlog__message-container" data-message-id="533171080886747146">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 06:31 AM">06:31</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 6:31 AM">06:31</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">デフォルトはomniライトじゃないですかね？</span></div>
@@ -1184,7 +1252,7 @@
       <div id="chatlog__message-container-533171214785708032" class="chatlog__message-container" data-message-id="533171214785708032">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 06:32 AM">06:32</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 6:32 AM">06:32</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Fileって何のことです？</span></div>
@@ -1197,7 +1265,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533185446684000261"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533185446684000261">11-Jan-19 07:28 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533185446684000261"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533185446684000261">01/11/2019 7:28 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">FileはiOSのFileアプリの事です、iOS12からusdzとかをプレビューできるようになりました</span></div>
           </div>
         </div>
@@ -1208,7 +1276,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533185789719478272"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533185789719478272">11-Jan-19 07:29 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533185789719478272"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533185789719478272">01/11/2019 7:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど！</span></div>
           </div>
         </div>
@@ -1219,7 +1287,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533185793167065099"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533185793167065099">11-Jan-19 07:29 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533185793167065099"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533185793167065099">01/11/2019 7:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、影というのはモデルに対しての陰ではなくて地面に現れる影です</span></div>
           </div>
         </div>
@@ -1230,7 +1298,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533186920281276437"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533186841717768192">11-Jan-19 07:34 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533186920281276437"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533186841717768192">01/11/2019 7:34 AM</a></span></a></div>
             <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/454191411328450561/533186841713573908/image0.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/454191411328450561/533186841713573908/image0.png" alt="Image attachment" title="Image: image0.png (346.43 KB)" loading="lazy"> </a></div>
           </div>
         </div>
@@ -1238,7 +1306,7 @@
       <div id="chatlog__message-container-533186920281276437" class="chatlog__message-container" data-message-id="533186920281276437">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 07:34 AM">07:34</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 7:34 AM">07:34</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ギターの下に出てる　まきびしみたいな形の影の事ですか？</span></div>
@@ -1251,7 +1319,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187311223963688"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187280928505871">11-Jan-19 07:35 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187311223963688"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187280928505871">01/11/2019 7:35 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ですです！</span></div>
           </div>
         </div>
@@ -1259,7 +1327,7 @@
       <div id="chatlog__message-container-533187311223963688" class="chatlog__message-container" data-message-id="533187311223963688">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 07:36 AM">07:36</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 7:36 AM">07:36</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">普通にSceneに配置すると、影が出ないんですよね</span></div>
@@ -1272,7 +1340,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187349832794127"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187349832794127">11-Jan-19 07:36 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187349832794127"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187349832794127">01/11/2019 7:36 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これモデルに影がついた半透明ポリゴンが含まれているのかと思ってました</span></div>
           </div>
         </div>
@@ -1283,7 +1351,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187470074970112"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187470074970112">11-Jan-19 07:36 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187470074970112"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187470074970112">01/11/2019 7:36 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、それなんですけど自作のモデルでも発生するので動的に焼いているみたいです</span></div>
           </div>
         </div>
@@ -1294,7 +1362,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187496637628416"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187496637628416">11-Jan-19 07:36 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187496637628416"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187496637628416">01/11/2019 7:36 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうだったのか・・・</span></div>
           </div>
         </div>
@@ -1305,8 +1373,8 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187548139225099"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187548139225099">11-Jan-19 07:36 AM</a></span></a></div>
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ARKitのExampleのマグとかはモデル自体に半透明のポリゴンが含まれているみたいです</span> <span class="chatlog__edited-timestamp" title="11-Jan-19 07:37 AM">(edited)</span></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533187548139225099"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187548139225099">01/11/2019 7:36 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ARKitのExampleのマグとかはモデル自体に半透明のポリゴンが含まれているみたいです</span> <span class="chatlog__edited-timestamp" title="01/11/2019 7:37 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1316,7 +1384,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188268607668224"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187617328726016">11-Jan-19 07:37 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188268607668224"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533187617328726016">01/11/2019 7:37 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">濃淡のあるソフトシャドウって簡単に出せるのかなあ</span></div>
           </div>
         </div>
@@ -1324,7 +1392,7 @@
       <div id="chatlog__message-container-533187782546423829" class="chatlog__message-container" data-message-id="533187782546423829">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 07:37 AM">07:37</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 7:37 AM">07:37</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://stackoverflow.com/questions/44568165/soft-shadow-shadow-blur-in-scenekit">https://stackoverflow.com/questions/44568165/soft-shadow-shadow-blur-in-scenekit</a></span></div>
@@ -1350,7 +1418,7 @@
       <div id="chatlog__message-container-533187981012369419" class="chatlog__message-container" data-message-id="533187981012369419">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 07:38 AM">07:38</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 7:38 AM">07:38</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">一応設定すればソフトシャドウ自体は得られるみたいですね。</span></div>
@@ -1360,7 +1428,7 @@
       <div id="chatlog__message-container-533188146276466698" class="chatlog__message-container" data-message-id="533188146276466698">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 07:39 AM">07:39</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 7:39 AM">07:39</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://developer.apple.com/documentation/scenekit/scnlight/1523300-shadowsamplecount">https://developer.apple.com/documentation/scenekit/scnlight/1523300-shadowsamplecount</a></span></div>
@@ -1370,7 +1438,7 @@
       <div id="chatlog__message-container-533188268607668224" class="chatlog__message-container" data-message-id="533188268607668224">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 07:39 AM">07:39</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 7:39 AM">07:39</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">SceneKit produces soft-edged shadows by rendering the silhouettes of scene geometry into a 2D shadow map and then using several weighted samples from the shadow map to determine the strength of the shadow at each pixel in the rendered scene. </code></span></div>
@@ -1383,7 +1451,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188283396522024"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188283396522024">11-Jan-19 07:39 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188283396522024"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188283396522024">01/11/2019 7:39 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このパラメタはやってなかったのでちょっと帰ったら試してみよう、、 昨晩色々試したんですけど、モデル自体に結構光が当たってテカる感じになっちゃったんですよね</span></div>
           </div>
         </div>
@@ -1394,7 +1462,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188390074581003"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188390074581003">11-Jan-19 07:40 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188390074581003"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188390074581003">01/11/2019 7:40 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この標準のビューワーのソースコードが見たいですね</span></div>
           </div>
         </div>
@@ -1405,7 +1473,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188474426228746"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188474426228746">11-Jan-19 07:40 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188474426228746"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188474426228746">01/11/2019 7:40 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ですね、Sceneのダンプが出来るとかなり捗りそう</span></div>
           </div>
         </div>
@@ -1416,7 +1484,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188626402508821"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188552826028033">11-Jan-19 07:40 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533188626402508821"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533188552826028033">01/11/2019 7:40 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あー</span></div>
           </div>
         </div>
@@ -1424,7 +1492,7 @@
       <div id="chatlog__message-container-533188626402508821" class="chatlog__message-container" data-message-id="533188626402508821">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="11-Jan-19 07:41 AM">07:41</div>
+            <div class="chatlog__short-timestamp" title="01/11/2019 7:41 AM">07:41</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Safariデバッガーみたいに、SceneKitインスペクタが別プロセスでもアタッチできたりしたら、良いのに。</span></div>
@@ -1437,7 +1505,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533473667162701835"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533473635193716736">12-Jan-19 02:33 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533473667162701835"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533473635193716736">01/12/2019 2:33 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://developer.apple.com/videos/play/wwdc2018/603/?time=190">https://developer.apple.com/videos/play/wwdc2018/603/?time=190</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1461,7 +1529,7 @@
       <div id="chatlog__message-container-533473667162701835" class="chatlog__message-container" data-message-id="533473667162701835">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Jan-19 02:33 AM">02:33</div>
+            <div class="chatlog__short-timestamp" title="01/12/2019 2:33 AM">02:33</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Contact Shadowというみたいですね</span></div>
@@ -1474,7 +1542,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533473799467827207"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533473799467827207">12-Jan-19 02:34 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=533473799467827207"><span class="chatlog__timestamp"><a href="#chatlog__message-container-533473799467827207">01/12/2019 2:34 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お</span></div>
           </div>
         </div>
@@ -1485,7 +1553,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=543884237669924879"><span class="chatlog__timestamp"><a href="#chatlog__message-container-543884013857669120">09-Feb-19 08:00 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=543884237669924879"><span class="chatlog__timestamp"><a href="#chatlog__message-container-543884013857669120">02/09/2019 8:00 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SceneKitのAmbientOcclutionをtexture bakingするとtextureめちゃくちゃになっちゃう…</span></div>
           </div>
         </div>
@@ -1493,7 +1561,7 @@
       <div id="chatlog__message-container-543884075266473994" class="chatlog__message-container" data-message-id="543884075266473994">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="09-Feb-19 08:01 PM">20:01</div>
+            <div class="chatlog__short-timestamp" title="02/09/2019 8:01 PM">20:01</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/454191411328450561/543884074624876579/2019-02-10_5.00.02.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/454191411328450561/543884074624876579/2019-02-10_5.00.02.png" alt="Image attachment" title="Image: 2019-02-10_5.00.02.png (2.1 MB)" loading="lazy"> </a></div>
@@ -1503,10 +1571,10 @@
       <div id="chatlog__message-container-543884237669924879" class="chatlog__message-container" data-message-id="543884237669924879">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="09-Feb-19 08:01 PM">20:01</div>
+            <div class="chatlog__short-timestamp" title="02/09/2019 8:01 PM">20:01</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Xcode9.4.1/10.1だと⤴︎の現象 Xcode10.2Betaだと「An error occurred while baking ambient occlusion maps.」でそもそも実行できなかった</span> <span class="chatlog__edited-timestamp" title="09-Feb-19 08:52 PM">(edited)</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Xcode9.4.1/10.1だと⤴︎の現象 Xcode10.2Betaだと「An error occurred while baking ambient occlusion maps.」でそもそも実行できなかった</span> <span class="chatlog__edited-timestamp" title="02/09/2019 8:52 PM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1516,7 +1584,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=543926542766702622"><span class="chatlog__timestamp"><a href="#chatlog__message-container-543926542766702622">09-Feb-19 10:49 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=543926542766702622"><span class="chatlog__timestamp"><a href="#chatlog__message-container-543926542766702622">02/09/2019 10:49 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">テクスチャを垂直方向に反転させる必要があるみたい</span></div>
           </div>
         </div>
@@ -1527,7 +1595,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=544099837826564126"><span class="chatlog__timestamp"><a href="#chatlog__message-container-544099837826564126">10-Feb-19 10:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=544099837826564126"><span class="chatlog__timestamp"><a href="#chatlog__message-container-544099837826564126">02/10/2019 10:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">MDLAssetの<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">generateAmbientOcclusionTexture</code>でAOのテクスチャをランタイムで生成できるのだけど、iOSで実行しても <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">2019-02-10 19:06:15.462995+0900 xxxxx[1179:222116] IIOImageWriteSession:115: cannot create: '/tmp/originalAOTexture.png.sb-7dc5bb5d-hKjFB0' error = 1 (Operation not permitted)</code> と言われて生成できない…。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">/tmp/</code>にアプリから書き込め無いような</span></div>
           </div>
         </div>
@@ -1538,7 +1606,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=544408128611942400"><span class="chatlog__timestamp"><a href="#chatlog__message-container-544408128611942400">11-Feb-19 06:43 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=544408128611942400"><span class="chatlog__timestamp"><a href="#chatlog__message-container-544408128611942400">02/11/2019 6:43 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑TSI出してみた</span></div>
           </div>
         </div>
@@ -1549,7 +1617,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=557424588989005824"><span class="chatlog__timestamp"><a href="#chatlog__message-container-557424535037804554">19-Mar-19 04:46 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=557424588989005824"><span class="chatlog__timestamp"><a href="#chatlog__message-container-557424535037804554">03/19/2019 4:46 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ランタイムでAO焼く実装のサンプルあげました <a href="https://github.com/noppefoxwolf/SceneKit_runtimeAO_Example">https://github.com/noppefoxwolf/SceneKit_runtimeAO_Example</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1573,7 +1641,7 @@
       <div id="chatlog__message-container-557424588989005824" class="chatlog__message-container" data-message-id="557424588989005824">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Mar-19 04:46 AM">04:46</div>
+            <div class="chatlog__short-timestamp" title="03/19/2019 4:46 AM">04:46</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">めっちゃ遅い、CPUでやってる気がする</span></div>
@@ -1586,7 +1654,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=557433055690883072"><span class="chatlog__timestamp"><a href="#chatlog__message-container-557433055690883072">19-Mar-19 05:19 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=557433055690883072"><span class="chatlog__timestamp"><a href="#chatlog__message-container-557433055690883072">03/19/2019 5:19 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">MDL系のAPIもこういうノードツリー持ってるんですね</span></div>
           </div>
         </div>
@@ -1597,7 +1665,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566269707603410944"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566269707603410944">12-Apr-19 02:33 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566269707603410944"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566269707603410944">04/12/2019 2:33 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SceneKit、macOSもiOSも新しく作っただけのプロジェクトを実行するだけでメモリリークがいっぱい検出されるんだけどしょうがない？ １つアプリを作ってどうしてもメモリ消費ががちょっとずつ増えていくのが解決しなくてもしやこれは最初からなのではと思ってやってみたら最初からだった。</span></div>
           </div>
         </div>
@@ -1608,7 +1676,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566293182543822848"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566292874564468736">12-Apr-19 04:05 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566293182543822848"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566292874564468736">04/12/2019 4:05 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">本当ですね。iOSのゲームアプリSceneKitテンプレートで、Leaksの2サイクル目で144件。</span></div>
           </div>
         </div>
@@ -1616,7 +1684,7 @@
       <div id="chatlog__message-container-566292938410426371" class="chatlog__message-container" data-message-id="566292938410426371">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Apr-19 04:05 PM">16:05</div>
+            <div class="chatlog__short-timestamp" title="04/12/2019 4:05 PM">16:05</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">飛行機のモデルを出すところをコメントアウトしてほぼ無のテンプレートにしても22件。</span></div>
@@ -1626,7 +1694,7 @@
       <div id="chatlog__message-container-566293182543822848" class="chatlog__message-container" data-message-id="566293182543822848">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Apr-19 04:06 PM">16:06</div>
+            <div class="chatlog__short-timestamp" title="04/12/2019 4:06 PM">16:06</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんで自分気づいてなかったんだろうと思って手元のをLeaksかけてみたら普通に別のリークでてきたので単に今まで見てなかったかも・・・</span></div>
@@ -1639,7 +1707,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566302250734190602"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566301912484282378">12-Apr-19 04:41 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566302250734190602"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566301912484282378">04/12/2019 4:41 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">誤検知ということもおそらくないので、これはしょうがないとしてひとまずやるしかなさそう<img loading="lazy" class="chatlog__emoji " alt="😓" title="sweat" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f613.svg"> Node</span></div>
           </div>
         </div>
@@ -1647,7 +1715,7 @@
       <div id="chatlog__message-container-566302102465544202" class="chatlog__message-container" data-message-id="566302102465544202">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Apr-19 04:42 PM">16:42</div>
+            <div class="chatlog__short-timestamp" title="04/12/2019 4:42 PM">16:42</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">NodeにCALayerでもなんでも貼れて思ってたよりもだいぶ便利だな、と再評価してたのだけど。。。</span></div>
@@ -1657,7 +1725,7 @@
       <div id="chatlog__message-container-566302250734190602" class="chatlog__message-container" data-message-id="566302250734190602">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Apr-19 04:42 PM">16:42</div>
+            <div class="chatlog__short-timestamp" title="04/12/2019 4:42 PM">16:42</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">使いやすいし、APIはよくできてると、思う。</span></div>
@@ -1670,7 +1738,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566303043398926341"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566302870433955863">12-Apr-19 04:45 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566303043398926341"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566302870433955863">04/12/2019 4:45 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SCNMaterialの.contentsですか？＞CALayer</span></div>
           </div>
         </div>
@@ -1678,7 +1746,7 @@
       <div id="chatlog__message-container-566303008783204356" class="chatlog__message-container" data-message-id="566303008783204356">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Apr-19 04:45 PM">16:45</div>
+            <div class="chatlog__short-timestamp" title="04/12/2019 4:45 PM">16:45</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://developer.apple.com/documentation/scenekit/scnmaterialproperty/1395372-contents">https://developer.apple.com/documentation/scenekit/scnmaterialproperty/1395372-contents</a></span></div>
@@ -1688,7 +1756,7 @@
       <div id="chatlog__message-container-566303043398926341" class="chatlog__message-container" data-message-id="566303043398926341">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Apr-19 04:46 PM">16:46</div>
+            <div class="chatlog__short-timestamp" title="04/12/2019 4:46 PM">16:46</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、ほんとだ、CALayerは明確に許されているのか。</span></div>
@@ -1701,7 +1769,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566303975700430858"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566303826177556481">12-Apr-19 04:49 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566303975700430858"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566303826177556481">04/12/2019 4:49 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そう。なかなかおもしろいのができたの思うので今度公開しますね。</span></div>
           </div>
         </div>
@@ -1709,7 +1777,7 @@
       <div id="chatlog__message-container-566303975700430858" class="chatlog__message-container" data-message-id="566303975700430858">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="12-Apr-19 04:49 PM">16:49</div>
+            <div class="chatlog__short-timestamp" title="04/12/2019 4:49 PM">16:49</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ずっと動かしてるとメモリをすごい使うことになるけど。。。</span></div>
@@ -1722,7 +1790,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566304103714783243"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566304103714783243">12-Apr-19 04:50 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=566304103714783243"><span class="chatlog__timestamp"><a href="#chatlog__message-container-566304103714783243">04/12/2019 4:50 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">お〜気になります</span></div>
           </div>
         </div>
@@ -1733,7 +1801,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567033138455379969"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567033138455379969">14-Apr-19 05:07 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567033138455379969"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567033138455379969">04/14/2019 5:07 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="omochimetaru#1122">@omochimetaru</span> <a href="https://github.com/folio-sec/Slideshow">https://github.com/folio-sec/Slideshow</a> とりあえずコードを公開しました。</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1760,7 +1828,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567059763230408726"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567059763230408726">14-Apr-19 06:53 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567059763230408726"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567059763230408726">04/14/2019 6:53 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ブログに書きました。 <a href="https://blog.kishikawakatsumi.com/entry/2019/04/15/035156">https://blog.kishikawakatsumi.com/entry/2019/04/15/035156</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -1790,7 +1858,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567141733788549131"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567141733788549131">15-Apr-19 12:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567141733788549131"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567141733788549131">04/15/2019 12:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おもしろいですね！</span></div>
           </div>
         </div>
@@ -1801,7 +1869,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567144878497071104"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567144878497071104">15-Apr-19 12:31 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567144878497071104"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567144878497071104">04/15/2019 12:31 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CALayer</code> を貼り付けてるのはここですね。 <a href="https://github.com/folio-sec/Slideshow/blob/master/Slideshow/SlideshowView.swift#L115">https://github.com/folio-sec/Slideshow/blob/master/Slideshow/SlideshowView.swift#L115</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -1828,13 +1896,13 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567146801522802698"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567146801522802698">15-Apr-19 12:38 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567146801522802698"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567146801522802698">04/15/2019 12:38 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
                   <div class="chatlog__markdown-quote-content">事実上、任意のAppKitもしくはUIKitのUIを3D空間に表示できます。 </div>
                 </div> AppKit の UI ではなく直接 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CALayer</code> として組み立ててるのはなんでですか？パフォーマンス上の理由？ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">NSView</code> にして auto layout でレイアウトとかもできるわけですよね？ <a href="https://github.com/folio-sec/Slideshow/blob/master/Slideshow/PhotoLayer.swift">https://github.com/folio-sec/Slideshow/blob/master/Slideshow/PhotoLayer.swift</a>
-              </span> <span class="chatlog__edited-timestamp" title="15-Apr-19 12:39 AM">(edited)</span></div>
+              </span> <span class="chatlog__edited-timestamp" title="04/15/2019 12:39 AM">(edited)</span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
               <div class="chatlog__embed-content-container">
@@ -1860,7 +1928,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567151840639189042"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567151558379307028">15-Apr-19 12:57 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567151840639189042"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567151558379307028">04/15/2019 12:57 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">NSViewもおそらく貼れるようで、おっしゃる通りAutoLayoutが使えてAutoLayoutが使えると左上基準でレイアウトできて楽、なんですけどなんかうまくいかなかったので、うまくいったレイヤーでやってます。 どうせLayer backedにするので（そうしないと不便でやってられない。）パフォーマンスは変わらないのでは、と思っています。</span></div>
           </div>
         </div>
@@ -1868,7 +1936,7 @@
       <div id="chatlog__message-container-567151840639189042" class="chatlog__message-container" data-message-id="567151840639189042">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 12:58 AM">00:58</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 12:58 AM">00:58</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">特に明確な理由はなく手さぐりでSceneKitを触りつつ時間の制約もあったので、うまくいったやり方を採用した、となります。</span></div>
@@ -1881,7 +1949,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159254885203971"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159254885203971">15-Apr-19 01:28 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159254885203971"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159254885203971">04/15/2019 1:28 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。ちょっと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">UIView</code> + AutoLayout を SceneKit のテクスチャとして使ってやってみたいことがあるので、もし試して何か知見が得られたら報告します。やるにしても少し先になりそうですが・・・。</span></div>
           </div>
         </div>
@@ -1892,7 +1960,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159558057754665"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159332131569674">15-Apr-19 01:28 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159558057754665"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159332131569674">04/15/2019 1:28 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="koher#9336">@koher</span> <a href="https://developer.apple.com/documentation/scenekit/scnmaterialproperty/1395372-contents">https://developer.apple.com/documentation/scenekit/scnmaterialproperty/1395372-contents</a></span></div>
           </div>
         </div>
@@ -1900,7 +1968,7 @@
       <div id="chatlog__message-container-567159432509915155" class="chatlog__message-container" data-message-id="567159432509915155">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:29 AM">01:29</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:29 AM">01:29</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">マテリアルに晴れるオブジェクト一覧にUIView, NSViewは書いてないので、</span></div>
@@ -1910,7 +1978,7 @@
       <div id="chatlog__message-container-567159558057754665" class="chatlog__message-container" data-message-id="567159558057754665">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:29 AM">01:29</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:29 AM">01:29</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">動いたとしても将来壊れたりしそうです</span></div>
@@ -1923,7 +1991,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159560201306112"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159560201306112">15-Apr-19 01:29 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159560201306112"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159560201306112">04/15/2019 1:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">UIView</code> の layer を貼ってできない？</span></div>
           </div>
         </div>
@@ -1934,7 +2002,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159710357389322"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159637581758476">15-Apr-19 01:29 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567159710357389322"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159637581758476">04/15/2019 1:29 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
@@ -1947,7 +2015,7 @@
       <div id="chatlog__message-container-567159710357389322" class="chatlog__message-container" data-message-id="567159710357389322">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:30 AM">01:30</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:30 AM">01:30</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">UIViewのバッキングレイヤーは使えないって書いてあります</span></div>
@@ -1960,7 +2028,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567160583728660480"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159737423233027">15-Apr-19 01:30 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567160583728660480"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567159737423233027">04/15/2019 1:30 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうなのか・・・。</span></div>
           </div>
         </div>
@@ -1968,7 +2036,7 @@
       <div id="chatlog__message-container-567160583728660480" class="chatlog__message-container" data-message-id="567160583728660480">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:33 AM">01:33</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:33 AM">01:33</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">うーん、じゃあレイアウトのために UIKit 使ってるだけだし、画像として書き出してから貼るのが現実的かな・・・。</span></div>
@@ -1981,7 +2049,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567161398061432833"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567161093840044032">15-Apr-19 01:35 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567161398061432833"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567161093840044032">04/15/2019 1:35 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
@@ -1994,7 +2062,7 @@
       <div id="chatlog__message-container-567161205068922902" class="chatlog__message-container" data-message-id="567161205068922902">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:36 AM">01:36</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:36 AM">01:36</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">地図上に貼るピンを、UIViewで与えられるんですが、そのUIViewの見た目をテクスチャ化した上でポリゴンで描画してて</span></div>
@@ -2004,7 +2072,7 @@
       <div id="chatlog__message-container-567161398061432833" class="chatlog__message-container" data-message-id="567161398061432833">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:36 AM">01:36</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:36 AM">01:36</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">毎フレーム更新モードだとまあまあ重かったです。</span></div>
@@ -2017,7 +2085,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567161516391006227"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567161516391006227">15-Apr-19 01:37 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567161516391006227"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567161516391006227">04/15/2019 1:37 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今やりたいことは、静的なので画像生成は単発なので大丈夫かと。</span></div>
           </div>
         </div>
@@ -2028,7 +2096,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567161588449148949"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567161588449148949">15-Apr-19 01:37 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567161588449148949"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567161588449148949">04/15/2019 1:37 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それだと良さそう。</span></div>
           </div>
         </div>
@@ -2039,7 +2107,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567162622080712710"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567162622080712710">15-Apr-19 01:41 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567162622080712710"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567162622080712710">04/15/2019 1:41 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GoogleMap SDK が何やってるかわからないけど、毎フレーム画像の allocate してたりしないかな？さすがにそれはない？ view の変更がある度にレンダリングしてテクスチャ転送ってそんなに重いかな？動画をテクスチャにするのとかよりマシそうな気が。</span></div>
           </div>
         </div>
@@ -2050,7 +2118,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567163079104659459"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567162816423919636">15-Apr-19 01:42 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567163079104659459"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567162816423919636">04/15/2019 1:42 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">変更があるたびに　だと軽いです　そういうモードもあるんだけど、変更検知がまともに動いてないので手動で通知する必要があって大変。</span></div>
           </div>
         </div>
@@ -2058,7 +2126,7 @@
       <div id="chatlog__message-container-567162926083997703" class="chatlog__message-container" data-message-id="567162926083997703">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:42 AM">01:42</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:42 AM">01:42</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">動画をテクスチャにするのはビデオデコーダがGPU上でレンダリングしてる場合はかなり軽いと思いますよ、転送コストが無いので</span></div>
@@ -2068,7 +2136,7 @@
       <div id="chatlog__message-container-567163079104659459" class="chatlog__message-container" data-message-id="567163079104659459">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:43 AM">01:43</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:43 AM">01:43</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
@@ -2086,7 +2154,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567163490335326208"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567163490335326208">15-Apr-19 01:45 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567163490335326208"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567163490335326208">04/15/2019 1:45 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">GL で CPU で動画デコード + 転送やってた経験からそこまで重くならなさそうな気がするんだけどなぁ。「まあまあ重かった」の程度にもよるけど。</span></div>
           </div>
         </div>
@@ -2097,7 +2165,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567163724805439489"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567163724805439489">15-Apr-19 01:46 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567163724805439489"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567163724805439489">04/15/2019 1:46 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ビューだとなんかうまくいかなかったのは対応してないってことなのかな。 なんか表示前のならいける、と都合よく解釈してた。</span></div>
           </div>
         </div>
@@ -2108,7 +2176,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567164072747860008"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567163736167546891">15-Apr-19 01:46 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567164072747860008"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567163736167546891">04/15/2019 1:46 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">60x80ptぐらいでパーツが10個ぐらいのピンが50枚ぐらいになるとiPhoneSEでフレームレートがガタつきはじめる。</span></div>
           </div>
         </div>
@@ -2116,7 +2184,7 @@
       <div id="chatlog__message-container-567164072747860008" class="chatlog__message-container" data-message-id="567164072747860008">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:47 AM">01:47</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:47 AM">01:47</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
@@ -2134,7 +2202,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567164239723364352"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567164239723364352">15-Apr-19 01:48 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567164239723364352"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567164239723364352">04/15/2019 1:48 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それくらいの分量だと重くなってもおかしくなさそう。</span></div>
           </div>
         </div>
@@ -2145,7 +2213,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567165248734363660"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567165248734363660">15-Apr-19 01:52 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567165248734363660"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567165248734363660">04/15/2019 1:52 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ひとつひとつがビューだとすると500個以上のビューになるからまずそれがパフォーマンスに影響してそう。</span></div>
           </div>
         </div>
@@ -2156,7 +2224,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567166263688953856"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567166131450806295">15-Apr-19 01:55 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567166263688953856"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567166131450806295">04/15/2019 1:55 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">毎フレーム転送じゃなければ大丈夫ですよ。</span></div>
           </div>
         </div>
@@ -2164,10 +2232,10 @@
       <div id="chatlog__message-container-567166263688953856" class="chatlog__message-container" data-message-id="567166263688953856">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="15-Apr-19 01:56 AM">01:56</div>
+            <div class="chatlog__short-timestamp" title="04/15/2019 1:56 AM">01:56</div>
           </div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まあ、そもそも50個もビューが出てるのはナンセンス（重なって見えないし）ですね。</span> <span class="chatlog__edited-timestamp" title="15-Apr-19 01:56 AM">(edited)</span></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まあ、そもそも50個もビューが出てるのはナンセンス（重なって見えないし）ですね。</span> <span class="chatlog__edited-timestamp" title="04/15/2019 1:56 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -2177,7 +2245,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567171945343352843"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567171945343352843">15-Apr-19 02:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567171945343352843"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567171945343352843">04/15/2019 2:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">プロジェクト開いてみました。こうやってDebug/Release違いのスキーム作るの良いですね。</span></div>
           </div>
         </div>
@@ -2188,7 +2256,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567204586457137174"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567204586457137174">15-Apr-19 04:28 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567204586457137174"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567204586457137174">04/15/2019 4:28 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">アプリだと便利なんですよね。</span></div>
           </div>
         </div>
@@ -2199,7 +2267,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567220657717248029"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567220657717248029">15-Apr-19 05:32 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=567220657717248029"><span class="chatlog__timestamp"><a href="#chatlog__message-container-567220657717248029">04/15/2019 5:32 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちょっとずつメモリ消費が増えていくの、リークのせいもあるっぽいけど心配するほどではないっぽい。どっちかというとレンダリング結果のキャッシュ？が一番多いんだと思う。 スライドショーのアプリ、実際はもう少しコードがあるんだけど、それを金曜からずっと動かしていてもちゃんと動いていたからリークによるメモリの増加はまあ誤差といえば誤差の範囲っぽい。気になるけど。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -2213,7 +2281,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=575961503677808640"><span class="chatlog__timestamp"><a href="#chatlog__message-container-575961503677808640">09-May-19 08:25 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=575961503677808640"><span class="chatlog__timestamp"><a href="#chatlog__message-container-575961503677808640">05/09/2019 8:25 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Xcode の Scene Editor で z-fighting を解決する方法がわかる方いませんか？ floor の上に重ねて plane を置きたいんですが・・・。</span></div>
           </div>
         </div>
@@ -2224,7 +2292,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=576183323479769109"><span class="chatlog__timestamp"><a href="#chatlog__message-container-576182795572084736">09-May-19 11:04 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=576183323479769109"><span class="chatlog__timestamp"><a href="#chatlog__message-container-576182795572084736">05/09/2019 11:04 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">昨日名前が思い出せなかったんですが、↓のpolygon offsetのようなものを想定しています。 <a href="https://sites.google.com/site/threejstuts/home/polygon_offset">https://sites.google.com/site/threejstuts/home/polygon_offset</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
@@ -2245,7 +2313,7 @@
       <div id="chatlog__message-container-576183323479769109" class="chatlog__message-container" data-message-id="576183323479769109">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="09-May-19 11:06 PM">23:06</div>
+            <div class="chatlog__short-timestamp" title="05/09/2019 11:06 PM">23:06</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">scene editor に限らず SceneKit と polygon offset で検索しても全然情報が出てこない…。</span></div>
@@ -2258,7 +2326,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=576240930412298253"><span class="chatlog__timestamp"><a href="#chatlog__message-container-576240837097291786">10-May-19 02:55 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=576240930412298253"><span class="chatlog__timestamp"><a href="#chatlog__message-container-576240837097291786">05/10/2019 2:55 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">DirectXやMETALだと depth bias っていうらしいですよ <a href="https://docs.microsoft.com/ja-jp/windows/desktop/direct3d9/depth-bias">https://docs.microsoft.com/ja-jp/windows/desktop/direct3d9/depth-bias</a>
                 <a href="https://stackoverflow.com/questions/35992450/equivalent-for-gl-polygon-offset-fill-in-metal">https://stackoverflow.com/questions/35992450/equivalent-for-gl-polygon-offset-fill-in-metal</a></span></div>
             <div class="chatlog__embed">
@@ -2299,7 +2367,7 @@
       <div id="chatlog__message-container-576240930412298253" class="chatlog__message-container" data-message-id="576240930412298253">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="10-May-19 02:55 AM">02:55</div>
+            <div class="chatlog__short-timestamp" title="05/10/2019 2:55 AM">02:55</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SceneKitにその概念が導入されてるかはわからないけど。</span></div>
@@ -2312,7 +2380,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=576242846403919893"><span class="chatlog__timestamp"><a href="#chatlog__message-container-576242846403919893">10-May-19 03:03 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=576242846403919893"><span class="chatlog__timestamp"><a href="#chatlog__message-container-576242846403919893">05/10/2019 3:03 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そんな呼び方があるのか。</span></div>
           </div>
         </div>
@@ -2323,7 +2391,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=654356393557491712"><span class="chatlog__timestamp"><a href="#chatlog__message-container-654356393557491712">11-Dec-19 04:18 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=654356393557491712"><span class="chatlog__timestamp"><a href="#chatlog__message-container-654356393557491712">12/11/2019 4:18 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SCNTechniqueに対してCABasicAnimation使ったことある方いらっしゃいますか？ 試行錯誤しているのですが、上手く動かず… 再現projはこんな感じです <a href="https://github.com/noppefoxwolf/SCNTechnique-Animation-Demo">https://github.com/noppefoxwolf/SCNTechnique-Animation-Demo</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -2350,7 +2418,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=654379978934452244"><span class="chatlog__timestamp"><a href="#chatlog__message-container-654379978934452244">11-Dec-19 05:52 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/454191411328450561?category=開発環境, ライブラリ&amp;channel=scenekit&amp;message_id=654379978934452244"><span class="chatlog__timestamp"><a href="#chatlog__message-container-654379978934452244">12/11/2019 5:52 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんかアニメーション中に同じsymbolを適当な値でsetObjectすると、そのフレームだけ正しいアニメーションの値で描画される。</span></div>
           </div>
         </div>

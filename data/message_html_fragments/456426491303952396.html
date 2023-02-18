@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/391942268954738688/e1a5899dcc9b06efc49f2edfa202245c.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=456426491303952396"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-456426251918245899">13-Jun-18 11:54 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="noppe#8476" data-user-id="391942268954738688">noppe</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=456426491303952396"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-456426251918245899">06/13/2018 11:54 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift/blob/master/docs/ABI/TypeMetadata.rst#common-metadata-layout">https://github.com/apple/swift/blob/master/docs/ABI/TypeMetadata.rst#common-metadata-layout</a> Common Metadata Layoutのkindはclass以外はTypeのポインタから-1した箇所から9byte目を参照すればいいのでしょうか…？</span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -27,7 +27,7 @@
   <div id="chatlog__message-container-456426491303952396" class="chatlog__message-container" data-message-id="456426491303952396">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="13-Jun-18 11:55 AM">11:55</div>
+        <div class="chatlog__short-timestamp" title="06/13/2018 11:55 AM">11:55</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">enum Kind {} func dumpMemory(_ p: UnsafeRawPointer, _ size: Int) { let addr = unsafeBitCast(p, to: Int64.self) let p = p.bindMemory(to: UInt8.self, capacity: size) for i in 0..&lt;size { if i % 8 == 0 { if i != 0 { print() } print(String(format: "[0x%016lx](\(i/8))", addr + Int64(i)), terminator: "") } print(String(format: " %02x", p[i]), terminator: "") } print() } var type: Any.Type = Kind.self let base: UnsafeMutablePointer = unsafeBitCast(type, to: UnsafeMutablePointer&lt;Int64&gt;.self) let metadataPointer = base.advanced(by: -1) let p = UnsafeMutableRawPointer(metadataPointer) dumpMemory(p, 16)</code> struct: 01 enum: 02 protocol: 0c なのでそれっぽい値は出ているのですが、検証として正しいのか…</span></div>

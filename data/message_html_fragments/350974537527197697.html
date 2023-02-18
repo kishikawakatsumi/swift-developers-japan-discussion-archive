@@ -3,8 +3,8 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=350974806096740354"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-350974312372633601">26-Aug-17 12:06 PM</a></div>
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しばらく潜って考えて整理してみた。 slavaが指摘しているバグ この gist と合わせて解説 <a href="https://gist.github.com/omochi/ac7bfec6f0b3f92b74502bbfaf0563a7">https://gist.github.com/omochi/ac7bfec6f0b3f92b74502bbfaf0563a7</a> あるクラスがが convenience init から、別の init メソッド を呼んでいるときは、 静的な Selfではなく、 convenience init 実行中の動的な Self とともに呼ばねばならない。 例えば、Animal.init(init0:)はそのようなパターンで、Cat.init(init0:)を呼び出すと、 Animalのconvenience initから、オーバライドされたCat.init()が呼び出されることがわかる。</span> <span class="chatlog__edited-timestamp" title="26-Aug-17 12:06 PM">(edited)</span></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=350974806096740354"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-350974312372633601">08/26/2017 12:06 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しばらく潜って考えて整理してみた。 slavaが指摘しているバグ この gist と合わせて解説 <a href="https://gist.github.com/omochi/ac7bfec6f0b3f92b74502bbfaf0563a7">https://gist.github.com/omochi/ac7bfec6f0b3f92b74502bbfaf0563a7</a> あるクラスがが convenience init から、別の init メソッド を呼んでいるときは、 静的な Selfではなく、 convenience init 実行中の動的な Self とともに呼ばねばならない。 例えば、Animal.init(init0:)はそのようなパターンで、Cat.init(init0:)を呼び出すと、 Animalのconvenience initから、オーバライドされたCat.init()が呼び出されることがわかる。</span> <span class="chatlog__edited-timestamp" title="08/26/2017 12:06 PM">(edited)</span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
           <div class="chatlog__embed-content-container">
@@ -24,7 +24,7 @@
   <div id="chatlog__message-container-350974396149661699" class="chatlog__message-container" data-message-id="350974396149661699">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Aug-17 12:06 PM">12:06</div>
+        <div class="chatlog__short-timestamp" title="08/26/2017 12:06 PM">12:06</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかし、 protocol の extension メソッドで定義された init を呼び出している場合には、 動的な Self ではなく、静的な Self に対して呼び出してしまうバグがあった。 これを検証しているのが Animal.init(init1:) である。 この中から呼ばれる self.init(facotry:) は、 Self が Animal に固定されて型検査されているし、 コンパイル後もそのように動作する。 その結果として、 Cat.init(init1:) の呼び出しは、 Cat の初期化をなんら呼び出していない。 実際に cat1.b を表示してみると、謎の値65が表示された。 (at IBM Swift sandbox) 本来は、 protocol から来ていたとしても、 convenience init から init を呼び出すところは、 動的な Self として扱わねばならない。</span></div>
@@ -34,7 +34,7 @@
   <div id="chatlog__message-container-350974473022865409" class="chatlog__message-container" data-message-id="350974473022865409">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Aug-17 12:07 PM">12:07</div>
+        <div class="chatlog__short-timestamp" title="08/26/2017 12:07 PM">12:07</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このような「バグでコンパイルできてしまう」パターンは、 既存の NSNumber 実装が踏み抜いている。 <a href="https://github.com/apple/swift-corelibs-foundation/blob/87466c45462cba5a085d5cd41d785d681016542d/Foundation/NSNumber.swift#L266">https://github.com/apple/swift-corelibs-foundation/blob/87466c45462cba5a085d5cd41d785d681016542d/Foundation/NSNumber.swift#L266</a> この行は、 NSNumber の親、 NSValue が conformance する protocol _Factory によって定義された init(factory:) を呼び出している。 ここでは unsafeBitCast で NSNumber にキャストしているので、 init(factory:) に対しては、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">() -&gt; NSNumber</code> なクロージャを渡している。</span></div>
@@ -60,7 +60,7 @@
   <div id="chatlog__message-container-350974537527197697" class="chatlog__message-container" data-message-id="350974537527197697">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Aug-17 12:07 PM">12:07</div>
+        <div class="chatlog__short-timestamp" title="08/26/2017 12:07 PM">12:07</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">slava の修正によって、 このような場合でも動的な Self として型検査されるようになった。 そうすると、 gist の例の場合では、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">init(factory:)</code> に渡しているクロージャの式が、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">() -&gt; Animal</code> であるゆえに、 コンパイルエラーとなる。 ここは、 self　の式の型は Animal ではなく Self なので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">() -&gt; Self</code> 型のクロージャを渡さねばならないからだ。</span></div>
@@ -70,7 +70,7 @@
   <div id="chatlog__message-container-350974629663342592" class="chatlog__message-container" data-message-id="350974629663342592">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Aug-17 12:07 PM">12:07</div>
+        <div class="chatlog__short-timestamp" title="08/26/2017 12:07 PM">12:07</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">同様のコンパイルエラーを、 NSNumber が実際に踏み抜いた。 これを回避するために、 slava は3つの選択肢をだしている。 1. swift5までとりあえず放置する 2. NSNumberをfinalにする 3. ジェネリクスを使う 1は無いとして、2については、 もしこの問題になっているクラス (AnimalやNSNumber) が final class であれば、 convenience init をサブクラスから呼ぶ事自体が無いので、 解決するというもの。(修正した型チェッカはそれも考慮している)</span></div>
@@ -80,7 +80,7 @@
   <div id="chatlog__message-container-350974693307580416" class="chatlog__message-container" data-message-id="350974693307580416">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Aug-17 12:08 PM">12:08</div>
+        <div class="chatlog__short-timestamp" title="08/26/2017 12:08 PM">12:08</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">実際には、この選択肢は取れない。 NSDecimalNumber のような、 NSNumber のサブクラスがすでに存在しているから。 <a href="https://github.com/apple/swift-corelibs-foundation/blob/856b8bcd9cae659f1ca48545b2ddb7f63da77171/Foundation/NSDecimalNumber.swift">https://github.com/apple/swift-corelibs-foundation/blob/856b8bcd9cae659f1ca48545b2ddb7f63da77171/Foundation/NSDecimalNumber.swift</a> しかもこいつは下記フィールドを保持している。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">fileprivate let decimal: Decimal</code> ということは、現状でも convenience init 経由の NSDecimalNumber のコンストラクトで、 メモリがぶっ壊れる可能性がある・・・？</span></div>
@@ -106,7 +106,7 @@
   <div id="chatlog__message-container-350974745631653889" class="chatlog__message-container" data-message-id="350974745631653889">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Aug-17 12:08 PM">12:08</div>
+        <div class="chatlog__short-timestamp" title="08/26/2017 12:08 PM">12:08</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">3の選択肢は、 現状の unsafeBitCast にジェネリクスを組み合わせて、 NSNumber固定ではなく、 Self へのキャストにすることで動かす、というもの。 slavaの実装例は下記で、返り値型推論を活用している。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func castCFNumber&lt;T&gt;() -&gt; T { return unsafeBitCast(cfnumber, to: T.self) }</code> slavaはこれを試してみるとこのこと。 <div class="chatlog__markdown-quote">
@@ -119,7 +119,7 @@
   <div id="chatlog__message-container-350974806096740354" class="chatlog__message-container" data-message-id="350974806096740354">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="26-Aug-17 12:08 PM">12:08</div>
+        <div class="chatlog__short-timestamp" title="08/26/2017 12:08 PM">12:08</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これでとりあえず動くようになるけど、 NSDecimalNumber の decimal プロパティが初期化されない可能性は解決しないのでは・・・？？？</span></div>

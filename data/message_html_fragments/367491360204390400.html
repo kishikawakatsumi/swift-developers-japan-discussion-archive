@@ -3,29 +3,29 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=367493000126791682"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-367490346231398401">11-Oct-17 01:55 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura#8334" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=367493000126791682"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-367490346231398401">10/11/2017 1:55 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift 4.0の<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">extension Optional : Decodable</code>
-            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">extension Optional : Decodable /* where Wrapped : Decodable */ { @_inlineable // FIXME(sil-serialize-all) public init(from decoder: Decoder) throws { // Initialize self here so we can get type(of: self). self = .none assertTypeIsDecodable(Wrapped.self, in: type(of: self)) let container = try decoder.singleValueContainer() if !container.decodeNil() { let metaType = (Wrapped.self as! Decodable.Type) let element = try metaType.init(from: container) self = .some(element as! Wrapped) } } }</code> (Swift 4.0のコードに変更)</span> <span class="chatlog__edited-timestamp" title="11-Oct-17 02:02 AM">(edited)</span></div>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">extension Optional : Decodable /* where Wrapped : Decodable */ { @_inlineable // FIXME(sil-serialize-all) public init(from decoder: Decoder) throws { // Initialize self here so we can get type(of: self). self = .none assertTypeIsDecodable(Wrapped.self, in: type(of: self)) let container = try decoder.singleValueContainer() if !container.decodeNil() { let metaType = (Wrapped.self as! Decodable.Type) let element = try metaType.init(from: container) self = .some(element as! Wrapped) } } }</code> (Swift 4.0のコードに変更)</span> <span class="chatlog__edited-timestamp" title="10/11/2017 2:02 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-367491360204390400" class="chatlog__message-container" data-message-id="367491360204390400">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="11-Oct-17 01:59 AM">01:59</div>
+        <div class="chatlog__short-timestamp" title="10/11/2017 1:59 AM">01:59</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">本当は<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Decoder</code>の処理を優先して、こう書きたい。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight"> let container = try decoder.singleValueContainer() if !container.decodeNil() { - let metaType = (Wrapped.self as! Decodable.Type) - let element = try metaType.init(__from: container) - self = .some(element as! Wrapped) + self = .some(try container.decode(Wrapped.self)) } } }</code></span> <span class="chatlog__edited-timestamp" title="11-Oct-17 02:32 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">本当は<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Decoder</code>の処理を優先して、こう書きたい。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight"> let container = try decoder.singleValueContainer() if !container.decodeNil() { - let metaType = (Wrapped.self as! Decodable.Type) - let element = try metaType.init(__from: container) - self = .some(element as! Wrapped) + self = .some(try container.decode(Wrapped.self)) } } }</code></span> <span class="chatlog__edited-timestamp" title="10/11/2017 2:32 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-367493000126791682" class="chatlog__message-container" data-message-id="367493000126791682">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="11-Oct-17 02:05 AM">02:05</div>
+        <div class="chatlog__short-timestamp" title="10/11/2017 2:05 AM">02:05</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift 4.0では、Standard Libraryで提供される<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">JSONEncoder</code>とかの<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Coder</code>で特別扱いされる<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">URL</code>の側で「<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">JSONEncoder</code>だったら辞書表現をやめる」みたいな力技で対応されていました。 <a href="https://github.com/apple/swift/pull/10766">https://github.com/apple/swift/pull/10766</a></span> <span class="chatlog__edited-timestamp" title="11-Oct-17 02:07 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift 4.0では、Standard Libraryで提供される<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">JSONEncoder</code>とかの<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Coder</code>で特別扱いされる<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">URL</code>の側で「<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">JSONEncoder</code>だったら辞書表現をやめる」みたいな力技で対応されていました。 <a href="https://github.com/apple/swift/pull/10766">https://github.com/apple/swift/pull/10766</a></span> <span class="chatlog__edited-timestamp" title="10/11/2017 2:07 AM">(edited)</span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
           <div class="chatlog__embed-content-container">

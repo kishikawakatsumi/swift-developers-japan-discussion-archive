@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=646998331024867348"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-646997601345994759">21-Nov-19 08:57 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="rintaro#0001" data-user-id="296587674737704960">rintaro</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=646998331024867348"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-646997601345994759">11/21/2019 8:57 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public func foo1() -&gt; () -&gt; Void { var x = 1 let closure: () -&gt; Void = { [x] in print(x) } return closure } public func foo2() -&gt; () -&gt; Void { var x = 1 let closure: () -&gt; Void do { let x = x closure = { () in print(x) } } return closure }</code> これのSILを出力すると</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-646997877482061850" class="chatlog__message-container" data-message-id="646997877482061850">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="21-Nov-19 08:58 AM">08:58</div>
+        <div class="chatlog__short-timestamp" title="11/21/2019 8:58 AM">08:58</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">foo1 と foo2 はほぼ同じになる。</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-646997932595216400" class="chatlog__message-container" data-message-id="646997932595216400">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="21-Nov-19 08:58 AM">08:58</div>
+        <div class="chatlog__short-timestamp" title="11/21/2019 8:58 AM">08:58</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">// foo1() sil @$s4test4foo1yycyF : $@convention(thin) () -&gt; @owned @callee_guaranteed () -&gt; () { bb0: %0 = alloc_stack $Int, var, name "x" // users: %3, %10, %4 %1 = integer_literal $Builtin.Int64, 1 // user: %2 %2 = struct $Int (%1 : $Builtin.Int64) // users: %8, %6, %3 store %2 to %0 : $*Int // id: %3 %4 = begin_access [read] [static] %0 : $*Int // user: %5 end_access %4 : $*Int // id: %5 debug_value %2 : $Int, let, name "x" // id: %6 // function_ref closure #1 in foo1() %7 = function_ref @$s4test4foo1yycyFyycfU_ : $@convention(thin) (Int) -&gt; () // user: %8 %8 = partial_apply [callee_guaranteed] %7(%2) : $@convention(thin) (Int) -&gt; () // users: %11, %9 debug_value %8 : $@callee_guaranteed () -&gt; (), let, name "closure" // id: %9 dealloc_stack %0 : $*Int // id: %10 return %8 : $@callee_guaranteed () -&gt; () // id: %11 } // end sil function '$s4test4foo1yycyF'</code></span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-646997975146561537" class="chatlog__message-container" data-message-id="646997975146561537">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="21-Nov-19 08:58 AM">08:58</div>
+        <div class="chatlog__short-timestamp" title="11/21/2019 8:58 AM">08:58</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">// foo2() sil @$s4test4foo2yycyF : $@convention(thin) () -&gt; @owned @callee_guaranteed () -&gt; () { bb0: %0 = alloc_stack $Int, var, name "x" // users: %3, %14, %5 %1 = integer_literal $Builtin.Int64, 1 // user: %2 %2 = struct $Int (%1 : $Builtin.Int64) // users: %9, %7, %3 store %2 to %0 : $*Int // id: %3 %4 = alloc_stack $@callee_guaranteed () -&gt; (), let, name "closure" // users: %10, %12, %13 %5 = begin_access [read] [static] %0 : $*Int // user: %6 end_access %5 : $*Int // id: %6 debug_value %2 : $Int, let, name "x" // id: %7 // function_ref closure #1 in foo2() %8 = function_ref @$s4test4foo2yycyFyycfU_ : $@convention(thin) (Int) -&gt; () // user: %9 %9 = partial_apply [callee_guaranteed] %8(%2) : $@convention(thin) (Int) -&gt; () // users: %11, %15, %10 store %9 to %4 : $*@callee_guaranteed () -&gt; () // id: %10 strong_retain %9 : $@callee_guaranteed () -&gt; () // id: %11 destroy_addr %4 : $*@callee_guaranteed () -&gt; () // id: %12 dealloc_stack %4 : $*@callee_guaranteed () -&gt; () // id: %13 dealloc_stack %0 : $*Int // id: %14 return %9 : $@callee_guaranteed () -&gt; () // id: %15 } // end sil function '$s4test4foo2yycyF'</code></span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-646998331024867348" class="chatlog__message-container" data-message-id="646998331024867348">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="21-Nov-19 09:00 AM">09:00</div>
+        <div class="chatlog__short-timestamp" title="11/21/2019 9:00 AM">09:00</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">クロージャのタイプは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@convention(thin) (Int) -&gt; ()</code> で一緒であって、 それに partial_apply de</span></div>

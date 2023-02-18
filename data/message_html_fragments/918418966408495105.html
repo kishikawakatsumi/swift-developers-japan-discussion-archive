@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=918419752383299654"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-918418835646869514">09-Dec-21 08:28 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=918419752383299654"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-918418835646869514">12/09/2021 8:28 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI @MainActor struct ContentView: View { let bar = Bar() var body: some View { Text("Hello, world!") .onAppear { Foo().start(bar: bar) } } } @MainActor final class Bar { func bar() -&gt; Int { print("bar", Thread.isMainThread) return 42 } } final class Foo { func start(bar: Bar) { Task { print("1", Thread.isMainThread, ObjectIdentifier(Thread.current)) let x = await bar.bar() print("2", Thread.isMainThread, ObjectIdentifier(Thread.current), x) Task { print("3", Thread.isMainThread, ObjectIdentifier(Thread.current)) let x = await bar.bar() print("4", Thread.isMainThread, ObjectIdentifier(Thread.current), x) Task.detached { print("5", Thread.isMainThread, ObjectIdentifier(Thread.current)) let x = await bar.bar() print("6", Thread.isMainThread, ObjectIdentifier(Thread.current), x) } } } } }</code>
             <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">1 false ObjectIdentifier(0x0000600001348780) bar true 2 false ObjectIdentifier(0x0000600001319580) 42 3 false ObjectIdentifier(0x0000600001319580) bar true 4 false ObjectIdentifier(0x0000600001348780) 42 5 false ObjectIdentifier(0x0000600001319580) bar true 6 false ObjectIdentifier(0x0000600001348780) 42</code></span></div>
       </div>
@@ -12,7 +12,7 @@
   <div id="chatlog__message-container-918418966408495105" class="chatlog__message-container" data-message-id="918418966408495105">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09-Dec-21 08:29 AM">08:29</div>
+        <div class="chatlog__short-timestamp" title="12/09/2021 8:29 AM">08:29</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar</code> はたしかにメインスレッドで実行されているのと</span></div>
@@ -22,7 +22,7 @@
   <div id="chatlog__message-container-918419399503921214" class="chatlog__message-container" data-message-id="918419399503921214">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09-Dec-21 08:30 AM">08:30</div>
+        <div class="chatlog__short-timestamp" title="12/09/2021 8:30 AM">08:30</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">1 と 2 が異なるスレッドで実行されていることから、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> は Actor Context を持つわけではなさそう。 Actor Context がない場合も <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">await</code> 先が結果を返したスレッドでそのまま実行されるわけではなく、また別のスレッドに投入される？</span></div>
@@ -32,7 +32,7 @@
   <div id="chatlog__message-container-918419752383299654" class="chatlog__message-container" data-message-id="918419752383299654">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09-Dec-21 08:32 AM">08:32</div>
+        <div class="chatlog__short-timestamp" title="12/09/2021 8:32 AM">08:32</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑も、 1 と 2 が同じスレッドで実行されることもあるけど（その方が多い）、それは節約されてるだけで、 1 と 2 が同じである保証はないと。</span></div>

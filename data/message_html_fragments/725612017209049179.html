@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=725612017209049179"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-725610272563396631">25-Jun-20 07:16 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=725612017209049179"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-725610272563396631">06/25/2020 7:16 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class Integer: Hashable, CustomStringConvertible { let value: Int init(_ value: Int) { self.value = value } static func == (lhs: Integer, rhs: Integer) -&gt; Bool { true } func hash(into hasher: inout Hasher) { 42.hash(into: &amp;hasher) } var description: String { value.description } }</code> に変えて、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">AView(value: Integer(Bool.random() ? 1 : 2))</code> にしたら更新されなくなった。</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-725610384412901396" class="chatlog__message-container" data-message-id="725610384412901396">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="25-Jun-20 07:16 AM">07:16</div>
+        <div class="chatlog__short-timestamp" title="06/25/2020 7:16 AM">07:16</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Integer</code> 変更前は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">AView(value: Integer(Bool.random() ? 1 : 2))</code> で更新された。</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-725610537748004966" class="chatlog__message-container" data-message-id="725610537748004966">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="25-Jun-20 07:17 AM">07:17</div>
+        <div class="chatlog__short-timestamp" title="06/25/2020 7:17 AM">07:17</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">参照型はビット比較するとアドレスが異なる場合に diff 発生してしまうから <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Equatable</code> を見てる？？</span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-725611875018211410" class="chatlog__message-container" data-message-id="725611875018211410">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="25-Jun-20 07:22 AM">07:22</div>
+        <div class="chatlog__short-timestamp" title="06/25/2020 7:22 AM">07:22</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI struct ContentView2: View { @ObservedObject private var counter: Counter = .shared var body: some View { print("ContentView2.body") return VStack { HStack { Text("\(counter.count)") Button("+") { self.counter.increment() } } AView(value: Box&lt;Double&gt;(.nan)) .padding() .border(Color.gray, width: 1) .padding() } } } private struct AView&lt;Value: CustomStringConvertible&gt;: View { let value: Value var body: some View { print("AView.body") return VStack { HStack { Text("\(Counter.shared.count), \(value.description)") Button("+") { Counter.shared.increment() } } BView(value: value) .padding() .border(Color.gray, width: 1) .padding() } } } private struct BView&lt;Value: CustomStringConvertible&gt;: View { let value: Value var body: some View { print("BView.body") return HStack { Text("\(Counter.shared.count), \(value.description)") Button("+") { Counter.shared.increment() } } } } private final class Counter: ObservableObject { @Published private(set) var count: Int = 0 func increment() { count += 1 } static let shared: Counter = .init() } final class Box&lt;Value&gt;: Equatable, CustomStringConvertible where Value: Equatable, Value: CustomStringConvertible { let value: Value init(_ value: Value) { self.value = value } static func == (lhs: Box&lt;Value&gt;, rhs: Box&lt;Value&gt;) -&gt; Bool { lhs.value == rhs.value } var description: String { value.description } }</code> ↑これだと常に更新される。やっぱ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">==</code> が見られてるっぽい。</span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-725612017209049179" class="chatlog__message-container" data-message-id="725612017209049179">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="25-Jun-20 07:23 AM">07:23</div>
+        <div class="chatlog__short-timestamp" title="06/25/2020 7:23 AM">07:23</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">AView(value: Box&lt;Double&gt;(.nan))</code> を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">AView(value: Box&lt;Double&gt;(42))</code> に変更すると更新されなくなる。</span></div>

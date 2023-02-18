@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=729936748129419276"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-729936675849109574">07-Jul-20 05:47 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=729936748129419276"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-729936675849109574">07/07/2020 5:47 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">さっきの <span class="chatlog__markdown-mention">#combine</span> で話してた <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Future</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">get</code> 、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Failure</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Never</code> のときだけ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Result&lt;Output, Never&gt;</code> じゃなくて <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Output</code> で受け取るようにできた。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *) extension Future { @_disfavoredOverload public func get(_ body: @escaping (Result&lt;Output, Failure&gt;) -&gt; Void) { let keep: Keep&lt;AnyCancellable&gt; = .init() keep.value = sink(receiveCompletion: { completion in switch completion { case .finished: break case .failure(let error): body(.failure(error)) } keep.value = nil }, receiveValue: { output in body(.success(output)) }) } } @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *) extension Future where Failure == Never { public func get(_ body: @escaping (Output) -&gt; Void) { let keep: Keep&lt;AnyCancellable&gt; = .init() keep.value = sink { output in body(output) keep.value = nil } } } private class Keep&lt;Value&gt; { var value: Value? }</code></span></div>
       </div>
     </div>
@@ -11,10 +11,10 @@
   <div id="chatlog__message-container-729936748129419276" class="chatlog__message-container" data-message-id="729936748129419276">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07-Jul-20 05:48 AM">05:48</div>
+        <div class="chatlog__short-timestamp" title="07/07/2020 5:48 AM">05:48</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@_disfavoredOverload</code> がないと ambiguous になってしまう。</span> <span class="chatlog__edited-timestamp" title="07-Jul-20 05:48 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@_disfavoredOverload</code> がないと ambiguous になってしまう。</span> <span class="chatlog__edited-timestamp" title="07/07/2020 5:48 AM">(edited)</span></div>
       </div>
     </div>
   </div>

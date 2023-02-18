@@ -140,7 +140,7 @@
       text-align: center
     }
 
-    .chatlog__reference-symbol {
+    .chatlog__reply-symbol {
       height: 10px;
       margin: 6px 4px 4px 36px;
       border-left: 2px solid #c7ccd1;
@@ -168,7 +168,7 @@
       min-width: 0
     }
 
-    .chatlog__reference {
+    .chatlog__reply {
       display: flex;
       margin-bottom: 0.15rem;
       align-items: center;
@@ -179,49 +179,49 @@
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-avatar {
+    .chatlog__reply-avatar {
       width: 16px;
       height: 16px;
       margin-right: 0.25rem;
       border-radius: 50%
     }
 
-    .chatlog__reference-author {
+    .chatlog__reply-author {
       margin-right: 0.3rem;
       font-weight: 600
     }
 
-    .chatlog__reference-content {
+    .chatlog__reply-content {
       overflow: hidden;
       text-overflow: ellipsis
     }
 
-    .chatlog__reference-link {
+    .chatlog__reply-link {
       cursor: pointer
     }
 
-    .chatlog__reference-link * {
+    .chatlog__reply-link * {
       display: inline;
       pointer-events: none
     }
 
-    .chatlog__reference-link .chatlog__markdown-quote {
+    .chatlog__reply-link .chatlog__markdown-quote {
       display: inline
     }
 
-    .chatlog__reference-link .chatlog__markdown-pre {
+    .chatlog__reply-link .chatlog__markdown-pre {
       display: inline
     }
 
-    .chatlog__reference-link:hover {
+    .chatlog__reply-link:hover {
       color: #2f3136
     }
 
-    .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+    .chatlog__reply-link:hover *:not(.chatlog__markdown-spoiler) {
       color: inherit
     }
 
-    .chatlog__reference-edited-timestamp {
+    .chatlog__reply-edited-timestamp {
       margin-left: 0.25rem;
       color: #5e6772;
       font-size: 0.75rem;
@@ -271,7 +271,7 @@
       color: #2f3136
     }
 
-    .chatlog__bot-label {
+    .chatlog__author-tag {
       position: relative;
       top: -0.1rem;
       margin-left: 0.3rem;
@@ -549,6 +549,8 @@
     }
 
     .chatlog__embed-generic-image {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
@@ -556,10 +558,62 @@
     }
 
     .chatlog__embed-generic-gifv {
+      object-fit: contain;
+      object-position: left;
       max-width: 45vw;
       max-height: 500px;
       vertical-align: top;
       border-radius: 3px
+    }
+
+    .chatlog__embed-invite-container {
+      min-width: 320px;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      border-radius: 3px;
+      background-color: rgba(249, 249, 249, 0.3)
+    }
+
+    .chatlog__embed-invite-title {
+      margin: 0 0 0.8rem 0;
+      color: #4f5660;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase
+    }
+
+    .chatlog__embed-invite {
+      display: flex
+    }
+
+    .chatlog__embed-invite-guild-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 0.85rem
+    }
+
+    .chatlog__embed-invite-info {
+      margin-left: 1rem
+    }
+
+    .chatlog__embed-invite-guild-name {
+      color: #36393e;
+      font-weight: 600
+    }
+
+    .chatlog__embed-invite-guild-name a {
+      color: inherit
+    }
+
+    .chatlog__embed-invite-channel-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: bottom
+    }
+
+    .chatlog__embed-invite-channel-name {
+      font-size: 0.9rem;
+      font-weight: 600
     }
 
     .chatlog__embed-spotify {
@@ -627,6 +681,7 @@
 
     .chatlog__markdown-spoiler {
       background-color: rgba(0, 0, 0, 0.1);
+      padding: 0 2px;
       border-radius: 3px
     }
 
@@ -658,7 +713,8 @@
     .chatlog__markdown-pre {
       background-color: #f9f9f9;
       font-family: "Consolas", "Courier New", Courier, monospace;
-      font-size: 0.85rem
+      font-size: 0.85rem;
+      text-decoration: inherit
     }
 
     .chatlog__markdown-pre--multiline {
@@ -695,9 +751,9 @@
     }
 
     .chatlog__markdown-timestamp {
-      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.1);
       padding: 0 2px;
-      color: #5e6772
+      border-radius: 3px
     }
 
     .chatlog__emoji {
@@ -782,20 +838,32 @@
         <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"></path>
         <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"></path>
       </symbol>
-      <symbol id="channel-pinned-message-icon" viewBox="0 0 18 18">
-        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      <symbol id="join-icon" viewBox="0 0 18 18">
+        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      </symbol>
+      <symbol id="leave-icon" viewBox="0 0 18 18">
+        <path fill="#ed4245" d="m3.8 8 3.6-3.6-1.4-1.4-6 6 6 6 1.4-1.4-3.6-3.6h14.2v-2"></path>
       </symbol>
       <symbol id="call-icon" viewBox="0 0 18 18">
         <path fill="#3ba55c" fill-rule="evenodd" d="M17.7163041 15.36645368c-.0190957.02699568-1.9039523 2.6680735-2.9957762 2.63320406-3.0676659-.09785935-6.6733809-3.07188394-9.15694343-5.548738C3.08002193 9.9740657.09772497 6.3791404 0 3.3061316v-.024746C0 2.2060575 2.61386252.3152347 2.64082114.2972376c.7110335-.4971705 1.4917101-.3149497 1.80959713.1372281.19320342.2744561 2.19712724 3.2811005 2.42290565 3.6489167.09884826.1608492.14714912.3554431.14714912.5702838 0 .2744561-.07975258.5770327-.23701117.8751101-.1527655.2902036-.65262318 1.1664385-.89862055 1.594995.2673396.3768148.94804468 1.26429792 2.351016 2.66357424 1.39173858 1.39027775 2.28923588 2.07641807 2.67002628 2.34187563.4302146-.2452108 1.3086162-.74238132 1.5972981-.89423205.5447887-.28682915 1.0907006-.31944893 1.4568885-.08661115.3459689.2182151 3.3383754 2.21027167 3.6225641 2.41611376.2695862.19234426.4144887.5399137.4144887.91672846 0 .2969525-.089862.61190215-.2808189.88523346"></path>
       </symbol>
-      <symbol id="guild-member-join-icon" viewBox="0 0 18 18">
-        <path fill="#3ba55c" d="m0 8h14.2l-3.6-3.6 1.4-1.4 6 6-6 6-1.4-1.4 3.6-3.6h-14.2"></path>
+      <symbol id="pencil-icon" viewBox="0 0 18 18">
+        <path fill="#99aab5" d="m0 14.25v3.75h3.75l11.06-11.06-3.75-3.75zm17.71-10.21c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75z"></path>
+      </symbol>
+      <symbol id="pin-icon" viewBox="0 0 18 18">
+        <path fill="#b9bbbe" d="m16.908 8.39684-8.29587-8.295827-1.18584 1.184157 1.18584 1.18584-4.14834 4.1475v.00167l-1.18583-1.18583-1.185 1.18583 3.55583 3.55502-4.740831 4.74 1.185001 1.185 4.74083-4.74 3.55581 3.555 1.185-1.185-1.185-1.185 4.1475-4.14836h.0009l1.185 1.185z"></path>
+      </symbol>
+      <symbol id="channel-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"></path>
+      </symbol>
+      <symbol id="thread-icon" viewBox="0 0 24 24">
+        <path fill="#b9bbbe" d="M5.43309 21C5.35842 21 5.30189 20.9325 5.31494 20.859L5.99991 17H2.14274C2.06819 17 2.01168 16.9327 2.02453 16.8593L2.33253 15.0993C2.34258 15.0419 2.39244 15 2.45074 15H6.34991L7.40991 9H3.55274C3.47819 9 3.42168 8.93274 3.43453 8.85931L3.74253 7.09931C3.75258 7.04189 3.80244 7 3.86074 7H7.75991L8.45234 3.09903C8.46251 3.04174 8.51231 3 8.57049 3H10.3267C10.4014 3 10.4579 3.06746 10.4449 3.14097L9.75991 7H15.7599L16.4523 3.09903C16.4625 3.04174 16.5123 3 16.5705 3H18.3267C18.4014 3 18.4579 3.06746 18.4449 3.14097L17.7599 7H21.6171C21.6916 7 21.7481 7.06725 21.7353 7.14069L21.4273 8.90069C21.4172 8.95811 21.3674 9 21.3091 9H17.4099L17.0495 11.04H15.05L15.4104 9H9.41035L8.35035 15H10.5599V17H7.99991L7.30749 20.901C7.29732 20.9583 7.24752 21 7.18934 21H5.43309Z"></path>
+        <path fill="#b9bbbe" d="M13.4399 12.96C12.9097 12.96 12.4799 13.3898 12.4799 13.92V20.2213C12.4799 20.7515 12.9097 21.1813 13.4399 21.1813H14.3999C14.5325 21.1813 14.6399 21.2887 14.6399 21.4213V23.4597C14.6399 23.6677 14.8865 23.7773 15.0408 23.6378L17.4858 21.4289C17.6622 21.2695 17.8916 21.1813 18.1294 21.1813H22.5599C23.0901 21.1813 23.5199 20.7515 23.5199 20.2213V13.92C23.5199 13.3898 23.0901 12.96 22.5599 12.96H13.4399Z"></path>
       </symbol>
     </defs>
   </svg>
   <div class="preamble">
-    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy">
-    </div>
+    <div class="preamble__guild-icon-container"><img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/291054398077927425/6737443b79da7dc8d5152980c8385ffb.png" alt="Guild icon" loading="lazy"></div>
     <div class="preamble__entries-container">
       <div class="preamble__entry">swift-developers-japan</div>
       <div class="preamble__entry">main / architecture</div>
@@ -807,7 +875,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/303853379707338754/1dd9957026e9f632a8d362e573e1ccc7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601683176850718752"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601683176850718752">19-Jul-19 07:54 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601683176850718752"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601683176850718752">07/19/2019 7:54 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">MVVM/MVPの話題で「1つのViewControllerにつき1つのプレゼンター（ViewModel/Presenter）」にしたい/したくない、みたいな話で意見があれば聞きたいと思ってます。ちなみに私は1:1にしたくないと思っていて、その理由は保守性の観点で複雑な画面に応じて複雑なプレセンターを作ってしまうと保守運用が大変だから、という気持ちです</span></div>
           </div>
         </div>
@@ -818,7 +886,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/303853379707338754/1dd9957026e9f632a8d362e573e1ccc7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601694903298293761"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601693462286434314">19-Jul-19 08:35 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601694903298293761"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601693462286434314">07/19/2019 8:35 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">1:1にしたい理由を推測すると、画面仕様を把握する際に、ViewModel/Presenterに画面に必要なロジックの呼び出しが一つにまとまっているという利点があるるんじゃないかと想像しています。</span></div>
           </div>
         </div>
@@ -826,7 +894,7 @@
       <div id="chatlog__message-container-601693703379353620" class="chatlog__message-container" data-message-id="601693703379353620">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Jul-19 08:35 AM">08:35</div>
+            <div class="chatlog__short-timestamp" title="07/19/2019 8:35 AM">08:35</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">1:1にして、階層化して子供のViewModel/Presenter作りたいというのも上の理由かなと想像してます</span></div>
@@ -836,7 +904,7 @@
       <div id="chatlog__message-container-601694903298293761" class="chatlog__message-container" data-message-id="601694903298293761">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Jul-19 08:40 AM">08:40</div>
+            <div class="chatlog__short-timestamp" title="07/19/2019 8:40 AM">08:40</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これダミーの画面みたいのを用意してそれについて話すともっと具体的かもしれませんね...</span></div>
@@ -849,7 +917,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/338302215078936576/2f0f5d2880a9a7bdc037652fbade2e9a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601712574467407872"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601711351177674752">19-Jul-19 09:46 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="hironytic#5238" data-user-id="338302215078936576">hironytic</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601712574467407872"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601711351177674752">07/19/2019 9:46 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yimajo#6375">@yimajo</span> さんの「1:1にしたくない」は、「1:nでもいい」ということですよね？「n:1でもいい」ではなくて。</span></div>
           </div>
         </div>
@@ -857,7 +925,7 @@
       <div id="chatlog__message-container-601712165862244353" class="chatlog__message-container" data-message-id="601712165862244353">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Jul-19 09:49 AM">09:49</div>
+            <div class="chatlog__short-timestamp" title="07/19/2019 9:49 AM">09:49</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ぼくはMVVMを、UIと切り離してテストを書けるという点が大きなメリットだと考えていて、その観点では、ViewControllerとViewModelは表裏一体と思っていたので、1:1以外をあまり考えたことがなかったです。</span></div>
@@ -867,7 +935,7 @@
       <div id="chatlog__message-container-601712574467407872" class="chatlog__message-container" data-message-id="601712574467407872">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Jul-19 09:50 AM">09:50</div>
+            <div class="chatlog__short-timestamp" title="07/19/2019 9:50 AM">09:50</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でも、1つのViewControllerにn個のViewModelがあったとして、それらViewModel間で特に状態やデータのフローがないのなら、1:nでもぼくの目的（UIと切り離してテストが書ける）は果たせるなと思いました。</span></div>
@@ -880,7 +948,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/303853379707338754/1dd9957026e9f632a8d362e573e1ccc7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601738165388050432"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601738165388050432">19-Jul-19 11:32 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601738165388050432"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601738165388050432">07/19/2019 11:32 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">はい。そうです。 &gt; 「1:1にしたくない」は、「1:nでもいい」ということですよね？</span></div>
           </div>
         </div>
@@ -891,7 +959,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/303853379707338754/1dd9957026e9f632a8d362e573e1ccc7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601744038936444938"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601744038936444938">19-Jul-19 11:55 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=601744038936444938"><span class="chatlog__timestamp"><a href="#chatlog__message-container-601744038936444938">07/19/2019 11:55 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">（共通する）状態やデータフローがない、っていう表現は良さそうですね。関連性があるなしの定義のひとつとして明確に示せそうです</span></div>
           </div>
         </div>
@@ -902,7 +970,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/294030912793083905/2e52bc9b7745a5da45adca161d7ba7bc.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="rizumita#3212" data-user-id="294030912793083905">rizumita</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=610826847231541268"><span class="chatlog__timestamp"><a href="#chatlog__message-container-610826847231541268">13-Aug-19 01:27 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="rizumita#3212" data-user-id="294030912793083905">rizumita</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=610826847231541268"><span class="chatlog__timestamp"><a href="#chatlog__message-container-610826847231541268">08/13/2019 1:27 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yimajo#6375">@yimajo</span> MVVMだとVに対するVMなのでVCを一つのVとして取り扱うかということになると思います。私はVCはVではないと考えているので、VMは複数存在しうると考えています。ただ、VCに対してVMが存在するのではないので1:nという表現がしっくりきません。 MVPではないですがVIPERではPresenterに対するVの役はVCが担うと設計されているようで、その場合はPとVC（実際はV）は1:1だと思います。 つまりそのアーキテクチャにおいてVCはVであるかで判断されるように思います。</span></div>
           </div>
         </div>
@@ -913,7 +981,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/294030912793083905/2e52bc9b7745a5da45adca161d7ba7bc.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="rizumita#3212" data-user-id="294030912793083905">rizumita</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=613707150476312577"><span class="chatlog__timestamp"><a href="#chatlog__message-container-613705992143896597">21-Aug-19 12:08 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="rizumita#3212" data-user-id="294030912793083905">rizumita</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=613707150476312577"><span class="chatlog__timestamp"><a href="#chatlog__message-container-613705992143896597">08/21/2019 12:08 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftUIでアプリを開発されてる方、アーキテクチャパターンは何か採用されてますか？</span></div>
           </div>
         </div>
@@ -921,7 +989,7 @@
       <div id="chatlog__message-container-613707150476312577" class="chatlog__message-container" data-message-id="613707150476312577">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="21-Aug-19 12:13 PM">12:13</div>
+            <div class="chatlog__short-timestamp" title="08/21/2019 12:13 PM">12:13</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">UIKitでは基本はMVCですが、SwiftUIで素の状態（？）はなんと呼べば良いのでしょうか。Document-Viewパターンっぽさもありますが、ちょっと違いますよね。</span></div>
@@ -934,7 +1002,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/303853379707338754/1dd9957026e9f632a8d362e573e1ccc7.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=699877492189823016"><span class="chatlog__timestamp"><a href="#chatlog__message-container-699877492189823016">15-Apr-20 07:03 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="yimajo#6375" data-user-id="303853379707338754">yimajo</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=699877492189823016"><span class="chatlog__timestamp"><a href="#chatlog__message-container-699877492189823016">04/15/2020 7:03 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="rizumita#3212">@rizumita</span> コメントありがとうございます。Discordすごく久しぶりに開いてメンションされてるのに気が付きました。そういえば最近だと私もVIPERだと一つのViewにつきPresenter 1つでやってました。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -948,7 +1016,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/711190952403927141/2063716c69305d0b09c6bee5b99eef57.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745465067084054669"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745465067084054669">19-Aug-20 02:12 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745465067084054669"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745465067084054669">08/19/2020 2:12 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">VIPER初心者です。質問させてください。 AViewがもっている状態を、別のBViewで発火したイベントで使いたい場合があると思うのですが、BViewPresenterにAViewの弱参照をもたせるのがセオリーなんでしょうか？ Presenterの責務は「ユーザーの操作やイベントを受け付けてInteractorにビジネスロジックの依頼をし、Viewに描画指示をする」だと理解しています。 そのため、単にViewの状態を取得するということをPresenterが行ってもよいのか気になっています。 他によい設計があれば教えていただけないでしょうか。</span></div>
           </div>
         </div>
@@ -959,7 +1027,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745470100806566018"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745470100806566018">19-Aug-20 02:32 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745470100806566018"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745470100806566018">08/19/2020 2:32 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">VIPERはくわしくないですが（ Clean Architecture の派生ということからの推測で話すと）、依存の方向は View から Presenter なので、 Presenter が View を持っているのはおかしくないでしょうか。プロトコルを介して保持しているということでしょうか？ あと、「AViewがもっている状態を、別のBViewで発火したイベントで使いたい」については、この「状態」は Entity や Interactor が持っているべきものではないですか？ 間違っていたらすみません。</span></div>
           </div>
         </div>
@@ -970,7 +1038,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/711190952403927141/2063716c69305d0b09c6bee5b99eef57.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745472591736602787"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745472591736602787">19-Aug-20 02:41 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745472591736602787"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745472591736602787">08/19/2020 2:41 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
@@ -989,7 +1057,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745475422208131423"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745475202858745924">19-Aug-20 02:52 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745475422208131423"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745475202858745924">08/19/2020 2:52 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">通常のラジオボタンであれば、たとえば送信ボタンが押されるまでは選択されても特にイベントを通知せず、送信ボタンが押されるというイベントによって初めてどれが選択されているかという情報が通知されるのではないでしょうか。</span></div>
           </div>
         </div>
@@ -997,7 +1065,7 @@
       <div id="chatlog__message-container-745475422208131423" class="chatlog__message-container" data-message-id="745475422208131423">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Aug-20 02:53 AM">02:53</div>
+            <div class="chatlog__short-timestamp" title="08/19/2020 2:53 AM">02:53</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかし、もしラジオボタンの選択によって動的に状態が変更されるようなものであれば、ラジオボタンの選択をイベントとして通知し、 Interactor がそれによって状態を更新するように思います。</span></div>
@@ -1010,13 +1078,13 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/711190952403927141/2063716c69305d0b09c6bee5b99eef57.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745477798910754887"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745477798910754887">19-Aug-20 03:02 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745477798910754887"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745477798910754887">08/19/2020 3:02 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
                 <div class="chatlog__markdown-quote">
                   <div class="chatlog__markdown-quote-border"></div>
                   <div class="chatlog__markdown-quote-content">Interactor がそれによって状態を更新するように思います。 </div>
                 </div>なるほど。理解できてきました。 View内部で閉じる状態変更であれば、Viewの中で状態管理すればよくて、他のViewへ影響がある状態変更の場合は、別のところで状態管理した方がいい、ということですね。 この状態をどこにもたせるかを考えた場合、iOSで気軽に使える共通メモリ領域はUserDefaultsになるのでしょうか？
-              </span> <span class="chatlog__edited-timestamp" title="19-Aug-20 03:10 AM">(edited)</span></div>
+              </span> <span class="chatlog__edited-timestamp" title="08/19/2020 3:10 AM">(edited)</span></div>
           </div>
         </div>
       </div>
@@ -1026,7 +1094,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745482305145012324"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745481766109970533">19-Aug-20 03:18 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745482305145012324"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745481766109970533">08/19/2020 3:18 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">UserDefaultsに保存すると永続化されてしまうので、今やりたいことと違う気がします。</span></div>
           </div>
         </div>
@@ -1034,7 +1102,7 @@
       <div id="chatlog__message-container-745482305145012324" class="chatlog__message-container" data-message-id="745482305145012324">
         <div class="chatlog__message">
           <div class="chatlog__message-aside">
-            <div class="chatlog__short-timestamp" title="19-Aug-20 03:20 AM">03:20</div>
+            <div class="chatlog__short-timestamp" title="08/19/2020 3:20 AM">03:20</div>
           </div>
           <div class="chatlog__message-primary">
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Interactor がプロパティとして保持するとかでしょうか。</span></div>
@@ -1047,7 +1115,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/711190952403927141/2063716c69305d0b09c6bee5b99eef57.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745482986866212955"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745482986866212955">19-Aug-20 03:23 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=745482986866212955"><span class="chatlog__timestamp"><a href="#chatlog__message-container-745482986866212955">08/19/2020 3:23 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それで十分そうです。 ありがとうございます。</span></div>
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="slight_smile"><img class="chatlog__emoji chatlog__emoji--small" alt="🙂" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f642.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -1061,7 +1129,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="k06#3602" data-user-id="575586159212757029">k06</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=754555287301652521"><span class="chatlog__timestamp"><a href="#chatlog__message-container-754555287301652521">13-Sep-20 04:13 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k06#3602" data-user-id="575586159212757029">k06</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=754555287301652521"><span class="chatlog__timestamp"><a href="#chatlog__message-container-754555287301652521">09/13/2020 4:13 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">viperに関して質問です。 Interactorは各Viewと１対１になるわけではないということですが、一つのViewがIntercatorを複数持つというので構わないのでしょうか。 DIする時に、多くのIntercatorを持たせるみたいな形式になるのが違和感があるのですが。</span></div>
           </div>
         </div>
@@ -1072,7 +1140,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/711190952403927141/2063716c69305d0b09c6bee5b99eef57.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=754866859387387934"><span class="chatlog__timestamp"><a href="#chatlog__message-container-754866859387387934">14-Sep-20 12:51 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="nishitaku#7176" data-user-id="711190952403927141">nishitaku</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=754866859387387934"><span class="chatlog__timestamp"><a href="#chatlog__message-container-754866859387387934">09/14/2020 12:51 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Interactorはビジネスロジックを担当しているので、その分割単位は必ずしもViewの分割単位と一致しないと思ってます。 なので、View : Interactor = 1 : Nになっても問題ないと理解しています。</span></div>
           </div>
         </div>
@@ -1083,7 +1151,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" title="k06#3602" data-user-id="575586159212757029">k06</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=756673110727589918"><span class="chatlog__timestamp"><a href="#chatlog__message-container-756673110727589918">19-Sep-20 12:28 AM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" title="k06#3602" data-user-id="575586159212757029">k06</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=756673110727589918"><span class="chatlog__timestamp"><a href="#chatlog__message-container-756673110727589918">09/19/2020 12:28 AM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど、ありがとうございます。 共通で使うメソッドがある場合、Intercatorを使い回すというイメージなんですね。 結構、細分化するようになりそうで、なかなかファイル数が膨大になりそうです、、。</span></div>
           </div>
         </div>
@@ -1094,7 +1162,7 @@
         <div class="chatlog__message">
           <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/92ec1c503bdfd8d5cd49c92bbb38c7ab.png?size=512" alt="Avatar" loading="lazy"></div>
           <div class="chatlog__message-primary">
-            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="lovee#6218" data-user-id="332734073565085699">lovee</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=812692010061529108"><span class="chatlog__timestamp"><a href="#chatlog__message-container-812692010061529108">20-Feb-21 02:27 PM</a></span></a></div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="lovee#6218" data-user-id="332734073565085699">lovee</span> <a href="/channels/601681406149787648?category=main&amp;channel=architecture&amp;message_id=812692010061529108"><span class="chatlog__timestamp"><a href="#chatlog__message-container-812692010061529108">02/20/2021 2:27 PM</a></span></a></div>
             <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftUI向けのアーキテクチャを考案してみました（アーキテクチャどんどん出過ぎw <a href="https://github.com/el-hoshino/ViDRep-Sample">https://github.com/el-hoshino/ViDRep-Sample</a></span></div>
             <div class="chatlog__embed">
               <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>

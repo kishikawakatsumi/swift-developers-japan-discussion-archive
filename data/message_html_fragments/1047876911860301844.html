@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1047877740503765062"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1047876911860301844">01-Dec-22 02:08 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1047877740503765062"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1047876911860301844">12/01/2022 2:08 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/apple/swift-evolution/blob/main/proposals/0332-swiftpm-command-plugins.md#example-2-formatting-source-code">https://github.com/apple/swift-evolution/blob/main/proposals/0332-swiftpm-command-plugins.md#example-2-formatting-source-code</a></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-1047877091418456126" class="chatlog__message-container" data-message-id="1047877091418456126">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="01-Dec-22 02:09 PM">14:09</div>
+        <div class="chatlog__short-timestamp" title="12/01/2022 2:09 PM">14:09</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">プロポーザルにのってる例がわかりやすいです。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// swift-tools-version: 5.6 import PackageDescription let package = Package( name: "MyFormatterPlugin", dependencies: [ .package(url: "https://github.com/apple/swift-format.git", from: "0.50500.0"), ], targets: [ .plugin( name: "MyFormatterPlugin", capability: .command( intent: .sourceCodeFormatting(), permissions: [ .writeToPackageDirectory(reason: "This command reformats source files") ] ), dependencies: [ .product(name: "swift-format", package: "swift-format"), ] ) ] )</code></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-1047877236788830318" class="chatlog__message-container" data-message-id="1047877236788830318">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="01-Dec-22 02:10 PM">14:10</div>
+        <div class="chatlog__short-timestamp" title="12/01/2022 2:10 PM">14:10</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.plugin()</code> で定義する <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MyFormatterPlugin</code> は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift-format</code> パッケージの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift-format</code> executable product に依存を宣言していて・・・</span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-1047877294305321022" class="chatlog__message-container" data-message-id="1047877294305321022">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="01-Dec-22 02:10 PM">14:10</div>
+        <div class="chatlog__short-timestamp" title="12/01/2022 2:10 PM">14:10</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import PackagePlugin import Foundation @main struct MyFormatterPlugin: CommandPlugin { func performCommand( context: PluginContext, arguments: [String] ) async throws { // We'll be invoking `swift-format`, so start by locating it. let swiftFormatTool = try context.tool(named: "swift-format") // By convention, use a configuration file in the package directory. let configFile = context.package.directory.appending(".swift-format.json") // Iterate over the targets in the package. for target in context.package.targets { // Skip any type of target that doesn't have source files. // Note: We could choose to instead emit a warning or error here. guard let target = target as? SourceModuleTarget else { continue } // Invoke `swift-format` on the target directory, passing a configuration // file from the package directory. let swiftFormatExec = URL(fileURLWithPath: swiftFormatTool.path.string) let swiftFormatArgs = [ "--configuration", "\(configFile)", "--in-place", "--recursive", "\(target.directory)" ] let process = try Process.run(swiftFormatExec, arguments: swiftFormatArgs) process.waitUntilExit() // Check whether the subprocess invocation was successful. if process.terminationReason == .exit &amp;&amp; process.terminationStatus == 0 { print("Formatted the source code in \(target.directory).") } else { let problem = "\(process.terminationReason):\(process.terminationStatus)" Diagnostics.error("swift-format invocation failed: \(problem)") } } } }</code></span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-1047877601764593674" class="chatlog__message-container" data-message-id="1047877601764593674">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="01-Dec-22 02:11 PM">14:11</div>
+        <div class="chatlog__short-timestamp" title="12/01/2022 2:11 PM">14:11</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MyFormatterPlugin</code> のコードでは、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">context.tool(named: "swift-format")</code> という特殊なAPIを通して、 依存として宣言したexecutableのビルドされた実体を表すオブジェクトを取得し、</span></div>
@@ -51,10 +51,10 @@
   <div id="chatlog__message-container-1047877740503765062" class="chatlog__message-container" data-message-id="1047877740503765062">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="01-Dec-22 02:12 PM">14:12</div>
+        <div class="chatlog__short-timestamp" title="12/01/2022 2:12 PM">14:12</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そこに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swiftFormatTool.path.string</code> でファイルパスが書いてあるので、後は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Process</code> でそれを発火する。</span> <span class="chatlog__edited-timestamp" title="01-Dec-22 02:12 PM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そこに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swiftFormatTool.path.string</code> でファイルパスが書いてあるので、後は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Process</code> でそれを発火する。</span> <span class="chatlog__edited-timestamp" title="12/01/2022 2:12 PM">(edited)</span></div>
       </div>
     </div>
   </div>

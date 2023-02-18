@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=349762646049947649"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-349762107295662080">23-Aug-17 03:49 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=349762646049947649"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-349762107295662080">08/23/2017 3:49 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">I think there are definitely places where having cases be a subtype of an enum make sense, but I don't think it makes sense for *all* cases to be subtypes. For example, with "biased" containers like Optional and Result, it makes sense for the "right" side to be a subtype and the "wrong" side to be explicitly constructed, IMO. If the types of cases overlap, it would also be *ambiguous* which case ought to be constructed when the payload is converted to the enum type—remember that enums are sums, not unions, and that's important for composability and uniform behavior with generics. I would be fine allowing enum subtyping with some opt-in attribute, e.g.: enum Optional&lt;Wrapped&gt; { sub case some(wrapped) case none } enum Result&lt;Wrapped&gt; { sub case ok(wrapped) case error(Error) // not a subtype } enum JSON { // OK for these to all be sub-cases, since they don't overlap sub case string(String), number(Double), array([JSON]), object([String: JSON]), null } enum Either&lt;T, U&gt; { // Error: sub cases potentially overlap sub case left(T), right(U) } -Joe</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-349762646049947649" class="chatlog__message-container" data-message-id="349762646049947649">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="23-Aug-17 03:51 AM">03:51</div>
+        <div class="chatlog__short-timestamp" title="08/23/2017 3:51 AM">03:51</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんかちょっと言ってることと違う気がする。</span></div>
