@@ -1,0 +1,34 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1086124819592003644" class="chatlog__message-container" data-message-id="1086124819592003644">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" title="udo#2235">udo</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1086123854201626694')"> ありがとうございます！ 必ず何か書き込むのでDataにしたいですが、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">data = try! Data(contensOf: hogeURL)</code> のようにtry!になるのが怖いというのがあります。ただData?だと取り出す時にやや面倒だなと思いました。ただ安全側に倒すならData?にしたほうが安全ではありそうですかね。 </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher#9336" data-user-id="293624673265123328">koher</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1086126427788816445"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1086124819592003644">03/17/2023 3:12 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">エラーハンドリングしたいということであれば、↓のようにするのがいいかもしれません。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">do { let data = try Data(contensOf: hogeURL) // data を使う処理 } catch { // エラーハンドリング }</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">catch</code> の中では <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">error</code> にアクセスすることで、エラー情報を取得することができます。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">try?</code> にしてしまうとエラー情報が失われてしまい、原因を特定したり、原因によってエラーハンドリングの仕方（アラートを表示する、リトライする、無視してログ出力するなど）を変更することもできなくなってしまいます。</span> <span class="chatlog__edited-timestamp" title="03/17/2023 3:12 AM">(edited)</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="t_kansha"><img class="chatlog__emoji chatlog__emoji--small" alt="t_kansha" src="https://cdn.discordapp.com/emojis/982131947683856444.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1086126427788816445" class="chatlog__message-container" data-message-id="1086126427788816445">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="03/17/2023 3:18 AM">03:18</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">また、 Swift ではエラーの意味で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nil</code> が返されるメソッド等が存在はしますが（たとえば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">String(data: data, using: .utf8)</code> など）、エラーの意味で返された <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nil</code> をそのまま保持し続けるのも望ましくありません。 エラーが <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">throw</code> されるのではなく <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nil</code> が返されるケースは、原則としてエラーの原因が自明な場合です（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">String(data: data, using: .utf8)</code> なら、 UTF-8 として解釈できないバイト列が渡された場合）。その場でエラーハンドリングすれば原因がわかりますが、持ち続けてしまうとどこから <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nil</code> が混入したのかわからなくなり、原因を究明するのが困難になります。エラーとして <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nil</code> が返される場合には、↓のように即座にエラーハンドリングするのが望ましいです。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">guard let string = String(data: data, using: .utf8) else { // エラーハンドリング（ data が UTF-8 として解釈できない場合） } // string を使う処理</code></span> <span class="chatlog__edited-timestamp" title="03/17/2023 3:43 AM">(edited)</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="t_naruhodo"><img class="chatlog__emoji chatlog__emoji--small" alt="t_naruhodo" src="https://cdn.discordapp.com/emojis/892393551856533584.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
