@@ -1,0 +1,241 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1095533141952839740" class="chatlog__message-container" data-message-id="1095533141952839740">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=1095538810772791387"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1095533141952839740">04/12/2023 2:17 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">xxxChangesのステート３つだけ見ればよくて、idle/pending/activeで遷移するっぽいな</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095533293417533532" class="chatlog__message-container" data-message-id="1095533293417533532">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:18 AM">02:18</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これはobservationごとに管理されてて activeのときにdidSetが起きるとcontinuation.resumeで送信されてidleに戻る</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095533541774856193" class="chatlog__message-container" data-message-id="1095533541774856193">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:19 AM">02:19</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">pendingのときにdidSetが起きると「ここまでの変更」にキーが追加される</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095533630878666772" class="chatlog__message-container" data-message-id="1095533630878666772">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:19 AM">02:19</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">pendingってのが変更を継続的に記録して一つにまとめようとしている状態だ</span> <span class="chatlog__edited-timestamp" title="04/12/2023 2:19 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095533775540211752" class="chatlog__message-container" data-message-id="1095533775540211752">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:20 AM">02:20</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">idleはresume送信後の初期状態で、ここでdidSetくるとpendingが始まる。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095534099332087808" class="chatlog__message-container" data-message-id="1095534099332087808">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:21 AM">02:21</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">insertNextChange</code> が idle中に来るとactiveになる pending中に来ると、そこまで集めた変更(があれば)をresume送信してidleになる</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095534112208588851" class="chatlog__message-container" data-message-id="1095534112208588851">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:21 AM">02:21</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あーわかったぞ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095534527226585108" class="chatlog__message-container" data-message-id="1095534527226585108">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:23 AM">02:23</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ObservedChangedはAsyncSequenceだから</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095534587112857600" class="chatlog__message-container" data-message-id="1095534587112857600">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:23 AM">02:23</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">for-await-inで自動でnextが呼ばれるんだけど</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095534735461187585" class="chatlog__message-container" data-message-id="1095534735461187585">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:23 AM">02:23</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">didSetでcontinuationが発火されるとそのnextがElementを返すんだけど</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095534937949618287" class="chatlog__message-container" data-message-id="1095534937949618287">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:24 AM">02:24</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">その後forの中に入って、for本文でasync処理が実行されているまでの間が、idleなんだ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095535060612030586" class="chatlog__message-container" data-message-id="1095535060612030586">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:25 AM">02:25</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、for本文が終わって、またasync sequenceの次の値を読み取る準備ができたタイミングで、 やっとこさ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">next()</code> が呼ばれるから</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095535121345560727" class="chatlog__message-container" data-message-id="1095535121345560727">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:25 AM">02:25</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">その「次の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">next()</code> が呼ばれるまでの間」に、発生したdidSetがpending stateとして累積されているんだわ</span> <span class="chatlog__edited-timestamp" title="04/12/2023 2:25 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095535574955347998" class="chatlog__message-container" data-message-id="1095535574955347998">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:27 AM">02:27</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">didSetが発生するTaskと、for-awaitしてるTaskが別で並行に動いてるからズレが発生する、これがまとめられるって言ってる</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095535931315994664" class="chatlog__message-container" data-message-id="1095535931315994664">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:28 AM">02:28</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">俺が疑問に思った withMutating のくくりだと毎回リセットされちゃうのではないか、は、同じアクターコンテキスト(Mainなど)においては多分そうで</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095536107871023125" class="chatlog__message-container" data-message-id="1095536107871023125">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:29 AM">02:29</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">全部mainで組んだらプロパティに書き込むたびにイベントが来るんじゃないかな あ、でも送り側もmainでfor-await側もmainはありえないか、デッドロックするわ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095537414153445376" class="chatlog__message-container" data-message-id="1095537414153445376">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:34 AM">02:34</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いやできるのか・・・？よくわからなくなってきた</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095537716206243850" class="chatlog__message-container" data-message-id="1095537716206243850">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:35 AM">02:35</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@MainActor func handleChanges(_ example: ChangesExample) { Task { @MainActor in for await change in example.changes(for: [\.someField, \.someOtherField]) { switch (change.contains(\.someField), change.contains(\.someOtherField)) case (true, true): print("Changed both properties") case (true, false): print("changed integer field") case (false, true): print("changed string field") default: fatalError("this case will never happen") } } } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095537905843314689" class="chatlog__message-container" data-message-id="1095537905843314689">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:36 AM">02:36</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑これって、handleChangesはメインスレッドで呼ばれつつ、Taskがエンキューされて、 次のメインループでTask本文が実行されて、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">example.changes().next</code> が for-await によって呼ばれて・・・</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095538070822064228" class="chatlog__message-container" data-message-id="1095538070822064228">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:37 AM">02:37</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうするとこの for-await は、MainActorでisolateされた本文コードだから、 async sequenceからエレメントが来たらMainActorにホップしてから処理されるけれど</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095538232982241351" class="chatlog__message-container" data-message-id="1095538232982241351">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:37 AM">02:37</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もし、この <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.next</code> の結果を送信するための Continuationが、MainActorコンテキストなTaskから呼びされた場合は</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095538406941003898" class="chatlog__message-container" data-message-id="1095538406941003898">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:38 AM">02:38</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">async sequenceの値送信側もmain actorで、for-awaitは、main actorからmain actorだからホップ無しで処理が進んで、 結果的に同期的にこのforの本文に入ってくるのかな。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095538478399356938" class="chatlog__message-container" data-message-id="1095538478399356938">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:38 AM">02:38</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうじゃないとUI更新が1フレーム遅れちゃうから困るんだけど。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1095538810772791387" class="chatlog__message-container" data-message-id="1095538810772791387">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/12/2023 2:40 AM">02:40</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんとなく以前からSwift Concurrencyで Task.init + for-await-in すると、1フレ遅れからは逃れられないように思ってたけど、 ちゃんとやれば大丈夫なんかね？</span></div>
+      </div>
+    </div>
+  </div>
+</div>
