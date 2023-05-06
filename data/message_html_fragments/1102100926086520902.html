@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1102099395379474523" class="chatlog__message-container" data-message-id="1102099395379474523">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="kebo#5285" data-user-id="341261694279876609">kebo</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1102100926086520902"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1102099395379474523">04/30/2023 5:09 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">こういうコードだと，あらかじめカウントアップした状態で，最初の toggle 連打時には <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">deinit 0</code> が 1 回，それ以降の連打時には <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">deinit 0</code> が 2 回ずつ出力されるので，<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> の挙動としては <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">condition</code> が変わって <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Counter</code> が変わると <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> のための変数が新しく作られるけれど，前に使っていた変数がまだ破棄されず生きていたらそれを使い回すが新しく作った方も画面表示に使わないだけで裏では保持し続ける，みたいな挙動になっていそうですね． <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> に参照型を持たせるか値型を持たせるかで挙動が変わりそうな気もするので Swift 5.9 ツールチェーンで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@_moveOnly</code> struct を作って使おうとしてみたんですが，<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">State&lt;T&gt;</code> みたいなジェネリクスでは noncopyable struct は使えないみたいで弾かれてしまいました... <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class Count { let count: Int init(_ count: Int) { self.count = count } deinit { print("deinit \(count)") } } struct Counter: View { let name: String @State var count = Count(0) var body: some View { Button("\(name)=\(count.count)") { count = Count(count.count + 1) } } } struct ContentView: View { @State var condition = false var body: some View { if condition { VStack { Counter(name: "T") Button("toggle") { condition.toggle() } } } else { VStack { Counter(name: "F") Button("toggle") { condition.toggle() } } } } }</code></span> <span class="chatlog__edited-timestamp" title="04/30/2023 5:12 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1102100926086520902" class="chatlog__message-container" data-message-id="1102100926086520902">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="04/30/2023 5:15 AM">05:15</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちなみに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@StateObject</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> だと挙動が違うので，上の例ではあくまでも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> の挙動を知るために <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> に参照型を持たせてます．</span></div>
+      </div>
+    </div>
+  </div>
+</div>

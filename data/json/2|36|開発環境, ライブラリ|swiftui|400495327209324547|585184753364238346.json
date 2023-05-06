@@ -22949,9 +22949,9 @@
       "content": "swiftUIのlistについて質問があります。\n現在listでは、内部でForEachを使用することで、onDeleteを使用することができます。\nですが、deleteボタン以外を追加する方法がわかりません。\n色々調べたのですが、左右のスワイプで表示されるボタンの作り方がどうしてもわかりません。\nどなたかご教授願えませんでしょうか。\n（こういうやつを出したいです）",
       "author": {
         "id": "212513828641046529",
-        "name": "Sumidora",
-        "discriminator": "8931",
-        "nickname": "Sumidora",
+        "name": "sizumita",
+        "discriminator": "0001",
+        "nickname": "sizumita",
         "color": null,
         "isBot": false,
         "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/9156ffd52835a1f34917ac8ecea4dab1.png?size=512"
@@ -23002,9 +23002,9 @@
       "content": "返信遅くなりすみません\uD83D\uDE4F\n背面でやるしかないようですね....\nもしくはUIKitを使うしかないのでしょうか....\nありがとうございます！",
       "author": {
         "id": "212513828641046529",
-        "name": "Sumidora",
-        "discriminator": "8931",
-        "nickname": "Sumidora",
+        "name": "sizumita",
+        "discriminator": "0001",
+        "nickname": "sizumita",
         "color": null,
         "isBot": false,
         "avatarUrl": "https://cdn.discordapp.com/avatars/212513828641046529/9156ffd52835a1f34917ac8ecea4dab1.png?size=512"
@@ -31815,7 +31815,1516 @@
         }
       ],
       "mentions": []
+    },
+    {
+      "id": "1102030600015200336",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:36:09.782+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ツイッターのこの会話が発端の話題なんですが\nhttps://twitter.com/omochimetaru/status/1652273418958675969",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "",
+          "url": "https://twitter.com/omochimetaru/status/1652273418958675969",
+          "timestamp": "2023-04-29T11:27:35.492+00:00",
+          "description": "@kntkymt @treastrain @fummicc1 ContentViewAって、\nContentViewBのように書いてるのと(ほぼ)同じって理解であってますか？",
+          "color": "#1DA1F2",
+          "author": {
+            "name": "おもちメタル (@omochimetaru)",
+            "url": "https://twitter.com/omochimetaru",
+            "iconUrl": "https://images-ext-2.discordapp.net/external/nuvCQBI9oDQG3ICC7i9Exu6g_qoeTYgD2eaVo-Gd5HU/https/pbs.twimg.com/profile_images/1173990915473436672/EgkugHJ6_400x400.jpg"
+          },
+          "image": {
+            "url": "https://images-ext-1.discordapp.net/external/R7KMpEQ2UsY5_A-Lm05CVsKhu6bnjqNN5WhTB_P4umU/https/pbs.twimg.com/media/Fu4NvuUaAAEaFy9.jpg",
+            "width": 894,
+            "height": 916
+          },
+          "footer": {
+            "text": "Twitter",
+            "iconUrl": "https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png"
+          },
+          "images": [
+            {
+              "url": "https://images-ext-1.discordapp.net/external/R7KMpEQ2UsY5_A-Lm05CVsKhu6bnjqNN5WhTB_P4umU/https/pbs.twimg.com/media/Fu4NvuUaAAEaFy9.jpg",
+              "width": 894,
+              "height": 916
+            },
+            {
+              "url": "https://images-ext-1.discordapp.net/external/mJrulmg3OKNglRzJs4KR6_6SpJfUr5k4mnt1CCyXotc/https/pbs.twimg.com/media/Fu4Ny4faUAAW5y8.jpg",
+              "width": 870,
+              "height": 940
+            }
+          ],
+          "fields": []
+        }
+      ],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102030668063588453",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:36:26.006+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "```swift\n// 素早くトグルすれば値が生きている\nstruct ContentViewE: View {\n    @State var toggle = false\n\n    var body: some View {\n        if toggle {\n            VStack {\n                TextView()\n\n                Button {\n                    toggle.toggle()\n                } label: {\n                    Text(\"toggle if\")\n                }\n            }\n        } else {\n            VStack {\n                TextView()\n\n                Button {\n                    toggle.toggle()\n                } label: {\n                    Text(\"toggle if\")\n                }\n            }\n        }\n    }\n}\n\nfinal class ViewModel: ObservableObject {\n    @Published var count = 0\n}\n\nstruct TextView: View {\n    @StateObject var viewModel: ViewModel\n\n    init() {\n        _viewModel = .init(wrappedValue: ViewModel())\n    }\n\n    var body: some View {\n        Button {\n            viewModel.count += 1\n        } label: {\n            Text(\"count: \\(viewModel.count)\")\n        }\n    }\n}\n```",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDE47‍♂️",
+            "code": "man_bowing",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647-200d-2642-fe0f.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1102030776620564580",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:36:51.888+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "↑このように、 if 文の then側とelse側にそれぞれViewを置いて、その中にStateObjectをもたせた時、",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102030881671090256",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:37:16.934+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "素早く then → else → then と戻ってくると、過去のthenの値が記憶されているが (StateObjectがdeinitされない)",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102030951334293505",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:37:33.543+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ゆっくり then → else → then と戻ってくると、値がリセットされる (StateObjectが deinit & init される)",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102031019730812968",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:37:49.85+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "という現象に遭遇したんですが、これってSwiftUIのバグですか？\nそれとも、SwiftUI的に何か説明されてる現象ですか？",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102031062793715712",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:38:00.117+00:00",
+      "timestampEdited": "2023-04-30T00:38:16.581+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "↓素早く操作すると値が残っている現象の動画です",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [
+        {
+          "id": "1102031062428815492",
+          "url": "https://cdn.discordapp.com/attachments/585184753364238346/1102031062428815492/2023-04-30_9.34.32.mov",
+          "fileName": "2023-04-30_9.34.32.mov",
+          "fileSizeBytes": 1705059
+        }
+      ],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102031303525797888",
+      "type": "Default",
+      "timestamp": "2023-04-30T00:38:57.512+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ちなみに、このように書き換えると、値が残る現象が消える事もわかりました。\n```swift\n// 必ずリセットされる\nstruct ContentViewD: View {\n    @State var toggle = false\n\n    var body: some View {\n        VStack {\n            if toggle {\n                TextView()\n            } else {\n                TextView()\n            }\n\n            Button {\n                toggle.toggle()\n            } label: {\n                Text(\"toggle if\")\n            }\n        }\n    }\n}\n```",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102055917064826880",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:16:45.837+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "StateObjectのinit(wrappedValue:)を自前で呼ぶべきではない、って話があった気がするんですが、それとは関係なさそうですか？",
+      "author": {
+        "id": "827894258966331402",
+        "name": "Ensan",
+        "discriminator": "6902",
+        "nickname": "Ensan",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/827894258966331402/be502717de29e4db1202de08822ad935.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102056419315945512",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:18:45.583+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "あ〜関係ありそう・・・！",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102056625168199700",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:19:34.662+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "https://developer.apple.com/documentation/swiftui/stateobject\n```swift\nclass DataModel: ObservableObject {\n    @Published var name = \"Some Name\"\n    @Published var isEnabled = false\n}\n\nstruct MyView: View {\n    @StateObject private var model = DataModel() // Create the state object.\n\n    var body: some View {\n        Text(model.name) // Updates when the data model changes.\n        MySubView()\n            .environmentObject(model)\n    }\n}\n```",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102056664485601351",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:19:44.036+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "↑こういう書き方がお作法なんですね。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102057243714785290",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:22:02.135+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "```swift\nstruct TextView: View {\n    @StateObject var viewModel = ViewModel()\n\n    var body: some View {\n        Button {\n            viewModel.count += 1\n        } label: {\n            Text(\"count: \\(viewModel.count)\")\n        }\n    }\n}\n```\n↑こう書き換えてみましたが、現象には変化無かったです。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "892393551856533584",
+            "name": "t_naruhodo",
+            "code": "t_naruhodo",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.discordapp.com/emojis/892393551856533584.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1102057976765878342",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:24:56.908+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ちなみにですが\n> StateObjectのinit(wrappedValue:)を自前で呼ぶべきではない\nこれは最近ドキュメントが更新され、「Initialize state objects using external data」のセクションが追加され\n「initを読んでも良いが、StateObjectが状態を復元するから、初期化は最初しか走らないよ（意訳）」と言う文面に変わりました\n\nhttps://developer.apple.com/documentation/swiftui/stateobject#Initialize-state-objects-using-external-data",
+      "author": {
+        "id": "357858243869016065",
+        "name": "kntk",
+        "discriminator": "7498",
+        "nickname": "kntk",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/357858243869016065/afb20eab67082201bd227d98d3fb7596.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "StateObject | Apple Developer Documentation",
+          "url": "https://developer.apple.com/documentation/swiftui/stateobject",
+          "timestamp": null,
+          "description": "A property wrapper type that instantiates an observable object.",
+          "thumbnail": {
+            "url": "https://images-ext-1.discordapp.net/external/LFRB6c7dk3awHBns7A_ycM6xsEL9C7Txab4nhzatlsQ/https/docs.developer.apple.com/tutorials/developer-og.jpg",
+            "width": 1200,
+            "height": 630
+          },
+          "images": [],
+          "fields": []
+        }
+      ],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC40",
+            "code": "eyes",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg"
+          },
+          "count": 3
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1102058184463614123",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:25:46.427+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "が、今回の例でやる必要かなったですね（↑の最初のコード作ったの自分です）",
+      "author": {
+        "id": "357858243869016065",
+        "name": "kntk",
+        "discriminator": "7498",
+        "nickname": "kntk",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/357858243869016065/afb20eab67082201bd227d98d3fb7596.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102058402986872863",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:26:38.527+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`body` の中で `if` を使うと条件式の値が変わった時に画面のライフタイム的にも一度画面が消えて再表示された扱いになる (`onDisappear` が呼ばれて `onAppear` が呼ばれ直す) ので，画面のライフタイムと一致するはずの `@StateObject` は初期化される方が正しい挙動な気がします．これを避けるために私はある程度複雑な `View` では `body` の中で `if`/`switch` をトップレベルで使わないように `VStack` で囲んだりしてますね．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDE3F",
+            "code": "crying_cat_face",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f63f.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1102058996413763585",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:29:00.011+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ふむふむ。やはり値が生き残る挙動の方が変なんですね。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102059166727667712",
+      "type": "Reply",
+      "timestamp": "2023-04-30T02:29:40.617+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> body の中で if/switch をトップレベルで使わないように VStack で囲んだりしてます\nこれってどういう意味ですか？\nVStackの中で if を使ったら、そのif配下においては同じ話ですよね？",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "341261694279876609",
+          "name": "kebo",
+          "discriminator": "5285",
+          "nickname": "kebo",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102058402986872863",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102059370247884900",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:30:29.14+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "```swift\n// 素早くトグルすれば値が生きている\nstruct ContentViewE2: View {\n    @State var toggle = false\n\n    var body: some View {\n        VStack {\n            if toggle {\n                VStack {\n                    TextView()\n\n                    Button {\n                        toggle.toggle()\n                    } label: {\n                        Text(\"toggle if\")\n                    }\n                }\n            } else {\n                VStack {\n                    TextView()\n\n                    Button {\n                        toggle.toggle()\n                    } label: {\n                        Text(\"toggle if\")\n                    }\n                }\n            }\n        }\n    }\n}\n```",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102059438061408340",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:30:45.308+00:00",
+      "timestampEdited": "2023-04-30T02:30:55.839+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "↑例えばこのようにしても同じ現象が起こります。\n`if` があるのは 「トップレベル」でこそないですが、同じです。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102060229597855764",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:33:54.025+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "こういうのがあった場合に，前者の場合だと `condition` が変わるたびに `ContentViewA` に対応づく画面は一度非表示になって再度表示され直した扱いになりますが，後者の場合はそうはならないという意味です．`if` や `else` のブロックの中に書いたものは条件が変わるたびに一度死にますよ．\n```swift\nstruct ContentViewA: View {\n    var body: some View {\n        if condition {\n            Text(\"A\")\n        } else {\n            Text(\"B\")\n        }\n    }\n}\n\nstruct ContentViewB: View {\n    var body: some View {\n        VStack {\n            if condition {\n                Text(\"A\")\n            } else {\n                Text(\"B\")\n            }\n        }\n    }\n}\n```",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102060980269236234",
+      "type": "Reply",
+      "timestamp": "2023-04-30T02:36:52.999+00:00",
+      "timestampEdited": "2023-04-30T02:37:13.774+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ContentViewAでもContentViewBでも、 `condition` が変わったら `Text(\"A\")` と `Text(\"B\")` の表示/非表示が切り替わるのではないのでしょうか",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "341261694279876609",
+          "name": "kebo",
+          "discriminator": "5285",
+          "nickname": "kebo",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102060229597855764",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102061162427842610",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:37:36.429+00:00",
+      "timestampEdited": "2023-04-30T02:37:50.593+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "omochimetaru さんのコード例で言うと，条件が変わった場合に `ContentViewE2` は生き続けますが `TextView` は死にます．`body` 直下の `VStack` がなかった場合は `ContentViewE2` も死にます．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102061280438796378",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:38:04.565+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "あ、 `body` を提供してる 外側の View が変わるんですか",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102061309052329984",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:38:11.387+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ちょっと試してみますね",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102064626692259911",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:51:22.374+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "@kebo \n```swift\nstruct MidViewA: View {\n    let condition: Bool\n    \n    @State var count = 0\n\n    var body: some View {\n        if condition {\n            Counter(name: \"T\", count: $count)\n        } else {\n            Counter(name: \"F\", count: $count)\n        }\n    }\n}\n\nstruct Counter: View {\n    var name: String\n    @Binding var count: Int\n\n    var body: some View {\n        Button { count += 1 } label: { Text(\"\\(name)=\\(count)\") }\n    }\n}\n\nstruct ContentViewF: View {\n    @State var condition = false\n\n    var body: some View {\n        VStack {\n            MidViewA(condition: condition)\n            Button { condition.toggle() } label: { Text(\"toggle\") }\n        }\n    }\n}\n```\n\nこれでおっしゃっている状況を構成できてると思ったんですがどうでしょうか？\n「`MidViewA` に関して、 `condition` が変化した場合、 `MidViewA.count` がリセットする」\n(`MidViewA` が、 `ContentViewA` を再現しようとしたものです)\nという話だと思います。\nしかし、動かしてみるとtoggleボタンを押してもカウントがリセットしませんでした。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "341261694279876609",
+          "name": "kebo",
+          "discriminator": "5285",
+          "nickname": "kebo",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+        }
+      ]
+    },
+    {
+      "id": "1102065011389648987",
+      "type": "Default",
+      "timestamp": "2023-04-30T02:52:54.093+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "意図はその通りです．ちょっと見てみます．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDE4F",
+            "code": "pray",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f64f.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1102070144739594260",
+      "type": "Default",
+      "timestamp": "2023-04-30T03:13:17.979+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "確かに iOS 16.5 ではおっしゃる通りでした．ひょっとしたら別の問題と混同して誤った情報を流してしまっていた可能性もありますが，どこかの OS バージョンから `@ViewBuilder` の扱いが変わった可能性もあるので，ちょっとシミュレータを落として古い OS で試してみます．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83C\uDD97",
+            "code": "ok",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f197.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1102080369890709564",
+      "type": "Default",
+      "timestamp": "2023-04-30T03:53:55.845+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "以下のように `ContentViewF` 側で `MidViewA` に `onDisappear` を生やした場合，iOS 16.5, iOS 15.0 時点では `condition` が変わっても呼ばれることはありませんが，iOS 14.0.1 では呼ばれてました．なので `MidViewA` が死ぬというのは iOS 14.x 時代の記憶だったようです．\n```swift\nstruct ContentViewF: View {\n    ...\n    var body: some View {\n        VStack {\n            MidViewA(condition: condition).onDisappear { print(\"onDisappear\") }\n            Button { condition.toggle() } label: { Text(\"toggle\") }\n        }\n    }\n}\n```\nただ，`MidViewA` の `@State`  がリセットされることはなかったので，`onDisappear` が呼ばれる条件と `@State` がリセットされる条件はそもそも違っていたみたいですね．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102080840550338591",
+      "type": "Default",
+      "timestamp": "2023-04-30T03:55:48.059+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "おおなるほど・・・\niOS15では、 onAppear/DisappearとStateのリセットは同じタイミングなんですかね",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102083919593078795",
+      "type": "Default",
+      "timestamp": "2023-04-30T04:08:02.16+00:00",
+      "timestampEdited": "2023-04-30T04:08:36.123+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ストレージがカツカツで iOS 15.0 Simulator を消しちゃったので 15 ではすぐには試せないですが，iOS 16.5 と iOS 14.0.1 では以下のようなコード (omochimetaru さんが最初らへんに書かれていた必ずリセットされるコードと同等) で T から F に変わって値がリセットされる時に \"onAppear F\" と \"onDisappear T\" がこの順番でログに吐かれますね．\n```swift\nstruct Counter: View {\n    let name: String\n    @State var count = 0\n\n    var body: some View {\n        Button(\"\\(name)=\\(count)\") {\n            count += 1\n        }\n        .onAppear {\n            print(\"onAppear \\(name)\")\n        }\n        .onDisappear {\n            print(\"onDisappear \\(name)\")\n        }\n    }\n}\n\nstruct ContentView: View {\n    @State var condition = false\n\n    var body: some View {\n        VStack {\n            if condition {\n                Counter(name: \"T\")\n            } else {\n                Counter(name: \"F\")\n            }\n            Button(\"toggle\") { condition.toggle() }\n        }\n    }\n}\n```",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102084180927598683",
+      "type": "Default",
+      "timestamp": "2023-04-30T04:09:04.467+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "なるほど。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102085273027874887",
+      "type": "Reply",
+      "timestamp": "2023-04-30T04:13:24.844+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "このコードだと，iOS 16.5 では素早くトグルすると値が生き残って，その時たとえば T から F へ切り替えて素早く T へ戻す動作だったとすると，onAppear F と onDisappear F だけが吐かれて，onDisappear T は無い状況でした．ただ iOS 14.0.1 だと onDisappear T も出る代わりに値は必ずリセットされちゃってました．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "189711109966659584",
+          "name": "omochimetaru",
+          "discriminator": "1122",
+          "nickname": "omochimetaru",
+          "color": "#EDABA1",
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102059370247884900",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102085525004877936",
+      "type": "Default",
+      "timestamp": "2023-04-30T04:14:24.92+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`onAppear` と `onDisappear` は `TextView` に生やした前提",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102085571574251623",
+      "type": "Default",
+      "timestamp": "2023-04-30T04:14:36.023+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Tのappear/disappearが起きない事と、stateが維持される事は一貫してるわけですね。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102085638762803290",
+      "type": "Default",
+      "timestamp": "2023-04-30T04:14:52.042+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ですね．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102086034319220766",
+      "type": "Reply",
+      "timestamp": "2023-04-30T04:16:26.35+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "まあ↑みたいな例もあるので，onDisappear/onAppear が起きることと State が維持されることは一致することが多いというだけで必ず一致するとは言い切れないかもしれないですが...",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [],
+      "reference": {
+        "messageId": "1102080369890709564",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102088092338376714",
+      "type": "Reply",
+      "timestamp": "2023-04-30T04:24:37.02+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "iOS14のSwiftUIはいろいろ怪しいのでぶっ壊れたって事でスルーして良いと思います",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC4D",
+            "code": "thumbsup",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "341261694279876609",
+          "name": "kebo",
+          "discriminator": "5285",
+          "nickname": "kebo",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102086034319220766",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102099395379474523",
+      "type": "Default",
+      "timestamp": "2023-04-30T05:09:31.875+00:00",
+      "timestampEdited": "2023-04-30T05:12:58.1+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "こういうコードだと，あらかじめカウントアップした状態で，最初の toggle 連打時には `deinit 0` が 1 回，それ以降の連打時には `deinit 0` が 2 回ずつ出力されるので，`@State` の挙動としては `condition` が変わって `Counter` が変わると `@State` のための変数が新しく作られるけれど，前に使っていた変数がまだ破棄されず生きていたらそれを使い回すが新しく作った方も画面表示に使わないだけで裏では保持し続ける，みたいな挙動になっていそうですね．\n`@State` に参照型を持たせるか値型を持たせるかで挙動が変わりそうな気もするので Swift 5.9 ツールチェーンで `@_moveOnly` struct を作って使おうとしてみたんですが，`State<T>` みたいなジェネリクスでは noncopyable struct は使えないみたいで弾かれてしまいました...\n```swift\nfinal class Count {\n    let count: Int\n    init(_ count: Int) {\n        self.count = count\n    }\n    deinit {\n        print(\"deinit \\(count)\")\n    }\n}\n\nstruct Counter: View {\n    let name: String\n    @State var count = Count(0)\n\n    var body: some View {\n        Button(\"\\(name)=\\(count.count)\") {\n            count = Count(count.count + 1)\n        }\n    }\n}\n\nstruct ContentView: View {\n    @State var condition = false\n\n    var body: some View {\n        if condition {\n            VStack {\n                Counter(name: \"T\")\n                Button(\"toggle\") { condition.toggle() }\n            }\n        } else {\n            VStack {\n                Counter(name: \"F\")\n                Button(\"toggle\") { condition.toggle() }\n            }\n        }\n    }\n}\n```",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102100926086520902",
+      "type": "Default",
+      "timestamp": "2023-04-30T05:15:36.824+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ちなみに `@StateObject` と `@State` だと挙動が違うので，上の例ではあくまでも `@State` の挙動を知るために `@State` に参照型を持たせてます．",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102135432415813672",
+      "type": "Default",
+      "timestamp": "2023-04-30T07:32:43.774+00:00",
+      "timestampEdited": "2023-04-30T07:33:01.729+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "連打生存バグは State + 値型でも起きるんですね。\n(↑の例は State + 参照型ですが、手元で `struct Count` にして確認しました )",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102135793193066566",
+      "type": "Default",
+      "timestamp": "2023-04-30T07:34:09.79+00:00",
+      "timestampEdited": "2023-04-30T07:34:21.958+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "元々 `Int` で起こっているのでそれはそうだと思います．(`Int` の生存期間が知りたかったので class でラップした感じです)",
+      "author": {
+        "id": "341261694279876609",
+        "name": "kebo",
+        "discriminator": "5285",
+        "nickname": "kebo",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102135797064409098",
+      "type": "Reply",
+      "timestamp": "2023-04-30T07:34:10.713+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> State<T> みたいなジェネリクスでは noncopyable struct は使えないみたい\nこれはそうです。\nSwiftのジェネリック抽象型 ( `T` の事 )は、Copyable が暗黙に含まれているからです。\n```swift\nfunc foo<T>(a: T) {\n  let b = a // ←これが常に許されている\n  print(b)\n}\n```",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "892393551856533584",
+            "name": "t_naruhodo",
+            "code": "t_naruhodo",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.discordapp.com/emojis/892393551856533584.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "341261694279876609",
+          "name": "kebo",
+          "discriminator": "5285",
+          "nickname": "kebo",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102099395379474523",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102136055832002611",
+      "type": "Reply",
+      "timestamp": "2023-04-30T07:35:12.408+00:00",
+      "timestampEdited": "2023-04-30T07:35:20.147+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "元々は StateObject → class → propertyのInt という要素による構成だったので、一応まだこの辺の部品を疑ってました",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "341261694279876609",
+          "name": "kebo",
+          "discriminator": "5285",
+          "nickname": "kebo",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/341261694279876609/2ed016f6e6f34c7c11dc276a23f08efd.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102135793193066566",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102136368429285397",
+      "type": "Reply",
+      "timestamp": "2023-04-30T07:36:26.937+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ちなみにこれについては 暗黙の `Copyable` を除去する文法 `<T: ~Copyable>` が議論されてます。実装状況は追ってないです。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC40",
+            "code": "eyes",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [],
+      "reference": {
+        "messageId": "1102135797064409098",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102138422145073193",
+      "type": "Reply",
+      "timestamp": "2023-04-30T07:44:36.581+00:00",
+      "timestampEdited": "2023-04-30T07:45:29.783+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "手元で確認してみたのですが、ContentViewEだとそもそもTextViewのonDisappearが素早く動かした時に呼ばれていないので、非表示なViewとしてSwiftUIに認識されていないかもですね...\n(ContentViewDのTextViewのonDisappearは呼ばれていますが...)",
+      "author": {
+        "id": "435624724173684747",
+        "name": "matsuji",
+        "discriminator": "8806",
+        "nickname": "matsuji",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/435624724173684747/da7b1a3b2e2bc57575ceddb88d28232e.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "189711109966659584",
+          "name": "omochimetaru",
+          "discriminator": "1122",
+          "nickname": "omochimetaru",
+          "color": "#EDABA1",
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102030668063588453",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102140300358590554",
+      "type": "Reply",
+      "timestamp": "2023-04-30T07:52:04.382+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "トグルするボタン自体が消え去るifセクションに包まれているわけですが、\nボタンが消えるアニメーションの時間の間だけ、ボタンを含むifセクション全体が生存を延長されている\nような感じがします。\nまあ見た目にはボタンはパッと切り替わってるんですけど・・・",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC4D",
+            "code": "thumbsup",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "435624724173684747",
+          "name": "matsuji",
+          "discriminator": "8806",
+          "nickname": "matsuji",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/435624724173684747/da7b1a3b2e2bc57575ceddb88d28232e.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102138422145073193",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102141934581059724",
+      "type": "Reply",
+      "timestamp": "2023-04-30T07:58:34.011+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "そうですね、Buttonが内部で持っている何かが悪さをしていそうな気がしました。\nContentViewEのButtonをText + onTapGestureに書き換えると、値が残ることはなくなりました\n```swift\nText(\"toggle if\")\n    .onTapGesture {\n        toggle.toggle()\n    }\n```",
+      "author": {
+        "id": "435624724173684747",
+        "name": "matsuji",
+        "discriminator": "8806",
+        "nickname": "matsuji",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/435624724173684747/da7b1a3b2e2bc57575ceddb88d28232e.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "189711109966659584",
+          "name": "omochimetaru",
+          "discriminator": "1122",
+          "nickname": "omochimetaru",
+          "color": "#EDABA1",
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102140300358590554",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1102143202758242374",
+      "type": "Default",
+      "timestamp": "2023-04-30T08:03:36.368+00:00",
+      "timestampEdited": "2023-04-30T08:18:00.514+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "あー、なるほど、Buttonのactionでanimationが起きてるんですね",
+      "author": {
+        "id": "435624724173684747",
+        "name": "matsuji",
+        "discriminator": "8806",
+        "nickname": "matsuji",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/435624724173684747/da7b1a3b2e2bc57575ceddb88d28232e.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102143685560377354",
+      "type": "Default",
+      "timestamp": "2023-04-30T08:05:31.477+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "これでも値は消えましたね\n```swift\nButton {\n    withAnimation(nil) {\n        toggle.toggle()\n    }\n} label: {\n    Text(\"toggle if\")\n}\n```",
+      "author": {
+        "id": "435624724173684747",
+        "name": "matsuji",
+        "discriminator": "8806",
+        "nickname": "matsuji",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/435624724173684747/da7b1a3b2e2bc57575ceddb88d28232e.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1102190789376888853",
+      "type": "Reply",
+      "timestamp": "2023-04-30T11:12:41.902+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "おお！アニメーションが悪さを起こしてるので間違いなさそう",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "435624724173684747",
+          "name": "matsuji",
+          "discriminator": "8806",
+          "nickname": "matsuji",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/435624724173684747/da7b1a3b2e2bc57575ceddb88d28232e.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1102143685560377354",
+        "channelId": "585184753364238346",
+        "guildId": "291054398077927425"
+      }
     }
   ],
-  "messageCount": 1265
+  "messageCount": 1316
 }
