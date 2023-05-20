@@ -930,7 +930,7 @@
             <div class="chatlog__reactions">
               <div class="chatlog__reaction" title="raised_hands"><img class="chatlog__emoji chatlog__emoji--small" alt="🙌" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f64c.svg" loading="lazy"> <span class="chatlog__reaction-count">28</span></div>
               <div class="chatlog__reaction" title="laughing"><img class="chatlog__emoji chatlog__emoji--small" alt="😆" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f606.svg" loading="lazy"> <span class="chatlog__reaction-count">9</span></div>
-              <div class="chatlog__reaction" title="apple_rainbow"><img class="chatlog__emoji chatlog__emoji--small" alt="apple_rainbow" src="https://cdn.discordapp.com/emojis/892028219233042492.png" loading="lazy"> <span class="chatlog__reaction-count">15</span></div>
+              <div class="chatlog__reaction" title="apple_rainbow"><img class="chatlog__emoji chatlog__emoji--small" alt="apple_rainbow" src="https://cdn.discordapp.com/emojis/892028219233042492.png" loading="lazy"> <span class="chatlog__reaction-count">16</span></div>
               <div class="chatlog__reaction" title="muscle"><img class="chatlog__emoji chatlog__emoji--small" alt="💪" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f4aa.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
               <div class="chatlog__reaction" title="apple_black"><img class="chatlog__emoji chatlog__emoji--small" alt="apple_black" src="https://cdn.discordapp.com/emojis/892027441005072384.png" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
             </div>
@@ -1146,9 +1146,191 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1107904211250855956" class="chatlog__message-container" data-message-id="1107904211250855956">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="trickart#3030" data-user-id="459680124531638283">trickart</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1107904211250855956"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1107904211250855956">05/16/2023 5:35 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Network FrameworkでのTCPソケット通信の実装方法について質問です。 現在、iOSアプリでLAN内のホストとTCPソケット通信でやり取りするアプリを作ろうとしています。 当初はStreamを使って通信処理を書こうと思ったのですが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CFStreamCreatePairWithSocketToHost(_:_:_:_:_:)</code> はiOS15でdeprecatedになっており、「Jump to Definition」でインターフェイスを確認すると「Use nw_connection<em>t in Network framework instead」となっていたためNetwork Frameworkを使うことにしました。 ところがNetwork FrameworkのNWConnectionの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">receive(minimumIncompleteLength:maximumLength:completion:)</code> メソッドは一度実行した後データを受信した場合、その後データが送られてきても何も起きないため、StreamDelegateの `stream(</em>:handle:)<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> がデータを受信するたびに実行されるのとは違う形のようでした。 今回実装したいアプリの通信の性質上、「いつ何回データが送られてくるか？」はあらかじめ把握できないため、StreamDelegateのように受信するたびにメソッドが実行される形が望ましいと考えております。 素朴な考えでは </code>receive(minimumIncompleteLength:maximumLength:completion:)<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> のcompletionの中で </code>receive(minimumIncompleteLength:maximumLength:completion:)<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> を呼ぶようにすれば何度データが送られてきてもcompletionが実行される実装に出来ると思ったのですが、この実装方法で問題ないかアドバイスをいただきたいです。 ( </code>[weak self]<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> を使っているから問題ない気がするけど循環参照の問題はないか？とかreceiveの取りこぼしがないか？が気になっています。)</code><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift import Foundation import Network final class Client { let connection: NWConnection init(host: String, port: UInt16) { connection = NWConnection( to: .hostPort(host: .init(host), port: .init(integerLiteral: port)), using: .tcp ) } deinit { connection.cancel() } func start() { connection.start(queue: .main) addReceive() } func send(_ bytes: [UInt8]) { connection.send(content: bytes, completion: .contentProcessed { _ in // do something. }) } private func addReceive() { connection.receive(minimumIncompleteLength: .zero, maximumLength: .max) { [weak self] content, context, isComplete, error in // do something. self?.addReceive() } } }</code>` ご回答いただけますと幸いです.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1107937164932689941" class="chatlog__message-container" data-message-id="1107937164932689941">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy">
+              <div class="chatlog__reply-author" title="trickart#3030">trickart</div>
+              <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1107904211250855956')"> Network FrameworkでのTCPソケット通信の実装方法について質問です。 現在、iOSアプリでLAN内のホストとTCPソケット通信でやり取りするアプリを作ろうとしています。 当初はStreamを使って通信処理を書こうと思ったのですが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CFStreamCreatePairWithSocketToHost(_:_:_:_:_:)</code> はiOS15でdeprecatedになっており、「Jump to Definition」でインターフェイスを確認すると「Use nw_connection<em>t in Network framework instead」となっていたためNetwork Frameworkを使うことにしました。 ところがNetwork FrameworkのNWConnectionの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">receive(minimumIncompleteLength:maximumLength:completion:)</code> メソッドは一度実行した後データを受信した場合、その後データが送られてきても何も起きないため、StreamDelegateの `stream(</em>:handle:)<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> がデータを受信するたびに実行されるのとは違う形のようでした。 今回実装したいアプリの通信の性質上、「いつ何回データが送られてくるか？」はあらかじめ把握できないため、StreamDelegateのように受信するたびにメソッドが実行される形が望ましいと考えております。 素朴な考えでは </code>receive(minimumIncompleteLength:maximumLength:completion:)<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> のcompletionの中で </code>receive(minimumIncompleteLength:maximumLength:completion:)<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> を呼ぶようにすれば何度データが送られてきてもcompletionが実行される実装に出来ると思ったのですが、この実装方法で問題ないかアドバイスをいただきたいです。 ( </code>[weak self]<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> を使っているから問題ない気がするけど循環参照の問題はないか？とかreceiveの取りこぼしがないか？が気になっています。)</code><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift import Foundation import Network final class Client { let connection: NWConnection init(host: String, port: UInt16) { connection = NWConnection( to: .hostPort(host: .init(host), port: .init(integerLiteral: port)), using: .tcp ) } deinit { connection.cancel() } func start() { connection.start(queue: .main) addReceive() } func send(_ bytes: [UInt8]) { connection.send(content: bytes, completion: .contentProcessed { _ in // do something. }) } private func addReceive() { connection.receive(minimumIncompleteLength: .zero, maximumLength: .max) { [weak self] content, context, isComplete, error in // do something. self?.addReceive() } } }</code>` ご回答いただけますと幸いです. </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1107937164932689941"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1107937164932689941">05/16/2023 7:46 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">僕がNetwork.frameworkでソケット通信するときは、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">receive</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">completion</code> の中で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">receive</code> を呼ぶループを組みますね。一般的にはそうなると思います。</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="t_naruhodo"><img class="chatlog__emoji chatlog__emoji--small" alt="t_naruhodo" src="https://cdn.discordapp.com/emojis/892393551856533584.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1107985735262404618" class="chatlog__message-container" data-message-id="1107985735262404618">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/1107637552422342686/15531348409c122e26e35de0334b8ba5.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="kajitani#9533" data-user-id="1107637552422342686">kajitani</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1107985735262404618"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1107985735262404618">05/16/2023 10:59 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">こんばんは！iOS16.4のアップデート内容に関して質問させてください！ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">// SwiftUI.View struct TestView: View { var body: some View { ScrollView { VStack { TextField("", text: .constant("")) Color.red .frame(height: 1000) Color.blue .frame(height: 200) } } } } // こちらのUIViewControllerを表示する final class TestViewController: UIViewController { override func viewDidLoad() { super.viewDidLoad() let content = UIHostingController(rootView: TestView()).view! view.addSubview(content) content.translatesAutoresizingMaskIntoConstraints = false NSLayoutConstraint.activate([ content.topAnchor.constraint(equalTo: view.topAnchor), content.leadingAnchor.constraint(equalTo: view.leadingAnchor), content.trailingAnchor.constraint(equalTo: view.trailingAnchor), content.bottomAnchor.constraint(equalTo: view.bottomAnchor) ]) } }</code> 上記のようなコードでUIViewControllerを表示した際、 iOS16.3.1までだとキーボード表示中でも青色のColorが表示されるまでスクロールできたのですが、 iOS16.4以降だとキーボード表示中に青色のColorが表示されるところまでスクロールできないようになっています。（キーボードが表示される階層が変更されている？） こちらはiOS16.4のアップデートにより挙動が変わったと思っているのですが、意図した変更で認識あっていますでしょうか？？ 意図せぬ変更で、今後元に戻すことがあるかどうかが気になっています…！ また、この事象から、iOS16.4のアップデートではUIの制御に関しての変更もあったと認識したのですが、他にも挙動が変わりうるような変更がありそうかが分かりましたら回答いただけましたら嬉しいです<img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647.svg"></span> <span class="chatlog__edited-timestamp" title="05/16/2023 11:26 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1108027252815437884" class="chatlog__message-container" data-message-id="1108027252815437884">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/guilds/291054398077927425/users/296270044306997259/avatars/b3c8f38318e72e64f46b20f15336336a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="date#8946" data-user-id="296270044306997259">d_date</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1108027252815437884"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1108027252815437884">05/16/2023 1:44 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いくつか見ているとなかなか回答の線引きの難しいところがあると思っています。 具体的な実装仕様に関するところは物によってご回答が難しいところがあるのと、回答はベストエフォートであることを覚えておいていただけるとありがたいです。 具体的にSwiftのコードで示すような実装仕様については我々コミュニティの方が詳しいので、ここをみてるみなさんで回答がわかる場合は回答にご協力いただけるとありがたいですし、 Appleとしてお墨付きがある方が望ましい仕様についてはエバンジェリストのお二人から回答がつくと思います。 仮に回答がつかなくても無視しているわけではなく、回答の対象になっていない可能性があることにご留意ください。</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">6</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1108196805113548840" class="chatlog__message-container" data-message-id="1108196805113548840">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/979288821063634975/50882e63e9d25065611bba28ac9a7014.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Masashi Toyota#2024" data-user-id="979288821063634975">Masashi Toyota</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1108196805113548840"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1108196805113548840">05/17/2023 12:58 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">遅くなりまして申し訳ございません<img loading="lazy" class="chatlog__emoji " alt="🙏" title="pray" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f64f.svg">そして <span class="chatlog__markdown-mention" title="date#8946">@d_date</span> さん、ありがとうございます！ おっしゃる通り、私どもで把握しておりこちらにお戻しできる内容もあれば、特に実装面ではコミュニティの皆さんの方が圧倒的に精通してらっしゃる内容もありますので、是非とも皆さんで手を取りあいながらこのチャンネルでもコミュニケーションしていけますと幸いです！ 一点だけ、コードレベルのご質問であれば、弊社のオフィシャルテクニカルサポートサービスもご利用いただけますので、ご検討いただければと思います！皆様にご報告いただいた内容が結果的に弊社側の不具合ということになれば、お使いいただいたサポートチケットが消費されずに戻される形になりますので、まだお使いになられたことがないということであれば、こちらも適宜有効活用いただければと思います！ <a href="https://developer.apple.com/jp/support/technical/">https://developer.apple.com/jp/support/technical/</a></span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="heart"><img class="chatlog__emoji chatlog__emoji--small" alt="❤️" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg" loading="lazy"> <span class="chatlog__reaction-count">6</span></div>
+              <div class="chatlog__reaction" title="man_bowing"><img class="chatlog__emoji chatlog__emoji--small" alt="🙇‍♂️" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647-200d-2642-fe0f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1108201830707642398" class="chatlog__message-container" data-message-id="1108201830707642398">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="trickart#3030" data-user-id="459680124531638283">trickart</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1108201830707642398"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1108201830707642398">05/17/2023 1:18 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">回答いただきありがとうございます！</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="grin"><img class="chatlog__emoji chatlog__emoji--small" alt="😁" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f601.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1108395832941760583" class="chatlog__message-container" data-message-id="1108395832941760583">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/1107637552422342686/15531348409c122e26e35de0334b8ba5.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reply-author" title="kajitani#9533">kajitani</div>
+              <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1107985735262404618')"> こんばんは！iOS16.4のアップデート内容に関して質問させてください！ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">// SwiftUI.View struct TestView: View { var body: some View { ScrollView { VStack { TextField("", text: .constant("")) Color.red .frame(height: 1000) Color.blue .frame(height: 200) } } } } // こちらのUIViewControllerを表示する final class TestViewController: UIViewController { override func viewDidLoad() { super.viewDidLoad() let content = UIHostingController(rootView: TestView()).view! view.addSubview(content) content.translatesAutoresizingMaskIntoConstraints = false NSLayoutConstraint.activate([ content.topAnchor.constraint(equalTo: view.topAnchor), content.leadingAnchor.constraint(equalTo: view.leadingAnchor), content.trailingAnchor.constraint(equalTo: view.trailingAnchor), content.bottomAnchor.constraint(equalTo: view.bottomAnchor) ]) } }</code> 上記のようなコードでUIViewControllerを表示した際、 iOS16.3.1までだとキーボード表示中でも青色のColorが表示されるまでスクロールできたのですが、 iOS16.4以降だとキーボード表示中に青色のColorが表示されるところまでスクロールできないようになっています。（キーボードが表示される階層が変更されている？） こちらはiOS16.4のアップデートにより挙動が変わったと思っているのですが、意図した変更で認識あっていますでしょうか？？ 意図せぬ変更で、今後元に戻すことがあるかどうかが気になっています…！ また、この事象から、iOS16.4のアップデートではUIの制御に関しての変更もあったと認識したのですが、他にも挙動が変わりうるような変更がありそうかが分かりましたら回答いただけましたら嬉しいです<img loading="lazy" class="chatlog__emoji " alt="🙇" title="person_bowing" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647.svg"> </span> <span class="chatlog__reply-edited-timestamp" title="05/16/2023 11:26 AM">(edited)</span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" title="atuh5308#6832" data-user-id="1101031448091312218">atuh5308</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1108395832941760583"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1108395832941760583">05/17/2023 2:09 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この現象に関してはaddChild, didMoveが抜けてるのが原因な気がします。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class ViewController: UIViewController { override func viewDidLoad() { super.viewDidLoad() let viewController = UIHostingController(rootView: TestView()) view.addSubview(viewController.view) addChild(viewController) viewController.didMove(toParent: self) viewController.view.translatesAutoresizingMaskIntoConstraints = false NSLayoutConstraint.activate([ viewController.view.topAnchor.constraint(equalTo: view.topAnchor), viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor), viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor), viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor) ]) } }</code></span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1108614256863227914" class="chatlog__message-container" data-message-id="1108614256863227914">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/1107637552422342686/15531348409c122e26e35de0334b8ba5.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Avatar" loading="lazy">
+              <div class="chatlog__reply-author" title="atuh5308#6832">atuh5308</div>
+              <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1108395832941760583')"> この現象に関してはaddChild, didMoveが抜けてるのが原因な気がします。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class ViewController: UIViewController { override func viewDidLoad() { super.viewDidLoad() let viewController = UIHostingController(rootView: TestView()) view.addSubview(viewController.view) addChild(viewController) viewController.didMove(toParent: self) viewController.view.translatesAutoresizingMaskIntoConstraints = false NSLayoutConstraint.activate([ viewController.view.topAnchor.constraint(equalTo: view.topAnchor), viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor), viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor), viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor) ]) } }</code> </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" title="kajitani#9533" data-user-id="1107637552422342686">kajitani</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1108614256863227914"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1108614256863227914">05/18/2023 4:37 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">確かにです…！修正すると期待通りの動作になりました！ そもそも前提になるコードの書き方がおかしかったですね<img loading="lazy" class="chatlog__emoji " alt="😢" title="cry" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f622.svg"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1108614643456417792" class="chatlog__message-container" data-message-id="1108614643456417792">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru#1122" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1108614736603525121"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1108614643456417792">05/18/2023 4:38 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">UIViewController</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">UIViewController</code> を親子付けするときに3手必要なの難しいっすよね。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1108614736603525121" class="chatlog__message-container" data-message-id="1108614736603525121">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="05/18/2023 4:39 AM">04:39</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">一部抜けててもなんとなく動いちゃうし。</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="point_left"><img class="chatlog__emoji chatlog__emoji--small" alt="👈" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f448.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1108614781692285049" class="chatlog__message-container" data-message-id="1108614781692285049">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Iceman#5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1108614781692285049"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1108614781692285049">05/18/2023 4:39 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">よく順番忘れる</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1109064692275617804" class="chatlog__message-container" data-message-id="1109064692275617804">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/760546449686528051/68a62423c8baf1a11f12b4f82ca2d3e1.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="Ryota#5506" data-user-id="760546449686528051">Ryota</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1109064692275617804"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1109064692275617804">05/19/2023 10:27 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Appleの方以外もわかる方いらっしゃると思いますが確実な答えが欲しいのでここで質問させていただきます。 AppleStoreConnectで審査済み(リリース待ち状態)のバージョンがあるとします。その上でさらに更新したバージョンをアップロードして審査をします。 その審査が通らなかった場合は、最初にアップロードした審査が通っているバージョンをリリースする。通った場合は新しい方でリリースというのは可能でしょうか。 リリースしたいタイミングがある程度決まっていた場合にこれが可能なのか知りたいという経緯です。またそれが可能な場合に何か別で問題があったりしますか(AppStoreに反映されるバージョンが0.0.0にならないなど)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1109071445545463868" class="chatlog__message-container" data-message-id="1109071445545463868">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi#7600" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/1098217648766079026?category=コミュニティ&amp;channel=ask-to-apple&amp;message_id=1109071445545463868"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1109071445545463868">05/19/2023 10:53 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">リリース待ちの状態を残したまま新しいバージョンを審査に出すことってできるんですか？</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="man_bowing"><img class="chatlog__emoji chatlog__emoji--small" alt="🙇‍♂️" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647-200d-2642-fe0f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 13 message(s)</div>
+    <div class="postamble__entry">Exported 26 message(s)</div>
   </div>
 </body>
 

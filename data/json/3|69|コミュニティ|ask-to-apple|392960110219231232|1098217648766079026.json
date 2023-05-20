@@ -66,7 +66,7 @@
             "isAnimated": false,
             "imageUrl": "https://cdn.discordapp.com/emojis/892028219233042492.png"
           },
-          "count": 15
+          "count": 16
         },
         {
           "emoji": {
@@ -611,7 +611,448 @@
         }
       ],
       "mentions": []
+    },
+    {
+      "id": "1107904211250855956",
+      "type": "Default",
+      "timestamp": "2023-05-16T05:35:47.827+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Network FrameworkでのTCPソケット通信の実装方法について質問です。\n\n現在、iOSアプリでLAN内のホストとTCPソケット通信でやり取りするアプリを作ろうとしています。\n\n当初はStreamを使って通信処理を書こうと思ったのですが、 `CFStreamCreatePairWithSocketToHost(_:_:_:_:_:)` はiOS15でdeprecatedになっており、「Jump to Definition」でインターフェイスを確認すると「Use nw_connection_t in Network framework instead」となっていたためNetwork Frameworkを使うことにしました。\n\nところがNetwork FrameworkのNWConnectionの `receive(minimumIncompleteLength:maximumLength:completion:)` メソッドは一度実行した後データを受信した場合、その後データが送られてきても何も起きないため、StreamDelegateの `stream(_:handle:)` がデータを受信するたびに実行されるのとは違う形のようでした。\n\n今回実装したいアプリの通信の性質上、「いつ何回データが送られてくるか？」はあらかじめ把握できないため、StreamDelegateのように受信するたびにメソッドが実行される形が望ましいと考えております。\n\n素朴な考えでは `receive(minimumIncompleteLength:maximumLength:completion:)` のcompletionの中で `receive(minimumIncompleteLength:maximumLength:completion:)` を呼ぶようにすれば何度データが送られてきてもcompletionが実行される実装に出来ると思ったのですが、この実装方法で問題ないかアドバイスをいただきたいです。\n\n( `[weak self]` を使っているから問題ない気がするけど循環参照の問題はないか？とかreceiveの取りこぼしがないか？が気になっています。)\n\n```swift\nimport Foundation\nimport Network\n\nfinal class Client {\n    let connection: NWConnection\n\n    init(host: String, port: UInt16) {\n        connection = NWConnection(\n            to: .hostPort(host: .init(host), port: .init(integerLiteral: port)),\n            using: .tcp\n        )\n    }\n\n    deinit {\n        connection.cancel()\n    }\n\n    func start() {\n        connection.start(queue: .main)\n        addReceive()\n    }\n\n    func send(_ bytes: [UInt8]) {\n        connection.send(content: bytes, completion: .contentProcessed { _ in\n            // do something.\n        })\n    }\n\n    private func addReceive() {\n        connection.receive(minimumIncompleteLength: .zero, maximumLength: .max) { [weak self] content, context, isComplete, error in\n            // do something.\n\n            self?.addReceive()\n        }\n    }\n}\n```\n\nご回答いただけますと幸いです.",
+      "author": {
+        "id": "459680124531638283",
+        "name": "trickart",
+        "discriminator": "3030",
+        "nickname": "trickart",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1107937164932689941",
+      "type": "Reply",
+      "timestamp": "2023-05-16T07:46:44.597+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "僕がNetwork.frameworkでソケット通信するときは、 `receive` の `completion` の中で `receive` を呼ぶループを組みますね。一般的にはそうなると思います。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "892393551856533584",
+            "name": "t_naruhodo",
+            "code": "t_naruhodo",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.discordapp.com/emojis/892393551856533584.png"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "459680124531638283",
+          "name": "trickart",
+          "discriminator": "3030",
+          "nickname": "trickart",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+        }
+      ],
+      "reference": {
+        "messageId": "1107904211250855956",
+        "channelId": "1098217648766079026",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1107985735262404618",
+      "type": "Default",
+      "timestamp": "2023-05-16T10:59:44.666+00:00",
+      "timestampEdited": "2023-05-16T11:26:14.013+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "こんばんは！iOS16.4のアップデート内容に関して質問させてください！\n```\n// SwiftUI.View\nstruct TestView: View {\n    var body: some View {\n        ScrollView {\n            VStack {\n                TextField(\"\", text: .constant(\"\"))\n                Color.red\n                    .frame(height: 1000)\n                Color.blue\n                    .frame(height: 200)\n            }\n        }\n    }\n}\n\n// こちらのUIViewControllerを表示する\nfinal class TestViewController: UIViewController {\n    \n    override func viewDidLoad() {\n        super.viewDidLoad()\n        \n        let content = UIHostingController(rootView: TestView()).view!\n        view.addSubview(content)\n        \n        content.translatesAutoresizingMaskIntoConstraints = false\n        NSLayoutConstraint.activate([\n            content.topAnchor.constraint(equalTo: view.topAnchor),\n            content.leadingAnchor.constraint(equalTo: view.leadingAnchor),\n            content.trailingAnchor.constraint(equalTo: view.trailingAnchor),\n            content.bottomAnchor.constraint(equalTo: view.bottomAnchor)\n        ])\n    }\n}\n```\n上記のようなコードでUIViewControllerを表示した際、\niOS16.3.1までだとキーボード表示中でも青色のColorが表示されるまでスクロールできたのですが、\niOS16.4以降だとキーボード表示中に青色のColorが表示されるところまでスクロールできないようになっています。（キーボードが表示される階層が変更されている？）\n\nこちらはiOS16.4のアップデートにより挙動が変わったと思っているのですが、意図した変更で認識あっていますでしょうか？？\n意図せぬ変更で、今後元に戻すことがあるかどうかが気になっています…！\n\nまた、この事象から、iOS16.4のアップデートではUIの制御に関しての変更もあったと認識したのですが、他にも挙動が変わりうるような変更がありそうかが分かりましたら回答いただけましたら嬉しいです\uD83D\uDE47",
+      "author": {
+        "id": "1107637552422342686",
+        "name": "kajitani",
+        "discriminator": "9533",
+        "nickname": "kajitani",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/1107637552422342686/15531348409c122e26e35de0334b8ba5.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1108027252815437884",
+      "type": "Default",
+      "timestamp": "2023-05-16T13:44:43.222+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "いくつか見ているとなかなか回答の線引きの難しいところがあると思っています。\n具体的な実装仕様に関するところは物によってご回答が難しいところがあるのと、回答はベストエフォートであることを覚えておいていただけるとありがたいです。\n\n具体的にSwiftのコードで示すような実装仕様については我々コミュニティの方が詳しいので、ここをみてるみなさんで回答がわかる場合は回答にご協力いただけるとありがたいですし、\nAppleとしてお墨付きがある方が望ましい仕様についてはエバンジェリストのお二人から回答がつくと思います。\n\n仮に回答がつかなくても無視しているわけではなく、回答の対象になっていない可能性があることにご留意ください。",
+      "author": {
+        "id": "296270044306997259",
+        "name": "date",
+        "discriminator": "8946",
+        "nickname": "d_date",
+        "color": "#F1C40F",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/guilds/291054398077927425/users/296270044306997259/avatars/b3c8f38318e72e64f46b20f15336336a.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC4D",
+            "code": "thumbsup",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg"
+          },
+          "count": 6
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1108196805113548840",
+      "type": "Default",
+      "timestamp": "2023-05-17T00:58:27.64+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "遅くなりまして申し訳ございません\uD83D\uDE4Fそして @date さん、ありがとうございます！\n\nおっしゃる通り、私どもで把握しておりこちらにお戻しできる内容もあれば、特に実装面ではコミュニティの皆さんの方が圧倒的に精通してらっしゃる内容もありますので、是非とも皆さんで手を取りあいながらこのチャンネルでもコミュニケーションしていけますと幸いです！\n\n一点だけ、コードレベルのご質問であれば、弊社のオフィシャルテクニカルサポートサービスもご利用いただけますので、ご検討いただければと思います！皆様にご報告いただいた内容が結果的に弊社側の不具合ということになれば、お使いいただいたサポートチケットが消費されずに戻される形になりますので、まだお使いになられたことがないということであれば、こちらも適宜有効活用いただければと思います！\nhttps://developer.apple.com/jp/support/technical/",
+      "author": {
+        "id": "979288821063634975",
+        "name": "Masashi Toyota",
+        "discriminator": "2024",
+        "nickname": "Masashi Toyota",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/979288821063634975/50882e63e9d25065611bba28ac9a7014.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "❤️",
+            "code": "heart",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2764.svg"
+          },
+          "count": 6
+        },
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDE47‍♂️",
+            "code": "man_bowing",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647-200d-2642-fe0f.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "296270044306997259",
+          "name": "date",
+          "discriminator": "8946",
+          "nickname": "d_date",
+          "color": "#F1C40F",
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/guilds/291054398077927425/users/296270044306997259/avatars/b3c8f38318e72e64f46b20f15336336a.png?size=512"
+        }
+      ]
+    },
+    {
+      "id": "1108201830707642398",
+      "type": "Default",
+      "timestamp": "2023-05-17T01:18:25.835+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "回答いただきありがとうございます！",
+      "author": {
+        "id": "459680124531638283",
+        "name": "trickart",
+        "discriminator": "3030",
+        "nickname": "trickart",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDE01",
+            "code": "grin",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f601.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1108395832941760583",
+      "type": "Reply",
+      "timestamp": "2023-05-17T14:09:19.572+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "この現象に関してはaddChild, didMoveが抜けてるのが原因な気がします。\n\n```swift\nclass ViewController: UIViewController {\n    override func viewDidLoad() {\n        super.viewDidLoad()\n        \n        let viewController = UIHostingController(rootView: TestView())\n        view.addSubview(viewController.view)\n        addChild(viewController)\n        viewController.didMove(toParent: self)\n        \n        viewController.view.translatesAutoresizingMaskIntoConstraints = false\n        NSLayoutConstraint.activate([\n            viewController.view.topAnchor.constraint(equalTo: view.topAnchor),\n            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),\n            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),\n            viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)\n        ])\n    }\n}\n```",
+      "author": {
+        "id": "1101031448091312218",
+        "name": "atuh5308",
+        "discriminator": "6832",
+        "nickname": "atuh5308",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/embed/avatars/2.png"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC40",
+            "code": "eyes",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": [
+        {
+          "id": "1107637552422342686",
+          "name": "kajitani",
+          "discriminator": "9533",
+          "nickname": "kajitani",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/avatars/1107637552422342686/15531348409c122e26e35de0334b8ba5.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1107985735262404618",
+        "channelId": "1098217648766079026",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1108614256863227914",
+      "type": "Reply",
+      "timestamp": "2023-05-18T04:37:15.893+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "確かにです…！修正すると期待通りの動作になりました！\nそもそも前提になるコードの書き方がおかしかったですね\uD83D\uDE22",
+      "author": {
+        "id": "1107637552422342686",
+        "name": "kajitani",
+        "discriminator": "9533",
+        "nickname": "kajitani",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/1107637552422342686/15531348409c122e26e35de0334b8ba5.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "1101031448091312218",
+          "name": "atuh5308",
+          "discriminator": "6832",
+          "nickname": "atuh5308",
+          "color": null,
+          "isBot": false,
+          "avatarUrl": "https://cdn.discordapp.com/embed/avatars/2.png"
+        }
+      ],
+      "reference": {
+        "messageId": "1108395832941760583",
+        "channelId": "1098217648766079026",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1108614643456417792",
+      "type": "Default",
+      "timestamp": "2023-05-18T04:38:48.064+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`UIViewController` と `UIViewController` を親子付けするときに3手必要なの難しいっすよね。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1108614736603525121",
+      "type": "Default",
+      "timestamp": "2023-05-18T04:39:10.272+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "一部抜けててもなんとなく動いちゃうし。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "1122",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC48",
+            "code": "point_left",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f448.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "id": "1108614781692285049",
+      "type": "Default",
+      "timestamp": "2023-05-18T04:39:21.022+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "よく順番忘れる",
+      "author": {
+        "id": "310258733890535426",
+        "name": "Iceman",
+        "discriminator": "5499",
+        "nickname": "Iceman",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1109064692275617804",
+      "type": "Default",
+      "timestamp": "2023-05-19T10:27:08.064+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Appleの方以外もわかる方いらっしゃると思いますが確実な答えが欲しいのでここで質問させていただきます。\n\nAppleStoreConnectで審査済み(リリース待ち状態)のバージョンがあるとします。その上でさらに更新したバージョンをアップロードして審査をします。\n\nその審査が通らなかった場合は、最初にアップロードした審査が通っているバージョンをリリースする。通った場合は新しい方でリリースというのは可能でしょうか。\n\nリリースしたいタイミングがある程度決まっていた場合にこれが可能なのか知りたいという経緯です。またそれが可能な場合に何か別で問題があったりしますか(AppStoreに反映されるバージョンが0.0.0にならないなど)",
+      "author": {
+        "id": "760546449686528051",
+        "name": "Ryota",
+        "discriminator": "5506",
+        "nickname": "Ryota",
+        "color": null,
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/760546449686528051/68a62423c8baf1a11f12b4f82ca2d3e1.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1109071445545463868",
+      "type": "Default",
+      "timestamp": "2023-05-19T10:53:58.169+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "リリース待ちの状態を残したまま新しいバージョンを審査に出すことってできるんですか？",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "7600",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDE47‍♂️",
+            "code": "man_bowing",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647-200d-2642-fe0f.svg"
+          },
+          "count": 1
+        }
+      ],
+      "mentions": []
     }
   ],
-  "messageCount": 13
+  "messageCount": 26
 }
