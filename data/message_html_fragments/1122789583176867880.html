@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1122789583176867880" class="chatlog__message-container" data-message-id="1122789583176867880">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1122789583176867880"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1122789583176867880">06/26/2023 7:24 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">handleButtonClicked</code> から辿ってみていくと、 Swift Concurrencyで管理しているスレッド (Task.init のbody)の中で、 whileによるビジーループをしているのが、Swift Concurrencyの規則に違反していてぶっ壊れているような気がします。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">echo</code> がうまくいくのは、プロセスが一瞬で終了するために、最初のwhileに入らずに済んでいるからかも。 1. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">echo "start" &amp;&amp; sleep 3 &amp;&amp; echo "end"</code> だったらうまくいきますか？ 2. 0.5秒のsleepを終了待ちではなく whileループの中に入れたらどうなりますか？ 3. async版executeの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">withCheckedThrowingContinuation</code> の冒頭で、同期版 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">execute</code> の実行を専用に用意したDispatchQueueに退避したらどうなりますか？ 4(おまけ) <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Process.waitUntilExit</code> という便利なメソッドがありますよ。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

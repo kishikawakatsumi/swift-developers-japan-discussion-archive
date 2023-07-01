@@ -1,0 +1,40 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1123081682040397875" class="chatlog__message-container" data-message-id="1123081682040397875">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/478775550341677056/1719561969711414ab9014ae3984d979.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="ikeh1024" data-user-id="478775550341677056">IKEH</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1123081717356433520"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1123081682040397875">06/27/2023 2:45 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ありがとうございます！その点が原因のようでした。 &gt;cat /path/to/適当にでかい(テキスト)ファイル &gt;<a href="https://stackoverflow.com/questions/55275078/objective-c-nstask-buffer-limitation">Objective-C, NSTask Buffer Limitation</a> &gt;The NSPipe buffer limit seems to be 4096 bytes 上記の通り4096 bytesが制限という話が見つかりました。 ただし10kbのテキストファイルで試した所、問題なく処理が完了し、出力も全て出力される動きでした。 &gt;(あるいはstdout/stderrを全部 /dev/null に繋げてみるとか) 下記とした場合に処理が完了しました。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">static var xcodebuild: String { """ xcodebuild \ -scheme "BuildSampleProject" \ -project ~/"Downloads/tmp/BuildSampleProject/BuildSampleProject.xcodeproj" \ -configuration "Release" \ -archivePath ~"/Downloads/tmp/BuildSampleProject/build/BuildSampleProject.xcarchive" \ archive \ 1&gt;/dev/null 2&gt;&amp;1 """ }</code></span> <span class="chatlog__edited-timestamp" title="06/27/2023 2:49 AM">(edited)</span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://stackoverflow.com/questions/55275078/objective-c-nstask-buffer-limitation">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">Objective-C, NSTask Buffer Limitation</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">I'm using NSTask to run an external utility which returns a long string of data. The problem is that when the returned string exceeds a large amount of data (around 32759 chars) it becomes null or</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/VbfwnzN2MM794XNccNxDzrB1YeuPrxR53y11bwRfflY/%3Fv%3D73d79a89bded/https/cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon%402.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/VbfwnzN2MM794XNccNxDzrB1YeuPrxR53y11bwRfflY/%3Fv%3D73d79a89bded/https/cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon%402.png" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1123081717356433520" class="chatlog__message-container" data-message-id="1123081717356433520">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="06/27/2023 2:45 AM">02:45</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">また実行中にPipeを随時吸い出せるように下記の通り書いてみたところ、こちらもxcodebuildの処理が無事に完了しました。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> /// completion版 static func execute(command: String, currentDirectoryURL: URL? = nil, completion: @escaping (Result&lt;String, CommandError&gt;) -&gt; ()) { let process = Process() process.launchPath = "/bin/zsh" process.arguments = ["-cl", command] process.currentDirectoryURL = currentDirectoryURL let pipe = Pipe() process.standardOutput = pipe process.standardError = pipe process.standardOutput = pipe process.standardError = pipe do { try process.run() } catch { completion(.failure(.failedInRunning)) return } var output = "" let saveOutputInProgress = { guard let _output = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) else { return } output += _output Thread.sleep(forTimeInterval: 0.5) } // Processが完了するまで、Taskがキャンセルされていないかを監視 while process.isRunning { do { try Task.checkCancellation() } catch { process.terminate() completion(.failure(.cancel)) return } saveOutputInProgress() } saveOutputInProgress() if process.terminationStatus != 0 { completion(.failure(.exitStatusIsInvalid(process.terminationStatus, output))) return } completion(.success(output)) }</code></span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">5</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1122800288944881704" class="chatlog__message-container" data-message-id="1122800288944881704">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/478775550341677056/1719561969711414ab9014ae3984d979.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="ikeh1024" data-user-id="478775550341677056">IKEH</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1122800408620961913"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1122800288944881704">06/26/2023 8:07 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ご回答ありがとうございます！取り急ぎ下記に、記載いただいた内容を試した結果を記載します。 &gt;echo "start" &amp;&amp; sleep 3 &amp;&amp; echo "end" だったらうまくいきますか？ はい、うまく動作します。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">start end</code> &gt;0.5秒のsleepを終了待ちではなく whileループの中に入れたらどうなりますか？ <ul>
+              <li>下記の通り変更しました。</li>
+              <li>動作としては変化なしで、xcodebuildの処理が終了しない状態です。</li>
+            </ul>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> // Processが完了するまで、Taskがキャンセルされていないかを監視 while process.isRunning { // xcodebuildを呼び出した際にここがfalseにならない do { try Task.checkCancellation() } catch { process.terminate() completion(.failure(.cancel)) return } Thread.sleep(forTimeInterval: 0.5) } let data = pipe.fileHandleForReading.readDataToEndOfFile() // Thread.sleep(forTimeInterval: 0.5) // Taskの終了を待つためのDelay(必要?)</code> &gt;async版executeの withCheckedThrowingContinuation の冒頭で、同期版 execute の実行を専用に用意したDispatchQueueに退避したらどうなりますか？ <ul>
+              <li>下記の通り変更しました。</li>
+              <li>動作としては変化なしで、xcodebuildの処理が終了しない状態となります。</li>
+            </ul>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> /// async版 @discardableResult static func execute(command: String, currentDirectoryURL: URL? = nil) async throws -&gt; String { try await withCheckedThrowingContinuation { continuation in DispatchQueue.global(qos: .background).async { execute(command: command, currentDirectoryURL: currentDirectoryURL) { result in do { let output = try result.get() continuation.resume(returning: output) } catch { continuation.resume(throwing: error) } } } } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1122800408620961913" class="chatlog__message-container" data-message-id="1122800408620961913">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="06/26/2023 8:07 AM">08:07</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">&gt;4(おまけ) Process.waitUntilExit という便利なメソッドがありますよ。 <ul>
+              <li>下記のコードで試しましたが、waitUntilExitの部分でxcodebuildの処理が終了しない状態となりました。</li>
+            </ul>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> do { try process.run() } catch { completion(.failure(.failedInRunning)) return } process.waitUntilExit() // xcodebuildを呼び出した際にここで止まってしまう let data = pipe.fileHandleForReading.readDataToEndOfFile()</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
