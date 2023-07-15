@@ -2778,8 +2778,8 @@
       "content": "質問失礼します。\nなんか `combineLatest` の元に `.subscribe(on:)`を噛ませたら流れこなくなります。どうしてなのでしょう？\uD83E\uDD14\nPublisherのsubscribeの起きるタイミングの問題とかですか\n\n```swift\nvar subscriptions = [AnyCancellable]()\n\nJust(2)\n    .combineLatest(Just(1))\n    .sink(\n        receiveCompletion: { print(\"works fine\", $0) },\n        receiveValue: { print(\"value\", $0)\n    })\n    .store(in: &subscriptions)\n\nJust(2)\n    .subscribe(on: DispatchQueue.main)\n    .combineLatest(Just(1))\n    .sink(\n        receiveCompletion: { print(\"you won't see me\", $0) },\n        receiveValue: { print(\"never\", $0)\n    })\n    .store(in: &subscriptions)\n\nJust(2)\n    .combineLatest(Just(1).subscribe(on: DispatchQueue.main))\n    .sink(\n        receiveCompletion: { print(\"you won't see me\", $0) },\n        receiveValue: { print(\"never\", $0)\n    })\n    .store(in: &subscriptions)\n```",
       "author": {
         "id": "425662260405469185",
-        "name": "dsxsxsxs",
-        "discriminator": "2836",
+        "name": ".dsxsxsxs",
+        "discriminator": "0000",
         "nickname": "dsxsxsxs",
         "color": null,
         "isBot": false,
@@ -2916,8 +2916,8 @@
       "content": "そうですね。playgroundで試してました。どのDispatchQueueとか関係なさそうです。直sinkしても特に問題ないです\n`Just(2)` をDeffered Futureに変えて検証してみてたけど、subscrbeされてそう。謎です。",
       "author": {
         "id": "425662260405469185",
-        "name": "dsxsxsxs",
-        "discriminator": "2836",
+        "name": ".dsxsxsxs",
+        "discriminator": "0000",
         "nickname": "dsxsxsxs",
         "color": null,
         "isBot": false,

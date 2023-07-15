@@ -1,0 +1,16 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1129613739423973436" class="chatlog__message-container" data-message-id="1129613739423973436">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="udo#2235" data-user-id="947148017851596891">udo</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1129613739423973436"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1129613739423973436">07/15/2023 3:21 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">どこかでインスタンスを保持していて、インスタンスが解放されることがないようにしているということでしょうか？ </div>
+            </div>勿論あえてしている訳ではなく意図せず循環参照している場合ですね。 画面AとBがあり、画面BでaddObserverしている場合、画面A&gt;B&gt;A&gt;Bのようにpushとpopを繰り返すと画面Bを表示するたびにaddObserverが走ると思います。その場合画面Aに戻った時にdeinitが走らないと通知が解除されないためpostされたら登録した回数分の処理が走ると思います。下記コードで確認すると異なるアドレスが出力されるため、登録した時のインスタンスを保持したままになっているという解釈であっているのか気になりました。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">//selector @objc func didReceive() { print(ObjectIdentifier(self)) }</code>
+          </span></div>
+      </div>
+    </div>
+  </div>
+</div>
