@@ -11,4 +11,4 @@ export type {
   RouterContext,
   State,
 } from "https://deno.land/x/oak/mod.ts";
-export { configure, renderFile } from "https://deno.land/x/eta/mod.ts";
+export { configure, renderFile } from "https://deno.land/x/eta@v2.2.0/mod.ts";
