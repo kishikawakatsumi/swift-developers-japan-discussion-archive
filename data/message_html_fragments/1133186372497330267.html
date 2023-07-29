@@ -1,0 +1,121 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1133184707761287260" class="chatlog__message-container" data-message-id="1133184707761287260">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=1133187188444627035"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1133184707761287260">07/24/2023 11:51 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">値型に対する変更監視は本質的にうまくいかないと思いますけどねえ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133184902641225778" class="chatlog__message-container" data-message-id="1133184902641225778">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:52 PM">23:52</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">classの中でvarで保持されているstructのようなケースなら、そのstructのアイデンティティは安定しているけど、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133184988611870740" class="chatlog__message-container" data-message-id="1133184988611870740">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:52 PM">23:52</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">例えば classの中のdictionaryの中で保持されているような値型を考えると、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133185230145077400" class="chatlog__message-container" data-message-id="1133185230145077400">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:53 PM">23:53</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">dictionaryのrehashなどのタイミングで、コンテナの内部バッファ上での値のアドレスが変わったりします</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133185364446675044" class="chatlog__message-container" data-message-id="1133185364446675044">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:54 PM">23:54</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そういうときに操作として値 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">T</code> のコピーをしている可能性がある。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133185709893746842" class="chatlog__message-container" data-message-id="1133185709893746842">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:55 PM">23:55</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">値型はいつでもコピーできるものとして設計されているのに対して、 アイデンティティ管理が必要な変更監視の概念を導入すると、 そういった思わぬコピーによっておかしなことになると思う</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133186372497330267" class="chatlog__message-container" data-message-id="1133186372497330267">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:58 PM">23:58</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">コピーのタイミングだったらコピー元・コピー先を区別して、サブスクライバを複製しない、ということができるかもしれないけど、 一般にコピーの方向って意識していないはずなので変なバグが生じそうだし、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133186414851411978" class="chatlog__message-container" data-message-id="1133186414851411978">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:58 PM">23:58</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">実際にはSwiftではコピーのタイミングでなにかすることができないので、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133186480576147619" class="chatlog__message-container" data-message-id="1133186480576147619">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:58 PM">23:58</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Copy on writeでできるのは、on writeの時点でカウンタがいくつか、を見られるだけなので、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133186595604938872" class="chatlog__message-container" data-message-id="1133186595604938872">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/24/2023 11:58 PM">23:58</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">writeのタイミング、つまり変更イベント送信のタイミングですが、 そこで自分自身がコピー元なのかコピー先なのか区別できないので実装不可能な気がする。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133186995007537264" class="chatlog__message-container" data-message-id="1133186995007537264">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/25/2023 12:00 AM">00:00</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftUIは値型のViewに対して変更監視のようなことができるけど、 あれは値型のViewはただのパラメータツリーを渡すためのインターフェースにすぎなくて、 ランタイムではビューツリー構造に基づくIdentityが定義・管理されていて、 そのアイデンティティのもとでイベントハンドリングしているからうまくいくのであって、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1133187188444627035" class="chatlog__message-container" data-message-id="1133187188444627035">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="07/25/2023 12:01 AM">00:01</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ライブラリ実装によって値型のようなインターフェースの裏にクラスが隠れてて、 値の更新のたびにそのクラスとの対応付けを取ってるからできるのであって、 つまり値型に対する更新監視をしているわけではなくて、対応付けられたアイデンティティ空間の方で更新監視してる。</span> <span class="chatlog__edited-timestamp" title="07/25/2023 12:01 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
