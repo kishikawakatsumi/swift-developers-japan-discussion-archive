@@ -16,7 +16,7 @@
     "after": null,
     "before": null
   },
-  "exportedAt": "2023-07-29T15:07:41.0569485+00:00",
+  "exportedAt": "2023-08-05T15:07:12.2727456+00:00",
   "messages": [
     {
       "id": "561865650436440085",
@@ -23182,7 +23182,2860 @@
       "stickers": [],
       "reactions": [],
       "mentions": []
+    },
+    {
+      "id": "1134941843273035984",
+      "type": "Default",
+      "timestamp": "2023-07-29T20:13:41.636+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "マクロの動作は Text => AST(a) => AST(b) => Text => Compiler だけどAST(b) => TextのところTextにしないで\nText => AST(a) => AST(b) => CompilerってASTで渡すほうがいいと思うんだけどなんか理由があってTextにしてたんだったかな。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134943491588362310",
+      "type": "Default",
+      "timestamp": "2023-07-29T20:20:14.625+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "というのもAST(b) => TextがあるためにSwiftSyntaxで作るTree構造はトークンレベルでスペース等をちゃんと入れないといけないのがけっこうな負担になってる。\nで、現在はそれを軽減するためにマクロの出力は自動的にフォーマットされるようになったんだけど（ここで使われるフォーマッタは足りないスペースを適切に足してくれる。フォーマットしない設定もできる。）、現在はフォーマットによって間違ったソースコードが出る場合もあって、それは直ると思うんだけど未発見のケースもたぶんありそうだし、あまりいいやり方と思えないんですよね。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134944000466493511",
+      "type": "Default",
+      "timestamp": "2023-07-29T20:22:15.951+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "うーん、でもSwiftSyntaxのASTがTrivia以外まったく同じでもTriviaが空白か改行かで意味が変わることがあるからダメか。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134944601560584212",
+      "type": "Default",
+      "timestamp": "2023-07-29T20:24:39.263+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "たとえば下の２つのコードはTrivia以外はまったく同じ構造のTreeにParseされるけど下はコンパイルエラーになるしな。\n\n```swift\nlet a = 1\nlet b = 2\n```\n\n```swift\nlet a = 1 let b = 2\n```",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134967871945048074",
+      "type": "Default",
+      "timestamp": "2023-07-29T21:57:07.355+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "いや、下の方は正確にはセミコロンがMissing tokenとして自動的に補完されるから区別はできてるよな。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134997563297251348",
+      "type": "Default",
+      "timestamp": "2023-07-29T23:55:06.325+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "マクロ出力はASTで十分なのそうですよね。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134997794525040660",
+      "type": "Default",
+      "timestamp": "2023-07-29T23:56:01.454+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "CST+自動フォーマットでいけるならまあ良さそう",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134998550531543122",
+      "type": "Default",
+      "timestamp": "2023-07-29T23:59:01.7+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "フォーマットはまだ問題のあるケースが多少あるんじゃないかなあ。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134998881315323934",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:00:20.565+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "わざわざ問題の起こる箇所を増やしてる感じあるねん。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134999200619311105",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:01:36.693+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Swiftのコードを読み取って、TypeScriptのコードに変換するツールを作ってるけど、",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134999287483355198",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:01:57.403+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "TypeScript出力はASTにして文字列化は自動で綺麗にしてます",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134999530945904700",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:02:55.449+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "それでちょうど良いと感じてる",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134999645202956298",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:03:22.69+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "最終成果物がTypeScriptのソースコードでそれまではASTなんですよね？",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134999671358640179",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:03:28.926+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "そうですね",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1134999874140651671",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:04:17.273+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "マクロは最終成果物がオブジェクトファイルでそれまでは同じようにSyntax Treeでずっといったらいいと思うんですよ。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135000281860542465",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:05:54.481+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "テキスト => Syntax Tree => フォーマット => テキスト => Syntax Treeっていうのが合理的じゃないんじゃないかと。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135002308409835570",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:13:57.648+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Swift SyntaxのTreeはCSTだけどTriviaを無視したらASTだと思うのでそれでずっとやり取りするのが堅牢だと思うんですよね。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135003265671639152",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:17:45.877+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Trivia無視するだけでAST相当なら、自動フォーマットがうまくいくはずな気もする",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135003792111304714",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:19:51.39+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "そうなんですよね。それでいうと現状のフォーマッタが簡易的なものだからっていうのはありますね。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005020593586287",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:24:44.283+00:00",
+      "timestampEdited": "2023-07-30T00:25:30.855+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "```\nassertionFailure(\"\"\"\n  First line\n\n  Second line\n\n  \"\"\")\n```\n前見つけた問題は上のような複数行文字列リテラルの中の空行をインデントするところが間違っててコンパイルエラーが起こるというものでした。（自動フォーマットで使われてるフォーマッタはインデントもする）\nただ、これはフォーマットしなかったら（テキストに出力しなかったら）起こらないはずなんですよ。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005288278270022",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:25:48.104+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "思い出した",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005359648551002",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:26:05.12+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Packageswiftを編集するコードを書いたんですが、",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005406398271569",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:26:16.266+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "関数呼び出しの引数を追加しようとするときに",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005467937087558",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:26:30.938+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "途中か末尾かどうかで、カンマをつけるべきかどうかが変わってしまうんですよ",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005551135297617",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:26:50.774+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "これはCSTだから必要なめんどくさい処理",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005651823775805",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:27:14.78+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ASTだったら普通はカンマは制御しない、引数の配列を組めばいいだけ",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005762238820412",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:27:41.105+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "だからtriviaだけ無視するのでは不足がありますね",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005881206055005",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:28:09.469+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "確かにカンマはトークンですね。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135005954144997447",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:28:26.859+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "まあでもノードは区切られてるからカンマは自動で直せそうだな",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135006568371470346",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:30:53.302+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "簡単じゃなさそうだ。この辺りのことはきっと検討した上で現在の方法が採用されてるんだろう。。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135009118655103077",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:41:01.337+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "変数宣言の型の前に書くコロンはトークンだけど、常に必要だからデフォルト値使っておけばいいな",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135009174472892558",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:41:14.645+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "トークンだけどあったりなかったりするものがめんどくさい",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135009349090152489",
+      "type": "Default",
+      "timestamp": "2023-07-30T00:41:56.277+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "カンマぐらいかなあ",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135033896380141692",
+      "type": "Default",
+      "timestamp": "2023-07-30T02:19:28.807+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "AST(b) => Compilerにした場合も AST(b)に対して構文解析が出来る機構になってるんでしたっけ？",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135101966876430446",
+      "type": "Default",
+      "timestamp": "2023-07-30T06:49:58.078+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "たぶん今はそういうのはなさそうな気がします。こうなってたほうがいいんじゃないかなと考えているっていう。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135110372416831589",
+      "type": "Default",
+      "timestamp": "2023-07-30T07:23:22.115+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ソースコードを構文解析して出てくるのがASTでは？",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135128716977127506",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:36:15.799+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "なるほど。いや、AST(a) => AST(b) => Compilerだと編集したAST(b)がコンパイル（主に構文解析）できるか担保できてないですよね。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135129053708427264",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:37:36.082+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "CompilerはASTをインプットとして受け取れるはずだけど、ASTまでの過程で行うはずの構文解析は終わってる前提な気がする。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135129172080070686",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:38:04.304+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ソースコードから生成されえないASTが構築しうるかどうかって事ですかね？\nどちらにせよその後の意味解析でエラーになるし問題はないような気がする",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135129412900237473",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:39:01.72+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "そうです。AST(b)はmacro用に自前で生成されたものだと思ってました。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135129700159729804",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:40:10.208+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ASTは構造化されている代わりにソースコードよりも制約が強い(表現能力が弱い)ので、必ずASTからソースコードが生成できます。ということは、ソースコードから生成されえないASTというのは存在しないと思います。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135129832871698472",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:40:41.849+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> ソースコードから生成されえないASTが構築しうるかどうかって事ですかね？\nいや、この意味じゃなかったです",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135130073259855963",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:41:39.162+00:00",
+      "timestampEdited": "2023-07-30T08:42:23.335+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> マクロの動作は Text => AST(a) => AST(b) => Text => Compiler だけどAST(b) => TextのところTextにしないで\n> Text => AST(a) => AST(b) => Compiler\nこのAST(b)はAST(a)からコンパイラじゃなくてユーザーがプラグイン経由で生成するで意味合ってますか？",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135130104054431875",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:41:46.504+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "コンパイルが通らない，と言う意味なら，通常と同様にASTに対して意味解析を行うので、問題はそこで検出されると思います",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135130267707785366",
+      "type": "Reply",
+      "timestamp": "2023-07-30T08:42:25.522+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ユーザーというかマクロのプログラムですね",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "358893395604930562",
+          "name": ".kitasuke",
+          "discriminator": "0000",
+          "nickname": "kitasuke",
+          "color": null,
+          "isBot": false,
+          "roles": [],
+          "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1135130073259855963",
+        "channelId": "561853152408895518",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1135130349626720377",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:42:45.053+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "そうそう、プラグインね。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135130424398577706",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:43:02.88+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "マクロのプログラムの入出力をCSTではなくASTにしてはどうか、という話だと思います",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135130702459973664",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:44:09.175+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "マクロのプログラムの入力をTextでなくASTにしたいという話ではないってこと？",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135130834156929126",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:44:40.574+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "マクロのプログラムというか、上記でいうCompilerの入力",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135131466741846136",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:47:11.394+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "岸川さんが言ってるのは両方かな？\nマクロプラグインは、ASTを受け取ってASTを返すインターフェースにする。\n出力されたASTはそのままコンパイラが使えれば効率的。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135131715162095616",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:48:10.622+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "多分今のコンパイラはマクロプラグインが出力したCSTを一度ソースコードにして、それをまたパースしてるんじゃないか・・・？",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135131800113512548",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:48:30.876+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "両方なのね",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135131819071787059",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:48:35.396+00:00",
+      "timestampEdited": "2023-07-30T08:49:00.444+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "それともそのまま(CSTをソースコードにしないまま)ASTgenしてるのかな？",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132122311573545",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:49:47.694+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "僕の論点としては、編集された出力されたASTが構文的に正しいのかを担保できてるのかという点です。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132233817133106",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:50:14.279+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ASTGenがASTの生成できた = 構文エラーはないってことですかね？",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132262468427796",
+      "type": "Reply",
+      "timestamp": "2023-07-30T08:50:21.11+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "それについての僕の意見はASTの性質から絶対に構文的に正しいという事ですね",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "358893395604930562",
+          "name": ".kitasuke",
+          "discriminator": "0000",
+          "nickname": "kitasuke",
+          "color": null,
+          "isBot": false,
+          "roles": [],
+          "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1135132122311573545",
+        "channelId": "561853152408895518",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1135132316251979816",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:50:33.933+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "https://github.com/omochi/TypeScriptAST",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "GitHub - omochi/TypeScriptAST",
+          "url": "https://github.com/omochi/TypeScriptAST",
+          "timestamp": null,
+          "description": "Contribute to omochi/TypeScriptAST development by creating an account on GitHub.",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://images-ext-2.discordapp.net/external/Mv_JexJn4hs57A6oWBe1fWssTUhX90IkHRkT6-6bO0E/https/opengraph.githubassets.com/a41b2a3688c5fea2c3bd231408c253dd17fe577579b8193b29d0e741abfad5d6/omochi/TypeScriptAST",
+            "width": 1200,
+            "height": 600
+          },
+          "images": [],
+          "fields": []
+        }
+      ],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132346656497684",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:50:41.182+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "そうなのか",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132361118449744",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:50:44.63+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "これはTypeScriptの自作のASTですが、",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132417838035007",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:50:58.153+00:00",
+      "timestampEdited": "2023-07-30T08:51:08.564+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "必ず文法的には正しいTypeScriptコードになります",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132565087457360",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:51:33.26+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "意味的には正しくない可能性があるからその先の意味解析でエラーになることはありえます",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135132634037637221",
+      "type": "Default",
+      "timestamp": "2023-07-30T08:51:49.699+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "意味解析はそうね。\nそれなら確かにTextじゃなくてAST(b)のまま渡すのが良さそう",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135135185927671829",
+      "type": "Default",
+      "timestamp": "2023-07-30T09:01:58.117+00:00",
+      "timestampEdited": "2023-07-30T09:02:46.532+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> それともそのまま(CSTをソースコードにしないまま)ASTgenしてるのかな？ \n余談だけど、マクロのプラグインはおそらくASTGenではCSTの生成までな気がしてる。これはまだ見つけられてないけど、このCSTがプラグインのメッセージとして返されてSwiftSyntaxかSourceKitか何かがソースコードに変換してるんじゃないかと予想してる\nhttps://github.com/apple/swift/blob/53da6759de6f36e48da70ed7174ce1ff6aadf7c4/lib/ASTGen/Sources/ASTGen/PluginHost.swift#L379",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "swift/lib/ASTGen/Sources/ASTGen/PluginHost.swift at 53da6759de6f36e...",
+          "url": "https://github.com/apple/swift/blob/53da6759de6f36e48da70ed7174ce1ff6aadf7c4/lib/ASTGen/Sources/ASTGen/PluginHost.swift",
+          "timestamp": null,
+          "description": "The Swift Programming Language. Contribute to apple/swift development by creating an account on GitHub.",
+          "color": "#1E2327",
+          "thumbnail": {
+            "url": "https://images-ext-1.discordapp.net/external/r9NZ4G3hEuBfHXwybUezUTtau6YbjXgnUW60UeRyTzc/https/opengraph.githubassets.com/4265c8de825b6e4029ea71d744c7e0f99a2cbd1f0414f0f28b7c7b426160b7c9/apple/swift",
+            "width": 1200,
+            "height": 600
+          },
+          "images": [],
+          "fields": []
+        }
+      ],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135142907611987998",
+      "type": "Default",
+      "timestamp": "2023-07-30T09:32:39.11+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> マクロのプログラムの入力をTextでなくASTにしたいという話ではないってこと？\n\n> マクロプラグインは、ASTを受け取ってASTを返すインターフェースにする。\n\nマクロの出力をTextからASTにしたいという話なのですが、今はマクロのインターフェースはASTを受け取ってASTを返すというものになってるんです。\n\nけれど実際は、マクロが返したASTがテキストになって、コンパイラは再度そのテキストをParseしてコンパイルするっていう動作をします。私はそこをASTのまま扱ってほしいと考えています。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135143783588175955",
+      "type": "Default",
+      "timestamp": "2023-07-30T09:36:07.959+00:00",
+      "timestampEdited": "2023-07-30T09:36:23.499+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "で、具体的に起こってる問題は\n\nマクロはASTを返すのだけどSwiftSyntaxのSyntax Treeはスペース等も含めた構造を構築しないと後続でコンパイルエラーになるからちょっと大変。\n\nなので少し前にスペース等を自動的に挿入してくれるようにデフォルトで自動フォーマットする処理が入った（BasicFormat）。\n\nただ、そのために複数文字列リテラルで不要なインデントを挿入してしまってコンパイルエラーが起こるなど本来なら起こらないはずの問題が起こっている。\n\nなので、AST => Text => コンパイラじゃなくてAST => コンパイラの方がいいのでは、という意見です。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135167346856697898",
+      "type": "Default",
+      "timestamp": "2023-07-30T11:09:45.88+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "BasicFormatはそういう機能なんですね。AST => コンパイラは内部的にはそれが良さそうですよね。最終的な出力としてはXcode上でマクロが展開されたソースコードをユーザーが見れるようにする必要はあるで合ってますか？それを手っ取り早く実現するためにTextで扱ってるような気がしてます。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135170899574800455",
+      "type": "Default",
+      "timestamp": "2023-07-30T11:23:52.914+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> 最終的な出力としてはXcode上でマクロが展開されたソースコードをユーザーが見れるようにする必要はあるで合ってますか？\n\nこれはあった方がいいと思う。マクロをデバッグしたり、そのままコピーして動かしたりすることはよくあるので。\n確かに今はXcodeが展開してくれるものとコンパイラに渡るものが一致しているからそれはそれで利点がありますね。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135171442934284298",
+      "type": "Default",
+      "timestamp": "2023-07-30T11:26:02.461+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "理解しました。そしたらやっぱりマクロのプラグインとコンパイラのやり取りはASTが入出力になるのが綺麗ですね。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135171767422435328",
+      "type": "Default",
+      "timestamp": "2023-07-30T11:27:19.825+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "その上でXcodeが展開するのはソースコードにして欲しいけど、結局はその部分で不要なインデント等のコンパイルエラーは起きうるかもしれないですね。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135172157928898691",
+      "type": "Default",
+      "timestamp": "2023-07-30T11:28:52.929+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "コンパイラに渡るものが若干形式変わるけど、ただASTとそのASTから生成ソースコードなので完全一致とはいかなくても問題はなさそう。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135172456701775932",
+      "type": "Default",
+      "timestamp": "2023-07-30T11:30:04.162+00:00",
+      "timestampEdited": "2023-07-30T11:30:20.706+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "> その上でXcodeが展開するのはソースコードにして欲しいけど、結局はその部分で不要なインデント等のコンパイルエラーは起きうるかもしれないですね。\n違うか。おもちさんが言うASTからは絶対に文法的に正しいコードしか出力されないのであれば、この問題は解消されるような。",
+      "author": {
+        "id": "358893395604930562",
+        "name": ".kitasuke",
+        "discriminator": "0000",
+        "nickname": "kitasuke",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135875223426695228",
+      "type": "Default",
+      "timestamp": "2023-08-01T10:02:36.806+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "おもちメタルさんの作ったTypeScriptのASTはたぶんそうなるようにがんばってるからそうなんだと思う。\nSwiftSyntaxが生成するStructureは設計思想の違いもあって、文法的に間違ったSyntax Treeも作れるのですよね。\n\nなのでSwiftSyntaxでTreeを作る場合はそこそこ丁寧な作業を求められる。\nそこでSwiftSyntaxの現在の提案としてはBasicFormatを自動で実行することででだいぶ楽になるんじゃない？っていうのが今の状況だと思う。\n\nで、私はBasicFormatの不具合に当たったのであんまりそれは良くないんじゃないかと思っている、みたいな。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135880724386426960",
+      "type": "Reply",
+      "timestamp": "2023-08-01T10:24:28.337+00:00",
+      "timestampEdited": "2023-08-01T10:24:37.885+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ちょっと話がズレてそう。\nSwiftSyntaxが提供しているのはCSTで、AST **ではない** 、という認識で、\nASTは Swift compiler内部の libAST のノードツリーのことを指してます。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "291075091025100810",
+          "name": "kishikawakatsumi",
+          "discriminator": "0000",
+          "nickname": "Kishikawa Katsumi",
+          "color": "#9B59B6",
+          "isBot": false,
+          "roles": [
+            {
+              "id": "429988025645137931",
+              "name": "bot-mgr",
+              "color": "#9B59B6",
+              "position": 19
+            },
+            {
+              "id": "453733144961744943",
+              "name": "apple-dev",
+              "color": "#F1C40F",
+              "position": 15
+            },
+            {
+              "id": "658479157700722709",
+              "name": "Server Booster",
+              "color": "#F47FFF",
+              "position": 14
+            }
+          ],
+          "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1135875223426695228",
+        "channelId": "561853152408895518",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1135882181810593843",
+      "type": "Default",
+      "timestamp": "2023-08-01T10:30:15.814+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "あ、ごめんなさい。ズレてますね。\nリセットして最初に戻ると、マクロがコンパイルされるときには、テキストからSwiftSyntaxのSyntax Treeになって、さらにテキストになってコンパイラに渡される、けどSyntax Treeのまま渡す方が問題が起こることが少ないんじゃないかという意見です。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135887592961884200",
+      "type": "Reply",
+      "timestamp": "2023-08-01T10:51:45.933+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "パイプラインとしてはそれでもいいと思うんですけど、\nXcodeで直接expand macroできたり、expandした状態を可視化したりする機能はほしいですよね。\nそうすると結局マクロ適用した後のテキストとしてのコード、というものからは逃れられないのでは。",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "291075091025100810",
+          "name": "kishikawakatsumi",
+          "discriminator": "0000",
+          "nickname": "Kishikawa Katsumi",
+          "color": "#9B59B6",
+          "isBot": false,
+          "roles": [
+            {
+              "id": "429988025645137931",
+              "name": "bot-mgr",
+              "color": "#9B59B6",
+              "position": 19
+            },
+            {
+              "id": "453733144961744943",
+              "name": "apple-dev",
+              "color": "#F1C40F",
+              "position": 15
+            },
+            {
+              "id": "658479157700722709",
+              "name": "Server Booster",
+              "color": "#F47FFF",
+              "position": 14
+            }
+          ],
+          "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1135882181810593843",
+        "channelId": "561853152408895518",
+        "guildId": "291054398077927425"
+      }
+    },
+    {
+      "id": "1135888133016277124",
+      "type": "Default",
+      "timestamp": "2023-08-01T10:53:54.692+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "そして、そのテキストとしてのコードをコンパイルした結果と、SyntaxTreeそのまま渡した結果は、当然同じじゃないと混乱を招くので、結局テキスト化したものを処理する、という形になりそう",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1135891384327479378",
+      "type": "Default",
+      "timestamp": "2023-08-01T11:06:49.865+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Syntax Treeの段階で文法エラーが起こり得る場合は状況はより悪くなるんですけど、Syntax Treeの段階で文法エラーが起こらないなら見せるテキストはSyntax Treeから適宜生成したテキストでいいと思うんですよ。単なるプレゼンテーションの１つ、みたいな。\n\nその先でコンパイルエラーが起こるのは変数の衝突とか書き方の違いじゃないから大丈夫と思うし。",
+      "author": {
+        "id": "291075091025100810",
+        "name": "kishikawakatsumi",
+        "discriminator": "0000",
+        "nickname": "Kishikawa Katsumi",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
     }
   ],
-  "messageCount": 605
+  "messageCount": 682
 }

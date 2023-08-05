@@ -15580,9 +15580,75 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1136006141327978549" class="chatlog__message-container" data-message-id="1136006141327978549">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/265102069655011328/f7be13d85fd7110147bf005d528c5c67.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="rinsuki" data-user-id="265102069655011328">rinsuki</span> <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=1136006141327978549"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1136006141327978549">08/01/2023 6:42 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">質問: UINavigationController の遷移アニメーション時、前後のVC同士が被らないように変更することは可能なんでしょうか？ 背景: 現在 Share Extension で脱 SLComposeServiceViewController をしていて (理由としては、なんか iOS 13 あたりから背景に対して中身が小さくなって不恰好なことや、マルチアカウントを強く意識したアプリなので最初にユーザーにアカウントを選ばせたい、アプリ側の投稿画面とボタンの位置等を統一したいなどがあります)、ただし見た目はなるべく元のままにしたい (のとすりガラスが好き) ので、背景に UIVisualEffectView + UIBlurEffect を敷いてみています。 ところが、 <ul>
+                  <li>UINavigationController (のサブクラス)のviewで UIVisualEffectView を背景にして、各子VCの背景は透明にすると、画面遷移中に遷移先VCの裏に遷移元VCがまるまる見えてしまう</li>
+                  <li>各子VCの背景に UIVisualEffectView を敷くと、それはそれで画面遷移中に一瞬 UIVisualEffectView が二重になり微妙な感じになる ということがわかりました。 では SLComposeServiceViewController はどうやっているのだろう？と観察すると、どうやら UIPageViewController のように遷移元VCと遷移先VCが隣にいる状態でスライドするだけ (重なりはしない) なので違和感がない、ということに気づきました。 これを UINavigationController で再現することは可能なのでしょうか？それとも自前で実装するしかないのでしょうか？</li>
+                </ul></span> <span class="chatlog__edited-timestamp" title="08/01/2023 6:43 PM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1136021961152147536" class="chatlog__message-container" data-message-id="1136021961152147536">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=1136021961152147536"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1136021961152147536">08/01/2023 7:45 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">UINavigationControllerでそういうアニメーションはないと思います。ただ遷移アニメーションをカスタマイズするのはTransitionDelegateを使って割と簡単にできるのでTransitionDelegateを設定して、スライドインしてくるようなアニメーションを前後の画面に対して設定するとできると思います。</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1136059005454794916" class="chatlog__message-container" data-message-id="1136059005454794916">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=1136059005454794916"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1136059005454794916">08/01/2023 10:12 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">サンプルを探してみたけどあまりなかった。 <a href="https://github.com/cjwirth/NavigationControllerTransitions">https://github.com/cjwirth/NavigationControllerTransitions</a> ^ は古いけどSwift 4を指定してXcodeの言うとおりにコンパイルエラーをFixitしていったら動いたから試すのは簡単だと思う。横にスライドじゃなくて縦にモーダルビューのようにアニメーションするんだけどそれをアニメーションを変えるだけだから問題ないと思う。 さらにSwipe Backに対応するにはUIViewControllerInteractiveTransitioningとUIPercentDrivenInteractiveTransitionを使ったりします。</span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/cjwirth/NavigationControllerTransitions">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">GitHub - cjwirth/NavigationControllerTransitions: Sample project sh...</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">Sample project showing how to retain the swipe back function on UINavigationControllers when using custom transitions - GitHub - cjwirth/NavigationControllerTransitions: Sample project showing how ...</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/D2wGKypA86dzLmDH-9w98zvpmgRGQxXC3SVRppN7phc/https/opengraph.githubassets.com/681c467c77730b080bb317988503dcf5f7ecc0d68f25a34cd1b23b3b754278a5/cjwirth/NavigationControllerTransitions"> <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/D2wGKypA86dzLmDH-9w98zvpmgRGQxXC3SVRppN7phc/https/opengraph.githubassets.com/681c467c77730b080bb317988503dcf5f7ecc0d68f25a34cd1b23b3b754278a5/cjwirth/NavigationControllerTransitions" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1136108524301201418" class="chatlog__message-container" data-message-id="1136108524301201418">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon" data-user-id="293572563010060288">tarunon</span> <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=1136108524301201418"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1136108524301201418">08/02/2023 1:29 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">スワイプの実装加えたいなどを含めて考えると、UIPageViewControllerで実装する方が近道なように見えてますが、どうでしょうか</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 1,243 message(s)</div>
+    <div class="postamble__entry">Exported 1,247 message(s)</div>
   </div>
 </body>
 
