@@ -1,0 +1,28 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1137635325024407592" class="chatlog__message-container" data-message-id="1137635325024407592">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="_rintaro" data-user-id="296587674737704960">rintaro</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1137635325024407592"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1137635325024407592">08/06/2023 6:36 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">3週間ほど休暇を取っていたのでまったく追えていないのですが、プロポーザルを読む限り: <ul>
+              <li>マクロの引数がタイプチェックされるのと同様に、ボディも展開前タイプチェックするかどうかは完全にデザイン選択の問題です。 タイプチェックしたほうが嬉しい場合もあるということですね</li>
+            </ul>
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">if they are fully type-checked prior to expansion, then the bodies are easier to reason about for programmers and also for tools. </div>
+            </div>
+            <ul>
+              <li>プロポーザルで述べられている関数ボディマクロは3種</li>
+            </ul> 1) 元のボディがない → 展開前タイプチェック不要 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@attached(body) macro Remote func f(a: Int, b: String) async throws -&gt; String</code> 2) 元のボディの前に何かを挿入する → 展開前タイプチェックする <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@attached(preamble) macro Logged func g(a: Int, b: Int) -&gt; Int { return a + b }</code> 3) 元のボディを書き換える → 展開前タイプチェックしない <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@attached(body) macro Traced @Traced("Doing complicated math") func h(a: Int, b: Int) -&gt; Int { return a + b }</code>
+            <ul>
+              <li>3 のパターンにおいて、展開前にタイプチェック_しない_ことでマクロで追加される変数名を使えるなどの利点がある一方、 その関数ボディ内でのコード補完や Jump to Definition などの IDE 機能が制限される可能性が高いです。</li>
+            </ul>
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">展開してから処理するのは難しいのかな </div>
+            </div>コンパイラはマクロの実装が元のボディの要素を展開後のどこに配置したのか、そもそも利用したのかの知識がありません。なので仮に <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@SomeBodyMacro func foo(a: Int, b: Int) { expr }</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func foo(a: Int, b: Int) { expr let a: String = "" expr }</code> に書き換えられるマクロがあったとき、非常に恣意的な例ですが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@SomeBodyMacro func foo(a: Int, b: Int) { a.&lt;HERE&gt; }</code> みたいなコード補完だと、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">a</code> が Int なのか String なのかわからない、みたいな話です。
+          </span></div>
+      </div>
+    </div>
+  </div>
+</div>

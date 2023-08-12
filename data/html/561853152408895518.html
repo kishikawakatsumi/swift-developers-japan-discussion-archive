@@ -9335,9 +9335,384 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1137646497194856492" class="chatlog__message-container" data-message-id="1137646497194856492">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="_rintaro" data-user-id="296587674737704960">rintaro</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1137646497194856492"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1137646497194856492">08/06/2023 7:21 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift のマクロは思想的にはテキスト書き換えに近いと<em>思います</em>。SwiftSyntaxでやりとりしているのはテキストそのままよりはマクロ実装者が便利だろうと考えているからだと<em>思います</em>。 テキストを介するおおきな理由の一つとして、コンパイラの swift-syntax と マクロプラグインの swift-syntax のバージョン差異の吸収というのがあります。たとえば Swift 5.10 で新しい文法が導入されたとして、5.10コンパイラから swift-syntax-509.x 向けに作られたプラグインを使う場合、 5.9 の swift-syntax は それを表現する手段を持ちません。が、テキストを介せばその 新しい文法も <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">unexpectedBetweenXXXandYYY</code> としてパースされるなど、何らかの形で_そのまま_マクロ実装に渡ります。マクロ実装は文法エラーのある Syntax Tree を受け取りますが、前後になにか足したりするだけでその内容を扱わないのであれば、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">expected*</code> がまたそのままテキスト化されてコンパイラに返り、コンパイラは 5.10 の swift-syntax でそれをパースすることによって、新しい文法が適切に解釈されるという形です。</span> <span class="chatlog__edited-timestamp" title="08/06/2023 7:48 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1137659660313317386" class="chatlog__message-container" data-message-id="1137659660313317386">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="_rintaro" data-user-id="296587674737704960">rintaro</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1137659660313317386"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1137659660313317386">08/06/2023 8:13 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+                <div class="chatlog__markdown-quote">
+                  <div class="chatlog__markdown-quote-border"></div>
+                  <div class="chatlog__markdown-quote-content">Syntax Treeの段階で文法エラーが起こり得る場合 </div>
+                </div> SwiftSyntax は CST なので文法エラーのあるテキストでも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">unexpectedXXX</code> などで表現できます。<code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">ExprSyntax("func foo() {}")</code> も<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ExprSyntax</code>としてはパースエラーですが、それでもツリー生成はされます。あと SwfitSyntax は 入力テキストのバリデーションを行わないので 極端な例ですが <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">IdentifierExprSyntax(identifier: TokenSyntax(.identifier("var value = 1"), presence: .present))</code> も通ります。
+              </span> <span class="chatlog__edited-timestamp" title="08/06/2023 8:18 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1137739527784505456" class="chatlog__message-container" data-message-id="1137739527784505456">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1137739527784505456"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1137739527784505456">08/06/2023 1:30 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やろうと思うとなんでもできる柔軟性があるっていうのはいいと思います。ただ多くのケースでは文法として正しいツリー構造を文法的に正しいツリーを維持したまま操作するのでそういう場合にテキストに戻すことでエラーが起こりうるよりはそうじゃない方がいいかなと思ったんですよね。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138398657016766469" class="chatlog__message-container" data-message-id="1138398657016766469">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138399790540009543"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138398657016766469">08/08/2023 9:09 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftSyntaxが最新版でちょっとツリーの構造が変わって作ってるマクロで対応が必要だった。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138398860360818688" class="chatlog__message-container" data-message-id="1138398860360818688">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/08/2023 9:10 AM">09:10</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar.foo.val</code> はもともと上のようなツリーになってたんだけど、</span></div>
+            <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/561853152408895518/1138398860092391494/Screenshot_2023-08-08_at_18.08.06.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/561853152408895518/1138398860092391494/Screenshot_2023-08-08_at_18.08.06.png" alt="Image attachment" title="Image: Screenshot_2023-08-08_at_18.08.06.png (29.89 KB)" loading="lazy"> </a></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138399790540009543" class="chatlog__message-container" data-message-id="1138399790540009543">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/08/2023 9:14 AM">09:14</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">各変数がトークンじゃなくて<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">DeclReferenceExprSyntax</code>（旧<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">IdentifierExprSyntax</code>）に包まれるようになった。それで各変数１つ１つが要素として評価されるようになったので元のツリーだったら、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar.foo.val</code>、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar.foo</code>、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar</code>とうまいことツリーが探索されてたのだけど、新しい構造だと<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar</code>、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">foo</code>、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">val</code>が単独でSyntax要素になったので単独で探索に引っかかるようになった。</span></div>
+            <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/561853152408895518/1138399790317707324/Screenshot_2023-08-08_at_18.08.29.png"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/561853152408895518/1138399790317707324/Screenshot_2023-08-08_at_18.08.29.png" alt="Image attachment" title="Image: Screenshot_2023-08-08_at_18.08.29.png (44.32 KB)" loading="lazy"> </a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138400979155439636" class="chatlog__message-container" data-message-id="1138400979155439636">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="iceman5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138400979155439636"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138400979155439636">08/08/2023 9:19 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おお、地味に壊れるところが出てきそうですね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138402964772487179" class="chatlog__message-container" data-message-id="1138402964772487179">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138403086952570900"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138402964772487179">08/08/2023 9:26 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ウチのはめためたに壊れた。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138403086952570900" class="chatlog__message-container" data-message-id="1138403086952570900">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/08/2023 9:27 AM">09:27</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Linterとか影響ありそう。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138403164626882570" class="chatlog__message-container" data-message-id="1138403164626882570">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138403164626882570"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138403164626882570">08/08/2023 9:27 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">decl referenceなるほど</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138403294448980008" class="chatlog__message-container" data-message-id="1138403294448980008">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138403294448980008"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138403294448980008">08/08/2023 9:28 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">トークンだ、と思ってたのがSyntaxになったり階層が増えるっていうのはその辺の構造をチェックするやつに影響ありそう。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138403519934763008" class="chatlog__message-container" data-message-id="1138403519934763008">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="yniw" data-user-id="375129448900591616">niw</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138403519934763008"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138403519934763008">08/08/2023 9:29 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Meta Meta</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138405377168384000" class="chatlog__message-container" data-message-id="1138405377168384000">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138405377168384000"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138405377168384000">08/08/2023 9:36 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あと、たぶんAPIの名前をキレイにしてる。 <a href="https://github.com/kishikawakatsumi/swift-power-assert/pull/255/files">https://github.com/kishikawakatsumi/swift-power-assert/pull/255/files</a> これはめっちゃ変わってるように見えるけどごく一部で、 <a href="https://github.com/SwiftFiddle/swift-ast-explorer/pull/319/files">https://github.com/SwiftFiddle/swift-ast-explorer/pull/319/files</a> プロパティの１つ１つを一貫性がある名前に整理してる。 ここ１か月くらいSwiftSyntaxの変更があるたびにめっちゃ名前変わってる。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138521627156553748" class="chatlog__message-container" data-message-id="1138521627156553748">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138521627156553748"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138521627156553748">08/08/2023 5:18 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">互換性を維持していくの大変そうだな。なんとなく複数バージョンをメンテすることになるんかなと思ってるけど。 （Swift 5.9用のライブラリ、6.0用のライブラリ、みたいな。）</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138618744030122084" class="chatlog__message-container" data-message-id="1138618744030122084">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138618965132836884"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138618744030122084">08/08/2023 11:44 PM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうですね。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138618965132836884" class="chatlog__message-container" data-message-id="1138618965132836884">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/08/2023 11:45 PM">23:45</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でも実行環境の対応バージョンと違って、開発環境のバージョンは上げやすいから、 最新のXcodeと最新のXcode betaの2系統だけの保守で足りそう</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="thumbsup_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👍🏻" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138650155466363071" class="chatlog__message-container" data-message-id="1138650155466363071">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138651497127743518"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138650155466363071">08/09/2023 1:49 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">自分としては各Xcodeに対応したバージョンをメンテするのはできるんだけどSemantic Versioningとその周辺のツールと相性が良くないねんな。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138650860377878641" class="chatlog__message-container" data-message-id="1138650860377878641">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 1:52 AM">01:52</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://forums.swift.org/t/macro-adoption-concerns-around-swiftsyntax/66588">https://forums.swift.org/t/macro-adoption-concerns-around-swiftsyntax/66588</a> ちょうど問題提起がStephenさんからされてたわ。</span></div>
+            <div class="chatlog__embed">
+              <div class="chatlog__embed-color-pill" style="background-color:rgba(17,17,17,255)"></div>
+              <div class="chatlog__embed-content-container">
+                <div class="chatlog__embed-content">
+                  <div class="chatlog__embed-text">
+                    <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://forums.swift.org/t/macro-adoption-concerns-around-swiftsyntax/66588">
+                        <div class="chatlog__markdown chatlog__markdown-preserve">Macro Adoption Concerns around SwiftSyntax</div>
+                      </a></div>
+                    <div class="chatlog__embed-description">
+                      <div class="chatlog__markdown chatlog__markdown-preserve">Macros are one of the most celebrated new features of Swift, and many of us are excited to adopt them in our projects. Many members of the core team are also excited to suggest macros as a solution to many problems. We’d love to hit the ground running and adopt macros in our projects, but the decision to adopt them raises some questions, particu...</div>
+                    </div>
+                  </div>
+                  <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/88hU1LfKxeFyWSdlYoQ4j5JtJZsPVThjZ9MCw52kQos/https/global.discourse-cdn.com/swift/original/1X/0a90dde98a223f5841eeca49d89dc9f57592e8d6.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/88hU1LfKxeFyWSdlYoQ4j5JtJZsPVThjZ9MCw52kQos/https/global.discourse-cdn.com/swift/original/1X/0a90dde98a223f5841eeca49d89dc9f57592e8d6.png" alt="Thumbnail" loading="lazy"> </a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138651092071239821" class="chatlog__message-container" data-message-id="1138651092071239821">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 1:52 AM">01:52</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Appleも問題を認識してるけど特に解決はされていない。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138651436608135208" class="chatlog__message-container" data-message-id="1138651436608135208">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 1:54 AM">01:54</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ユーザー側でできる方法としては各自SwiftSyntaxをForkしてバージョンごとに違う名前に変えてライブラリに内包してしまう、などがある。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138651497127743518" class="chatlog__message-container" data-message-id="1138651497127743518">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 1:54 AM">01:54</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">^ まあこれはジョーク（皮肉）ですね。</span> <span class="chatlog__edited-timestamp" title="08/09/2023 1:55 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138716036099739688" class="chatlog__message-container" data-message-id="1138716036099739688">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title=".kitasuke" data-user-id="358893395604930562">kitasuke</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138716768525881467"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138716036099739688">08/09/2023 6:10 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">確かに問題提起しようと思うくらいには最近の変更量はMacro関係無しに多かったですね</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138716768525881467" class="chatlog__message-container" data-message-id="1138716768525881467">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 6:13 AM">06:13</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftSyntaxの動向を観察してると、当分は基本的に最新のXcode betaへの対応をメインで考えてそう</span> <span class="chatlog__edited-timestamp" title="08/09/2023 7:27 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138731507406618634" class="chatlog__message-container" data-message-id="1138731507406618634">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon" data-user-id="293572563010060288">tarunon</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138731507406618634"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138731507406618634">08/09/2023 7:12 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">実際SwiftSyntaxをforkしてるプロジェクトは幾つか観測してますね…</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138752319979266068" class="chatlog__message-container" data-message-id="1138752319979266068">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138753077093085204"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138752319979266068">08/09/2023 8:35 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftSyntaxはバージョン507になったときにその意思をはっきりしてますよね</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138752455631441920" class="chatlog__message-container" data-message-id="1138752455631441920">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 8:35 AM">08:35</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swiftのマイナーバージョンがあがるときは、SwiftSyntaxのメジャーバージョンが上がるから</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138752589152911431" class="chatlog__message-container" data-message-id="1138752589152911431">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 8:36 AM">08:36</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そもそもSwiftSyntaxの2バージョンをまたいだ互換プログラムは書けない、書けるようにするつもりがない</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138752898717732916" class="chatlog__message-container" data-message-id="1138752898717732916">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 8:37 AM">08:37</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftSyntax自体も昔はxcodeのバージョンと紐づいて分裂してて、swift-formatとかはSwiftSyntaxに引っ張られて同じようにバージョンが分裂している</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1138753077093085204" class="chatlog__message-container" data-message-id="1138753077093085204">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/09/2023 8:38 AM">08:38</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">よくはないだろうけど現実的に仕方ないと思う</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1138998108852867232" class="chatlog__message-container" data-message-id="1138998108852867232">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="trickart" data-user-id="459680124531638283">trickart</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1138998108852867232"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1138998108852867232">08/10/2023 12:51 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もっと気軽にSwiftSyntaxに依存できればいいのに 今のところは気合い入れて追従するか使わないかって感じなんですね…</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1139003623842529381" class="chatlog__message-container" data-message-id="1139003623842529381">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/358893395604930562/1d896f16f61b24ec8b00b7df8ea85498.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title=".kitasuke" data-user-id="358893395604930562">kitasuke</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1139003623842529381"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1139003623842529381">08/10/2023 1:13 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">swift-formatは開発用はSwiftSyntaxのmasterブランチを見てるので、追従するPRが多いです。そしてahoppenさんがSwiftSyntax側での変更をswift-format側にも対応してくれてるのでまだ平和に進んでますが、他のSwiftSyntax使ってるツールはそんな手段は取れないので大変ですね...</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1139012829018603683" class="chatlog__message-container" data-message-id="1139012829018603683">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/561853152408895518?category=main&amp;channel=swift-syntax&amp;message_id=1139013276911538196"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1139012829018603683">08/10/2023 1:50 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">5.9のリリース後はある程度落ち着くとは思うけどそれは頻度の問題で大変なのはあまり変わらないでしょうね。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1139013276911538196" class="chatlog__message-container" data-message-id="1139013276911538196">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/10/2023 1:52 AM">01:52</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">とりあえずテストをたくさん書いて、SwiftSyntaxとToolchainのアップデートを自動でPR出すように整えるのが最低限必要かな。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 682 message(s)</div>
+    <div class="postamble__entry">Exported 715 message(s)</div>
   </div>
 </body>
 
