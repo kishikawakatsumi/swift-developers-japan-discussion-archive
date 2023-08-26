@@ -34997,9 +34997,420 @@
         </div>
       </div>
     </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141249971975376977" class="chatlog__message-container" data-message-id="1141249971975376977">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141249971975376977"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141249971975376977">08/16/2023 5:59 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="omochimetaru">@omochimetaru</span> 以前送ってくれた修正ですが SwiftPMが生成しているmodulemapではなく、自作しているmodulemapを正としたのはなにか理由がありますか 問題があるケースが見つかったのでどうやって直そうか考えてます</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141250828569694278" class="chatlog__message-container" data-message-id="1141250828569694278">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reply-author" title="giginet">giginet</div>
+              <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1141249971975376977')"> <span class="chatlog__markdown-mention" title="omochimetaru">@omochimetaru</span> 以前送ってくれた修正ですが SwiftPMが生成しているmodulemapではなく、自作しているmodulemapを正としたのはなにか理由がありますか 問題があるケースが見つかったのでどうやって直そうか考えてます </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141250828569694278"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141250828569694278">08/16/2023 6:03 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">単に小さい変更で問題が解決できそうだったからです。 ログ周りとかも不便で作業しづらかったので大きな作業を避けました。 SwiftPMが作る動作(1)が残ってる（ただし参照されないようにした）＋自作の生成ロジック(2)も持ってる という現在の状態は設計として望ましくないと思ってます。 SwiftPMが作る動作をオーバライドして、(1)と(2)を統合するのが良いと思ってます。 SwiftPMがxcodebuildにmodulemapを生成させるところの仕組みは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_FILE_CONTENT</code> というパラメータに文字列をいれてやる方法を使っているので、 (2)で持ってる自前のモジュールマップ生成結果を このパラメータに上書きしてやれば、統合できると思います。 生成先のパスも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_PATH</code> かなんかで指定されているので変更できる。 問題があるケースというのもそれでうまく解決すると思う。</span> <span class="chatlog__edited-timestamp" title="08/16/2023 6:05 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141254918032855051" class="chatlog__message-container" data-message-id="1141254918032855051">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141255190960414730"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141254918032855051">08/16/2023 6:19 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">理解しました</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141255190960414730" class="chatlog__message-container" data-message-id="1141255190960414730">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:20 AM">06:20</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これらが作ってるmodulemap、役割が違うんですよ 前者のSwiftPMが生成しているものはバイナリのビルド時に使われる物で、後者の自作しているものは配布されるフレームワークに同梱され、エンドユーザーが使うmodulemap というわけで生成が必要がある</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141255347810598943" class="chatlog__message-container" data-message-id="1141255347810598943">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141255347810598943"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141255347810598943">08/16/2023 6:21 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">結局clangモジュールとしてヘッダーの可視性を定義してるだけだから</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141255387182542848" class="chatlog__message-container" data-message-id="1141255387182542848">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141255387182542848"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141255387182542848">08/16/2023 6:21 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おもちさんがやってくれた変更は、ビルド時に後者を見てビルドするようにするという仕組みになっていて、前者に寄せた方が良いのかなと思ってた</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141255387916537906" class="chatlog__message-container" data-message-id="1141255387916537906">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141255387916537906"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141255387916537906">08/16/2023 6:21 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">同じようにできるんじゃないかな</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141255443528814732" class="chatlog__message-container" data-message-id="1141255443528814732">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reply-author" title="giginet">giginet</div>
+              <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1141255387182542848')"> おもちさんがやってくれた変更は、ビルド時に後者を見てビルドするようにするという仕組みになっていて、前者に寄せた方が良いのかなと思ってた </span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141255503251505192"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141255443528814732">08/16/2023 6:21 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">前者に寄せるのは無理なんですよね</span></div>
+            <div class="chatlog__reactions">
+              <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141255503251505192" class="chatlog__message-container" data-message-id="1141255503251505192">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:21 AM">06:21</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftPMが作るmodulemapは、マシンのフルパスが書き込まれてるから配布できない</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141255546033405952" class="chatlog__message-container" data-message-id="1141255546033405952">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141255670897836103"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141255546033405952">08/16/2023 6:22 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、そうそう</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141255605751918592" class="chatlog__message-container" data-message-id="1141255605751918592">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:22 AM">06:22</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">だからビルド時は前者を使って、後者は配布時にのみ使うということですね</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141255670897836103" class="chatlog__message-container" data-message-id="1141255670897836103">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:22 AM">06:22</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今ビルド時にも配布用のmodulemapを使っているんじゃないかな</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141255833326456884" class="chatlog__message-container" data-message-id="1141255833326456884">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256005854969919"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141255833326456884">08/16/2023 6:23 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、そうです。 &gt; ビルド時にも配布用のmodulemapを使っている 配布用のmodulemapでビルドもしてしまう必要があると思う。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141256005854969919" class="chatlog__message-container" data-message-id="1141256005854969919">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:23 AM">06:23</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ビルドしてるときと、配布されるフレームワークを利用するときで、結局同じようにヘッダーが解決されてないと、いろいろと無理なはず。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256082145161256" class="chatlog__message-container" data-message-id="1141256082145161256">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256082145161256"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256082145161256">08/16/2023 6:24 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。わかりました</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256127250698250" class="chatlog__message-container" data-message-id="1141256127250698250">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256127250698250"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256127250698250">08/16/2023 6:24 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ビルドするときと配布するときでヘッダー可視性がズレてるようなトリッキーな構成にしてるパッケージは見捨てるしか無いと思う</span> <span class="chatlog__edited-timestamp" title="08/16/2023 6:24 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256222587224136" class="chatlog__message-container" data-message-id="1141256222587224136">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256222587224136"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256222587224136">08/16/2023 6:24 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちなみに今起きている問題、依存関係の一部をキャッシュから復元すると、modulemapが生成されていないということが発覚した</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256324315881482" class="chatlog__message-container" data-message-id="1141256324315881482">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256324315881482"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256324315881482">08/16/2023 6:25 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">scipio自前のキャッシュシステム？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256360537903146" class="chatlog__message-container" data-message-id="1141256360537903146">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy">
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+              <div class="chatlog__reply-author" style="color:rgb(237,171,161)" title="omochimetaru">omochimetaru</div>
+              <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1141256127250698250')"> ビルドするときと配布するときでヘッダー可視性がズレてるようなトリッキーな構成にしてるパッケージは見捨てるしか無いと思う </span> <span class="chatlog__reply-edited-timestamp" title="08/16/2023 6:24 AM">(edited)</span></div>
+            </div>
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256360537903146"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256360537903146">08/16/2023 6:25 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうなんですよね。結構多いけど、そこを無理するのは違うなと思って対応していないです 設定で読み替える仕組みはあってもいいのかなとは考えているが･･････</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256372051251263" class="chatlog__message-container" data-message-id="1141256372051251263">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256372051251263"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256372051251263">08/16/2023 6:25 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">自作してるmodulemapをキャッシュから復元するロジックが入ってないんじゃないか？</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256411066675211" class="chatlog__message-container" data-message-id="1141256411066675211">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256432986103888"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256411066675211">08/16/2023 6:25 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そう</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141256432986103888" class="chatlog__message-container" data-message-id="1141256432986103888">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:25 AM">06:25</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なので直します</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141256509012058202" class="chatlog__message-container" data-message-id="1141256509012058202">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141256701803233280"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141256509012058202">08/16/2023 6:25 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まあ、自作してるmodulemapは、xcbuildのビルドグラフシステムからこぼれてるから、そういう意味でもよくないんだよね。</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141256651157024769" class="chatlog__message-container" data-message-id="1141256651157024769">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:26 AM">06:26</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">単純に自作のmodulemapもキャッシュする＋復元してあげる だけで、問題は解決できそうだけど</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141256701803233280" class="chatlog__message-container" data-message-id="1141256701803233280">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/16/2023 6:26 AM">06:26</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">根本的にいいのは ↑で書いた(1)と(2)の統合だと思います。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141941351265607730" class="chatlog__message-container" data-message-id="1141941351265607730">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141941351265607730"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141941351265607730">08/18/2023 3:47 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">昨日 <ul>
+                  <li>SwiftPM側が挿入する <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_FILE_CONTENTS</code> をなくして自動生成を抑止する</li>
+                  <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-fmodule-map-file</code> を渡さないようにする</li>
+                  <li>自分で生成したものを <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_FILE</code> に渡してFrameworkに含むようにする</li>
+                  <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-F</code>で生成したフレームワーク内のモジュールを正としてあつかうようにする という変更を試してみたら、NIOSSLのビルドは維持出来たし動いてそうだ</li>
+                </ul></span> <span class="chatlog__edited-timestamp" title="08/18/2023 3:47 AM">(edited)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141941602131136603" class="chatlog__message-container" data-message-id="1141941602131136603">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141941809816285316"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141941602131136603">08/18/2023 3:48 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">おお</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141941674944249866" class="chatlog__message-container" data-message-id="1141941674944249866">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/18/2023 3:48 AM">03:48</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">自分で生成したものを <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_FILE</code> にわたすのではなくて、</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141941734658560092" class="chatlog__message-container" data-message-id="1141941734658560092">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/18/2023 3:48 AM">03:48</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_FILE_CONTENTS</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_PATH</code> を使って、xcbuildに生成させたらどう？</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="chatlog__message-container-1141941809816285316" class="chatlog__message-container" data-message-id="1141941809816285316">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside">
+            <div class="chatlog__short-timestamp" title="08/18/2023 3:49 AM">03:49</div>
+          </div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そのほうがxcbuildのシステム内で完結するよ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141941813138169949" class="chatlog__message-container" data-message-id="1141941813138169949">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141941813138169949"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141941813138169949">08/18/2023 3:49 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それだとフレームワークにコピーが必要になるんですよね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141941873385160765" class="chatlog__message-container" data-message-id="1141941873385160765">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141941873385160765"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141941873385160765">08/18/2023 3:49 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あー足りない動作があるのか</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141942059511586846" class="chatlog__message-container" data-message-id="1141942059511586846">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141942059511586846"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141942059511586846">08/18/2023 3:50 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">MODULEMAP_FILE_CONTENTS と MODULEMAP_PATH を使うと、DerivedData内にmodulemapが生成されて、それがビルド時に使われるんだけど、Frameworkにはdistributionされない</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141942101110689913" class="chatlog__message-container" data-message-id="1141942101110689913">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141942101110689913"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141942101110689913">08/18/2023 3:50 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほどね</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141942261832241243" class="chatlog__message-container" data-message-id="1141942261832241243">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141942261832241243"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141942261832241243">08/18/2023 3:50 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_FILE</code>と<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_PATH</code>一緒にしたらうまく動かないかな</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chatlog__message-group">
+      <div id="chatlog__message-container-1141949038980235394" class="chatlog__message-container" data-message-id="1141949038980235394">
+        <div class="chatlog__message">
+          <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy"></div>
+          <div class="chatlog__message-primary">
+            <div class="chatlog__header"><span class="chatlog__author" title="giginet" data-user-id="243946040623890432">giginet</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141949038980235394"><span class="chatlog__timestamp"><a href="#chatlog__message-container-1141949038980235394">08/18/2023 4:17 AM</a></span></a></div>
+            <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑はダメだった</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="postamble">
-    <div class="postamble__entry">Exported 2,744 message(s)</div>
+    <div class="postamble__entry">Exported 2,780 message(s)</div>
   </div>
 </body>
 

@@ -16,7 +16,7 @@
     "after": null,
     "before": null
   },
-  "exportedAt": "2023-08-12T15:11:10.526019+00:00",
+  "exportedAt": "2023-08-26T15:11:27.9086154+00:00",
   "messages": [
     {
       "id": "700260394656202802",
@@ -11213,8 +11213,8 @@
       "content": "こんにちは、Combineについての質問をさせてください。\nCombineで、複数の値を送るPublisherって、どうやって作っていますか？\n例えば、コールバック関数が複数回呼ばれる場合（WebSocketでメッセージを受信する等）の処理をPublisherにラップしたい場合、どう実装できるのでしょうか？\n```swift\nwebSocketClient.receiveMessage { message, error in\n    // this closure is called multiple times, everytime a message comes\n    ...\n}\n```\n他のFRPライブラリ、例えばReactiveSwiftだと、`SignalProducer.init(_ startHandler:)`、RxSwiftだと`Observable.create` と、普通にinitializerでかけるのですが、Combineで相当するものが見つからず、Combineユーザーの方がどう対応しているのか知りたいです。\nTCA (The Composable Architecture)の `Effect.run` はそのようなユースケースにも使えて便利なのですが、内部実装はカスタムのPublisherとSubscriberを作っているようで、このようにカスタムのPublisherを作って対応しているのでしょうか？\n割とよくあるシナリオな割にうまく書けなくて、Combine使っている方がどう処理しているのか気になっています。よろしくお願いします〜。",
       "author": {
         "id": "322428188871622666",
-        "name": "Yoshikuni Kato",
-        "discriminator": "6611",
+        "name": "yoshikunikato",
+        "discriminator": "0000",
         "nickname": "Yoshikuni Kato",
         "color": null,
         "isBot": false,
@@ -11366,8 +11366,8 @@
       "content": "ありがとうございます。\nSubject等の状態を導入すればできそう、というのはイメージがつきます。\nただ、Rx等だと、例えば以下の処理のように、監視の終了などを含め、1つのObservable内にencapsulateできるのが扱いやすくて便利だなぁと思っているのですが、CombineだとこのようにPublisher内に閉じ込めることは難しい（あまりやらない？）のでしょうか？\n\n```swift\nlet observable = Observable<String>.create { observer in\n    let token = webSocketClient.receiveMessage { message in\n        observer.on(.next(message))\n    }\n\n    return Disposables.create {\n        // close connection when disposed\n        token.invalidate()\n    }\n}\n```",
       "author": {
         "id": "322428188871622666",
-        "name": "Yoshikuni Kato",
-        "discriminator": "6611",
+        "name": "yoshikunikato",
+        "discriminator": "0000",
         "nickname": "Yoshikuni Kato",
         "color": null,
         "isBot": false,
@@ -11476,8 +11476,8 @@
       "content": "分かりました。少し調べていた感じだと、単純なextension等では実現できなくて、実現しているもの（CombineExtやTCA等）では独自Subscriptionを作る方法で実現しているようで、私も何度かトライしたことがあるのですが、少し難易度が高かったので、どのように回避しているのか、気になっていたところでした。",
       "author": {
         "id": "322428188871622666",
-        "name": "Yoshikuni Kato",
-        "discriminator": "6611",
+        "name": "yoshikunikato",
+        "discriminator": "0000",
         "nickname": "Yoshikuni Kato",
         "color": null,
         "isBot": false,
@@ -11500,8 +11500,8 @@
       "content": "他の質問サイト等でも、Subject等の状態を導入して実現している、もしくは（自作は結構大変なので）CombineExtを導入しているという回答をもらったので、そのぐらいしか手がなさそうですね。",
       "author": {
         "id": "322428188871622666",
-        "name": "Yoshikuni Kato",
-        "discriminator": "6611",
+        "name": "yoshikunikato",
+        "discriminator": "0000",
         "nickname": "Yoshikuni Kato",
         "color": null,
         "isBot": false,
@@ -11524,8 +11524,8 @@
       "content": "ありがとうございます！",
       "author": {
         "id": "322428188871622666",
-        "name": "Yoshikuni Kato",
-        "discriminator": "6611",
+        "name": "yoshikunikato",
+        "discriminator": "0000",
         "nickname": "Yoshikuni Kato",
         "color": null,
         "isBot": false,

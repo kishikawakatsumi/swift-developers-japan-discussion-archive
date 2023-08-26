@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1143458920002768938" class="chatlog__message-container" data-message-id="1143458920002768938">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/298037925646565377/2c5f11e0ebd12319d641e006940b1b63.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="we_channel" data-user-id="298037925646565377">We</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1143458920002768938"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1143458920002768938">08/22/2023 8:17 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftUIについてご質問させてください。 以下コードはTODOリストを実装したものです。TodoItemには完了/未完了を表すチェックボックスがあり、完了した項目は下になるようソートしています。 ですがObservableObjectがネストしているためチェックボックスの変更通知がContentViewまで届かず、リストが再描画されません。 この問題についてはobjectWillChangeとコールバック関数を組み合わせて解決しましたが、どうもSwiftUIの設計思想に反している気がします。 もっとSwiftの流儀に則ったうまい解決方法はありますでしょうか。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI struct ContentView: View { @StateObject var viewModel = TodoList() var body: some View { List { Button("Add Item") { viewModel.add() } ForEach(viewModel.items.sorted { !$0.completed &amp;&amp; $1.completed }) { TodoItemView(viewModel: $0) } } } } class TodoList: ObservableObject { @Published var items: [TodoItem] = [] func add() { items.append(TodoItem(text: "item: \(items.count)") { self.objectWillChange.send() }) } } class TodoItem: ObservableObject, Identifiable { @Published var completed = false { didSet { onChanged() } } @Published var text: String private let onChanged: () -&gt; Void init(text: String, onChanged: @escaping () -&gt; Void) { self.text = text self.onChanged = onChanged } } struct TodoItemView: View { @StateObject var viewModel: TodoItem var body: some View { HStack { Button(action: { viewModel.completed.toggle() }, label: { Image(systemName: viewModel.completed ? "checkmark.square.fill" : "square") }) TextField("", text: $viewModel.text) } } }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

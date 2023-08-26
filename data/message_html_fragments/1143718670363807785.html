@@ -1,0 +1,59 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1143718670363807785" class="chatlog__message-container" data-message-id="1143718670363807785">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/298037925646565377/2c5f11e0ebd12319d641e006940b1b63.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" title="we_channel">We</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1143458920002768938')"> SwiftUIについてご質問させてください。 以下コードはTODOリストを実装したものです。TodoItemには完了/未完了を表すチェックボックスがあり、完了した項目は下になるようソートしています。 ですがObservableObjectがネストしているためチェックボックスの変更通知がContentViewまで届かず、リストが再描画されません。 この問題についてはobjectWillChangeとコールバック関数を組み合わせて解決しましたが、どうもSwiftUIの設計思想に反している気がします。 もっとSwiftの流儀に則ったうまい解決方法はありますでしょうか。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI struct ContentView: View { @StateObject var viewModel = TodoList() var body: some View { List { Button("Add Item") { viewModel.add() } ForEach(viewModel.items.sorted { !$0.completed &amp;&amp; $1.completed }) { TodoItemView(viewModel: $0) } } } } class TodoList: ObservableObject { @Published var items: [TodoItem] = [] func add() { items.append(TodoItem(text: "item: \(items.count)") { self.objectWillChange.send() }) } } class TodoItem: ObservableObject, Identifiable { @Published var completed = false { didSet { onChanged() } } @Published var text: String private let onChanged: () -&gt; Void init(text: String, onChanged: @escaping () -&gt; Void) { self.text = text self.onChanged = onChanged } } struct TodoItemView: View { @StateObject var viewModel: TodoItem var body: some View { HStack { Button(action: { viewModel.completed.toggle() }, label: { Image(systemName: viewModel.completed ? "checkmark.square.fill" : "square") }) TextField("", text: $viewModel.text) } } }</code> </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1143718670363807785"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1143718670363807785">08/23/2023 1:29 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">ObservableObjectがネストしているためチェックボックスの変更通知がContentViewまで届かず（略） どうもSwiftUIの設計思想に反している気がします。 </div>
+            </div>こういうの悩ましいですよね。もうすぐObservation（↓）が追加され、それを利用すればネストしたモデルの変更も通知されるようになるので、iOSのバージョンが許せばそれを利用するのが良いかもしれません。 <a href="https://developer.apple.com/videos/play/wwdc2023/10149/">https://developer.apple.com/videos/play/wwdc2023/10149/</a>
+            <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0395-observability.md">https://github.com/apple/swift-evolution/blob/main/proposals/0395-observability.md</a>
+          </span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://developer.apple.com/videos/play/wwdc2023/10149/">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">Discover Observation in SwiftUI - WWDC23 - Videos - Apple Developer</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Simplify your SwiftUI data models with Observation. We'll share how the Observable macro can help you simplify models and improve your...</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-2.discordapp.net/external/WjtMZgJtANhIZQp_uxXg4ARBmKrPG2bV9wJRoxCkonU/https/devimages-cdn.apple.com/wwdc-services/images/D35E0E85-CCB6-41A1-B227-7995ECD83ED5/8206/8206_wide_250x141_2x.jpg"> <img class="chatlog__embed-thumbnail" src="https://images-ext-2.discordapp.net/external/WjtMZgJtANhIZQp_uxXg4ARBmKrPG2bV9wJRoxCkonU/https/devimages-cdn.apple.com/wwdc-services/images/D35E0E85-CCB6-41A1-B227-7995ECD83ED5/8206/8206_wide_250x141_2x.jpg" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/apple/swift-evolution/blob/main/proposals/0395-observability.md">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">swift-evolution/proposals/0395-observability.md at main · apple/swi...</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">This maintains proposals for changes and user-visible enhancements to the Swift Programming Language. - apple/swift-evolution</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/Ph2c917pwqyrwrD4IqNMDieAbuE3GYFkK_KtxGyvTFE/https/opengraph.githubassets.com/e48e31ca543bc74b746e301f3d2411592324fc3ea05f029a7d100096dae9d65a/apple/swift-evolution"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/Ph2c917pwqyrwrD4IqNMDieAbuE3GYFkK_KtxGyvTFE/https/opengraph.githubassets.com/e48e31ca543bc74b746e301f3d2411592324fc3ea05f029a7d100096dae9d65a/apple/swift-evolution" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+          <div class="chatlog__reaction" title="man_bowing"><img class="chatlog__emoji chatlog__emoji--small" alt="🙇‍♂️" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f647-200d-2642-fe0f.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

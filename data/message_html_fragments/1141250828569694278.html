@@ -1,0 +1,17 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1141250828569694278" class="chatlog__message-container" data-message-id="1141250828569694278">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/243946040623890432/0106546bbb9c2559ece26d95bb0f0477.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" title="giginet">giginet</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1141249971975376977')"> <span class="chatlog__markdown-mention" title="omochimetaru">@omochimetaru</span> 以前送ってくれた修正ですが SwiftPMが生成しているmodulemapではなく、自作しているmodulemapを正としたのはなにか理由がありますか 問題があるケースが見つかったのでどうやって直そうか考えてます </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1141250828569694278"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1141250828569694278">08/16/2023 6:03 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">単に小さい変更で問題が解決できそうだったからです。 ログ周りとかも不便で作業しづらかったので大きな作業を避けました。 SwiftPMが作る動作(1)が残ってる（ただし参照されないようにした）＋自作の生成ロジック(2)も持ってる という現在の状態は設計として望ましくないと思ってます。 SwiftPMが作る動作をオーバライドして、(1)と(2)を統合するのが良いと思ってます。 SwiftPMがxcodebuildにmodulemapを生成させるところの仕組みは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_FILE_CONTENT</code> というパラメータに文字列をいれてやる方法を使っているので、 (2)で持ってる自前のモジュールマップ生成結果を このパラメータに上書きしてやれば、統合できると思います。 生成先のパスも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MODULEMAP_PATH</code> かなんかで指定されているので変更できる。 問題があるケースというのもそれでうまく解決すると思う。</span> <span class="chatlog__edited-timestamp" title="08/16/2023 6:05 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
