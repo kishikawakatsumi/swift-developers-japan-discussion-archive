@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=798479695297249321"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-798478262346842112">01/12/2021 9:07 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=798479695297249321"><span class="chatlog__timestamp" title="Tuesday, 12 January 2021 09:07"></span></a><a href="#chatlog__message-container-798478262346842112">01/12/2021 09:07</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="k_bo">@kebo</span> 情報ありがとうございます！↓の部分ですね。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct ScrumsView: View { @Binding var scrums: [DailyScrum] var body: some View { List { ForEach(scrums) { scrum in NavigationLink(destination: DetailView(scrum: binding(for: scrum))) { CardView(scrum: scrum) } .listRowBackground(scrum.color) } } .navigationTitle("Daily Scrums") .navigationBarItems(trailing: Button(action: {}) { Image(systemName: "plus") }) } private func binding(for scrum: DailyScrum) -&gt; Binding&lt;DailyScrum&gt; { guard let scrumIndex = scrums.firstIndex(where: { $0.id == scrum.id }) else { fatalError("Can't find scrum in array") } return $scrums[scrumIndex] } }</code></span></div>
         <div class="chatlog__reactions">
           <div class="chatlog__reaction" title="thumbsup"><img class="chatlog__emoji chatlog__emoji--small" alt="👍" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -14,7 +14,7 @@
   <div id="chatlog__message-container-798479695297249321" class="chatlog__message-container" data-message-id="798479695297249321">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="01/12/2021 9:13 AM">09:13</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 12 January 2021 09:13">09:13</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ForEach</code> の O(N) と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">binding(for:)</code> の O(N) の組み合わせで O(N^2) になるのが辛そうですね。 N が大きい場合。順序を保持して ID から O(1) で子を引けるコンテナがほしいですね。標準であればベストですが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Array</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Dictionary</code> を組み合わせて作るのが良さそう。</span></div>

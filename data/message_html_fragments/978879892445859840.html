@@ -9,7 +9,7 @@
           <div class="chatlog__reply-author" style="color:rgb(233,30,99)" title="shiz1209">shiz</div>
           <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'978819810538455060')"> swift-async-algorithmsに<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ManagedCriticalState</code>というstructがあり、 <a href="https://github.com/apple/swift-async-algorithms/blob/main/Sources/AsyncAlgorithms/Locking.swift">https://github.com/apple/swift-async-algorithms/blob/main/Sources/AsyncAlgorithms/Locking.swift</a> 用途としては、複数のactorとかqueueで状態を共有する場合や、前に他のスレッドで話にあったwithTaskCancellationHandlerのcancelHandlerで利用することが想定されているのですが、 <a href="https://github.com/apple/swift-async-algorithms/pull/7">https://github.com/apple/swift-async-algorithms/pull/7</a> actor内部の値にsyncにアクセスしたい場合にも使えるのかなと思ったのですが、どうなんでしょう？withCriticalRegion内部でawaitできないのでデータ競合は起きないのかなーと思ったのですが… <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">actor A { let state = ManagedCriticalState(0) nonisolated var value: Int { state.withCriticalRegion { $0 } } func update() { state.withCriticalRegion { $0 += 1 } } } func test() async { let a = A() await a.update() print(a.value) // 1 } await test()</code> </span></div>
         </div>
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=978882377071865856"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-978879892445859840">05/25/2022 4:39 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=978882377071865856"><span class="chatlog__timestamp" title="Wednesday, 25 May 2022 04:39"></span></a><a href="#chatlog__message-container-978879892445859840">05/25/2022 04:39</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">考え方はあってると思いますよ。でも、それはActor以前のJavaのsynchronizedのようなインスタンス別のロックベースの並行プログラミングに戻っているだけなので</span></div>
       </div>
     </div>
@@ -17,7 +17,7 @@
   <div id="chatlog__message-container-978879999719399435" class="chatlog__message-container" data-message-id="978879999719399435">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:39 AM">04:39</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:39">04:39</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうした方式の既知の問題を踏んでいく事になると思います</span></div>
@@ -27,7 +27,7 @@
   <div id="chatlog__message-container-978880465190678548" class="chatlog__message-container" data-message-id="978880465190678548">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:41 AM">04:41</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:41">04:41</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">フィールドの読み書きをアトミックにして並行アクセスに安全なオブジェクトを作る事ができるけど</span></div>
@@ -37,7 +37,7 @@
   <div id="chatlog__message-container-978880536602890250" class="chatlog__message-container" data-message-id="978880536602890250">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:41 AM">04:41</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:41">04:41</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">現実的には「タイミングを待つ」方式が必要になって、</span></div>
@@ -47,7 +47,7 @@
   <div id="chatlog__message-container-978880723048083486" class="chatlog__message-container" data-message-id="978880723048083486">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:42 AM">04:42</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:42">04:42</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そこで、 1. 同期の内側でコールバック関数を呼ぶ 2. 同期の外側で非同期なコールバックを投げる のどちらかが必要になります</span></div>
@@ -57,7 +57,7 @@
   <div id="chatlog__message-container-978880828107001856" class="chatlog__message-container" data-message-id="978880828107001856">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:42 AM">04:42</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:42">04:42</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">1を選択すると、そのコールバック内でさらにそのオブジェクトを触ろうとしたときにデッドロックするという問題が生じます</span></div>
@@ -67,7 +67,7 @@
   <div id="chatlog__message-container-978880952531038219" class="chatlog__message-container" data-message-id="978880952531038219">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:43 AM">04:43</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:43">04:43</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">リカーシブロックで問題を緩和する事ができますが(Javaはこれ)、結局２つ以上のアクセスフローが絡まったパターンでデッドロックします</span></div>
@@ -77,7 +77,7 @@
   <div id="chatlog__message-container-978881570695942164" class="chatlog__message-container" data-message-id="978881570695942164">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:45 AM">04:45</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:45">04:45</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">2を選択すると、結局そこで非同期な待機ポイントが挟まるので、 状態遷移の途中状態にアクセス可能なタイミングが生まれて考慮が難しくなります。</span></div>
@@ -87,7 +87,7 @@
   <div id="chatlog__message-container-978881613251350558" class="chatlog__message-container" data-message-id="978881613251350558">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:46 AM">04:46</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:46">04:46</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">1はいざエンバグした場合にデバッグするのが難しいので</span></div>
@@ -97,7 +97,7 @@
   <div id="chatlog__message-container-978881847910080524" class="chatlog__message-container" data-message-id="978881847910080524">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:46 AM">04:46</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:46">04:46</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">常に2になるように強制する事でシンプルにするのと、 メッセージボックスによる直列化でフィールド自体のロックのオーバーヘッドを回避したのが、 SwiftのActorです</span></div>
@@ -107,7 +107,7 @@
   <div id="chatlog__message-container-978882214488076318" class="chatlog__message-container" data-message-id="978882214488076318">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:48 AM">04:48</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:48">04:48</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">クリティカルセクションの問題は、保護する範囲が拡大していってデッドロックしうるパターンに踏み込むのが一番怖い部分なので、</span></div>
@@ -117,7 +117,7 @@
   <div id="chatlog__message-container-978882377071865856" class="chatlog__message-container" data-message-id="978882377071865856">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/25/2022 4:49 AM">04:49</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 25 May 2022 04:49">04:49</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">適切に使う分には、「syncで状態を読めるActor」でバランスを取れると思います。</span></div>

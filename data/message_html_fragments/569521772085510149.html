@@ -3,8 +3,8 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=569527187900858379"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-569520021034762256">04/21/2019 1:49 PM</a></div>
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="kateinoigakukun">@kateinoigakukun</span> １年前を思い出しながらSwiftPowerAssertから<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-dump-ast</code>のParserの部分を独立させて、現行の環境で動くようにしました。よかったら参考にしてください。 <a href="https://github.com/kishikawakatsumi/SwiftAST">https://github.com/kishikawakatsumi/SwiftAST</a> 使い方は <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">swift-ast parse [FILE_PATH_TO_PARSE] -buildCommand [BUILD_COMMAND_TO_BUILD_THE_PROJECT]</code> 例えば <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">path/to/swift-ast parse "./Framework/Sources/SpreadsheetView.swift" -buildCommand xcodebuild -scheme SpreadsheetView</code> や、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">path/to/swift-ast parse ./Lib/KeychainAccess/Keychain.swift -buildCommand xcodebuild -scheme KeychainAccess -sdk iphonesimulator -destination "name=iPhone Xs,OS=12.2"</code> です。 以下、思い出したことを書きます。</span> <span class="chatlog__edited-timestamp" title="04/21/2019 1:49 PM">(edited)</span></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=569527187900858379"><span class="chatlog__timestamp" title="Sunday, 21 April 2019 13:49"></span></a><a href="#chatlog__message-container-569520021034762256">04/21/2019 13:49</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="kateinoigakukun">@kateinoigakukun</span> １年前を思い出しながらSwiftPowerAssertから<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-dump-ast</code>のParserの部分を独立させて、現行の環境で動くようにしました。よかったら参考にしてください。 <a href="https://github.com/kishikawakatsumi/SwiftAST">https://github.com/kishikawakatsumi/SwiftAST</a> 使い方は <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">swift-ast parse [FILE_PATH_TO_PARSE] -buildCommand [BUILD_COMMAND_TO_BUILD_THE_PROJECT]</code> 例えば <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">path/to/swift-ast parse "./Framework/Sources/SpreadsheetView.swift" -buildCommand xcodebuild -scheme SpreadsheetView</code> や、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">path/to/swift-ast parse ./Lib/KeychainAccess/Keychain.swift -buildCommand xcodebuild -scheme KeychainAccess -sdk iphonesimulator -destination "name=iPhone Xs,OS=12.2"</code> です。 以下、思い出したことを書きます。</span> <span class="chatlog__edited-timestamp" title="Sunday, 21 April 2019 13:49">(edited)</span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
           <div class="chatlog__embed-content-container">
@@ -30,10 +30,10 @@
   <div id="chatlog__message-container-569521772085510149" class="chatlog__message-container" data-message-id="569521772085510149">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="04/21/2019 1:56 PM">13:56</div>
+        <div class="chatlog__short-timestamp" title="Sunday, 21 April 2019 13:56">13:56</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-dump-ast</code>は全ての型が解決しているので原則としてコンパイルが成功する必要があります。簡単な（依存関係がない）ファイルなら簡単ですが、他のファイルやモジュールを参照している場合は同じモジュールのファイルの場合はそれを一緒に渡す、別モジュールの場合はそれを先にビルドする必要があります。 なので、時間は余計にかかるのですが、 <a href="https://github.com/kishikawakatsumi/SwiftAST/blob/master/Sources/SwiftAST/XcodebuildTool.swift#L37-L42">https://github.com/kishikawakatsumi/SwiftAST/blob/master/Sources/SwiftAST/XcodebuildTool.swift#L37-L42</a> のように <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift -dump-ast</code> を実行する前にまずビルドしています。 ビルドエラーが起こる状態で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift -dump-ast</code> を実行した場合、単に失敗するか不完全なASTが出力されます。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift -dump-ast</code> の出力自体が謎であるのにさらに不完全なASTを相手にするのは無理なので、最初のキモは確実にビルドできるパラメータを組み立てることです。</span> <span class="chatlog__edited-timestamp" title="04/21/2019 1:58 PM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-dump-ast</code>は全ての型が解決しているので原則としてコンパイルが成功する必要があります。簡単な（依存関係がない）ファイルなら簡単ですが、他のファイルやモジュールを参照している場合は同じモジュールのファイルの場合はそれを一緒に渡す、別モジュールの場合はそれを先にビルドする必要があります。 なので、時間は余計にかかるのですが、 <a href="https://github.com/kishikawakatsumi/SwiftAST/blob/master/Sources/SwiftAST/XcodebuildTool.swift#L37-L42">https://github.com/kishikawakatsumi/SwiftAST/blob/master/Sources/SwiftAST/XcodebuildTool.swift#L37-L42</a> のように <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift -dump-ast</code> を実行する前にまずビルドしています。 ビルドエラーが起こる状態で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift -dump-ast</code> を実行した場合、単に失敗するか不完全なASTが出力されます。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift -dump-ast</code> の出力自体が謎であるのにさらに不完全なASTを相手にするのは無理なので、最初のキモは確実にビルドできるパラメータを組み立てることです。</span> <span class="chatlog__edited-timestamp" title="Sunday, 21 April 2019 13:58">(edited)</span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
           <div class="chatlog__embed-content-container">
@@ -56,7 +56,7 @@
   <div id="chatlog__message-container-569523165517053972" class="chatlog__message-container" data-message-id="569523165517053972">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="04/21/2019 2:01 PM">14:01</div>
+        <div class="chatlog__short-timestamp" title="Sunday, 21 April 2019 14:01">14:01</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">最初のハードルを超えたら、完全なASTのテキストが手に入るので、それを読んでいくだけです。 難しいのは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">constructor_decl</code> や <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">brace_stmt</code> <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">assign_expr</code> といったノードの種類がよくわからないことと、それぞれがどういう属性を持っているかが当然Undocumentedでよくわからないところで、Parse自体はそれほど難しくないはず（目的にもよりますが）です。</span></div>
@@ -66,7 +66,7 @@
   <div id="chatlog__message-container-569524049605034019" class="chatlog__message-container" data-message-id="569524049605034019">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="04/21/2019 2:05 PM">14:05</div>
+        <div class="chatlog__short-timestamp" title="Sunday, 21 April 2019 14:05">14:05</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/kishikawakatsumi/SwiftAST/blob/master/Sources/SwiftASTCore/SwiftAST.swift#L39-L46">https://github.com/kishikawakatsumi/SwiftAST/blob/master/Sources/SwiftASTCore/SwiftAST.swift#L39-L46</a> ^ を見ると私がどのようにやったかがわかります。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">private func process(sourceFile: URL, verbose: Bool = false) throws -&gt; AST { let arguments = buildArguments(source: sourceFile) let rawAST = try dumpAST(arguments: arguments) let tokens = tokenize(rawAST: rawAST) let node = lex(tokens: tokens) let root = parse(node: node) return root }</code>
@@ -93,7 +93,7 @@
   <div id="chatlog__message-container-569525116589834251" class="chatlog__message-container" data-message-id="569525116589834251">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="04/21/2019 2:09 PM">14:09</div>
+        <div class="chatlog__short-timestamp" title="Sunday, 21 April 2019 14:09">14:09</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-dump-ast</code>の出力はS式のように見えるのでカッコを頼りにしたくなりますが、別の意味のカッコが普通に（<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">"</code>や<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">'</code>に囲まれることなく）出てくるのでそれは難しいです。 代わりに行とインデントを使います。</span></div>
@@ -103,7 +103,7 @@
   <div id="chatlog__message-container-569525791252283412" class="chatlog__message-container" data-message-id="569525791252283412">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="04/21/2019 2:12 PM">14:12</div>
+        <div class="chatlog__short-timestamp" title="Sunday, 21 April 2019 14:12">14:12</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">func tokenize(source: String) -&gt; [ASTToken] { var lines = [String]() for line in source.split(separator: "\n", omittingEmptySubsequences: false) { let trimmed = line.trimmingCharacters(in: .whitespaces) if trimmed.hasPrefix("(inherited_conformance") || trimmed.hasPrefix("(normal_conformance") || trimmed.hasPrefix("(abstract_conformance") || trimmed.hasPrefix("(specialized_conformance") || trimmed.hasPrefix("(assoc_type") || trimmed.hasPrefix("(value req") || !trimmed.hasPrefix("(") { continue } lines.append(String(line)) } ...</code>
@@ -114,7 +114,7 @@
   <div id="chatlog__message-container-569527187900858379" class="chatlog__message-container" data-message-id="569527187900858379">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="04/21/2019 2:17 PM">14:17</div>
+        <div class="chatlog__short-timestamp" title="Sunday, 21 April 2019 14:17">14:17</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そのあと、１行ごとに１文字ずつIterateしながらトークンに分割していきます。 私の場合は<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">indent</code>（先頭の空白）、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">symbol</code>（シングルクオートで囲まれた文字列）、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">string</code>（ダブルクオートで囲まれた文字列）、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">token</code>（それ以外の文字列や記号）に分類しました。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">class ASTToken { enum TokenType { case token case symbol case string case indent(Int) }</code></span></div>

@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=441887729333043200"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-441886737384472576">05/04/2018 9:00 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/307001159565180928?category=開発環境, ライブラリ&amp;channel=uikit&amp;message_id=441887729333043200"><span class="chatlog__timestamp" title="Friday, 04 May 2018 09:00"></span></a><a href="#chatlog__message-container-441886737384472576">05/04/2018 09:00</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">iOS 11からFrameの大きさが変更前と後で同じならinputViewが変わってもUIKeyboard関連のNotificationが呼ばれなくなるという変更があったみたいなんだけど、iPhone Xでは明らかに見た目の高さが変わってるのに通知されないからどうしようもないという問題があるみたいです。 再現プロジェクト <a href="https://github.com/kishikawakatsumi/UIKeyboardNotificationNotCalled">https://github.com/kishikawakatsumi/UIKeyboardNotificationNotCalled</a> ^ iPhone XでUSキーボードからToggleボタンを押すと、明らかにキーボードの高さが変わるので通知して欲しいけど通知されない。カスタムInputViewの高さを275以外にすると通知される。 iPhone X以外、例えばiPhone 7では高さが<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">258</code>（USキーボードから切り開ける場合。日本語のフリック入力キーボードの場合は<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">216</code>）のとき、同様に通知されないけどこれは見た目の高さは変わらないので実質的に問題にならない。</span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -30,7 +30,7 @@
   <div id="chatlog__message-container-441886776949473280" class="chatlog__message-container" data-message-id="441886776949473280">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/04/2018 9:00 AM">09:00</div>
+        <div class="chatlog__short-timestamp" title="Friday, 04 May 2018 09:00">09:00</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="http://www.openradar.me/33990607">http://www.openradar.me/33990607</a> &lt;= たぶん同じ問題。</span></div>
@@ -40,7 +40,7 @@
   <div id="chatlog__message-container-441887729333043200" class="chatlog__message-container" data-message-id="441887729333043200">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="05/04/2018 9:04 AM">09:04</div>
+        <div class="chatlog__short-timestamp" title="Friday, 04 May 2018 09:04">09:04</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Workaroundとしては <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">@IBAction func toggleInputView(_ sender: Any) { let wasFirstResponder = textField.isFirstResponder if wasFirstResponder { textField.resignFirstResponder() } if let _ = textField.inputView { textField.inputView = nil } else { let myInputView = UIView(frame: view.bounds) myInputView.frame.size.height = 275 myInputView.backgroundColor = .blue textField.inputView = myInputView } textField.reloadInputViews() if wasFirstResponder { textField.becomeFirstResponder() } }</code> こんな感じで、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">resignFirstResponder()</code>を挟む。それだけだとキーボードが閉じてしまうので<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">becomeFirstResponder()</code>も呼ぶ。同じメソッド内で呼ぶぶんにはRunLoopが回らないので最終的に何ごともなかったようにキーボードはそのまま（変換中の日本語入力などは確定されてしまう）。</span></div>

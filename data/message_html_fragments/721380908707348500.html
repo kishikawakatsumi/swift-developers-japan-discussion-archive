@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=721381525379219546"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-721379379128696883">06/13/2020 3:04 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=721381525379219546"><span class="chatlog__timestamp" title="Saturday, 13 June 2020 15:04"></span></a><a href="#chatlog__message-container-721379379128696883">06/13/2020 15:04</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$foo.readOnly.a</code> できた。この方法絶対ダメだけどｗ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI extension ObservedObject.Wrapper { var readOnly: ReadOnly { let object: ObjectType = unsafeBitCast(self, to: ObjectType.self) return ReadOnly(object) } @dynamicMemberLookup struct ReadOnly { private let object: ObjectType init(_ object: ObjectType) { self.object = object } subscript&lt;Subject&gt;(dynamicMember keyPath: KeyPath&lt;ObjectType, Subject&gt;) -&gt; Binding&lt;Subject&gt; { Binding&lt;Subject&gt;( get: { self.object[keyPath: keyPath] }, set: { _ in assertionFailure("Read-only") } ) } } }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-721379498221764648" class="chatlog__message-container" data-message-id="721379498221764648">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06/13/2020 3:04 PM">15:04</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 13 June 2020 15:04">15:04</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Wrapper</code> はどう考えても元のオブジェクトをラップしてるだけだろうと考えて <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">unsafeBitCast</code> したら動いたｗ</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-721380908707348500" class="chatlog__message-container" data-message-id="721380908707348500">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06/13/2020 3:10 PM">15:10</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 13 June 2020 15:10">15:10</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今やりたいのは、↓の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Foo</code> のような型に対して <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@ObservedObject var foo: Foo</code> を作って、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$foo.readOnly.a</code> のようにして read-only な片方向のバインディングを作りたいということです。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Combine class Foo: ObservableObject { @Published private(set) var a: Int = 0 func incrementA() { a += 1 } }</code></span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-721381525379219546" class="chatlog__message-container" data-message-id="721381525379219546">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06/13/2020 3:12 PM">15:12</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 13 June 2020 15:12">15:12</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">incrementA</code> が露出してるけど、アップデートのための関数は生成者や <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">internal</code> にしか暴露されないとかもあり得る。そうでなくても、↑の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">incrementA</code> のようにアップデートの方法を限定したいからプロパティが <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">private(set)</code> になるケースもあって、そのようなケースでもバインディングしたいというニーズも考えられる。</span></div>

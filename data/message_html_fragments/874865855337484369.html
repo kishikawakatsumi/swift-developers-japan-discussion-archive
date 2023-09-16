@@ -9,7 +9,7 @@
           <div class="chatlog__reply-author" style="color:rgb(231,76,60)" title="tarunon">tarunon</div>
           <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'874863999735439360')"> <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// ok async { [weak self] in for await notification in NotificationCenter.default... { guard let self = self else { break } self... } } // leak! async { [weak self] in guard let self = self else { return } for await notification in NotificationCenter.default... { self... } }</code> こういうケースは前から結構あったし、async sequenceが出てきた以上無視できないようになったと思う </span></div>
         </div>
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=874865855337484369"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-874865375404232734">08/11/2021 4:02 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=874865855337484369"><span class="chatlog__timestamp" title="Wednesday, 11 August 2021 04:02"></span></a><a href="#chatlog__message-container-874865375404232734">08/11/2021 04:02</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あーなるほど。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">for await</code> イベント通知パターンだと、ループごとに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self</code> 取り出さないと、循環参照になるね。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">[guard]</code> captureだと固定で先頭で取り出すから駄目なのか。</span></div>
       </div>
     </div>
@@ -17,7 +17,7 @@
   <div id="chatlog__message-container-874865855337484369" class="chatlog__message-container" data-message-id="874865855337484369">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/11/2021 4:04 AM">04:04</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 11 August 2021 04:04">04:04</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">どうなんだろうなあ。リークというか、循環してるだけで、切ればいいよね。 画面が表示されてる間は循環してても良くて、 画面が閉じられた時にtaskを一通りcancelして購読解除してやるスタイルなら大丈夫。</span></div>

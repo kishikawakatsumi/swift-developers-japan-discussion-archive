@@ -9,7 +9,7 @@
           <div class="chatlog__reply-author" style="color:rgb(241,196,15)" title="hironytic">hironytic</div>
           <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'890753596877049947')"> (B) が MainActor ではないところが微妙 </span></div>
         </div>
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890764474905145426"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-890762682423185471">09/24/2021 12:52 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890764474905145426"><span class="chatlog__timestamp" title="Friday, 24 September 2021 00:52"></span></a><a href="#chatlog__message-container-890762682423185471">09/24/2021 00:52</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑の話で考えると、 (B) は最終的な仕様上 MainActor にならないし、現状でも MainActor に守られているわけではないけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self.nameLabel.text = ...</code> みたいなのが書けないと既存コードが破壊されまくるので、現状ではコンパイラが MainActor 扱いにしてコードの互換性を保っている（ただし守られてはいない）、 Swift 6 では MainActor でなくなるし <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">await</code> 必須になる、ということになる？ そして、それと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">bar</code> をすっ飛ばして <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">foo</code> の context を引き継ぐ話はまた別で、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</code> は actor の context をぶった切る、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</code> でない <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@escaping</code> なクロージャが何かの actor の context を持つことはないと考えると、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> に渡されるクロージャは、それが宣言された場所で最も近い（内側のスコープの） actor を引き継ぐと考えれば一般化できる？ という感じでしょうか。</span></div>
       </div>
     </div>
@@ -17,7 +17,7 @@
   <div id="chatlog__message-container-890764433532522536" class="chatlog__message-container" data-message-id="890764433532522536">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09/24/2021 12:59 AM">00:59</div>
+        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 00:59">00:59</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// Actor 1 a { // @escaping // どの Actor でもない Task.init { // Actor 1 await MainActor.run { // MainActor b { // @escaping // どの Actor でもない Task.init { // MainActor c { // @Sendable @escaping // どの Actor でもない Task.init { // どの Actor でもない actor2 { // Actor 2 @Sendable @escaping // Actor 2 d { // @escaping // どの Actor でもない Task.init { // Actor 2 } } } } } } } } } }</code></span></div>
@@ -27,7 +27,7 @@
   <div id="chatlog__message-container-890764474905145426" class="chatlog__message-container" data-message-id="890764474905145426">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09/24/2021 1:00 AM">01:00</div>
+        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 01:00">01:00</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑のような感じ？</span></div>

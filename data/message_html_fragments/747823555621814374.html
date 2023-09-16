@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=747828022484402309"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-747823347970342992">08/25/2020 2:23 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=747828022484402309"><span class="chatlog__timestamp" title="Tuesday, 25 August 2020 14:23"></span></a><a href="#chatlog__message-container-747823347970342992">08/25/2020 14:23</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">onAppear</code> で create して <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">onDisappear</code> で release したいようなものってどうやって保持するのがいいですか？</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-747823555621814374" class="chatlog__message-container" data-message-id="747823555621814374">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/25/2020 2:23 PM">14:23</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 25 August 2020 14:23">14:23</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI struct ContentView: View { var body: some View { NavigationView { FirstView() } } } struct FirstView: View { var body: some View { return NavigationLink(destination: SecondView()) { Text("Go") } .onAppear { // ここで create } .onDisappear { // ここで release } } } struct SecondView: View { var body: some View { Text("Second") } }</code></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-747824170821484605" class="chatlog__message-container" data-message-id="747824170821484605">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/25/2020 2:26 PM">14:26</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 25 August 2020 14:26">14:26</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">FirstView</code> のプロパティに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Box</code> 的なクラスのインスタンスを保持しておいて、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">onAppear</code> で create されたインスタンスを <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Box</code> に格納して、その <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Box</code> を介して <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">onDisappear</code> で release ？</span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-747824350404804651" class="chatlog__message-container" data-message-id="747824350404804651">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/25/2020 2:26 PM">14:26</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 25 August 2020 14:26">14:26</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もし <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">FirstView</code> がコンポーネント的な <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">View</code> で、親 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">View</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> が頻繁に再実行されたときにうまく動くか心配。</span></div>
@@ -41,17 +41,17 @@
   <div id="chatlog__message-container-747825697824833646" class="chatlog__message-container" data-message-id="747825697824833646">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/25/2020 2:32 PM">14:32</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 25 August 2020 14:32">14:32</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct FirstView: View { var box = Box&lt;Foo&gt;() var body: some View { NavigationLink(destination: SecondView()) { Text("Go") } .onAppear { self.box.value = Foo() } .onDisappear { self.box.value?.release() self.box.value = nil } } }</code> みたいな。</span> <span class="chatlog__edited-timestamp" title="08/25/2020 2:35 PM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct FirstView: View { var box = Box&lt;Foo&gt;() var body: some View { NavigationLink(destination: SecondView()) { Text("Go") } .onAppear { self.box.value = Foo() } .onDisappear { self.box.value?.release() self.box.value = nil } } }</code> みたいな。</span> <span class="chatlog__edited-timestamp" title="Tuesday, 25 August 2020 14:35">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-747826475214045305" class="chatlog__message-container" data-message-id="747826475214045305">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/25/2020 2:35 PM">14:35</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 25 August 2020 14:35">14:35</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やっぱり↓にしたらちゃんと動かなくなった。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct ContentView: View { @State var count: Int = 0 var body: some View { NavigationView { VStack { Stepper(count.description, value: $count) .frame(maxWidth: 160) FirstView() } } } }</code>
@@ -62,7 +62,7 @@
   <div id="chatlog__message-container-747827664844488794" class="chatlog__message-container" data-message-id="747827664844488794">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/25/2020 2:40 PM">14:40</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 25 August 2020 14:40">14:40</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">box</code> の代わりに <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct FirstView: View { // var box = Box&lt;Foo&gt;() @State var foo: Foo?</code> として保持させる裏技もあるけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> のようなライフサイクルがほしいだけで、変更検知（して <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> 再実行）はいらない・・・。</span></div>
@@ -72,7 +72,7 @@
   <div id="chatlog__message-container-747828022484402309" class="chatlog__message-container" data-message-id="747828022484402309">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="08/25/2020 2:41 PM">14:41</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, 25 August 2020 14:41">14:41</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">変更検知なしの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> みたいな Property Wrapper を作ればいいのかな・・・。</span></div>

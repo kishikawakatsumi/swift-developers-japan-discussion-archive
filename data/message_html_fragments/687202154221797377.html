@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=687202154221797377"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-687201937602379804">03/11/2020 7:35 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=687202154221797377"><span class="chatlog__timestamp" title="Wednesday, 11 March 2020 07:35"></span></a><a href="#chatlog__message-container-687201937602379804">03/11/2020 07:35</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">Notes on Approach The key idea here is using the bytes of a UInt64 in a way similarly to SIMD. When doing ASCII operations the new UTF-8 backing of Strings makes them perfectly suited for this technique. Aside from integer parsing, for example also ASCII case manipulation sees many-X speed-ups when using this approach. Example (details below): let str = 0x3132_3030_3633_3739 // ASCII "12006379" let digits = str &amp;- 0x3030_3030_3030_3030 // Subtract "0" from every lane // … (underflow check omitted for clarity) let c = (0x7f - 9) &amp;* 0x0101_0101_0101_0101 // Constant to check value &gt; 9 let isAnyAbove9 = (digits &amp;+ c) &amp; 0x8080_8080_8080_8080 != 0</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-687202154221797377" class="chatlog__message-container" data-message-id="687202154221797377">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="03/11/2020 7:36 AM">07:36</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 11 March 2020 07:36">07:36</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">文字列バッファを１文字ずつ読むんじゃなくて、８バイト分のビットバッファとみなして、ビット演算使ってまとめて８文字ずつ処理していくと。</span></div>

@@ -1,0 +1,22 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1150814041497948215" class="chatlog__message-container" data-message-id="1150814041497948215">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/373007528428306433/11eeba2e7cb53d8bd5aa86b0a6461a78.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(17,128,106)" title="koher">koher</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1150812909295915038')"> オーバーヘッドと言っても、メインスレッドで実行したい処理であれば必要なことですし、従来 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">DispatchQueue.main.async{ }</code> してたのと変わらないと思いますので、気にする必要はないと思います。 ただ、個人的に↓のようなケースは気になってます。従来はなかった遅延だと思うので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> の中でボタン無効化したりしていたら、それまでに割り込まれる可能性がありますし。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func buttonPressed(sender: UIButton) { Task { ... } }</code> </span> <span class="chatlog__reply-edited-timestamp" title="Monday, 11 September 2023 15:19">(edited)</span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="tanako#8031" data-user-id="373007528428306433">tanako</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1150814041497948215"><span class="chatlog__timestamp" title="Monday, 11 September 2023 15:24"></span></a><a href="#chatlog__message-container-1150814041497948215">09/11/2023 15:24</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">従来 DispatchQueue.main.async{ } してたのと変わらない </div>
+            </div>なるほど、確かにそうですね。これで良いのかと不安に思っていたのでありがたいです。 buttonPressedに関しては <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@MainActor</code> が付与されていれば Task も MainActor と同じExecutorで実行されるのでhopがなく遅延も無いと思っていたんですがhopが無いだけでenqueueする遅延は起きるということですかね。
+          </span> <span class="chatlog__edited-timestamp" title="Monday, 11 September 2023 15:24">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

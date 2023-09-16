@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=726084434507595817"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-726084020235927583">06/26/2020 2:38 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=726084434507595817"><span class="chatlog__timestamp" title="Friday, 26 June 2020 14:38"></span></a><a href="#chatlog__message-container-726084020235927583">06/26/2020 14:38</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">List</code> が表示されていない間は流れをせき止める <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ObservableObject</code> でラップすることで、遷移先からの更新の反映を遅らせることができました。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class ObservableDam&lt;WrappedValue: ObservableObject&gt;: ObservableObject { typealias ObjectWillChangePublisher = AnyPublisher&lt;WrappedValue.ObjectWillChangePublisher.Output, Never&gt; let wrappedValue: WrappedValue private var cancellable: AnyCancellable? = nil var isActive: Bool = true { didSet { if isActive { let outputs = self.outputs self.outputs = [] for output in outputs { subject.send(output) } } } } private var outputs: [ObjectWillChangePublisher.Output] = [] private let subject: PassthroughSubject&lt;ObjectWillChangePublisher.Output, Never&gt; = .init() var objectWillChange: ObjectWillChangePublisher { subject.eraseToAnyPublisher() } init(_ wrappedValue: WrappedValue) { self.wrappedValue = wrappedValue cancellable = wrappedValue.objectWillChange.sink { [weak self] output in guard let self = self else { return } if self.isActive { self.subject.send(output) } else { self.outputs.append(output) } } } }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-726084264847999076" class="chatlog__message-container" data-message-id="726084264847999076">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06/26/2020 2:39 PM">14:39</div>
+        <div class="chatlog__short-timestamp" title="Friday, 26 June 2020 14:39">14:39</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑こういうのを作って、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct ContentView: View { @ObservedObject var history: ObservableDam&lt;History&gt; = .init(.shared)</code> ↑こうして <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> } .onAppear { self.history.isActive = true } .onDisappear { self.history.isActive = false }</code> ↑こうする。</span></div>
@@ -21,10 +21,10 @@
   <div id="chatlog__message-container-726084434507595817" class="chatlog__message-container" data-message-id="726084434507595817">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06/26/2020 2:40 PM">14:40</div>
+        <div class="chatlog__short-timestamp" title="Friday, 26 June 2020 14:40">14:40</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">戻ってきた瞬間に更新が発火して、アニメーションして最新状態が表示される。</span> <span class="chatlog__edited-timestamp" title="06/26/2020 2:40 PM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">戻ってきた瞬間に更新が発火して、アニメーションして最新状態が表示される。</span> <span class="chatlog__edited-timestamp" title="Friday, 26 June 2020 14:40">(edited)</span></div>
       </div>
     </div>
   </div>

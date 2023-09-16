@@ -9,7 +9,7 @@
           <div class="chatlog__reply-author" title="uhooi">uhooi</div>
           <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'920599979456876544')"> Presenter の処理が気になる Before <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> func didSelectMonster(monster: MonsterEntity) { interactor.saveForSpotlight(monster) router.showMonsterDetail(monster: monster)</code> After <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> func didSelectMonster(monster: MonsterEntity) async { router.showMonsterDetail(monster: monster) await interactor.saveForSpotlight(monster) }</code> ↓だと Ineractor の処理を待つ気がするから、Router による画面遷移の処理と順番を入れ替えた その考えで合っているかはわからない、、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> func didSelectMonster(monster: MonsterEntity) async { await interactor.saveForSpotlight(monster) router.showMonsterDetail(monster: monster) }</code> </span></div>
         </div>
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=920670111768129556"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-920670111768129556">12/15/2021 1:34 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=920670111768129556"><span class="chatlog__timestamp" title="Wednesday, 15 December 2021 13:34"></span></a><a href="#chatlog__message-container-920670111768129556">12/15/2021 13:34</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
             <div class="chatlog__markdown-quote">
               <div class="chatlog__markdown-quote-border"></div>
@@ -18,7 +18,7 @@
               <div class="chatlog__markdown-quote-border"></div>
               <div class="chatlog__markdown-quote-content">Router による画面遷移の処理と順番を入れ替えた </div>
             </div>この場合は問題ないのかもしれませんが、いつでも入れ替えられるとは限らないように思います。 処理が終わるのを待たずに後続処理を始めるためには、↓のように書くことができます（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">: Void</code> がないと警告が出ます）。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func didSelectMonster(monster: MonsterEntity) async { async let x: Void = interactor.saveForSpotlight(monster) router.showMonsterDetail(monster: monster) await x }</code>
-          </span> <span class="chatlog__edited-timestamp" title="12/15/2021 1:34 PM">(edited)</span></div>
+          </span> <span class="chatlog__edited-timestamp" title="Wednesday, 15 December 2021 13:34">(edited)</span></div>
         <div class="chatlog__reactions">
           <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
         </div>

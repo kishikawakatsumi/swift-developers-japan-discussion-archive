@@ -3,20 +3,20 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293572563010060288/92f572b5e1ef6656a55498787c15a5ad.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon" data-user-id="293572563010060288">tarunon</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=750623229319708722"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-750622109637804063">09/02/2020 7:44 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(231,76,60)" title="tarunon" data-user-id="293572563010060288">tarunon</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=750623229319708722"><span class="chatlog__timestamp" title="Wednesday, 02 September 2020 07:44"></span></a><a href="#chatlog__message-container-750622109637804063">09/02/2020 07:44</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちゃんと言語化出来ていなかったと思うので、もう一度説明すると <ul>
               <li>Result&lt;T, Never&gt;とTを暗黙変換するのは流石にきついものがある</li>
               <li>しかしResultを無理くり拡張するのは暗黙変換より筋が良いかと言うと…</li>
               <li>故に、Resultを返す側のIFとして、Failure==Neverのときは直接Tを返すインターフェイスのオーバーロードであったほうが末端の利用者にとっては嬉しい場面が多そうだ。</li>
               <li>のでnot throwsのget()が存在しないんじゃないか</li>
-            </ul> という推論です。でもCombineのextensionとか見てると、not throwsのget()はproposal書けば案外すんなり通るんじゃないかなとも思えてきました。</span> <span class="chatlog__edited-timestamp" title="09/02/2020 7:44 AM">(edited)</span></div>
+            </ul> という推論です。でもCombineのextensionとか見てると、not throwsのget()はproposal書けば案外すんなり通るんじゃないかなとも思えてきました。</span> <span class="chatlog__edited-timestamp" title="Wednesday, 02 September 2020 07:44">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-750623114844438569" class="chatlog__message-container" data-message-id="750623114844438569">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09/02/2020 7:48 AM">07:48</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 02 September 2020 07:48">07:48</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">例えばこんな感じで、Resultを返す方にdisfavoredOverloadをつけておけば、NeverのときにResultでないTを優先出来たりするので。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct MyClass&lt;T, Failure: Error&gt; { @_disfavoredOverload func getResponse() -&gt; Result&lt;T, Failure&gt; { fatalError() } } extension MyClass where Failure == Never { func getResponse() -&gt; T { fatalError() } } let t = MyClass&lt;Int, Never&gt;().getResponse()</code></span></div>
@@ -26,10 +26,10 @@
   <div id="chatlog__message-container-750623229319708722" class="chatlog__message-container" data-message-id="750623229319708722">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="09/02/2020 7:48 AM">07:48</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, 02 September 2020 07:48">07:48</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Resultが欲しい場面はクロージャの引数とかなんですが、同じ使い方で成り立つ</span> <span class="chatlog__edited-timestamp" title="09/02/2020 7:48 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Resultが欲しい場面はクロージャの引数とかなんですが、同じ使い方で成り立つ</span> <span class="chatlog__edited-timestamp" title="Wednesday, 02 September 2020 07:48">(edited)</span></div>
       </div>
     </div>
   </div>

@@ -3,15 +3,15 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" title="yniw" data-user-id="375129448900591616">niw</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1129616155183693875"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-1129614359451144252">07/15/2023 3:24 AM</a></div>
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">その場合、最初のABと次のABは別のインスタンスになるはずです。(そうでないならばなにか不思議なことが起こると思います...)</span> <span class="chatlog__edited-timestamp" title="07/15/2023 3:25 AM">(edited)</span></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="yniw" data-user-id="375129448900591616">niw</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1129616155183693875"><span class="chatlog__timestamp" title="Saturday, 15 July 2023 03:24"></span></a><a href="#chatlog__message-container-1129614359451144252">07/15/2023 03:24</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">その場合、最初のABと次のABは別のインスタンスになるはずです。(そうでないならばなにか不思議なことが起こると思います...)</span> <span class="chatlog__edited-timestamp" title="Saturday, 15 July 2023 03:25">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-1129614519262511124" class="chatlog__message-container" data-message-id="1129614519262511124">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07/15/2023 3:24 AM">03:24</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 15 July 2023 03:24">03:24</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、そうであるならばBが2つ存在して1つの通知は異なる両方のBで受け取っていると思います。</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-1129614640477913118" class="chatlog__message-container" data-message-id="1129614640477913118">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07/15/2023 3:25 AM">03:25</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 15 July 2023 03:25">03:25</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">deinitが呼ばれないは最初のABについて、ということですね。pushしているのであればそれは期待する動作です。</span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-1129615289802297475" class="chatlog__message-container" data-message-id="1129615289802297475">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07/15/2023 3:27 AM">03:27</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 15 July 2023 03:27">03:27</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">NSNotificationCenter (Swift の NotificationCenter)はobserverを保持（所有）しません。ですので「登録時のインスタンスを保持したままになっている」というより、登録時のインスタンスを弱参照しているがより正しいです。</span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-1129615539782819911" class="chatlog__message-container" data-message-id="1129615539782819911">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07/15/2023 3:28 AM">03:28</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 15 July 2023 03:28">03:28</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかし、それぞれのView Controllerはnavigationのスタックに保持（所有）されているので、その所有が続く限りはそれらのView Controllerすべてに通知が届きます。</span></div>
@@ -51,10 +51,10 @@
   <div id="chatlog__message-container-1129616155183693875" class="chatlog__message-container" data-message-id="1129616155183693875">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="07/15/2023 3:31 AM">03:31</div>
+        <div class="chatlog__short-timestamp" title="Saturday, 15 July 2023 03:31">03:31</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なお正確には NSNotificationCenter は弱参照と同時に通知の登録情報を保持します。この登録情報は unregisterするか、次回通知を送るときに参照先がなくなったときにしかメモリから消去されません。ですので、observeしている通知がレアなものであるばあい、登録情報がリークします。(これはドキュメントにうっすら書かれているだけなのであまり知られていないのですが...) ですので、必要がないと書かれているインターネットの情報は多いと思いますが実際は observer (この場合、ViewController) の deinit() で unregister するほうが良いです。</span> <span class="chatlog__edited-timestamp" title="07/15/2023 3:31 AM">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なお正確には NSNotificationCenter は弱参照と同時に通知の登録情報を保持します。この登録情報は unregisterするか、次回通知を送るときに参照先がなくなったときにしかメモリから消去されません。ですので、observeしている通知がレアなものであるばあい、登録情報がリークします。(これはドキュメントにうっすら書かれているだけなのであまり知られていないのですが...) ですので、必要がないと書かれているインターネットの情報は多いと思いますが実際は observer (この場合、ViewController) の deinit() で unregister するほうが良いです。</span> <span class="chatlog__edited-timestamp" title="Saturday, 15 July 2023 03:31">(edited)</span></div>
       </div>
     </div>
   </div>

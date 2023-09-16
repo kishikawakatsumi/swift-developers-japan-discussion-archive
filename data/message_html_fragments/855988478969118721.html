@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=855988478969118721"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-855987917457326081">06/20/2021 1:50 AM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=855988478969118721"><span class="chatlog__timestamp" title="Sunday, 20 June 2021 01:50"></span></a><a href="#chatlog__message-container-855987917457326081">06/20/2021 01:50</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">#20 1.569 [2215/2636] Compiling _NumericsShims _NumericsShims.c #20 1.623 [2216/2637] Compiling _AtomicsShims.c #20 1.623 [2217/2637] Compiling CSystem shims.c #20 3.014 [2218/2637] Compiling RealModule AlgebraicField.swift #20 4.016 [2219/2640] Compiling DequeModule Compatibility.swift #20 6.883 SIL memory lifetime failure in @$s13ComplexModule0A0V3logyACyxGAEFZ: memory is not initialized, but should #20 6.883 memory location: %98 = alloc_stack $RealType, let, name "θ" // users: %392, %390, %234, %235, %406, %247, %100 #20 6.883 at instruction: copy_addr %98 to [initialization] %391 : $*RealType // id: %392 #20 6.883 #20 6.883 in function: #20 6.883 // static Complex.log(_:) #20 6.883 sil [serialized] [ossa] @$s13ComplexModule0A0V3logyACyxGAEFZ : $@convention(method) &lt;RealType where RealType : Real&gt; (@in_guaranteed Complex&lt;RealType&gt;, @thin Complex&lt;RealType&gt;.Type) -&gt; @out Complex&lt;RealType&gt; {</code> swift-numericsがこんな感じのエラーでDocker上でだけビルドできないっていうのにずっと悩んでたけど、Dockerに割り当てるリソースを増やしたら解決した。 CIでもちょっと内容は違うけど似たようなところで失敗していてそれは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-j 1</code> を指定したらビルドできるようになった。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">SIL memory lifetime failure</code> ってなんだろうってずっと悩んでいた。</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-855988478969118721" class="chatlog__message-container" data-message-id="855988478969118721">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="06/20/2021 1:52 AM">01:52</div>
+        <div class="chatlog__short-timestamp" title="Sunday, 20 June 2021 01:52">01:52</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift 5.3の場合は問題なくて5.4以上のときだけこの問題が起こって、Ubuntuのバージョンを16に下げた場合も微妙に直るみたいな挙動をしていたので原因を見落とした。</span></div>

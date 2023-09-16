@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/296587674737704960/5d3c584499ce245b7129cda8c7ae00e9.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" title="_rintaro" data-user-id="296587674737704960">rintaro</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=680492684879593533"><span class="chatlog__timestamp"></span></a><a href="#chatlog__message-container-680490462947442795">02/21/2020 7:06 PM</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="_rintaro" data-user-id="296587674737704960">rintaro</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=680492684879593533"><span class="chatlog__timestamp" title="Friday, 21 February 2020 19:06"></span></a><a href="#chatlog__message-container-680490462947442795">02/21/2020 19:06</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-verify-apply-fixes</code> というのがあるのですが、現在のところエラー文言の修正や fix-it の不一致の修正くらいしかできないです。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">$ cat /tmp/t.swift guard false { // expected-error {{...}} {{none}} fatalError() } $ swift -frontend -typecheck -verify-apply-fixes /tmp/t.swift -sdk $(xcrun -show-sdk-path -sdk macosx) /tmp/t.swift:1:35: error: incorrect message found guard false { // expected-error {{...}} {{none}} ^~~ expected 'else' after 'guard' condition $ cat /tmp/t.swift guard false { // expected-error {{expected 'else' after 'guard' condition}} {{none}} fatalError() } $ swift -frontend -typecheck -verify-apply-fixes /tmp/t.swift -sdk $(xcrun -show-sdk-path -sdk macosx) /tmp/t.swift:1:77: error: expected no fix-its; actual fix-it seen: {{12-12=else }} guard false { // expected-error {{expected 'else' after 'guard' condition}} {{none}} ^~~~~~~ {{12-12=else }} $ cat /tmp/t.swift guard false { // expected-error {{expected 'else' after 'guard' condition}} {{12-12=else }}} fatalError() }</code> つまりは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-verify</code> モードで出る fix-it をオリジナルファイルに適用するというモードです。</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-680491635406012484" class="chatlog__message-container" data-message-id="680491635406012484">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="02/21/2020 7:10 PM">19:10</div>
+        <div class="chatlog__short-timestamp" title="Friday, 21 February 2020 19:10">19:10</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">$ cat /tmp/t.swift guard false { fatalError() } $ swift -frontend -typecheck -verify /tmp/t.swift -sdk $(xcrun -show-sdk-path -sdk macosx) /tmp/t.swift:1:13: error: unexpected error produced: expected 'else' after 'guard' condition guard false { ^</code> みたいなときに、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> // expected-error {{expected 'else' after 'guard' condition}}</code> を挿入するようなfix-it が出れば良いのですが、現状そうなってないです <img loading="lazy" class="chatlog__emoji " alt="🙂" title="slight_smile" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f642.svg"></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-680492684879593533" class="chatlog__message-container" data-message-id="680492684879593533">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="02/21/2020 7:14 PM">19:14</div>
+        <div class="chatlog__short-timestamp" title="Friday, 21 February 2020 19:14">19:14</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちなみに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-verify</code>/<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-verify-apply-fixes</code> の実装はここにあります <a href="https://github.com/apple/swift/blob/master/lib/Frontend/DiagnosticVerifier.cpp">https://github.com/apple/swift/blob/master/lib/Frontend/DiagnosticVerifier.cpp</a></span></div>
