@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=509912188534652938"><span class="chatlog__timestamp" title="Thursday, 08 November 2018 02:03"></span></a><a href="#chatlog__message-container-509910721639874561">11/08/2018 02:03</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=509912188534652938"><span class="chatlog__timestamp" title="Thursday, November 8, 2018 2:03 AM"></span></a><a href="#chatlog__message-container-509910721639874561">11/8/2018 2:03 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">dataTask</code> については、戻り値を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">URLSessionDataTask</code> に使ってるのが微妙だけど、これは Foundation の API 設計の問題だと思うなぁ。</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-509911452635758602" class="chatlog__message-container" data-message-id="509911452635758602">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 08 November 2018 02:06">02:06</div>
+        <div class="chatlog__short-timestamp" title="Thursday, November 8, 2018 2:06 AM">2:06 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">response</code> をエラーケースでも受け取りたいとしても、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">data</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">response</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">error</code> を受け取るだけなら↓ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">async/await</code> と typed throws で↓にできる。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func dataTask(with url: URL) async throws URLSessionDataTaskError -&gt; (Data, URLResponse) { ... } struct URLSessionDataTaskError: Error { let response: URLResponse? }</code></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-509912188534652938" class="chatlog__message-container" data-message-id="509912188534652938">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 08 November 2018 02:08">02:08</div>
+        <div class="chatlog__short-timestamp" title="Thursday, November 8, 2018 2:08 AM">2:08 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">以前 Joe Groff が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Result</code> 全否定してたときのコメント。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">Yeah, we extensively discussed adding a Result type internally, but ultimately couldn't justify it. The only real use case we could see in the wild was for threading errors through CPS-inversion-style abstractions like async promises, something we hope to provide proper language support for. More generally, expressing effects as monadic values is a pretty awful abstraction; aside from polluting the Internet with an endless deluge of unhelpful tutorials, they also don't compose cleanly, they impose nesting where is desired—you have to pick between Result&lt;Async&lt;T&gt;&gt; and Async&lt;Result&lt;T&gt;&gt;, or build ResultT&lt;AsyncT&lt;Identity&gt;&gt;&lt;T&gt; out of monad transformers—and they don't do the natural thing when used with other higher-order abstractions—if you're mapping a `throws` function over a collection, you probably want to propagate that error like `rethrows` does, not end up with a collection of Result&lt;T&gt;. I'd rather see us adopt an extensible algebraic effects system, something like http://www.eff-lang.org , which provides a framework for `throws`, `async` and other control flow effects to be cleanly composed and abstracted over. I see `throws` as the first seed of that.</code>

@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/304938790424805378?category=開発環境, ライブラリ&amp;channel=ios&amp;message_id=461385397415706638"><span class="chatlog__timestamp" title="Wednesday, 27 June 2018 04:19"></span></a><a href="#chatlog__message-container-461384987544125440">06/27/2018 04:19</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/304938790424805378?category=開発環境, ライブラリ&amp;channel=ios&amp;message_id=461385397415706638"><span class="chatlog__timestamp" title="Wednesday, June 27, 2018 4:19 AM"></span></a><a href="#chatlog__message-container-461384987544125440">6/27/2018 4:19 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">前々から作りたいと思ってたのを試しに実装してみました。とりあえず動くようにしただけなので実装がかなり雑ですが・・・。色々不具合もあるかもしれません。 <a href="https://github.com/koher/EasyCamery">https://github.com/koher/EasyCamery</a></span></div>
         <div class="chatlog__embed">
           <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
@@ -27,7 +27,7 @@
   <div id="chatlog__message-container-461385063821737994" class="chatlog__message-container" data-message-id="461385063821737994">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 27 June 2018 04:19">04:19</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, June 27, 2018 4:19 AM">4:19 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓みたいに使えます。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import UIKit import AVFoundation import EasyCamery import EasyImagy class ViewController: UIViewController { @IBOutlet var imageView: UIImageView! private let camera: Camera&lt;RGBA&lt;UInt8&gt;&gt; = try! Camera(sessionPreset: .vga640x480, focusMode: .continuousAutoFocus) override func viewDidAppear(_ animated: Bool) { super.viewDidAppear(animated) camera.start { [weak self] image in DispatchQueue.main.async { self?.imageView.image = image.uiImage } } } override func viewWillDisappear(_ animated: Bool) { camera.stop() super.viewWillDisappear(animated) } }</code></span></div>
@@ -37,7 +37,7 @@
   <div id="chatlog__message-container-461385397415706638" class="chatlog__message-container" data-message-id="461385397415706638">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 27 June 2018 04:20">04:20</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, June 27, 2018 4:20 AM">4:20 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">image</code> は EasyImagy の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Image</code> 型なので自由にピクセルにアクセスできます。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">var image = Image&lt;RGBA&lt;UInt8&gt;&gt;(named: "ImageName")! print(image[x, y]) image[x, y] = RGBA(red: 255, green: 0, blue: 0, alpha: 127) image[x, y] = RGBA(0xFF00007F) // red: 255, green: 0, blue: 0, alpha: 127 // Iterates over all pixels for pixel in image { // ... } // Processes images (e.g. binarizations) let binarized: Image&lt;Bool&gt; = image.map { $0.gray &gt;= 127 } // From/to `UIImage` image = Image&lt;RGBA&lt;UInt8&gt;&gt;(uiImage: imageView.image!) imageView.image = image.uiImage</code></span></div>

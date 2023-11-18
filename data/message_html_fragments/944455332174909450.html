@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/941518510000046101/e31a3624dfece97bec2310df0b9049fa.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" title="quesera2262" data-user-id="941518510000046101">quesera2</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=944455332174909450"><span class="chatlog__timestamp" title="Saturday, 19 February 2022 04:46"></span></a><a href="#chatlog__message-container-944454793424945192">02/19/2022 04:46</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="quesera2262" data-user-id="941518510000046101">quesera2</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=944455332174909450"><span class="chatlog__timestamp" title="Saturday, February 19, 2022 4:46 AM"></span></a><a href="#chatlog__message-container-944454793424945192">2/19/2022 4:46 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">StubのAPIリポジトリでその場で結果を返してしまうと、await中の状態に対するassertionが書けないと考えていて、疑似コードですけれどこういう感じで値を返すのを遅延させている感じです <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func fetchRepositories(userName: String) async throws -&gt; [FooItem] { 　　　　　　　　// ここで値を返すとawait中の検証ができない return try await withCheckedThrowingContinuation { continuation in self.continuation = continuation } } func `continue`() { self.continuation.resume(returning: expectResult) }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-944455012971577415" class="chatlog__message-container" data-message-id="944455012971577415">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Saturday, 19 February 2022 04:47">04:47</div>
+        <div class="chatlog__short-timestamp" title="Saturday, February 19, 2022 4:47 AM">4:47 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.yield()</code> がない場合、await内の処理がまったく進まないので、上のコードだと支障ないんですけれど、内部で値を変えているものが未反映になる感じですね</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-944455332174909450" class="chatlog__message-container" data-message-id="944455332174909450">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Saturday, 19 February 2022 04:48">04:48</div>
+        <div class="chatlog__short-timestamp" title="Saturday, February 19, 2022 4:48 AM">4:48 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やりたいこととしてはこういう感じになります（こっちのほうがわかりやすかった） <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">XCTAssertFalse(viewModel.showProgress) async let result: () = viewModel.fetchRepository() await Task.yield() XCTAssertTrue(viewModel.showProgress) // ここを検証したい stubApiClient.continue() // resumeで値を返却させる await result XCTAssertFalse(viewModel.showProgress)</code></span></div>

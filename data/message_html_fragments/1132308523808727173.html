@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/499393715140558881?category=コミュニティ&amp;channel=swift-zoomin&amp;message_id=1132308674401030244"><span class="chatlog__timestamp" title="Saturday, 22 July 2023 13:49"></span></a><a href="#chatlog__message-container-1132308523808727173">07/22/2023 13:49</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/499393715140558881?category=コミュニティ&amp;channel=swift-zoomin&amp;message_id=1132308674401030244"><span class="chatlog__timestamp" title="Saturday, July 22, 2023 1:49 PM"></span></a><a href="#chatlog__message-container-1132308523808727173">7/22/2023 1:49 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// // ContentView.swift // ObservationPlayground // // Created by Yuta Koshizawa on 2023/07/22. // import SwiftUI //var counter: Counter = .init() struct ContentView: View { // @StateObject private var state: ContentViewState = .init() @State private var state: ContentViewState = .init() var body: some View { let _ = print("A") ScrollView { VStack { Text("Sum: \(state.countSum)") ForEach(state.counters.indices, id: \.self) { i in // CounterView(counter: $state.counters[i]) CounterView(counter: state.counters[i]) Divider() } // CounterView(counter: state.counter) // CounterView(counter: Binding( // get: { // counter // }, set: { newValue in // counter = newValue // } // )) } .padding() } } } //@MainActor //final class ContentViewState: ObservableObject { // @Published var counters: [Counter] = (1...100).map { _ in Counter() } // // ... //} @MainActor @Observable final class ContentViewState { var counters: [Counter] = (1...100).map { _ in Counter() } var countSum: Int { counters.lazy.map(\.count).reduce(0, +) } nonisolated init() {} }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-1132308607380226171" class="chatlog__message-container" data-message-id="1132308607380226171">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Saturday, 22 July 2023 13:50">13:50</div>
+        <div class="chatlog__short-timestamp" title="Saturday, July 22, 2023 1:50 PM">1:50 PM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI struct CounterView: View { // @Binding var counter: Counter @Bindable var counter: Counter var body: some View { let _ = print("B \(counter.count)") VStack { Text(counter.count.description) Button("Count up") { counter.countUp() } Button("Reset") { counter.reset() } Stepper("", value: $counter.count) } .padding() } }</code></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-1132308674401030244" class="chatlog__message-container" data-message-id="1132308674401030244">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Saturday, 22 July 2023 13:50">13:50</div>
+        <div class="chatlog__short-timestamp" title="Saturday, July 22, 2023 1:50 PM">1:50 PM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">//struct Counter: Sendable { // private(set) var count: Int = 0 // // mutating func countUp() { // count += 1 // } // // mutating func reset() { // count = 0 // } //} //final class Counter { // private(set) var count: Int = 0 // // func countUp() { // count += 1 // } // // func reset() { // count = 0 // } //} import Observation @MainActor @Observable final class Counter: Sendable { var count: Int = 0 func countUp() { count += 1 } func reset() { count = 0 } }</code></span></div>

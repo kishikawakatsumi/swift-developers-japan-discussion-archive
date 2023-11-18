@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=726023330129379389"><span class="chatlog__timestamp" title="Friday, 26 June 2020 10:33"></span></a><a href="#chatlog__message-container-726022238440259584">06/26/2020 10:33</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=726023330129379389"><span class="chatlog__timestamp" title="Friday, June 26, 2020 10:33 AM"></span></a><a href="#chatlog__message-container-726022238440259584">6/26/2020 10:33 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI import Foundation import Combine struct ContentView: View { @ObservedObject var history: History = .shared let dateFormatter: DateFormatter = { let value = DateFormatter() value.dateFormat = "yyyy-MM-dd HH:mm:ss" return value }() let items: [Item] = [ Item(id: "A"), Item(id: "B"), Item(id: "C"), ] var body: some View { NavigationView { VStack { VStack { ForEach(items) { item in NavigationLink(destination: ItemView(item: item)) { Text("Open \(item.id)") .padding(4) } } } .padding() Text("履歴") .font(.headline) .padding() Divider() List(history.records.reversed()) { record in NavigationLink(destination: ItemView( item: self.items.first(where: { $0.id == record.id })! )) { VStack(alignment: .leading) { Text("\(record.id)") .font(.headline) Text("\(self.dateFormatter.string(from: record.lastPlayed))") .font(.subheadline) .foregroundColor(.secondary) } } } } } } } struct ItemView: View { let item: Item var body: some View { VStack { Text("\(item.id)") Button("Play") { History.shared.record(for: self.item.id) } } } }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-726022420166606848" class="chatlog__message-container" data-message-id="726022420166606848">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 26 June 2020 10:33">10:33</div>
+        <div class="chatlog__short-timestamp" title="Friday, June 26, 2020 10:33 AM">10:33 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct Item: Identifiable { let id: String } final class History: ObservableObject { private(set) var records: [Record] = [] private let subject: PassthroughSubject&lt;Void, Never&gt; = .init() var objectWillChange: AnyPublisher&lt;Void, Never&gt; { subject.eraseToAnyPublisher() } func record(for id: Item.ID) { records.removeAll(where: { $0.id == id }) records.append(Record(id: id, lastPlayed: Date())) subject.send(()) } static let shared: History = .init() struct Record: Identifiable { let id: Item.ID let lastPlayed: Date } }</code></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-726022469785485333" class="chatlog__message-container" data-message-id="726022469785485333">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 26 June 2020 10:34">10:34</div>
+        <div class="chatlog__short-timestamp" title="Friday, June 26, 2020 10:34 AM">10:34 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑これで再現しました。</span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-726022600928526376" class="chatlog__message-container" data-message-id="726022600928526376">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 26 June 2020 10:34">10:34</div>
+        <div class="chatlog__short-timestamp" title="Friday, June 26, 2020 10:34 AM">10:34 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">A, B, C の順に "Open" して "Play" してから履歴から A を選んで "Play" すると pop される。</span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-726023330129379389" class="chatlog__message-container" data-message-id="726023330129379389">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 26 June 2020 10:37">10:37</div>
+        <div class="chatlog__short-timestamp" title="Friday, June 26, 2020 10:37 AM">10:37 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">

@@ -3,14 +3,14 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=438979563574394883"><span class="chatlog__timestamp" title="Thursday, 26 April 2018 08:28"></span></a><a href="#chatlog__message-container-438979563574394883">04/26/2018 08:28</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=438979563574394883"><span class="chatlog__timestamp" title="Thursday, April 26, 2018 8:28 AM"></span></a><a href="#chatlog__message-container-438979563574394883">4/26/2018 8:28 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
             <div class="chatlog__markdown-quote">
               <div class="chatlog__markdown-quote-border"></div>
               <div class="chatlog__markdown-quote-content">でも A(2) も解放されないといけない気が。 </div>
             </div>これってCoW時点では<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">A(2)</code>もコピーされてるから、解放されなくて正解な気が。 <span class="chatlog__markdown-mention" title="swift41#2144">@swift-4.1.3</span>
             <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">class A : CustomStringConvertible{ let val: Int init(_ val: Int) { self.val = val } deinit { print("deinit: \(self)") } var description: String { return "A(\(val))" } } var x: ArraySlice&lt;A&gt; = [A(1), A(2), A(3)] do { let y = x // yは[A(1), A(2), A(3)]を保持 print("A") x.removeFirst() // xは[A(1), A(2), A(3)]を保持して[A(2), A(3)]を露出 x[2] = A(4) // CoW発生、xは[A(2), A(4)]を保持 print("B") x.removeFirst() // xは[A(2), A(4)]を保持して[A(4)]を露出 x[2] = A(5) // xは[A(2), A(5)]を保持して[A(5)]を露出、A(4)解放 print("C") x.removeFirst() // xは[A(2), A(5)]を保持して[]を露出 print("D") } // y解放、xに保持されていないA(1),A(3)解放 print("E")</code>
-          </span> <span class="chatlog__edited-timestamp" title="Thursday, 26 April 2018 08:48">(edited)</span></div>
+          </span> <span class="chatlog__edited-timestamp" title="Thursday, April 26, 2018 8:48 AM">(edited)</span></div>
       </div>
     </div>
   </div>

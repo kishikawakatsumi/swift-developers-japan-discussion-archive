@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=477319736061984769"><span class="chatlog__timestamp" title="Friday, 10 August 2018 03:36"></span></a><a href="#chatlog__message-container-477319274843602954">08/10/2018 03:36</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=477319736061984769"><span class="chatlog__timestamp" title="Friday, August 10, 2018 3:36 AM"></span></a><a href="#chatlog__message-container-477319274843602954">8/10/2018 3:36 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">昨日の話の続きで思ったんですが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self</code> に限らず <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">weak</code> キャプチャしたオブジェクトが異なるスレッドで解放される可能性がある場合、リファレンスカウントの減少から <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">deinit</code> の実行までは排他的でもアトミックでもないと思うんですが、そうすると <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">weak</code> キャプチャしてる側で常にぶっ壊れる可能性がないですか？異なるスレッドからの解放はそもそもやっちゃいけない？</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-477319430691487744" class="chatlog__message-container" data-message-id="477319430691487744">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 10 August 2018 03:37">03:37</div>
+        <div class="chatlog__short-timestamp" title="Friday, August 10, 2018 3:37 AM">3:37 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">たとえば、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self?.foo()</code> を呼び出したときに、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self</code> のリファレンスカウントをチェックしたときは 1 だったけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">foo</code> が呼ばれる前に別スレッドから <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self</code> が解放されてしまったとか。</span></div>
@@ -21,10 +21,10 @@
   <div id="chatlog__message-container-477319736061984769" class="chatlog__message-container" data-message-id="477319736061984769">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 10 August 2018 03:38">03:38</div>
+        <div class="chatlog__short-timestamp" title="Friday, August 10, 2018 3:38 AM">3:38 AM</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">冒頭で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">guard let </code>self<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> = self else { return }</code> してると一見安全そうだけど、この場合でもリファレンスカウントのチェックから代入してリファレンスカウント増やすまでの間に別スレッドから解放されてしまうおそれがありそう。</span> <span class="chatlog__edited-timestamp" title="Friday, 10 August 2018 03:38">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">冒頭で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">guard let </code>self<code class="chatlog__markdown-pre chatlog__markdown-pre--inline"> = self else { return }</code> してると一見安全そうだけど、この場合でもリファレンスカウントのチェックから代入してリファレンスカウント増やすまでの間に別スレッドから解放されてしまうおそれがありそう。</span> <span class="chatlog__edited-timestamp" title="Friday, August 10, 2018 3:38 AM">(edited)</span></div>
       </div>
     </div>
   </div>

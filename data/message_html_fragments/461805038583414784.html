@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=461805361121198091"><span class="chatlog__timestamp" title="Thursday, 28 June 2018 08:02"></span></a><a href="#chatlog__message-container-461803496417656832">06/28/2018 08:02</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/375411941214126090?category=開発環境, ライブラリ&amp;channel=firebase&amp;message_id=461805361121198091"><span class="chatlog__timestamp" title="Thursday, June 28, 2018 8:02 AM"></span></a><a href="#chatlog__message-container-461803496417656832">6/28/2018 8:02 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">FirebaseはFrameworkの体裁を取っていますが、実際はStatic Libraryです。複数のフレームワークにリンクすると、複数のシンボルがリンクされてしまいます。 また、CocoaPodsの現在の使用により、１つのターゲットにリンクしたとしても、すべてのターゲットにリンカフラグが設定されるので、結局は同じ問題が起こります。</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-461803773195583499" class="chatlog__message-container" data-message-id="461803773195583499">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 28 June 2018 08:03">08:03</div>
+        <div class="chatlog__short-timestamp" title="Thursday, June 28, 2018 8:03 AM">8:03 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">解決方法はいろいろありますが、基本的には１つのターゲットにリンクするようにして、他のターゲットからはそのフレームワークをImportする形で使用することです。</span></div>
@@ -21,17 +21,17 @@
   <div id="chatlog__message-container-461804334372487199" class="chatlog__message-container" data-message-id="461804334372487199">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 28 June 2018 08:05">08:05</div>
+        <div class="chatlog__short-timestamp" title="Thursday, June 28, 2018 8:05 AM">8:05 AM</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、具体的にCocoaPodsでどうしたらいいかというと、 どれか１つのターゲットだけにリンクするようにPodfileを構成し、その上でさらに、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">platform :ios, '10.0' use_frameworks! pod 'SwiftGen' pod 'SwiftLint' pod 'LicensePlist' target 'XXXApp' do pod 'Shimmer', inhibit_warnings: true target 'XXXAppTests' do inherit! :search_paths pod 'Mockingjay', inhibit_warnings: true pod 'iOSSnapshotTestCase', inhibit_warnings: true end target 'XXXAppUITests' do inherit! :search_paths end end target 'Foo' do pod 'GoogleTagManager', inhibit_warnings: true target 'FooTests' do inherit! :search_paths pod 'Mockingjay', inhibit_warnings: true end end post_install do |installer| installer.aggregate_targets.each do |aggregate_target| puts aggregate_target.name if aggregate_target.name == 'Pods-XXXApp' aggregate_target.xcconfigs.each do |config_name, config_file| config_file.libraries.delete('GoogleAnalytics') config_file.frameworks.delete('FirebaseAnalytics') config_file.frameworks.delete('FirebaseCore') config_file.frameworks.delete('FirebaseCoreDiagnostics') config_file.frameworks.delete('FirebaseInstanceID') config_file.frameworks.delete('FirebaseNanoPB') config_file.frameworks.delete('GoogleSymbolUtilities') config_file.frameworks.delete('GoogleTagManager') config_file.frameworks.delete('GoogleToolboxForMac') config_file.frameworks.delete('GoogleUtilities') config_file.frameworks.delete('nanopb') xcconfig_path = aggregate_target.xcconfig_path(config_name) config_file.save_as(xcconfig_path) end end end end</code> ^ 上記のように、リンクしないターゲットからはFirebaseに関連するライブラリのリンカフラグを取り除く、というのが最も分かりやすい解決法だと思います。</span> <span class="chatlog__edited-timestamp" title="Thursday, 28 June 2018 08:07">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、具体的にCocoaPodsでどうしたらいいかというと、 どれか１つのターゲットだけにリンクするようにPodfileを構成し、その上でさらに、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">platform :ios, '10.0' use_frameworks! pod 'SwiftGen' pod 'SwiftLint' pod 'LicensePlist' target 'XXXApp' do pod 'Shimmer', inhibit_warnings: true target 'XXXAppTests' do inherit! :search_paths pod 'Mockingjay', inhibit_warnings: true pod 'iOSSnapshotTestCase', inhibit_warnings: true end target 'XXXAppUITests' do inherit! :search_paths end end target 'Foo' do pod 'GoogleTagManager', inhibit_warnings: true target 'FooTests' do inherit! :search_paths pod 'Mockingjay', inhibit_warnings: true end end post_install do |installer| installer.aggregate_targets.each do |aggregate_target| puts aggregate_target.name if aggregate_target.name == 'Pods-XXXApp' aggregate_target.xcconfigs.each do |config_name, config_file| config_file.libraries.delete('GoogleAnalytics') config_file.frameworks.delete('FirebaseAnalytics') config_file.frameworks.delete('FirebaseCore') config_file.frameworks.delete('FirebaseCoreDiagnostics') config_file.frameworks.delete('FirebaseInstanceID') config_file.frameworks.delete('FirebaseNanoPB') config_file.frameworks.delete('GoogleSymbolUtilities') config_file.frameworks.delete('GoogleTagManager') config_file.frameworks.delete('GoogleToolboxForMac') config_file.frameworks.delete('GoogleUtilities') config_file.frameworks.delete('nanopb') xcconfig_path = aggregate_target.xcconfig_path(config_name) config_file.save_as(xcconfig_path) end end end end</code> ^ 上記のように、リンクしないターゲットからはFirebaseに関連するライブラリのリンカフラグを取り除く、というのが最も分かりやすい解決法だと思います。</span> <span class="chatlog__edited-timestamp" title="Thursday, June 28, 2018 8:07 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-461805038583414784" class="chatlog__message-container" data-message-id="461805038583414784">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 28 June 2018 08:08">08:08</div>
+        <div class="chatlog__short-timestamp" title="Thursday, June 28, 2018 8:08 AM">8:08 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この例だと、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">XXXApp</code>と<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Foo</code>というターゲットがあって、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Foo</code>はEmbeddedFrameworkです。FirebaseはFooにのみリンクしています。</span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-461805130891919360" class="chatlog__message-container" data-message-id="461805130891919360">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 28 June 2018 08:08">08:08</div>
+        <div class="chatlog__short-timestamp" title="Thursday, June 28, 2018 8:08 AM">8:08 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">（GoogleTagManagerがFirebaseAnalyticsに依存しています。）</span></div>
@@ -51,7 +51,7 @@
   <div id="chatlog__message-container-461805297246273546" class="chatlog__message-container" data-message-id="461805297246273546">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 28 June 2018 08:09">08:09</div>
+        <div class="chatlog__short-timestamp" title="Thursday, June 28, 2018 8:09 AM">8:09 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかし、CocoaPodsがXXXAppにもリンカフラグを設定してしまうので、XXXAppからFirebase関連のライブラリのリンカフラグを取り除いています。</span></div>
@@ -61,7 +61,7 @@
   <div id="chatlog__message-container-461805361121198091" class="chatlog__message-container" data-message-id="461805361121198091">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 28 June 2018 08:09">08:09</div>
+        <div class="chatlog__short-timestamp" title="Thursday, June 28, 2018 8:09 AM">8:09 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ターゲットが増えても理屈は同じです。</span></div>

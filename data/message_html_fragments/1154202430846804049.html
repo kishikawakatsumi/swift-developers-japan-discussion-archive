@@ -14,7 +14,7 @@
               </div>例えばAPI呼び出しなら、通信のレベルと、JSONを処理するレベル、APIに応じたバリデーションのレベル、みたいに整理する、という事でしょうか？ そうだったとして、この抽象化されたエラー型の中に、具体的な実装に依存したエラー型が渡せるように、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">any Error</code> が混ざり込みませんかね？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// こういうのは列挙できたとしても・・・ enum ProtocolError { case brokenJSON case invalidFormat(String) ... } enum APICallError { case protocolError(ProtocolError) // ↓こっちは実装変更に対応しようとすると列挙できない case networkError(any Error) }</code>
             </span></div>
         </div>
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1154202430846804049"><span class="chatlog__timestamp" title="Wednesday, 20 September 2023 23:48"></span></a><a href="#chatlog__message-container-1154202430846804049">09/20/2023 23:48</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1154202430846804049"><span class="chatlog__timestamp" title="Wednesday, September 20, 2023 11:48 PM"></span></a><a href="#chatlog__message-container-1154202430846804049">9/20/2023 11:48 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">はい、その場合は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">any Error</code> が混ざってしまうか、実装に依存した型がassociated valueに現れると思います。</span></div>
       </div>
     </div>

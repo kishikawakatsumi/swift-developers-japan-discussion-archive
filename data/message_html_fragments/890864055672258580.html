@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890864501702922300"><span class="chatlog__timestamp" title="Friday, 24 September 2021 07:32"></span></a><a href="#chatlog__message-container-890863286243958805">09/24/2021 07:32</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=890864501702922300"><span class="chatlog__timestamp" title="Friday, September 24, 2021 7:32 AM"></span></a><a href="#chatlog__message-container-890863286243958805">9/24/2021 7:32 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">&gt; **Rationale**: In theory, `@escaping` is completely orthogonal to `@Sendable`, and a Swift program built entirely with `@Sendable` from the ground up would not have the rule that `@escaping` closures be non-isolated. However, the existing Swift ecosystem is built without `@Sendable`, which leaves us with an unfortunate choice. We can assume that the lack of `@Sendable` on a function type means that the closure won't escape the concurrency domain, and where existing code (i.e., all Swift code that's been written so far) breaks this assumption, we'll have a data race. Or, we can conservatively assume that all existing function types are `@Sendable`, which will prevent all data races, but at the cost of being unable to use even the most basic facilities (such as `Sequence.map`, above). Therefore, we employ an heuristic: `@escaping` is a good (but imperfect) indicator in Swift today that the closure can be executed concurrently, so we don't permit escaping closures to be actor-isolated. This eliminates a significant proportion of the data races that would affect actor state, and the cost of (1) admitting some data races with existing code that manages to execute a closure concurrently without escaping it, and (2) prohibiting some safe patterns where a closure escapes but does not cross concurrency domains. This is a pragmatic, temporarily solution to the problem of rolling out data-race prevention throughout an existing ecosystem. Our approach will ratchet up the safety as code opts in to more concurrency safety in future language versions.</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-890863884406235186" class="chatlog__message-container" data-message-id="890863884406235186">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 07:35">07:35</div>
+        <div class="chatlog__short-timestamp" title="Friday, September 24, 2021 7:35 AM">7:35 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">「理論上は、escapingとsendableは直行する概念だけど、まだsendableが普及してないから妥協をする必要があって、実際escapingはコールバックに使ってることが多いし、escapingならnon-isolated(=sendable)にするヒューリスティックにしようと思うよ」</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-890863911744712724" class="chatlog__message-container" data-message-id="890863911744712724">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 07:35">07:35</div>
+        <div class="chatlog__short-timestamp" title="Friday, September 24, 2021 7:35 AM">7:35 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">みたいな事が書いてあって</span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-890863938944778260" class="chatlog__message-container" data-message-id="890863938944778260">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 07:35">07:35</div>
+        <div class="chatlog__short-timestamp" title="Friday, September 24, 2021 7:35 AM">7:35 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それに対してラトナーが↑で</span></div>
@@ -41,7 +41,7 @@
   <div id="chatlog__message-container-890864055672258580" class="chatlog__message-container" data-message-id="890864055672258580">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 07:35">07:35</div>
+        <div class="chatlog__short-timestamp" title="Friday, September 24, 2021 7:35 AM">7:35 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">「いやいやそれだとマズイでしょ理論上直行するわけで・・・(以下説明)」みたいなツッコミをした結果</span></div>
@@ -51,7 +51,7 @@
   <div id="chatlog__message-container-890864153336639538" class="chatlog__message-container" data-message-id="890864153336639538">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 07:36">07:36</div>
+        <div class="chatlog__short-timestamp" title="Friday, September 24, 2021 7:36 AM">7:36 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">第二回レビューのタイミングでは、escapingに関するヒューリスティック(=sendable)が取り除かれた？</span></div>
@@ -61,7 +61,7 @@
   <div id="chatlog__message-container-890864403384270889" class="chatlog__message-container" data-message-id="890864403384270889">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 07:37">07:37</div>
+        <div class="chatlog__short-timestamp" title="Friday, September 24, 2021 7:37 AM">7:37 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ラトナー <div class="chatlog__markdown-quote">
@@ -74,7 +74,7 @@
   <div id="chatlog__message-container-890864501702922300" class="chatlog__message-container" data-message-id="890864501702922300">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 24 September 2021 07:37">07:37</div>
+        <div class="chatlog__short-timestamp" title="Friday, September 24, 2021 7:37 AM">7:37 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Sendableじゃないけどescapingなクロージャは完全に正しい（ありえる）</span></div>

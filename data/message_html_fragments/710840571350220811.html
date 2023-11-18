@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=710840571350220811"><span class="chatlog__timestamp" title="Friday, 15 May 2020 13:05"></span></a><a href="#chatlog__message-container-710840213810970674">05/15/2020 13:05</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=710840571350220811"><span class="chatlog__timestamp" title="Friday, May 15, 2020 1:05 PM"></span></a><a href="#chatlog__message-container-710840213810970674">5/15/2020 1:05 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import UIKit import Combine class ViewController: UIViewController { override func viewDidLoad() { super.viewDidLoad() DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in let vc = ViewController2() self?.present(vc, animated: true) } } } class ViewController2: UIViewController { private var cancellables: Set&lt;AnyCancellable&gt; = [] deinit { print("deinit") } override func viewDidLoad() { super.viewDidLoad() Client.shared.perform(request: URLRequest(url: URL(string: "https://www.google.com")!)) .sink(receiveCompletion: { (completion) in print(completion) self.updateUI() }) { (response) in print(response) self.updateUI() } .store(in: &amp;cancellables) } func updateUI() { } } class Client { static let shared = Client() private let session = URLSession(configuration: .default) private init() {} func perform(request: URLRequest) -&gt; Future&lt;URLResponse, Error&gt; { return Future&lt;URLResponse, Error&gt; { [weak self] promise in self?.session.dataTask(with: request) { (data, response, error) in if let error = error { promise(.failure(error)) return } if let response = response { promise(.success(response)) return } } .resume() } } }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-710840571350220811" class="chatlog__message-container" data-message-id="710840571350220811">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 15 May 2020 13:06">13:06</div>
+        <div class="chatlog__short-timestamp" title="Friday, May 15, 2020 1:06 PM">1:06 PM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">^ 小さく再現できるコードだとこうなるんですけど、これはViewController2の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self.updateUI()</code> の呼び出しはweak selfじゃないとViewController2を閉じてもViewController2は解放されないんですよね。</span></div>

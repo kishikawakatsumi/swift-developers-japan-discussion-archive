@@ -3,16 +3,16 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=1153875649040240741"><span class="chatlog__timestamp" title="Wednesday, 20 September 2023 02:05"></span></a><a href="#chatlog__message-container-1153874527114231809">09/20/2023 02:05</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=1153875649040240741"><span class="chatlog__timestamp" title="Wednesday, September 20, 2023 2:05 AM"></span></a><a href="#chatlog__message-container-1153874527114231809">9/20/2023 2:05 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/vapor/fluent-kit/blob/main/Sources/FluentKit/Concurrency/Database%2BConcurrency.swift#L4-L10">https://github.com/vapor/fluent-kit/blob/main/Sources/FluentKit/Concurrency/Database%2BConcurrency.swift#L4-L10</a>
-            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> func transaction&lt;T&gt;(_ closure: @Sendable @escaping (Database) async throws -&gt; T) async throws -&gt; T { try await self.transaction { db -&gt; EventLoopFuture&lt;T&gt; in let promise = self.eventLoop.makePromise(of: T.self) promise.completeWithTask{ try await closure(db) } return promise.futureResult }.get() }</code></span> <span class="chatlog__edited-timestamp" title="Wednesday, 20 September 2023 02:05">(edited)</span></div>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> func transaction&lt;T&gt;(_ closure: @Sendable @escaping (Database) async throws -&gt; T) async throws -&gt; T { try await self.transaction { db -&gt; EventLoopFuture&lt;T&gt; in let promise = self.eventLoop.makePromise(of: T.self) promise.completeWithTask{ try await closure(db) } return promise.futureResult }.get() }</code></span> <span class="chatlog__edited-timestamp" title="Wednesday, September 20, 2023 2:05 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-1153874676783796294" class="chatlog__message-container" data-message-id="1153874676783796294">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 20 September 2023 02:06">02:06</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 20, 2023 2:06 AM">2:06 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑この <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">transaction</code> 関数の引数の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">closure</code> って、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</code> も <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@escaping</code> も外していいと思うんですけど、正しい考えですかね？</span></div>
@@ -22,7 +22,7 @@
   <div id="chatlog__message-container-1153874889166557184" class="chatlog__message-container" data-message-id="1153874889166557184">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 20 September 2023 02:06">02:06</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 20, 2023 2:06 AM">2:06 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">理由は、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">self.transaction</code> が返す <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">EventLoopFuture</code> を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">await future.get()</code> して待機しているから、 この <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">transaction</code> メソッドが終了する時点では、必ず <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">closure</code> の呼び出しも終了しているからです。</span></div>
@@ -32,7 +32,7 @@
   <div id="chatlog__message-container-1153875279085846620" class="chatlog__message-container" data-message-id="1153875279085846620">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 20 September 2023 02:08">02:08</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 20, 2023 2:08 AM">2:08 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">closure</code> はEventLoopスレッドで実行されるのでconcurrency boundaryは跨いでるけど、 この <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">transaction</code> メソッド自体が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">async</code> で、呼び出し側は必ず <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">await</code> で待たないといけないし。</span></div>
@@ -42,7 +42,7 @@
   <div id="chatlog__message-container-1153875649040240741" class="chatlog__message-container" data-message-id="1153875649040240741">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 20 September 2023 02:09">02:09</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 20, 2023 2:09 AM">2:09 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let closure = { (db) in ... } Task { closure() } try await db.transaction(closure)</code> ↑呼び出し側で勝手にこういうふうにする事ができるか・・・？ でもこの場合は、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">let closure</code> の時点で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Sendable</code> にしないと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> に渡せないから、この心配もないか</span></div>

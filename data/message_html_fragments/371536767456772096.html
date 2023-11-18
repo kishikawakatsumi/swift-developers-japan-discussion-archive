@@ -3,15 +3,15 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=371536916350500874"><span class="chatlog__timestamp" title="Sunday, 22 October 2017 05:52"></span></a><a href="#chatlog__message-container-371536349154770945">10/22/2017 05:52</a></div>
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まず、クロージャがaとbをコピーしてるというのは無さそうです。nonescapeなクロージャはスタック上の値をポインタ参照するので。 で、TimeProfilerで調べてみたら、Matrix.initに渡してるクロージャの中のmapとreduceが、CountableRangeに対するprotocol witness呼び出しをしていたんで、そこらへんがインライン化されてないっぽいです。 Matrix.multiply自体はSpecializeされているぽいけど、Matrix.initのクロージャの中身が最適化されてない</span> <span class="chatlog__edited-timestamp" title="Sunday, 22 October 2017 05:52">(edited)</span></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=371536916350500874"><span class="chatlog__timestamp" title="Sunday, October 22, 2017 5:52 AM"></span></a><a href="#chatlog__message-container-371536349154770945">10/22/2017 5:52 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まず、クロージャがaとbをコピーしてるというのは無さそうです。nonescapeなクロージャはスタック上の値をポインタ参照するので。 で、TimeProfilerで調べてみたら、Matrix.initに渡してるクロージャの中のmapとreduceが、CountableRangeに対するprotocol witness呼び出しをしていたんで、そこらへんがインライン化されてないっぽいです。 Matrix.multiply自体はSpecializeされているぽいけど、Matrix.initのクロージャの中身が最適化されてない</span> <span class="chatlog__edited-timestamp" title="Sunday, October 22, 2017 5:52 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-371536727417946123" class="chatlog__message-container" data-message-id="371536727417946123">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Sunday, 22 October 2017 05:54">05:54</div>
+        <div class="chatlog__short-timestamp" title="Sunday, October 22, 2017 5:54 AM">5:54 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">試しに Matrix.initの中身だけ手動で書いたら、 swifty(1): 9.03 pointer(2): 0.18 に対して、 forloop(3): 1.93</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-371536767456772096" class="chatlog__message-container" data-message-id="371536767456772096">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Sunday, 22 October 2017 05:54">05:54</div>
+        <div class="chatlog__short-timestamp" title="Sunday, October 22, 2017 5:54 AM">5:54 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> public static func multiply3&lt;p&gt;(a: Matrix&lt;R, n, m&gt;, b: Matrix&lt;R, m, p&gt;) -&gt; Matrix&lt;R, n, p&gt; { assert(a.cols == b.rows, "Mismatching matrix size.") return Matrix&lt;R, n, p&gt;(rows: a.rows, cols: b.cols, type: (a.type == b.type) ? a.type : .Default) { (i, k) -&gt; R in var x = R.zero for j in 0..&lt;a.cols { x = x + a[i, j] * b[j, k] } return x } }</code></span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-371536916350500874" class="chatlog__message-container" data-message-id="371536916350500874">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Sunday, 22 October 2017 05:55">05:55</div>
+        <div class="chatlog__short-timestamp" title="Sunday, October 22, 2017 5:55 AM">5:55 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">50倍ぐらい差があるところを10倍差ぐらいまで追いついた。</span></div>

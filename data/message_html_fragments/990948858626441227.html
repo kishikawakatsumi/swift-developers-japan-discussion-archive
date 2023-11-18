@@ -3,13 +3,13 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/3323008de1ce00a014c55874baaebc26.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz1209" data-user-id="382314715495399425">shiz</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=990948858626441227"><span class="chatlog__timestamp" title="Monday, 27 June 2022 11:56"></span></a><a href="#chatlog__message-container-990948858626441227">06/27/2022 11:56</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz1209" data-user-id="382314715495399425">shiz</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=990948858626441227"><span class="chatlog__timestamp" title="Monday, June 27, 2022 11:56 AM"></span></a><a href="#chatlog__message-container-990948858626441227">6/27/2022 11:56 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
             <div class="chatlog__markdown-quote">
               <div class="chatlog__markdown-quote-border"></div>
               <div class="chatlog__markdown-quote-content">いやClosure内部なので保証されていない気がする </div>
             </div> やっぱり引き継がれないですねー <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">func runEscaping(_ operation: @escaping () -&gt; Void) { Task.detached { // Taskも同じ結果 print("3", Thread.isMainThread) // false operation() } } @MainActor final class Bar { func countUp() { print("1", Thread.isMainThread) // true runEscaping { print("2", Thread.isMainThread) // false } } }</code> ↓はWWDCのセッションで言われていた通り、nonisolatedなsync関数は呼び出し側のcontextに依る(そもそもescapingしないのか) <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">func runEscaping(_ operation: @escaping () -&gt; Void) { print("3", Thread.isMainThread) // true operation() } @MainActor final class Bar { func countUp() { print("1", Thread.isMainThread) // true runEscaping { print("2", Thread.isMainThread) // true } } }</code>
-          </span> <span class="chatlog__edited-timestamp" title="Monday, 27 June 2022 13:49">(edited)</span></div>
+          </span> <span class="chatlog__edited-timestamp" title="Monday, June 27, 2022 1:49 PM">(edited)</span></div>
       </div>
     </div>
   </div>

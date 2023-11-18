@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=483814155762270220"><span class="chatlog__timestamp" title="Tuesday, 28 August 2018 01:39"></span></a><a href="#chatlog__message-container-483812886079209497">08/28/2018 01:39</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=483814155762270220"><span class="chatlog__timestamp" title="Tuesday, August 28, 2018 1:39 AM"></span></a><a href="#chatlog__message-container-483812886079209497">8/28/2018 1:39 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@dynamicMemberLookup</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@dynamicCallable</code> に加えて、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@dynamicConvertible</code> ほしくないですか？今だと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">PythonObject</code> から Swift に戻すときに↓のようにしないといけなくて面倒。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Python let np = Python.import("numpy") let a = np.array([[1, 2], [3, 4]]) let b = np.array([[5], [6]]) let c = np.matmul(a, b) let d: Int = Int(c[0, 0])! // ここで明示的変換が必要 print(d)</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-483813220998709261" class="chatlog__message-container" data-message-id="483813220998709261">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Tuesday, 28 August 2018 01:41">01:41</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, August 28, 2018 1:41 AM">1:41 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">前提として Swift では暗黙の型変換は許さないという上で、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@dynamic</code> 系は安全性を崩して書きやすさをとっているので、 dynamic に限って暗黙の型変換を許すのは良いバランスじゃないかということです。</span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-483813390033354762" class="chatlog__message-container" data-message-id="483813390033354762">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Tuesday, 28 August 2018 01:41">01:41</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, August 28, 2018 1:41 AM">1:41 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓のように書きたい。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Python let np = Python.import("numpy") let a = np.array([[1, 2], [3, 4]]) let b = np.array([[5], [6]]) let c = np.matmul(a, b) let d: Int = c[0, 0] // 暗黙の型変換 print(d)</code></span></div>
@@ -31,7 +31,7 @@
   <div id="chatlog__message-container-483813482018635786" class="chatlog__message-container" data-message-id="483813482018635786">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Tuesday, 28 August 2018 01:42">01:42</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, August 28, 2018 1:42 AM">1:42 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Int</code> を右に書くか左に書くかの違いに見えますが、引数に渡すときに意味があります。</span></div>
@@ -41,17 +41,17 @@
   <div id="chatlog__message-container-483813915575451661" class="chatlog__message-container" data-message-id="483813915575451661">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Tuesday, 28 August 2018 01:43">01:43</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, August 28, 2018 1:43 AM">1:43 AM</div>
       </div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓みたいな感じ。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@dynamicMemberLookup @dynamicCallable @dynamicConvertible struct PythonObject { ... func converted() -&gt; Int { ... } func converted() -&gt; Bool { ... } func converted() -&gt; String { ... } func converted() -&gt; (PythonObject, PythobObject) { ... } ... }</code></span> <span class="chatlog__edited-timestamp" title="Tuesday, 28 August 2018 01:43">(edited)</span></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓みたいな感じ。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@dynamicMemberLookup @dynamicCallable @dynamicConvertible struct PythonObject { ... func converted() -&gt; Int { ... } func converted() -&gt; Bool { ... } func converted() -&gt; String { ... } func converted() -&gt; (PythonObject, PythobObject) { ... } ... }</code></span> <span class="chatlog__edited-timestamp" title="Tuesday, August 28, 2018 1:43 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-483814155762270220" class="chatlog__message-container" data-message-id="483814155762270220">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Tuesday, 28 August 2018 01:44">01:44</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, August 28, 2018 1:44 AM">1:44 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">今は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Int</code> や <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Bool</code> 等については <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">extension</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">init</code> になってるけど、タプルは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">extension</code> 作れないので <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">PythonObject</code> に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">tuple2</code> とかのメソッドが生えてて統一感もない。</span></div>

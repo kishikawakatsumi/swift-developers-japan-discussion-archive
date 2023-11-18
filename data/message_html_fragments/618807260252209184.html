@@ -3,17 +3,17 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/370406638915420161/a90e18d5a48a5bebd4720db2fadea512.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" title="taketo1024" data-user-id="370406638915420161">Taketo Sano</span> <a href="/channels/319688664240357376?category=main&amp;channel=other-lang&amp;message_id=618808487270416413"><span class="chatlog__timestamp" title="Wednesday, 04 September 2019 13:51"></span></a><a href="#chatlog__message-container-618805400375918636">09/04/2019 13:51</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="taketo1024" data-user-id="370406638915420161">Taketo Sano</span> <a href="/channels/319688664240357376?category=main&amp;channel=other-lang&amp;message_id=618808487270416413"><span class="chatlog__timestamp" title="Wednesday, September 4, 2019 1:51 PM"></span></a><a href="#chatlog__message-container-618805400375918636">9/4/2019 1:51 PM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">C と Swift の連携で、Ubuntu でのみ再現するかなり嫌な感じのバグに苦しんでいます…<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f616.svg">
             <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func rank() -&gt; Int { let cA: UnsafeMutablePointer&lt;spasm&gt; = spasm_init(A) defer { spasm_csr_free(cA) } let rank = spasm_rank_hybrid(cA) return Int(rank) }</code>
-            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_</code> とついてるのが C のライブラリです。これを Ubuntu で実行すると <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_csr_free(cA)</code> の中で Segmentation Fault が発生します。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_csr_free</code> の中でポインタのアドレスを出力してみると、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_init</code> で返されるポインタのアドレスから微妙に変わっています。であれば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_rank_hybrid</code> の中で何者かがアドレスを書き換えてるのだろうと思いきや、この関数の return の直前でアドレスを出力してみても <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">init</code> で返されるものと同じになっているのです… C と Swift の連携によってアドレスが書き換わってるとしか思えない感じです…<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f616.svg"> しかも不気味なことに <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func rank() -&gt; Int { let cA: UnsafeMutablePointer&lt;spasm&gt; = spasm_init(A) print(cA) // ← これを入れるだけ defer { spasm_csr_free(cA) } let rank = spasm_rank_hybrid(cA) return Int(rank) }</code> こうすると Seg-Fault が発生しなくなります…<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f616.svg"></span> <span class="chatlog__edited-timestamp" title="Wednesday, 04 September 2019 14:24">(edited)</span></div>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_</code> とついてるのが C のライブラリです。これを Ubuntu で実行すると <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_csr_free(cA)</code> の中で Segmentation Fault が発生します。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_csr_free</code> の中でポインタのアドレスを出力してみると、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_init</code> で返されるポインタのアドレスから微妙に変わっています。であれば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spasm_rank_hybrid</code> の中で何者かがアドレスを書き換えてるのだろうと思いきや、この関数の return の直前でアドレスを出力してみても <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">init</code> で返されるものと同じになっているのです… C と Swift の連携によってアドレスが書き換わってるとしか思えない感じです…<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f616.svg"> しかも不気味なことに <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func rank() -&gt; Int { let cA: UnsafeMutablePointer&lt;spasm&gt; = spasm_init(A) print(cA) // ← これを入れるだけ defer { spasm_csr_free(cA) } let rank = spasm_rank_hybrid(cA) return Int(rank) }</code> こうすると Seg-Fault が発生しなくなります…<img loading="lazy" class="chatlog__emoji " alt="😖" title="confounded" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f616.svg"></span> <span class="chatlog__edited-timestamp" title="Wednesday, September 4, 2019 2:24 PM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-618806262846586890" class="chatlog__message-container" data-message-id="618806262846586890">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 04 September 2019 13:55">13:55</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 4, 2019 1:55 PM">1:55 PM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">defer</code> が悪さをしてるのかと思って <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func rank() -&gt; Int { let cA: UnsafeMutablePointer&lt;spasm&gt; = spasm_init(A) let rank = spasm_rank_hybrid(cA) spasm_csr_free(cA) return Int(rank) }</code> としてみましたが同じでした<img loading="lazy" class="chatlog__emoji " alt="😣" title="persevere" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f623.svg"></span></div>
@@ -23,7 +23,7 @@
   <div id="chatlog__message-container-618807260252209184" class="chatlog__message-container" data-message-id="618807260252209184">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 04 September 2019 13:59">13:59</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 4, 2019 1:59 PM">1:59 PM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">spasm_init: 0x7f3051b1c8f0 start of spasm_rank_hybrid: 0x7f3051b1c8f0 end of spasm_rank_hybrid: 0x7f3051b1c8f0 spasm_csr_free: 0x7f3051b1c800</code> こういう感じで、アドレスが <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">f0</code> 分ズレるという…</span></div>
@@ -33,7 +33,7 @@
   <div id="chatlog__message-container-618807780530454549" class="chatlog__message-container" data-message-id="618807780530454549">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 04 September 2019 14:01">14:01</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 4, 2019 2:01 PM">2:01 PM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Optional の分ズレてるとかかなぁ<img loading="lazy" class="chatlog__emoji " alt="🙄" title="rolling_eyes" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f644.svg"></span></div>
@@ -43,7 +43,7 @@
   <div id="chatlog__message-container-618808487270416413" class="chatlog__message-container" data-message-id="618808487270416413">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 04 September 2019 14:04">14:04</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 4, 2019 2:04 PM">2:04 PM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">f0</code> ズレるんじゃなくて <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">&amp; 00</code> されるようです<img loading="lazy" class="chatlog__emoji " alt="😣" title="persevere" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f623.svg"></span></div>

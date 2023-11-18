@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/700259791217491999?category=開発環境, ライブラリ&amp;channel=combine&amp;message_id=729900261744836608"><span class="chatlog__timestamp" title="Tuesday, 07 July 2020 03:19"></span></a><a href="#chatlog__message-container-729899400570208286">07/07/2020 03:19</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/700259791217491999?category=開発環境, ライブラリ&amp;channel=combine&amp;message_id=729900261744836608"><span class="chatlog__timestamp" title="Tuesday, July 7, 2020 3:19 AM"></span></a><a href="#chatlog__message-container-729899400570208286">7/7/2020 3:19 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Combine の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Future</code> って、非同期処理のコールバック代わりに使おうとすると、いちいち <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">cancellable</code> をどこかに保持しておかないといけなくて面倒じゃないですか？キャンセルしないとき。</span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-729899523828088833" class="chatlog__message-container" data-message-id="729899523828088833">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Tuesday, 07 July 2020 03:20">03:20</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, July 7, 2020 3:20 AM">3:20 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓こういうのがあれば便利じゃないかと思ったんですが、どうでしょうか？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">extension Future { public func get(_ body: @escaping (Result&lt;Output, Failure&gt;) -&gt; Void) { let keep: Keep&lt;AnyCancellable&gt; = .init() keep.value = sink(receiveCompletion: { completion in switch completion { case .finished: break case .failure(let error): body(.failure(error)) } keep.value = nil }, receiveValue: { output in body(.success(output)) }) } } private class Keep&lt;Value&gt; { var value: Value? }</code></span></div>
@@ -21,7 +21,7 @@
   <div id="chatlog__message-container-729900261744836608" class="chatlog__message-container" data-message-id="729900261744836608">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Tuesday, 07 July 2020 03:23">03:23</div>
+        <div class="chatlog__short-timestamp" title="Tuesday, July 7, 2020 3:23 AM">3:23 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓使うとき。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let future = asyncFoo() future.get { foo in // cancellable は内部的に保持される // ... }</code></span></div>

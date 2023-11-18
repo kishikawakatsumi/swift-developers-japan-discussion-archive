@@ -9,16 +9,16 @@
           <div class="chatlog__reply-author" title="kihara1684">kihara</div>
           <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'882847433506312213')"> swiftuiとspritekitで簡易なゲームを作っています。タイトル画面からゲーム画面への遷移にはpresentSceneを使っており遷移自体はうまくいくのですが、アプリを一度バックグラウンドにするとゲーム中でもタイトル画面に戻ってしまいます。おそらくContentViewで毎回タイトル画面が呼び出されているせいだと思うのですが改善方法が調べてもわからず詰まっています。どなたか解決策をご存じの方はいらっしゃいますか？ </span></div>
         </div>
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=882850669109866526"><span class="chatlog__timestamp" title="Thursday, 02 September 2021 04:51"></span></a><a href="#chatlog__message-container-882850310119378964">09/02/2021 04:51</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=882850669109866526"><span class="chatlog__timestamp" title="Thursday, September 2, 2021 4:51 AM"></span></a><a href="#chatlog__message-container-882850310119378964">9/2/2021 4:51 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">このコードだと <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> が走る度に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">scene</code> が再生成されてしまうので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@StateObject</code> の中に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">scene</code> を持たせるなどした方が良いと思います。たとえば↓のように（これで問題が解決するかわかりませんが）。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct ContentView: View { @StateObject private var state: ContentViewState = .init() var body: some View { SpriteView(scene: scene) .frame(width: UIScreen.main.bounds.size.width , height: UIScreen.main.bounds.size.height) .ignoresSafeArea() } }</code>
-            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Combine final class ContentViewState: ObservableObject { let scene: SKScene init() { self.scene = GameTitleScene() scene.size = CGSize(width: UIScreen.main.bounds.size.width , height: UIScreen.main.bounds.size.height) } }</code></span> <span class="chatlog__edited-timestamp" title="Thursday, 02 September 2021 05:07">(edited)</span></div>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Combine final class ContentViewState: ObservableObject { let scene: SKScene init() { self.scene = GameTitleScene() scene.size = CGSize(width: UIScreen.main.bounds.size.width , height: UIScreen.main.bounds.size.height) } }</code></span> <span class="chatlog__edited-timestamp" title="Thursday, September 2, 2021 5:07 AM">(edited)</span></div>
       </div>
     </div>
   </div>
   <div id="chatlog__message-container-882850442030219304" class="chatlog__message-container" data-message-id="882850442030219304">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 02 September 2021 04:52">04:52</div>
+        <div class="chatlog__short-timestamp" title="Thursday, September 2, 2021 4:52 AM">4:52 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">もしくは、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">SpriteView</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">UIViewControllerRepresentable</code> 等であればそちらで持たせる方が良いかもしれません。</span></div>
@@ -28,7 +28,7 @@
   <div id="chatlog__message-container-882850669109866526" class="chatlog__message-container" data-message-id="882850669109866526">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Thursday, 02 September 2021 04:53">04:53</div>
+        <div class="chatlog__short-timestamp" title="Thursday, September 2, 2021 4:53 AM">4:53 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑の例では <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">StateObject</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">objectWillChange</code> が活きてませんが、他の色々があると仮定して持たせるならそこかなと。</span></div>

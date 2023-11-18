@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" title="riku#5154" data-user-id="799658659113205800">riku</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1139491636951396374"><span class="chatlog__timestamp" title="Friday, 11 August 2023 09:30"></span></a><a href="#chatlog__message-container-1139490995772325958">08/11/2023 09:30</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" title="riku#5154" data-user-id="799658659113205800">riku</span> <a href="/channels/291211035438874625?category=main&amp;channel=beginner-help&amp;message_id=1139491636951396374"><span class="chatlog__timestamp" title="Friday, August 11, 2023 9:30 AM"></span></a><a href="#chatlog__message-container-1139490995772325958">8/11/2023 9:30 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">struct ContentView: View { @State private var location: CGPoint = CGPoint(x: 50, y: 50) @State private var timeRemaining = 600 @State private var timerRunning = false var body: some View { VStack { ZStack { Circle() .fill(Color.blue) .frame(width: 50, height: 50) .position(location) .gesture( DragGesture() .onChanged { value in location = value.location } ) } .frame(maxWidth: .infinity, maxHeight: .infinity) .border(Color.black, width: 2) TimerView(timerRunning: $timerRunning, timeRemaining: $timeRemaining)// 枠線を追加 } } } struct TimerView: View { @Binding var timerRunning: Bool @Binding var timeRemaining: Int let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect() var body: some View { VStack { HStack { Text("\(String(format: "%02d", timeRemaining / 60)):\(String(format: "%02d", timeRemaining % 60))") .font(.system(size: 48)) .fontWeight(.bold) .onTapGesture { timerRunning.toggle() } .onReceive(timer) { _ in if timeRemaining &gt; 0 &amp;&amp; timerRunning { timeRemaining -= 1 } else if timeRemaining == 0 { timerRunning = false } } } } } }</code></span></div>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div id="chatlog__message-container-1139491636951396374" class="chatlog__message-container" data-message-id="1139491636951396374">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Friday, 11 August 2023 09:32">09:32</div>
+        <div class="chatlog__short-timestamp" title="Friday, August 11, 2023 9:32 AM">9:32 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">質問です。こんな感じの普通のTimerとdragで物体が動くViewを作ったとき、物体を動かしているときにTimerが止まってしまいます。どうすればDragしている間でもTimerを更新することができますか？</span></div>

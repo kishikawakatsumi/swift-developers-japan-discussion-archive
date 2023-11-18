@@ -3,7 +3,7 @@
     <div class="chatlog__message">
       <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
       <div class="chatlog__message-primary">
-        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=750584478698831954"><span class="chatlog__timestamp" title="Wednesday, 02 September 2020 05:12"></span></a><a href="#chatlog__message-container-750584021536342067">09/02/2020 05:12</a></div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=750584478698831954"><span class="chatlog__timestamp" title="Wednesday, September 2, 2020 5:12 AM"></span></a><a href="#chatlog__message-container-750584021536342067">9/2/2020 5:12 AM</a></div>
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@ObservedObject</code> のライフサイクルって違うんですね。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">init</code> が呼ばれても初期化されないけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@ObservedObject</code> はされるみたい。</span></div>
         <div class="chatlog__reactions">
           <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
@@ -14,7 +14,7 @@
   <div id="chatlog__message-container-750584215711645777" class="chatlog__message-container" data-message-id="750584215711645777">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 02 September 2020 05:13">05:13</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 2, 2020 5:13 AM">5:13 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct ContentView: View { @State var count: Int = 0 var body: some View { VStack { Stepper("\(count)", value: $count) SView() CView() } .padding(30) } } struct S { var value: Int init(value: Int) { self.value = value } } struct SView: View { @State var s: S = .init(value: 42) var body: some View { Stepper("S: \(s.value)", value: $s.value) } } class C: ObservableObject { @Published var value: Int init(value: Int) { self.value = value } } struct CView: View { @ObservedObject var c: C = .init(value: 42) var body: some View { Stepper("C: \(c.value)", value: $c.value) } }</code> 1つ目の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Stepper</code> を増減したときに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">SView</code> はリセットされないけど <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CView</code> はリセットされる。</span></div>
@@ -24,7 +24,7 @@
   <div id="chatlog__message-container-750584478698831954" class="chatlog__message-container" data-message-id="750584478698831954">
     <div class="chatlog__message">
       <div class="chatlog__message-aside">
-        <div class="chatlog__short-timestamp" title="Wednesday, 02 September 2020 05:14">05:14</div>
+        <div class="chatlog__short-timestamp" title="Wednesday, September 2, 2020 5:14 AM">5:14 AM</div>
       </div>
       <div class="chatlog__message-primary">
         <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">SView</code> では <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">S</code> のイニシャライザは呼ばれてるけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> への書き込みが行われない模様。</span></div>
