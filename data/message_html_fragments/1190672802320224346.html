@@ -1,0 +1,37 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1190672464229957672" class="chatlog__message-container" data-message-id="1190672464229957672">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/618622560094912525/56cac09a45bfdb309b10fd655f69f4d0.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" title="xsuiyoku">xsuiyoku</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1190672129042157698')"> 参照を渡すような感じですか？ </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1190673967544017087"><span class="chatlog__timestamp" title="Saturday, December 30, 2023 3:07 PM"></span></a><a href="#chatlog__message-container-1190672464229957672">12/30/2023 3:07 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">はい、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Binding</code> はそんな感じです。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Binding</code> 自体は全く特殊な型ではなく、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Binding</code> なプロパティが変更されても <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> を再実行するような機能も持ちません。ただ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">get</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">set</code> を持つだけです。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1190672802320224346" class="chatlog__message-container" data-message-id="1190672802320224346">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, December 30, 2023 3:08 PM">3:08 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Binding</code> なプロパティが変更されたときにそのViewの <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> が再実行されるのは、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Binding</code> を渡した側のViewで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> が再実行され、それに伴って渡された側の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">View</code> も更新されるからです。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1190673967544017087" class="chatlog__message-container" data-message-id="1190673967544017087">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, December 30, 2023 3:13 PM">3:13 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct FooView: View { @State var user: User var body: some View { Checkbox(isOn: $user.isPublic) } } struct Checkbox: View { @Binding var isOn: Bool var body: some View { Button { isOn.toggle() } label: { Image(isOn ? "Checkbox-On" : "Checkbox-Off") } } }</code> とした場合、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">user.isPublic</code> が更新されるとそれを <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Binding</code> で保持する <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Checkbox</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> が再実行されるのではなく、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">user</code> を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> で保持する <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">FooView</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> が再実行されます。その結果として、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Checkbox(isOn: $user.isPublic)</code> が新しい <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">isPublic</code> に対して実行され、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Checkbox</code> が更新されます。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

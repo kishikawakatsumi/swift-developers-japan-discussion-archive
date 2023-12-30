@@ -1,0 +1,58 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1190663045190516878" class="chatlog__message-container" data-message-id="1190663045190516878">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/618622560094912525/56cac09a45bfdb309b10fd655f69f4d0.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" title="xsuiyoku">xsuiyoku</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1190620863565930537')"> こんばんは、swiftuiを久しぶりに触った者です @ObservableはObservableObjectの完全な置き換えで、bindingが必要なところは@Bindableに置き換えるという認識であってますか？ </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1190664993297928212"><span class="chatlog__timestamp" title="Saturday, December 30, 2023 2:29 PM"></span></a><a href="#chatlog__message-container-1190663045190516878">12/30/2023 2:29 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">僕も最初勘違いしていたのですが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Bindable</code> は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Binding</code> の置き換えではありません。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Bindable</code> はProperty WrapperのProjected Value（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$</code> ）を使えるようにするためのものです。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1190663897653465179" class="chatlog__message-container" data-message-id="1190663897653465179">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, December 30, 2023 2:33 PM">2:33 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">たとえば、リファレンス <a href="https://developer.apple.com/documentation/swiftui/bindable">https://developer.apple.com/documentation/swiftui/bindable</a> の例では、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@Observable class Book: Identifiable { var title = "Sample Book Title" var isAvailable = true } struct BookEditView: View { @Bindable var book: Book @Environment(\.dismiss) private var dismiss var body: some View { Form { TextField("Title", text: $book.title) Toggle("Book is available", isOn: $book.isAvailable) Button("Close") { dismiss() } } } }</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">BookEditView</code> 自体においては <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Book</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Bindable</code> である必要はありません。もし <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">book</code> のプロパティが変更されれば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">BookEditView</code> は再レンダリング（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">body</code> が再実行）されますし、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">BookEditView</code> の中で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">book</code> のプロパティを変更すれば、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">BookEditView</code> に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">book</code> を渡した元の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">View</code> 等にも反映されます。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1190664646168948736" class="chatlog__message-container" data-message-id="1190664646168948736">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, December 30, 2023 2:36 PM">2:36 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">しかし、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">TextField("Title", text: $book.title)</code> のように、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">book</code> のプロパティをさらに先の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">View</code> に渡そうとするときに困ります。もし <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">let book: Book</code> だと（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Book</code> はクラスなので、Property Wrapper（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Bindable</code> 等）を使わないのであれば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">var</code> である必要がありません。単に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">let book: Book</code> としても、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@observable</code> なクラスのプロパティの更新は追跡され、再レンダリングされます）、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$</code> を使うことができません。</span> <span class="chatlog__edited-timestamp" title="Saturday, December 30, 2023 2:39 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1190664828319170570" class="chatlog__message-container" data-message-id="1190664828319170570">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, December 30, 2023 2:36 PM">2:36 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">その場合は、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">TextField("Title", text: Binding( get: { book.ttile }, set: { book.title = $0 } ))</code> と書くことになってしまいます。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1190664993297928212" class="chatlog__message-container" data-message-id="1190664993297928212">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, December 30, 2023 2:37 PM">2:37 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これが面倒なので、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$</code> が使えるように <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Bindable</code> を利用します。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
