@@ -16,7 +16,7 @@
     "after": null,
     "before": null
   },
-  "exportedAt": "2024-01-27T15:07:32.9395865+00:00",
+  "exportedAt": "2024-02-03T15:07:51.0883729+00:00",
   "messages": [
     {
       "id": "306246741404155916",
@@ -29070,7 +29070,7 @@
       "attachments": [
         {
           "id": "925991862815309914",
-          "url": "https://cdn.discordapp.com/attachments/306246042817396737/925991862815309914/Screen_Shot_2021-12-30_at_14.58.27.png?ex=65c46e20&is=65b1f920&hm=503d13e029f2ff9029e42a873f4683324eeb3136ab2b8062d8535b061b77338e&",
+          "url": "https://cdn.discordapp.com/attachments/306246042817396737/925991862815309914/Screen_Shot_2021-12-30_at_14.58.27.png?ex=65cda8a0&is=65bb33a0&hm=39e40066f8397338edae0b797b46b0cc9da579873374b266c3168421ad36944b&",
           "fileName": "Screen_Shot_2021-12-30_at_14.58.27.png",
           "fileSizeBytes": 854977
         }
@@ -30011,7 +30011,168 @@
       "stickers": [],
       "reactions": [],
       "mentions": []
+    },
+    {
+      "id": "1201762582638383114",
+      "type": "Default",
+      "timestamp": "2024-01-30T05:35:27.37+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "Docker Desktopで`--platform=linux/amd64`を付けて実行した時に`/proc/self/cmdline`の内容がバグってて、\n```bash\n$ docker run --platform=linux/arm64 alpine cat /proc/self/cmdline|xargs -0 echo\ncat /proc/self/cmdline\n$ docker run --platform=linux/amd64 alpine cat /proc/self/cmdline|xargs -0 echo\n/bin/cat cat /proc/self/cmdline\n```\n`CommandLine.arguments`の取得にそれを利用してるSwift製のバイナリはその影響を受けるので、`swift build`とか動かない。\n```bash\n$ docker run -it -v $PWD:$PWD:rw -w $PWD --platform=linux/amd64 swift swift build\nerror: Unexpected argument '/usr/bin/swift-build'\nUsage: swift build <options>\n  See 'build -help' for more information.\n```\n正規の手順(`argc`,`argv`)?を使ってる場合、影響を受けない。\nhttps://lima-vm.io で立ち上げたdockerだと`/proc/self/cmdline`の内容は少しおかしいけど、Swiftの`CommandLine.arguments`は影響を受けない。\n```bash\n$ docker.lima run --platform=linux/arm64 alpine cat /proc/self/cmdline|xargs -0 echo\ncat /proc/self/cmdline\n$ docker.lima run --platform=linux/amd64 alpine cat /proc/self/cmdline|xargs -0 echo\n/bin/cat /proc/self/cmdline\n```",
+      "author": {
+        "id": "127674083331538944",
+        "name": "norio_nomura",
+        "discriminator": "0000",
+        "nickname": "norio_nomura",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Lima",
+          "url": "https://lima-vm.io/",
+          "timestamp": null,
+          "description": "",
+          "images": [],
+          "fields": []
+        }
+      ],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1201763236370984991",
+      "type": "Default",
+      "timestamp": "2024-01-30T05:38:03.232+00:00",
+      "timestampEdited": "2024-01-30T05:57:09.488+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "issueは上がってるけど未解決のままcloseされてる。\nhttps://github.com/docker/for-mac/issues/7058",
+      "author": {
+        "id": "127674083331538944",
+        "name": "norio_nomura",
+        "discriminator": "0000",
+        "nickname": "norio_nomura",
+        "color": "#9B59B6",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "429988025645137931",
+            "name": "bot-mgr",
+            "color": "#9B59B6",
+            "position": 19
+          },
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [
+        {
+          "title": "Rosetta emulation mishandles /proc//cmdline in 4.25.0 · Issue #7058...",
+          "url": "https://github.com/docker/for-mac/issues/7058",
+          "timestamp": null,
+          "description": "Description After updating to Docker Desktop for Mac 4.25.0, Ubuntu 22.04 images running under Rosetta 2 emulation began to show corrupted /proc/<pid>/cmdline contents. Specifically, the actu...",
+          "color": "#1E2327",
+          "images": [],
+          "fields": []
+        }
+      ],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1201779249669742613",
+      "type": "Default",
+      "timestamp": "2024-01-30T06:41:41.1+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "gwynneさんだ",
+      "author": {
+        "id": "189711109966659584",
+        "name": "omochimetaru",
+        "discriminator": "0000",
+        "nickname": "omochimetaru",
+        "color": "#EDABA1",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "305219738017988608",
+            "name": "admin",
+            "color": "#EDABA1",
+            "position": 23
+          },
+          {
+            "id": "658479157700722709",
+            "name": "Server Booster",
+            "color": "#F47FFF",
+            "position": 14
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
+    },
+    {
+      "id": "1201785856604778506",
+      "type": "Default",
+      "timestamp": "2024-01-30T07:07:56.316+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "`/proc/self/cmdline` じゃなくてcrt0がくれるargvをコンパイラが吐くエントリポイントで保存しておくのが良いのかなぁ。",
+      "author": {
+        "id": "291062140079570944",
+        "name": "kateinoigakukun",
+        "discriminator": "0000",
+        "nickname": "Yuta  Saito",
+        "color": "#F1C40F",
+        "isBot": false,
+        "roles": [
+          {
+            "id": "453733144961744943",
+            "name": "apple-dev",
+            "color": "#F1C40F",
+            "position": 15
+          }
+        ],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": []
     }
   ],
-  "messageCount": 781
+  "messageCount": 785
 }

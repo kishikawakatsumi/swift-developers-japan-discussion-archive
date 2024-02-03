@@ -1,0 +1,49 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1201762582638383114" class="chatlog__message-container" data-message-id="1201762582638383114">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/306246042817396737?category=main&amp;channel=linux-swift&amp;message_id=1201763236370984991"><span class="chatlog__timestamp" title="Tuesday, January 30, 2024 5:35 AM"></span></a><a href="#chatlog__message-container-1201762582638383114">1/30/2024 5:35 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Docker Desktopで<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">--platform=linux/amd64</code>を付けて実行した時に<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">/proc/self/cmdline</code>の内容がバグってて、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-bash">$ docker run --platform=linux/arm64 alpine cat /proc/self/cmdline|xargs -0 echo cat /proc/self/cmdline $ docker run --platform=linux/amd64 alpine cat /proc/self/cmdline|xargs -0 echo /bin/cat cat /proc/self/cmdline</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CommandLine.arguments</code>の取得にそれを利用してるSwift製のバイナリはその影響を受けるので、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift build</code>とか動かない。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-bash">$ docker run -it -v $PWD:$PWD:rw -w $PWD --platform=linux/amd64 swift swift build error: Unexpected argument '/usr/bin/swift-build' Usage: swift build &lt;options&gt; See 'build -help' for more information.</code> 正規の手順(<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">argc</code>,<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">argv</code>)?を使ってる場合、影響を受けない。 <a href="https://lima-vm.io">https://lima-vm.io</a> で立ち上げたdockerだと<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">/proc/self/cmdline</code>の内容は少しおかしいけど、Swiftの<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">CommandLine.arguments</code>は影響を受けない。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-bash">$ docker.lima run --platform=linux/arm64 alpine cat /proc/self/cmdline|xargs -0 echo cat /proc/self/cmdline $ docker.lima run --platform=linux/amd64 alpine cat /proc/self/cmdline|xargs -0 echo /bin/cat /proc/self/cmdline</code></span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://lima-vm.io/">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">Lima</div>
+                  </a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1201763236370984991" class="chatlog__message-container" data-message-id="1201763236370984991">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, January 30, 2024 5:38 AM">5:38 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">issueは上がってるけど未解決のままcloseされてる。 <a href="https://github.com/docker/for-mac/issues/7058">https://github.com/docker/for-mac/issues/7058</a></span> <span class="chatlog__edited-timestamp" title="Tuesday, January 30, 2024 5:57 AM">(edited)</span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/docker/for-mac/issues/7058">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">Rosetta emulation mishandles /proc//cmdline in 4.25.0 · Issue #7058...</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Description After updating to Docker Desktop for Mac 4.25.0, Ubuntu 22.04 images running under Rosetta 2 emulation began to show corrupted /proc/&lt;pid&gt;/cmdline contents. Specifically, the actu...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
