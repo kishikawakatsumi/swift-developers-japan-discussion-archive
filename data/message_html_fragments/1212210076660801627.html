@@ -1,0 +1,71 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1212208910984028171" class="chatlog__message-container" data-message-id="1212208910984028171">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1212211218727833681"><span class="chatlog__timestamp" title="Wednesday, February 28, 2024 1:25 AM"></span></a><a href="#chatlog__message-container-1212208910984028171">2/28/2024 1:25 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">transferring引数: Actorのinitの引数のように、渡された引数がその関数のリージョンに引き渡されるようになる。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1212209358314803210" class="chatlog__message-container" data-message-id="1212209358314803210">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 28, 2024 1:27 AM">1:27 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> let ns = await withCheckedContinuation { continuation in Task { @MainActor in let ns = NonSendable() continuation.resume(returning: ns) } }</code> Region based isolationの元でこれはエラーになるらしい。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ns</code> が MainActor に居るので <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">resume</code> に渡せなくなる。</span> <span class="chatlog__edited-timestamp" title="Wednesday, February 28, 2024 1:27 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1212209585360863302" class="chatlog__message-container" data-message-id="1212209585360863302">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 28, 2024 1:28 AM">1:28 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public struct CheckedContinuation&lt;T, E: Error&gt;: Sendable { public func resume(returning value: transferring T) }</code> こうすることで、渡せるようになる。 ただし、渡した後ろでは使えなくなる。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1212209875258708038" class="chatlog__message-container" data-message-id="1212209875258708038">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 28, 2024 1:29 AM">1:29 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">transferring返り値: 呼び出し側から見て、その値がリージョンから引き剥がされている扱いになる。関数自体の実装の正当性はチェックされる。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@MainActor struct S { let ns: NonSendable func getNonSendable() -&gt; transferring NonSendable { return NonSendable() } } nonisolated func f(s: S) async { let ns = s.getNonSendable() // okay; 'ns' is in a disconnected region }</code></span> <span class="chatlog__edited-timestamp" title="Wednesday, February 28, 2024 1:30 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1212210076660801627" class="chatlog__message-container" data-message-id="1212210076660801627">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 28, 2024 1:30 AM">1:30 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑これはtransferring指定がないと、sのMainActor regionから、let nsに渡せない。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1212211156454740028" class="chatlog__message-container" data-message-id="1212211156454740028">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 28, 2024 1:34 AM">1:34 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">region based isolationが前提の元で、その挙動を調整するための機能って感じかなあ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1212211218727833681" class="chatlog__message-container" data-message-id="1212211218727833681">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 28, 2024 1:34 AM">1:34 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">snapshot版じゃないと試せなそうだ</span></div>
+      </div>
+    </div>
+  </div>
+</div>
