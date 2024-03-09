@@ -1,0 +1,61 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1215513907578540123" class="chatlog__message-container" data-message-id="1215513907578540123">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1215515049800765480"><span class="chatlog__timestamp" title="Friday, March 8, 2024 4:18 AM"></span></a><a href="#chatlog__message-container-1215513907578540123">3/8/2024 4:18 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">variadic generics (type pack) を使っているんですが、コンパイラのバグを踏んだかも？</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1215513942974013550" class="chatlog__message-container" data-message-id="1215513942974013550">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, March 8, 2024 4:18 AM">4:18 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">頑張って最小化しました</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1215513957268197476" class="chatlog__message-container" data-message-id="1215513957268197476">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, March 8, 2024 4:18 AM">4:18 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">protocol Controller { associatedtype Deps typealias Routes = GenericRoutes&lt;Self&gt; } struct Request {} protocol Provider { associatedtype ServiceType func provide(for request: Request) throws -&gt; ServiceType } struct GenericRoutes&lt;C: Controller&gt; { public init&lt;P: Provider&gt;( provider: P ) where P.ServiceType == C.Deps { } } struct VariadicProvider&lt; each T: Provider &gt;: Provider { public typealias ServiceType = (repeat (each T).ServiceType) public init(_ providers: repeat each T) { self.providers = (repeat each providers) } public var providers: (repeat each T) public func provide(for request: Request) throws -&gt; ServiceType { return (repeat try (each providers).provide(for: request)) } } protocol DKey { associatedtype Value } struct Dependencies { func get&lt;K: DKey&gt;(_ key: K) -&gt; K.Value { fatalError() } func forRequest&lt;each K: DKey&gt;( _ keys: repeat each K ) -&gt; VariadicProvider&lt;repeat (each K).Value&gt; { return VariadicProvider&lt;repeat (each K).Value&gt;( repeat self.get(each keys) ) } } struct A {} struct B {} struct C {} struct WController: Controller { typealias Deps = (A, B, C) } struct AP: Provider { func provide(for request: Request) throws -&gt; A { fatalError() } } struct BP: Provider { func provide(for request: Request) throws -&gt; B { fatalError() } } struct CP: Provider { func provide(for request: Request) throws -&gt; C { fatalError() } } struct AK: DKey { typealias Value = AP } extension DKey where Self == AK { static var a: AK { AK() } } struct BK: DKey { typealias Value = BP } extension DKey where Self == BK { static var b: BK { BK() } } struct CK: DKey { typealias Value = CP } extension DKey where Self == CK { static var c: CK { CK() } } func main(d: Dependencies) { let vp1: VariadicProvider&lt;AP, BP, CP&gt; = VariadicProvider( d.get(.a), d.get(.b), d.get(.c) ) let r1 = WController.Routes( provider: vp1 ) // write direct vp let r2 = WController.Routes( provider: VariadicProvider( d.get(.a), d.get(.b), d.get(.c) ) ) // build vp from forRequest let vp3: VariadicProvider&lt;AP, BP, CP&gt; = d.forRequest( .a, .b, .c ) let r3 = WController.Routes( provider: vp3 ) // write direct forRequest let r4 = WController.Routes( provider: d.forRequest( .a, .b, .c ) ) }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1215514002344378408" class="chatlog__message-container" data-message-id="1215514002344378408">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, March 8, 2024 4:18 AM">4:18 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__attachment"><a href="https://cdn.discordapp.com/attachments/291054454793306112/1215514002088529950/2024-03-08_13.17.40.png?ex=65fd06a1&amp;is=65ea91a1&amp;hm=5f0360671512b04a24e505f15fb67f4fa2b0d2bd97522e820e87d382856eb9c8&amp;"> <img class="chatlog__attachment-media" src="https://cdn.discordapp.com/attachments/291054454793306112/1215514002088529950/2024-03-08_13.17.40.png?ex=65fd06a1&amp;is=65ea91a1&amp;hm=5f0360671512b04a24e505f15fb67f4fa2b0d2bd97522e820e87d382856eb9c8&amp;" alt="Image attachment" title="Image: 2024-03-08_13.17.40.png (793.68 KB)" loading="lazy"> </a></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1215514097349824572" class="chatlog__message-container" data-message-id="1215514097349824572">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, March 8, 2024 4:19 AM">4:19 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">r3</code> がコンパイルできるのに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">r4</code> ができないのはおかしいんじゃないかと</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1215515049800765480" class="chatlog__message-container" data-message-id="1215515049800765480">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, March 8, 2024 4:22 AM">4:22 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift 5.9.2 はOKで5.10でエラーになってる・・・ <a href="https://discord.com/channels/291054398077927425/430242233468452865/1215514280141660240" onclick="scrollToMessage(event, '1215514280141660240')">https://discord.com/channels/291054398077927425/430242233468452865/1215514280141660240</a></span></div>
+      </div>
+    </div>
+  </div>
+</div>
