@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1217321086581080194" class="chatlog__message-container" data-message-id="1217321086581080194">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/298037925646565377/2c5f11e0ebd12319d641e006940b1b63.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="we_channel" data-user-id="298037925646565377">We</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1217321086581080194"><span class="chatlog__timestamp" title="Wednesday, March 13, 2024 3:59 AM"></span></a><a href="#chatlog__message-container-1217321086581080194">3/13/2024 3:59 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">以下コードがエラーになる理由がよく分からないです。 どう見てもEncodableに準拠しているように見えるのですが... <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct Foo: Encodable { // Type 'Foo' does not conform to protocol 'Encodable' let value: Encodable }</code> encodeを実装したら解消しましたが、これも理由が説明できず。 やりたいことは実現でましたがモヤモヤしています。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct Foo: Encodable { let value: Encodable enum CodingKeys: String, CodingKey { case value } func encode(to encoder: Encoder) throws { var container = encoder.container(keyedBy: CodingKeys.self) try container.encode(value, forKey: .value) } } let data = try! JSONEncoder().encode([Foo(value: 10), Foo(value: "bar")]) let json = String(data: data, encoding: .utf8)! // [{"value":10},{"value":"bar"}]</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
