@@ -1,0 +1,17 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1226350323690635274" class="chatlog__message-container" data-message-id="1226350323690635274">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(237,171,161)" title="omochimetaru">omochimetaru</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1226305777837543464')"> <span class="chatlog__markdown-mention" title="kateinoigakukun">@Yuta Saito</span> JavaScriptKitのJSClosure型なんですけど、 is JSObjectだけど、is JSFunctionではないのが変な感じがします 1. 「呼び出せる型で共通化して受け取って呼び出す」コードが書けない 2. JSClosure.jsValueをJSObject.constructに渡すとJSObject型になり、JSFunction.constructに渡すと失敗する 3. JSClosureを一度JSに渡してから取り出して作ったJSValueではJSFunctionになっている。これは2と矛盾する。 <s>まだ実行してないけどこうなってるようにみえる</s> </span> <span class="chatlog__reply-edited-timestamp" title="Sunday, April 7, 2024 1:57 AM">(edited)</span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1226350323690635274"><span class="chatlog__timestamp" title="Sunday, April 7, 2024 1:58 AM"></span></a><a href="#chatlog__message-container-1226350323690635274">4/7/2024 1:58 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">自動テストで確認した。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class JavaScriptKitTests: XCTestCase { func testClosureAsFunction() throws { let clo = JSClosure { (_) in return 7.jsValue } let obj = try JSObject.mustConstruct(from: clo.jsValue) XCTAssertFalse(obj is JSFunction) let fn = clo.asFunction() let ret = try Int.mustConstruct(from: try fn()) XCTAssertEqual(ret, 7) } } extension JSClosure { #if USES_JAVASCRIPT_KIT_MOCK public func asFunction() -&gt; JSThrowingFunction { let fn = native as! JSNativeFunction return JSFunction(native: fn).throws } #else public func asFunction() -&gt; JSThrowingFunction { var buffer: JSValue = Array&lt;Int&gt;([0]).jsValue buffer[0] = self.jsValue let fn = JSFunction.unsafeConstruct(from: buffer[0]) return fn.throws } #endif }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
