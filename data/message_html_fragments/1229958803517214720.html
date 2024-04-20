@@ -1,0 +1,41 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1229958154901520394" class="chatlog__message-container" data-message-id="1229958154901520394">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1229958883103998087"><span class="chatlog__timestamp" title="Wednesday, April 17, 2024 12:54 AM"></span></a><a href="#chatlog__message-container-1229958154901520394">4/17/2024 12:54 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-sh">swift build --experimental-swift-sdk wasm32-unknown-wasi \ --build-tests \ -Xswiftc -static-stdlib \ -Xswiftc -Xclang-linker -Xswiftc -mexec-model=reactor \ -Xlinker --export-if-defined=__main_argc_argv \ --disable-build-manifest-caching \ -Xlinker --stack-first \ -Xlinker --global-base=1048576 \ -Xlinker -z -Xlinker stack-size=1048576</code> この辺のパラメータ、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Xswiftc</code> とか <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Xlinker</code> は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Package.swift</code> に書くことができるけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">--experimental-swift-sdk wasm32-unknown-wasi</code> は書けないですよね？</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1229958371591983136" class="chatlog__message-container" data-message-id="1229958371591983136">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, April 17, 2024 12:55 AM">12:55 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">適切なsdkを選ぶのは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$ swift build</code> を使う人の責任、という設計は正しいんだろうか？ これwasmというよりswiftpm cliの設計の話かな</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1229958803517214720" class="chatlog__message-container" data-message-id="1229958803517214720">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, April 17, 2024 12:57 AM">12:57 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">例えばSwiftPM Packageとして iOSアプリを作るとして（できないけど）</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1229958883103998087" class="chatlog__message-container" data-message-id="1229958883103998087">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, April 17, 2024 12:57 AM">12:57 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">パッケージが対象とするプラットフォームはもう決まってるから、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Package.swift</code> で宣言できるのが正しい気がする</span></div>
+      </div>
+    </div>
+  </div>
+</div>
