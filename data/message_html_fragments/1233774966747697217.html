@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1233774966747697217" class="chatlog__message-container" data-message-id="1233774966747697217">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/499393715140558881?category=コミュニティ&amp;channel=swift-zoomin&amp;message_id=1233774966747697217"><span class="chatlog__timestamp" title="Saturday, April 27, 2024 1:41 PM"></span></a><a href="#chatlog__message-container-1233774966747697217">4/27/2024 1:41 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">//let a: Result&lt;Int, any Error&gt; = .success(2) //let b: Result&lt;Int, any Error&gt; = .success(3) // //func foo() throws -&gt; Int //func foo() -&gt; Result&lt;Int, any Error&gt; // //let sum: Result&lt;Int, any Error&gt; = a.flatMap { a in // b.flatMap { b in // .success(a + b) // } //} // //print(sum) let a: Task&lt;Int, Never&gt; = .init { return 2 } let b: Task&lt;Int, Never&gt; = .init { return 3 } extension Task where Failure == Never { func map&lt;T&gt;(_ body: @escaping (Success) -&gt; T) -&gt; Task&lt;T, Never&gt; { Task&lt;T, Never&gt; { body(await value) } } func flatMap&lt;T&gt;(_ body: @escaping (Success) -&gt; Task&lt;T, Never&gt;) -&gt; Task&lt;T, Never&gt; { Task&lt;T, Never&gt; { await body(await value).value } } } let square: Task&lt;Int, Never&gt; = b.map { $0 * $0 } print(await square.value) let sum: Task&lt;Int, Never&gt; = a.flatMap { a in b.map { b in a + b } } print(await sum.value)</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

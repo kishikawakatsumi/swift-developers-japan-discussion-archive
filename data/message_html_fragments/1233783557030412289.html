@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1233783066623737918" class="chatlog__message-container" data-message-id="1233783066623737918">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/499393715140558881?category=コミュニティ&amp;channel=swift-zoomin&amp;message_id=1233783557030412289"><span class="chatlog__timestamp" title="Saturday, April 27, 2024 2:13 PM"></span></a><a href="#chatlog__message-container-1233783066623737918">4/27/2024 2:13 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">enum FooError: Error { case bar case baz(Int) } func foo(_ x: Int) throws(FooError) -&gt; Int { if Bool.random() { throw .bar } return x * x } //func foo() throws -&gt; Int { // 42 //} extension Array { // func myMap&lt;T&gt;(_ transform: (Element) throws -&gt; T) rethrows -&gt; [T] { // var result: [T] = [] // for element in self { // result.append(try transform(element)) // } // return result // } func myMap&lt;T, E: Error&gt;(_ transform: (Element) throws(E) -&gt; T) throws(E) -&gt; [T] { var result: [T] = [] for element in self { result.append(try transform(element)) } return result } } let array = [2, 3, 5] print(array.myMap { $0 * $0 }) do { print(try array.myMap { try foo($0) }) } catch { print(error) } func main() { // do throws(FooError) { // print(try foo()) // _ = try foo() // } catch { // switch error { // case .bar: // print("bar") // case .baz(let x): // print("baz: \(x)") // } // } } let result: Result&lt;Int, FooError&gt; = .failure(.bar) do { try result.get() } catch { print(error) }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1233783557030412289" class="chatlog__message-container" data-message-id="1233783557030412289">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 27, 2024 2:15 PM">2:15 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">enum FooError: Error { case bar case baz(Int) } func foo(_ x: Int) async throws(FooError) -&gt; Int { if Bool.random() { throw .bar } return x * x } Task { async let x = foo(3) do { print(try await x) } catch { print(error) } }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

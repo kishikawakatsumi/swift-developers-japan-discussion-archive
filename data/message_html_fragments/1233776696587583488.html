@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1233776696587583488" class="chatlog__message-container" data-message-id="1233776696587583488">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/499393715140558881?category=コミュニティ&amp;channel=swift-zoomin&amp;message_id=1233778108599894046"><span class="chatlog__timestamp" title="Saturday, April 27, 2024 1:48 PM"></span></a><a href="#chatlog__message-container-1233776696587583488">4/27/2024 1:48 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">enum FooError: Error { case bar case baz(Int) } func foo() throws(FooError) -&gt; Int { if Bool.random() { return 42 } else { throw .bar } } func main() { do { print(try foo()) } catch { switch error { case .bar: print("bar") case .baz(let x): print("baz: \(x)") } } } func main() { do { print(try foo()) } catch .bar { print("bar)") } catch .baz(let x) { print("baz: \(x)") } catch { preconditionFailure("Never reaches here.") } } main()</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1233777388412862556" class="chatlog__message-container" data-message-id="1233777388412862556">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 27, 2024 1:50 PM">1:50 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// 複数のエラー型をthrowするとき enum FooError: Error { case bar case baz(Int) } enum BarError: Error {} func foo() throws(FooError) -&gt; Int { if Bool.random() { return 42 } else { throw .bar } } func bar() throws(BarError) { } func main() { do { print(try foo()) try bar() } catch let error as FooError { print("foo: \(error)") } catch let error as BarError { print("bar: \(error)") } catch { preconditionFailure("Never reaches here.") } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1233778108599894046" class="chatlog__message-container" data-message-id="1233778108599894046">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 27, 2024 1:53 PM">1:53 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">enum FooError: Error { case bar case baz(Int) } enum BarError: Error {} func foo() throws(FooError) -&gt; Int { if Bool.random() { return 42 } else { throw .bar } } func bar() throws(BarError) { } func main() { do throws(FooError) { print(try foo()) _ = try foo() } catch { switch error { case .bar: print("bar") case .baz(let x): print("baz: \(x)") } } }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
