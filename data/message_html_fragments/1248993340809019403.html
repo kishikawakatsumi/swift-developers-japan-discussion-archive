@@ -1,0 +1,87 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1248991558074892289" class="chatlog__message-container" data-message-id="1248991558074892289">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(241,196,15)" title="kateinoigakukun">Yuta Saito</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1248990934608379944')"> これまでビルド済みのバイナリを配布してたので、「ホストのコンパイラ」というのがそもそもcartonから見えてなかった（無いかもしれない。特にLinuxで。）SwiftPMのプラグインにしたことで常に「ホストのコンパイラ」が存在するようになった </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1248993340809019403"><span class="chatlog__timestamp" title="Saturday, June 8, 2024 1:26 PM"></span></a><a href="#chatlog__message-container-1248991558074892289">6/8/2024 1:26 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">確かにややこしい。cartonがSwiftを用意しようとしてるのに、そのSwiftのバージョンを判定しようとしてる。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1248991684717580299" class="chatlog__message-container" data-message-id="1248991684717580299">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, June 8, 2024 1:27 PM">1:27 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でもシンプルに <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">carton-driver</code> が実行された時に、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">PATH</code> から見える <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift</code> を基準にしてもいい気がするけど</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1248991915089592351" class="chatlog__message-container" data-message-id="1248991915089592351">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, June 8, 2024 1:27 PM">1:27 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちょうどさっき手元で試したんだけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">#if compiler(&gt;=6.0) #error("6.0") #elseif compiler(&gt;=5.10) #error("5.10") #elseif compiler(&gt;=5.9) #error("5.9") #endif</code> これで、目の前の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$ swift</code> のバージョンを判定するのはうまくいきそうだった ( <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$ swift --version</code> をパースするのはちょっと怪しさがある気がしている )</span> <span class="chatlog__edited-timestamp" title="Saturday, June 8, 2024 1:30 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1248992353616789524" class="chatlog__message-container" data-message-id="1248992353616789524">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, June 8, 2024 1:29 PM">1:29 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">「1. cartonコンパイル時のswift」だと、パッケージで入れた時はうまくいくけど、 「2. carton-driver実行にみつけたswift」にすれば、パッケージの場合もうまく行くし、carton driverをマシンレベルでインストールしてる環境でもうまく動く</span> <span class="chatlog__edited-timestamp" title="Saturday, June 8, 2024 1:31 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1248992418930495488" class="chatlog__message-container" data-message-id="1248992418930495488">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, June 8, 2024 1:29 PM">1:29 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ので、後者の方が良さそうな気がするけど、どうでしょうか</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1248993068334448721" class="chatlog__message-container" data-message-id="1248993068334448721">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, June 8, 2024 1:32 PM">1:32 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いや、 1. でも別にそう困ることは無い気はするな・・・ 結局マシン環境で見つかる <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">$ swift</code> は原則一つなので</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1248993216309628969" class="chatlog__message-container" data-message-id="1248993216309628969">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, June 8, 2024 1:33 PM">1:33 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">export TOOLCHAINS</code> で切り替えた時に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">carton-driver</code> はそのまんま同じマシンインストール版を使っていてもうまく切り替わるみたいな事か</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1248993340809019403" class="chatlog__message-container" data-message-id="1248993340809019403">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, June 8, 2024 1:33 PM">1:33 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">俺が色々開発上で生じるややこしい状況を考えてるだけで一般ユーザには不要な混乱をもたらすだけか？</span> <span class="chatlog__edited-timestamp" title="Saturday, June 8, 2024 1:33 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

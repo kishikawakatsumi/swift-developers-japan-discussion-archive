@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1242136745630240910" class="chatlog__message-container" data-message-id="1242136745630240910">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291062140079570944/75d22639a88c37be90cb60118acb7df5.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kateinoigakukun" data-user-id="291062140079570944">Yuta Saito</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1242136844456431700"><span class="chatlog__timestamp" title="Monday, May 20, 2024 3:27 PM"></span></a><a href="#chatlog__message-container-1242136745630240910">5/20/2024 3:27 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちょうどパッチを書いちゃった</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1242136769164738680" class="chatlog__message-container" data-message-id="1242136769164738680">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, May 20, 2024 3:28 PM">3:28 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-diff">diff --git a/Sources/CartonKit/Server/ServerHTTPHandler.swift b/Sources/CartonKit/Server/ServerHTTPHandler.swift index 87c72de..0f7c494 100644 --- a/Sources/CartonKit/Server/ServerHTTPHandler.swift +++ b/Sources/CartonKit/Server/ServerHTTPHandler.swift @@ -71,6 +71,11 @@ final class ServerHTTPHandler: ChannelInboundHandler, RemovableChannelHandler { bytes: localFileSystem.readFileContents(configuration.mainWasmPath).contents ) ) + case "/" + configuration.entrypoint.fileName: + response = StaticResponse( + contentType: "application/javascript", + body: ByteBuffer(bytes: configuration.entrypoint.content.contents) + ) default: guard let staticResponse = try self.respond(context: context, head: head) else { self.respond404(context: context) @@ -111,13 +116,7 @@ final class ServerHTTPHandler: ChannelInboundHandler, RemovableChannelHandler { private func respond(context: ChannelHandlerContext, head: HTTPRequestHead) throws -&gt; StaticResponse? { - var responders = [ - self.makeStaticResourcesResponder( - baseDirectory: FileManager.default.homeDirectoryForCurrentUser - .appendingPathComponent(".carton") - .appendingPathComponent("static") - ) - ] + var responders: [(_ context: ChannelHandlerContext, _ uri: String) throws -&gt; StaticResponse?] = [] let buildDirectory = configuration.mainWasmPath.parentDirectory for directoryName in try localFileSystem.resourcesDirectoryNames(relativeTo: buildDirectory) {</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1242136844456431700" class="chatlog__message-container" data-message-id="1242136844456431700">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, May 20, 2024 3:28 PM">3:28 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">テストケースと一緒にコミットしてもらうのが良いかも</span></div>
+      </div>
+    </div>
+  </div>
+</div>
