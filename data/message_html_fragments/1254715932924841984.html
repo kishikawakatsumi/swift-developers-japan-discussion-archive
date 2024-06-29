@@ -1,0 +1,30 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1254715932924841984" class="chatlog__message-container" data-message-id="1254715932924841984">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/387843027072188417/47c96b35135f39a117c2d3e88950c7ab.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(17,128,106)" title="koher">koher</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1249536908791386193')"> 某所で話してたのは↓ですね。 <div class="chatlog__markdown-quote">
+                <div class="chatlog__markdown-quote-border"></div>
+                <div class="chatlog__markdown-quote-content">Repositoryがオンメモリキャッシュを扱うかどうかに関わらず、僕はSingle source of truthとなる状態を扱うMainActorを設けるようにしています。より具体的には、Repository - Store - (ViewModel) - Viewという構造にしていて、Viewを超えて保持する状態を（MainActorである）Storeで保持しています。ViewModel（またはViewModelを省略してViewの状態や変更をViewが直接扱う場合はView）がStoreに対してデータの更新を要求すると、Storeは必要に応じてRepositoryを介してデータを取得し、自身の状態（<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@Published</code>なプロパティ）を更新する形です。 Repositoryはあくまでデータアクセスを抽象化するためのものなので、キャッシュの有無は外から不可知なのが良いかと思います。なので、たとえRepositoryがオンメモリキャッシュを持っていてもStoreに相当するものは必要だと思いますし（Repositoryのキャッシュは状態を扱っているわけではないと思うので）、Store的なものがあればそれをMainActorにすることでUI（ViewまたはViewModel）から同期的にアクセスすることができます。</div>
+              </div> </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kuniwak" data-user-id="387843027072188417">Kuniwak</span> <a href="/channels/346503087256502274?category=開発以外&amp;channel=zatsu&amp;message_id=1254716105919037502"><span class="chatlog__timestamp" title="Monday, June 24, 2024 8:33 AM"></span></a><a href="#chatlog__message-container-1254715932924841984">6/24/2024 8:33 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">結局、CurrentValueSubject を Actor にしたもの（ConcurrentValueSubject）をさらに wrap して state を射影するくん（ProjectedValueSubject）を作って、これを ObservableObject に準拠させるくん（ViewBinding）を作ってことなきを得ました。 ConcurrentValueSubject: <a href="https://github.com/Kuniwak/BLEMacroApp/blob/7756662301f809b10926c3f0466a160cca6866de/Packages/Package/Sources/ConcurrentCombine/ConcurrentValueSubject.swift">https://github.com/Kuniwak/BLEMacroApp/blob/7756662301f809b10926c3f0466a160cca6866de/Packages/Package/Sources/ConcurrentCombine/ConcurrentValueSubject.swift</a> ProjectedValueSubject: <a href="https://github.com/Kuniwak/BLEMacroApp/blob/7756662301f809b10926c3f0466a160cca6866de/Packages/Package/Sources/ConcurrentCombine/ProjectedValueSubject.swift">https://github.com/Kuniwak/BLEMacroApp/blob/7756662301f809b10926c3f0466a160cca6866de/Packages/Package/Sources/ConcurrentCombine/ProjectedValueSubject.swift</a> ViewBinding: <a href="https://github.com/Kuniwak/BLEMacroApp/blob/7756662301f809b10926c3f0466a160cca6866de/Packages/Package/Sources/ViewFoundation/ViewBinding.swift">https://github.com/Kuniwak/BLEMacroApp/blob/7756662301f809b10926c3f0466a160cca6866de/Packages/Package/Sources/ViewFoundation/ViewBinding.swift</a></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1254716105919037502" class="chatlog__message-container" data-message-id="1254716105919037502">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, June 24, 2024 8:33 AM">8:33 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Model の世界では ProjectedValueSubject までしか知らなくて、View の世界から ViewBinding が登場するという設計です</span></div>
+      </div>
+    </div>
+  </div>
+</div>
