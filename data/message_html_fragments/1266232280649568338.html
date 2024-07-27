@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1266231121801253034" class="chatlog__message-container" data-message-id="1266231121801253034">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/430242233468452865?category=main&amp;channel=swiftbot-sandbox&amp;message_id=1266232280649568338"><span class="chatlog__timestamp" title="Friday, July 26, 2024 3:10 AM"></span></a><a href="#chatlog__message-container-1266231121801253034">7/26/2024 3:10 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">linux版だとオプションの位置に関係なく出ないぽい。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-console">$ pbpaste|swift -strict-concurrency=complete - &lt;stdin&gt;:8:13: warning: sending 'self'-isolated value of type 'S' with later accesses to actor-isolated context risks causing data races; this is an error in the Swift 6 language mode 6 | 7 | func main(a: A) async { 8 | await a.foo() | `- warning: sending 'self'-isolated value of type 'S' with later accesses to actor-isolated context risks causing data races; this is an error in the Swift 6 language mode 9 | } $ pbpaste|docker run --rm swiftlang/swift:nightly swift -strict-concurrency=complete - $ pbpaste|docker run --rm swiftlang/swift:nightly-6.0-jammy swift -strict-concurrency=complete - $ pbpaste|docker run --rm swift swift -strict-concurrency=complete -</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1266232280649568338" class="chatlog__message-container" data-message-id="1266232280649568338">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, July 26, 2024 3:15 AM">3:15 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">linux版nightlyだと、標準入力じゃなくても出ない。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-console">$ docker run -it --rm swiftlang/swift:nightly ################################################################ # # # Swift Nightly Docker Image # # Tag: swift-DEVELOPMENT-SNAPSHOT-2024-07-22-a # # # ################################################################ root@6db06d8b9690:/# echo 'struct S: Sendable {} actor A { func foo(e: S = S()) {} } func main(a: A) async { await a.foo() }'&gt;a.swift root@6db06d8b9690:/# swift -strict-concurrency=complete a.swift root@6db06d8b9690:/# swift -version Swift version 6.0-dev (LLVM 3427f33b53c666b, Swift c21a3a974d40e14) Target: aarch64-unknown-linux-gnu</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
