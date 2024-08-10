@@ -1,0 +1,41 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1271417854503288832" class="chatlog__message-container" data-message-id="1271417854503288832">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/357858243869016065/afb20eab67082201bd227d98d3fb7596.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="kntk" data-user-id="357858243869016065">kntk</span> <a href="/channels/430242233468452865?category=main&amp;channel=swiftbot-sandbox&amp;message_id=1271419391333892129"><span class="chatlog__timestamp" title="Friday, August 9, 2024 10:40 AM"></span></a><a href="#chatlog__message-container-1271417854503288832">8/9/2024 10:40 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SEで該当するサンプルコードはこれですかね disconnected-&gt;task-isolated-&gt;disconnected <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0414-region-based-isolation.md#weak-transfers-nonisolated-functions-and-disconnected-isolation-regions">https://github.com/swiftlang/swift-evolution/blob/main/proposals/0414-region-based-isolation.md#weak-transfers-nonisolated-functions-and-disconnected-isolation-regions</a>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func nonIsolatedCallee(_ x: NonSendable) async { ... } func useValue(_ x: NonSendable) { ... } @MainActor func transferToMainActor&lt;T&gt;(_ t: T) { ... } actor MyActor { var state: NonSendable func example() async { // Regions: [{(), self}] let x = NonSendable() // Regions: [(x), {(), self}] // While nonIsolatedCallee executes the regions are: // Regions: [{(x), Task}, {(), self}] await nonIsolatedCallee(x) // Once it has finished executing, 'x' is disconnected again // Regions: [(x), {(), self}] // 'x' can be used since it is disconnected again. useValue(x) // (1) // 'x' can be transferred since it is disconnected again. await transferToMainActor(x) // (2) // Error! After transferring to main actor, permanently // in main actor, so we can't use it. useValue(x) // (3) } }</code></span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0414-region-based-isolation.md">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">swift-evolution/proposals/0414-region-based-isolation.md at main · ...</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">This maintains proposals for changes and user-visible enhancements to the Swift Programming Language. - swiftlang/swift-evolution</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/SfpUm9t91ozVxQKHRBYX7EO4CEzcMnnRp30CYzgic_g/https/opengraph.githubassets.com/ea51632a7ab465f5827e98ed0654ee87abdd883800253a2c2c1049d6a83d9d4f/swiftlang/swift-evolution"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/SfpUm9t91ozVxQKHRBYX7EO4CEzcMnnRp30CYzgic_g/https/opengraph.githubassets.com/ea51632a7ab465f5827e98ed0654ee87abdd883800253a2c2c1049d6a83d9d4f/swiftlang/swift-evolution" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1271419391333892129" class="chatlog__message-container" data-message-id="1271419391333892129">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, August 9, 2024 10:46 AM">10:46 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Repository.doSomething内でselfがtask-isolatedになっていて task-isolatedは他のtask-isolatedにもactor-isolatedにも結合できないルールによって守られているので、呼び出し終了後にdisconnectedに戻せる、って感じでしょうか</span></div>
+      </div>
+    </div>
+  </div>
+</div>
