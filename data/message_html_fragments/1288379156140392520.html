@@ -1,0 +1,32 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288378857384181801" class="chatlog__message-container" data-message-id="1288378857384181801">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288379156140392520"><span class="chatlog__timestamp" title="Wednesday, September 25, 2024 5:57 AM"></span></a><a href="#chatlog__message-container-1288378857384181801">9/25/2024 5:57 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓も（現状で）ダメなのか・・・。これなんでダメなんですっけ？actor context引き継いでたら <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> にキャプチャされてもデータ競合起こさないと思うんですが。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class Foo { var value: Int = 0 }</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">actor Bar { func useFoo(foo: sending Foo) { Task { foo.value += 1 } foo.value += 1 } }</code></span> <span class="chatlog__edited-timestamp" title="Wednesday, September 25, 2024 5:59 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288379038662135860" class="chatlog__message-container" data-message-id="1288379038662135860">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 5:58 AM">5:58 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code> ばっか使ってるから、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">actor</code> でもできると思ってた。↓は通る。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">@MainActor func useFooMain(foo: sending Foo) { Task { foo.value += 1 } foo.value += 1 }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288379156140392520" class="chatlog__message-container" data-message-id="1288379156140392520">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 5:58 AM">5:58 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">actor</code> のメソッドでもダメなので、↓も当然ダメ。これも安全に思うけど。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func useFoo&lt;A: Actor&gt;(actor: isolated A, foo: sending Foo) { Task { foo.value += 1 } foo.value += 1 }</code></span> <span class="chatlog__edited-timestamp" title="Wednesday, September 25, 2024 6:00 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

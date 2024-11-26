@@ -1,0 +1,90 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1296731449495654422" class="chatlog__message-container" data-message-id="1296731449495654422">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1296732210438864907"><span class="chatlog__timestamp" title="Friday, October 18, 2024 7:07 AM"></span></a><a href="#chatlog__message-container-1296731449495654422">10/18/2024 7:07 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://github.com/swiftlang/swift-foundation/pull/988">https://github.com/swiftlang/swift-foundation/pull/988</a></span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/swiftlang/swift-foundation/pull/988">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">URL: Appending to an empty file path results in an absolute path by...</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">When appending path to a URL with an empty relative path, the current code does: &amp;quot;&amp;quot; + &amp;quot;/&amp;quot; + path. This is problematic because it makes the relative path absolute...</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/SeRFBda62qJwsqolA9zefX7c_lqfcgyIZ3f36WocQhQ/https/opengraph.githubassets.com/30e75b4ed73ecd417a4296dd29bf47ed43fe435cc5f6cc4cbb60c388ac06457b/swiftlang/swift-foundation/pull/988"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/SeRFBda62qJwsqolA9zefX7c_lqfcgyIZ3f36WocQhQ/https/opengraph.githubassets.com/30e75b4ed73ecd417a4296dd29bf47ed43fe435cc5f6cc4cbb60c388ac06457b/swiftlang/swift-foundation/pull/988" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1296731511994843139" class="chatlog__message-container" data-message-id="1296731511994843139">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, October 18, 2024 7:08 AM">7:08 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift-foundation.URL</code> の挙動がおかしいやつ一個直された</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="tada"><img class="chatlog__emoji chatlog__emoji--small" alt="🎉" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f389.svg" loading="lazy"> <span class="chatlog__reaction-count">3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1296731644820066385" class="chatlog__message-container" data-message-id="1296731644820066385">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, October 18, 2024 7:08 AM">7:08 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">新しく <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">testURLAppendingToEmptyPath</code> というテストケースも追加されて安心</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1296731775468568588" class="chatlog__message-container" data-message-id="1296731775468568588">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, October 18, 2024 7:09 AM">7:09 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> let emptyPathURL = URL(filePath: "", relativeTo: baseURL) let url = emptyPathURL.appending(path: "main.swift") // New behavior keeps the path relative without needing to insert "." checkBehavior(url.relativePath, new: "main.swift", old: "./main.swift")</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1296731823119794257" class="chatlog__message-container" data-message-id="1296731823119794257">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, October 18, 2024 7:09 AM">7:09 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ただ必ずしも完全な互換性を維持するつもりはそもそもないっぽい</span> <span class="chatlog__edited-timestamp" title="Friday, October 18, 2024 7:11 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1296731933492908072" class="chatlog__message-container" data-message-id="1296731933492908072">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, October 18, 2024 7:09 AM">7:09 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">checkBehavior</code> は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">new:</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift-foundation</code> で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">old:</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Foundation.framework</code> のexpectを書く不思議なテスト関数</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1296732210438864907" class="chatlog__message-container" data-message-id="1296732210438864907">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, October 18, 2024 7:10 AM">7:10 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">./main.swift</code> にならなくても <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">main.swift</code> でいいのはそうだから、いいけど。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

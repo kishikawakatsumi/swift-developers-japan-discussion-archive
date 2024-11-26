@@ -1,0 +1,27 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288478863885864981" class="chatlog__message-container" data-message-id="1288478863885864981">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(237,171,161)" title="omochimetaru">omochimetaru</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1288442983670091826')"> このバッティングよくわからなかったので、順を追った説明がほしい </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288479703211966605"><span class="chatlog__timestamp" title="Wednesday, September 25, 2024 12:34 PM"></span></a><a href="#chatlog__message-container-1288478863885864981">9/25/2024 12:34 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">1. 現状の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@_inheritActorContext</code> はglobal actor以外<s>のcontextは暗黙的は引き継がない</s>はnon-<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Sendable</code>な値を暗黙的にキャプチャできない 2. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@inheritsIsolation</code> が提案されていて（すでにマージされてて使える）、それに変わると暗黙的に<s>引き継がれる</s>キャプチャできるようになる 3. そうすると、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">async func</code> に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">isolated</code> 引数でactorを指定した場合も <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> <s>はcontextを引き継ぐ</s>で暗黙的キャプチャできる 4. 新しい <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nonisolated async func</code> の提案が暗黙の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">isolated</code> 引数を仕込むのなら、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> が<s>contextを引き継がない</s>暗黙的キャプチャできないとおかしくない？ って話。Proposalには引き継がないと書かれてるのでバッティング。でも、実際には仕込まれる暗黙の引数は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Optional</code> だから（おそらくactorの外から呼ばれた時は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nil</code> になる）引き継がなくて正しそう。</span> <span class="chatlog__edited-timestamp" title="Thursday, September 26, 2024 1:40 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288479703211966605" class="chatlog__message-container" data-message-id="1288479703211966605">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 12:38 PM">12:38 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ただ、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code>-isolated な場合もcontext（というかisolation domain）を引き継ぐようにして（加えて、エントリーポイントから必ず <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> 上で実行されることを保証することで常にいずれかのisolation domainに属することを保証して）暗黙の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">isolated</code> 引数を非Optionalにした方がすっきりするんじゃないかというのが個人的な意見です。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

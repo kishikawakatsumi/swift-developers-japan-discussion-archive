@@ -1,0 +1,37 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288489792291471411" class="chatlog__message-container" data-message-id="1288489792291471411">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(237,171,161)" title="omochimetaru">omochimetaru</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1288487533889585162')"> なるほど。3まではOKで、4は別に決めの問題で、旧inheritActorContextやinheritsIsolationはあくまで静的に見えるシグネチャとしての場合での引き継ぎだと捉えれば、暗黙のisolatedを引き継がないのは特に問題が無いと思います。ただまあ引き継ぐ方に直すのでもフィールとして一貫性は取れるとは思います。 <div class="chatlog__markdown-quote">
+                <div class="chatlog__markdown-quote-border"></div>
+                <div class="chatlog__markdown-quote-content">おそらくactorの外から呼ばれた時は nil になる </div>
+              </div>これは関係なくないですか？ この提案の元でもnonisolated funcの中でTask.initした場合、呼び出し元がnil actorの場合にはどうせ直列化できないから、いずれにしても静的には並行だとして実装する必要がある。 つまり、inheritActorContextはもともとから、「いつでも直列にできる」ものではないですよね。静的にactor isolateサれている場合だけ直列になるものだった。 それとも、いつでも直列にできるものになったらいいな、という事？ <div class="chatlog__markdown-quote">
+                <div class="chatlog__markdown-quote-border"></div>
+                <div class="chatlog__markdown-quote-content">Task-isolated な場合もcontext（というかisolation domain）を引き継ぐようにして </div>
+              </div>これって、actor isolatedではない普通の状況で、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> したらそこから並列な実行フローが生える、という一番素朴な仕様を捨ててしまうので変だと思います。 <div class="chatlog__markdown-quote">
+                <div class="chatlog__markdown-quote-border"></div>
+                <div class="chatlog__markdown-quote-content">常にいずれかのisolation domainに属することを保証して </div>
+              </div>スレッドをSwift Runtimeの外で立ち上げてそこから呼び出されてくるパターンが残るので根本的に不可能に思います。 </span> <span class="chatlog__reply-edited-timestamp" title="Wednesday, September 25, 2024 1:10 PM">(edited)</span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288489792291471411"><span class="chatlog__timestamp" title="Wednesday, September 25, 2024 1:18 PM"></span></a><a href="#chatlog__message-container-1288489792291471411">9/25/2024 1:18 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">それとも、いつでも直列にできるものになったらいいな、という事？ </div>
+            </div>はい、そうです。Swiftのコードはすべて何らかのisolation domainに所属した状態で実行されているようになれば、それが実現可能だろうと考えています。現状ではそうなっていないから <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Optional</code> になってるんだろうと。 で、そうだとすると、 <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">これって、actor isolatedではない普通の状況で、Task.init したらそこから並列な実行フローが生える、という一番素朴な仕様を捨ててしまうので変だと思います。 </div>
+            </div>は、actor isolatedでなくてもisolation domainを引き継ぐ&amp;常にisoladion domainに属するなら問題ないはず。現に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@main</code> でも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code>-isolatedだし。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nonisolated func</code> は呼び出し元のisolation domainを引き継ぎ、常にisolation domainに属しているなら可能なはず。 <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">スレッドをSwift Runtimeの外で立ち上げてそこから呼び出されてくるパターンが残るので根本的に不可能に思います。 </div>
+            </div>これは、Swiftに再突入した時点で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> に入れられないかなぁ。同期的に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> に入ることができないといけないけど・・・
+          </span></div>
+      </div>
+    </div>
+  </div>
+</div>

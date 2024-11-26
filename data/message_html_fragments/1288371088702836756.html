@@ -1,0 +1,52 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288370032728080404" class="chatlog__message-container" data-message-id="1288370032728080404">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(237,171,161)" title="omochimetaru">omochimetaru</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1288353957575659604')"> Actor isolatedな場合: 同じ Actor instance を持つ Task が同じisolation domainにいる not Actor isolatedな場合: Taskごとに独立なisolation domainにいる </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288371272941568012"><span class="chatlog__timestamp" title="Wednesday, September 25, 2024 5:22 AM"></span></a><a href="#chatlog__message-container-1288370032728080404">9/25/2024 5:22 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> でcontextを引き継げば、actor関係なく <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> インスタンス同士でもisolation domainを共有すると思うんですよね。なので、actorに紐付けられてない<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code>を考えるよりも、基本的に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> はインスタンスごとにisolation domainを持つけど、isolation domainを引き継いだ場合はその限りではないという整理の方がわかりやすいかなと。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288370949195960381" class="chatlog__message-container" data-message-id="1288370949195960381">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 5:26 AM">5:26 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">Task.init でcontextを引き継げば、actor関係なく Task インスタンス同士でもisolation domainを共有する </div>
+            </div>あれ？これは起こらないのかな・・・
+          </span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288371088702836756" class="chatlog__message-container" data-message-id="1288371088702836756">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 5:26 AM">5:26 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓これ怒られました <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class Foo { var value: Int = 0 } Task.detached { let foo = Foo() Task { foo.value += 1 print(foo.value) } foo.value += 1 print(foo.value) }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288371272941568012" class="chatlog__message-container" data-message-id="1288371272941568012">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 5:27 AM">5:27 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">内側の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> が外側の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> のisolation domainを引き継ぐと思ってた。引き継ぐのはactor contextだけなのか</span></div>
+      </div>
+    </div>
+  </div>
+</div>

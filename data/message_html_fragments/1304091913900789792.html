@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1304091913900789792" class="chatlog__message-container" data-message-id="1304091913900789792">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341261694279876609/2ef749d900b0d6dffa48217f8717d009.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="k_bo" data-user-id="341261694279876609">kebo</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1304091913900789792"><span class="chatlog__timestamp" title="Thursday, November 7, 2024 2:35 PM"></span></a><a href="#chatlog__message-container-1304091913900789792">11/7/2024 2:35 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">多分踏む人はすごく少ないと思いますが，swift-wasm-6.0.2-RELEASE の Swift SDK を Docker Hub の swift:6.0.2-noble イメージから作られたコンテナ上でインストールしてビルドした Wasm バイナリを wasm-opt で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Oz</code> レベルで最適化すると不正なバイナリになっちゃいますね． <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-console">root@03961603bf69:~/hoge# swift build -c release --swift-sdk wasm32-unknown-wasi ... root@03961603bf69:~/hoge# wasm-opt -Oz -all .build/release/hoge.wasm -o hoge.wasm warning: active memory segments have overlap, which prevents some optimizations. root@03961603bf69:~/hoge# wasmtime hoge.wasm Error: failed to parse WebAssembly module Caused by: invalid value type (at offset 0x2f1)</code> wasm-opt が <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Oz</code> じゃなくて <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">-Os</code> だったら起こらないですし，コンテナのベースイメージが swift:6.0.2-noble じゃなくて swift:6.0.2-jammy だった場合も起こらないので，wasm-opt の問題なのか Swift の問題なのか Ubuntu の問題なのかわからないので一体どこで報告すれば...</span></div>
+      </div>
+    </div>
+  </div>
+</div>

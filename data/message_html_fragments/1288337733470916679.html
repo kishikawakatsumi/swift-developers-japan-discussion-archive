@@ -1,0 +1,20 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288337733470916679" class="chatlog__message-container" data-message-id="1288337733470916679">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/b1b8f6e8c25a2c7232a6f838fe062d96.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(233,30,99)" title="shiz1209">shiz</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1288297311814025257')"> migration guideでは、isolation domainはactor-isolated、globalactor-isolated、nonisolatedの3つとされていて、そこは変わらないのかなあと思っています。 </span> <span class="chatlog__reply-edited-timestamp" title="Wednesday, September 25, 2024 12:33 AM">(edited)</span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288337733470916679"><span class="chatlog__timestamp" title="Wednesday, September 25, 2024 3:14 AM"></span></a><a href="#chatlog__message-container-1288337733470916679">9/25/2024 3:14 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">migration guideのその記述、ちょっとわかりづらい気がしていて、たとえば、↓のコードでは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">foo</code> がisolation boundaryを越えるわけですが、これはnon-isolatedなisolation domainからnon-isolatedなisolation domainに越境してることになりますよね？ <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">final class Foo { var value: Int = 0 } Task.detached { let foo = Foo() Task.detached { foo.value += 1 print(foo.value) } foo.value += 1 print(foo.value) }</code> isolation domainが三つというのは "fall into one of three categories" でisolation domain自体の数の話ではないので、non-isolatedなカテゴリーに属するisolation domainが複数あっても良いと思いますが、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> インスタンスに紐づくisolation domainがあると考えた方が直観的かなと。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nonisolated async func</code> が呼び出し元のisolation domainで実行されるようになるなら、non-isolatedなisolation domainとは基本的に（contextを引き継がない） <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> インスタンスに紐づけられたisolation domainになるんじゃないでしょうか（すべてのasync contextは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> 上で実行されるのでactorに紐づいたisolation domainじゃないときは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> に紐づいたisolation domainになるのかなと）。</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

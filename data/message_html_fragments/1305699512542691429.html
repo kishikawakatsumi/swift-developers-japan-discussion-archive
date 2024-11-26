@@ -1,0 +1,20 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1305699512542691429" class="chatlog__message-container" data-message-id="1305699512542691429">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(155,89,182)" title="kishikawakatsumi">Kishikawa Katsumi</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1305697866404200520')"> <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public struct Header { public let protocolId: UInt32 public let structureSize: UInt16 public internal(set) var creditCharge: UInt16 public let status: UInt32 ... public init( creditCharge: UInt16 = 1, command: Command, creditRequest: UInt16 = 0, flags: Flags = [], nextCommand: UInt32 = 0, messageId: UInt64, treeId: UInt32 = 0, sessionId: UInt64 ) { self.protocolId = 0x424D53FE self.structureSize = 64 self.creditCharge = creditCharge self.status = 0 self.command = command.rawValue ... } init(data: Data) { let reader = ByteReader(data) protocolId = reader.read() structureSize = reader.read() creditCharge = reader.read() status = reader.read() ... }</code> 最初の例は簡単に書いたのでプロパティの定義と初期化を一緒にしましたが、実際はこのようにinitで定数になっているので、受信のときは受け取ったバイナリから初期化されます。その場合でもprotocolIdやstructureSizeを利用者が個別に変更したいというユースケースはないはずです。 </span> <span class="chatlog__reply-edited-timestamp" title="Tuesday, November 12, 2024 12:58 AM">(edited)</span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1305699512542691429"><span class="chatlog__timestamp" title="Tuesday, November 12, 2024 1:03 AM"></span></a><a href="#chatlog__message-container-1305699512542691429">11/12/2024 1:03 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ああなるほど。送信用はvalidな値しかできなくて、受信時は流せるから、あくまで組み立てた後に変更ができない話でしたね。 あるとすれば、あるピアから受け取ったパケットをあえて一部壊して他のピアに転送する、みたいなイカれたノードを実装してみたいみたいな時に、不便がありそうですが、そんな事しなそうですね。 ただこういった「そんな事しなそう」を超えるアイデアが将来出てくるものなのが難しい <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">struct DebugHeaderとかstruct BrokenHeaderを作ってやります </div>
+            </div>これは良いですね。確かにだいぶセマンティクスからはみ出てるので別物として区別するのはどちらの立場からも嬉しい解決方法。</span> <span class="chatlog__edited-timestamp" title="Tuesday, November 12, 2024 1:03 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

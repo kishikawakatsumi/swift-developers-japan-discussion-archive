@@ -1,0 +1,46 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288492527766343680" class="chatlog__message-container" data-message-id="1288492527766343680">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(17,128,106)" title="koher">koher</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1288489792291471411')">
+              <div class="chatlog__markdown-quote">
+                <div class="chatlog__markdown-quote-border"></div>
+                <div class="chatlog__markdown-quote-content">それとも、いつでも直列にできるものになったらいいな、という事？ </div>
+              </div>はい、そうです。Swiftのコードはすべて何らかのisolation domainに所属した状態で実行されているようになれば、それが実現可能だろうと考えています。現状ではそうなっていないから <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Optional</code> になってるんだろうと。 で、そうだとすると、 <div class="chatlog__markdown-quote">
+                <div class="chatlog__markdown-quote-border"></div>
+                <div class="chatlog__markdown-quote-content">これって、actor isolatedではない普通の状況で、Task.init したらそこから並列な実行フローが生える、という一番素朴な仕様を捨ててしまうので変だと思います。 </div>
+              </div>は、actor isolatedでなくてもisolation domainを引き継ぐ&amp;常にisoladion domainに属するなら問題ないはず。現に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@main</code> でも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">MainActor</code>-isolatedだし。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">nonisolated func</code> は呼び出し元のisolation domainを引き継ぎ、常にisolation domainに属しているなら可能なはず。 <div class="chatlog__markdown-quote">
+                <div class="chatlog__markdown-quote-border"></div>
+                <div class="chatlog__markdown-quote-content">スレッドをSwift Runtimeの外で立ち上げてそこから呼び出されてくるパターンが残るので根本的に不可能に思います。 </div>
+              </div>これは、Swiftに再突入した時点で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> に入れられないかなぁ。同期的に <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> に入ることができないといけないけど・・・
+            </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288492961067175999"><span class="chatlog__timestamp" title="Wednesday, September 25, 2024 1:29 PM"></span></a><a href="#chatlog__message-container-1288492527766343680">9/25/2024 1:29 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">nonisolated func は呼び出し元のisolation domainを引き継ぎ、常にisolation domainに属しているなら可能 </div>
+            </div>原理的にそのように動かすことはできても、バックグラウンド処理化するという意味での並列性が消えて、呼び出し元のdomain(executor)が混線してしまいますよね。cooperativeな並行性は残せるけど。 <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">Swiftに再突入した時点で Task に入れられないかなぁ。同期的に Task に入ることができないといけない </div>
+            </div>これってよくある、「同期のonButtonTapコールバックの中からTaskに入ってasync処理をしたい」って思うけどどうしてもできないのと同じで、絶対できない事に思います。 そうやって入った先でさらにTask.initしてisolation domainを継承したりできるためには、そのフローでsuspendしたりresumeできるということで、そのスレッドがマネージドなexecutorで実行されるコルーチンフロー（要はTask）でないといけないので、呼び出し元を抑えられてる状況からだとどうにもならない。
+          </span> <span class="chatlog__edited-timestamp" title="Wednesday, September 25, 2024 1:29 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288492961067175999" class="chatlog__message-container" data-message-id="1288492961067175999">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 1:31 PM">1:31 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">後からモナドにできない、エフェクトを内側から追加できないのと一緒で。non throwsな関数から呼び出された先から例外を投げたいとかと同じ無理難題になってるような感じがします。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

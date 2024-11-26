@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1304113157568069784" class="chatlog__message-container" data-message-id="1304113157568069784">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/341261694279876609/2ef749d900b0d6dffa48217f8717d009.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="k_bo" data-user-id="341261694279876609">kebo</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1304114786644135986"><span class="chatlog__timestamp" title="Thursday, November 7, 2024 4:00 PM"></span></a><a href="#chatlog__message-container-1304113157568069784">11/7/2024 4:00 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CHANGELOG から，GC と extended-const に当たりをつけて試していたら GC と一緒に何かの feature (まだ不明) が有効になっている時にだけ起こることがわかりました． <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-console">$ wasm-opt -Oz -all hoge.wasm -o hoge_host_opt.wasm &amp;&amp; wasmtime hoge_host_opt.wasm warning: active memory segments have overlap, which prevents some optimizations. Error: failed to parse WebAssembly module Caused by: heap types not supported without the gc feature (at offset 0x2e8) $ wasm-opt -Oz -all --disable-gc --disable-reference-types hoge.wasm -o hoge_host_opt.wasm &amp;&amp; wasmtime hoge_host_opt.wasm warning: active memory segments have overlap, which prevents some optimizations. Hello, world! $ wasm-opt -Oz --enable-gc --enable-reference-types hoge.wasm -o hoge_host_opt.wasm &amp;&amp; wasmtime hoge_host_opt.wasm warning: active memory segments have overlap, which prevents some optimizations. Hello, world!</code></span> <span class="chatlog__edited-timestamp" title="Thursday, November 7, 2024 4:01 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1304114786644135986" class="chatlog__message-container" data-message-id="1304114786644135986">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, November 7, 2024 4:06 PM">4:06 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swift 5.x でビルドされた Wasm バイナリでも wasm-opt 108 だと起こることもわかったので，とりあえず Swift 6.0.2 とか swift-wasm-6.0.2-RELEASE の Swift SDK の問題ではなさそうです！</span> <span class="chatlog__edited-timestamp" title="Thursday, November 7, 2024 4:12 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

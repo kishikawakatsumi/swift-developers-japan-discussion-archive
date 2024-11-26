@@ -1,0 +1,149 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288120737156038759" class="chatlog__message-container" data-message-id="1288120737156038759">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288123645306208257"><span class="chatlog__timestamp" title="Tuesday, September 24, 2024 12:51 PM"></span></a><a href="#chatlog__message-container-1288120737156038759">9/24/2024 12:51 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://forums.swift.org/t/pitch-inherit-isolation-by-default-for-async-functions/74862">https://forums.swift.org/t/pitch-inherit-isolation-by-default-for-async-functions/74862</a></span> <span class="chatlog__edited-timestamp" title="Tuesday, September 24, 2024 12:52 PM">(edited)</span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(17,17,17,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://forums.swift.org/t/pitch-inherit-isolation-by-default-for-async-functions/74862">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">[Pitch] Inherit isolation by default for async functions</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Hello, Swift evolution! SE-0338 specifies that nonisolated async functions never run on an actor's executor. This design decision was made to prevent unnecessary serialization and contention for the actor by switching off of the actor to run the nonisolated async function, and any new tasks it creates that inherit isolation. The actor is then f...</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/88hU1LfKxeFyWSdlYoQ4j5JtJZsPVThjZ9MCw52kQos/https/global.discourse-cdn.com/swift/original/1X/0a90dde98a223f5841eeca49d89dc9f57592e8d6.png"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/88hU1LfKxeFyWSdlYoQ4j5JtJZsPVThjZ9MCw52kQos/https/global.discourse-cdn.com/swift/original/1X/0a90dde98a223f5841eeca49d89dc9f57592e8d6.png" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288120974427820078" class="chatlog__message-container" data-message-id="1288120974427820078">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 12:52 PM">12:52 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SE-0338で導入された、nonisolated asyncな関数はグローバルエグゼキュータに隔離されるという仕様を撤回する提案のドラフト</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288121181597077524" class="chatlog__message-container" data-message-id="1288121181597077524">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 12:53 PM">12:53 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これにより、呼び出し元のアイソレーションを引き継ぐようになるので、例えばメインアクターコンテキストからnonisolatedな関数を呼ぶ時にnon Sendableな値を受け渡しできるようになる</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288121511504253009" class="chatlog__message-container" data-message-id="1288121511504253009">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 12:55 PM">12:55 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">一方で、SE-0338はアクターのエグゼキュータに処理が詰まってしまうことを回避するための仕様だったんだけど、そのニーズをカバーするために新たに @concurrent を導入する</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288121712843554898" class="chatlog__message-container" data-message-id="1288121712843554898">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 12:55 PM">12:55 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">@concurrent な関数は、グローバルエグゼキュータに隔離される。他のアイソレーション指定子とは排他的になる。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288121831294898237" class="chatlog__message-container" data-message-id="1288121831294898237">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 12:56 PM">12:56 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">変更の動機の一つに、同期関数との挙動の一致がある</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288122266777026612" class="chatlog__message-container" data-message-id="1288122266777026612">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 12:58 PM">12:58 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">同期関数はつまりsyncなnonisolatedだけど、呼び出し元のエグゼキュータを引き継ぐ。asyncな場合とその特性が一致してわかりやすくなる。 従来は、asyncをつけたタイミングでドメインを跨ぐように変わるためにnon Sendableが引っかかってエラーになることがありえた。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288122564337733696" class="chatlog__message-container" data-message-id="1288122564337733696">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 12:59 PM">12:59 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="shiz1209">@shiz</span> さんのツイートも貼っておこう <a href="https://x.com/stzn3/status/1838156100669157574?s=46&amp;t=x82HmLxu4d0JVtr__-b65Q">https://x.com/stzn3/status/1838156100669157574?s=46&amp;t=x82HmLxu4d0JVtr__-b65Q</a></span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(29,161,242,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://twitter.com/stzn3/status/1838156100669157574?s=46&amp;t=x82HmLxu4d0JVtr__-b65Q">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">shiz(しず)@クリエイティブプログラマー翻訳 (@stzn3) on X</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">これは結構大きい変更な気がする<img loading="lazy" class="chatlog__emoji " alt="👀" title="eyes" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg"> SE-0338のnon-isolatedなasync関数はデフォルトだとactorのexecutor上では実行しないという決定を覆す change the default execution semantics of nonisolated async functions to run on the caller's actor. <a href="https://t.co/kstghSyIIb">https://t.co/kstghSyIIb</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="chatlog__embed-footer"><img class="chatlog__embed-footer-icon" src="https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png" alt="Footer icon" loading="lazy"> <span class="chatlog__embed-footer-text"> Twitter • 9/23/2024 9:59 AM </span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288123034707951639" class="chatlog__message-container" data-message-id="1288123034707951639">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 1:01 PM">1:01 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">個人的にはこれは最近まさに考えていて、同期と非同期で違うのはわかりにくいと思ったので、賛成。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288123201444118623" class="chatlog__message-container" data-message-id="1288123201444118623">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 1:01 PM">1:01 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">でもこのレベルのちゃぶ台返しありなんだ、、という驚きはある。</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="🥹"><img class="chatlog__emoji chatlog__emoji--small" alt="🥹" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f979.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288123645306208257" class="chatlog__message-container" data-message-id="1288123645306208257">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 24, 2024 1:03 PM">1:03 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">スレッドも好意的な書き込みが多い、あと結構見たことないアイコンが多い 引っかかっていた人が多いのかも</span></div>
+      </div>
+    </div>
+  </div>
+</div>

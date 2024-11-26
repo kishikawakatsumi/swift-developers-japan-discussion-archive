@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1288375602818191451" class="chatlog__message-container" data-message-id="1288375602818191451">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1288376644809265194"><span class="chatlog__timestamp" title="Wednesday, September 25, 2024 5:44 AM"></span></a><a href="#chatlog__message-container-1288375602818191451">9/25/2024 5:44 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">actor contextで書かれていた汎用的な処理があって、その処理の中で <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> を使って、non-<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Sendable</code> な値を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> にキャプチャしているとして、その処理自体は汎用性があってどのisolation domainで実行しても良いとなったときに、その処理を関数に切り出すことができなくなってしまいそう。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1288376644809265194" class="chatlog__message-container" data-message-id="1288376644809265194">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, September 25, 2024 5:48 AM">5:48 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">つまり、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task.init</code> は特別にactor contextを引き継ぎ、それによって <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Task</code> の内外でnon-<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Sendable</code>な値を受け渡しできるようになるけど、それができるかどうかがコードが書かれた場所によって変わってしまう。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1286548756891959327" class="chatlog__message-container" data-message-id="1286548756891959327">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/269801719796334592/c7ac354c0870623258accfe97d7b8ffa.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="t.ae" data-user-id="269801719796334592">t.ae</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1286549331058622466"><span class="chatlog__timestamp" title="Friday, September 20, 2024 4:45 AM"></span></a><a href="#chatlog__message-container-1286548756891959327">9/20/2024 4:45 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Foundation protocol MyProtocol: Equatable, Hashable {} extension NSPoint: MyProtocol { // Warning: Extension declares a conformance of imported type 'CGPoint' to imported protocols 'Hashable', 'Equatable'; this will not behave correctly if the owners of 'CoreFoundation' introduce this conformance in the future public func hash(into hasher: inout Hasher) { fatalError("Not implemented") } public static func == (lhs: CGPoint, rhs: CGPoint) -&gt; Bool { fatalError("Not implemented") } }</code> これFixしたらEquatable, Hashableのconformanceが個別にできるんですね。<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">extension CGPoint: @retroactive Hashable, @retroactive Equatable {}</code>のほうが多少記述量が少ない。 実際やってるプロジェクトで5つくらいのprotocolをまとめたprotocolがあって、適合させる外部の型も複数あるという状態なんですが、全件にこれ書くの嫌な感じが…</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1286549331058622466" class="chatlog__message-container" data-message-id="1286549331058622466">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, September 20, 2024 4:47 AM">4:47 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Vaporですけど、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// これが extension TypeFromOtherModule: Content {} // こうなる extension TypeFromOtherModule: @retroactive AsyncResponseEncodable {} extension TypeFromOtherModule: @retroactive AsyncRequestDecodable {} extension TypeFromOtherModule: @retroactive ResponseEncodable {} extension TypeFromOtherModule: @retroactive RequestDecodable {} extension TypeFromOtherModule: @retroactive Content {}</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

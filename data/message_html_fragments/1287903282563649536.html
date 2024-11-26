@@ -1,0 +1,97 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1287903112958312540" class="chatlog__message-container" data-message-id="1287903112958312540">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/375129448900591616/515e8a82d7bf15378bf69f2b8a1a03f7.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="yniw" data-user-id="375129448900591616">niw</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1287904337791684689"><span class="chatlog__timestamp" title="Monday, September 23, 2024 10:27 PM"></span></a><a href="#chatlog__message-container-1287903112958312540">9/23/2024 10:27 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">struct ItemView: View { @Binding var department: Department var storeIndex: Int var itemIndex: Int var body: some View { VStack { Text("price") TextField( "", value: $department.stores[storeIndex].items[itemIndex].price, format: .number ) .keyboardType(.decimalPad) } } } struct ContentView: View { @State private var path: NavigationPath = .init() @State private var department: Department = .init() var body: some View { NavigationStack(path: $path) { Button("Visit Store") { let newStore: Store = .init() department.stores.append(newStore) path.append(newStore) } .navigationDestination(for: Store.self) { store in let storeIndex = department.stores.firstIndex { $0.id == store.id }! Button("See Item") { let newItem: Item = .init() department.stores[storeIndex].items.append(newItem) path.append(newItem) } .navigationDestination(for: Item.self) { item in let itemIndex = department.stores[storeIndex].items.firstIndex { $0.id == item.id }! ItemView(department: $department, storeIndex: storeIndex, itemIndex: itemIndex) } } } } }</code></span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287903200325931031" class="chatlog__message-container" data-message-id="1287903200325931031">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:27 PM">10:27 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ItemViewを分ければ状態の変更が分断されるのでいけますね。</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287903282563649536" class="chatlog__message-container" data-message-id="1287903282563649536">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:27 PM">10:27 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんか <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">navigationDestination</code> の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">destination</code> ブロックは特別っぽいです。</span> <span class="chatlog__edited-timestamp" title="Monday, September 23, 2024 10:29 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287903399626674187" class="chatlog__message-container" data-message-id="1287903399626674187">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:28 PM">10:28 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">いわゆる状態変化があったときのbodyの再評価以外のタイミングで呼ばれるんですよね。</span> <span class="chatlog__edited-timestamp" title="Monday, September 23, 2024 10:28 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287903535563800610" class="chatlog__message-container" data-message-id="1287903535563800610">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:28 PM">10:28 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">let _ = Self._printChanges()</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287903592283639878" class="chatlog__message-container" data-message-id="1287903592283639878">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:29 PM">10:29 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">を入れるとunchangedなのに呼ばれてしまいます。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287903653159764041" class="chatlog__message-container" data-message-id="1287903653159764041">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:29 PM">10:29 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">多分... そういう「仕様」のような気がしますね。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287903886887358465" class="chatlog__message-container" data-message-id="1287903886887358465">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:30 PM">10:30 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">通常、some View を返すような block をとる API は View の body の中で結果呼ばれることが多いんですが、そうなってない気がしますね。</span> <span class="chatlog__edited-timestamp" title="Monday, September 23, 2024 10:30 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1287904337791684689" class="chatlog__message-container" data-message-id="1287904337791684689">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Monday, September 23, 2024 10:32 PM">10:32 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まあ、SwiftUIのDSL的にどんどんネストできちゃうけど、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">View</code> で全部切り出せっていうのが教えっちゃあ教えなのでそういう想定のAPIなのかなと思います。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
