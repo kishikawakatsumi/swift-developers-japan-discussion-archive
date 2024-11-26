@@ -3,13 +3,13 @@
 require("dotenv").config();
 
 const fs = require("fs");
-const algoliasearch = require("algoliasearch");
+const { algoliasearch } = require("algoliasearch");
+const { searchClient } = require("@algolia/client-search");
 
-const client = algoliasearch(
+const client = searchClient(
   process.env.ALGOLIA_APP_ID,
   process.env.ALGOLIA_API_KEY
 );
-const index = client.initIndex("messages");
 
 const optoutUsers = new Set();
 const optoutChannels = new Set(["453733491067322378"]);
@@ -48,8 +48,11 @@ fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
             "utf-8"
           ),
         }));
-        await index.saveObjects(messages, {
-          autoGenerateObjectIDIfNotExist: false,
+        await client.saveObjects({
+          indexName: "massages",
+          objects: {
+            messages,
+          },
         });
 
         const optOutMessageIds = messages
@@ -61,7 +64,10 @@ fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
           })
           .map((message) => message.id);
         if (optOutMessageIds.length) {
-          await index.deleteObjects(optOutMessageIds);
+          await index.deleteObjects({
+            indexName: "massages",
+            objectIDs: optOutMessageIds,
+          });
         }
       }
     );
@@ -81,8 +87,11 @@ fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
     ),
   }));
   try {
-    await index.saveObjects(messages, {
-      autoGenerateObjectIDIfNotExist: false,
+    await client.saveObjects({
+      indexName: "massages",
+      objects: {
+        messages,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -97,6 +106,9 @@ fs.readdirSync(root, { withFileTypes: true }).forEach(async (dirent) => {
     })
     .map((message) => message.id);
   if (optOutMessageIds.length) {
-    await index.deleteObjects(optOutMessageIds);
+    await client.deleteObjects({
+      indexName: "massages",
+      objectIDs: optOutMessageIds,
+    });
   }
 });
