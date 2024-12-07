@@ -1,0 +1,24 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1313812243971838004" class="chatlog__message-container" data-message-id="1313812243971838004">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1313813097202319502"><span class="chatlog__timestamp" title="Wednesday, December 4, 2024 10:20 AM"></span></a><a href="#chatlog__message-container-1313812243971838004">12/4/2024 10:20 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">手元のテストケース１つだけだけど通った。１つ通ったら全部通ると思う。動いてるわ。本当にありがとう！</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="grinning"><img class="chatlog__emoji chatlog__emoji--small" alt="😀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f600.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313813097202319502" class="chatlog__message-container" data-message-id="1313813097202319502">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 10:24 AM">10:24 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">private func send&lt;each Request: Message.Request&gt;(_ messages: repeat each Request) async throws -&gt; (repeat (each Request).Response) { var count = 0 for _ in repeat each messages { count += 1 } var packet = Data() var index = 0 for message in repeat each messages { let data = message.encoded() let alignment = Data(count: 8 - data.count % 8) if index &lt; count - 1 { let body = data + alignment var header = Header(data: body[..&lt;64]) let payload = data[64...] header.nextCommand = UInt32(body.count) packet += sign(header.encoded() + payload + alignment) } else { packet += sign(data + alignment) } index += 1 } let responseData = try await connection.send(packet) let reader = ByteReader(responseData) var responses = [Data]() var header: Header var offset = 0 repeat { responses.append(Data(responseData[offset...])) header = reader.read() offset += Int(header.nextCommand) reader.seek(to: offset) } while header.nextCommand != 0 responses.append(Data(responseData[offset...])) var iterator = responses.makeIterator() func respond&lt;R: Message.Request&gt;(requestType: R.Type) -&gt; R.Response { guard let next = iterator.next() else { fatalError() } return R.Response(data: next) } return (repeat respond(requestType: (each Request).self)) }</code> とりあえず動くのはこう。ただ、めちゃめちゃわかりにくくなる。ここから読めるコードに改善していくとすると<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">for message in repeat each messages {</code>をforループごと別の関数にするとかかな。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1313833489740857344" class="chatlog__message-container" data-message-id="1313833489740857344">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1313835428683448351"><span class="chatlog__timestamp" title="Wednesday, December 4, 2024 11:45 AM"></span></a><a href="#chatlog__message-container-1313833489740857344">12/4/2024 11:45 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">やってみる。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct CompoundedRequest&lt;each Request: Message.Request&gt; { let requests: (repeat each Request) init(requests: repeat each Request) { self.requests = (repeat each requests) } func encoded() -&gt; Data { var count = 0 for _ in repeat each requests { count += 1 } var packet = Data() var index = 0 for request in repeat each requests { let data = request.encoded() let alignment = Data(count: 8 - data.count % 8) if index &lt; count - 1 { let body = data + alignment var header = Header(data: body[..&lt;64]) let payload = data[64...] header.nextCommand = UInt32(body.count) packet += sign(header.encoded() + payload + alignment) } else { packet += sign(data + alignment) } index += 1 } return packet } } private func send&lt;each Request: Message.Request&gt;(_ request: CompoundedRequest&lt;repeat each Request&gt;) async throws -&gt; (repeat (each Request).Response) { let packet = request.encoded() let responseData = try await connection.send(packet) let reader = ByteReader(responseData) var responses = [Data]() var header: Header var offset = 0 repeat { responses.append(Data(responseData[offset...])) header = reader.read() offset += Int(header.nextCommand) reader.seek(to: offset) } while header.nextCommand != 0 var iterator = 0 func respond&lt;R: Message.Request&gt;(requestType: R.Type) -&gt; R.Response { let response = R.Response(data: responses[iterator]) iterator += 1 return response } return (repeat respond(requestType: (each Request).self)) }</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">for message in repeat each messages {</code>のところ、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">struct CompoundedRequest&lt;each Request: Message.Request&gt;</code>っていうのと作るっていうのはどうだろうか。</span> <span class="chatlog__edited-timestamp" title="Wednesday, December 4, 2024 11:48 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313833777277177856" class="chatlog__message-container" data-message-id="1313833777277177856">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 11:46 AM">11:46 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">let compoundedRequest = CompoundedRequest(requests: createRequest, setInfoRequest, closeRequest) let (r1, r2, r3) = try await send(compoundedRequest)</code> こう使う。。。まあ好みだな。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313834143385255957" class="chatlog__message-container" data-message-id="1313834143385255957">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 11:47 AM">11:47 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">前の方が引数と戻り値の数が合っているので使う方はちょっとわかりにくいかな。SMB2プロトコルを知ってればCompoundedRequestという概念が示されているのでそこは良い。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313835285372600380" class="chatlog__message-container" data-message-id="1313835285372600380">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 11:52 AM">11:52 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct CompoundedRequest&lt;each Request: Message.Request&gt; { let requests: (repeat each Request) init(requests: repeat each Request) { self.requests = (repeat each requests) }</code> この部分の型アノテーションや変数の代入、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func send&lt;each Request: Message.Request&gt;(_ messages: repeat each Request) async throws -&gt; (repeat (each Request).Response)</code> ここの戻り値、のところは外側のカッコがないとダメっていうの難しい。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313835428683448351" class="chatlog__message-container" data-message-id="1313835428683448351">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 11:52 AM">11:52 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">コンパイラががんばってほしい。</span></div>
+      </div>
+    </div>
+  </div>
+</div>

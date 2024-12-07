@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1313800636667793428" class="chatlog__message-container" data-message-id="1313800636667793428">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1313800636667793428"><span class="chatlog__timestamp" title="Wednesday, December 4, 2024 9:34 AM"></span></a><a href="#chatlog__message-container-1313800636667793428">12/4/2024 9:34 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">できそうな気がしてきた。リクエストメッセージの結合は最後のメッセージだけ別の処理が必要なんだけどmessagesの数（count）やiteratorを取得することってできないですよね？ その場合は最後のパケットだけ別の引数で受けるとかするのかな。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">var count = 0 for message in repeat each messages { count += 1 } var packet = Data() var index = 0 for message in repeat each messages {</code> ^ とりあえず今はいったんこんな感じで無駄にループして数えるように書いたんだけど、なんか方法ありますか？ 各パケットを連結する元々の処理は次になります。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">private func send(_ packets: Data...) async throws -&gt; Data { return try await connection.send( packets.enumerated().reduce(into: Data()) { let alignment = Data(count: 8 - $1.element.count % 8) if $1.offset &lt; packets.count - 1 { let packet = $1.element + alignment var header = Header(data: packet[..&lt;64]) let payload = $1.element[64...] header.nextCommand = UInt32(packet.count) $0 += sign(header.encoded() + payload + alignment) } else { $0 += sign($1.element + alignment) } } ) }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

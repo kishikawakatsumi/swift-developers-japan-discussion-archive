@@ -1,0 +1,34 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1313778195882836008" class="chatlog__message-container" data-message-id="1313778195882836008">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/50c323aecdb961ec63caeeedaa4f7ff6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="el_hoshino" data-user-id="332734073565085699">lovee</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1313779300344008745"><span class="chatlog__timestamp" title="Wednesday, December 4, 2024 8:05 AM"></span></a><a href="#chatlog__message-container-1313778195882836008">12/4/2024 8:05 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それなら、Push系はNavigationLinkでEvent-Drivenできるし、Modal系は標準のAPIはないですが、Buttonの中で遷移状態をラップしたFullScreenPresentationLinkボタン作れば事実上のEvent-Driven遷移できるので、それでいいかなと思います <img loading="lazy" class="chatlog__emoji " alt="🤔" title="thinking" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f914.svg"> Tab系だけEvent-Drivenにする方法あまり思い浮かばないかな…（今のところそれやったことないので <img loading="lazy" class="chatlog__emoji " alt="😅" title="sweat_smile" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f605.svg"></span> <span class="chatlog__edited-timestamp" title="Wednesday, December 4, 2024 8:07 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313779073931149343" class="chatlog__message-container" data-message-id="1313779073931149343">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 8:09 AM">8:09 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ちなみにうちは今こう言う感じのModal遷移ボタン作ってますw <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public struct FullScreenCoverPresentationLink&lt;Label: View&gt;: View { @State private var isPresented: Bool = false @State private var path: [Route] = [] @State private var toastHandler: ToastHandler = ToastHandler() @Environment(\.routingProvider) var routingProvider: RoutingProvider let route: Route let label: () -&gt; Label public init(route: Route, label: @escaping () -&gt; Label) { self.route = route self.label = label } public var body: some View { Button { isPresented = true } label: { label() } .fullScreenCover(isPresented: $isPresented, content: { NavigationStack(path: $path) { routingProvider.makeView(for: route) .displayToast(on: .bottom, handledBy: toastHandler, toastMaker: ToastView.init(toastHandler:)) .navigationDestination(for: Route.self, destination: { routingProvider.makeView(for: $0) }) .toolbar { ToolbarItem(placement: .topBarTrailing) { DismissButton() } } } }) } }</code></span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">2</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313779300344008745" class="chatlog__message-container" data-message-id="1313779300344008745">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 8:09 AM">8:09 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これで使う時は普通の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">NavigationLink</code> と全く同じ方法で使えてるから結構楽ですw</span></div>
+      </div>
+    </div>
+  </div>
+</div>

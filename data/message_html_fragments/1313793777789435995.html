@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1313793439812550687" class="chatlog__message-container" data-message-id="1313793439812550687">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/310258733890535426/8fffd5befbc057dcd546b39b0259e66a.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="iceman5499" data-user-id="310258733890535426">Iceman</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1313793777789435995"><span class="chatlog__timestamp" title="Wednesday, December 4, 2024 9:06 AM"></span></a><a href="#chatlog__message-container-1313793439812550687">12/4/2024 9:06 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import Foundation protocol MyDecodable { init(decode bytes: Data) } enum Message { protocol Request { associatedtype Response: MyDecodable func encodeToData(_ body: inout Data) } } struct FooRequest: Message.Request { struct Response: MyDecodable { var message: String init(decode bytes: Data) { message = String(data: bytes, encoding: .utf8) ?? "error!" } } func encodeToData(_ body: inout Data) { body.append(contentsOf: "Foo".utf8) } } struct BarRequest: Message.Request { struct Response: MyDecodable { var message: String init(decode bytes: Data) { message = String(data: bytes, encoding: .utf8) ?? "error!" } } func encodeToData(_ body: inout Data) { body.append(contentsOf: "Bar".utf8) } } private func send&lt;each Request: Message.Request&gt;(_ messages: repeat each Request) async throws -&gt; (repeat (each Request).Response) { var body: Data = .init() for message in repeat each messages { message.encodeToData(&amp;body) body.append(contentsOf: "\0".utf8) } let responseBody = body // 本当はなにか別の送信処理 var responseSubSections = responseBody.split(separator: "\0".utf8).makeIterator() func decodeBytes&lt;R: Message.Request&gt;(requestType: R.Type) -&gt; R.Response { guard let next = responseSubSections.next() else { fatalError("レスポンス個数不一致") } return R.Response.init(decode: next) } return (repeat decodeBytes(requestType: (each Request).self)) } let (fooRes, barRes) = try await send(FooRequest(), BarRequest()) print(fooRes.message) print(barRes.message)</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313793455000129547" class="chatlog__message-container" data-message-id="1313793455000129547">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 9:06 AM">9:06 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">こんな感じでどうでしょうか</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1313793777789435995" class="chatlog__message-container" data-message-id="1313793777789435995">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, December 4, 2024 9:07 AM">9:07 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">関数にイテレータをキャプチャさせて、variadic typeの個数回取り出しています</span></div>
+      </div>
+    </div>
+  </div>
+</div>
