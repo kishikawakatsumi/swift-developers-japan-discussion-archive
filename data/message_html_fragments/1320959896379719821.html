@@ -1,0 +1,72 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1320959461099311185" class="chatlog__message-container" data-message-id="1320959461099311185">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/430242233468452865?category=main&amp;channel=swiftbot-sandbox&amp;message_id=1320960658958712894"><span class="chatlog__timestamp" title="Tuesday, December 24, 2024 3:41 AM"></span></a><a href="#chatlog__message-container-1320959461099311185">12/24/2024 3:41 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">元コードはこうなんだよな <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">public func withSpan&lt;T&gt;( _ operationName: String, context: @autoclosure () -&gt; ServiceContext = .current ?? .topLevel, ofKind kind: SpanKind = .internal, isolation: isolated (any Actor)? = #isolation, function: String = #function, file fileID: String = #fileID, line: UInt = #line, _ operation: (any Span) async throws -&gt; T ) async rethrows -&gt; T { try await InstrumentationSystem.legacyTracer.withAnySpan( operationName, at: DefaultTracerClock.now, context: context(), ofKind: kind, function: function, file: fileID, line: line ) { anySpan in try await operation(anySpan) } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1320959501951832124" class="chatlog__message-container" data-message-id="1320959501951832124">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, December 24, 2024 3:41 AM">3:41 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">try await operation(anySpan)</code> をむき出しにするとエラーになる</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1320959667706531963" class="chatlog__message-container" data-message-id="1320959667706531963">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, December 24, 2024 3:42 AM">3:42 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">内側はこうで、これもまた包まれてる <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> public func withAnySpan&lt;T, Instant: TracerInstant&gt;( _ operationName: String, at instant: @autoclosure () -&gt; Instant, context: @autoclosure () -&gt; ServiceContext = .current ?? .topLevel, ofKind kind: SpanKind = .internal, isolation: isolated (any Actor)? = #isolation, function: String = #function, file fileID: String = #fileID, line: UInt = #line, _ operation: (any Tracing.Span) async throws -&gt; T ) async rethrows -&gt; T { let span = self.startAnySpan( operationName, at: instant(), context: context(), ofKind: kind, function: function, file: fileID, line: line ) defer { span.end() } do { return try await ServiceContext.$current.withValue(span.context) { try await operation(span) } } catch { span.recordError(error) throw error // rethrow } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1320959896379719821" class="chatlog__message-container" data-message-id="1320959896379719821">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, December 24, 2024 3:43 AM">3:43 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> @inlinable final public func withValue&lt;R&gt;(_ valueDuringOperation: Value, operation: () async throws -&gt; R, isolation: isolated (any Actor)? = #isolation, file: String = #fileID, line: UInt = #line) async rethrows -&gt; R</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1320959964428107798" class="chatlog__message-container" data-message-id="1320959964428107798">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, December 24, 2024 3:43 AM">3:43 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">withValueも同じ形だけどこれはstdlibだからわからない</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1320960277486764073" class="chatlog__message-container" data-message-id="1320960277486764073">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, December 24, 2024 3:44 AM">3:44 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift"> internal func withValueImpl&lt;R&gt;(_ valueDuringOperation: __owned Value, operation: () async throws -&gt; R, isolation: isolated (any Actor)?, file: String = #fileID, line: UInt = #line) async rethrows -&gt; R { _taskLocalValuePush(key: key, value: consume valueDuringOperation) defer { _taskLocalValuePop() } return try await operation() }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1320960658958712894" class="chatlog__message-container" data-message-id="1320960658958712894">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, December 24, 2024 3:46 AM">3:46 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="swift61#2812">@swift-6.1-dev</span>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func withValueImpl&lt;R&gt;( operation: () async throws -&gt; R, isolation: isolated (any Actor)? ) async rethrows -&gt; R { return try await operation() }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
