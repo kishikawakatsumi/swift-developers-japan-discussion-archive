@@ -1,0 +1,21 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1337190878464315412" class="chatlog__message-container" data-message-id="1337190878464315412">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/b1b8f6e8c25a2c7232a6f838fe062d96.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz1209" data-user-id="382314715495399425">shiz</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1337190878464315412"><span class="chatlog__timestamp" title="Thursday, February 6, 2025 10:39 PM"></span></a><a href="#chatlog__message-container-1337190878464315412">2/6/2025 10:39 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">sendingとconsumingは直交してるはずなんですよね〜 </div>
+            </div> なのでParamSpecifier::Consumingとは違うParamSpecifier::ImplicitlyCopyableConsumingが必要なんだと思いました。consumingに似て非なるものに同じ用語(consuming)を使っているのが紛らわしのかなと思いました。 transferringを追加したPRにはこう書かれていました。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">A transferring parameter is a consuming like param modifier that can be used to transfer values to an async function such that you can transfer the value further.</code>
+            <a href="https://github.com/swiftlang/swift/pull/70836">https://github.com/swiftlang/swift/pull/70836</a> ただ、 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">I preserve the consuming behavior by making it so that the type checker changes the ParamSpecifier to ImplicitlyCopyableConsuming if we have a default param specifier and transferring is set. </code>
+            <a href="https://github.com/swiftlang/swift/pull/71567">https://github.com/swiftlang/swift/pull/71567</a> ともあるのでconsumingだと言われればそうなのかもしれませんが...w <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">sendingはそういったセマンティクスを持たないと思うんだよな 検査を静的にマークしてるだけだよなあ   </div>
+            </div> 初めは意図していなかったのかもしれませんが、これまでのconsumingだと対応できないことに気付き、結果的に新しいParamSpecifierが必要になってしまったのではないかなあと思いました。
+          </span></div>
+      </div>
+    </div>
+  </div>
+</div>

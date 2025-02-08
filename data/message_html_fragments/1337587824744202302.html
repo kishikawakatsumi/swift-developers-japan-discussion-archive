@@ -1,0 +1,75 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1337586891268161590" class="chatlog__message-container" data-message-id="1337586891268161590">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/b1b8f6e8c25a2c7232a6f838fe062d96.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(233,30,99)" title="shiz1209">shiz</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1337586187694637097')"> 調べてみました。 1. var x を通常の関数引数に渡す場合がどうなってるか <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">coerceCallArguments</code>の中でRValueにしているようでした。 <a href="https://github.com/swiftlang/swift/blob/e22c09c05546bc638169da0dfc8c8996f160f168/lib/Sema/CSApply.cpp#L8399">https://github.com/swiftlang/swift/blob/e22c09c05546bc638169da0dfc8c8996f160f168/lib/Sema/CSApply.cpp#L8399</a>
+              <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">(argument (declref_expr type="@lvalue Int" location=79078.swift:19:6</code> が <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">(argument (load_expr implicit type="Int" location=79078.swift:19:6</code> に変わります。クロージャ(例えば、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">var a = {}</code>)も同じでした。 2. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">coerceToRValue</code> はっきりとこの場合だというのはわからなかったのですが、参照を実態化するために使われているようです。Exprを新しく生成(Rewrite)するときに必要なのかなあ？と思いました 3. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">withoutActuallyEscaping</code>
+              <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">The body closure receives a copy of the argument closure that is temporarily made @escaping.</code> とコピーが渡されていることを想定していることからも、RValueが期待されているのかなと思いました。 <a href="https://github.com/swiftlang/swift/blob/3787044e8349bf4933ae43f16cbbb44344785e04/lib/Sema/TypeOfReference.cpp#L2245">https://github.com/swiftlang/swift/blob/3787044e8349bf4933ae43f16cbbb44344785e04/lib/Sema/TypeOfReference.cpp#L2245</a> そうすると、LValueをRValueに変換し忘れていたということかと思うのですが、一個気になるのが、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">sending</code>と<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">consuming</code>は比較的新しいものの、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">inout</code> でもクラッシュするのは、なんで今まで誰も気づかなかったのかという点ですね...w (あるいはユースケースがないから放置されていたのか...) <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">func send( operation: inout () async -&gt; Void ) async { _ = await withoutActuallyEscaping(operation) { escapingClosure in await escapingClosure() } }</code> </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1337587907023863931"><span class="chatlog__timestamp" title="Saturday, February 8, 2025 12:52 AM"></span></a><a href="#chatlog__message-container-1337586891268161590">2/8/2025 12:52 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">古いコンパイラでもダメなのか気になりますね var、inout、sending全部でテストケース足しておきましょう</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="thumbsup_tone1"><img class="chatlog__emoji chatlog__emoji--small" alt="👍🏻" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d-1f3fb.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337586969437536287" class="chatlog__message-container" data-message-id="1337586969437536287">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, February 8, 2025 12:53 AM">12:53 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">気づかれてないんだと思いますよ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337587127793487976" class="chatlog__message-container" data-message-id="1337587127793487976">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, February 8, 2025 12:53 AM">12:53 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">woAEはそもそも型チェックが専用実装で特別だし、使う場所もかなり限られてるし、それをinoutでつかわんし。</span> <span class="chatlog__edited-timestamp" title="Saturday, February 8, 2025 12:53 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337587561668939807" class="chatlog__message-container" data-message-id="1337587561668939807">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, February 8, 2025 12:55 AM">12:55 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">coerce to RVは単にセマンティクスとして「値」を求められてる時に常に事前に呼ぶってことじゃないかなあ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337587824744202302" class="chatlog__message-container" data-message-id="1337587824744202302">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, February 8, 2025 12:56 AM">12:56 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">言語仕様としてはLVは暗黙にRVになるけど、コンパイラ内部では明示的に変換するスタイルなんじゃないすかね</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337587907023863931" class="chatlog__message-container" data-message-id="1337587907023863931">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, February 8, 2025 12:56 AM">12:56 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">生成されるコードという意味では命令生成が必要だったりもするし。</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="t_naruhodo"><img class="chatlog__emoji chatlog__emoji--small" alt="t_naruhodo" src="https://cdn.discordapp.com/emojis/892393551856533584.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1336849977812586597" class="chatlog__message-container" data-message-id="1336849977812586597">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1336854741208010843"><span class="chatlog__timestamp" title="Thursday, February 6, 2025 12:04 AM"></span></a><a href="#chatlog__message-container-1336849977812586597">2/6/2025 12:04 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://discord.com/channels/291054398077927425/430242233468452865/1336833815728885760" onclick="scrollToMessage(event, '1336833815728885760')">https://discord.com/channels/291054398077927425/430242233468452865/1336833815728885760</a>
+            <span class="chatlog__markdown-mention" title="shiz1209">@shiz</span>
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">// If we do not have an Ownership Repr and do not have a no escape type, // return implicit copyable consuming.</div>
+            </div>
+          </span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336850271074259046" class="chatlog__message-container" data-message-id="1336850271074259046">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:05 AM">12:05 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これについては、オーナーシップ指定子がついてない時はconsuming扱い、という仕様に従ってるだけですね</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336850704844722309" class="chatlog__message-container" data-message-id="1336850704844722309">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:07 AM">12:07 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Swiftの引数はたとえCopyableだったとしても、consuming, shared, inoutの3つのどれかしかないです</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336851009925812315" class="chatlog__message-container" data-message-id="1336851009925812315">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:08 AM">12:08 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それで、Copyableな場合の通常の値渡しはconsumingです。 コピーが複製されて、呼び出し側と共有はされてないから、寿命がそのローカル関数に閉じてるからです。</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="t_naruhodo"><img class="chatlog__emoji chatlog__emoji--small" alt="t_naruhodo" src="https://cdn.discordapp.com/emojis/892393551856533584.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336851059192234045" class="chatlog__message-container" data-message-id="1336851059192234045">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:08 AM">12:08 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">consumingというのはミスリーディングで初期はこれはownedと呼ばれてました</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336851328777060414" class="chatlog__message-container" data-message-id="1336851328777060414">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:09 AM">12:09 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">引数とメソッドが nonmutatingとshared, mutatingとinout、consumingとownedという対応だったんだけど、同じものは同じワードの方がわかりやすいだろう、ということで引数もconsumingと呼びことに決まった</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336851774832906401" class="chatlog__message-container" data-message-id="1336851774832906401">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:11 AM">12:11 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">c++ static bool isSpecifierImmutableInFunctionBody(Specifier sp) { switch (sp) { case Specifier::Default: case Specifier::Borrowing: case Specifier::LegacyShared: case Specifier::LegacyOwned: return true; case Specifier::Consuming: case Specifier::InOut: case Specifier::ImplicitlyCopyableConsuming: return false; } llvm_unreachable("unhandled specifier"); }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336852173253771344" class="chatlog__message-container" data-message-id="1336852173253771344">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:13 AM">12:13 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">素直に見るとこれが変ですよね、inoutな値はmutableだけど、consumingは別にインターフェースとしてはletなので。 でも、ここはlet/varのミュータビリティではなく、別のニュアンスの話なのかもしれない？</span> <span class="chatlog__edited-timestamp" title="Thursday, February 6, 2025 12:13 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336852661537996871" class="chatlog__message-container" data-message-id="1336852661537996871">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:15 AM">12:15 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">c++ /// Does a var or subscript produce an l-value? /// /// \param baseType - the type of the base on which this object /// is being accessed; must be null if and only if this is not /// a type member static bool doesStorageProduceLValue( ... if (!baseType) { return true; }</code></span> <span class="chatlog__edited-timestamp" title="Thursday, February 6, 2025 12:15 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336853982341234758" class="chatlog__message-container" data-message-id="1336853982341234758">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:20 AM">12:20 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">この関数は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">var</code> が LValue を提供できるかどうかを調べてそうですね</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1336854741208010843" class="chatlog__message-container" data-message-id="1336854741208010843">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, February 6, 2025 12:23 AM">12:23 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">sendingだったからといって、代入左辺にもできないし <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">&amp;</code> も付けられないので、やっぱり （たとえローレベルで間接アクセスできるとしても）Swiftの型システムレベルでLValue に評価されてるのがおかしい気がする</span></div>
+      </div>
+    </div>
+  </div>
+</div>

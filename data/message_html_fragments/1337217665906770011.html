@@ -1,0 +1,131 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1337216719776780419" class="chatlog__message-container" data-message-id="1337216719776780419">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1337217865811759196"><span class="chatlog__timestamp" title="Friday, February 7, 2025 12:21 AM"></span></a><a href="#chatlog__message-container-1337216719776780419">2/7/2025 12:21 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なんですが・・・</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337216736541278269" class="chatlog__message-container" data-message-id="1337216736541278269">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:21 AM">12:21 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func send( operation: consuming @escaping () async -&gt; Void ) async { await withoutActuallyEscaping(operation) { (_) in } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337216760427839561" class="chatlog__message-container" data-message-id="1337216760427839561">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:21 AM">12:21 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↑これでもクラッシュすることを見つけました</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337216972483465336" class="chatlog__message-container" data-message-id="1337216972483465336">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:22 AM">12:22 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうするとこれはsendingの問題じゃなくて</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217021141844019" class="chatlog__message-container" data-message-id="1337217021141844019">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:23 AM">12:23 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">consumingによるlvalueの問題なのかもしれません</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217110438445228" class="chatlog__message-container" data-message-id="1337217110438445228">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:23 AM">12:23 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">sending関係でバグってるのはsendingがimplicit copyable consumingになるからで、間接的な理由でしかない</span> <span class="chatlog__edited-timestamp" title="Friday, February 7, 2025 12:23 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217369873055754" class="chatlog__message-container" data-message-id="1337217369873055754">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:24 AM">12:24 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">さらに見つけたぞ</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217407458213928" class="chatlog__message-container" data-message-id="1337217407458213928">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:24 AM">12:24 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func send( operation: consuming @escaping () async -&gt; Void ) async { let x = operation await withoutActuallyEscaping(x) { (_) in } }</code> ↑これはコンパイルできるのに</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217468195672136" class="chatlog__message-container" data-message-id="1337217468195672136">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:24 AM">12:24 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">func send( operation: consuming @escaping () async -&gt; Void ) async { var x = operation await withoutActuallyEscaping(x) { (_) in } }</code> ↑これはクラッシュします</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217590409429056" class="chatlog__message-container" data-message-id="1337217590409429056">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:25 AM">12:25 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">var x</code> は、内部で lvalue として扱われるはずなので、</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217665906770011" class="chatlog__message-container" data-message-id="1337217665906770011">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:25 AM">12:25 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">問題はconsumingにあるのではなく lvalue を渡すと壊れる場所のほうにあるのではないか</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217711671087115" class="chatlog__message-container" data-message-id="1337217711671087115">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:25 AM">12:25 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">var x</code> を lvalue 扱いするのが間違いってことはないはずなんで。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1337217865811759196" class="chatlog__message-container" data-message-id="1337217865811759196">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, February 7, 2025 12:26 AM">12:26 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">そうなってくると、rvalueを要求してる場所にlvalueを渡してるのがバグで、rvalueにcoerceするのが正解ってだけなんじゃないか・・・？</span></div>
+      </div>
+    </div>
+  </div>
+</div>
