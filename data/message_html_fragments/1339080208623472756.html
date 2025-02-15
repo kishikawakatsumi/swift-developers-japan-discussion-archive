@@ -1,0 +1,53 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1339080208623472756" class="chatlog__message-container" data-message-id="1339080208623472756">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" style="color:rgb(155,89,182)" title="norio_nomura">norio_nomura</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1339068791749083257')"> 1. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">~/Library/org.swift.swiftpm/swift-sdks</code>を<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">/opt/homebrew/share/swift/sdks</code>へのシンボリックリンクに(Homebrewは<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">~</code>以下のディレクトリへ書き込めないため) 2. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">brew tap-new swiftwasm/swiftwasm</code> 3. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">/opt/homebrew/Library/Taps/swiftwasm/homebrew-swiftwasm/Formula/swiftwasm-sdk@6.0.rb</code>を以下の内容で作成。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-ruby">class SwiftwasmSdkAT60 &lt; Formula desc "SwiftWasm SDK 6.0" homepage "https://github.com/swiftwasm/swift" version "6.0.2" url "https://github.com/swiftwasm/swift/releases/download/swift-wasm-#{version}-RELEASE/swift-wasm-#{version}-RELEASE-wasm32-unknown-wasi.artifactbundle.zip" license "" def install prefix.install Dir["*"] sdks_path = share/"swift/sdks" sdks_path.mkpath sdks_path.install_symlink prefix =&gt; "#{name}.artifactbundle" end def caveats &lt;&lt;~EOS SwiftWasm SDK #{version} has been installed at: #{prefix} A symlink has been created at: /opt/homebrew/share/swift/sdks/#{name}.artifactbundle EOS end end</code> 4. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">brew install swiftwasm/swiftwasm/swiftwasm-sdk@6.0</code> で<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift sdk list</code>から認識されるインストールが出来た。 </span> <span class="chatlog__reply-edited-timestamp" title="Wednesday, February 12, 2025 3:45 AM">(edited)</span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/383442648012423179?category=main&amp;channel=wasm&amp;message_id=1339083134750167050"><span class="chatlog__timestamp" title="Wednesday, February 12, 2025 3:46 AM"></span></a><a href="#chatlog__message-container-1339080208623472756">2/12/2025 3:46 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">#{version}</code>を使うように変えた</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1339081746255446128" class="chatlog__message-container" data-message-id="1339081746255446128">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 12, 2025 3:52 AM">3:52 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あとは <ul>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">license</code>(わからなかった)</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">caveats</code>を整える</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@6.1</code>, <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@main</code>とかも作る</li>
+              <li>tap名をちゃんと決めてrepo作る</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">url</code>と<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">sha256</code>をCIで更新</li>
+            </ul>とかすれば<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">brew upgrade</code>でそれぞれの最新を入手できる環境が作れるはず。</span> <span class="chatlog__edited-timestamp" title="Wednesday, February 12, 2025 3:53 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1339082393180569652" class="chatlog__message-container" data-message-id="1339082393180569652">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 12, 2025 3:55 AM">3:55 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">HomebrewはLinuxでも使えるはず(使ったことない)だから、dockerとかでも使いやすくなるはず。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1339083134750167050" class="chatlog__message-container" data-message-id="1339083134750167050">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Wednesday, February 12, 2025 3:58 AM">3:58 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">(<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">gh</code>でリリースチェックするコード書きたくない)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

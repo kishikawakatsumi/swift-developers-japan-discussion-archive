@@ -1,0 +1,14 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1337904406577938483" class="chatlog__message-container" data-message-id="1337904406577938483">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/382314715495399425/b1b8f6e8c25a2c7232a6f838fe062d96.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(233,30,99)" title="shiz1209" data-user-id="382314715495399425">shiz</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1337904406577938483"><span class="chatlog__timestamp" title="Saturday, February 8, 2025 9:54 PM"></span></a><a href="#chatlog__message-container-1337904406577938483">2/8/2025 9:54 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">asyncの正体、ここっぽいですねw <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight"> auto refType = FunctionType::get(arg, result, FunctionType::ExtInfoBuilder() .withNoEscape(true) .withAsync(true) // 👈🏻 .withThrows(true, thrownError) .build());</code>
+            <a href="https://github.com/swiftlang/swift/blob/main/lib/Sema/TypeOfReference.cpp#L2278">https://github.com/swiftlang/swift/blob/main/lib/Sema/TypeOfReference.cpp#L2278</a> その後スコアを加算して、最終的にasyncが選ばれています <a href="https://github.com/swiftlang/swift/blob/main/lib/Sema/CSSimplify.cpp#L1919">https://github.com/swiftlang/swift/blob/main/lib/Sema/CSSimplify.cpp#L1919</a>
+            <s><a href="https://github.com/swiftlang/swift/blob/main/lib/Sema/TypeOfReference.cpp#L2486">https://github.com/swiftlang/swift/blob/main/lib/Sema/TypeOfReference.cpp#L2486</a></s>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">---Solution--- Fixed score: [sync-in-asynchronous(s), weight: 17, impact: 1] Type variables: $T0 as Void @ locator@0x127053000 [DiscardAssignment@79078.swift:4:5] $T1 as (@escaping () async -&gt; Void, (@escaping () async -&gt; Void) async -&gt; Void) async -&gt; Void @ locator@0x127053068 [DeclRef@79078.swift:4:15] $T2 as () async -&gt; Void @ locator@0x1270530b0 [DeclRef@79078.swift:4:15 → function argument] $T3 as () async -&gt; Void @ locator@0x1270530b0 [DeclRef@79078.swift:4:15 → function argument] Overload choices: locator@0x127053068 [DeclRef@79078.swift:4:15] with Swift.(file).withoutActuallyEscaping(_:do:) as withoutActuallyEscaping: ($T2, ($T3) async throws($T5) -&gt; $T4) async throws($T5) -&gt; $T4</code> withAsyncをtrueにしないようにする方向かなと思っています。</span> <span class="chatlog__edited-timestamp" title="Saturday, February 8, 2025 10:25 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
