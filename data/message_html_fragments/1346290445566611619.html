@@ -1,0 +1,31 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1346290445566611619" class="chatlog__message-container" data-message-id="1346290445566611619">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/291075091025100810/39d60f97ea2bca395f1992c42f25107c.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="kishikawakatsumi" data-user-id="291075091025100810">Kishikawa Katsumi</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1346291375863496724"><span class="chatlog__timestamp" title="Tuesday, March 4, 2025 1:17 AM"></span></a><a href="#chatlog__message-container-1346290445566611619">3/4/2025 1:17 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">マクロの展開に関してはユニットテストから実行してデバッグするのが簡単ですよ。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1346290928796831816" class="chatlog__message-container" data-message-id="1346290928796831816">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, March 4, 2025 1:19 AM">1:19 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">SwiftSyntaxMacrosTestSupportというのが提供されていて、assertMacroExpansion関数に文字列でSwiftソースコードの断片を渡してそれが意図した通りに展開されるかテストできる。そこでブレイクポイントをマクロのコードに仕掛けたら止まる。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1346291375863496724" class="chatlog__message-container" data-message-id="1346291375863496724">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, March 4, 2025 1:21 AM">1:21 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ワシはassertMacroExpansion関数よりもう少しシンプルにやりたいと思うから次のように書いてる。これもマクロ側にブレイクポイントを適当に置いてテストを実行したら止まる。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">let sourceFile = Parser.parse( source: """ let numbers = [1, 2, 3, 4, 5] #assert(numbers[2] == 4) """ ) let macros: [String: any Macro.Type] = [ "assert": PowerAssertMacro.self, ] let context = BasicMacroExpansionContext( sourceFiles: [sourceFile: .init(moduleName: testModuleName, fullFilePath: testFileName)] ) let expanded = "\(sourceFile.expand(macros: macros, in: context))" ...</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
