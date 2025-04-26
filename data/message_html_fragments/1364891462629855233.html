@@ -1,0 +1,41 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1364891317238370335" class="chatlog__message-container" data-message-id="1364891317238370335">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/387843027072188417/47c96b35135f39a117c2d3e88950c7ab.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="kuniwak" data-user-id="387843027072188417">Kuniwak</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1364892491815456821"><span class="chatlog__timestamp" title="Thursday, April 24, 2025 9:10 AM"></span></a><a href="#chatlog__message-container-1364891317238370335">4/24/2025 9:10 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">swiftc ./hoge.swift でできた ./hoge って codesign されてるんですかね。改ざんはうまくいったっぽいんですが、shell から起動せずコード署名っぽいので落とされてます（以下は Console に現れたログ） <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">default 18:07:03.665366+0900 kernel CODE SIGNING: cs_invalid_page(0x1044d0000): p=10294[helloWorld.mod] final status 0x23020200, denying page sending SIGKILL default 18:07:03.665386+0900 kernel CODE SIGNING: process 10294[helloWorld.mod]: rejecting invalid page at address 0x1044d0000 from offset 0x0 in file "/Users/kuniwak/macho-cstring-masker/testdata/helloWorld.mod" (cs_mtime:1745485489.189643926 == mtime:1745485489.189643926) (signed:1 validated:1 tainted:1 nx:0 wpmapped:0 dirty:0 depth:0)</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1364891462629855233" class="chatlog__message-container" data-message-id="1364891462629855233">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, April 24, 2025 9:11 AM">9:11 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">改ざん前後はこんな感じです <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">$ diff -u &lt;(xxd ./helloWorld) &lt;(xxd ./helloWorld.mod) --- /dev/fd/11 2025-04-24 18:11:06 +++ /dev/fd/12 2025-04-24 18:11:06 @@ -1013,8 +1013,8 @@ 00003f40: 1002 40f9 0002 1fd6 1000 00b0 100a 40f9 ..@...........@. 00003f50: 0002 1fd6 1000 00b0 100e 40f9 0002 1fd6 ..........@..... 00003f60: 1000 00b0 1012 40f9 0002 1fd6 1000 00b0 ......@......... -00003f70: 101a 40f9 0002 1fd6 4865 6c6c 6f2c 2057 ..@.....Hello, W -00003f80: 6f72 6c64 2100 0a00 2000 0000 3cfe ffff orld!... ...&lt;... +00003f70: 101a 40f9 0002 1fd6 4865 6c6c 6f2c 202a ..@.....Hello, * +00003f80: 2a2a 2a2a 2100 0a00 2000 0000 3cfe ffff ****!... ...&lt;... 00003f90: 0000 0000 0300 0000 0100 0000 1c00 0000 ................ 00003fa0: 0100 0000 2000 0000 0000 0000 2000 0000 .... ....... ... 00003fb0: 0200 0000 0000 0004 c83d 0000 4400 0000 .........=..D...</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1364891893049196626" class="chatlog__message-container" data-message-id="1364891893049196626">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, April 24, 2025 9:13 AM">9:13 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">$ otool -s __TEXT __cstring ./helloWorld ./helloWorld: Contents of (__TEXT,__cstring) section 0000000100003f78 6c6c6548 57202c6f 646c726f 000a0021 0000000100003f88 20 00</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1364892491815456821" class="chatlog__message-container" data-message-id="1364892491815456821">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, April 24, 2025 9:15 AM">9:15 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あ、署名されてるんだ。codesign -f -s したら動くようになりました</span></div>
+      </div>
+    </div>
+  </div>
+</div>

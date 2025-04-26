@@ -1,0 +1,19 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1363418329016041544" class="chatlog__message-container" data-message-id="1363418329016041544">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/357858243869016065/afb20eab67082201bd227d98d3fb7596.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="kntk" data-user-id="357858243869016065">kntk</span> <a href="/channels/430242233468452865?category=main&amp;channel=swiftbot-sandbox&amp;message_id=1363418329016041544"><span class="chatlog__timestamp" title="Sunday, April 20, 2025 7:37 AM"></span></a><a href="#chatlog__message-container-1363418329016041544">4/20/2025 7:37 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">ケツカンマ許容ロジックの実装が雑で、エラーを無視する事で実装していたために </div>
+            </div>エラーと言ってもdiagnoseとParserの内部のエラー表現（=回復ロジックを実行すべきか否かに使われるParserStatus/ParserResult）は別物っぽく、（僕もあんまり理解しきれてないですが） ケツカンマの許容ロジックの実装ではdiagnoseは無視して消したがParser内部のエラー表現は<strong>エラーを出し続けて放置してた</strong>ので 許容パターンなのに回復ロジックが実行されて、後に書いたExpressionがスキップされてました <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">パーサーのロジックとして実際にケツカンマを許容する正規系として対応 </div>
+            </div>はい、僕のPRは内部的なエラーも出さず正規系として処理するように変更してます （出発点として、関数呼び出しとかのStringInterpolation以外のケツカンマは正規系として処理されているのに、StringInterpolationだけdiagnoseを消すだけのパッチ的な適当な対応がされていたのが問題で、僕のPRはStringInterpolationも他のケツカンマ対応のアプローチにマージする方針です）
+          </span> <span class="chatlog__edited-timestamp" title="Sunday, April 20, 2025 8:00 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1365582194466099280" class="chatlog__message-container" data-message-id="1365582194466099280">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/581694745969950735/aab94048fe1cc449dc945b4d25dd875b.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="kyome22" data-user-id="581694745969950735">Kyome22</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1365583069096185858"><span class="chatlog__timestamp" title="Saturday, April 26, 2025 6:56 AM"></span></a><a href="#chatlog__message-container-1365582194466099280">4/26/2025 6:56 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">最新のSwiftUIではObservationを使ってプロパティの変更を監視することになっていますよね。ただ、現状では<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Observation</code>と<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ObservableObject</code>を併用した方がパフォーマンスが良いと考えているのですが合ってますでしょうか？</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1365582636055134219" class="chatlog__message-container" data-message-id="1365582636055134219">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 26, 2025 6:57 AM">6:57 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">例えば以下のコードだとボタンを押すたびにChildViewModelのinitとdeinitが発火しているためインスタンスの作り直しが起きていると思います。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI import Observation struct ContentView: View { @State var count = 0 var body: some View { VStack { Text(count.description) Button { count += 1 print("count: \(count)") } label: { Text("count") } ChildView() } } } struct ChildView: View { @State var viewModel = ChildViewModel() var body: some View { Text("child") } } @MainActor @Observable final class ChildViewModel { init() { print("init") } deinit { print("deinit") } }</code></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1365582962233573467" class="chatlog__message-container" data-message-id="1365582962233573467">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 26, 2025 6:59 AM">6:59 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">StateObject</code>を使えば初回のinitだけが有効になるので、以下のように<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ObservableObject</code>を適用するとボタンを押すたびにinitとdeinitが発火されることはなくなります。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1365583069096185858" class="chatlog__message-container" data-message-id="1365583069096185858">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 26, 2025 6:59 AM">6:59 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI import Observation struct ContentView: View { @State var count = 0 var body: some View { VStack { Text(count.description) Button { count += 1 print("count: \(count)") } label: { Text("count") } ChildView() } } } struct ChildView: View { @StateObject var viewModel = ChildViewModel() var body: some View { Text("child") } } @MainActor @Observable final class ChildViewModel: ObservableObject { init() { print("init") } deinit { print("deinit") } }</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>

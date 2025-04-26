@@ -1,0 +1,44 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1365591269400772618" class="chatlog__message-container" data-message-id="1365591269400772618">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/581694745969950735/aab94048fe1cc449dc945b4d25dd875b.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" title="kyome22" data-user-id="581694745969950735">Kyome22</span> <a href="/channels/585184753364238346?category=開発環境, ライブラリ&amp;channel=swiftui&amp;message_id=1365592912469037076"><span class="chatlog__timestamp" title="Saturday, April 26, 2025 7:32 AM"></span></a><a href="#chatlog__message-container-1365591269400772618">4/26/2025 7:32 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">書いたクロージャーがautoclosureの自動クロージャーで包まれるからですね。</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="t_desudesu"><img class="chatlog__emoji chatlog__emoji--small" alt="t_desudesu" src="https://cdn.discordapp.com/emojis/940212349648916518.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1365591510816526399" class="chatlog__message-container" data-message-id="1365591510816526399">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 26, 2025 7:33 AM">7:33 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">まぁどのみち最初の話通り、ただのStateだとインスタンスが毎回作られるのでinitの中身次第ではパフォーマンスに差が出そうですね。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1365592344212144240" class="chatlog__message-container" data-message-id="1365592344212144240">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 26, 2025 7:36 AM">7:36 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code>の場合、２回目以降に作られたインスタンスって本当に捨てられてるんですね。ためしにUUID持たせたら更新されるかと思ったらされませんでした。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">import SwiftUI import Observation struct ContentView: View { @State var count = 0 var body: some View { VStack { Text(count.description) Button { count += 1 print("count: \(count)") } label: { Text("count") } ChildView() } } } struct ChildView: View { @State var viewModel = ChildViewModel() var body: some View { Text("child: \(viewModel.uuid)") } } @MainActor @Observable final class ChildViewModel { var uuid = UUID() init() { print("init \(uuid)") } deinit { print("deinit") } }</code></span> <span class="chatlog__edited-timestamp" title="Saturday, April 26, 2025 7:37 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1365592912469037076" class="chatlog__message-container" data-message-id="1365592912469037076">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, April 26, 2025 7:38 AM">7:38 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">ボタンを押すたびに異なるUUIDが作られているけれど画面上に表示されてるUUIDは変わらずでした。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-sh">init 89ABAE9C-B5DB-40F7-B710-AE95575C29D3 count: 1 init C4985631-EF43-4AF7-8684-999EE5CFD808 count: 2 init EE559DE9-F089-4EB2-AD93-CBDEC3645992 deinit count: 3 init 31DDF64E-71FB-475D-AE42-1D76FCDA9FBF deinit count: 4 init 65A0C8E2-2AA3-4BF5-B706-746587E5C9A3 deinit count: 5 init 24222547-C0AB-45ED-ABDD-9579D746C752 deinit</code></span></div>
+      </div>
+    </div>
+  </div>
+</div>
