@@ -1,0 +1,30 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1367869764575428760" class="chatlog__message-container" data-message-id="1367869764575428760">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/127674083331538944/4893b43ea9ee2231b8ffb8b05c305ce3.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(155,89,182)" title="norio_nomura" data-user-id="127674083331538944">norio_nomura</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1367870512650256405"><span class="chatlog__timestamp" title="Friday, May 2, 2025 2:26 PM"></span></a><a href="#chatlog__message-container-1367869764575428760">5/2/2025 2:26 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">これダウンロードリンクって自分で組み立てる感じなんでしょうか？ </div>
+            </div>nightlyのDockerイメージ作成を参考にするといいです。 参考にして組んだ、ボットのスナップショットダウンロードはこんな感じ。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-Dockerfile"># download Swift toolchain ARG SWIFT_WEBROOT #=https://download.swift.org/development ARG SWIFT_PLATFORM #=ubuntu ARG OS_MAJOR_VER #=24 ARG OS_MIN_VER #=04 ARG OS_ARCH_SUFFIX=${TARGETARCH} ARG OS_ARCH_SUFFIX=${OS_ARCH_SUFFIX/amd64/} ARG OS_ARCH_SUFFIX=${OS_ARCH_SUFFIX/arm64/-aarch64} ARG PLATFORM_WEBROOT="${SWIFT_WEBROOT}/${SWIFT_PLATFORM}${OS_MAJOR_VER}${OS_MIN_VER}${OS_ARCH_SUFFIX}" WORKDIR /swift-toolchain # Use ADD to invalidate cache, if latest-build.yml has been changed ADD ${PLATFORM_WEBROOT}/latest-build.yml . RUN --mount=type=cache,sharing=locked,target=/var/cache/apt,id=${TARGETARCH} --mount=type=cache,sharing=locked,target=/var/lib/apt,id=${TARGETARCH} &lt;&lt;EOF # - Grab curl here so we cache better up above apt-get-install ca-certificates curl gnupg2 # - Latest Toolchain info source &lt;(sed -E 's/^([^:]+): +(.*)$/\1="\2"/' latest-build.yml) [[ -n ${dir} &amp;&amp; -n ${download} &amp;&amp; -n ${download_signature} ]] || exit echo "${dir}" &gt;.swift_tag download_url_base="${PLATFORM_WEBROOT}/${dir}" # - Download the GPG keys, Swift toolchain, and toolchain signature, and verify. export GNUPGHOME=. curl -fLsS --compressed https://swift.org/keys/all-keys.asc | gpg --import --quiet - &gt;/dev/null curl -fLsS "${download_url_base}/${download}" -O "${download_url_base}/${download_signature}" -O gpg --batch --quiet --verify "${download_signature}" "${download}" &gt;/dev/null apt-get-update purge --auto-remove -qq curl gnupg2 &gt;/dev/null ln -sf "${download}" latest_toolchain.tar.gz EOF</code>
+          </span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1367870512650256405" class="chatlog__message-container" data-message-id="1367870512650256405">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Friday, May 2, 2025 2:29 PM">2:29 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">SWIFT_WEBROOT</code>がバージョンによって切り替わる。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">main</code>: [<a href="https://download.swift.org/development]">https://download.swift.org/development]</a>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">release/6.2</code>: [<a href="https://download.swift.org/swift-6.2-branch]">https://download.swift.org/swift-6.2-branch]</a> 最新のビルドは<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">latest-build.yml</code>に情報が入る。</span> <span class="chatlog__edited-timestamp" title="Friday, May 2, 2025 2:36 PM">(edited)</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="t_kansha"><img class="chatlog__emoji chatlog__emoji--small" alt="t_kansha" src="https://cdn.discordapp.com/emojis/982131947683856444.png" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
