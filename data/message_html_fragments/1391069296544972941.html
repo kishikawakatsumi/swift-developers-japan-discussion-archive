@@ -1,0 +1,69 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1391069036162449459" class="chatlog__message-container" data-message-id="1391069036162449459">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__reply-symbol"></div><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/293624673265123328/accd07acc220a18568ba46a6e9ede18a.png?size=512" alt="Avatar" loading="lazy">
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__reply"><img class="chatlog__reply-avatar" src="https://cdn.discordapp.com/avatars/341549155304341514/d34c845c7211a4bcf206ffb96ed8fb64.png?size=512" alt="Avatar" loading="lazy">
+          <div class="chatlog__reply-author" title="tochi86">tochi86 - とち🐹</div>
+          <div class="chatlog__reply-content"><span class="chatlog__reply-link" onclick="scrollToMessage(event,'1391066862124798052')"> 【質問】CLAUDE.mdにどんなことを書いているのかは、気になりました </span></div>
+        </div>
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(17,128,106)" title="koher" data-user-id="293624673265123328">koher</span> <a href="/channels/499393715140558881?category=コミュニティ&amp;channel=swift-zoomin&amp;message_id=1391069296544972941"><span class="chatlog__timestamp" title="Saturday, July 5, 2025 2:51 PM"></span></a><a href="#chatlog__message-container-1391069036162449459">7/5/2025 2:51 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">あんまメンテしてないので参考になるかわかりませんが、今見ると結構細かいこと書いてますね・・・。 <h1>『電光石火』 開発ガイドライン</h1>
+            <h2>概要</h2> 本プロジェクトはiOSアプリ『電光石火』の開発をするためのものです。 『電光石火』は「九九」「四字熟語」「県庁所在地」など、反復練習ですばやく答えられるようになるべきものを、ゲーム形式で手軽に身につけられるアプリです。「たしざん」「ひきざん」「L / Rなどの聞き分け」「炎色反応」「東西南北」など、定番のものから少し変わったものまで、様々なコンテンツを提供しています。 本アプリはエントリーポイントを除いて基本的にSwift Packageで作られており、本ディレクトリはDenkouSekkaパッケージのルートディレクトリです。DenkouSekkaパッケージには次の二つのモジュールが存在します。 <ul>
+              <li>DenkouSekkaLogic: UIとは独立したロジックのレイヤーを表すモジュール</li>
+              <li>DenkouSekkaUI: DenkouSekkaLogicを利用し、ユーザーに練習問題等を提供するモジュール</li>
+            </ul> DenkouSekkaUIのRootViewがDenkouSekkaUIのエントリーポイントとなります。 <h2>ビルドコマンド</h2>
+            <ul>
+              <li>ビルド: <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift build</code></li>
+              <li>テストの実行: <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift test</code></li>
+            </ul>
+            <ul>
+              <li>特定のモジュールだけビルド: <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift build --target DenkouSekkaLogic</code></li>
+            </ul>
+            <h2>コードスタイルガイドライン</h2>
+            <ul>
+              <li>Foundationの型を使わない場合はimport Foundationを書かない</li>
+              <li>Swift 6.0の機能を使用する (swift-tools-version: 6.0)</li>
+              <li>UIコンポーネントにはSwiftUIを使用する</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">foregroundColor</code> よりも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">foregroundStyle</code> を利用する</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">ZStack</code> でなければならない場合を除き <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">overlay</code> を優先的に利用する</li>
+              <li>コンポーネントの間隔は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">padding</code> よりも <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">spacing</code> で調整する</li>
+              <li>命名規則: Swift API Design GuidelinesとSwift Standard Libraryの命名規則に従う</li>
+              <li>値型（ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">struct</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">enum</code> ）のエンティティは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Sendable</code> と <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Codable</code> に準拠する</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">enum</code> がassociated valueを持たない単純な <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">case</code> のみを持つときは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Hashable</code> に準拠する</li>
+              <li>メソッドがインスタンスの状態にアクセスする必要がない場合は <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">static</code> メソッドにする</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">static</code> メソッド・プロパティにアクセスするときには可能であれば <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">Self.</code> を使う</li>
+              <li>できるだけ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">return</code> を省略する（single expressionの場合）</li>
+              <li><code class="chatlog__markdown-pre chatlog__markdown-pre--inline">if</code> 式や <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">switch</code> 式が利用できる場合は活用する</li>
+            </ul>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">// switch式の例 func foo(base: Bar) -&gt; Int { switch bar { case a: 2 // returnは不要 case b: 3 case c: 5 } }</code>
+            <ul>
+              <li>名前空間のスコープを意識し、積極的にnested typeを利用する</li>
+              <li>関連する関数では引数の順序を一貫させる</li>
+              <li>unit testにはSwift Testingを使用する</li>
+              <li>Swift TestingではSuiteとなるstructをネストして構造を整理する</li>
+            </ul>...
+          </span> <span class="chatlog__edited-timestamp" title="Saturday, July 5, 2025 2:53 PM">(edited)</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="clap"><img class="chatlog__emoji chatlog__emoji--small" alt="👏" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44f.svg" loading="lazy"> <span class="chatlog__reaction-count">4</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1391069296544972941" class="chatlog__message-container" data-message-id="1391069296544972941">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Saturday, July 5, 2025 2:52 PM">2:52 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">↓みたいなのもありますね。 <h2>作業手順</h2>
+            <ul>
+              <li>コードの修正を行った場合は、必ず修正後に以下を実行する:</li>
+            </ul> 1. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift build</code> でプロジェクトがビルドできることを確認 2. <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">swift test</code> でテストが通ることを確認 3. 上記の確認が取れるまでコードを修正する
+          </span> <span class="chatlog__edited-timestamp" title="Saturday, July 5, 2025 2:54 PM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
