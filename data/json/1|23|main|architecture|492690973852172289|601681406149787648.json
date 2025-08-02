@@ -16,7 +16,7 @@
     "after": null,
     "before": null
   },
-  "exportedAt": "2025-07-26T15:15:26.7502566+00:00",
+  "exportedAt": "2025-08-02T15:15:26.9370602+00:00",
   "messages": [
     {
       "id": "601683176850718752",
@@ -1234,7 +1234,7 @@
             "isAnimated": false,
             "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44f.svg"
           },
-          "count": 3,
+          "count": 4,
           "users": [
             {
               "id": "332734073565085699",
@@ -1244,6 +1244,15 @@
               "color": "#F1C40F",
               "isBot": false,
               "avatarUrl": "https://cdn.discordapp.com/avatars/332734073565085699/50c323aecdb961ec63caeeedaa4f7ff6.png?size=512"
+            },
+            {
+              "id": "485766664445624323",
+              "name": "treastrain",
+              "discriminator": "0000",
+              "nickname": "treastrain",
+              "color": null,
+              "isBot": false,
+              "avatarUrl": "https://cdn.discordapp.com/avatars/485766664445624323/8c3e673865a51f404ce7b6a086e2cc99.png?size=512"
             },
             {
               "id": "683979392967376932",
@@ -1268,7 +1277,152 @@
       ],
       "mentions": [],
       "inlineEmojis": []
+    },
+    {
+      "id": "1398859414395551815",
+      "type": "Reply",
+      "timestamp": "2025-07-27T02:47:53.943+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "自分の理解があってるかわからないので的外れな質問だったら申し訳ないんですが、storesのsendの中で非同期な関数を叩くときの中間状態のテストってどうやってますか？\n例えば2つasyncな関数を叩くときに、片方だけ失敗したパターンとか、先に片方が成功したパターンとかでstoreの状態がどうなっているべき、みたいなテストをどう書くのかが気になります",
+      "author": {
+        "id": "683979392967376932",
+        "name": "yuki.noseda",
+        "discriminator": "0000",
+        "nickname": "yuki.noseda",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/683979392967376932/738558e985c53602d3e2f2c7c67180ce.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "581694745969950735",
+          "name": "kyome22",
+          "discriminator": "0000",
+          "nickname": "Kyome22",
+          "color": null,
+          "isBot": false,
+          "roles": [],
+          "avatarUrl": "https://cdn.discordapp.com/avatars/581694745969950735/aab94048fe1cc449dc945b4d25dd875b.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1398524780398907443",
+        "channelId": "601681406149787648",
+        "guildId": "291054398077927425"
+      },
+      "inlineEmojis": []
+    },
+    {
+      "id": "1398867249535778958",
+      "type": "Reply",
+      "timestamp": "2025-07-27T03:19:01.986+00:00",
+      "timestampEdited": null,
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "非常に鋭い良い質問ですね。\n\nTCAではよくあることなのですが、asyncな関数を叩くときはそのレスポンスをResult型で返却するようにしておき、ある関数を叩いてレスポンスを受け取った時用のAction caseを追加して、sendの中でさらにsendを叩くようにします。そうするとResult型のsuccessとfailureそれぞれパターンでテストケースが書けます\n\nここで問題なのはLUCAにはsendの中で別Actionをsendされた時にそれをトラッキングする仕組みがありません。\n(TCAならstore.receive(Action)で追加のActionまで追ってテストができます。)\n\nそこをどうするかが現状のLUCAの最大の課題です。つまり質問への回答としては、残念ながらテストの仕方が確立してません。",
+      "author": {
+        "id": "581694745969950735",
+        "name": "kyome22",
+        "discriminator": "0000",
+        "nickname": "Kyome22",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/581694745969950735/aab94048fe1cc449dc945b4d25dd875b.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [
+        {
+          "emoji": {
+            "id": "",
+            "name": "\uD83D\uDC4D",
+            "code": "thumbsup",
+            "isAnimated": false,
+            "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f44d.svg"
+          },
+          "count": 1,
+          "users": [
+            {
+              "id": "683979392967376932",
+              "name": "yuki.noseda",
+              "discriminator": "0000",
+              "nickname": "yuki.noseda",
+              "color": null,
+              "isBot": false,
+              "avatarUrl": "https://cdn.discordapp.com/avatars/683979392967376932/738558e985c53602d3e2f2c7c67180ce.png?size=512"
+            }
+          ]
+        }
+      ],
+      "mentions": [
+        {
+          "id": "683979392967376932",
+          "name": "yuki.noseda",
+          "discriminator": "0000",
+          "nickname": "yuki.noseda",
+          "color": null,
+          "isBot": false,
+          "roles": [],
+          "avatarUrl": "https://cdn.discordapp.com/avatars/683979392967376932/738558e985c53602d3e2f2c7c67180ce.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1398859414395551815",
+        "channelId": "601681406149787648",
+        "guildId": "291054398077927425"
+      },
+      "inlineEmojis": []
+    },
+    {
+      "id": "1398876693162233877",
+      "type": "Reply",
+      "timestamp": "2025-07-27T03:56:33.522+00:00",
+      "timestampEdited": "2025-07-27T03:57:29.954+00:00",
+      "callEndedTimestamp": null,
+      "isPinned": false,
+      "content": "ありがとうございます！\n\n個人的にはActionを追加発火させていく構成は可読性が低いと思ってるんですが、みんな慣れてて平気なんですかね？？（TCAとかだとボタンタップされたときに一連の処理として何が起きるのかを理解するのに苦労する印象。まぁ一連のactionの流れをちゃんとテスト書いてればテスト見れば分かるというのはそうですが）\n\nちなみに自分が最近試してる設計だと、Observableなclass(store的なもの)に状態保持をさせつつ、Viewからのイベントは別のclass(ViewEventAcceptor)で受け取るようにしてます。\nViewEventAcceptorでは状態変更のactionを発火させる構成にしていて、非同期処理を同期的に書けるけどテストもできる感じにしようとしてます。\nサンプル：https://github.com/yuukiw00w/SwiftBlogReader/blob/main/AppPackage/Sources/Feature/Feed/UIModel/FeedViewEventAcceptor.swift\n（まだ固まってないのでご参考までに）",
+      "author": {
+        "id": "683979392967376932",
+        "name": "yuki.noseda",
+        "discriminator": "0000",
+        "nickname": "yuki.noseda",
+        "color": null,
+        "isBot": false,
+        "roles": [],
+        "avatarUrl": "https://cdn.discordapp.com/avatars/683979392967376932/738558e985c53602d3e2f2c7c67180ce.png?size=512"
+      },
+      "attachments": [],
+      "embeds": [],
+      "stickers": [],
+      "reactions": [],
+      "mentions": [
+        {
+          "id": "581694745969950735",
+          "name": "kyome22",
+          "discriminator": "0000",
+          "nickname": "Kyome22",
+          "color": null,
+          "isBot": false,
+          "roles": [],
+          "avatarUrl": "https://cdn.discordapp.com/avatars/581694745969950735/aab94048fe1cc449dc945b4d25dd875b.png?size=512"
+        }
+      ],
+      "reference": {
+        "messageId": "1398867249535778958",
+        "channelId": "601681406149787648",
+        "guildId": "291054398077927425"
+      },
+      "inlineEmojis": []
     }
   ],
-  "messageCount": 31
+  "messageCount": 34
 }
