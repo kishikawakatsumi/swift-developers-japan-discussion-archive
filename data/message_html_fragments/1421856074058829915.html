@@ -1,0 +1,97 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1421854777926484080" class="chatlog__message-container" data-message-id="1421854777926484080">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/472019265369669634?category=main&amp;channel=swiftc&amp;message_id=1421856074058829915"><span class="chatlog__timestamp" title="Sunday, September 28, 2025 1:43 PM"></span></a><a href="#chatlog__message-container-1421854777926484080">9/28/2025 1:43 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><a href="https://youtu.be/E9GdNKjGZ7Y?si=HWsGVoUOHUOdgYI3">https://youtu.be/E9GdNKjGZ7Y?si=HWsGVoUOHUOdgYI3</a>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">llvm-cas</code> を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">clang</code> に導入するパッチの解説動画を見ました。難しくて推測混じりですが・・・ 内容をキーにした(content addressable)なストレージを基盤に使って、その上でファイルシステムのミラーのようなものを作る これはイミュータブルなツリーになる。 その上でコンパイラの個別の処理を動かして、既存の依存スキャンやジョブキャッシュの仕組みを使うと、 必然的に内容が違えば入力パラメータに含まれるファイル参照が変わるので、ファイルシステムの意図しないミュータビリティを避けることができてキャッシュシステムとして安定する かつ、同一内容は単一化されるので、クリーンを跨いだリビルドでも以前の内容を使ったキャッシュが動かせる。 ファイルツリーだけじゃなくて、<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">#include</code> ツリー（ようわからん）とかMachOバイナリなどのドメインデータ構造もCAS上のツリーとして扱うことで、ブロブのキャッシュが効いて、ビルドシステム全体で消費する物理ストレージがだいぶ節約できる。</span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(255,0,0,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-author-container"><a class="chatlog__embed-author-link" href="https://www.youtube.com/channel/UCv2_41bSAa5Y_8BacJUZfjQ">
+                    <div class="chatlog__embed-author">LLVM</div>
+                  </a></div>
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=E9GdNKjGZ7Y">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">2022 LLVM Dev Mtg: Using Content-Addressable Storage in Clang for C...</div>
+                  </a></div>
+                <div class="chatlog__embed-youtube-container"><iframe class="chatlog__embed-youtube" src="https://www.youtube.com/embed/E9GdNKjGZ7Y" width="400" height="225"></iframe></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1421855365921902823" class="chatlog__message-container" data-message-id="1421855365921902823">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Sunday, September 28, 2025 1:45 PM">1:45 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、調べてみると、Swift CompilerもCASを活用できるようにパッチが最近入ってる。一連のパッチは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@cachemeifyoucan</code> さんが作ってて、そのために生まれた人みたいになってる・・・ <a href="https://github.com/swiftlang/swift/pull/81990">https://github.com/swiftlang/swift/pull/81990</a></span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/swiftlang/swift/pull/81990">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">[CAS] Allow uncached job from CAS based dependency scanning by cach...</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Create a path that swift-frontend can execute an uncached job from modules built with CAS based explicit module build. The new flag -import-module-from-cas will allow an uncached build to load modu...</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/cuQzK0rXXE3ogZRB6qk6vHOzeBeZpbREQ8zGuUx6js0/https/opengraph.githubassets.com/14ec84b7e8014f762e5cfaa2d337f5b5e737d7afef38220891c46af22c5798e3/swiftlang/swift/pull/81990"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/cuQzK0rXXE3ogZRB6qk6vHOzeBeZpbREQ8zGuUx6js0/https/opengraph.githubassets.com/14ec84b7e8014f762e5cfaa2d337f5b5e737d7afef38220891c46af22c5798e3/swiftlang/swift/pull/81990" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1421856074058829915" class="chatlog__message-container" data-message-id="1421856074058829915">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Sunday, September 28, 2025 1:48 PM">1:48 PM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">2023年1月ぐらいからやってるのかな。 <a href="https://github.com/swiftlang/swift/pull/63206">https://github.com/swiftlang/swift/pull/63206</a>
+            <a href="https://github.com/swiftlang/swift/pull/65058">https://github.com/swiftlang/swift/pull/65058</a></span></div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/swiftlang/swift/pull/63206">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">Virtualize swift compiler outputs by cachemeifyoucan · Pull Reques...</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Step 1 of making swift compiler output cacheable. Virtualize swift compiler outputs (not everything yet, but most of the important output to show feasibility) and add a mechanics to verify the outp...</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/gHidnTkEQgwLtJ3zRAvxKjYCbJuY8WoF96-CaY06h74/https/opengraph.githubassets.com/219f129417aa94c9e7c89004cd3bec0f4ae15fc15687d90e717d8adacb6cbb42/swiftlang/swift/pull/63206"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/gHidnTkEQgwLtJ3zRAvxKjYCbJuY8WoF96-CaY06h74/https/opengraph.githubassets.com/219f129417aa94c9e7c89004cd3bec0f4ae15fc15687d90e717d8adacb6cbb42/swiftlang/swift/pull/63206" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+        <div class="chatlog__embed">
+          <div class="chatlog__embed-color-pill" style="background-color:rgba(30,35,39,255)"></div>
+          <div class="chatlog__embed-content-container">
+            <div class="chatlog__embed-content">
+              <div class="chatlog__embed-text">
+                <div class="chatlog__embed-title"><a class="chatlog__embed-title-link" href="https://github.com/swiftlang/swift/pull/65058">
+                    <div class="chatlog__markdown chatlog__markdown-preserve">[CAS] Integrate CAS into swift compiler by cachemeifyoucan · Pull ...</div>
+                  </a></div>
+                <div class="chatlog__embed-description">
+                  <div class="chatlog__markdown chatlog__markdown-preserve">Teach swift compiler about CAS to allow compiler caching in the future. Add flags to initiate CAS inside swift-frontend Teach swift to compile using a CAS file system.</div>
+                </div>
+              </div>
+              <div class="chatlog__embed-thumbnail-container"><a class="chatlog__embed-thumbnail-link" href="https://images-ext-1.discordapp.net/external/pqyd6UjL_fSLohUWIju7VxviNzMgj8sj7lLq0CnvyBQ/https/opengraph.githubassets.com/05bfaec34937fd5e2be828f76ce9f4385229f505afd4e0943e5179757c5b4301/swiftlang/swift/pull/65058"> <img class="chatlog__embed-thumbnail" src="https://images-ext-1.discordapp.net/external/pqyd6UjL_fSLohUWIju7VxviNzMgj8sj7lLq0CnvyBQ/https/opengraph.githubassets.com/05bfaec34937fd5e2be828f76ce9f4385229f505afd4e0943e5179757c5b4301/swiftlang/swift/pull/65058" alt="Thumbnail" loading="lazy"> </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1422457817939574886" class="chatlog__message-container" data-message-id="1422457817939574886">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/387857770038427648?category=main&amp;channel=testing&amp;message_id=1422458732046188626"><span class="chatlog__timestamp" title="Tuesday, September 30, 2025 5:39 AM"></span></a><a href="#chatlog__message-container-1422457817939574886">9/30/2025 5:39 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">はい、Suiteオブジェクト自体はただのシンボルみたいなもので状態じゃないので、そこでやっちゃいけない</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1422457879885254656" class="chatlog__message-container" data-message-id="1422457879885254656">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 30, 2025 5:39 AM">5:39 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">Suite単位で共通の初期化をするためにあるのは、Suite Trait の provideScope だと思います。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1422458117165285387" class="chatlog__message-container" data-message-id="1422458117165285387">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 30, 2025 5:40 AM">5:40 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct MySuiteTrait: SuiteTrait &amp; TestScoping { func provideScope( for test: Test, testCase: Test.Case?, performing function: () async throws -&gt; Void ) async throws { print("enter suite scope") defer { print("leave suite scope") } try await function() } }</code></span> <span class="chatlog__edited-timestamp" title="Tuesday, September 30, 2025 5:41 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1422458210996060190" class="chatlog__message-container" data-message-id="1422458210996060190">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 30, 2025 5:41 AM">5:41 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">これで、スイートツリーの開始時と終了時に初期化・解放を書けます。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1422458494988193792" class="chatlog__message-container" data-message-id="1422458494988193792">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 30, 2025 5:42 AM">5:42 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct MyTestTrait: TestTrait &amp; TestScoping { func provideScope( for test: Test, testCase: Test.Case?, performing function: () async throws -&gt; Void ) async throws { print("enter test") defer { print("leave test") } try await function() } }</code> こうするとテストの開始・終了を挟める。</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1422458732046188626" class="chatlog__message-container" data-message-id="1422458732046188626">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Tuesday, September 30, 2025 5:43 AM">5:43 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">で、Suite Trait だけど子孫の テスト全部を個別に挟む、というのがこう。 <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct MyRecursiveSuiteTrait: SuiteTrait &amp; TestScoping { var isRecursive: Bool { true } func provideScope( for test: Test, testCase: Test.Case?, performing function: () async throws -&gt; Void ) async throws { print("enter test") defer { print("leave test") } try await function() } }</code></span> <span class="chatlog__edited-timestamp" title="Tuesday, September 30, 2025 5:43 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
