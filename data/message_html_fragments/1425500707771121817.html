@@ -1,0 +1,27 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1425500707771121817" class="chatlog__message-container" data-message-id="1425500707771121817">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/291054454793306112?category=main&amp;channel=swift&amp;message_id=1425500707771121817"><span class="chatlog__timestamp" title="Wednesday, October 8, 2025 3:10 PM"></span></a><a href="#chatlog__message-container-1425500707771121817">10/8/2025 3:10 PM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">
+            <div class="chatlog__markdown-quote">
+              <div class="chatlog__markdown-quote-border"></div>
+              <div class="chatlog__markdown-quote-content">[Pitch] Controlling function definition visibility in clients <a href="https://forums.swift.org/t/pitch-controlling-function-definition-visibility-in-clients/82372">https://forums.swift.org/t/pitch-controlling-function-definition-visibility-in-clients/82372</a>
+              </div>
+            </div> なかなか骨太の議論なんだけど、面白い提案。 コンパイル後のバイナリに、 <ul>
+              <li>ABIエントリポイントを作るかどうか</li>
+              <li>コードを公開するかどうか(inline化用)</li>
+            </ul> をセットで <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@export(interface, implementation)</code> で制御できるようにする。 もともとの議論は Embedded Swift で不都合があって、 Embedded だと原則実装公開なので、 C とリンクするような場合に、ABIシンボルがなくてうまくいかない場合が起きたりするらしい。 で、これを導入すると、既存のいろんなことが整理できる。 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@_alwaysEmitIntoClient</code> → <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@export(implementation)</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@_neverEmitIntoClient</code> → <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@export(interface)</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@inlinable</code> → ほぼ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@export(interface, implementation)</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@usableFromInline</code> → ほぼ <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@export(interface)</code>
+            <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@export</code> は API 仕様の<code class="chatlog__markdown-pre chatlog__markdown-pre--inline">public</code>, <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">internal</code> とは直交して、 ABI仕様みたいな感じ。 既存の <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@inline(always)</code>, <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@inline(never)</code> ともうまく直交する。 export impl と inline never だと自分用に実装を埋め込む。
+          </span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="eyes"><img class="chatlog__emoji chatlog__emoji--small" alt="👀" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f440.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
