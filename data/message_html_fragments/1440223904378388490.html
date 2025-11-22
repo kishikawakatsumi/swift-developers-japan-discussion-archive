@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1440223904378388490" class="chatlog__message-container" data-message-id="1440223904378388490">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/332734073565085699/50c323aecdb961ec63caeeedaa4f7ff6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(241,196,15)" title="el_hoshino" data-user-id="332734073565085699">lovee</span> <a href="/channels/375206337937801216?category=main&amp;channel=swift-zatsu&amp;message_id=1440223904378388490"><span class="chatlog__timestamp" title="Tuesday, November 18, 2025 6:15 AM"></span></a><a href="#chatlog__message-container-1440223904378388490">11/18/2025 6:15 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve"><code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">private struct Item: Identifiable { let id: UUID = .init() var isOn: Bool = false } private struct ItemView: View { var item: Item @State private var localIsOn: Bool? private var isOnBinding: Binding&lt;Bool&gt; { .init( get: { localIsOn ?? item.isOn }, set: { localIsOn = $0 } ) } var body: some View { let _ = print("\(isOnBinding.wrappedValue)") Toggle("isOn", isOn: isOnBinding) } } struct ContentView: View { @State private var items: [Item] = (0..&lt;200).map { _ in .init() } var body: some View { ScrollView { LazyVStack { ForEach(items) { item in ItemView(item: item) } } } } }</code> スクロールの場合は、本来「ビューヒエラルキーから消した」わけではないはずなのに、メモリから消えたら <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">@State</code> 状態も消えるんだね… しかも一番厄介なのは、画面から消えても、メモリから消えたとは限らない <img loading="lazy" class="chatlog__emoji " alt="😇" title="innocent" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f607.svg"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
