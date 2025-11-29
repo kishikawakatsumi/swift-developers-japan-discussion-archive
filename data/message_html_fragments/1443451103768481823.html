@@ -1,0 +1,34 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1443450235824377968" class="chatlog__message-container" data-message-id="1443450235824377968">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/304939011904897024?category=main&amp;channel=swiftpm&amp;message_id=1443451557357293688"><span class="chatlog__timestamp" title="Thursday, November 27, 2025 3:55 AM"></span></a><a href="#chatlog__message-container-1443450235824377968">11/27/2025 3:55 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">サーバーサイドSwiftのCI時間短縮をいろいろやって、うまくいってしばらく経った わかったこととして、 swiftpm のビルドキャッシュは、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.build</code> ディレクトリと、ソースツリーのファイルの modified time が一致していればちゃんと再利用される <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">dependencies:</code> で定義する依存先ライブラリは <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.build/checkouts</code> に配置されているから、 <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.build</code> をキャッシュすれば自然と modified time も同期されるから簡単。 プロジェクト本体のソースツリーの部分が問題で、 git からチェックアウトするときに modified time は管理されてなくてフレッシュな時刻になっちゃうから、それで本体部分に関しては <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.build</code> があってもキャッシュが機能しない。</span> <span class="chatlog__edited-timestamp" title="Thursday, November 27, 2025 3:56 AM">(edited)</span></div>
+        <div class="chatlog__reactions">
+          <div class="chatlog__reaction" title="pencil"><img class="chatlog__emoji chatlog__emoji--small" alt="📝" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f4dd.svg" loading="lazy"> <span class="chatlog__reaction-count">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1443451103768481823" class="chatlog__message-container" data-message-id="1443451103768481823">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, November 27, 2025 3:59 AM">3:59 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">それで、ファイルの mtimeとmd5 をスキャンして書き出しておいて、それをまた適用するツールを作って対処した。この書き出し結果を <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.build</code> に入れて一緒にキャッシュさせるとうまく整合性が同期できる。 ついでにその変化があったかどうかで、キャッシュのストアを更新することで、フレッシュな <code class="chatlog__markdown-pre chatlog__markdown-pre--inline">.build</code> に更新できるようにした。(GitHub Actions の cache を想定)</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="chatlog__message-container-1443451557357293688" class="chatlog__message-container" data-message-id="1443451557357293688">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside">
+        <div class="chatlog__short-timestamp" title="Thursday, November 27, 2025 4:01 AM">4:01 AM</div>
+      </div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">CAS (Content Addressable Storage) build に移行すれば、そもそもビルドシステムがキャッシュ用途で mtime みる必要がなくて、こういう努力もいらんよなあ、と思った。</span></div>
+      </div>
+    </div>
+  </div>
+</div>
