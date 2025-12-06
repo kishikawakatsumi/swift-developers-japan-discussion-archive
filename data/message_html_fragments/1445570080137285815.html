@@ -1,0 +1,11 @@
+<div class="chatlog__message-group">
+  <div id="chatlog__message-container-1445570080137285815" class="chatlog__message-container" data-message-id="1445570080137285815">
+    <div class="chatlog__message">
+      <div class="chatlog__message-aside"><img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/189711109966659584/95280765d1be73ce985dce15ea3585f6.png?size=512" alt="Avatar" loading="lazy"></div>
+      <div class="chatlog__message-primary">
+        <div class="chatlog__header"><span class="chatlog__author" style="color:rgb(237,171,161)" title="omochimetaru" data-user-id="189711109966659584">omochimetaru</span> <a href="/channels/306995750418513920?category=main&amp;channel=swift-2&amp;message_id=1445570080137285815"><span class="chatlog__timestamp" title="Wednesday, December 3, 2025 12:19 AM"></span></a><a href="#chatlog__message-container-1445570080137285815">12/3/2025 12:19 AM</a></div>
+        <div class="chatlog__content chatlog__markdown"><span class="chatlog__markdown-preserve">なるほど。 仮にそのような型 (仮に InteriorMutableContainer: IMCとする) を現状の言語機能の範囲で実装するとして、以下のように borrowing 共有による同時編集の問題があるため、exclusive が必要ではないでしょうか <code class="chatlog__markdown-pre chatlog__markdown-pre--multiline language-swift">struct IMC&lt;X&gt;: ~Copyable { subscript(index: Int) -&gt; Void { // ↓ダミーの嘘実装 get {} borrowing set {} } } func main(_ c: borrowing IMC&lt;Int&gt;) { // borrow は copy しないので non Copyable な値を複製(?)できる proc(c, c) } func proc(_ c1: borrowing IMC&lt;Int&gt;, _ c2: borrowing IMC&lt;Int&gt;) { // 同じメモリの同時読み書き c1[0] = c2[0] }</code></span> <span class="chatlog__edited-timestamp" title="Wednesday, December 3, 2025 12:20 AM">(edited)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
